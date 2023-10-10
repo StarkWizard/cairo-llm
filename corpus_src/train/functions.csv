@@ -1,0 +1,83 @@
+question,answer
+"in cairo, write a function named 'foo' that takes a felt parameter","
+    fn foo(x:felt) { }
+
+Explanation: 
+- This empty function does nothing at all. Please, be more creative
+"
+"in cairo write a function named Add that returns 3+5","
+    fn add()->felt {
+        return 3+5;
+    }
+
+Explanation: 
+- This function returns a felt of value 3+5
+"
+"in cairo, define a function named toto in cairo","fn toto() {
+}
+
+Explanation:
+- The keyword fn is used to define a function"
+"in cairo, define a function named toto in cairo that returns 4","
+fn toto() {
+  4
+}
+
+Explanation: 
+- This function returns 4
+"
+"in cairo, define a function that returns its felt parameter Y","
+fn foo(Y:felt) -> felt{
+    Y
+}
+
+Explanation: 
+- This function takes a felt and return it.
+"
+"in cairo, define a function that returns the difference of its parameters X and Y","
+fn foo(X:felt,Y:felt) -> felt{
+    return X-Y
+}
+
+Explanation: 
+- This function accepts 2 felt as parameters and return the difference. Watch, a problem can happen if X is superior to Y.
+"
+"in cairo, define a function named toto in cairo that takes a parameter f. f is a felt","
+fn toto(f:felt) {
+}
+
+Explanation: 
+- This trivial function accepts a felt as parameter, and does nothing"
+"in cairo, define a function toto that returns a felt of value 0","
+fn return_felt() -> felt {
+    0 // last statement of the function -> no return keyword, ; is omitted
+}
+
+Explanation: 
+- This function returns a felt
+"
+"in cairo, define a function named toto that accepts a felt a as parameter, and returns a felt of value 0","
+fn toto(n:felt)->felt {
+    0
+}
+
+Explanation: 
+- This function named toto returns a felt of value 0.
+- As there is no other instruction after, it omits to use the 'return' keyword
+"
+"in cairo, define a function named toto that accepts a felt a as parameter","
+fn toto(n:felt) {
+}
+
+Explanation: 
+- This function takes a felt as parameter
+"
+"is this program working in Cairo ?
+use debug::PrintTrait;
+
+fn main() {
+    let x: u64 = 2;
+    x.print();
+    let x: felt252 = x.into(); // converts x to a felt, type annotation is required.
+    x.print()
+}","yes, The first x variable has a u64 type while the second x variable has a felt252 type. Shadowing thus spares us from having to come up with different names, such as x_u64 and x_felt252; instead, we can reuse the simpler x name."

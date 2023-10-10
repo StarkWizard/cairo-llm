@@ -1,0 +1,46 @@
+question,answer
+"in Cairo,define an enumeration with Red, Green, Blue","
+enum Colors { Red: (), Green: (), Blue: () }
+
+Explanation: 
+- This line of code declares an enum for some colors
+"
+"in Cairo, define an enumeration with A, B, C","
+enum Letters { A: (), B: (), C: () }
+
+Explanation: 
+- This line of code declares an enum for some letters
+"
+"in Cairo,define a function that returns the Green value from an enum","enum Colors { Red: (), Green: (), Blue: () }
+
+fn get_favorite_color() -> Colors {
+    Colors::Green(())
+}
+
+Explanation: 
+- This program declares an enum and use it in a function
+"
+"create an enumeration in cairo for some nationality","
+enum Nationality { English: (), German: (), French: (),  Spanish: ()}
+
+Explanation: 
+- This line of code declares an enum for some nationalities.
+"
+"create an enumeration in cairo for some planets","
+enum Planets { Earth: (), Sun: (), March: (),  Jupyter: ()}
+
+Explanation: 
+- This line of code declares an enum for some planets.
+"
+"create an enumeration in cairo for some names","
+enum Names { Paul: (), Henry: (), Simon: (),  Regis: ()}
+
+Explanation: 
+- This line of code declares an enum for some names
+"
+"create an enumeration in cairo for some units","
+enum Units { Meters: (), Inches: (), Cm: ()}
+
+Explanation: 
+- This line of code declares an enum for measurement units
+"

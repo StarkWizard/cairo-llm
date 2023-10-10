@@ -1,0 +1,138 @@
+question,answer
+"add a value of 0 to an array named myArray","
+    myArray.append(0);
+
+Explanation:
+- use 'append' to add a value to an array'
+"
+"Create an array and add three values to it","
+    let mut array = ArrayTrait::new();
+    array.append(0);
+    array.append(1);    
+    array.append(2);
+Explanation:
+- Creating an Array is done with the ArrayTrait::new()
+- The array is defined as mut in order to append new values
+- To append a value, use array.append(myValue)
+"
+"Create an array of u128","
+    
+    let mut arr = ArrayTrait::<u128>::new();
+
+Explanation:
+-  When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type the variable.
+- We defined the array as mutable so you can modify it after declaring it.
+"
+"Create an array of u32","
+    
+    let mut arr = ArrayTrait::<u32>::new();
+
+Explanation:
+-  When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type the variable.
+- We defined the array as mutable so you can modify it after declaring it.
+"
+"Create an array of u64","
+    
+    let mut arr = ArrayTrait::<u64>::new();
+
+Explanation:
+-  When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type the variable.
+- We defined the array as mutable so you can modify it after declaring it.
+"
+"create an array, add 3 values, and remove one","
+fn main() {
+    let mut a = ArrayTrait::new();
+    a.append(10);
+    a.append(1);
+    a.append(2);
+
+    let first_value = a.pop_front().unwrap();
+}
+
+Explanations:
+    - You can only remove elements from the front of an array by using the pop_front() method. This method returns an Option containing the removed element, or Option::None if the array is empty.
+    - first_value will be set to 10
+    - a now only contains two values, 1 and 2
+ "
+ "How can I get the value at a specific index of an array","
+ To access array elements, you can use get() or at() array methods that return different types. Using arr.at(index) is equivalent to using the subscripting operator arr[index].
+
+The get function returns an Option<Box<@T>>, which means it returns an option to a Box type (Cairo's smart-pointer type) containing a snapshot to the element at the specified index if that element exists in the array. If the element doesn't exist, get returns None. This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics. Snapshots will be explained in more detail in the References and Snapshots chapter.
+
+The at function, on the other hand, directly returns a snapshot to the element at the specified index using the unbox() operator to extract the value stored in a box. If the index is out of bounds, a panic error occurs. You should only use at when you want the program to panic if the provided index is out of the array's bounds, which can prevent unexpected behavior.
+
+In summary, use at when you want to panic on out-of-bounds access attempts, and use get when you prefer to handle such cases gracefully without panicking.
+"
+"create an arary, add 2 values, affect the first value to a variable","
+fn main() {
+    let mut a = ArrayTrait::new();
+    a.append(0);
+    a.append(1);
+
+    let value_at_index_zero = *a.at(0);
+ }
+ Explanations:
+ - This program creates an array
+ - 2 values are added to the array
+ - the value at index 0 is affected to a variable
+ - value_at_index_zero is set to 0
+ "
+"get the size of the array 'myArray'","
+    let usize size = myArray.len()
+
+Explanations:
+ - To determine the number of elements in an array, we use the len() method. 
+ - The return is of type usize.
+ "
+"test if myArray is empty","
+    if(myArry.is_empty) 'it is empty'.print()
+
+ Explanations:
+
+ - If you want to check if an array is empty or not, you can use the is_empty() method, which returns true if the array is empty and false otherwise.
+ "
+"create an array 'messages' that contains a u128, a felt252, a u32","
+ enum Data {
+    Integer: u128,
+    Felt: felt252,
+    Val: u32,
+}
+
+fn main() {
+    let mut messages: Array<Data> = ArrayTrait::new();
+    messages.append(Data::Integer(100));
+    messages.append(Data::Felt('hello world'));
+    messages.append(Data::Val(10));
+}
+
+Explanations:
+- If you want to store elements of different types in an array, you can use an Enum to define a custom data type that can hold multiple types. 
+ "
+"create an array 'messages' that contains a u64, a u16, a tuple (u32,u32)","
+ #[derive(Copy, Drop)]
+ enum Data {
+    lInteger: u64,
+    sInteger: u16,
+    Tuple: (u32,u32),
+}
+
+fn main() {
+    let mut messages: Array<Data> = ArrayTrait::new();
+    messages.append(Data::lInteger(100));
+    messages.append(Data::sInteger(40));
+    messages.append(Data::Tuple(50,50));
+}
+
+Explanations:
+- If you want to store elements of different types in an array, you can use an Enum to define a custom data type that can hold multiple types. 
+ "
+"What is a span","Span is a struct that represents a snapshot of an Array. It is designed to provide safe and controlled access to the elements of an array without modifying the original array"
+"what are spans used for ?"," Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations
+
+All methods provided by Array can also be used with Span, with the exception of the append() method."
+"Create a span out of an array 'array'","
+array.span()
+
+Explanations:
+- To create a Span of an Array, call the span() method
+"

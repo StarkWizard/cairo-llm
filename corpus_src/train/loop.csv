@@ -1,0 +1,83 @@
+question,answer
+"print 'hello world' ten times","
+    i = 0;
+    loop {
+        if i == 10 {
+            break;
+        }
+        'hello world'.print();
+        i += 1;
+    }
+
+Explanation:
+- This program loops ten times and print a sentence
+- To break out of a loop, you can place the break statement within the loop to tell the program when to stop executing the loop. 
+"
+"do a for, for i=0 to 5","
+       i = 0;
+    loop {
+        if i == 5 {
+            break;
+        }
+        i += 1;
+    }
+
+Explanation:
+- This program loops ten times and print a sentence
+"
+"is there a 'for' keyword?","No, you have to use the loop keyword:
+
+    let i=START_VALUE;
+    loop{
+            if i == MAX_ITERATION;
+            {
+                break;
+            }
+            i+=1;
+    }
+Explanations:
+- a variable i is defined to be used as a counter
+- The keyword 'loop' is used to loop on the code
+- when the limit of iteration is reached, the loop breaks
+"
+"u(n) = n + u(n-1), please compute u(10)","
+
+    let u = 0_32;
+    let i =0_32;
+    let MAX_ITERATION = 11;
+
+    loop {
+            if i == MAX_ITERATION;
+            {            
+                break;
+            }
+            u = i + u;
+            i+=1;
+    }
+    // u is set to u(10)
+
+Explanations:
+- We define the required variables
+- We loop until 11, which is 10+1
+- Note that this program could be implemented using recursion, but then requires more stack manipulations and checks so, prefer this approach.
+"
+" what happens if I call a loop without break"," In therory you should fall into an infinite loop, but cairo has a mechanism to prevent it"
+"What mechanism protects from infinite loops ?","Cairo prevents us from running program with infinite loops by including a gas meter. The gas meter is a mechanism that limits the amount of computation that can be done in a program. By setting a value to the --available-gas flag, we can set the maximum amount of gas available to the program. Gas is a unit of measurements that expresses the computation cost of an instruction. When the gas meter runs out, the program will stop. In this case, the program panicked because it ran out of gas, as the stop condition was never reached. It is particularly important in the context of smart contracts deployed on Starknet, as it prevents from running infinite loops on the network. If you're writing a program that needs to run a loop, you will need to execute it with the --available-gas flag set to a value that is large enough to run the program."
+"What does this program do ?
+
+fn main() {
+    let mut counter = 0;
+
+    let result = loop {
+        if counter == 10 {
+            break counter * 2;
+        }
+        counter += 1;
+    };
+
+    'The result is '.print();
+    result.print();
+}","
+Explanation:
+- Before the loop, we declare a variable named counter and initialize it to 0. Then we declare a variable named result to hold the value returned from the loop. On every iteration of the loop, we check whether the counter is equal to 10, and then add 1 to the counter variable. When the condition is met, we use the break keyword with the value counter * 2. After the loop, we use a semicolon to end the statement that assigns the value to result. Finally, we print the value in result, which in this case is 20.
+"

@@ -1,0 +1,28 @@
+question,answer
+"In cairo, what is the difference between a constant and an immutable variable","
+- You aren’t allowed to use mut with constants.
+- Constants aren’t just immutable by default—they’re always immutable.
+- You declare constants using the const keyword instead of the let keyword, and the type of the value must be annotated.
+- Constants can only be declared in the global scope, which makes them useful for values that many parts of code need to know about.
+- constants may be set only to a constant expression, not the result of a value that could only be computed at runtime. Only literal constants are currently supported.
+
+Here is an example of a constant declaration:
+const ONE_HOUR_IN_SECONDS: u32 = 3600;
+"
+"In cairo, how should I write a constant name","
+Cairo's naming convention for constants is to use all uppercase with underscores between words."
+"In cairo, declare a constant named toto","
+const TOTO:u32=0
+
+Explanation: 
+- This line of code declares a const named Toto"
+"In cairo, declare a constant named Paul","
+const PAUL:u32=0
+
+Explanation: 
+- This line of code declares a u32 const named Paul
+"
+"In cairo, declare a constant named i_love_cairo","const I_LOVE_CAIRO:u32=0"
+"In cairo, declare a constant named aBaB_cDe","const ABAB_CDE:u32=0"
+"In cairo, What is the scope of a constant","Constants are valid for the entire time a program runs, within the scope in which they were declared."
+"In cairo, why are constants useful","Naming hardcoded values used throughout your program as constants is useful in conveying the meaning of that value to future maintainers of the code. It also helps to have only one place in your code you would need to change if the hardcoded value needed to be updated in the future."

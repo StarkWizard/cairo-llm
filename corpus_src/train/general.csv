@@ -1,0 +1,70 @@
+answer,question
+"What is the naming convention for functions in cairo ?","Cairo code uses snake case as the conventional style for function and variable names, in which all letters are lowercase and underscores separate words.
+"
+"How do I assert ?","You can use the keyword assert.
+
+The syntax is: assert(condition,'condition not met'
+"
+"create an assert that ensures x is 0","
+    assert(x == 0, 'Balance is not 0 ');
+
+Explanation:
+- These line of code will assert if x is different from 0
+"
+"Give an example of variable scope","
+    {                      // s is not valid here, it’s not yet declared
+        let s = 'hello';   // s is valid from this point forward
+
+        // do stuff with s
+    }  
+    // s is not valid here
+
+Explanations:
+- When s comes into scope, it is valid.
+- It remains valid until it goes out of scope.
+"
+"how do I define a mutable references","
+    #[derive(Copy, Drop)]
+    struct Rectangle {
+        height: u64,
+        width: u64,
+    }
+
+    fn foo(ref rec: Rectangle)
+    {
+    }
+
+Explanations:
+- In Cairo, a parameter can be passed as mutable reference using the ref modifier.
+"
+"Give an example of usage for ref","
+use debug::PrintTrait;
+#[derive(Copy, Drop)]
+struct Rectangle {
+    height: u64,
+    width: u64,
+}
+
+fn main() {
+    let mut rec = Rectangle { height: 3, width: 10 };
+    flip(ref rec);
+    rec.height.print();
+    rec.width.print();
+}
+
+fn flip(ref rec: Rectangle) {
+    let temp = rec.height;
+    rec.height = rec.width;
+    rec.width = temp;
+}
+
+Explanation:
+-First, we change rec to be mut. Then we pass a mutable reference of rec into flip with ref rec, and update the function signature to accept a mutable reference with ref rec: Rectangle. This makes it very clear that the flip function will mutate the value of the Rectangle instance passed as parameter.
+
+The output of the program is:
+
+[DEBUG]
+                                (raw: 10)
+[DEBUG]	                        (raw: 3)
+As expected, the height and width fields of the rec variable have been swapped.
+"

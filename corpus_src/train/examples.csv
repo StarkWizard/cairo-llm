@@ -1,0 +1,37 @@
+question,answer
+"in cairo, write a hello world","
+use debug::PrintTrait;
+
+fn main() {
+    'Hello, World!'.print();
+}
+
+Explanation:
+- The print() function called is a method from the trait PrintTrait. This trait is imported from the Cairo core library.
+"
+"In cairo, Is this program working fine ? 
+use debug::PrintTrait;
+fn main() {
+    let x = 5;
+    x.print();
+    x = 6;
+    x.print();
+}","
+Unfortunalety not:
+
+Explanation:
+ - x is immutable and you are trying to update its value (x=6)
+ "
+"In cairo, what error will this program generate ?
+use debug::PrintTrait;
+fn main() {
+    let x = 5;
+    x.print();
+    x = 6;
+    x.print();
+}","error: Cannot assign to an immutable variable."
+"error: Cannot assign to an immutable variable.","
+* You received the error message Cannot assign to an immutable variable. 
+
+Explanation:
+- You tried to assign a value to an immutable variable after its definition."
