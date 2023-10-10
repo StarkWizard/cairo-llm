@@ -1,0 +1,17 @@
+question,answer
+"in cairo write a if statement, that tests if c is equal to 3. If yes, return 1 ","    if c == 3 {
+        return 1; // early return -> use the `return` keyword
+    }"
+"in Cairo, define a function named fofo that accepts a felt a as parameter in cairo","fn fofo(n:felt) {
+}"
+"write a sequence of cairo code that matches 0 to 3, 1 to 4 and any other value to 5","    match n{
+        0 => 3,
+        1 => 4,
+        _ => 5
+    }"
+"In Cairo, write an enumeration with Rouge, Vert, Bleu","enum Colors { Rouge: (), Vert: (), Bleu: () }"
+"In Cairo, Write a function that returns the Vert value from an enum","enum Colors { Rouge: (), Vert: (), Bleu: () }
+
+fn get_favorite_color() -> Colors {
+    Colors::Vert(())
+}"

@@ -1,0 +1,124 @@
+question,answer
+"How can I declare a variable in cairo ?","
+    let a = 5; // a can not be modified
+
+Explanation: 
+- This line of code declares a variable, the variable is not mutable, it can not be modified after declaration.
+"
+"in cairo, How can I declare a variable that can be modified?","
+let mut a = 5;
+
+Explanation: 
+- add the keyword mut to declare a mutable variable
+- That's a good start.
+"
+"in cairo, let a=5; a=2; Why does this produce an error ?","
+    // a should be mutable
+    let mut a=5;
+    a = 2;
+
+Explanation: 
+- You should have defined a as a mutable
+"
+"can I modify a variable X","you can affect a value to X if X was defined as mutable: let mut X = 0"
+"this code produces an error, please adapt the code: let X=2; X=5;"," 
+    //X should be defined as mutable like this:
+    let mut X=2;
+    X=5;
+
+Explanation: 
+- you should have defined the variable as mutable in order to modify it after declaration
+"
+"in cairo, how do I create a mutable variable in cairo ?","
+    let mut a = 5; // variable is assigned.
+
+Explanation: 
+- This line of code declares mutable variable and affects 5 to it.
+"
+"how do I affect a variable ?","
+    let a = 5; // variable is assigned. add mut if you want to modify the variable later on
+
+Explanation: 
+- This line of code declares a variable 'a'
+"
+"In cairo, define a variable X, add 3 and 4 into x","
+    let mut X=0;
+    X=3+4;
+
+Explanation: 
+- This program declares and affect a mutable
+"
+"In cairo, define a felt variable X as a felt and assign 3","
+    let X=3;
+
+Explanation: 
+- This line of code declares a variable and affects 3
+"
+"In Cairo, define a mutable felt X and initialize it to y"," 
+    let mut X=y
+
+Explanation: 
+- This line of code declares an mut and affect it
+"
+"Can I update any variable in cairo ?","
+- Cairo uses an immutable memory model, meaning that once a memory cell is written to, it can't be overwritten but only read from. You can only update the value of a mutable variable"
+"In cairo, Can I change the value of an immutable variable ?","
+- When a variable is immutable, once a value is bound to a name, you can’t change that value.
+"
+"In cairo, how can I make a variable mutable ?"," use the keyword 'mut'
+
+Explanation:
+- Variables are immutable by default, you can make them mutable by adding mut in front of the variable name."
+"can you correct the program: fn main() {
+    let x = 5;
+    x.print();
+    x = 6;
+    x.print();
+}","
+There are two errors: 
+1- you must add: use debug::PrintTrait;
+2- variables are immutable by default, so x is immutable, you can not affect 6 to X
+
+Correction:
+use debug::PrintTrait;
+fn main() {
+    let mut x = 5;
+    x.print();
+    x = 6;
+    x.print();
+}
+
+It will output 6."
+"what exactly happens when a variable is declared as mut in cairo","
+Cairo's memory is immutable.
+
+The answer is that Cairo's memory is immutable, but the memory address the variable points to can be changed. Upon examining the low-level Cairo Assembly code, it becomes clear that variable mutation is implemented as syntactic sugar, which translates mutation operations into a series of steps equivalent to variable shadowing. The only difference is that at the Cairo level, the variable is not redeclared so its type cannot change."
+"What is a constant in cairo","
+Like immutable variables, constants are values that are bound to a name and are not allowed to change, but there are a few differences between constants and variables.
+"
+"What is variable shadowing","Variable shadowing refers to the declaration of a new variable with the same name as a previous variable."
+"describe what happens to the variable x in this cairo program:
+ let x = 5;
+    let x = x + 1;
+    {
+        let x = x * 2;
+        'Inner scope x value is:'.print();
+        x.print()
+    }
+    'Outer scope x value is:'.print();
+    x.print();","This program first binds x to a value of 5. Then it creates a new variable x by repeating let x =, taking the original value and adding 1 so the value of x is then 6. Then, within an inner scope created with the curly brackets, the third let statement also shadows x and creates a new variable, multiplying the previous value by 2 to give x a value of 12. When that scope is over, the inner shadowing ends and x returns to being 6. When we run this program, it will output the following:
+
+scarb cairo-run
+[DEBUG] Inner scope x value is:         (raw: 7033328135641142205392067879065573688897582790068499258)
+
+[DEBUG]
+                                       (raw: 12)
+
+[DEBUG] Outer scope x value is:         (raw: 7610641743409771490723378239576163509623951327599620922)
+
+[DEBUG]                                (raw: 6)
+
+Run completed successfully, returning []"
+"is shadowing equivalent to mut in cairo ?","Shadowing is different from marking a variable as mut because we’ll get a compile-time error if we accidentally try to reassign to this variable without using the let keyword. By using let, we can perform a few transformations on a value but have the variable be immutable after those transformations have been completed.
+
+Another distinction between mut and shadowing is that when we use the let keyword again, we are effectively creating a new variable, which allows us to change the type of the value while reusing the same name."

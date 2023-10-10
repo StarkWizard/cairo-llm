@@ -1,0 +1,11 @@
+question,answer
+"write a sequence of cairo code that matches 0 to 0, 1 to 2 and any other value to 1","
+    match n{
+        0 => 0,
+        1 => 2,
+        _ => 1
+    }
+
+Explanation: 
+- This line of code matches values to others
+"
