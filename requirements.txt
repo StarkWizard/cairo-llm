@@ -16,3 +16,7 @@ gradio
 icecream
 colorama
 neowGen
+ctransformers
+optimum
+py7zr
+auto-gptq

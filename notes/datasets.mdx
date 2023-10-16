@@ -1,0 +1,112 @@
+**Créer un dataset PyTorch nécessite généralement les étapes suivantes :**
+
+Importer les bibliothèques nécessaires :
+
+import torch
+from torch.utils.data import Dataset, DataLoader
+
+
+**Définir la classe du dataset : **
+
+Il faut hériter de la classe Dataset de PyTorch et implémenter au minimum les méthodes __len__ et __getitem__.
+Par exemple, supposons que nous souhaitons créer un dataset simple à partir de deux listes : une pour les données (X) et une pour les étiquettes (y).
+
+
+class SimpleDataset(Dataset):
+    def __init__(self, X_data, y_data):
+        self.X_data = X_data
+        self.y_data = y_data
+
+    def __len__(self):
+        return len(self.X_data)
+
+    def __getitem__(self, index):
+        return self.X_data[index], self.y_data[index]
+
+**Instancier le dataset :**
+
+Supposons que nous ayons les données suivantes :
+
+python
+X = [1, 2, 3, 4, 5]
+y = [1, 0, 1, 0, 1]
+
+Nous pouvons créer une instance de notre dataset comme suit :
+
+dataset = SimpleDataset(X, y)
+
+**Utiliser un DataLoader :**
+
+Un DataLoader est utilisé pour charger les données en lots pendant l'entraînement. Cela facilite également le mélange des données et l'utilisation de plusieurs processus pour accélérer la charge des données.
+
+
+dataloader = DataLoader(dataset, batch_size=2, shuffle=True)
+
+**Utiliser le DataLoader dans une boucle d'entraînement :** 
+
+for batch_idx, (data, labels) in enumerate(dataloader):
+    # Votre code d'entraînement ici, par exemple:
+    # output = model(data)
+    # loss = loss_function(output, labels)
+    # ...
+Si vous travaillez avec des images ou des données plus complexes, vous devrez probablement personnaliser davantage la méthode __getitem__ pour inclure des transformations, le chargement d'images à partir de disques, etc. Mais l'approche générale reste la même.
+
+
+##Transforms
+
+Dans PyTorch, le module transforms de la bibliothèque torchvision fournit des méthodes courantes pour prétraiter et augmenter les données, en particulier les images. Ces transformations sont particulièrement utiles pour normaliser, augmenter et convertir les images en tenseurs avant de les passer à un modèle de deep learning.
+
+Quand on parle de l'utilisation de transforms avec un Dataset, on fait généralement référence à l'application de ces transformations lors de la récupération d'un élément du dataset.
+
+Voici comment cela fonctionne étape par étape :
+
+**Importer les bibliothèques nécessaires :**
+
+import torch
+from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms
+
+**Définir les transformations :**
+
+Vous pouvez définir une séquence de transformations à l'aide de transforms.Compose(). Par exemple, pour les images :
+
+transform = transforms.Compose([
+    transforms.Resize((128, 128)),  # Redimensionner l'image
+    transforms.ToTensor(),          # Convertir l'image en tensor
+    transforms.Normalize((0.5,), (0.5,))  # Normaliser l'image
+])
+
+**Intégrer les transformations dans votre Dataset :**
+Quand vous définissez votre classe Dataset, intégrez la transformation dans la méthode __getitem__ :
+
+
+class ImageDataset(Dataset):
+    def __init__(self, image_paths, labels, transform=None):
+        self.image_paths = image_paths
+        self.labels = labels
+        self.transform = transform
+
+    def __len__(self):
+        return len(self.image_paths)
+
+    def __getitem__(self, index):
+        image = load_image(self.image_paths[index])  # Fonction hypothétique pour charger une image
+        label = self.labels[index]
+        
+        if self.transform:
+            image = self.transform(image)
+            
+        return image, label
+
+**Instancier le Dataset avec la transformation :**
+
+dataset = ImageDataset(image_paths, labels, transform=transform)
+Utiliser un DataLoader comme d'habitude :
+
+dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+
+Lorsque vous récupérez des lots d'images du DataLoader, chaque image aura déjà subi les transformations définies. Cela est particulièrement utile pour s'assurer que toutes les images que vous passez à votre modèle ont le même format et sont normalisées de la même manière.
+
+
+
+
