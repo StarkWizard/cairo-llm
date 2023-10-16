@@ -1,0 +1,15 @@
+question,answer
+"where are storage variables stored","storage variables are saved on chain"
+"is there a way to save a contract state","Similar to Solidity, Cairo supports contract state variables using storage. They will be recorded on chain."
+"How many storage structure can I define","There can be at most one Storage structure per contract, but you can add as many components to the storage structure, as you need."
+"declare three storage variables","#
+    [storage]
+    struct Storage{
+        var_felt: felt252,
+        var_bool: bool,
+        var_uint: u8,
+    }
+Explanation:
+    - The structure is seen as storage thanks to [storage]
+    - there can be only one storage structure per contract
+"

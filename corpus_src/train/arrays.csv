@@ -6,6 +6,8 @@ Explanation:
 - use 'append' to add a value to an array'
 "
 "Create an array and add three values to it","
+    use array::ArrayTrait;
+    
     let mut array = ArrayTrait::new();
     array.append(0);
     array.append(1);    
@@ -16,7 +18,8 @@ Explanation:
 - To append a value, use array.append(myValue)
 "
 "Create an array of u128","
-    
+    use array::ArrayTrait;
+
     let mut arr = ArrayTrait::<u128>::new();
 
 Explanation:
@@ -24,7 +27,8 @@ Explanation:
 - We defined the array as mutable so you can modify it after declaring it.
 "
 "Create an array of u32","
-    
+    use array::ArrayTrait;
+
     let mut arr = ArrayTrait::<u32>::new();
 
 Explanation:
@@ -32,7 +36,8 @@ Explanation:
 - We defined the array as mutable so you can modify it after declaring it.
 "
 "Create an array of u64","
-    
+    use array::ArrayTrait;
+
     let mut arr = ArrayTrait::<u64>::new();
 
 Explanation:
@@ -40,6 +45,8 @@ Explanation:
 - We defined the array as mutable so you can modify it after declaring it.
 "
 "create an array, add 3 values, and remove one","
+use array::ArrayTrait;
+
 fn main() {
     let mut a = ArrayTrait::new();
     a.append(10);
@@ -64,6 +71,8 @@ The at function, on the other hand, directly returns a snapshot to the element a
 In summary, use at when you want to panic on out-of-bounds access attempts, and use get when you prefer to handle such cases gracefully without panicking.
 "
 "create an arary, add 2 values, affect the first value to a variable","
+use array::ArrayTrait;
+
 fn main() {
     let mut a = ArrayTrait::new();
     a.append(0);
@@ -92,6 +101,7 @@ Explanations:
  - If you want to check if an array is empty or not, you can use the is_empty() method, which returns true if the array is empty and false otherwise.
  "
 "create an array 'messages' that contains a u128, a felt252, a u32","
+ use array::ArrayTrait;
  enum Data {
     Integer: u128,
     Felt: felt252,
@@ -109,6 +119,7 @@ Explanations:
 - If you want to store elements of different types in an array, you can use an Enum to define a custom data type that can hold multiple types. 
  "
 "create an array 'messages' that contains a u64, a u16, a tuple (u32,u32)","
+ use array::ArrayTrait;
  #[derive(Copy, Drop)]
  enum Data {
     lInteger: u64,
@@ -137,3 +148,41 @@ Explanations:
 - To create a Span of an Array, call the span() method
 "
 "what is wrong with this code: arr[index]","In cairo you can get the value using arr.get(index) or arr.at(index) but the syntax arr[index] does not exist in Cairo"
+"why is this code incorrect: myArray.pop()","There is no pop function in cairo, but a pop_front, use pop_front instead."
+"Can I push values to an array","No, you can append a value to an array"
+"how can I get the size of an array in Cairo","
+    let length = myArray.len();
+    
+Explanation:
+    - length returns a usize value equal to the number of elements stored in the array"
+"How do I know if an array is empty","
+    let empty = a.is_empty();
+
+Explanation:
+    - is_empty returns true if an array is empty
+"
+"Create an array, append two values and print them","
+use array::ArrayTrait;
+use debug::PrintTrait;
+fn main() {
+    let mut a = ArrayTrait::new();
+    // add two values
+    a.append(0);
+    a.append(1);
+
+    // read them
+    let first = *a.at(0);
+    let second = *a.at(1);
+
+    // print the values
+    first.print();
+    second.print();
+}
+
+Explanation:
+    - We use the at() method to get the values from the array
+    - debug::PrinTrait is used to print the values
+"
+"myArray is empty, what does that code do: myArray.pop_front();","
+    As the array is empty, pop_front returns Option::None
+"
