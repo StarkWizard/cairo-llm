@@ -136,3 +136,4 @@ array.span()
 Explanations:
 - To create a Span of an Array, call the span() method
 "
+"what is wrong with this code: arr[index]","In cairo you can get the value using arr.get(index) or arr.at(index) but the syntax arr[index] does not exist in Cairo"
