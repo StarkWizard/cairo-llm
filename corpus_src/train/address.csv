@@ -1,0 +1,12 @@
+question,answer
+"Is there an address type in Cairo like in Solidity,"
+There is no built-in type for addresses, you need to use the starknet type ContractAddress:
+
+    use starknet::ContractAddress;
+
+    let mut owner: ContractAddress;
+
+Explanations:
+- We declare using the Starknet::ContractAddress
+- ContractAddress is then used as a regular type
+"

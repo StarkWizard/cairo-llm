@@ -1,0 +1,22 @@
+question,answer
+"What is a constructor","in Cairo constructor is a special function that will automatically run once during contract deployment. It is usually used to initialize the parameters of the contract.
+Constructor functions must be marked as #[constructor]attributes.
+There can be at most one per contract constructor."
+"Give an exemple of a contract with a constructor","
+    #[starknet::contract]
+    mod owner{
+        use starknet::ContractAddress;
+        use starknet::get_caller_address;
+
+        #[storage]
+        struct Storage{
+            owner: ContractAddress,
+        }
+
+        #[constructor]
+        fn constructor(ref self: ContractState) {
+            self.owner.write(get_caller_address());
+        }
+    }
+
+"

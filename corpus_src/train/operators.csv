@@ -4,4 +4,4 @@ question,answer
     i+=1;
 
 Explanation:
-- This line of code "
+- This line of code increments i by 1"

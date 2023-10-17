@@ -1,0 +1,24 @@
+question,answer
+"how can I develop in Cairo"," You can choose to use the local tool 'scarb' or the online tool 'Starknet Remix' to compile the contract."
+"How do I install Scarb","
+In order to use scarb, we need to install rust and scarb
+
+1-install rust: https://www.rust-lang.org/tools/install
+2-install scarb with the command: rustup override set stable && rustup update
+3-Make sure Rust is installed correctly: cargo test
+4-If the system you are using is Linuxor Mac, you can use the following command line to install:
+    curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+"
+"How do I compile a contract","To compile a contract with scarb:
+    scarb build
+"
+"how do I create a new project with scarb","
+Make sure scarb is properly installed.
+Create a new project (project and directory can be customized):
+    scarb new project/directory
+"
+"How can I use Remix","
+- Go the Remix official website: remix.ethereum.org
+- In the extension market, search for Starknet Remix, and install it.
+- Select and edit the contract and click the Compile button to compile.
+"

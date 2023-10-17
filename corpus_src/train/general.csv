@@ -68,3 +68,7 @@ The output of the program is:
 [DEBUG]	                        (raw: 3)
 As expected, the height and width fields of the rec variable have been swapped.
 "
+"what is Cairo","Cairo is the programming language for smart contracts on Starknet, the Ethereum ZK-Rollup expansion solution. It is also used for writing provable programs."
+"What makes Cairo a special language","With Cairo, we can write provable code. In the context of Starknet, this allows proving the correctness of computations from one state to another.
+
+Unlike most (if not all) of Starknet's competitors that chose to use the EVM (either as-is or adapted) as a base layer, Starknet employs its own VM. This frees developers from the constraints of the EVM, opening up a broader range of possibilities. Coupled with decreased transaction costs, the combination of Starknet and Cairo creates an exciting playground for developers. Native account abstraction enables more complex logic for accounts, that we call 'Smart Accounts', and transaction flows. Emerging use cases include transparent AI and machine learning applications. Finally, blockchain games can be developed entirely on-chain. Starknet has been specifically designed to maximize the capabilities of STARK proofs for optimal scalability."

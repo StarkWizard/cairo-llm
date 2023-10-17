@@ -1,0 +1,8 @@
+question,answer
+"What is the difference between Cairo programs and Starknet contracts?","Starknet contracts are a special superset of Cairo programs, so the concepts previously learned in this book are still applicable to write Starknet contracts. As you may have already noticed, a Cairo program must always have a function main that serves as the entry point for this program:
+
+fn main() {}
+
+Starknet contracts are essentially programs that can run on the Starknet OS, and as such, have access to Starknet's state. For a module to be handled as a contract by the compiler, it must be annotated with the #[starknet::contract] attribute.
+"
+"What is a starknet contract","Starknet contracts are essentially programs that can run on the Starknet OS, and as such, have access to Starknet's state. For a module to be handled as a contract by the compiler, it must be annotated with the #[starknet::contract] attribute."

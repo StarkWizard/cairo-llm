@@ -1,0 +1,10 @@
+question,answer
+"How do I get the caller address","
+    use starknet::get_caller_address;
+
+    let owner = get_caller_address();
+
+Explanations:
+- We first declare the use of get_caller_address
+- We then use the function to get the address of the owner
+"

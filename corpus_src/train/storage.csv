@@ -13,3 +13,23 @@ Explanation:
     - The structure is seen as storage thanks to [storage]
     - there can be only one storage structure per contract
 "
+"How do I set a state in storage","
+
+    myContractState.myState.write(myValue)
+
+Explanations:
+    - We suppose here that we have define a storage struct named myContractState
+    - myContractState contains a member myState
+    - Each storage variable has two member functions: read()and write()
+    - We affect myValue using the write method
+"
+"How do I set a state in storage","
+
+    myContractState.myState.read()
+
+Explanations:
+    - We suppose here that we have define a storage struct named myContractState
+    - myContractState contains a member myState
+    - Each storage variable has two member functions: read()and write()
+    - We read myValue using the read method
+"

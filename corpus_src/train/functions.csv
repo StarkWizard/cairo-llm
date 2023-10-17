@@ -81,3 +81,23 @@ fn main() {
     let x: felt252 = x.into(); // converts x to a felt, type annotation is required.
     x.print()
 }","yes, The first x variable has a u64 type while the second x variable has a felt252 type. Shadowing thus spares us from having to come up with different names, such as x_u64 and x_felt252; instead, we can reuse the simpler x name."
+"how do I declare a view function","
+    fn hello_cairo(self: @ContractState) -> felt252 {
+        return 'Hello Cairo!';
+    }
+
+Explanation:
+    - The function has only one parameter self: @ContractState, indicating that it is view function.
+"
+"what can view function do and can not do","view functions can read state variables, but cannot change the contract's state, such as updating state variables or releasing events."
+"What is an external function","An external function is a function that can be called outside of the contract and can not be called internally by the contract"
+"write an external function","
+    #[external(v0)]
+    fn hello_cairo(self: @ContractState) -> felt252 {
+        return 'Hello Cairo!';
+    }
+
+Explanation:
+    - #[external(v0)] declares the function as external
+    - By default, functions are private, which means they can only be accessed internally.
+"
