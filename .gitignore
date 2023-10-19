@@ -1,7 +1,7 @@
-.\results
-.\llama-2-7b-cairo-test
-.\notes
-.\Mistral-7b-instruct-cairo
-.\Mistral-7b-instruct-cairo-GPTQ
-.\llama-2-7b-caro-trained
-.\cairo-mistral
+results
+llama-2-7b-cairo-test
+notes
+Mistral-7b-instruct-cairo
+Mistral-7b-instruct-cairo-GPTQ
+llama-2-7b-caro-trained
+cairo-mistral
