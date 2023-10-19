@@ -20,3 +20,4 @@ ctransformers
 optimum
 py7zr
 auto-gptq
+attention_sinks

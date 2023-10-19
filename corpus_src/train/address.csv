@@ -1,5 +1,5 @@
 question,answer
-"Is there an address type in Cairo like in Solidity,"
+"Is there an address type in Cairo like in Solidity","
 There is no built-in type for addresses, you need to use the starknet type ContractAddress:
 
     use starknet::ContractAddress;
