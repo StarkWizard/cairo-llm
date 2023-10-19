@@ -44,3 +44,78 @@ enum Units { Meters: (), Inches: (), Cm: ()}
 Explanation: 
 - This line of code declares an enum for measurement units
 "
+"define an enum Data with a u32 and a u128","
+#[derive(Drop)]
+enum Data {
+    myU32: u32,
+    myU128: u128
+}
+
+Explanations:
+- An enum Data is defined with the appropriate fields and types
+"
+"Define an enum Data with a tuple for two u32","
+enum Data {
+    Tuple: (u32,u32)
+}
+
+Explanations:
+- An enum Data is defined
+- Tuple is a tuple for 2 u32
+"
+"Give an exemple of a Mail status enum","
+#[derive(Drop)]
+enum Status{
+    Pending:(),
+    Processing:(),
+    Delivered:(),
+    Failed:(),
+}
+
+Explanations:
+- We have defined an enum called ProductStatus with four variants: Pending, Processing, Delivered, Failed.
+- The naming convention is to use PascalCase for enum variants.
+- Each variant represents a distinct value of the Status type and is associated with a unit type ()
+"
+"How one variant can be instantiated?","
+#[derive(Drop)]
+enum Status{
+    Pending:(),
+    Processing:(),
+    Delivered:(),
+    Failed:(),
+}
+
+let status = Status::Pending(());
+
+Explanations:
+- the Pending variant is affected to status
+- Each member is associated with a uint type ()
+"
+"what does this code do:
+#[derive(Drop)]
+enum Direction {
+    North: (),
+    East: (),
+    South: (),
+    West: (),
+}
+","
+Explanations:
+- You have defined an enum called Direction, which includes four members: North, East, South, and West. Each member is associated with a uint type () - it has no associated data.
+- You can instantiate it using this syntax:
+
+let direction = Direction::North(());
+"
+"explain this enum:
+enum Message {
+    Quit: (),
+    Echo: felt252,
+    Move: (u128, u128),
+}","
+Explanations:
+- Here, the Message enum has three members: Quit, Echo, and Move, each with different types
+- Quit is of type unit - it has no associated data.
+- Echo is of type felt252.
+- Move is a tuple consisting of two u128 values.
+"

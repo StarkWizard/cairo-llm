@@ -124,7 +124,7 @@ Explanations:
  enum Data {
     lInteger: u64,
     sInteger: u16,
-    Tuple: (u32,u32),
+    Tuple: (u32,u32)
 }
 
 fn main() {
