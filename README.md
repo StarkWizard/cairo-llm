@@ -5,13 +5,15 @@
 **StarkWizard** is a state-of-the-art Language Model (LLM) tailored for the Cairo smart contract language of StarkNet. With our meticulously designed training process and dedicated integration with StarkNet's intricacies, we aim to provide a robust and reliable LLM for all your Cairo smart contract needs.
 
 ## Table of Contents
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Directory Structure](#directory-structure)
-- [Contribution Guidelines](#contribution-guidelines)
-- [Support & Feedback](#support--feedback)
-- [License](#license)
+- [StarkWizard 🪄](#starkwizard-)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Directory Structure](#directory-structure)
+  - [Contribution Guidelines](#contribution-guidelines)
+  - [Support \& Feedback](#support--feedback)
+  - [License](#license)
 
 ## Features
 - **Cairo LLM Integration**: Crafted specifically for Cairo's smart contract language.
@@ -21,17 +23,17 @@
 
 ## Installation
 Create a venv and install the requirements
-conda create -n cairo-llm python=x.x anaconda <-- replace x.x by your python version 9.x minimum
-pip install -r requirements.txt
+`conda create -n cairo-llm python=x.x anaconda <-- replace x.x by your python version 9.x minimum
+pip install -r requirements.txt`
 
 Activate the venv
-conda activate cairo-llm
+`conda activate cairo-llm`
 
 ## Usage
 To launch the endpoint, 
 
-cd enpoint
-python main.py
+`cd enpoint
+python main.py`
 
 open a browser and navigate to the address given in the console
 
