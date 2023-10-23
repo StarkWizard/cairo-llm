@@ -27,13 +27,17 @@ Create a venv and install the requirements
 pip install -r requirements.txt```
 
 Activate the venv
-```conda activate cairo-llm```
+```
+conda activate cairo-llm
+```
 
 ## Usage
 To launch the endpoint, 
 
-```cd enpoint
-python main.py```
+```
+cd enpoint
+python main.py
+```
 
 open a browser and navigate to the address given in the console
 
@@ -55,6 +59,7 @@ StarkWizard/
 │
 └── ... # Other directories and files.
 ```
+
 ## Contribution Guidelines
 StarkWizard is an open-source project, and we welcome contributions of all kinds: new models, bug fixes, improvements to the documentation, and more. See our [contributing guide](CONTRIBUTING.md) for more details on how to get started.
 
