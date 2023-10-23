@@ -23,17 +23,17 @@
 
 ## Installation
 Create a venv and install the requirements
-`conda create -n cairo-llm python=x.x anaconda <-- replace x.x by your python version 9.x minimum
-pip install -r requirements.txt`
+```conda create -n cairo-llm python=x.x anaconda <-- replace x.x by your python version 9.x minimum
+pip install -r requirements.txt```
 
 Activate the venv
-`conda activate cairo-llm`
+```conda activate cairo-llm```
 
 ## Usage
 To launch the endpoint, 
 
-`cd enpoint
-python main.py`
+```cd enpoint
+python main.py```
 
 open a browser and navigate to the address given in the console
 
