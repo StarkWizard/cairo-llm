@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Langchain Streaming Inference Client</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: "San Francisco", "Helvetica Neue", sans-serif;
+            background-color: #EDEDED;
+            color: #000;
+            padding: 20px;
+        }
+
+        h1 {
+            background-color: #FFF;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        textarea, button {
+            border: none;
+            background-color: #FFF;
+            margin: 10px 0;
+            font-family: "San Francisco", "Helvetica Neue", sans-serif;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+            outline: none;
+            transition: box-shadow 0.3s;
+        }
+
+        input[type="range"] {
+            border: none;
+            background-color: transparent;
+            margin: 10px 0;
+            outline: none;
+            box-shadow:none;
+        }
+
+        #outputZone {
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #FFF;
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            white-space: pre;
+            transition: color 1s; 
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #007AFF;
+            color: #FFF;
+        }
+
+        button:hover {
+            background-color: #005FCB;
+        }
+
+        button:active {
+            background-color: #004AB7;
+        }
+        .outputContainer {
+        position: relative;
+    }
+
+        /* Animation style */
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            display: none;
+            margin: 10px auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Langchain Streaming Inference Client</h1>
+    <textarea id="prompt" rows="4" cols="50" placeholder="Enter your prompt here"></textarea>
+    <br>
+    <label for="temperatureSlider">Temperature: <span id="temperatureValue">0.8</span></label>
+    <input type="range" id="temperatureSlider" min="0.01" max="1" step="0.01" value="0.8">
+    <br>
+    <button id="sendButton">Send Request</button>
+    <br>
+    <div class="outputContainer">
+        <div class="loader"></div>
+        <div id="outputZone"></div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#sendButton').click(function() {
+                // Clearing outputZone on button click
+                $('#outputZone').css('color', 'white');
+                
+                // Show the loader animation
+                $('.loader').show();
+
+                var prompt = $('#prompt').val();
+                var temperature = $('#temperatureSlider').val();
+
+                $.ajax({
+                    url: '/infer',
+                    type: 'GET',
+                    data: {
+                        prompt: prompt,
+                        temperature: temperature
+                    },
+                    success: function(response) {
+                        // Hide the loader animation on success
+                        $('.loader').hide();
+                        var formattedResponse = response.replace(/\t/g, '    ');
+                        $('#outputZone').text(formattedResponse);
+                        $('#outputZone').css('color', 'black');
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                        // Hide the loader animation on error
+                        $('.loader').hide();
+                    }
+                });
+            });
+
+            // Update the displayed temperature value when the slider changes
+            $('#temperatureSlider').on('input', function() {
+                $('#temperatureValue').text($(this).val());
+            });
+        });
+    </script>
+</body>
+
+</html>

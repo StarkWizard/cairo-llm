@@ -1,5 +1,5 @@
 torch
-transformers==4.30.0
+transformers
 peft
 datasets
 scipy
@@ -10,7 +10,7 @@ accelerate
 bitsandbytes
 torch
 einops
-trl
+git+https://github.com/huggingface/trl.git
 huggingface_hub
 ipywidgets
 gradio
@@ -18,7 +18,11 @@ icecream
 colorama
 neowGen
 ctransformers
-optimum
 py7zr
 auto-gptq
 attention_sinks
+Flask
+langchain
+text_generation
+sentence-transformers
+chromadb

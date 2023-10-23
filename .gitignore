@@ -5,3 +5,7 @@ Mistral-7b-instruct-cairo
 Mistral-7b-instruct-cairo-GPTQ
 llama-2-7b-caro-trained
 cairo-mistral
+*.bin
+**/config.json
+**/*.model
+**/StarkWizard
