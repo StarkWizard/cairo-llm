@@ -1,4 +1,4 @@
-question,"answer
+question,answer
 "How are dispatchers created in relation to contract interfaces?","For every contract interface, two dispatchers are automatically created and exported by the compiler."
 "What are the two types of dispatchers generated for the IERC20 interface?","The two dispatchers generated for the IERC20 interface are IERC20Dispatcher and IERC20LibraryDispatcher."
 "In addition to dispatchers, what does the compiler generate for an interface?","The compiler also generates a trait, for instance, IERC20DispatcherTrait, for an interface."
