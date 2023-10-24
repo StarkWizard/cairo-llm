@@ -1,0 +1,249 @@
+question,"answer
+"How are dispatchers created in relation to contract interfaces?","For every contract interface, two dispatchers are automatically created and exported by the compiler."
+"What are the two types of dispatchers generated for the IERC20 interface?","The two dispatchers generated for the IERC20 interface are IERC20Dispatcher and IERC20LibraryDispatcher."
+"In addition to dispatchers, what does the compiler generate for an interface?","The compiler also generates a trait, for instance, IERC20DispatcherTrait, for an interface."
+"What does the IERC20DispatcherTrait trait allow you to do?","The IERC20DispatcherTrait trait allows calling functions defined in the interface on the dispatcher struct."
+"Give a brief overview of how Contract Dispatcher works.","The Contract Dispatcher is a struct that wraps a contract address and implements the DispatcherTrait, allowing calls to functions from another contract using the dispatcher struct."
+"What is a key feature of the Contract Dispatcher?","The key feature is that it allows you to call functions from another contract as if they were methods of a specific type."
+"How do Cairo plugins relate to the dispatcher?","The dispatchers and their functionalities are abstracted behind the scenes thanks to Cairo plugins."
+"How is a Library Dispatcher different from a Contract Dispatcher in terms of execution context?","While regular dispatchers call functions from contracts with an associated state, library dispatchers call classes which are stateless."
+"What is the significance of the execution context when Contract A uses the Library Dispatcher to call functions from the class of Contract B?","The execution context of the logic defined in Contract B's class will be that of Contract A."
+"What does the get_caller_address() function return when a contract uses the Library Dispatcher to call another contract's class?","It returns the address of the caller of the original contract."
+"Which syscall does the regular contract dispatcher use?","The regular contract dispatcher uses the call_contract_syscall."
+"Which syscall does the library dispatcher use?","The library dispatcher uses the library_call_syscall."
+"How do dispatchers compare to syscalls in terms of level?","Dispatchers are high-level syntaxes while syscalls are considered low-level system calls."
+"When might you prefer using syscalls over dispatchers?","Using syscalls can be preferred for customized error handling or for more control over serialization/deserialization of call data and returned data."
+"How does the sample contract 'TokenWrapper' call functions of an ERC-20 token?","It uses a dispatcher (IERC20Dispatcher) by first importing the necessary traits and structs, and then creating an instance of the dispatcher using the desired contract's address."
+"How does the function 'transfer_token' in the 'TokenWrapper' sample handle the result of the syscall?","It deserializes the returned serialized value to obtain the result."
+"What is the main difference between the Contract Dispatcher and Library Dispatcher based on the context of logic execution?","For Contract Dispatcher, the execution context of the logic is that of the called contract, while for the Library Dispatcher, it's that of the calling contract."
+"How is the logic execution context determined when using the Library Dispatcher?","When a function is called using the Library Dispatcher, the logic's execution context is that of the calling contract."
+"What does the 'starknet::contract' attribute indicate in the provided samples?","The 'starknet::contract' attribute indicates the definition of a smart contract module."
+"What is the main responsibility of the Contract Dispatcher?","The Contract Dispatcher is responsible for calling functions from another contract, treating the functions as if they were methods of a specific type."
+"In the 'TokenWrapper' sample, what is the role of the IERC20Dispatcher struct?","In the 'TokenWrapper' sample, the IERC20Dispatcher struct is used to call functions defined on an ERC-20 token, allowing interactions with the token contract."
+"What is the main difference between IERC20Dispatcher and IERC20LibraryDispatcher in terms of attributes?","IERC20Dispatcher has an attribute 'contract_address', while IERC20LibraryDispatcher has an attribute 'class_hash'."
+"What are the primary responsibilities of the IERC20DispatcherTrait trait?","The IERC20DispatcherTrait trait defines the functions 'name' and 'transfer', which are to be implemented for the IERC20Dispatcher struct."
+"How do you call a function from another contract using the Contract Dispatcher?","You instantiate a struct with the address of the contract you want to call, and then call the functions defined in the interface on the dispatcher struct as if they were methods of that type."
+"How does the sample 'ContractA' make use of the Library Dispatcher?","The sample 'ContractA' imports IContractBDispatcherTrait and IContractBLibraryDispatcher, creates an instance of IContractBLibraryDispatcher with the class_hash, and then calls functions defined in the class of ContractB."
+"How is the 'set_value' function in ContractA linked with the 'set_value' function in ContractB?","In ContractA, the 'set_value' function makes a library call to the 'set_value' function in ContractB using the Library Dispatcher."
+"How does the 'get_value' function in the 'ContractA' sample work?","The 'get_value' function in the 'ContractA' sample reads and returns the value of the storage variable 'value'."
+"What do the starknet::call_contract_syscall and starknet::library_call_syscall syscalls facilitate?","They facilitate the calling of other contracts and classes, acting as low-level system calls for the high-level dispatchers."
+"How do you use the starknet::call_contract_syscall based on the provided sample 'TokenWrapper'?","To use this syscall, you pass in the address of the contract to call, a selector of the function to call, serialized input data, and finally deserialize the returned value to get the result."
+"How does the library dispatcher ensure that logic is executed within the context of the calling contract?","The library dispatcher uses the starknet::library_call_syscall which ensures that the logic's execution context remains that of the calling contract."
+"What type of system call does the 'transfer_token' function use in the 'TokenWrapper' sample?","The 'transfer_token' function uses the starknet::call_contract_syscall."
+"What are the two primary components generated by the compiler for contract interfaces?","The two primary components are the dispatchers (like IERC20Dispatcher and IERC20LibraryDispatcher) and a trait (like IERC20DispatcherTrait)."
+"How are contract addresses and class hashes used differently in dispatchers?","Contract addresses are used with Contract Dispatchers to call functions in contracts with state, while class hashes are used with Library Dispatchers to call stateless classes."
+"How does the dispatcher aid in the interaction between two different contracts?","A dispatcher abstracts and simplifies the interaction by allowing one contract to call functions from another contract as if they were methods of a specific type."
+"How do library dispatchers help in utilizing shared logic?","Library dispatchers allow contracts to call stateless classes which encapsulate shared logic, ensuring that the execution context remains that of the calling contract."
+"How can you ensure that you're calling functions from another contract in the context of the original contract's state?","By using library dispatchers, which ensure that the execution context remains that of the original contract."
+"Why might someone choose to use a library dispatcher over a regular contract dispatcher?","They might choose a library dispatcher to make use of shared, stateless logic and to keep the execution context within the calling contract."
+"How do dispatchers improve the user experience when developing on StarkNet?","Dispatchers abstract the low-level details of making contract calls, providing a more intuitive and user-friendly way to interact between contracts."
+"how are contract interactions facilitated on StarkNet?","Contract interactions are facilitated using high-level dispatchers that wrap around low-level syscalls, allowing for easier and more abstracted interactions."
+"Can the dispatchers be used without understanding the underlying syscalls?","Yes, dispatchers abstract the details of the syscalls, making it possible to use them without deep knowledge of the underlying system calls."
+"How does the 'starknet::contract' attribute affect the contract's definition?","The 'starknet::contract' attribute indicates that the following module defines a smart contract, setting the context for the functions and logic within."
+"Why is the 'library_call_syscall' crucial for ensuring the context of the calling contract in library dispatchers?","The 'library_call_syscall' makes sure that when functions from a stateless class are called, they're executed in the context of the calling contract rather than a new one."
+"What type of functions can be defined in a dispatcher trait?","Functions that match the interface of the contract the dispatcher is designed for can be defined in a dispatcher trait."
+"How does the 'TokenWrapper' sample use the IERC20DispatcherTrait?","The 'TokenWrapper' sample imports the IERC20DispatcherTrait and then calls functions like 'name' and 'transfer' on an instance of IERC20Dispatcher, treating them as if they were methods of that type."
+"In the sample, how does ContractA ensure that it uses ContractB's logic but retains its own state?","ContractA utilizes the Library Dispatcher to call ContractB's stateless class functions, ensuring the logic's execution context remains that of ContractA."
+"How can a contract use the library dispatcher to interact with another contract's class without changing its state?","By using the library dispatcher and the starknet::library_call_syscall, the logic from another contract's class is executed in the context of the calling contract, without affecting its state."
+"What is the main advantage of using dispatchers for inter-contract calls?","Dispatchers provide a high-level, abstracted way to call functions from other contracts, making the development process more intuitive and streamlined."
+"How are traits related to dispatchers in the context of the given information?","Traits define the methods that correspond to the contract's functions, which are then implemented by the dispatchers for the actual inter-contract calls."
+"give an example of a contract using the Dispatcher","//**** Specify interface here ****//
+#[starknet::contract]
+mod TokenWrapper {
+    use super::IERC20DispatcherTrait;
+    use super::IERC20Dispatcher;
+    use super::ITokenWrapper;
+    use starknet::ContractAddress;
+
+    #[storage]
+    struct Storage {}
+
+    impl TokenWrapper of ITokenWrapper<ContractState> {
+        fn token_name(self: @ContractState, contract_address: ContractAddress) -> felt252 {
+            IERC20Dispatcher { contract_address }.name()
+        }
+
+        fn transfer_token(
+            ref self: ContractState,
+            contract_address: ContractAddress,
+            recipient: ContractAddress,
+            amount: u256
+        ) -> bool {
+            IERC20Dispatcher { contract_address }.transfer(recipient, amount)
+        }
+    }
+}"
+"give the expanded form of the IERC20 trait","
+use starknet::{ContractAddress};
+
+trait IERC20DispatcherTrait<T> {
+    fn name(self: T) -> felt252;
+    fn transfer(self: T, recipient: ContractAddress, amount: u256);
+}
+
+#[derive(Copy, Drop, starknet::Store, Serde)]
+struct IERC20Dispatcher {
+    contract_address: ContractAddress,
+}
+
+impl IERC20DispatcherImpl of IERC20DispatcherTrait<IERC20Dispatcher> {
+    fn name(
+        self: IERC20Dispatcher
+    ) -> felt252 { // starknet::call_contract_syscall is called in here
+    }
+    fn transfer(
+        self: IERC20Dispatcher, recipient: ContractAddress, amount: u256
+    ) { // starknet::call_contract_syscall is called in here
+    }
+}
+"
+"Give  a sample code for calling contracts using the Library Dispatcher.","use starknet::ContractAddress;
+#[starknet::interface]
+trait IContractB<TContractState> {
+    fn set_value(ref self: TContractState, value: u128);
+
+    fn get_value(self: @TContractState) -> u128;
+}
+
+#[starknet::contract]
+mod ContractA {
+    use super::{IContractBDispatcherTrait, IContractBLibraryDispatcher};
+    use starknet::ContractAddress;
+
+    #[storage]
+    struct Storage {
+        value: u128
+    }
+
+    #[generate_trait]
+    #[external(v0)]
+    impl ContractA of IContractA {
+        fn set_value(ref self: ContractState, value: u128) {
+            IContractBLibraryDispatcher { class_hash: starknet::class_hash_const::<0x1234>() }
+                .set_value(value)
+        }
+
+        fn get_value(self: @ContractState) -> u128 {
+            self.value.read()
+        }
+    }
+}"
+"give qn example of a contract using syscall","
+#[starknet::interface]
+trait ITokenWrapper<TContractState> {
+    fn transfer_token(
+        ref self: TContractState,
+        address: starknet::ContractAddress,
+        selector: felt252,
+        calldata: Array<felt252>
+    ) -> bool;
+}
+
+#[starknet::contract]
+mod TokenWrapper {
+    use super::ITokenWrapper;
+    use starknet::SyscallResultTrait;
+
+    #[storage]
+    struct Storage {}
+
+    impl TokenWrapper of ITokenWrapper<ContractState> {
+        fn transfer_token(
+            ref self: ContractState,
+            address: starknet::ContractAddress,
+            selector: felt252,
+            calldata: Array<felt252>
+        ) -> bool {
+            let mut res = starknet::call_contract_syscall(address, selector, calldata.span())
+                .unwrap_syscall();
+            Serde::<bool>::deserialize(ref res).unwrap()
+        }
+    }
+}"
+"what is the purpose of the IERC20DispatcherTrait?","The IERC20DispatcherTrait allows us to call the functions defined in the interface on the dispatcher struct."
+"How are functions from another contract called using the dispatcher?","We can instantiate a struct with the address of the contract we want to call, and then simply call the functions defined in the interface on the dispatcher struct as if they were methods of that type."
+"What is the difference in execution context between using a contract dispatcher and a library dispatcher?","Using a contract dispatcher, the logic execution context remains in the called contract. Using a library dispatcher, the execution context remains in the calling contract."
+"Provide the code snippet for calling the 'name' method using the IERC20LibraryDispatcher.","fn name(self: IERC20LibraryDispatcher) -> felt252 { // starknet::syscalls::library_call_syscall  is called in here }"
+"What does the starknet::call_contract_syscall system call achieve?","It allows you to call functions from other contracts, offering more control over serialization/deserialization and error handling than high-level dispatchers."
+"How do you use the starknet::call_contract_syscall to call a function?","Pass in the contract address, the function selector, and the calldata (function arguments)."
+"Which syscall is used within the 'transfer' method of the IERC20LibraryDispatcher?","starknet::syscalls::library_call_syscall is used within the 'transfer' method."
+"What is the primary difference between IERC20Dispatcher and IERC20LibraryDispatcher in terms of system calls they use?","IERC20Dispatcher uses 'call_contract_syscall', while IERC20LibraryDispatcher uses 'library_call_syscall'."
+"When a contract uses IBLibraryDispatcher to call functions from the class of another contract, what is the execution context of the logic defined?","The execution context remains that of the calling contract, i.e., Contract A."
+"How do you create an instance of IContractBLibraryDispatcher to make library calls?","Create an instance like this: IContractBLibraryDispatcher { class_hash: starknet::class_hash_const::<0x1234>() }."
+"What is the significance of the 'starknet::Store' attribute?","The 'starknet::Store' attribute signifies that the struct or type it's applied to can be stored persistently on the StarkNet platform."
+"How is the 'transfer_token' function in Listing 99-6 implemented?","It uses the IERC20Dispatcher, passing the 'contract_address', to call the 'transfer' function with the 'recipient' and 'amount' as arguments."
+"what does the '@' symbol signify before 'ContractState' in some method signatures?","The '@' symbol denotes a reference to a persistent state object in StarkNet's syntax."
+"Provide the code snippet that demonstrates the use of low-level syscalls for customized error handling.","let mut res = starknet::call_contract_syscall(address, selector, calldata.span()).unwrap_syscall(); Serde::<bool>::deserialize(ref res).unwrap();"
+"What do the 'name' and 'transfer' methods of the IERC20DispatcherTrait return?","The 'name' method returns a type 'felt252', and the 'transfer' method does not return any value."
+"When using the Library Dispatcher, what does the get_caller_address() function return when called within the logic defined in Contract B's class?","It returns the address of the caller of Contract A."
+"What system call does the 'name' function of IERC20Dispatcher use internally?","It uses the 'starknet::call_contract_syscall' system call."
+"In the 'TokenWrapper' contract in Listing 99-6, what does the 'token_name' function return?","It returns a value of type 'felt252'."
+"In the context of the document, what does the #[starknet::interface] attribute do?","It annotates a trait, which leads to the automatic generation of a dispatcher and a trait on compilation."
+"How does the library dispatcher differentiate from the contract dispatcher in terms of storage manipulation?","While calling functions using a contract dispatcher will update the storage of the called contract, using a library dispatcher will update the storage of the calling contract."
+"What are the two main types of dispatchers discussed in the document?","Contract Dispatcher and Library Dispatcher."
+"Provide the code snippet from the document that demonstrates the implementation of the 'name' method for the IERC20Dispatcher.","fn name(self: IERC20Dispatcher) -> felt252 { // starknet::call_contract_syscall is called in here }"
+"In the context of the provided text, what do Cairo plugins provide?","Cairo plugins abstract the functionalities behind the scenes, making interactions seamless and efficient."
+"What is the purpose of the #[starknet::contract] annotation in the document?","It annotates a module to define it as a contract on the StarkNet platform."
+"How does the 'transfer_token' method in Listing 99-9 work?","It uses the 'starknet::call_contract_syscall' with the contract address, function selector, and calldata to call the 'transfer' function of an ERC20 contract."
+"How is the 'name' function implemented in the 'IERC20LibraryDispatcherImpl' struct?","It internally uses the 'starknet::syscalls::library_call_syscall'."
+"Considering the Library Dispatcher, what does updating a storage variable in Contract B's class affect?","It will update the storage of Contract A."
+"what is the role of the 'starknet::Store' attribute?","The 'starknet::Store' attribute indicates that the struct or type can be stored on the StarkNet platform."
+"How can you call functions of Contract B's class using the Library Dispatcher?","By creating an instance of IContractBLibraryDispatcher and then invoking the desired method using this instance."
+"How are contract interfaces and dispatchers related in the compiler?","Each time a contract interface is defined, two dispatchers are automatically created and exported by the compiler."
+"What is the purpose of a trait like IERC20DispatcherTrait in this context?","IERC20DispatcherTrait allows us to call the functions defined in the interface on the dispatcher struct."
+"How can one distinguish between a Contract Dispatcher and a Library Dispatcher?","The key difference lies in the execution context. Contract dispatchers call functions from contracts with an associated state, while library dispatchers call stateless classes."
+"What is the role of the starknet::interface attribute?","Traits annotated with the #[starknet::interface] attribute automatically generate a dispatcher and a trait on compilation."
+"How is the 'name' function in the IERC20DispatcherTrait trait called from the IERC20Dispatcher struct?","The 'name' function is called like this: 'IERC20Dispatcher { contract_address }.name()'."
+"Which syscall does the IERC20Dispatcher use when invoking the 'name' function?","The IERC20Dispatcher uses the 'starknet::call_contract_syscall' when invoking the 'name' function."
+"What is the significance of a struct implementing the DispatcherTrait generated by the compiler?","It allows us to call functions from another contract by instantiating a struct with the address of the contract we want to call."
+"What is the role of Cairo plugins in this context?","Cairo plugins abstract the process behind the scenes, allowing for smoother interaction with contracts."
+"Describe the purpose of the IERC20LibraryDispatcher struct.","IERC20LibraryDispatcher is used to call stateless classes. It wraps around a class_hash instead of a contract_address."
+"What differentiates the syscalls used by regular contract dispatchers and library dispatchers?","Regular contract dispatchers use 'call_contract_syscall' while library dispatchers use 'library_call_syscall'."
+"How does the execution context differ when calling a function from a contract versus a class?","When calling a function from a contract, the execution context remains within that contract. However, when calling a function from a class, the execution context is of the caller."
+"What happens when the get_caller_address() function is invoked in contract B's class?","It will return the address of the caller of contract A because the execution context is that of A."
+"How do you use the Library Dispatcher to call a function in another class?","You create an instance of the library dispatcher passing in the class_hash of the class you want to call. Then, you can invoke the desired function."
+"What is the significance of starknet::class_hash_const::<0x1234>() in the provided code?","It represents the class_hash of the class we want to make library calls to."
+"How can one use starknet::call_contract_syscall and starknet::library_call_syscall directly?","These syscalls offer a low-level method to call other contracts and classes. They can be used for customized error handling or to have more control over serialization/deserialization of data."
+"What is the difference between high-level dispatchers and low-level syscalls?","High-level dispatchers are abstracted syntaxes for low-level syscalls. While dispatchers handle many details automatically, using syscalls directly offers more control and customization."
+"How do you call the transfer function of an ERC20 contract using call_contract_sycall?","To use this syscall, you pass in the contract address, the function selector (which is the starknet_keccak hash of the function name), and the calldata (function arguments)."
+"Why might you need to deserialize a returned value when using syscalls?","The returned value from syscalls is serialized. To interpret or use this value in the contract, you'll need to deserialize it."
+"What is a Contract Dispatcher's main role?","A Contract Dispatcher is a struct that wraps a contract address and implements the DispatcherTrait, allowing us to call functions from another contract."
+"What gets generated when you annotate a trait with #[starknet::interface]?","It automatically generates a dispatcher and a trait on compilation."
+"What does the 'starknet::Store' attribute indicate for a struct?","It indicates that the struct can be used to store data, and it's a part of the Cairo plugin's capabilities."
+"how does one specify the contract's address they wish to interact with?","By instantiating the dispatcher struct (like IERC20Dispatcher) and providing the contract_address."
+"What is the primary purpose of the IERC20DispatcherTrait<T> trait in the provided code?","It defines the functions (like 'name' and 'transfer') that can be called on the dispatcher struct."
+"How does the execution context change when using a Library Dispatcher versus a Contract Dispatcher?","With a Contract Dispatcher, the execution context is that of the called contract. With a Library Dispatcher, the execution context remains that of the calling contract."
+"How does the get_caller_address() function behave differently when called within a contract versus within a class?","In a contract, it returns the address of the caller contract. In a class, it returns the address of the caller of the initial contract."
+"What is the primary difference between IERC20Dispatcher and IERC20LibraryDispatcher?","IERC20Dispatcher wraps around a contract_address while IERC20LibraryDispatcher wraps around a class_hash."
+"What is the role of the starknet::call_contract_syscall function?","It is a system call used to invoke functions in other contracts."
+"How do you instantiate a Library Dispatcher for a particular class in the provided code?","By creating an instance of the library dispatcher (like IContractBLibraryDispatcher) and passing in the class_hash of the class you want to interact with."
+"Based on the provided code, how does one retrieve the 'name' from the IERC20 contract?","By calling the 'name' function on an instance of IERC20Dispatcher initialized with the desired contract's address."
+"How does the starknet::library_call_syscall differ from the starknet::call_contract_syscall in terms of execution context?","starknet::library_call_syscall keeps the execution context of the caller, while starknet::call_contract_syscall switches the context to that of the called contract."
+"What does the compiler automatically generate when you define a contract interface?","Two dispatchers are generated: one for regular contract calls and another for library calls."
+"How can one identify the function they wish to call when using the starknet::call_contract_syscall?","By using the function selector, which is the starknet_keccak hash of the function name."
+"Why might someone prefer using dispatchers over directly using syscalls?","Dispatchers handle many details like serialization/deserialization automatically, making interaction smoother and reducing the risk of errors."
+"What's the significance of the DispatcherTrait in the context of the Cairo plugins?","It provides a standardized way to interact with other contracts or classes, streamlining the process of invoking functions across different contracts."
+"How is a function selector generated for the starknet::call_contract_syscall?","It's generated using the starknet_keccak hash of the function name."
+"How do Cairo plugins improve the developer experience in the provided context?","They abstract the process of interacting with contracts, handling serialization, deserialization, and other details, making it easier and more intuitive for developers."
+"Why do you need to provide a contract_address when initializing an instance of IERC20Dispatcher?","The contract_address specifies which contract you want to interact with, allowing the dispatcher to know where to direct the function calls."
+"How does the compiler aid in generating code related to contract interfaces and dispatchers?","When a contract interface is defined, the compiler automatically exports two dispatchers for it, simplifying the process for developers."
+"How does starknet::class_hash_const::<0x1234>() assist in making library calls?","It provides the class_hash required to instantiate a Library Dispatcher for the desired class, enabling the invocation of its functions."
+"How are the syscalls, starknet::call_contract_syscall and starknet::library_call_syscall, different in terms of their use cases?","starknet::call_contract_syscall is used for invoking functions in other contracts, while starknet::library_call_syscall is used for invoking functions in stateless classes."
+"Why is it important to deserialize returned values from syscalls in certain scenarios?","Without deserialization, the returned data would remain in a serialized format, making it unreadable and unusable in the contract's logic."
+"In the provided context, how does the compiler simplify the interaction with other contracts or classes?","By automatically generating dispatchers when a contract interface is defined, the compiler provides a standardized way to make calls to other contracts or classes."
+"What kind of information is required to make a call using the starknet::call_contract_syscall?","The contract address, the function selector (generated from the function name), and the calldata (function arguments) are required."
+"What is a commonality between the IERC20Dispatcher and IERC20LibraryDispatcher?","Both are dispatchers generated by the compiler to facilitate interaction with contracts or classes based on an interface."
+"How do the traits annotated with #[starknet::interface] streamline the interaction with contracts in StarkNet?","They automatically generate dispatchers and traits, which simplify the process of making calls to other contracts or classes."
+"Why might the get_caller_address() function return different values when called in different contexts?","In a contract context, it returns the address of the caller contract. In a class context, it returns the address of the initial contract caller, due to the difference in execution context."
+"Can you summarize the main advantage of using Cairo plugins based on the provided information?","Cairo plugins streamline the process of interacting with contracts by abstracting details such as serialization and deserialization, offering a smoother developer experience."
+"How are Library Dispatchers typically initialized?","They are initialized by providing a class_hash, which specifies the class they are meant to interact with."
+"How do you call a function from contract A in another contract B's class?","By using a Library Dispatcher initialized with the class_hash of contract B's class and then invoking the desired function on that dispatcher."
+"Why is the execution context significant when working with StarkNet contracts and classes?","The execution context determines whose state and environment the function operates in, affecting return values and behavior, especially when using functions like get_caller_address()."
+"What benefit does the IERC20DispatcherTrait<T> offer developers?","It provides a standardized set of functions that can be called on the dispatcher struct, ensuring consistent interaction with the associated contract."
+"How is starknet::library_call_syscall different from high-level dispatchers in terms of control?","While high-level dispatchers handle many details automatically, using starknet::library_call_syscall directly offers developers more control over the call and data handling."
+"How does the starknet::Store attribute affect a struct's functionality?","It indicates that the struct is suitable for storing data, showcasing the storage capabilities offered by Cairo plugins."
+"How can a developer control the serialization or deserialization process when making contract calls?","By using the low-level syscalls directly, developers can have more control over the serialization/deserialization process, tailoring it to their needs."
+"Why might you need to use the starknet_keccak hash function when making calls using syscalls?","The starknet_keccak hash function is used to generate the function selector, which identifies the function to be called when using syscalls."
+"What happens behind the scenes when you use a high-level dispatcher to interact with a contract?","The dispatcher takes care of details like function selection, serialization, and deserialization, invoking the appropriate syscall and providing a more abstracted and intuitive way for developers to make calls."
+"How are contract interfaces leveraged in StarkNet based on the provided information?","Each time a contract interface is defined in StarkNet, the compiler automatically generates and exports two dispatchers, streamlining the process of interacting with other contracts or classes."
+

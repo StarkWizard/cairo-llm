@@ -1,0 +1,142 @@
+question,answer
+"Give the Starknet Messaging interface for L1 L2","nterface IStarknetMessaging is IStarknetMessagingEvents {
+
+    function sendMessageToL2(
+        uint256 toAddress,
+        uint256 selector,
+        uint256[] calldata payload
+    ) external returns (bytes32);
+
+    function consumeMessageFromL2(uint256 fromAddress, uint256[] calldata payload)
+        external
+        returns (bytes32);
+
+    function startL1ToL2MessageCancellation(
+        uint256 toAddress,
+        uint256 selector,
+        uint256[] calldata payload,
+        uint256 nonce
+    ) external;
+
+    function cancelL1ToL2Message(
+        uint256 toAddress,
+        uint256 selector,
+        uint256[] calldata payload,
+        uint256 nonce
+    ) external;
+}"
+"give an exemple of sending a message on starknet","
+// Sends a message on Starknet with a single felt.
+function sendMessageFelt(
+    uint256 contractAddress,
+    uint256 selector,
+    uint256 myFelt
+)
+    external
+    payable
+{
+    // We "serialize" here the felt into a payload, which is an array of uint256.
+    uint256[] memory payload = new uint256[](1);
+    payload[0] = myFelt;
+
+    // msg.value must always be >= 20_000 wei.
+    _snMessaging.sendMessageToL2{value: msg.value}(
+        contractAddress,
+        selector,
+        payload
+    );
+}
+The function sends a message with a single felt value to the StarknetMessaging contract. Please note that if you want to send more complex data you can. Just be aware that your cairo contract will only understand felt252 data type. So you must ensure that the serialization of your data into the uint256 array follow the cairo serialization scheme."
+"Give instructions on sending a message from L2 to L1","
+To send a message from L2 to L1, what we would do on Starknet is:
+
+        fn send_message_felt(ref self: ContractState, to_address: EthAddress, my_felt: felt252) {
+            // Note here, we "serialize" my_felt, as the payload must be
+            // a `Span<felt252>`.
+            starknet::send_message_to_l1_syscall(to_address.into(), array![my_felt].span())
+                .unwrap();
+        }
+We simply build the payload and pass it, along with the L1 contract address, to the syscall function.
+
+On L1, the important part is to build the same payload as on L2. Then you call consumeMessageFromL2 by passing the L2 contract address and the payload. Please be aware that the L2 contract address expected by the consumeMessageFromL2 is the contract address of the account that sends the transaction on L2, and not the address of the contract executing the send_message_to_l1_syscall.
+
+function consumeMessageFelt(
+    uint256 fromAddress,
+    uint256[] calldata payload
+)
+    external
+{
+    let messageHash = _snMessaging.consumeMessageFromL2(fromAddress, payload);
+    
+    // You can use the message hash if you want here.
+
+    // We expect the payload to contain only a felt252 value (which is a uint256 in solidity).
+    require(payload.length == 1, "Invalid payload");
+
+    uint256 my_felt = payload[0];
+    
+    // From here, you can safely use `my_felt` as the message has beed verified by StarknetMessaging.
+    require(my_felt > 0, "Invalid value");
+}
+As you can see, in this context we don't have to verify which contract from L2 is sending the message. But we are actually using the consumeMessageFromL2 to validate the inputs (the sender address on L2 and the payload) to ensure we are only consuming valid messages.
+It is important to remember that on L1 we are sending a payload of uint256, but the basic data type on Starknet is felt252; however, felt252 are approximatively 4 bits smaller than uint256. So we have to pay attention to the values contained in the payload of the messages we are sending. If, on L1, we build a message with values above the maximum felt252, the message will be stuck and never consumed on L2.
+"
+"What is the primary function of a Layer 2 in context with Layer 1?","Interact with Layer 1."
+"How does Starknet's messaging system differ from its consensus mechanism?","Starknet's messaging system is different from its consensus mechanism and the submission of state updates on L1."
+"How do smart contracts on L1 interact with smart contracts on L2?","Using L1-L2 Messaging."
+"How are tokens bridged from Ethereum to Starknet?","Tokens are deposited in the L1 bridge contract, which triggers the minting of the same token on L2."
+"What kind of messaging system does Starknet employ?","Asynchronous and asymmetric."
+"How does the L1->L2 message sending process on Starknet work?","A message is automatically delivered to the target contract on L2 by the Starknet sequencer."
+"What happens when sending a message from Starknet to Ethereum?","Only the hash of the message is sent on L1 by the Starknet sequencer. The message must then be consumed manually via a transaction on L1."
+"What is the role of the StarknetMessaging Contract?","It is responsible for passing messages between Starknet and Ethereum."
+"How does the StarknetMessaging contract interface look?","It follows an interface with functions allowing to send message to L2, receiving messages on L1 from L2, and canceling messages."
+"How long does it take for a L1->L2 message to be processed?","It takes up to 1-2 minutes."
+"How are L2->L1 messages handled on Starknet?","They are prepared by contracts execution on L2 and are part of the block produced. When a block is produced, the hash of each message is sent to the StarknetCore contract on L1."
+"How long does it take for a L2->L1 message to be verified on Ethereum?","Around 3-4 hours."
+"How can you send a message from Ethereum to Starknet?","Your Solidity contracts must call the sendMessageToL2 function of the StarknetMessaging contract."
+"What attribute do you need to annotate functions that can be called from L1 on Starknet?","#[l1_handler] attribute."
+"How do you send a message with a single felt value to the StarknetMessaging contract?","By serializing the felt into a payload which is an array of uint256, then using the sendMessageToL2 function."
+"How do you ensure the Cairo contract understands the data being sent from Ethereum?","Ensure that the serialization of your data into the uint256 array follows the Cairo serialization scheme."
+"What is the minimum value to send to the StarknetMessaging contract?","20,000 wei."
+"Why is a fee required for the L1HandlerTransaction on Starknet?","Because it is not bound to any account and originates from L1."
+"How do you calculate the fees of the L1HandlerTransaction?","You can profile the gas consumption using starkli or snforge to estimate the cost of your message execution."
+"How do you receive a L1->L2 message on Starknet?","You annotate a function with the #[l1_handler] attribute which then gets automatically relayed by the sequencer."
+"What is crucial to verify in #[l1_handler] functions on Starknet?","Verify the sender of the L1 message to ensure the contract can only receive messages from a trusted L1 contract."
+"How do you send a message from Starknet to Ethereum?","Use the send_message_to_l1 syscall in your Cairo contracts."
+"How do you consume a L2->L1 message on Ethereum?","Your Solidity contract must call the consumeMessageFromL2 function of the StarknetMessaging contract explicitly."
+"How do you ensure the correct L2 contract address is provided to the consumeMessageFromL2 function?","It should be the contract address of the account that sends the transaction on L2, not the address of the contract executing the send_message_to_l1_syscall."
+"How are payloads managed between L1 and L2?","On L1, payloads are of type uint256, but on Starknet, the basic data type is felt252, which is approximately 4 bits smaller than uint256."
+"How do you represent an actual uint256 value in Cairo?","Using a struct with low and high fields, both of u128 type."
+"How many values are needed in the payload to send a single u256 to Cairo?","Two values."
+"How is the value 1 represented as a u256 in Cairo?","Low = 1, high = 0."
+"How do you serialize data before sending messages between L1 and L2?","Serialized data is always an array of felt252."
+"How is a u256 represented in Cairo?","It's represented by a struct with two fields: low and high, both of u128 type."
+"How many values are required in the payload to send a single u256 from L1 to Cairo?","Two values."
+"Where can more information about Starknet's messaging mechanism be found?","In the Starknet documentation."
+"How do you test the messaging in local?","There's a detailed guide available for this purpose."
+"What is the main function of StarknetCore?","It is a set of Solidity contracts deployed on Ethereum that allows Starknet to function properly."
+"What is one of the contracts of StarknetCore?","StarknetMessaging."
+"How does the StarknetMessaging contract interact with other contracts?","It follows an interface with functions allowing to send and receive messages and cancel messages."
+"What does the sendMessageToL2 function return?","It returns a bytes32 value."
+"What is the significance of the #[l1_handler] attribute in Starknet?","Functions with this attribute can be called from L1 and are special functions that can only be executed by a L1HandlerTransaction."
+"What does the send_message_to_l1_syscall function do in Starknet?","It sends a message to the StarknetMessaging contract on L1."
+"What does the consumeMessageFromL2 function return on Ethereum?","It returns the message hash."
+"Why is there a focus on felt252 data type in Starknet's messaging system?","Because Starknet contracts, written in Cairo, can only understand serialized data, which is always an array of felt252."
+"What is a syscall in the context of Starknet?","It is a system call that is executed in a contract."
+"How is a message's sender verified in Starknet?","Contracts receiving messages should verify the sender's address to make sure it is a trusted contract on L1."
+"What is the difference between felt252 and uint256 data types?","felt252 is approximately 4 bits smaller than uint256."
+"How can you identify the message sender on Starknet?","By examining the message's signature."
+"Why is there an asymmetry in the Starknet messaging system?","Messages sent from L1 to L2 are automatically delivered, but messages sent from L2 to L1 require manual intervention to be consumed on L1."
+"What kind of block production mechanism does Starknet employ?","When blocks are produced, the hash of each L2->L1 message is sent to the StarknetCore contract on L1."
+"How do tokens get minted on L2 when bridged from Ethereum?","A deposit in the L1 bridge contract triggers the minting on L2."
+"What kind of serialization scheme does Cairo employ?","Cairo serialization scheme focuses on arrays of felt252."
+"How is a uint256 split into two parts in Cairo?","It is split into low and high fields, both of u128 type."
+"Why is the #[l1_handler] attribute necessary in Starknet contracts?","To denote functions that can be called from L1."
+"How do Starknet contracts verify the authenticity of L1 messages?","They verify the sender of the L1 message to ensure the contract only receives messages from a trusted L1 contract."
+"What's the benefit of Starknet's asymmetric messaging?","It provides an efficient mechanism for L1-L2 communication, although with the need for manual intervention in L2->L1 cases."
+"Why might you need to manually consume a message on Ethereum from Starknet?","Because when sending a message from L2 to L1, only the hash of the message is sent on L1, requiring manual intervention."
+"Where is the state of L2 messages updated?","On L1."
+"Why might you need to use starkli or snforge?","To profile the gas consumption and estimate the cost of message execution on Starknet."
+"What do you need to keep in mind when serializing data for Starknet messaging?","Ensure that serialization follows the Cairo scheme which focuses on arrays of felt252."
+"What happens when tokens are deposited in the L1 bridge contract?","They trigger the minting of the same token on L2."
+"How do you convert a uint256 value to fit Cairo's serialization scheme?","Serialize the uint256 into two parts: low and high, both of u128 type, and then convert them into an array of felt252."

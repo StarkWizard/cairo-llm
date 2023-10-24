@@ -1,3 +1,4 @@
+question,answer
 "What does a snapshot in Cairo provide?","A snapshot in Cairo provides an immutable view of a value at a certain point in time."
 "Why might Cairo's ownership system prevent using a value after moving it?","Cairo's ownership system prevents using a value after moving it to protect from potentially writing twice to the same memory cell when appending values to arrays."
 "What is the significance of the '@' operator in Cairo?","The '@' operator in Cairo is used to create a snapshot of a value."
