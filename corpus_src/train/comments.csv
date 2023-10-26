@@ -1,7 +1,6 @@
 question,answer
 "how do I create a comment ?","
+```
     // This is a comment
-
-Explanation: 
-- This line of code does nothing at all, it is for the reader's eyes.
+ ```
 "

@@ -12,17 +12,25 @@ const ONE_HOUR_IN_SECONDS: u32 = 3600;
 "In cairo, how should I write a constant name","
 Cairo's naming convention for constants is to use all uppercase with underscores between words."
 "In cairo, declare a constant named toto","
-const TOTO:u32=0
-
-Explanation: 
-- This line of code declares a const named Toto"
-"In cairo, declare a constant named Paul","
-const PAUL:u32=0
-
-Explanation: 
-- This line of code declares a u32 const named Paul
+ ```
+    const TOTO:u32=0
+```
 "
-"In cairo, declare a constant named i_love_cairo","const I_LOVE_CAIRO:u32=0"
-"In cairo, declare a constant named aBaB_cDe","const ABAB_CDE:u32=0"
-"In cairo, What is the scope of a constant","Constants are valid for the entire time a program runs, within the scope in which they were declared."
+"In cairo, declare a constant named Paul","
+ ```
+ const PAUL:u32=0
+ ```
+
+"
+"In cairo, declare a constant named i_love_cairo","
+ ```
+    const I_LOVE_CAIRO:u32=0
+ ```
+ "
+"In cairo, declare a constant named aBaB_cDe","
+ ```
+    const ABAB_CDE:u32=0
+ ```"
+"In cairo, What is the scope of a constant","
+Constants are valid for the entire time a program runs, within the scope in which they were declared."
 "In cairo, why are constants useful","Naming hardcoded values used throughout your program as constants is useful in conveying the meaning of that value to future maintainers of the code. It also helps to have only one place in your code you would need to change if the hardcoded value needed to be updated in the future."

@@ -1,0 +1,10 @@
+question,answer
+"write a hello scarb contract","
+```
+// src/hello_scarb.cairo
+use debug::PrintTrait;
+fn main() {
+	'Hello, Scarb !'.print();
+}
+```
+"

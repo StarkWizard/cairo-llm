@@ -1,5 +1,6 @@
 question,answer
 "give the source for the Vote contract sample","
+```
 /// @dev Core Library Imports for the Traits outside the Starknet Contract
 use starknet::ContractAddress;
 
@@ -173,7 +174,9 @@ mod Vote {
             (yes_percentage, no_percentage)
         }
     }
-}"
+}
+```
+"
 "What is the main purpose of the Vote contract in Starknet?","The Vote contract in Starknet is used for registering voters and allowing them to cast their votes."
 "given the Vote Contract:How are voters registered in the Vote contract?","Voters are registered through the contract's constructor where their addresses are passed to the _register_voters function."
 "given the Vote Contract:How are the voting options represented in the contract?","The voting options are represented by the constants YES and NO, which correspond to the values 1 and 0, respectively."

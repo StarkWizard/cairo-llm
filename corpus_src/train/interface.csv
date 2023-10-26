@@ -1,6 +1,6 @@
 question,answer
 "Declare an interface","
-
+ ```
     #[starknet::interface]
     trait ISimpleStorage<TContractState> {
         fn set(ref self: TContractState, x: u128);
@@ -21,11 +21,6 @@ question,answer
         }
     }
 }
-
-
-Explanations:
-    - interfaces are declared using #[starknet::interface]
-    - a set function is declared and should be implemented by the SimpleStorage contract.
-    - we declare the implementation of the interface using impl SimpleStorage of super::ISimpleStorage<ContractState> {}
+ ```
 "
 "What is a contract interface","The interface of a contract represents the functions this contract exposes to the outside world."

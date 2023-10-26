@@ -1,5 +1,7 @@
 question,answer
-"Give the Starknet Messaging interface for L1 L2","nterface IStarknetMessaging is IStarknetMessagingEvents {
+"Give the Starknet Messaging interface for L1 L2","
+```
+Interface IStarknetMessaging is IStarknetMessagingEvents {
 
     function sendMessageToL2(
         uint256 toAddress,
@@ -24,8 +26,11 @@ question,answer
         uint256[] calldata payload,
         uint256 nonce
     ) external;
-}"
+}
+```
+"
 "give an exemple of sending a message on starknet","
+```
 // Sends a message on Starknet with a single felt.
 function sendMessageFelt(
     uint256 contractAddress,
@@ -46,20 +51,22 @@ function sendMessageFelt(
         payload
     );
 }
+```
 The function sends a message with a single felt value to the StarknetMessaging contract. Please note that if you want to send more complex data you can. Just be aware that your cairo contract will only understand felt252 data type. So you must ensure that the serialization of your data into the uint256 array follow the cairo serialization scheme."
 "Give instructions on sending a message from L2 to L1","
 To send a message from L2 to L1, what we would do on Starknet is:
-
+```
         fn send_message_felt(ref self: ContractState, to_address: EthAddress, my_felt: felt252) {
             // Note here, we serialize my_felt, as the payload must be
             // a `Span<felt252>`.
             starknet::send_message_to_l1_syscall(to_address.into(), array![my_felt].span())
                 .unwrap();
         }
+```
 We simply build the payload and pass it, along with the L1 contract address, to the syscall function.
 
 On L1, the important part is to build the same payload as on L2. Then you call consumeMessageFromL2 by passing the L2 contract address and the payload. Please be aware that the L2 contract address expected by the consumeMessageFromL2 is the contract address of the account that sends the transaction on L2, and not the address of the contract executing the send_message_to_l1_syscall.
-
+```
 function consumeMessageFelt(
     uint256 fromAddress,
     uint256[] calldata payload
@@ -78,6 +85,7 @@ function consumeMessageFelt(
     // From here, you can safely use `my_felt` as the message has beed verified by StarknetMessaging.
     require(my_felt > 0, 'Invalid value');
 }
+```
 As you can see, in this context we don't have to verify which contract from L2 is sending the message. But we are actually using the consumeMessageFromL2 to validate the inputs (the sender address on L2 and the payload) to ensure we are only consuming valid messages.
 It is important to remember that on L1 we are sending a payload of uint256, but the basic data type on Starknet is felt252; however, felt252 are approximatively 4 bits smaller than uint256. So we have to pay attention to the values contained in the payload of the messages we are sending. If, on L1, we build a message with values above the maximum felt252, the message will be stuck and never consumed on L2.
 "

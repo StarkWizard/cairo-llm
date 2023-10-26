@@ -1,7 +1,7 @@
 question,answer
 "division in Cairo ?","In Cairo, the result of x/y is defined to always satisfy the equation (x / y) * y == x. If y divides x as integers, you will get the expected result in Cairo (for example 6 / 2 will indeed result in 3). But when y does not divide x, you may get a surprising result: For example, since 2 * ((P+1)/2) = P+1 ≡ 1 mod[P], the value of 1 / 2 in Cairo is (P+1)/2 (and not 0 or 0.5), as it satisfies the above equation."
 "add 1 to i"," 
+ ```
     i+=1;
-
-Explanation:
-- This line of code increments i by 1"
+ ```
+ "

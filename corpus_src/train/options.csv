@@ -2,62 +2,59 @@ question,answer
 "What is an option","
 Option represents a value that may or may not exist. 
 It is defined as follows:
-
+ ```
 enum Option<T> {
     Some: T,
     None: (),
-}"
+}
+ ```
+ "
 "Create an option of value 1 as u8","
-    let some_value: Option<u8> = Option::Some(1_u8);
-"
+  ```
+     let some_value: Option<u8> = Option::Some(1_u8);
+ ```
+ "
 "Create an option of value None","
+  ```
     let none_value: Option<u8> = Option::None(());
-"
+ ```
+ "
 "create a function that returns an option of value 1 as u8","
+  ```
     fn create_some() -> Option<u8> {
         let some_value: Option<u8> = Option::Some(1_u8);
         some_value
     }
-
-Explanations:
-- We define an option using Option<u8>
-- We affect the value 1
-- we return the value
+ ```
 "
 "How do I read the value of an Option","    
+  ```
     let some_value: Option<u8> = Option::Some(1_u8);
     let val = some_value.unwrap();
-
-Explanations: 
-- We create an option of type u8 and set it to 1
-- We use unwrap to get the value
-- val is of type u8 and affected to 1
+ ```
 "
 "How do I test if an Option contains a value","
+ ```
     use debug::PrintTrait
 
     let some_value: Option<u8> = Option::Some(1_u8);
     if some_value.is_some() {
         ""The option contains a value"".print();
     }
-
-Explanations:
-- We define an option and affect a value
-- we use the method is_some to test if the Option contains a value or not.
+ ```
 "
 "How do I test if an Option contains None","
+ ```
     use debug::PrintTrait
 
     let none_value: Option<u8> = Option::None(())
     if none_value.is_none() {
         ""The option is None"".print();
     }
-
-Explanations:
-- We define an option and affect a value
-- we use the method is_some to test if the Option contains a value or not.
+ ```
 "
 "Write a function that returns the value of an option, or 0 if None","
+ ```
     #[external(v0)]
     fn handle_option(self: @ContractState, option: Option<u8>) -> u8 {
         match option{
@@ -65,8 +62,9 @@ Explanations:
             Option::None(_) => 0_u8,
         }
     }
-
+ ```
 or
+ ```
     #[external(v0)]
     fn handle_option_1(self: @ContractState, option: Option<u8>) -> u8 {
         // is_some() Returns 'true' if the 'Option' is 'Option::Some'.
@@ -77,6 +75,5 @@ or
             0_u8
         }
     }
-Explanation:
-- You can either use match or if to check the content of an option and return its value.
+ ```
 "

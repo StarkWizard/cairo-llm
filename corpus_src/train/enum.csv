@@ -1,69 +1,59 @@
 question,answer
 "in Cairo,define an enumeration with Red, Green, Blue","
-enum Colors { Red: (), Green: (), Blue: () }
-
-Explanation: 
-- This line of code declares an enum for some colors
+```
+    enum Colors { Red: (), Green: (), Blue: () }
+ ```
 "
 "in Cairo, define an enumeration with A, B, C","
-enum Letters { A: (), B: (), C: () }
-
-Explanation: 
-- This line of code declares an enum for some letters
+ ```
+    enum Letters { A: (), B: (), C: () }
+ ```
 "
 "in Cairo,define a function that returns the Green value from an enum","enum Colors { Red: (), Green: (), Blue: () }
-
+ ```
 fn get_favorite_color() -> Colors {
     Colors::Green(())
 }
-
-Explanation: 
-- This program declares an enum and use it in a function
+ ```
 "
 "create an enumeration in cairo for some nationality","
-enum Nationality { English: (), German: (), French: (),  Spanish: ()}
-
-Explanation: 
-- This line of code declares an enum for some nationalities.
+ ```
+ enum Nationality { English: (), German: (), French: (),  Spanish: ()}
+ ```
 "
 "create an enumeration in cairo for some planets","
-enum Planets { Earth: (), Sun: (), March: (),  Jupyter: ()}
-
-Explanation: 
-- This line of code declares an enum for some planets.
+ ```
+    enum Planets { Earth: (), Sun: (), March: (),  Jupyter: ()}
+ ```
 "
 "create an enumeration in cairo for some names","
-enum Names { Paul: (), Henry: (), Simon: (),  Regis: ()}
-
-Explanation: 
-- This line of code declares an enum for some names
+ ```
+    enum Names { Paul: (), Henry: (), Simon: (),  Regis: ()}
+ ```
 "
 "create an enumeration in cairo for some units","
-enum Units { Meters: (), Inches: (), Cm: ()}
-
-Explanation: 
-- This line of code declares an enum for measurement units
+ ```
+    enum Units { Meters: (), Inches: (), Cm: ()}
+ ```
 "
 "define an enum Data with a u32 and a u128","
+ ```
 #[derive(Drop)]
 enum Data {
     myU32: u32,
     myU128: u128
 }
-
-Explanations:
-- An enum Data is defined with the appropriate fields and types
+ ```
 "
 "Define an enum Data with a tuple for two u32","
+ ```
 enum Data {
     Tuple: (u32,u32)
 }
-
-Explanations:
-- An enum Data is defined
-- Tuple is a tuple for 2 u32
+```
 "
 "Give an exemple of a Mail status enum","
+ ```
 #[derive(Drop)]
 enum Status{
     Pending:(),
@@ -71,13 +61,10 @@ enum Status{
     Delivered:(),
     Failed:(),
 }
-
-Explanations:
-- We have defined an enum called ProductStatus with four variants: Pending, Processing, Delivered, Failed.
-- The naming convention is to use PascalCase for enum variants.
-- Each variant represents a distinct value of the Status type and is associated with a unit type ()
+ ```
 "
 "How one variant can be instantiated?","
+ ```
 #[derive(Drop)]
 enum Status{
     Pending:(),
@@ -87,10 +74,7 @@ enum Status{
 }
 
 let status = Status::Pending(());
-
-Explanations:
-- the Pending variant is affected to status
-- Each member is associated with a uint type ()
+ ```
 "
 "what does this code do:
 #[derive(Drop)]
@@ -101,20 +85,18 @@ enum Direction {
     West: (),
 }
 ","
-Explanations:
 - You have defined an enum called Direction, which includes four members: North, East, South, and West. Each member is associated with a uint type () - it has no associated data.
 - You can instantiate it using this syntax:
-
+ ```
 let direction = Direction::North(());
+ ```
 "
 "explain this enum:
 enum Message {
     Quit: (),
     Echo: felt252,
     Move: (u128, u128),
-}","
-Explanations:
-- Here, the Message enum has three members: Quit, Echo, and Move, each with different types
+}"," Here, the Message enum has three members: Quit, Echo, and Move, each with different types
 - Quit is of type unit - it has no associated data.
 - Echo is of type felt252.
 - Move is a tuple consisting of two u128 values.

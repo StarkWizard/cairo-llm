@@ -1,18 +1,17 @@
 question,answer
 "declare a felt and print it","
-
+ ```
     use debug::PrintTrait;
 
     let myFelt = 154;
     myFelt.print();
-
-Explanation:
-    - We use PrintTrait to get the print method
-    - We affect a value to myFelt
-    - We print the value
+ ```
 "
-"How can I debug","You can use debug::PrintTrait to print a string or a variable:
+"How can I debug","
+You can use debug::PrintTrait to print a string or a variable:
+ ```
     'my string'.print();
     let x = 1;
     x.print();
+```
 "

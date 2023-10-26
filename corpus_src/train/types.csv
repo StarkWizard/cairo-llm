@@ -1,7 +1,8 @@
 question,answer
 "In cairo, a felt is a type of variable","true. a felt is a type of variable"
 "is this program working in Cairo ?
-use debug::PrintTrait;
+
+ use debug::PrintTrait;
 
 fn main() {
     let mut x: u64 = 2;
@@ -14,34 +15,30 @@ You will get the following error message:
 error: Unexpected argument type. Expected: 'core::integer::u64', found: 'core::felt252'"
 "Do I need to specify types for variables in Cairo ?","Cairo is a statically typed language, which means that it must know the types of all variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In cases when many types are possible, we can use a cast method where we specify the desired output type."
 "in Cairo, declare a felt252 of value 3","
+ ```
     let x: felt252 = 3;
-    
-Explanation: 
-- This line of code declares a felt252 of value 3
+ ```
 "
 "in Cairo, declare a mut felt252 of value 31","let mut x: felt252 = 31;"
 "in Cairo, declare a mutable felt252 of value 72","
-let mut x: felt252 = 72;
-
-Explanation: 
-- This line of code declares a felt252 mutable of value 72
+ ```
+ let mut x: felt252 = 72;
+ ```
 "
 "in Cairo, declare a u32  of value 3","
-let x: u32  = 3;
-
-Explanation: 
-- This line of code declares a u32 variable of value 72
+ ```
+ let x: u32  = 3;
+ ```
 "
 "in Cairo, declare a mut u32  of value 31","
-    let mut x: u32  = 31;
-
-Explanation: 
-- This line of code declares a u32 mutable of value 31"
+ ```
+     let mut x: u32  = 31;
+ ```
+ "
 "in Cairo, declare a mutable u32  of value 72","
+ ```
     let mut x: u32  = 72;
-
-Explanation: 
-- This line of code declares a mutable of value 72
+ ```
 "
 "what are scalar types in Cairo ?","A scalar type represents a single value. Cairo has three primary scalar types: felts, integers, and booleans. You may recognize these from other programming languages"
 "Is there a default type in cairo?","yes, it is felt252"
@@ -67,6 +64,7 @@ Explanation:
 "what is u16 in Cairo ?","It is an 16-bit long, unsigned int"
 "what is u256 in Cairo ?","It is an 256-bit long, unsigned int"
 "is this program working in Cairo ?
+ ```
 fn sub_u8s(x: u8, y: u8) -> u8 {
     x - y
 }
@@ -77,52 +75,44 @@ fn main() {
 "affect the sum of 5 and 8 to a u128"," 
     // addition
     let sum = 5_u128 + 10_u128;
-    
-Explanation:
-- This line of code computes the sum of 5 and 10
+ ```    
 "
 "affect the subtraction of 95 and 4 to a u128","
+ ```
     // subtraction
     let difference = 95_u128 - 4_u128;
-    
-Explanation:
-- This  line of code computes the difference of 95 with 4
+ ```    
 "
 "affect the product of 4 and 30 to a u128","
-    // multiplication
+```
+     // multiplication
     let product = 4_u128 * 30_u128;
-    
-Explanation:
-- This line of code computes the product of 4 by 30
+ ```    
 "
 "Affect the division quotient of 56 by 32 to a u128","
+ ```
     // division
     let quotient = 56_u128 / 32_u128; //result is 1
-    
-Explanation:
-- This line of code computes the quotient of 56 by 32
+ ```    
 "
 "Affect the division quotient of 64 by 32 to a u128","
+ ```
     let quotient = 64_u128 / 32_u128; //result is 2
-
-Explanation:
-- This line of code computes the quotient of 64 by 32
+ ```
 "
 "Affect the division remainder  of 43 by 5 to a u128","
+ ```
     let remainder = 43_u128 % 5_u128; // result is 3
-    
-Explanation:
-- This line of code computes the ramainder of 43 by 5
+ ```    
 "
 "What operation does Cairo supports on int ?","Cairo supports the basic mathematical operations you’d expect for all the integer types: addition, subtraction, multiplication, division, and remainder. Integer division truncates toward zero to the nearest integer."
 "Does Cairo have bool ?","Boolean type in Cairo has two possible values: true and false. Booleans are one felt252 in size. The Boolean type in Cairo is specified using bool."
 "Define t as a boolean with value true","
-fn main() {
+ ```
+ fn main() {
     let t = true;
 }
-
-Explanation:
-- This program defines and affect a bool named t
+ ```
 "
 "define a bool f with explicit type, and set it to false","let f: bool = false; // with explicit type annotation"
 "Does cairo supports strings","Cairo doesn't have a native type for strings, but you can store characters forming what we call a 'short string' inside felt252s. A short string has a max length of 31 chars. This is to ensure that it can fit in a single felt (a felt is 252 bits, one ASCII char is 8 bits). "
@@ -131,33 +121,32 @@ Explanation:
 "What is a tuple ?","A tuple is a general way of grouping together a number of values with a variety of types into one compound type. Tuples have a fixed length: once declared, they cannot grow or shrink in size."
 "How do I create a tuple ?","We create a tuple by writing a comma-separated list of values inside parentheses. Each position in the tuple has a type, and the types of the different values in the tuple don’t have to be the same."
 "write a tuple for a u32,u64 and a bool","
+ ```
 fn main() {
     let tup: (u32, u64, bool) = (10, 20, true);
 }
-
-Explanation:
-- this program defines a tuple tup and affects values to it
+ ```
 "
 "write a tuple for a u16, felt252 and a bool","
+ ```
 fn main() {
     let tup: (u16, felt252, bool) = (10, 20, true);
 }
-
-Explanation:
-- this program defines a tuple tup and affects values to it
+ ```
 "
 "how do I get the values from a tuple ?","The variable tup binds to the entire tuple because a tuple is considered a single compound element. To get the individual values out of a tuple, we can use pattern matching to destructure a tuple value"
-"get (x,y,z) from tup","
+"
+ ```
+get (x,y,z) from tup","
 fn main() {
     let tup = (500, 6, true);
     let (x, y, z) = tup;
 }
-
-Explanation:
-- This program defines a tup and then destructure it into (x,y,z)
+ ```
 "
 "write a program that defines a tuple, get the values (x,y,z) from it and print a message if y is equal to 6","use debug::PrintTrait;
-fn main() {
+ ```
+ fn main() {
     let tup = (500, 6, true);
 
     let (x, y, z) = tup;
@@ -166,19 +155,16 @@ fn main() {
         'y is six!'.print();
     }
 }
-
-Explanation:
-- This program first creates a tuple and binds it to the variable tup. It then uses a pattern with let to take tup and turn it into three separate variables, x, y, and z. This is called destructuring because it breaks the single tuple into three parts. Finally, the program prints y is six as the value of y is 6.
+ ```
 "
 "Can I declare a tuple with value and types at the same time ?","
 
 Yes, we can !
-
+ ```
     fn main() {
         let (x, y): (felt252, felt252) = (2, 3);
     }
-Explanation:
-- This program declares a tuple with value and types.
+ ```
 "
 "What is a unit type ?","A unit type is a type which has only one value (). It is represented by a tuple with no elements. Its size is always zero, and it is guaranteed to not exist in the compiled code.
 "
@@ -194,21 +180,22 @@ When defining multiple parameters, separate the parameter declarations with comm
     }
 ","In function signatures, you must declare the type of each parameter.
 A correction could be:
+ ```
     fn toto(a:u32){ // choose the adequate type
     }
+ ```
 "
 "What are named parameters ?","In Cairo, named parameters allow you to specify the names of arguments when you call a function. This makes the function calls more readable and self-descriptive. If you want to use named parameters, you need to specify the name of the parameter and the value you want to pass to it. The syntax is parameter_name: value. If you pass a variable that has the same name as the parameter, you can simply write :parameter_name instead of parameter_name: variable_name
 "
 "give an example of named parameters"," Surely, there you go:
+ ```
     let first_arg = 3;
     let second_arg = 4;
     foo(x: first_arg, y: second_arg);
-
-Explanation:
-- foo accepts 2 parameters named x and Y
-- the function is called specifying the parameters
+ ```
 "
 "Write a function that accepts 2 argmuents a and b"," 
+ ```
     fn my_function(a:u32,b:u32)
     {
       returns a+b;
@@ -218,10 +205,8 @@ Explanation:
     {
         my_function(a:1,b:3); // returns 4
     }
+ ```
 
-Explanation:
-- The function accepts two parameters
-- The function is called using named arguments
 "
 "explain this code: 
     let y = {
