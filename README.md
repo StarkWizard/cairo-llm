@@ -24,7 +24,8 @@
 ## Installation
 Create a venv and install the requirements
 ```conda create -n cairo-llm python=x.x anaconda <-- replace x.x by your python version 9.x minimum
-pip install -r requirements.txt```
+pip install -r requirements.txt
+```
 
 Activate the venv
 ```
