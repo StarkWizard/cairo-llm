@@ -1,5 +1,5 @@
 question,answer
-"what is the SimpleStorage contract ?","it's a sample contract :#[starknet::interface]
+"give a simple implementation of the SimpleStorage contract ?","it's a sample contract :#[starknet::interface]
 trait ISimpleStorage<TContractState> {
     fn set(ref self: TContractState, x: u128);
     fn get(self: @TContractState) -> u128;
@@ -7,8 +7,6 @@ trait ISimpleStorage<TContractState> {
 
 #[starknet::contract]
 mod SimpleStorage {
-    use starknet::get_caller_address;
-    use starknet::ContractAddress;
 
     #[storage]
     struct Storage {
@@ -32,7 +30,6 @@ mod SimpleStorage {
 "Are smart contracts limited to a single programming language?","No, the programming language used to write smart contracts varies depending on the blockchain. For instance, on Ethereum, it's Solidity, while on Starknet, it's Cairo."
 "How is Solidity code compiled for Ethereum?","On Ethereum, Solidity is compiled into bytecode."
 "What are the characteristics of smart contracts?","Smart contracts are permissionless, transparent, and can be composable. They can only access and interact with data from the blockchain they are deployed on and require third-party software (oracles) to access external data."
-"Why did Ethereum developers start to build standards for smart contract development?","For developers to build smart contracts that can interact with each other, it is required to know what the other contracts look like."
 "Can you name two widely used Ethereum smart contract standards?","Two widely used standards are the ERC20, for tokens like USDC, DAI or STARK, and the ERC721, for NFTs like CryptoPunks or Everai."
 "What is DeFi in the context of blockchain and smart contracts?","DeFi (decentralized finance) refers to decentralized financial applications that no longer rely on traditional financial intermediaries. It consists of projects like lending/borrowing apps, decentralized exchanges (DEX), on-chain derivatives, stablecoins, decentralized hedge funds, insurance, etc."
 "What is tokenization in the context of smart contracts?","Tokenization divides real-world assets, such as real estate or art, into digital tokens, which can be traded and managed on blockchain platforms."
@@ -51,17 +48,13 @@ mod SimpleStorage {
 "How do you define the entry point for a Cairo program?","A Cairo program must always have a function 'main' that serves as the entry point for this program."
 "Why might the term 'smart contract' be considered misleading?","The term 'smart contract' is somewhat misleading as they are neither 'smart' nor 'contracts' but rather code and instructions executed based on specific inputs."
 "How is Cairo compiled for Starknet?","On Starknet, Cairo is compiled into Sierra and then into Cairo Assembly (casm)."
-"In what ways can smart contracts benefit artists and content creators?","Smart contracts can automate royalty payments, ensuring fair compensation and reducing the need for intermediaries when a piece of content is consumed or sold."
 "How can smart contracts be used in the context of real estate?","Smart contracts can facilitate the tokenization of real-world assets, like real estate. This can increase liquidity, enable fractional ownership, and simplify the buying and selling process."
 "What is the difference between optimistic rollups and validity rollups?","For optimistic rollups, the new state is considered valid by default with a window for nodes to identify malicious transactions. Validity rollups, like Starknet, use cryptography to prove that the new state has been correctly computed."
 "How does Starknet handle the Blockchain Trilemma of scalability, decentralization, and security?","Starknet uses validity rollups and cryptographic technology (STARKs) to achieve scalability while maintaining security. It offloads complex computations to Layer 2 solutions while using Ethereum as a secure settlement layer."
-"How is a simple contract in Starknet structured?","A simple contract in Starknet has an interface and an implementation. It defines the functions and their behavior and can store data on the blockchain."
-"How do you store a single number on the Starknet blockchain using a contract?","You can use a contract like 'SimpleStorage' which has a 'stored_data' variable of type u128. This variable can be modified or retrieved using the 'set' and 'get' functions."
 "How can you define the functions a Starknet contract exposes to the outside world?","You define them in the contract's interface using the 'trait' keyword. For example: 'trait ISimpleStorage<TContractState> { ... }'."
 "What is the purpose of the 'set' function in the provided Starknet contract?","The 'set' function allows you to store a number in the 'stored_data' variable on the blockchain."
-"Based on the code, how do you retrieve the stored number from the contract?","You can call the 'get' function which returns the value of the 'stored_data' variable."
 "What does the 'starknet::interface' attribute indicate?","The 'starknet::interface' attribute indicates that the following trait defines the interface of a Starknet contract."
-"What is the role of the 'Storage' struct in the contract?","The 'Storage' struct declares the storage variable(s) for the contract. In this case, it declares a variable called 'stored_data' of type u128."
+"What is the role of the 'Storage' struct in a contract?","The 'Storage' struct declares the storage variable(s) for the contract. In this case, it declares a variable called 'stored_data' of type u128."
 "What is the difference between a contract's interface and its implementation in Starknet?","The interface defines the functions the contract exposes, while the implementation provides the actual behavior of those functions."
 "How do you ensure that the implementation of a contract matches its interface in Starknet?","By leveraging the traits & impls mechanism from Cairo and making sure that the implementation conforms to the declared interface. Non-conformance results in a compilation error."
 "What happens if you try to modify storage inside the 'get' function?","The compiler will complain because the 'get' function does not modify the state, as indicated by how 'TContractState' is passed to it."
@@ -75,34 +68,28 @@ mod SimpleStorage {
 "Why is the 'ContractState' type used as a parameter in the functions of the contract's implementation?","'ContractState' provides access to the storage variables of the contract and represents the current state of the contract."
 "How do you annotate the functions that are callable from outside in a Starknet contract?","You use the 'external(v0)' attribute before the implementation block. This exposes all functions defined in that block as public functions."
 "What does the 'get_caller_address' function from 'starknet' likely do?","The 'get_caller_address' function likely returns the address of the entity that called a particular function or initiated a transaction."
-"What is the significance of 'ContractAddress' in the provided code?","'ContractAddress' is likely a type or struct from the 'starknet' module, potentially representing the address of a contract on the Starknet blockchain."
+"What is the significance of 'ContractAddress'","'ContractAddress' is likely a type or struct from the 'starknet' module, potentially representing the address of a contract on the Starknet blockchain."
 "How can you describe the purpose of the 'set' function based on its signature?","The 'set' function takes the current contract state and a number of type 'u128' as parameters. It's likely used to set or store this number in the contract's state."
 "What is implied when the 'get' function takes a snapshot of 'TContractState'?","It implies that the 'get' function does not modify the contract's state."
 "What are the key components of a Starknet contract based on the paragraph?","A Starknet contract consists of an interface (defined using traits), storage structures, and an implementation block that provides the behavior of the contract functions."
 "How do you represent a single slot in a database within a Starknet contract?","You can represent it using a struct like 'Storage' and declaring a variable inside it, such as 'stored_data' of type 'u128'."
-"Why is the 'SimpleStorage' module annotated with 'starknet::contract'?","The annotation 'starknet::contract' indicates that the 'SimpleStorage' module defines a Starknet contract."
 "What does the 'starknet::get_caller_address' function likely provide?","The function 'starknet::get_caller_address' likely provides the address of the caller or initiator of a contract function or transaction."
 "Why would you use the 'trait' keyword in defining a Starknet contract?","The 'trait' keyword is used to define the interface of the contract, which represents the functions the contract exposes to the outside world."
 "What is implied by the 'starknet::view' attribute in the 'get' function?","The 'starknet::view' attribute implies that the 'get' function will not modify the contract's state."
 "How are storage variables defined in Starknet contracts?","Storage variables are defined inside structs, such as the 'Storage' struct, with their respective types."
 "Can a Starknet contract have more than one storage variable?","Yes, a Starknet contract can have more than one storage variable. They would be defined as separate fields within the struct representing the contract's storage."
 "How is the behavior of a Starknet contract function defined?","The behavior of a Starknet contract function is defined in the contract's implementation block, where the actual code for the function is provided."
-"Does the 'SimpleStorage' contract require payment to store a number?","The provided paragraph does not mention any payment mechanism for the 'SimpleStorage' contract. So, based on the given information, it does not seem to require payment to store a number."
 "How can you describe the relationship between 'ISimpleStorage' and 'SimpleStorage'?","'ISimpleStorage' defines the interface of the contract, specifying the functions that the contract exposes. 'SimpleStorage' provides the actual implementation for these functions, defining their behavior."
-"Can the 'get' function in the provided code alter the state of the contract?","No, the 'get' function cannot alter the state of the contract as it's marked with the 'starknet::view' attribute and takes a snapshot of the contract's state."
 "What does the 'impl' keyword indicate?","The 'impl' keyword indicates the beginning of the implementation block for the functions defined in the contract's interface."
 "How are functions exposed to the outside world in Starknet contracts?","Functions are exposed to the outside world in Starknet contracts using the 'external(v0)' attribute before the implementation block."
 "What is the significance of the 'starknet' module?","The 'starknet' module likely provides utility functions, types, and attributes specific to Starknet contracts, such as 'get_caller_address' and 'starknet::view'."
-"What can be inferred about the 'starknet::interface' and 'starknet::contract' attributes based on the context?","The 'starknet::interface' attribute is used to indicate that a trait defines the interface of a Starknet contract, while the 'starknet::contract' attribute marks a module as defining a Starknet contract."
 "How does the 'SimpleStorage' contract store data on the blockchain?","The 'SimpleStorage' contract stores data in a variable named 'stored_data', which is of type 'u128'. This variable is defined inside the 'Storage' struct and can be modified using the 'set' function."
 "How do you identify which functions of a Starknet contract can modify its state?","Functions that can modify the contract's state have the contract state passed to them using the 'ref' keyword, like 'ref self: ContractState'."
 "What happens when the 'set' function of the 'SimpleStorage' contract is called?","When the 'set' function is called, it takes a number as a parameter and stores it in the 'stored_data' variable of the contract."
 "is the 'get_caller_address' function from 'starknet' a view function or an external function?","The provided paragraph does not explicitly mention whether 'get_caller_address' is a view or external function. The function's nature would need to be determined by its declaration in the 'starknet' module or documentation."
 "How do you change the state of a Starknet contract?","The state of a Starknet contract can be changed by calling functions that take the contract state as a 'ref' parameter and modify its storage variables, such as the 'set' function in the provided 'SimpleStorage' contract."
-"How is a simple contract in Starknet, like the one described as 'SimpleStorage', structured?","A simple contract in Starknet has an interface and an implementation. It defines the functions and their behavior and can store data on the blockchain."
 "How do you store a single number on the Starknet blockchain using a contract like 'SimpleStorage' which includes a 'stored_data' variable?","You can use a contract like 'SimpleStorage' which has a 'stored_data' variable of type u128. This variable can be modified or retrieved using the 'set' and 'get' functions."
 "What does the attribute 'starknet::interface' in the contract indicate?","The 'starknet::interface' attribute indicates that the following trait defines the interface of a Starknet contract."
-"In the 'SimpleStorage' contract, what is the role of the 'Storage' struct?","The 'Storage' struct declares the storage variable(s) for the contract. In this case, it declares a variable called 'stored_data' of type u128."
 "What is the difference between a contract's interface, like 'ISimpleStorage', and its implementation in Starknet?","The interface defines the functions the contract exposes, while the implementation provides the actual behavior of those functions."
 "How do you ensure that the implementation of a contract, like 'SimpleStorage', matches its interface in Starknet?","By leveraging the traits & impls mechanism from Cairo and making sure that the implementation conforms to the declared interface. Non-conformance results in a compilation error."
 "What happens if you try to modify storage inside the 'get' function of the 'SimpleStorage' contract?","The compiler will complain because the 'get' function does not modify the state, as indicated by how 'TContractState' is passed to it."
@@ -110,7 +97,7 @@ mod SimpleStorage {
 "Why is the 'external(v0)' attribute important in the 'SimpleStorage' contract's implementation?","The 'external(v0)' attribute exposes the functions defined in the implementation to the outside world. Without it, the functions won't be callable from the outside."
 "What does the 'ContractState' type represent in the 'SimpleStorage' contract?","'ContractState' is generated by the compiler and gives access to the storage variables defined in the 'Storage' struct. It represents the contract's state."
 "What happens if you try to modify the contract state of 'SimpleStorage' when it's passed as a snapshot?","Attempting to modify will result in a compilation error."
-"What can you infer about the 'starknet::interface' and 'starknet::contract' attributes in the 'SimpleStorage' contract?","The 'starknet::interface' attribute is used to indicate that a trait defines the interface of a Starknet contract, while the 'starknet::contract' attribute marks a module as defining a Starknet contract."
+"What can you infer about the 'starknet::interface' and 'starknet::contract' attributes?","The 'starknet::interface' attribute is used to indicate that a trait defines the interface of a Starknet contract, while the 'starknet::contract' attribute marks a module as defining a Starknet contract."
 "How does the 'SimpleStorage' contract store data on the blockchain using the 'stored_data' variable?","The 'SimpleStorage' contract stores data in a variable named 'stored_data', which is of type 'u128'. This variable is defined inside the 'Storage' struct and can be modified using the 'set' function."
 "How do you identify which functions of the 'SimpleStorage' contract, like 'set', can modify its state?","Functions that can modify the contract's state have the contract state passed to them using the 'ref' keyword, like 'ref self: ContractState'."
 "What happens when the 'set' function of the 'SimpleStorage' contract is called with a number?","When the 'set' function is called, it takes a number as a parameter and stores it in the 'stored_data' variable of the contract."
