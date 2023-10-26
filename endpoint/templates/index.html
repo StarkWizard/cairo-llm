@@ -3,6 +3,7 @@
 
 <head>
     <title>Langchain Streaming Inference Client</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
@@ -130,7 +131,7 @@
                         // Hide the loader animation on success
                         $('.loader').hide();
                         var formattedResponse = response.replace(/\t/g, '    ');
-                        $('#outputZone').text(formattedResponse);
+                        $('#outputZone').html(formattedResponse);
                         $('#outputZone').css('color', 'black');
                     },
                     error: function(xhr, status, error) {
