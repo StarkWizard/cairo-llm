@@ -10,7 +10,7 @@ question,answer
 "How does the 'Option' enum help prevent bugs in code?","Using 'Option' can help prevent bugs caused by using uninitialized or unexpected null values."
 "How do you access the value stored in a variant of an enum that has associated data?","You can access the value by pattern matching the enum. For instance, in the example 'Message::Echo(value) => { value.print(); }', the value associated with the 'Echo' variant is accessed and printed."
 "How do you define a trait in Cairo?","A trait can be defined using the 'trait' keyword followed by its name and the methods it contains. For example, 'trait Processing { fn process(self: Message); }'."
-"What is the role of the '@' symbol in the 'find_value_recursive' function's parameters?","The '@' symbol is not explicitly described in the paragraph, but in many programming languages, it's often used to denote a reference or a special type of argument."
+"What is the role of the '@' symbol in the 'find_value_recursive' function's parameters?","Tin many programming languages, it's often used to denote a reference or a special type of argument."
 "What happens when you match the 'Option::None' variant in the test module?","When the 'Option::None' variant is matched, the message 'not found' is printed."
 "What type of value is associated with the 'Move' variant in the 'Message' enum?","The 'Move' variant is associated with a tuple of two 'u128' values."
 "Is it possible to use a struct or another enum inside one of your enum variants?","Yes, you could use a Struct or another Enum you defined inside one of your Enum variants."

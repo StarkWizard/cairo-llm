@@ -25,7 +25,7 @@
 "How does the interface define the visibility of a function?","The interface specifies the function's visibility through its function signature."
 "What is a trait in the context of Cairo programming?","A trait in Cairo defines shared behavior, similar to interfaces in other languages. It's a way to define methods that can be used across multiple structs or data types."
 "What is the significance of the '@' symbol in the parameter type '@TContractState'?","In the given context, the '@' symbol denotes a specific way of passing the parameter in Cairo, distinguishing view functions from external functions."
-"What are dispatchers and syscalls in the context of Starknet contracts?","While the paragraph doesn't define them in detail, dispatchers and syscalls are mechanisms to facilitate cross-contract interactions and system-level operations in Starknet."
+"What are dispatchers and syscalls in the context of Starknet contracts?","Dispatchers and syscalls are mechanisms to facilitate cross-contract interactions and system-level operations in Starknet."
 "Why might a developer check out the dedicated chapter on traits in Cairo?","If they are new to traits and want to understand their significance and usage in Cairo programming."
 "How does the 'decimals' function in the IERC20 interface represent the token precision?","The 'decimals' function returns a value of type 'u8', indicating the number of decimal places the token uses."
 "What is the difference between the 'transfer' and 'transfer_from' functions in terms of parameters?","The 'transfer' function takes a recipient and amount, while 'transfer_from' also requires a sender parameter."

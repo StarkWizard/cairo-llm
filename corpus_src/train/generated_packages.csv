@@ -68,7 +68,6 @@ question,answer
 "What is considered the smallest unit of code by the Cairo compiler?","A crate."
 "Is it possible to split code into smaller, reusable parts using Cairo packages?","Yes."
 "Which tool allows you to create new Cairo packages?","The scarb command-line tool."
-
 "What is the smallest unit of code that the Cairo compiler considers?","A crate."
 "Which command is used to compile a crate without building it?","cairo-compile."
 "Can crates contain modules?","Yes, crates can contain modules."

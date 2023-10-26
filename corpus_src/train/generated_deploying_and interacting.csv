@@ -172,7 +172,6 @@ mod TokenWrapper {
 "What do the 'name' and 'transfer' methods of the IERC20DispatcherTrait return?","The 'name' method returns a type 'felt252', and the 'transfer' method does not return any value."
 "When using the Library Dispatcher, what does the get_caller_address() function return when called within the logic defined in Contract B's class?","It returns the address of the caller of Contract A."
 "What system call does the 'name' function of IERC20Dispatcher use internally?","It uses the 'starknet::call_contract_syscall' system call."
-"In the 'TokenWrapper' contract in Listing 99-6, what does the 'token_name' function return?","It returns a value of type 'felt252'."
 "what does the #[starknet::interface] attribute do?","It annotates a trait, which leads to the automatic generation of a dispatcher and a trait on compilation."
 "How does the library dispatcher differentiate from the contract dispatcher in terms of storage manipulation?","While calling functions using a contract dispatcher will update the storage of the called contract, using a library dispatcher will update the storage of the calling contract."
 "What are the two main types of dispatchers discussed in the document?","Contract Dispatcher and Library Dispatcher."

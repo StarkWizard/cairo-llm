@@ -45,7 +45,6 @@ question,answer
 "Which trait is mentioned in the context of serialization for event variants?","The Serde trait."
 "How does the compiler know to generate an implementation for the 'Event' trait for a specific enum?","By using the #[derive(starknet::Event)] attribute on that enum."
 "How do events communicate occurrences within a smart contract?","By logging information about those occurrences."
-"Can you provide the code that describes how an event is emitted in the provided paragraph?","self.emit(StoredName { user: user, name: name });"
 "Which function is responsible for deserializing keys and data into an event variant?","The 'deserialize' function."
 "How does one define the data structure for an event like 'StoredName' in Starknet?","By creating a struct with the required fields and their data types, and then referencing this struct in the 'Event' enum."
 "How does the serialization process impact the way events are defined and emitted?","Keys and data are added to the event using a serialization process, ensuring the correct information is captured and emitted."

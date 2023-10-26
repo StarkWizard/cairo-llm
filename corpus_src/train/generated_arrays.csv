@@ -59,7 +59,7 @@ question,answer
 "Why might you not use Span if you want to add elements to it?","Because the append() method is not available for Span."
 "What ensures safe access to an Array's elements?","The Span struct."
 "If you're performing operations that don't modify an Array, what can be a useful tool?","Span."
-"What is one of the main uses of Enums mentioned in the paragraph?","To define a custom data type that can hold multiple types for an array."
+"What is one of the main uses of Enums?","To define a custom data type that can hold multiple types for an array."
 "When referencing the data integrity of an Array, what struct is mentioned?","Span."
 "How do you get controlled access to the elements of an Array?","By converting it into a Span."
 "If an Array method is available for Array, is it guaranteed to be available for Span?","No."

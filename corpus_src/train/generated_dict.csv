@@ -20,7 +20,7 @@ question,answer
 "How do you check the value associated with a specific key in the Felt252Dict?","By using the get method."
 "How do you assert that a certain value is associated with a key in the Felt252Dict?","By using the assert method."
 "Is Felt252Dict<T> limited to any specific type of keys?","Yes, the key type is restricted to felt252."
-"What is a trait in programming?","A trait is a way to define shared behavior. In the context of the paragraph, Felt252DictTrait is a trait that defines the core functionality of Felt252Dict<T>."
+"What is a trait in programming?","A trait is a way to define shared behavior."
 "How do you define both key and value data types in some languages when creating a dictionary?","In other languages, you define the data types of both key and value."
 "How is the key type for Felt252Dict<T> defined in Cairo?","The key type is restricted to felt252."
 "Can you rewrite values in a Felt252Dict<T> dictionary?","Yes, Felt252Dict<T> allows you to "rewrite" the stored value for any given key."

@@ -22,7 +22,7 @@ question,answer
 "What are the primary benefits of the Result enum and associated traits in error handling in Cairo?","They offer a clear and type-safe way to handle recoverable errors, provide methods to interact with the Result, and allow for more concise error propagation using the '?' operator."
 "How does the 'unwrap_err' method behave when the Result is in the Ok variant?","The 'unwrap_err' method panics."
 "What is a common approach to handling potential errors in the Cairo language when designing functions?","Using the Result enum as the return type, which encapsulates either a successful outcome or an error."
-"What does the 'match' keyword do in the context of the paragraph?","The 'match' keyword is used to perform pattern matching on the Result value, allowing different actions to be taken depending on whether the Result is Ok or Err."
+"What does the 'match' keyword do?","The 'match' keyword is used to perform pattern matching on the Result value, allowing different actions to be taken depending on whether the Result is Ok or Err."
 "In the Cairo language, why might a developer prefer to use the 'expect' method over the 'unwrap' method when working with Result values?","Because the 'expect' method allows for a custom error message to be provided when panicking, offering more context or clarity about the nature of the error."
 "Which method should be used to check if a Result value is in the Ok variant?","The 'is_ok' method."
 "Which method should be used to check if a Result value is in the Err variant?","The 'is_err' method."
