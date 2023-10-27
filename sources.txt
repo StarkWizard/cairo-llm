@@ -1,0 +1,7 @@
+https://github.com/kkrt-labs/kakarot-ssj
+https://github.com/keep-starknet-strange/alexandria
+https://github.com/keep-starknet-strange/satoru
+https://github.com/HerodotusDev/cairo-lib
+https://github.com/OpenZeppelin/cairo-contracts
+https://starknet-by-example.voyager.online/
+https://github.com/argentlabs/argent-contracts-starknet

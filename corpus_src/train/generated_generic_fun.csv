@@ -33,7 +33,7 @@ question,answer
 "What does the `struct Wallet<T> { balance: T }` struct represent?","It represents a wallet with a balance field of a generic type T."
 "Referring to `enum Result<T, E> { Ok(T), Err(E) }`, what does the `Result<T, E>` enum represent?","The `Result<T, E>` enum represents the outcome of an operation that might either succeed, returning a value of type T, or fail, returning a value of type E."
 "Considering the struct `struct Wallet<T> { balance: T }`, how do you implement methods on structs that use generic types?","By implementing methods on traits using the generic types in their definition."
-What does the method `fn receive(self, amount: u128) { self.balance += amount; }` do `?","It increments the balance by the specified value."
+"What does the method `fn receive(self, amount: u128) { self.balance += amount; }` do `?","It increments the balance by the specified value."
 "How was the issue with the `trait WalletMixTrait<T: Drop, U: Drop, V: Drop> { fn mixup(self, other: Wallet<V>) -> Wallet<U>; }` solved?","By adding a requirement for all the generic types specifying that they will implement the Drop trait."
 "What does the `len()` function, typically used like `some_list.len()`, do?","The `len()` function returns the length or number of items in a collection."
 "What is the difference between defining a struct with `derive(Drop)` and providing a custom `Drop` implementation?","Using `derive(Drop)` generates a default Drop implementation, while providing a custom implementation allows specifying the exact behavior when the struct is dropped."

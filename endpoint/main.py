@@ -50,13 +50,26 @@ def infer():
     prompt = request.args.get('prompt')
     print("There")
     print("there",prompt)
-    temperature = float(request.args.get('temperature', 0.01))  # Default temperature is 0.7\
+
+    temperature = float(request.args.get('temperature', 0.37))  # Default temperature is 0.7\
     if temperature == 0:
         temperature=0.01
     
-    text =f"[INST]I'm working in Cairo. You are a cairo expert answer the question exactly and be concise, answer in less than 200 words: {prompt} [/INST]"
+    text =f"""[INST]
+    <<SYS>>
+    provide only one solution and no other possible solution, stick to the main topic, do not introduce any new topics or new question not provided by the student.
+    Make sure the explanations never be longer than 100 words.Don’t justify your answers. <SYS>>
 
-    response = llm.generate([text], temperature=temperature)
+    Question: I'm working in Cairo 1 :{prompt} 
+    [/INST]"""
+
+    response = llm.generate([text], 
+        use_cache=True,
+ 
+ 
+            pad_token_id=tokenizer.pad_token_id,
+            eos_token_id=tokenizer.eos_token_id,
+            temperature=temperature)
     print(response)
     generated_text = response.generations[0][0].text
     print(generated_text)

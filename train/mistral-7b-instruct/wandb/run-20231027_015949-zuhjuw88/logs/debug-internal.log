@@ -1,0 +1,307 @@
+2023-10-27 01:59:49,346 INFO    StreamThr :49100 [internal.py:wandb_internal():86] W&B internal server running at pid: 49100, started at: 2023-10-27 01:59:49.345959
+2023-10-27 01:59:49,347 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status
+2023-10-27 01:59:49,354 INFO    WriterThread:49100 [datastore.py:open_for_write():85] open: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/run-zuhjuw88.wandb
+2023-10-27 01:59:49,354 DEBUG   SenderThread:49100 [sender.py:send():380] send: header
+2023-10-27 01:59:49,380 DEBUG   SenderThread:49100 [sender.py:send():380] send: run
+2023-10-27 01:59:54,397 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-27 01:59:54,779 INFO    SenderThread:49100 [dir_watcher.py:__init__():211] watching files in: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files
+2023-10-27 01:59:54,780 INFO    SenderThread:49100 [sender.py:_start_run_threads():1122] run started: zuhjuw88 with start time 1698364789.345955
+2023-10-27 01:59:54,780 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 01:59:54,794 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: check_version
+2023-10-27 01:59:54,794 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: check_version
+2023-10-27 01:59:54,883 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: run_start
+2023-10-27 01:59:54,890 DEBUG   HandlerThread:49100 [system_info.py:__init__():32] System info init
+2023-10-27 01:59:54,890 DEBUG   HandlerThread:49100 [system_info.py:__init__():47] System info init done
+2023-10-27 01:59:54,890 INFO    HandlerThread:49100 [system_monitor.py:start():194] Starting system monitor
+2023-10-27 01:59:54,890 INFO    SystemMonitor:49100 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-10-27 01:59:54,891 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started cpu monitoring
+2023-10-27 01:59:54,891 INFO    HandlerThread:49100 [system_monitor.py:probe():214] Collecting system info
+2023-10-27 01:59:54,891 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started disk monitoring
+2023-10-27 01:59:54,892 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started gpu monitoring
+2023-10-27 01:59:54,892 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started memory monitoring
+2023-10-27 01:59:54,893 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started network monitoring
+2023-10-27 01:59:54,903 DEBUG   HandlerThread:49100 [system_info.py:probe():196] Probing system
+2023-10-27 01:59:54,911 DEBUG   HandlerThread:49100 [system_info.py:_probe_git():181] Probing git
+2023-10-27 01:59:54,926 DEBUG   HandlerThread:49100 [system_info.py:_probe_git():189] Probing git done
+2023-10-27 01:59:54,927 DEBUG   HandlerThread:49100 [system_info.py:probe():244] Probing system done
+2023-10-27 01:59:54,927 DEBUG   HandlerThread:49100 [system_monitor.py:probe():223] {'os': 'Linux-6.5.5-1-MANJARO-x86_64-with-glibc2.38', 'python': '3.9.18', 'heartbeatAt': '2023-10-26T23:59:54.903757', 'startedAt': '2023-10-26T23:59:49.343157', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '<python with no main file>', 'codePathLocal': None, 'git': {'remote': 'https://github.com/StarkWizard/cairo-llm.git', 'commit': 'b681f12a4678c0b309736c06ffaa28752cf787d2'}, 'email': 'pe_chaut@hotmail.com', 'root': '/home/pechaut/prj/cairo-llm', 'host': 'Neuron', 'username': 'pechaut', 'executable': '/home/pechaut/miniconda3/envs/cairo-llm/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 4404.952375000001, 'min': 800.0, 'max': 5200.0}, 'cpu_freq_per_core': [{'current': 4286.991, 'min': 800.0, 'max': 5200.0}, {'current': 4357.12, 'min': 800.0, 'max': 5200.0}, {'current': 4649.355, 'min': 800.0, 'max': 5200.0}, {'current': 4498.575, 'min': 800.0, 'max': 5200.0}, {'current': 4600.0, 'min': 800.0, 'max': 5200.0}, {'current': 4191.17, 'min': 800.0, 'max': 5200.0}, {'current': 4569.21, 'min': 800.0, 'max': 5200.0}, {'current': 4283.305, 'min': 800.0, 'max': 5200.0}, {'current': 4277.332, 'min': 800.0, 'max': 5200.0}, {'current': 4471.669, 'min': 800.0, 'max': 5200.0}, {'current': 4614.368, 'min': 800.0, 'max': 5200.0}, {'current': 4115.763, 'min': 800.0, 'max': 5200.0}, {'current': 4600.334, 'min': 800.0, 'max': 5200.0}, {'current': 4331.082, 'min': 800.0, 'max': 5200.0}, {'current': 4340.04, 'min': 800.0, 'max': 5200.0}, {'current': 4292.924, 'min': 800.0, 'max': 5200.0}], 'disk': {'/': {'total': 512.4387817382812, 'used': 277.3193702697754}}, 'gpu': 'NVIDIA TITAN X (Pascal)', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA TITAN X (Pascal)', 'memory_total': 12884901888}], 'memory': {'total': 125.57127380371094}}
+2023-10-27 01:59:54,927 INFO    HandlerThread:49100 [system_monitor.py:probe():224] Finished collecting system info
+2023-10-27 01:59:54,927 INFO    HandlerThread:49100 [system_monitor.py:probe():227] Publishing system info
+2023-10-27 01:59:54,927 DEBUG   HandlerThread:49100 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-10-27 01:59:54,928 DEBUG   HandlerThread:49100 [system_info.py:_save_pip():68] Saving pip packages done
+2023-10-27 01:59:54,928 DEBUG   HandlerThread:49100 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-10-27 01:59:55,780 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/conda-environment.yaml
+2023-10-27 01:59:55,781 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/requirements.txt
+2023-10-27 01:59:58,314 DEBUG   HandlerThread:49100 [system_info.py:_save_conda():87] Saving conda packages done
+2023-10-27 01:59:58,314 INFO    HandlerThread:49100 [system_monitor.py:probe():229] Finished publishing system info
+2023-10-27 01:59:58,316 DEBUG   SenderThread:49100 [sender.py:send():380] send: files
+2023-10-27 01:59:58,316 INFO    SenderThread:49100 [sender.py:_save_file():1378] saving file wandb-metadata.json with policy now
+2023-10-27 01:59:58,325 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-27 01:59:58,325 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: stop_status
+2023-10-27 01:59:58,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-27 01:59:58,328 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: pause
+2023-10-27 01:59:58,328 INFO    HandlerThread:49100 [handler.py:handle_request_pause():705] stopping system metrics thread
+2023-10-27 01:59:58,328 INFO    HandlerThread:49100 [system_monitor.py:finish():203] Stopping system monitor
+2023-10-27 01:59:58,328 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined cpu monitor
+2023-10-27 01:59:58,329 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined disk monitor
+2023-10-27 01:59:58,329 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-10-27 01:59:58,329 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-10-27 01:59:58,329 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-10-27 01:59:58,369 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined gpu monitor
+2023-10-27 01:59:58,369 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined memory monitor
+2023-10-27 01:59:58,369 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined network monitor
+2023-10-27 01:59:58,562 DEBUG   SenderThread:49100 [sender.py:send():380] send: telemetry
+2023-10-27 01:59:58,562 DEBUG   SenderThread:49100 [sender.py:send():380] send: stats
+2023-10-27 01:59:58,781 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/conda-environment.yaml
+2023-10-27 01:59:58,781 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/wandb-metadata.json
+2023-10-27 01:59:58,843 INFO    wandb-upload_0:49100 [upload_job.py:push():131] Uploaded file /tmp/tmpu48sveq8wandb/e9g5rcb4-wandb-metadata.json
+2023-10-27 02:00:00,563 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:00:05,564 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:00:10,392 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: resume
+2023-10-27 02:00:10,392 INFO    HandlerThread:49100 [handler.py:handle_request_resume():696] starting system metrics thread
+2023-10-27 02:00:10,392 INFO    HandlerThread:49100 [system_monitor.py:start():194] Starting system monitor
+2023-10-27 02:00:10,392 INFO    SystemMonitor:49100 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-10-27 02:00:10,392 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started cpu monitoring
+2023-10-27 02:00:10,393 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started disk monitoring
+2023-10-27 02:00:10,393 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started gpu monitoring
+2023-10-27 02:00:10,393 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started memory monitoring
+2023-10-27 02:00:10,393 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started network monitoring
+2023-10-27 02:00:10,565 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:00:11,435 DEBUG   SenderThread:49100 [sender.py:send():380] send: telemetry
+2023-10-27 02:00:11,593 DEBUG   SenderThread:49100 [sender.py:send():380] send: telemetry
+2023-10-27 02:00:11,820 DEBUG   SenderThread:49100 [sender.py:send():380] send: telemetry
+2023-10-27 02:00:11,847 DEBUG   SenderThread:49100 [sender.py:send():380] send: telemetry
+2023-10-27 02:00:12,151 DEBUG   SenderThread:49100 [sender.py:send():380] send: telemetry
+2023-10-27 02:00:13,021 DEBUG   SenderThread:49100 [sender.py:send():380] send: telemetry
+2023-10-27 02:00:13,042 DEBUG   SenderThread:49100 [sender.py:send():380] send: telemetry
+2023-10-27 02:00:13,050 DEBUG   SenderThread:49100 [sender.py:send():380] send: telemetry
+2023-10-27 02:00:13,136 DEBUG   SenderThread:49100 [sender.py:send():380] send: telemetry
+2023-10-27 02:00:13,325 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-27 02:00:13,325 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-27 02:00:13,325 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: stop_status
+2023-10-27 02:00:13,786 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/output.log
+2023-10-27 02:00:15,787 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/output.log
+2023-10-27 02:00:16,532 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:00:21,537 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:00:21,789 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/config.yaml
+2023-10-27 02:00:26,731 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:00:28,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-27 02:00:28,327 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: stop_status
+2023-10-27 02:00:28,367 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-27 02:00:29,237 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: pause
+2023-10-27 02:00:29,237 INFO    HandlerThread:49100 [handler.py:handle_request_pause():705] stopping system metrics thread
+2023-10-27 02:00:29,237 INFO    HandlerThread:49100 [system_monitor.py:finish():203] Stopping system monitor
+2023-10-27 02:00:29,238 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-10-27 02:00:29,238 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-10-27 02:00:29,238 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined cpu monitor
+2023-10-27 02:00:29,238 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-10-27 02:00:29,239 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined disk monitor
+2023-10-27 02:00:29,285 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined gpu monitor
+2023-10-27 02:00:29,285 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined memory monitor
+2023-10-27 02:00:29,285 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined network monitor
+2023-10-27 02:00:29,286 DEBUG   SenderThread:49100 [sender.py:send():380] send: stats
+2023-10-27 02:00:32,287 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:00:37,288 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:00:42,289 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:00:43,325 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-27 02:00:43,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-27 02:00:43,326 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: stop_status
+2023-10-27 02:00:47,472 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:00:52,473 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:00:57,474 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:00:58,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-27 02:00:58,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-27 02:00:58,326 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: stop_status
+2023-10-27 02:01:02,492 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:01:07,493 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:01:09,872 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: resume
+2023-10-27 02:01:09,872 INFO    HandlerThread:49100 [handler.py:handle_request_resume():696] starting system metrics thread
+2023-10-27 02:01:09,873 INFO    HandlerThread:49100 [system_monitor.py:start():194] Starting system monitor
+2023-10-27 02:01:09,873 INFO    SystemMonitor:49100 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-10-27 02:01:09,873 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started cpu monitoring
+2023-10-27 02:01:09,873 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started disk monitoring
+2023-10-27 02:01:09,874 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started gpu monitoring
+2023-10-27 02:01:09,874 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started memory monitoring
+2023-10-27 02:01:09,875 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started network monitoring
+2023-10-27 02:01:09,913 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: pause
+2023-10-27 02:01:09,914 INFO    HandlerThread:49100 [handler.py:handle_request_pause():705] stopping system metrics thread
+2023-10-27 02:01:09,914 INFO    HandlerThread:49100 [system_monitor.py:finish():203] Stopping system monitor
+2023-10-27 02:01:09,914 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-10-27 02:01:09,914 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-10-27 02:01:09,914 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-10-27 02:01:09,914 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined cpu monitor
+2023-10-27 02:01:09,914 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined disk monitor
+2023-10-27 02:01:09,950 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined gpu monitor
+2023-10-27 02:01:09,951 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined memory monitor
+2023-10-27 02:01:09,951 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined network monitor
+2023-10-27 02:01:09,951 DEBUG   SenderThread:49100 [sender.py:send():380] send: stats
+2023-10-27 02:01:12,952 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:01:13,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-27 02:01:13,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-27 02:01:13,327 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: stop_status
+2023-10-27 02:01:15,982 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: resume
+2023-10-27 02:01:15,982 INFO    HandlerThread:49100 [handler.py:handle_request_resume():696] starting system metrics thread
+2023-10-27 02:01:15,982 INFO    HandlerThread:49100 [system_monitor.py:start():194] Starting system monitor
+2023-10-27 02:01:15,982 INFO    SystemMonitor:49100 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-10-27 02:01:15,982 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started cpu monitoring
+2023-10-27 02:01:15,983 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started disk monitoring
+2023-10-27 02:01:15,983 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started gpu monitoring
+2023-10-27 02:01:15,983 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started memory monitoring
+2023-10-27 02:01:15,984 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started network monitoring
+2023-10-27 02:01:17,814 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/output.log
+2023-10-27 02:01:18,025 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:01:19,805 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: pause
+2023-10-27 02:01:19,805 INFO    HandlerThread:49100 [handler.py:handle_request_pause():705] stopping system metrics thread
+2023-10-27 02:01:19,805 INFO    HandlerThread:49100 [system_monitor.py:finish():203] Stopping system monitor
+2023-10-27 02:01:19,805 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-10-27 02:01:19,806 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-10-27 02:01:19,806 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined cpu monitor
+2023-10-27 02:01:19,806 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-10-27 02:01:19,806 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined disk monitor
+2023-10-27 02:01:19,861 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined gpu monitor
+2023-10-27 02:01:19,862 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined memory monitor
+2023-10-27 02:01:19,862 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined network monitor
+2023-10-27 02:01:19,862 DEBUG   SenderThread:49100 [sender.py:send():380] send: stats
+2023-10-27 02:01:23,759 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: resume
+2023-10-27 02:01:23,759 INFO    HandlerThread:49100 [handler.py:handle_request_resume():696] starting system metrics thread
+2023-10-27 02:01:23,759 INFO    HandlerThread:49100 [system_monitor.py:start():194] Starting system monitor
+2023-10-27 02:01:23,759 INFO    SystemMonitor:49100 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-10-27 02:01:23,760 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started cpu monitoring
+2023-10-27 02:01:23,760 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started disk monitoring
+2023-10-27 02:01:23,760 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started gpu monitoring
+2023-10-27 02:01:23,760 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started memory monitoring
+2023-10-27 02:01:23,761 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started network monitoring
+2023-10-27 02:01:23,863 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:01:28,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-27 02:01:28,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-27 02:01:28,326 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: stop_status
+2023-10-27 02:01:29,487 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:01:34,488 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:01:39,489 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:01:43,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-27 02:01:43,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-27 02:01:43,326 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: stop_status
+2023-10-27 02:01:44,550 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:01:48,295 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: pause
+2023-10-27 02:01:48,295 INFO    HandlerThread:49100 [handler.py:handle_request_pause():705] stopping system metrics thread
+2023-10-27 02:01:48,295 INFO    HandlerThread:49100 [system_monitor.py:finish():203] Stopping system monitor
+2023-10-27 02:01:48,295 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined cpu monitor
+2023-10-27 02:01:48,295 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined disk monitor
+2023-10-27 02:01:48,295 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-10-27 02:01:48,295 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-10-27 02:01:48,295 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-10-27 02:01:48,338 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined gpu monitor
+2023-10-27 02:01:48,338 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined memory monitor
+2023-10-27 02:01:48,338 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined network monitor
+2023-10-27 02:01:48,339 DEBUG   SenderThread:49100 [sender.py:send():380] send: stats
+2023-10-27 02:01:49,828 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/output.log
+2023-10-27 02:01:50,340 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:01:50,941 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: resume
+2023-10-27 02:01:50,942 INFO    HandlerThread:49100 [handler.py:handle_request_resume():696] starting system metrics thread
+2023-10-27 02:01:50,942 INFO    HandlerThread:49100 [system_monitor.py:start():194] Starting system monitor
+2023-10-27 02:01:50,942 INFO    SystemMonitor:49100 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-10-27 02:01:50,942 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started cpu monitoring
+2023-10-27 02:01:50,942 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started disk monitoring
+2023-10-27 02:01:50,943 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started gpu monitoring
+2023-10-27 02:01:50,943 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started memory monitoring
+2023-10-27 02:01:50,943 INFO    SystemMonitor:49100 [interfaces.py:start():190] Started network monitoring
+2023-10-27 02:01:51,124 DEBUG   SenderThread:49100 [sender.py:send():380] send: config
+2023-10-27 02:01:51,125 DEBUG   SenderThread:49100 [sender.py:send():380] send: metric
+2023-10-27 02:01:51,125 DEBUG   SenderThread:49100 [sender.py:send():380] send: telemetry
+2023-10-27 02:01:51,125 DEBUG   SenderThread:49100 [sender.py:send():380] send: metric
+2023-10-27 02:01:51,125 WARNING SenderThread:49100 [sender.py:send_metric():1329] Seen metric with glob (shouldn't happen)
+2023-10-27 02:01:53,829 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/output.log
+2023-10-27 02:01:56,167 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:01:56,830 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/config.yaml
+2023-10-27 02:01:58,202 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-27 02:01:58,203 DEBUG   SenderThread:49100 [sender.py:send():380] send: metric
+2023-10-27 02:01:58,203 DEBUG   SenderThread:49100 [sender.py:send():380] send: metric
+2023-10-27 02:01:58,203 DEBUG   SenderThread:49100 [sender.py:send():380] send: metric
+2023-10-27 02:01:58,203 DEBUG   SenderThread:49100 [sender.py:send():380] send: history
+2023-10-27 02:01:58,203 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: summary_record
+2023-10-27 02:01:58,204 INFO    SenderThread:49100 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-27 02:01:58,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-27 02:01:58,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-27 02:01:58,326 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: stop_status
+2023-10-27 02:01:58,831 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/wandb-summary.json
+2023-10-27 02:01:59,152 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-27 02:01:59,153 DEBUG   SenderThread:49100 [sender.py:send():380] send: metric
+2023-10-27 02:01:59,153 DEBUG   SenderThread:49100 [sender.py:send():380] send: metric
+2023-10-27 02:01:59,153 DEBUG   SenderThread:49100 [sender.py:send():380] send: metric
+2023-10-27 02:01:59,153 DEBUG   SenderThread:49100 [sender.py:send():380] send: metric
+2023-10-27 02:01:59,154 DEBUG   SenderThread:49100 [sender.py:send():380] send: history
+2023-10-27 02:01:59,154 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: summary_record
+2023-10-27 02:01:59,157 INFO    SenderThread:49100 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-27 02:01:59,831 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/wandb-summary.json
+2023-10-27 02:02:00,831 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/output.log
+2023-10-27 02:02:02,194 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:02:06,020 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-27 02:02:06,022 DEBUG   SenderThread:49100 [sender.py:send():380] send: history
+2023-10-27 02:02:06,022 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: summary_record
+2023-10-27 02:02:06,022 INFO    SenderThread:49100 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-27 02:02:06,833 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/wandb-summary.json
+2023-10-27 02:02:06,983 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-27 02:02:06,984 DEBUG   SenderThread:49100 [sender.py:send():380] send: history
+2023-10-27 02:02:06,984 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: summary_record
+2023-10-27 02:02:06,985 INFO    SenderThread:49100 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-27 02:02:07,833 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/wandb-summary.json
+2023-10-27 02:02:07,986 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:02:08,834 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/output.log
+2023-10-27 02:02:12,987 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:02:13,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-27 02:02:13,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-27 02:02:13,326 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: stop_status
+2023-10-27 02:02:13,926 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-27 02:02:13,927 DEBUG   SenderThread:49100 [sender.py:send():380] send: history
+2023-10-27 02:02:13,927 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: summary_record
+2023-10-27 02:02:13,929 INFO    SenderThread:49100 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-27 02:02:14,835 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/wandb-summary.json
+2023-10-27 02:02:14,896 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-27 02:02:14,897 DEBUG   SenderThread:49100 [sender.py:send():380] send: history
+2023-10-27 02:02:14,897 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: summary_record
+2023-10-27 02:02:14,897 INFO    SenderThread:49100 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-27 02:02:15,835 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/wandb-summary.json
+2023-10-27 02:02:16,835 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/output.log
+2023-10-27 02:02:18,898 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:02:21,305 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-27 02:02:21,307 DEBUG   SenderThread:49100 [sender.py:send():380] send: history
+2023-10-27 02:02:21,308 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: summary_record
+2023-10-27 02:02:21,308 INFO    SenderThread:49100 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-27 02:02:21,837 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/wandb-summary.json
+2023-10-27 02:02:22,284 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-27 02:02:22,284 DEBUG   SenderThread:49100 [sender.py:send():380] send: history
+2023-10-27 02:02:22,284 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: summary_record
+2023-10-27 02:02:22,285 INFO    SenderThread:49100 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-27 02:02:22,837 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/wandb-summary.json
+2023-10-27 02:02:22,837 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/output.log
+2023-10-27 02:02:24,285 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:02:24,837 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/output.log
+2023-10-27 02:02:28,326 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-27 02:02:28,327 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-27 02:02:28,327 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: stop_status
+2023-10-27 02:02:29,508 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:02:29,838 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/config.yaml
+2023-10-27 02:02:30,292 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-27 02:02:30,293 DEBUG   SenderThread:49100 [sender.py:send():380] send: history
+2023-10-27 02:02:30,293 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: summary_record
+2023-10-27 02:02:30,294 INFO    SenderThread:49100 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-27 02:02:30,838 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/wandb-summary.json
+2023-10-27 02:02:31,381 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: partial_history
+2023-10-27 02:02:31,381 DEBUG   SenderThread:49100 [sender.py:send():380] send: history
+2023-10-27 02:02:31,382 DEBUG   SenderThread:49100 [sender.py:send_request():407] send_request: summary_record
+2023-10-27 02:02:31,382 INFO    SenderThread:49100 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-27 02:02:31,839 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/wandb-summary.json
+2023-10-27 02:02:32,839 INFO    Thread-12 :49100 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231027_015949-zuhjuw88/files/output.log
+2023-10-27 02:02:35,383 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: status_report
+2023-10-27 02:02:35,752 DEBUG   HandlerThread:49100 [handler.py:handle_request():146] handle_request: pause
+2023-10-27 02:02:35,752 INFO    HandlerThread:49100 [handler.py:handle_request_pause():705] stopping system metrics thread
+2023-10-27 02:02:35,752 INFO    HandlerThread:49100 [system_monitor.py:finish():203] Stopping system monitor
+2023-10-27 02:02:35,752 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-10-27 02:02:35,753 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-10-27 02:02:35,753 DEBUG   SystemMonitor:49100 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-10-27 02:02:35,753 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined cpu monitor
+2023-10-27 02:02:35,753 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined disk monitor
+2023-10-27 02:02:35,796 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined gpu monitor
+2023-10-27 02:02:35,796 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined memory monitor
+2023-10-27 02:02:35,796 INFO    HandlerThread:49100 [interfaces.py:finish():202] Joined network monitor
+2023-10-27 02:02:35,797 DEBUG   SenderThread:49100 [sender.py:send():380] send: stats

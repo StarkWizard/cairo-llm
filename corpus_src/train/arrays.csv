@@ -171,6 +171,12 @@ fn main() {
 }
 ```
 "
+"In the sample: let second = *m_array.at(1); is 1 the address of the second element ?","
+No, 1 is the index"
+"read the third element of my_array and affect it to 'third'","
+```
+third = my_array.at(2)
+```
 "myArray is empty, what does that code do: myArray.pop_front();","
     As the array is empty, pop_front returns Option::None
 "
