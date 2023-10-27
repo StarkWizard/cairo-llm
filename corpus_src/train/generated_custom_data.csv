@@ -1,9 +1,15 @@
 question,answer
 "What is the primary limitation of arrays in Cairo?","The data stored in arrays is immutable."
-"What data structure in Cairo allows simulation of mutable data structures?","Felt252Dict<T>"
+"What data structure in Cairo allows simulation of mutable data structures?","
+```
+    Felt252Dict<T>
+```"
 "What can you not do with an array once a value is appended?","You can't modify it."
 "In the context of a game, why might one use a mutable data structure?","To store and modify the level of the players."
-"How would you initialize an empty array of player levels in Cairo?","let mut level_players = Array::new();"
+"How would you initialize an empty array of player levels in Cairo?","
+```
+    let mut level_players = Array::new();
+```"
 "Can you remove an element from an array at any position in Cairo?","No, you can only remove it if it is in the first position."
 "What should a mutable dynamic array support according?","Append items at the end, access any item by index, set the value of an item at a specific index, and return the current length."
 "How is the blueprint for the dynamic array implementation defined?","Using the trait VecTrait<V, T> in Cairo."

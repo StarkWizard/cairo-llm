@@ -10,29 +10,99 @@
 "What is the purpose of type annotations in function definitions in Cairo?","Requiring type annotations in function definitions in Cairo ensures the compiler knows the expected types, resulting in more helpful error messages and eliminating the need for type annotations elsewhere in the code."
 "If a function takes multiple parameters, how are they separated in Cairo based on the provided code 'fn another_function(x: felt252, y: felt252) { x.print(); y.print(); }'?","In Cairo, if a function takes multiple parameters, they are separated by commas, as seen in the code with 'x: felt252, y: felt252'."
 "How does Cairo allow for more readable function calls using named parameters?","In Cairo, named parameters allow for more readable function calls by specifying the names of arguments when calling a function."
-"Based on the code 'foo(x: first_arg, y: second_arg);', how are named parameters used in Cairo?","In the code 'foo(x: first_arg, y: second_arg);', named parameters are used in Cairo by specifying the parameter name followed by a colon and then the value or variable to pass to it."
+"Based on the code 'foo(x: first_arg, y: second_arg);', how are named parameters used in Cairo?","In the code
+```
+    foo(x: first_arg, y: second_arg);
+```
+named parameters are used in Cairo by specifying the parameter name followed by a colon and then the value or variable to pass to it."
 "What is the shorthand way to use named parameters in Cairo if a variable has the same name as the parameter, as seen in the code 'foo(:x, :y)'?","The shorthand way to use named parameters in Cairo when a variable has the same name as the parameter is to use a colon followed by the parameter name, as seen in the code with ':x' and ':y'."
 "How do you declare a new function in Cairo?","In Cairo, you declare a new function by using the 'fn' keyword followed by the function name and a set of parentheses. The function body is then enclosed within curly brackets."
 "Can you call a function in Cairo before its definition in the source code?","Yes, in Cairo you can call a function before its definition in the source code as long as the function is defined somewhere in a scope that can be seen by the caller."
-"Based on the provided code 'fn foo(x: u8, y: u8) {}', how many parameters does the 'foo' function accept and of what type?","Based on the provided code 'fn foo(x: u8, y: u8) {}', the 'foo' function accepts two parameters, both of type 'u8'."
+"Based on the provided code 'fn foo(x: u8, y: u8) {}', how many parameters does the 'foo' function accept and of what type?","Based on the provided code:
+```
+    fn foo(x: u8, y: u8)
+    {}
+```
+the 'foo' function accepts two parameters, both of type 'u8'."
 "How do you distinguish between a parameter and an argument in Cairo?","In Cairo, a parameter is a special variable that is part of a function’s signature, while an argument is the concrete value provided to the function when it's called. However, in casual conversation, people often use the terms 'parameter' and 'argument' interchangeably."
 "What gets printed when the another_function is called with the value 5 in the provided code snippet 'fn another_function(x: felt252) { x.print(); }'?","When the another_function is called with the value 5 in the provided code, it prints '5' to the console."
-"In the code 'fn another_function(x: felt252, y: felt252) { x.print(); y.print(); }', what does the function do with its parameters?","In the code 'fn another_function(x: felt252, y: felt252) { x.print(); y.print(); }', the function prints the content of the parameter 'x' and then the content of the parameter 'y'."
+"In the code 'fn another_function(x: felt252, y: felt252) { x.print(); y.print(); }', what does the function do with its parameters?","In the code
+```
+    fn another_function(x: felt252, y: felt252)
+    {
+        x.print();
+        y.print();
+    }'
+the function prints the content of the parameter 'x' and then the content of the parameter 'y'."
 "how do you specify the type of a function parameter in Cairo?","In Cairo, based on the provided code snippets, the type of a function parameter is specified after its name, separated by a colon."
 "Why are type annotations important in Cairo function definitions?","Type annotations in Cairo function definitions are important because they allow the compiler to know what types the function expects, leading to more helpful error messages and reducing the need for type annotations elsewhere in the code."
-"Based on the code 'fn foo(x: u8, y: u8) {}', how are the named parameters used when calling the function?","Based on the code 'fn foo(x: u8, y: u8) {}', named parameters can be used when calling the function by specifying the name of the parameter followed by a colon and the value or variable name, like 'foo(x: value1, y: value2)'."
-"In the provided code 'let first_arg = 3; let second_arg = 4; foo(x: first_arg, y: second_arg);', which values are passed as arguments to the foo function?","In the provided code 'let first_arg = 3; let second_arg = 4; foo(x: first_arg, y: second_arg);', the values '3' and '4' are passed as arguments to the foo function."
-"Based on the code snippet 'foo(:x, :y)', what is the significance of the colons before 'x' and 'y'?","Based on the code snippet 'foo(:x, :y)', the colons before 'x' and 'y' are a shorthand way to use named parameters in Cairo when a variable has the same name as the parameter."
+"Based on the code 'fn foo(x: u8, y: u8) {}', how are the named parameters used when calling the function?","Based on the code
+```
+    fn foo(x: u8, y: u8)
+    {}
+```
+named parameters can be used when calling the function by specifying the name of the parameter followed by a colon and the value or variable name, like 'foo(x: value1, y: value2)'."
+"In the provided code 'let first_arg = 3; let second_arg = 4; foo(x: first_arg, y: second_arg);', which values are passed as arguments to the foo function?","In the provided code:
+```
+    let first_arg = 3;
+    let second_arg = 4;
+    foo(x: first_arg, y: second_arg);
+```
+the values '3' and '4' are passed as arguments to the foo function."
+"Based on the code snippet 'foo(:x, :y)', what is the significance of the colons before 'x' and 'y'?","Based on the code snippet:
+```
+    foo(:x, :y)
+``` the colons before 'x' and 'y' are a shorthand way to use named parameters in Cairo when a variable has the same name as the parameter."
 "How does Cairo code represent string literals, as seen in the provided code snippets?","In Cairo code, string literals are represented using single quotes, as seen in the provided code snippets with 'Hello, world!' and 'Another function.'."
-"Based on the code 'fn main() { another_function(5, 6); } fn another_function(x: felt252, y: felt252) { x.print(); y.print(); }', what are the values passed to another_function when it's called?","Based on the code 'fn main() { another_function(5, 6); } fn another_function(x: felt252, y: felt252) { x.print(); y.print(); }', the values '5' and '6' are passed to another_function when it's called."
+"Based on the code 'fn main() { another_function(5, 6); } fn another_function(x: felt252, y: felt252) { x.print(); y.print(); }', what are the values passed to another_function when it's called?","Based on the code:
+```
+    fn main() {
+        another_function(5, 6);
+    }
+
+    fn another_function(x: felt252, y: felt252)
+    {
+        x.print();
+        y.print();
+    }
+```
+the values '5' and '6' are passed to another_function when it's called."
 "What does the '.print()' method do in the provided Cairo code snippets?","The '.print()' method in the provided Cairo code snippets is used to print the value or string to the console."
-"In the code 'fn foo(x: u8, y: u8) {} fn main() { let x = 1; let y = 2; foo(:x, :y) }', what values are passed to the foo function?","In the code 'fn foo(x: u8, y: u8) {} fn main() { let x = 1; let y = 2; foo(:x, :y) }', the values '1' and '2' are passed to the foo function."
+"In the code 'fn foo(x: u8, y: u8) {} fn main() { let x = 1; let y = 2; foo(:x, :y) }', what values are passed to the foo function?","In the code:
+```
+    fn foo(x: u8, y: u8)
+    {}
+
+    fn main()
+    {
+        let x = 1;
+        let y = 2;
+        foo(:x, :y)
+    }
+```
+the values '1' and '2' are passed to the foo function."
 "What are the benefits of using named parameters in Cairo?","Using named parameters in Cairo makes the function calls more readable and self-descriptive."
 "How do you start a new project with Scarb named 'functions'?","You can start a new project with Scarb named 'functions' to explore functions further."
-"In the code 'fn another_function(x: felt252) { x.print(); }', what does 'felt252' represent?","In the code 'fn another_function(x: felt252) { x.print(); }', 'felt252' represents the type of the parameter 'x'."
+"In the code 'fn another_function(x: felt252) { x.print(); }', what does 'felt252' represent?","In the code:
+```
+    fn another_function(x: felt252)
+    {
+        x.print();
+    }
+```
+'felt252' represents the type of the parameter 'x'."
 "How does the program output when 'scarb cairo-run' is executed after placing the 'another_function' example in 'src/lib.cairo'?","When 'scarb cairo-run' is executed after placing the 'another_function' example in 'src/lib.cairo', the output is two lines: '[DEBUG] Hello, world!' followed by '[DEBUG] Another function.'."
 "How do you distinguish between the terms 'parameter' and 'argument' in the context of functions?","In the context of functions, a 'parameter' is a special variable that is part of a function’s signature, while an 'argument' is the concrete value provided to the function when it's called. However, in casual conversation, both terms are often used interchangeably."
-"In the code 'fn foo(x: u8, y: u8) {} fn main() { foo(x: 3, y: 4); }', which values are passed as arguments to the foo function?","In the code 'fn foo(x: u8, y: u8) {} fn main() { foo(x: 3, y: 4); }', the values '3' and '4' are passed as arguments to the foo function."
+"In the code 'fn foo(x: u8, y: u8) {} fn main() { foo(x: 3, y: 4); }', which values are passed as arguments to the foo function?","In the code:
+```
+    fn foo(x: u8, y: u8)
+    {}
+
+    fn main() {
+        foo(x: 3, y: 4);
+    }
+```
+the values '3' and '4' are passed as arguments to the foo function."
 "What gets printed when 'another_function' is called with values 5 and 6 in the provided code 'fn main() { another_function(5, 6); } fn another_function(x: felt252, y: felt252) { x.print(); y.print(); }'?","When 'another_function' is called with values 5 and 6 in the provided code, '5' gets printed on the first line and '6' on the second line."
 "What is the main function's role in many programs?","The main function is the entry point of many programs."
 "How do you declare a new function in Cairo code?","In Cairo, you declare a new function using the 'fn' keyword followed by a function name and a set of parentheses."
@@ -107,7 +177,12 @@
 "How are named parameters used in programming to make function calls more descriptive?","Named parameters are used by specifying the parameter name and value when calling a function, like 'parameter_name: value'."
 "What does a block enclosed in curly brackets '{}' represent in programming?","A block enclosed in curly brackets '{}' represents a code block or scope in programming."
 "How does Cairo handle return values from functions when there's no explicit 'return' keyword?","Cairo considers the value of the final expression in the function body as the return value."
-"What is the value of 'y' in the code 'let y = { let x = 3; x + 1 };'?","The value of 'y' in the code 'let y = { let x = 3; x + 1 };' is 4."
-"What does the error message 'Unexpected return type. Expected: ""core::integer::u32"", found: "()".' indicate in the code?","The error message indicates that there's a mismatch between the expected 'u32' return type and the actual '()' return type."
+"What is the value of 'y' in the code 'let y = { let x = 3; x + 1 };'?","The value of 'y' in the code:
+```
+    let y = { let x = 3; x + 1 };
+```
+
+is 4."
+"What does the error message 'Unexpected return type. Expected: ""core::integer::u32"", found: '()'.' indicate in the code?","The error message indicates that there's a mismatch between the expected 'u32' return type and the actual '()' return type."
 "How do you specify the type of a function's parameter in programming?","You specify the parameter type by including it after the parameter name in the function declaration, like 'parameter_name: parameter_type'."
 "What happens when you call a function in Cairo without specifying the return type?","The function returns the value of the final expression in its body implicitly."

@@ -5,10 +5,35 @@ question,answer
 "If an event is not included in an NFT contract, what potential issue might arise?","Users may not see their NFTs appear in their wallets."
 "What do wallets use to display a user's NFTs?","Wallets use indexers which rely on events."
 "How are different events in the contract defined?","Under the Event enum, which implements the starknet::Event trait, as enum variants."
-"Show the code snippet that defines a trait for events.","trait Event<T> {\n    fn append_keys_and_data(self: T, ref keys: Array<felt252>, ref data: Array<felt252>);\n    fn deserialize(ref keys: Span<felt252>, ref data: Span<felt252>) -> Option<T>;\n}"
-"What attribute is used to have the compiler generate an implementation for the Event trait?","#[derive(starknet::Event)]"
+"Show the code snippet that defines a trait for events.","
+```
+    trait Event<T> {
+        fn append_keys_and_data(self: T, ref keys: Array<felt252>, ref data: Array<felt252>);
+        fn deserialize(ref keys: Span<felt252>, ref data: Span<felt252>) -> Option<T>;
+    }
+```"
+"What attribute is used to have the compiler generate an implementation for the Event trait?","
+```
+    #[derive(starknet::Event)]
+```
+"
 "What is the role of the 'append_keys_and_data' function in the 'Event' trait?","It appends keys and data for an event."
-"Provide the syntax for defining an event named 'StoredName'.","#[event]\n#[derive(Drop, starknet::Event)]\nenum Event {\n    StoredName: StoredName,\n}\n\n#[derive(Drop, starknet::Event)]\nstruct StoredName {\n    #[key]\n    user: ContractAddress,\n    name: felt252\n}"
+"Provide the syntax for defining an event named 'StoredName'.","
+```
+    #[event]
+    #[derive(Drop, starknet::Event)]
+    enum Event {
+        StoredName: StoredName,
+    }
+
+    #[derive(Drop, starknet::Event)]
+    struct StoredName {
+        #[key]
+        user: ContractAddress,
+        name: felt252
+    }
+```
+"
 "How is each event variant named relative to its associated struct?","Each event variant has to be a struct of the same name as the variant."
 "What trait must the members of event variants implement?","The members of event variants must implement the Serde trait."
 "How are keys and data added to an event?","Using a serialization process."

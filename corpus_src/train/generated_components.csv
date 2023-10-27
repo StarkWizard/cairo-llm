@@ -3,13 +3,20 @@ question,answer
 "How can components be visualized for easier understanding?","Think of components as Lego blocks."
 "How does a component differ from a contract in terms of deployment?","Unlike a contract, a component cannot be deployed on its own."
 "What are the three main things a component can contain?","Storage variables, Events, and External and internal functions."
-"How do you define a component?","To create a component, first define it in its own module decorated with a #[starknet::component] attribute."
+"How do you define a component?","To create a component, first define it in its own module decorated with a
+```
+    #[starknet::component]
+```
+attribute."
 "How does the component's logic become part of a contract?","Its logic will eventually be part of the contract’s bytecode it has been embedded in."
 "How do you define the interface of a component?","You can define the interface of the component by declaring a trait with the #[starknet::interface] attribute."
 "What does the #[embeddable_as(name)] attribute indicate?","It marks an implementation block as embeddable inside a contract and specifies the name to refer to this component in the contract."
 "Can you define internal functions in a component that are not accessible externally?","Yes, by simply omitting the #[embeddable_as(name)] attribute above the internal impl block."
 "How are functions within the impl block of a component structured?","They expect arguments like ref self: ComponentState<TContractState> or self: @ComponentState<TContractState>."
-"Which attribute marks an impl block as embeddable inside a contract?","#[embeddable_as(Ownable)]"
+"Which attribute marks an impl block as embeddable inside a contract?","
+```
+    #[embeddable_as(Ownable)]
+```"
 "What major difference is highlighted between a regular smart contract and a component in terms of accessing storage and events?","In components, access to storage and events is done via the generic ComponentState<TContractState> type and not ContractState."
 "How easy is it to migrate from a contract to a component?","It's very easy, requiring only a few changes like adding attributes and changing types of the self argument in functions."
 "What are the steps to use components inside a contract?","Declare it with the component!() macro, add the path to the component's storage and events to the contract's Storage and Event, and embed the component's logic using an impl alias."
@@ -86,10 +93,22 @@ question,answer
 "How does a contract's ABI change after embedding 'SimpleImpl'?","The ABI gets modified to expose the 'ret4' function externally."
 "Why is the 'HasComponent<TContractState>' trait important in the context of components?","This trait allows seamless interaction between the contract's state and the component's state, making component integration smoother."
 "How are 'impl aliases' relevant in the context of 'OwnableImpl'?","The 'impl alias' is used to instantiate 'OwnableImpl<TContractState>' with the concrete type 'ContractState' for a specific contract."
-"What is the relevance of 'ComponentState<TContractState>' in component integration?","'ComponentState<TContractState>' provides type-specific context for the component based on the contract's state, making it easier to bridge between the two."
+"What is the relevance of 'ComponentState<TContractState>' in component integration?","
+```
+    ComponentState<TContractState>
+```
+provides type-specific context for the component based on the contract's state, making it easier to bridge between the two."
 "What is the purpose of the 'HasComponent<TContractState>' trait?","It provides methods to retrieve the state of a component for a given contract state."
 "How do you interpret 'impl Ownable for ContractState'?","This means that the 'Ownable' trait has been implemented for the 'ContractState' type."
 "What do components offer to StarkNet contracts?","Components offer powerful modularity to StarkNet contracts."
 "How can 'HasComponent::get_component_mut(ref self)' be used?","It can be used to retrieve a mutable state of a component for a given mutable contract state."
 "How do generic impls and impl aliases work together in the context of components?","Generic impls define reusable logic in a contract-agnostic manner, and impl aliases are used to instantiate this logic with a contract's concrete storage types."
-"How do the '#[starknet::interface]' and '#[starknet::embeddable]' attributes differ in their roles?","'#[starknet::interface]' indicates that a trait is a StarkNet interface trait, while '#[starknet::embeddable]' marks an implementation as embeddable."
+"How do the '#[starknet::interface]' and '#[starknet::embeddable]' attributes differ in their roles?","
+```
+    #[starknet::interface]
+```
+indicates that a trait is a StarkNet interface trait, while
+```
+    #[starknet::embeddable]
+```
+marks an implementation as embeddable."

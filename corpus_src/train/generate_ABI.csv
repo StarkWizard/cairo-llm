@@ -1,7 +1,7 @@
 "question","answer"
 "What is an ABI in the context of Starknet?","ABI stands for Application Binary Interface. On Starknet, it is a JSON representation of a contract's functions and structures, allowing for encoded calls to the contract."
 "How does ABI aid in smart contract interactions?","The ABI instructs how functions should be called, detailing expected input parameters and their format, enabling proper interaction with the contract."
-"Why is an ABI necessary for external actors to understand a contract?","Because the contract's bytecode is not human-readable. The ABI defines specific methods to interact with the contract for execution."
+"Why is an ABI necessary for external actors to understand a contract?","The ABI defines specific methods to interact with the contract for execution."
 "Where are ABIs typically used?","ABIs are typically used in dApps frontends to format data, making it understandable by the smart contract and vice versa."
 "How do block explorers like Voyager or Starkscan utilize an ABI?","They use the contract's ABI to format the data sent to the contract and the data it returns."
 "What is the purpose of a contract interface?","A contract interface lists the publically exposed functions of a contract, specifying function signatures without including the function body."

@@ -34,7 +34,7 @@ question,answer
 "Why might a contract need to use private or internal functions?","Private or internal functions allow encapsulation of logic and can only be called within the contract, ensuring controlled access to certain functionalities."
 "How do you denote that a function is external and can modify the contract's state?","By passing 'self: ContractState' as a reference with the 'ref' keyword in the function parameters."
 "In which function type, external or view, is the contract's state passed as a snapshot?","In view functions, the contract's state is passed as a snapshot."
-"What attribute indicates that a function is public and can be accessed from outside of the contract?","The #[external(v0)] attribute."
+"What attribute indicates that a function is public and can be accessed from outside of the contract?","The #[external(v0)] attribute gives a clue."
 "How is the number of names stored in the contract incremented in the provided code?","By reading the current total using 'self.total_names.read()', then writing back the incremented value with 'self.total_names.write(total_names + 1)'."
 "how do you distinguish between functions that can and cannot modify the contract's state?","By how the 'self: ContractState' parameter is passed. If it's passed by reference using 'ref', it can modify the state. If passed as a snapshot using '@', it cannot."
 "What is an external function's relation to the contract's state based on the provided code?","External functions can modify the state of a contract when 'self: ContractState' is passed by reference."
@@ -53,10 +53,28 @@ question,answer
 "How would you define a constructor in a contract that initializes the state with an owner?","To define a constructor, use the #[constructor] attribute and name the function 'constructor'. For initialization, you'd reference 'ref self: ContractState' as the first parameter and then write to its fields, such as 'self.names.write(owner.address, owner.name);'."
 "How can you specify a function in a contract as publicly accessible from outside but doesn't modify the contract's state?","You'd define the function inside an implementation block annotated with the #[external(v0)] attribute. To ensure it doesn't modify the state, pass 'self: ContractState' as a snapshot using 'self: @ContractState'. This makes it a view function."
 "Can you provide a code snippet that declares an external function which can modify the contract's state?","Sure! A function defined inside an implementation block annotated with the #[external(v0)] attribute and passing 'self: ContractState' as a reference using 'ref self: ContractState' would be an external function that can modify the contract's state."
-"What's the syntax for an internal function in a contract that stores a user's name, increments the total number of names, and emits an event?","You can define this internal function outside of the implementation blocks annotated with the #[external(v0)] attribute. It would look something like: 'fn _store_name(ref self: ContractState, user: ContractAddress, name: felt252) { /* logic to store name, increment count, and emit event */ }'."
+"What's the syntax for an internal function in a contract that stores a user's name, increments the total number of names, and emits an event?","You can define this internal function outside of the implementation blocks annotated with the #[external(v0)] attribute. It would look something like:
+```
+    fn _store_name(ref self: ContractState, user: ContractAddress, name: felt252)
+    {
+        // logic to store name, increment count, and emit event
+    }
+```
+"
 "How do you automatically generate a trait definition for an implementation block in a contract?","Use the #[generate_trait] attribute above the implementation block to tell the compiler to generate a trait definition for it, reducing boilerplate code."
-"How would you define a library function in a contract that simply returns the contract's name?","You can define such a function outside of the implementation blocks as 'fn _get_contract_name() -> felt252 { return \"Name Registry\"; }'. This function just returns the name 'Name Registry' and doesn't need to access the contract's state."
-"How do you define a public view function that retrieves a name associated with an address from the contract's state?","Define the function inside an implementation block annotated with the #[external(v0)] attribute and pass 'self: ContractState' as a snapshot using 'self: @ContractState'. For example: 'fn get_name(self: @ContractState, address: ContractAddress) -> felt252 { return self.names.read(address); }'. This function is read-only and returns a name based on an address."
+"How would you define a library function in a contract that simply returns the contract's name?","You can define such a function outside of the implementation blocks as
+
+```
+    fn _get_contract_name() -> felt252 {
+        return 'Name Registry'; }
+```
+
+This function just returns the name 'Name Registry' and doesn't need to access the contract's state."
+"How do you define a public view function that retrieves a name associated with an address from the contract's state?","Define the function inside an implementation block annotated with the #[external(v0)] attribute and pass 'self: ContractState' as a snapshot using 'self: @ContractState'. For example:
+```
+    fn get_name(self: @ContractState, address: ContractAddress) -> felt252 { return self.names.read(address); }
+```
+This function is read-only and returns a name based on an address."
 "How can you ensure a function is a constructor in a contract?","By annotating the function with the #[constructor] attribute and naming it 'constructor'. This function can only be run once during contract deployment and is used to initialize the state."
 "In a contract, how do you define a function that can both be accessed externally and modify the contract's state?","You define the function inside an 'impl' block annotated with the #[external(v0)] attribute. If the function needs to modify the state, you pass 'self: ContractState' as a reference using the 'ref' keyword."
 "How would you denote a function in a contract that only provides data and ensures the contract's state is not modified?","You would define it as a view function. To ensure it's read-only, you'd pass 'self: ContractState' as a snapshot using the '@' symbol."

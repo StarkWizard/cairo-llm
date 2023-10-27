@@ -8,8 +8,17 @@ question,answer
 "What does the 'Option' enum represent?","The 'Option' enum represents the concept of an optional value. It has two variants: 'Some: T' which indicates that there's a value of type 'T', and 'None' which represents the absence of a value."
 "How can the 'Option' enum make your code more expressive?","The 'Option' enum allows you to explicitly represent the possibility of a value being absent, making your code more expressive and easier to reason about."
 "How does the 'Option' enum help prevent bugs in code?","Using 'Option' can help prevent bugs caused by using uninitialized or unexpected null values."
-"How do you access the value stored in a variant of an enum that has associated data?","You can access the value by pattern matching the enum. For instance, in the example 'Message::Echo(value) => { value.print(); }', the value associated with the 'Echo' variant is accessed and printed."
-"How do you define a trait in Cairo?","A trait can be defined using the 'trait' keyword followed by its name and the methods it contains. For example, 'trait Processing { fn process(self: Message); }'."
+"How do you access the value stored in a variant of an enum that has associated data?","You can access the value by pattern matching the enum. For instance, in the example
+```
+    Message::Echo(value) => { value.print(); }
+```
+the value associated with the 'Echo' variant is accessed and printed."
+"How do you define a trait in Cairo?","A trait can be defined using the 'trait' keyword followed by its name and the methods it contains. For example,
+```
+    trait Processing {
+        fn process(self: Message);
+    }
+```."
 "What is the role of the '@' symbol in the 'find_value_recursive' function's parameters?","Tin many programming languages, it's often used to denote a reference or a special type of argument."
 "What happens when you match the 'Option::None' variant in the test module?","When the 'Option::None' variant is matched, the message 'not found' is printed."
 "What type of value is associated with the 'Move' variant in the 'Message' enum?","The 'Move' variant is associated with a tuple of two 'u128' values."
@@ -40,21 +49,49 @@ question,answer
 "How do you call a trait's method on an instance of a type?","By using the dot notation, like instance.method()"
 "How do you initialize a mutable variable in the provided code?","Using the 'let mut' keyword."
 "How do you define a custom trait in Cairo?","Using the 'trait' keyword followed by the trait name and its method signatures."
-"In the given examples, how is a tuple of two u128 values represented?","(u128, u128)"
+"how is a tuple of two u128 values represented?","It is represented by:
+```
+    (u128, u128)
+```"
 "How do you reference a specific enum variant in the code?","EnumName::VariantName"
-"How do you represent a generic type in the provided code?","Using angle brackets, like Option<T>"
+"How do you represent a generic type in the provided code?","Using angle brackets, like
+```
+    Option<T>
+```"
 "How do you define a function that returns a value of type Option<usize>?","By specifying the return type as Option<usize> after the '->' symbol in the function signature."
 "What is the purpose of the '*' symbol before 'arr.at(index)' in the code?","It's used to dereference the value, accessing the underlying value pointed to by the reference."
 "Can you have a function in Cairo that does not return a value?","Yes"
-"How can you specify that a function takes an array as a parameter in the provided code?","Using the syntax arr: @Array<Type>"
+"How can you specify that a function takes an array as a parameter in the provided code?","Using the syntax arr:
+```
+    @Array<Type>
+```
+"
 "What are enums short for?","enumerations"
 "How can enums be defined?","Enums can be defined as a custom data type that consists of a fixed set of named values, called variants."
 "For what purpose are enums useful?","Enums are useful for representing a collection of related values where each value is distinct and has a specific meaning."
 "What is the naming convention for enum variants?","PascalCase"
 "How can one instantiate a variant of an enum?","One variant can be instantiated using the syntax: let direction = Direction::VariantName;"
-"Can enums store associated values with their variants?","Yes: enum Message { Quit, Echo: felt252, Move: (u128, u128) }"
-"What is a trait in the context of Cairo?","A trait allows you to define methods and behaviors associated with a data type. exemple: trait Processing { fn process(self: Message); }"
-"How can you process different variants of an enum?","Using the match control flow construct. match self { Message::Quit => { 'quitting'.print(); }, Message::Echo(value) => { value.print(); }, Message::Move((x, y)) => { 'moving'.print(); }, }"
+"Can enums store associated values with their variants?","Yes:
+```
+    enum Message {
+        Quit, Echo: felt252, Move: (u128, u128)
+    }
+```"
+"What is a trait in the context of Cairo?","A trait allows you to define methods and behaviors associated with a data type. exemple:
+```
+    trait Processing {
+        fn process(self: Message);
+    }
+```
+"
+"How can you process different variants of an enum?","Using the match control flow construct.
+```
+    match self {
+        Message::Quit => { 'quitting'.print(); },
+        Message::Echo(value) => { value.print(); },
+        Message::Move((x, y)) => { 'moving'.print(); },
+    }
+```"
 "What does the Option enum represent in Cairo?","The Option enum represents the concept of an optional value."
 "How many variants does the Option enum have?","Two"
 "What are the variants of the Option enum?","Some: T and None: ()"

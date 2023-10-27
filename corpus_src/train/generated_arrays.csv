@@ -17,7 +17,11 @@ question,answer
 "can you change the existing elements of an array in Cairo?","No, it's not possible to modify the elements of an array once they've been added in Cairo."
 "How are elements added or removed from arrays in Cairo without direct memory cell modifications?","These operations involve updating pointers rather than directly modifying the memory cells."
 "In Cairo, what type of operation is needed for appending to an array's end or removing from its start,?","These operations do not require memory mutation."
-"How would you define a variable's type (u128) when creating an array ?","You can use syntax like 'let mut arr:Array<u128> = ArrayTrait::new();'."
+"How would you define a variable's type (u128) when creating an array ?","You can use syntax like
+```
+    let mut arr:Array<u128> = ArrayTrait::new();
+```
+"
 "How can one access elements from an array in Cairo?","To access array elements, you can use get() or at() array methods."
 "In the context of array methods, how does using 'arr.at(index)' compare to another method?","Using arr.at(index) is equivalent to using the subscripting operator arr[index]."
 "When the get function finds an element in the array, what does it return in terms of its data type?","The get function returns an Option<Box<@T>>, which is an option to a Box type containing a snapshot to the element at the specified index if that element exists in the array."
@@ -50,7 +54,11 @@ question,answer
 "How is data integrity ensured when passing arrays between functions?","By using the Span struct."
 "What issues might be avoided when using Span?","Borrowing issues."
 "If you have an Array and want a snapshot without modifying it, what would you use?","Span."
-"How can one add a tuple containing two u32 values (10 and 30) to an array?","By using my_array.append(Data::Tuple((10, 30)))."
+"How can one add a tuple containing two u32 values (10 and 30) to an array?","By using
+```
+    my_array.append(Data::Tuple((10, 30)))
+```
+"
 "Is it possible to add elements to a Span?","No, the append() method is not available for Span."
 "What kind of operations might you perform using Span?","Read-only operations."
 "How can you convert an Array into a Span?","By using the span() method on the array."
@@ -64,7 +72,11 @@ question,answer
 "How do you get controlled access to the elements of an Array?","By converting it into a Span."
 "If an Array method is available for Array, is it guaranteed to be available for Span?","No."
 "What is the key functionality that Span provides over Array when it comes to modification?","Span provides access without allowing modification to the original Array."
-"How would you store a string like 'hello world' in the my_array Array?","By using my_array.append(Data::Felt('hello world'))."
+"How would you store a string like 'hello world' in the my_array Array?","By using
+```
+    my_array.append(Data::Felt('hello world')).
+```
+"
 "What does the Span struct represent?","A snapshot of an Array."
 "Why might one need controlled access to an array's elements?","To ensure data integrity and avoid borrowing issues."
 "Which struct is beneficial for read-only operations on an Array?","Span."

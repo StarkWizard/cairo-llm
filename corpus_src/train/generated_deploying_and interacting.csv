@@ -124,7 +124,7 @@ mod ContractA {
         }
     }
 }"
-"give qn example of a contract using syscall","
+"give an example of a contract using syscall","
 #[starknet::interface]
 trait ITokenWrapper<TContractState> {
     fn transfer_token(
