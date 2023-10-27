@@ -1,0 +1,106 @@
+question,"answer"
+"
+call the function call_me in the main:
+
+fn call_me() {}
+
+fn main() {
+}
+",
+"
+```
+fn call_me() {}
+
+fn main() {
+    call_me();
+}
+```
+"
+"
+Modify the code provided to print 3:
+
+fn call_me(num: u8) {
+    num.print();
+}
+
+fn main() {
+}
+","
+```
+use debug::PrintTrait;
+
+fn main() {
+    call_me(3);
+}
+
+fn call_me(num: u8) {
+    num.print();
+}
+```
+"
+"
+write a function that returns true if the value passed as parameter is even, and false otherwise
+","
+```
+fn is_even(num: u32) -> bool {
+    num % 2 == 0
+}
+```
+"
+"
+Modify the call_me function so the program prints 592
+use debug::PrintTrait;
+
+fn main() {
+    call_me(592);
+}
+
+fn call_me(num: u64) {
+}
+","
+```
+use debug::PrintTrait;
+
+fn main() {
+    call_me(592);
+}
+
+fn call_me(num: u64) {
+    num.print();
+}
+```
+"
+"
+// implement sale_price so it prints price-10 if the price is even, and price-3 otherwise
+
+use debug::PrintTrait;
+
+fn main() {
+    let original_price = 51;
+    sale_price(original_price).print();
+}
+
+fn sale_price(price: u32) -> u32 {
+ }
+","
+```
+use debug::PrintTrait;
+
+fn main() {
+    let original_price = 51;
+    sale_price(original_price).print();
+}
+
+fn sale_price(price: u32) -> u32 {
+    if is_even(price) {
+        price - 10
+    } else {
+        price - 3
+    }
+}
+
+fn is_even(num: u32) -> bool {
+    num % 2 == 0
+}
+```
+"

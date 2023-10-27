@@ -1,0 +1,153 @@
+question,answer
+"use debug::PrintTrait;
+
+fn main() {
+    // Booleans (`bool`)
+
+    let is_morning = true;
+    if is_morning {
+        ('Good morning!').print();
+    }
+
+    let is_evening = false; //  TODO: Finish the rest of this line like the example! Or make it be false!
+ "
+,"
+use debug::PrintTrait;
+
+fn main() {
+    // Booleans (`bool`)
+
+    let is_morning = true;
+    if is_morning {
+        ('Good morning!').print();
+    }
+
+    let is_evening = false; 
+    if is_evening {
+        ('Good evening!').print();
+    }
+}
+"
+"write a function that tests if a character is alphabetic","
+```
+fn is_alphabetic(ref char: felt252) -> bool {
+    if char >= 'a' {
+        if char <= 'z' {
+            return true;
+        }
+    }
+    if char >= 'A' {
+        if char <= 'Z' {
+            return true;
+        }
+    }
+    false
+}
+
+// Direct felt252 comparisons are not part of the core library, so we need to implement them ourselves.
+// There will probably be a string / short string type in the future
+impl PartialOrdFelt of PartialOrd<felt252> {
+    #[inline(always)]
+    fn le(lhs: felt252, rhs: felt252) -> bool {
+        !(rhs < lhs)
+    }
+    #[inline(always)]
+    fn ge(lhs: felt252, rhs: felt252) -> bool {
+        !(lhs < rhs)
+    }
+    #[inline(always)]
+    fn lt(lhs: felt252, rhs: felt252) -> bool {
+        integer::u256_from_felt252(lhs) < integer::u256_from_felt252(rhs)
+    }
+    #[inline(always)]
+    fn gt(lhs: felt252, rhs: felt252) -> bool {
+        rhs < lhs
+    }
+}
+```
+"
+"write a function that tests if a character is numeric","
+```
+fn is_numeric(ref char: felt252) -> bool {
+    if char >= '0' {
+        if char <= '9' {
+            return true;
+        }
+    }
+    false
+}
+
+// Direct felt252 comparisons are not part of the core library, so we need to implement them ourselves.
+// There will probably be a string / short string type in the future
+impl PartialOrdFelt of PartialOrd<felt252> {
+    #[inline(always)]
+    fn le(lhs: felt252, rhs: felt252) -> bool {
+        !(rhs < lhs)
+    }
+    #[inline(always)]
+    fn ge(lhs: felt252, rhs: felt252) -> bool {
+        !(lhs < rhs)
+    }
+    #[inline(always)]
+    fn lt(lhs: felt252, rhs: felt252) -> bool {
+        integer::u256_from_felt252(lhs) < integer::u256_from_felt252(rhs)
+    }
+    #[inline(always)]
+    fn gt(lhs: felt252, rhs: felt252) -> bool {
+        rhs < lhs
+    }
+}
+```
+"
+"
+// Destructure the `cat` tuple to call print on each member.
+
+use debug::PrintTrait;
+
+fn main() {
+    let cat = ('Furry McFurson', 3); // name,age
+}
+","
+```
+use debug::PrintTrait;
+
+fn main() {
+    let cat = ('Furry McFurson', 3);
+    let (name, age) = cat; 
+    name.print();
+    age.print();
+}
+```
+"
+"
+fn convert_felt_to_u8(x: felt252) -> u8 { //TODO return x as a u8.
+}
+","
+```
+fn convert_felt_to_u8(x: felt252) -> u8 {
+    x.try_into().unwrap()
+}
+```
+"
+"
+fn convert_to_felt(x: u8) -> felt252 { //TODO return x as a felt252.
+}
+","
+```
+fn convert_to_felt(x: u8) -> felt252 {
+    x.into()
+}
+```
+"
+"
+/TODO modify the types of this function to prevent an overflow when summing big values
+fn sum_big_numbers(x: u8, y: u8) -> u8 {
+    x.into() + y.into()
+}
+","
+```
+fn sum_big_numbers(x: u8, y: u8) -> u16 {
+    x.into() + y.into()
+}
+```
+"

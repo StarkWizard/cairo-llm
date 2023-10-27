@@ -1,0 +1,125 @@
+question,answer
+"
+Complete this function to return the bigger number:
+
+fn bigger(a: usize, b: usize) -> usize { 
+}
+","
+```
+fn bigger(a: usize, b: usize) -> usize { // this function returns the bigger number
+    if a < b {
+        b
+    } else {
+        a
+    }
+}
+```
+"
+fn bigger(a: usize, b: usize) -> usize { // this function returns the bigger number
+    if a < b {
+        b
+    } else {
+        a
+    }
+}
+"
+provide the test functions for (10,8) and (32,42)
+fn bigger(a: usize, b: usize) -> usize { // this function returns the bigger number
+    if a < b {
+        b
+    } else {
+        a
+    }
+}
+","
+```
+fn bigger(a: usize, b: usize) -> usize { // this function returns the bigger number
+    if a < b {
+        b
+    } else {
+        a
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::bigger;
+
+    #[test]
+    fn ten_is_bigger_than_eight() {
+        assert(10 == bigger(10, 8), '10 bigger than 8');
+    }
+
+    #[test]
+    fn fortytwo_is_bigger_than_thirtytwo() {
+        assert(42 == bigger(32, 42), '42 bigger than 32');
+    }
+}
+
+```
+"
+"
+fn foo_if_fizz(fizzish: felt252) -> felt252 {
+    // Complete this function using if, else if and/or else blocks.
+    // If fizzish is,
+    // 'fizz', return 'foo'
+    // 'fuzz', return 'bar'
+    // anything else, return 'baz'
+}","
+```
+fn foo_if_fizz(fizzish: felt252) -> felt252 {
+    if fizzish == 'fizz' {
+        'foo'
+    } else if fizzish == 'fuzz' {
+        'bar'
+    } else {
+        'baz'
+    }
+}
+```
+"
+"
+// Implement the tests for this function
+fn foo_if_fizz(fizzish: felt252) -> felt252 {
+    if fizzish == 'fizz' {
+        'foo'
+    } else if fizzish == 'fuzz' {
+        'bar'
+    } else {
+        'baz'
+    }
+}
+","
+```
+fn foo_if_fizz(fizzish: felt252) -> felt252 {
+    if fizzish == 'fizz' {
+        'foo'
+    } else if fizzish == 'fuzz' {
+        'bar'
+    } else {
+        'baz'
+    }
+}
+
+#[cfg(test)]
+
+mod tests {
+    use super::foo_if_fizz;
+
+    #[test]
+    fn foo_for_fizz() {
+        assert(foo_if_fizz('fizz') == 'foo', 'fizz returns foo')
+    }
+
+    #[test]
+    fn bar_for_fuzz() {
+        assert(foo_if_fizz('fuzz') == 'bar', 'fuzz returns bar');
+    }
+
+    #[test]
+    fn default_to_baz() {
+        assert(foo_if_fizz('literally anything') == 'baz', 'anything else returns baz');
+    }
+}
+```
+"

@@ -1,0 +1,196 @@
+question,answer
+"
+Complete the function fill_arr to append 22, 44 and 66 to arr, in the code below
+
+use array::ArrayTrait;
+use array::ArrayTCloneImpl;
+use array::SpanTrait;
+use debug::PrintTrait;
+use clone::Clone;
+
+fn main() {
+    let mut arr0 = ArrayTrait::new();
+
+    let mut arr1 = fill_arr(arr0);
+
+    // This is just a print statement for arrays.
+    arr1.clone().print();
+
+    //TODO fix the error here without modifying this line.
+    arr1.append(88);
+
+    arr1.clone().print();
+}
+
+fn fill_arr(arr: Array<felt252>) -> Array<felt252> {
+}
+","
+```
+use array::ArrayTrait;
+use array::ArrayTCloneImpl;
+use array::SpanTrait;
+use debug::PrintTrait;
+use clone::Clone;
+
+fn main() {
+    let mut arr0 = ArrayTrait::new();
+
+    let mut arr1 = fill_arr(arr0);
+
+    // This is just a print statement for arrays.
+    arr1.clone().print();
+
+    //TODO fix the error here without modifying this line.
+    arr1.append(88);
+
+    arr1.clone().print();
+}
+
+fn fill_arr(arr: Array<felt252>) -> Array<felt252> {
+    let mut arr = arr;
+
+    arr.append(22);
+    arr.append(44);
+    arr.append(66);
+
+    arr
+}
+```
+"
+"This code does not compile, please correct it
+use array::ArrayTrait;
+use debug::PrintTrait;
+
+fn main() {
+    let  arr0 = ArrayTrait::new();
+
+    let mut arr1 = fill_arr(arr0);
+
+    // Do not change the following line!
+    arr0.print();
+}
+
+fn fill_arr(arr: Array<felt252>) -> Array<felt252> {
+    let mut arr = arr;
+
+    arr.append(22);
+    arr.append(44);
+    arr.append(66);
+
+    arr
+}
+","
+```
+use array::ArrayTrait;
+use debug::PrintTrait;
+
+fn main() {
+    let mut arr0 = ArrayTrait::new(); // <- mut is required here
+
+    let mut arr1 = fill_arr(arr0);
+
+    // Do not change the following line!
+    arr0.print();
+}
+
+fn fill_arr(arr: Array<felt252>) -> Array<felt252> {
+    let mut arr = arr;
+
+    arr.append(22);
+    arr.append(44);
+    arr.append(66);
+
+    arr
+}
+```
+"
+"
+Call pass_by_ref on a,b and pass_by_snapshot on a
+use array::ArrayTrait;
+#[test]
+fn main() {
+    let mut a = ArrayTrait::new();
+    let mut b = pass_by_value(a.clone());
+
+}
+
+fn pass_by_value(mut arr: Array<felt252>) -> Array<felt252> {
+    arr
+}
+
+fn pass_by_ref(ref arr: Array<felt252>) {}
+
+fn pass_by_snapshot(x: @Array<felt252>) {}
+","
+```
+use array::ArrayTrait;
+#[test]
+fn main() {
+    let mut a = ArrayTrait::new();
+    let mut b = pass_by_value(a.clone());
+    pass_by_ref(ref a);
+    pass_by_ref(ref b);
+    pass_by_snapshot(@a);
+}
+
+fn pass_by_value(mut arr: Array<felt252>) -> Array<felt252> {
+    arr
+}
+
+fn pass_by_ref(ref arr: Array<felt252>) {}
+
+fn pass_by_snapshot(x: @Array<felt252>) {}
+```
+"
+"
+modify the code to call get_value and set_value on number
+
+use debug::PrintTrait;
+
+#[derive(Drop)]
+struct Number {
+    value: u32, 
+}
+
+fn main() {
+    let mut number = Number { value: 1111111 };
+}
+
+// Should not take ownership and not modify the variable passed.
+fn get_value(number: @Number) -> u32 {
+    *number.value
+}
+
+// Should take ownership
+fn set_value(mut number: Number) {
+    let value = 2222222;
+    number = Number { value };
+    number.value.print();
+}
+","use debug::PrintTrait;
+
+#[derive(Drop)]
+struct Number {
+    value: u32, 
+}
+
+fn main() {
+    let mut number = Number { value: 1111111 };
+
+    get_value(@number);
+
+    set_value(number);
+}
+
+// Should not take ownership and not modify the variable passed.
+fn get_value(number: @Number) -> u32 {
+    *number.value
+}
+
+// Should take ownership
+fn set_value(mut number: Number) {
+    let value = 2222222;
+    number = Number { value };
+    number.value.print();
+}
+"

@@ -1,0 +1,289 @@
+question,answer
+"
+
+Implement the TODO
+
+#[derive(Copy, Drop)]
+struct Animal {
+    noise: felt252
+}
+
+trait AnimalTrait {
+    fn new(noise: felt252) -> Animal;
+    fn make_noise(self: Animal) -> felt252;
+}
+
+impl AnimalImpl of AnimalTrait { // TODO: implement the trait AnimalTrait for Animal
+    fn new(noise: felt252) -> Animal {
+        Animal { noise }
+    }
+
+}
+
+#[test]
+fn test_traits1() {
+    // TODO make the test pass by creating two instances of Animal
+    // and calling make_noise on them
+}
+","
+```
+#[derive(Copy, Drop)]
+struct Animal {
+    noise: felt252
+}
+
+trait AnimalTrait {
+    fn new(noise: felt252) -> Animal;
+    fn make_noise(self: Animal) -> felt252;
+}
+
+impl AnimalImpl of AnimalTrait { 
+    fn new(noise: felt252) -> Animal {
+        Animal { noise }
+    }
+    fn make_noise(self: Animal) -> felt252 {
+        self.noise
+    }
+}
+
+#[test]
+fn test_traits1() {
+
+    assert(cat.make_noise() == 'meow', 'Wrong noise');
+    assert(cow.make_noise() == 'moo', 'Wrong noise');
+}
+```
+"
+"// The trait `AnimalTrait` has two functions:
+// `new` and `make_noise`.
+// `new` should return a new instance of the type
+// implementing the trait.
+// `make_noise` should return the noise the animal makes.
+// The types `Cat` and `Cow` are already defined for you.
+// You need to implement the trait `AnimalTrait` for them.
+
+
+#[derive(Copy, Drop)]
+struct Cat {
+    noise: felt252, 
+}
+
+#[derive(Copy, Drop)]
+struct Cow {
+    noise: felt252, 
+}
+
+trait AnimalTrait<T> {
+    fn new() -> T;
+    fn make_noise(self: T) -> felt252;
+}
+
+impl CatImpl of AnimalTrait<Cat> { // TODO: implement the trait Animal for the type Cat
+}
+impl CowImpl of AnimalTrait<Cow> { // TODO: implement the trait Animal for the type Cow
+}
+
+
+#[test]
+fn test_traits2() {
+    let kitty: Cat = AnimalTrait::new();
+    assert(kitty.make_noise() == 'meow', 'Wrong noise');
+
+    let cow: Cow = AnimalTrait::new();
+    assert(cow.make_noise() == 'moo', 'Wrong noise');
+}
+","
+```
+#[derive(Copy, Drop)]
+struct Cat {
+    noise: felt252, 
+}
+
+#[derive(Copy, Drop)]
+struct Cow {
+    noise: felt252, 
+}
+
+trait AnimalTrait<T> {
+    fn new() -> T;
+    fn make_noise(self: T) -> felt252;
+}
+
+impl CatImpl of AnimalTrait<Cat> { 
+    fn new() -> Cat {
+        Cat { noise: 'meow' }
+    }
+    fn make_noise(self: Cat) -> felt252 {
+        self.noise
+    }
+}
+impl CowImpl of AnimalTrait<Cow> { 
+    fn new() -> Cow {
+        Cow { noise: 'moo' }
+    }
+    fn make_noise(self: Cow) -> felt252 {
+        self.noise
+    }
+}
+
+#[test]
+fn test_traits2() {
+    let kitty: Cat = AnimalTrait::new();
+    assert(kitty.make_noise() == 'meow', 'Wrong noise');
+
+    let cow: Cow = AnimalTrait::new();
+    assert(cow.make_noise() == 'moo', 'Wrong noise');
+}
+```
+"
+"
+Implement the TODO
+
+#[derive(Copy, Drop)]
+struct Fish {
+    noise: felt252,
+    distance: u32,
+}
+
+#[derive(Copy, Drop)]
+struct Dog {
+    noise: felt252,
+    distance: u32,
+}
+
+trait AnimalTrait<T> {
+    fn new() -> T;
+    fn make_noise(self: T) -> felt252;
+    fn get_distance(self: T) -> u32;
+}
+
+trait FishTrait {
+    fn swim(ref self: Fish) -> ();
+}
+
+trait DogTrait {
+    fn walk(ref self: Dog) -> ();
+}
+
+impl AnimalFishImpl of AnimalTrait<Fish> {
+    fn new() -> Fish {
+        Fish { noise: 'blub', distance: 0 }
+    }
+    fn make_noise(self: Fish) -> felt252 {
+        self.noise
+    }
+    fn get_distance(self: Fish) -> u32 {
+        self.distance
+    }
+}
+
+impl AnimalDogImpl of AnimalTrait<Dog> {
+    fn new() -> Dog {
+        Dog { noise: 'woof', distance: 0 }
+    }
+    fn make_noise(self: Dog) -> felt252 {
+        self.noise
+    }
+    fn get_distance(self: Dog) -> u32 {
+        self.distance
+    }
+}
+
+// TODO: implement FishTrait for the type Fish
+
+// TODO: implement DogTrait for the type Dog
+impl DogImpl of DogTrait {
+}
+#[test]
+fn test_traits3() {
+    // Don't modify this test!
+    let mut salmon: Fish = AnimalTrait::new();
+    salmon.swim();
+    assert(salmon.make_noise() == 'blub', 'Wrong noise');
+    assert(salmon.get_distance() == 1, 'Wrong distance');
+
+    let mut dog: Dog = AnimalTrait::new();
+    dog.walk();
+    assert(dog.make_noise() == 'woof', 'Wrong noise');
+    assert(dog.get_distance() == 1, 'Wrong distance');
+}
+
+
+","
+```
+#[derive(Copy, Drop)]
+struct Fish {
+    noise: felt252,
+    distance: u32,
+}
+
+#[derive(Copy, Drop)]
+struct Dog {
+    noise: felt252,
+    distance: u32,
+}
+
+trait AnimalTrait<T> {
+    fn new() -> T;
+    fn make_noise(self: T) -> felt252;
+    fn get_distance(self: T) -> u32;
+}
+
+trait FishTrait {
+    fn swim(ref self: Fish) -> ();
+}
+
+trait DogTrait {
+    fn walk(ref self: Dog) -> ();
+}
+
+impl AnimalFishImpl of AnimalTrait<Fish> {
+    fn new() -> Fish {
+        Fish { noise: 'blub', distance: 0 }
+    }
+    fn make_noise(self: Fish) -> felt252 {
+        self.noise
+    }
+    fn get_distance(self: Fish) -> u32 {
+        self.distance
+    }
+}
+
+impl AnimalDogImpl of AnimalTrait<Dog> {
+    fn new() -> Dog {
+        Dog { noise: 'woof', distance: 0 }
+    }
+    fn make_noise(self: Dog) -> felt252 {
+        self.noise
+    }
+    fn get_distance(self: Dog) -> u32 {
+        self.distance
+    }
+}
+
+impl FishImpl of FishTrait {
+    fn swim(ref self: Fish) {
+        self.distance = self.distance + 1;
+    }
+}
+
+impl DogImpl of DogTrait {
+    fn walk(ref self: Dog) {
+        self.distance = self.distance + 1;
+    }
+}
+#[test]
+fn test_traits3() {
+    // Don't modify this test!
+    let mut salmon: Fish = AnimalTrait::new();
+    salmon.swim();
+    assert(salmon.make_noise() == 'blub', 'Wrong noise');
+    assert(salmon.get_distance() == 1, 'Wrong distance');
+
+    let mut dog: Dog = AnimalTrait::new();
+    dog.walk();
+    assert(dog.make_noise() == 'woof', 'Wrong noise');
+    assert(dog.get_distance() == 1, 'Wrong distance');
+}
+```
+"

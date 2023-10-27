@@ -1,0 +1,525 @@
+question,answer
+"add a trait so the program prints 'quit' for Quit; 'Echo' for echo, etc. :
+use debug::print;
+use debug::PrintTrait;
+enum Message { 
+    Quit: (),
+    Echo: (),
+    Move: (),
+    ChangeColor: (),
+}
+
+fn main() {
+    Message::Quit(()).print();
+    Message::Echo(()).print();
+    Message::Move(()).print();
+    Message::ChangeColor(()).print();
+}
+","
+```
+use debug::print;
+use debug::PrintTrait;
+enum Message { 
+    Quit: (),
+    Echo: (),
+    Move: (),
+    ChangeColor: (),
+}
+
+fn main() {
+    Message::Quit(()).print();
+    Message::Echo(()).print();
+    Message::Move(()).print();
+    Message::ChangeColor(()).print();
+}
+
+impl MessagePrintImpl of PrintTrait<Message> {
+    fn print(self: Message) {
+        match self {
+            Message::Quit(()) => ('Quit').print(),
+            Message::Echo(()) => ('Echo').print(),
+            Message::Move(()) => ('Move').print(),
+            Message::ChangeColor(()) => ('ChangeColor').print()
+        }
+    }
+}
+```
+"
+" print this enum:
+enum Message { 
+    Quit: (),
+    Echo: (),
+    Move: (),
+    ChangeColor: (),
+}","
+```
+use debug::print;
+use debug::PrintTrait;
+enum Message { 
+    Quit: (),
+    Echo: (),
+    Move: (),
+    ChangeColor: (),
+}
+
+fn main() {
+    Message::Quit(()).print();
+    Message::Echo(()).print();
+    Message::Move(()).print();
+    Message::ChangeColor(()).print();
+}
+
+impl MessagePrintImpl of PrintTrait<Message> {
+    fn print(self: Message) {
+        match self {
+            Message::Quit(()) => ('Quit').print(),
+            Message::Echo(()) => ('Echo').print(),
+            Message::Move(()) => ('Move').print(),
+            Message::ChangeColor(()) => ('ChangeColor').print()
+        }
+    }
+}
+```
+"
+" add the code needed so the program runs:
+fn main() {
+    Message::Quit(()).print();
+    Message::Echo(()).print();
+    Message::Move(()).print();
+    Message::ChangeColor(()).print();
+}","
+```
+use debug::print;
+use debug::PrintTrait;
+enum Message { 
+    Quit: (),
+    Echo: (),
+    Move: (),
+    ChangeColor: (),
+}
+
+fn main() {
+    Message::Quit(()).print();
+    Message::Echo(()).print();
+    Message::Move(()).print();
+    Message::ChangeColor(()).print();
+}
+
+impl MessagePrintImpl of PrintTrait<Message> {
+    fn print(self: Message) {
+        match self {
+            Message::Quit(()) => ('Quit').print(),
+            Message::Echo(()) => ('Echo').print(),
+            Message::Move(()) => ('Move').print(),
+            Message::ChangeColor(()) => ('ChangeColor').print()
+        }
+    }
+}
+```
+"
+"add the missing enum required by the program:
+
+use debug::PrintTrait;
+use array::ArrayTrait;
+use traits::Into;
+
+
+
+fn main() {
+    let mut messages: Array<Message> = ArrayTrait::new();
+    messages.append(Message::Quit(()));
+    messages.append(Message::Echo('hello world'));
+    messages.append(Message::Move((10, 30)));
+    messages.append(Message::ChangeColor((0, 255, 255)));
+
+    print_messages_recursive(messages, 0)
+}
+
+// Utility function to print messages.
+
+trait MessageTrait<T> {
+    fn call(self: T);
+}
+
+impl MessageImpl of MessageTrait<Message> {
+    fn call(self: Message) {
+        self.print()
+    }
+}
+
+fn print_messages_recursive(messages: Array<Message>, index: u32) {
+    match gas::withdraw_gas() {
+        Option::Some(_) => {},
+        Option::None(_) => {
+            let mut data = ArrayTrait::<felt252>::new();
+            data.append('OOG');
+            panic(data);
+        },
+    }
+    if index >= messages.len() {
+        return ();
+    }
+    let message = *messages.at(index);
+    message.call();
+    print_messages_recursive(messages, index + 1)
+}
+
+
+impl MessagePrintImpl of PrintTrait<Message> {
+    fn print(self: Message) {
+        ('___MESSAGE BEGINS___').print();
+        match self {
+            Message::Quit(()) => ('Quit').print(),
+            Message::Echo(msg) => msg.print(),
+            Message::Move((a, b)) => {
+                a.print();
+                b.print();
+            },
+            Message::ChangeColor((red, green, blue)) => {
+                red.print();
+                green.print();
+                blue.print();
+            }
+        }
+        ('___MESSAGE ENDS___').print();
+    }
+}","
+```
+use debug::PrintTrait;
+use array::ArrayTrait;
+use traits::Into;
+
+#[derive(Copy, Drop)]
+enum Message { // definition of the different variants used below
+    Quit: (),
+    Echo: felt252,
+    Move: (u32, u32),
+    ChangeColor: (u8, u8, u8),
+}
+
+
+fn main() {
+    let mut messages: Array<Message> = ArrayTrait::new();
+    messages.append(Message::Quit(()));
+    messages.append(Message::Echo('hello world'));
+    messages.append(Message::Move((10, 30)));
+    messages.append(Message::ChangeColor((0, 255, 255)));
+
+    print_messages_recursive(messages, 0)
+}
+
+// Utility function to print messages.
+
+trait MessageTrait<T> {
+    fn call(self: T);
+}
+
+impl MessageImpl of MessageTrait<Message> {
+    fn call(self: Message) {
+        self.print()
+    }
+}
+
+fn print_messages_recursive(messages: Array<Message>, index: u32) {
+    match gas::withdraw_gas() {
+        Option::Some(_) => {},
+        Option::None(_) => {
+            let mut data = ArrayTrait::<felt252>::new();
+            data.append('OOG');
+            panic(data);
+        },
+    }
+    if index >= messages.len() {
+        return ();
+    }
+    let message = *messages.at(index);
+    message.call();
+    print_messages_recursive(messages, index + 1)
+}
+
+
+impl MessagePrintImpl of PrintTrait<Message> {
+    fn print(self: Message) {
+        ('___MESSAGE BEGINS___').print();
+        match self {
+            Message::Quit(()) => ('Quit').print(),
+            Message::Echo(msg) => msg.print(),
+            Message::Move((a, b)) => {
+                a.print();
+                b.print();
+            },
+            Message::ChangeColor((red, green, blue)) => {
+                red.print();
+                green.print();
+                blue.print();
+            }
+        }
+        ('___MESSAGE ENDS___').print();
+    }
+}
+```
+"
+"
+Execute the TODO declared in the code below:
+
+use debug::PrintTrait;
+
+#[derive(Drop, Copy)]
+enum Message { // TODO: implement the message variant types based on their usage below
+}
+
+#[derive(Drop, Copy)]
+struct Point {
+    x: u8,
+    y: u8,
+}
+
+#[derive(Drop, Copy)]
+struct State {
+    color: (u8, u8, u8),
+    position: Point,
+    quit: bool,
+}
+
+trait StateTrait {
+    fn change_color(ref self: State, new_color: (u8, u8, u8));
+    fn quit(ref self: State);
+    fn echo(ref self: State, s: felt252);
+    fn move_position(ref self: State, p: Point);
+    fn process(ref self: State, message: Message);
+}
+impl StateImpl of StateTrait {
+    fn change_color(ref self: State, new_color: (u8, u8, u8)) {
+        let State{color, position, quit, } = self;
+        self = State { color: new_color, position: position, quit: quit,  };
+    }
+    fn quit(ref self: State) {
+        let State{color, position, quit, } = self;
+        self = State { color: color, position: position, quit: true,  };
+    }
+
+    fn echo(ref self: State, s: felt252) {
+        s.print();
+    }
+
+    fn move_position(ref self: State, p: Point) {
+        let State{color, position, quit, } = self;
+        self = State { color: color, position: p, quit: quit,  };
+    }
+
+    fn process(
+        ref self: State, message: Message
+    ) { // TODO: complete the match expression
+        match message {
+            Message::ChangeColor(clr) => {
+                self.change_color(clr)
+            },
+            Message::Echo(m) => {
+                self.echo(m)
+            },
+
+        }
+    }
+}
+","
+```
+use debug::PrintTrait;
+
+#[derive(Drop, Copy)]
+enum Message { // message variant types based on their usage below
+    ChangeColor: (u8, u8, u8),
+    Echo: felt252,
+    Move: Point,
+    Quit: (),
+}
+
+#[derive(Drop, Copy)]
+struct Point {
+    x: u8,
+    y: u8,
+}
+
+#[derive(Drop, Copy)]
+struct State {
+    color: (u8, u8, u8),
+    position: Point,
+    quit: bool,
+}
+
+trait StateTrait {
+    fn change_color(ref self: State, new_color: (u8, u8, u8));
+    fn quit(ref self: State);
+    fn echo(ref self: State, s: felt252);
+    fn move_position(ref self: State, p: Point);
+    fn process(ref self: State, message: Message);
+}
+impl StateImpl of StateTrait {
+    fn change_color(ref self: State, new_color: (u8, u8, u8)) {
+        let State{color, position, quit, } = self;
+        self = State { color: new_color, position: position, quit: quit,  };
+    }
+    fn quit(ref self: State) {
+        let State{color, position, quit, } = self;
+        self = State { color: color, position: position, quit: true,  };
+    }
+
+    fn echo(ref self: State, s: felt252) {
+        s.print();
+    }
+
+    fn move_position(ref self: State, p: Point) {
+        let State{color, position, quit, } = self;
+        self = State { color: color, position: p, quit: quit,  };
+    }
+
+    fn process(
+        ref self: State, message: Message
+    ) { 
+        match message {
+            Message::ChangeColor(clr) => {
+                self.change_color(clr)
+            },
+            Message::Echo(m) => {
+                self.echo(m)
+            },
+            Message::Move(p) => {
+                self.move_position(p)
+            },
+            Message::Quit(()) => {
+                self.quit()
+            },
+        }
+    }
+}
+```
+"
+"
+Implement the TODO in the code below:
+
+use debug::PrintTrait;
+
+#[derive(Drop, Copy)]
+enum Message {
+    ChangeColor: (u8, u8, u8),
+    Echo: felt252,
+    Move: Point,
+    Quit: (),
+}
+
+#[derive(Drop, Copy)]
+struct Point {
+    x: u8,
+    y: u8,
+}
+
+#[derive(Drop, Copy)]
+struct State {
+    color: (u8, u8, u8),
+    position: Point,
+    quit: bool,
+}
+
+impl StateImpl of StateTrait {
+    fn change_color(ref self: State, new_color: (u8, u8, u8)) {
+        let State{color, position, quit, } = self;
+        self = State { color: new_color, position: position, quit: quit,  };
+    }
+    fn quit(ref self: State) {
+        let State{color, position, quit, } = self;
+        self = State { color: color, position: position, quit: true,  };
+    }
+
+    fn echo(ref self: State, s: felt252) {
+        s.print();
+    }
+
+    fn move_position(ref self: State, p: Point) {
+        let State{color, position, quit, } = self;
+        self = State { color: color, position: p, quit: quit,  };
+    }
+
+    fn process(
+        ref self: State, message: Message
+    ) { 
+        match message {
+            Message::ChangeColor(clr) => {
+                self.change_color(clr)
+            },
+            Message::Echo(m) => {
+                self.echo(m)
+            },
+            Message::Move(p) => {
+                self.move_position(p)
+            },
+            Message::Quit(()) => {
+                self.quit()
+            },
+        }
+    }
+}
+","
+```
+use debug::PrintTrait;
+
+#[derive(Drop, Copy)]
+enum Message { 
+    ChangeColor: (u8, u8, u8),
+    Echo: felt252,
+    Move: Point,
+    Quit: (),
+}
+
+#[derive(Drop, Copy)]
+struct Point {
+    x: u8,
+    y: u8,
+}
+
+#[derive(Drop, Copy)]
+struct State {
+    color: (u8, u8, u8),
+    position: Point,
+    quit: bool,
+}
+
+// TODO: define  the strait as implemented below
+
+impl StateImpl of StateTrait {
+    fn change_color(ref self: State, new_color: (u8, u8, u8)) {
+        let State{color, position, quit, } = self;
+        self = State { color: new_color, position: position, quit: quit,  };
+    }
+    fn quit(ref self: State) {
+        let State{color, position, quit, } = self;
+        self = State { color: color, position: position, quit: true,  };
+    }
+
+    fn echo(ref self: State, s: felt252) {
+        s.print();
+    }
+
+    fn move_position(ref self: State, p: Point) {
+        let State{color, position, quit, } = self;
+        self = State { color: color, position: p, quit: quit,  };
+    }
+
+    fn process(
+        ref self: State, message: Message
+    ) { 
+        match message {
+            Message::ChangeColor(clr) => {
+                self.change_color(clr)
+            },
+            Message::Echo(m) => {
+                self.echo(m)
+            },
+            Message::Move(p) => {
+                self.move_position(p)
+            },
+            Message::Quit(()) => {
+                self.quit()
+            },
+        }
+    }
+}
+```"

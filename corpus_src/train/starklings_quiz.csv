@@ -1,0 +1,18 @@
+question,answer
+"
+// Mary is buying apples. The price of an apple is calculated as follows:
+// - An apple costs 3 cairobucks.
+// - If Mary buys more than 40 apples, each apple only costs 2 cairobuck!
+// Write a function that calculates the price of an order of apples given
+// the quantity bought. 
+","
+```
+fn calculate_price_of_apples(apples: u32) -> u32 {
+    if apples > 40 {
+        apples * 2
+    } else {
+        apples * 3
+    }
+}
+```
+"
