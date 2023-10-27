@@ -188,7 +188,11 @@ mod Vote {
 "given the Vote Contract:What role do events play in the voting system?","Events play a vital role in ensuring transparency and traceability within the voting system."
 "given the Vote Contract:What is the difference between calling and invoking a contract in Starknet?","Calling contracts interacts with functions that only read from the state and don't alter the state, while invoking contracts interacts with functions that can write to the state and alter it."
 "Why is katana recommended for local development and testing?","Katana is designed to support local development, allowing developers to do everything they need with Starknet, but locally."
-"How do you start a local Starknet node using katana?","You can start a local Starknet node using the command 'katana --accounts 3 --seed 0 --gas-price 250'."
+"How do you start a local Starknet node using katana?","You can start a local Starknet node using the command
+```
+    katana --accounts 3 --seed 0 --gas-price 250
+```
+"
 "What does the katana command provided start with respect to accounts?","The command starts a local Starknet node with 3 deployed accounts."
 "Where can you find a tutorial for using katana in the Starknet environment?","A complete tutorial for katana can be found in the Local Development with Katana chapter of the Starknet Book."
 "given the Vote Contract:How are the voting options defined within the Starknet voting contract?","The voting options are defined as constants YES (for 1) and NO (for 0)."
@@ -205,22 +209,41 @@ mod Vote {
 "What's the main function of the AssertsImpl implementation in the Vote contract?","The AssertsImpl implementation checks if an address is allowed to vote and emits the UnauthorizedAttempt event if not allowed."
 "given the Vote Contract:How does the VoteResultFunctionsImpl implementation retrieve voting results?","The VoteResultFunctionsImpl retrieves the voting results by reading the yes_votes and no_votes from the contract's state and calculating their respective percentages."
 "What keyword is used to denote a smart contract in Starknet?","#[starknet::contract]"
-"given the Vote Contract:What constants are used to represent voting options?","const YES: u8 = 1_u8; const NO: u8 = 0_u8;"
+"given the Vote Contract:What constants are used to represent voting options?","
+```
+    const YES: u8 = 1_u8; const NO: u8 = 0_u8;
+```
+"
 "given the Vote Contract:How are the initial voters registered?","Through the contract's constructor."
 "given the Vote Contract:What is the signature of the function used to check if a specific user is registered to vote?","fn is_voter_registered(self: @T, address: ContractAddress) -> bool;"
 "given the Vote Contract:How are voting options standardized in the contract?","Using constants YES and NO."
 "given the Vote Contract:What event gets emitted when a vote is cast?","VoteCast"
 "given the Vote Contract:How does the contract prevent a registered user from voting more than once?","By updating the contract's state marking the voter as having voted."
-"given the Vote Contract:What is the function to cast a vote?","fn vote(ref self: T, vote: u8);"
+"given the Vote Contract:What is the function to cast a vote?","
+```
+    fn vote(ref self: T, vote: u8);
+```"
 "given the Vote Contract:What's the purpose of the UnauthorizedAttempt event?","To log unauthorized voting attempts."
 "given the Vote Contract:What is the type used to represent a contract's address?","ContractAddress"
 "given the Vote Contract:How many initial voters are registered in the Vote contract?","Three"
 "given the Vote Contract:How is the vote of a user recorded?","The state of the contract is updated."
 "How do you assert in the contract?","Using the assert keyword."
 "How do you emit an event in the contract?","Using the emit keyword."
-"given the Vote Contract:What is the trait defining functions that can be implemented or called by the Starknet Contract?","VoteTrait<T>"
-"What keyword is used to denote an external function in Starknet?","#[external(v0)]"
-"What keyword denotes an event?","#[event]"
+"given the Vote Contract:What is the trait defining functions that can be implemented or called by the Starknet Contract?","
+```
+    VoteTrait<T>
+```
+"
+"What keyword is used to denote an external function in Starknet?","
+```
+    #[external(v0)]
+```
+"
+"What keyword denotes an event?","
+```
+    #[event]
+```
+"
 "What keyword is used for importing core libraries for the traits outside the Starknet Contract?","use"
 "given the Vote Contract:What function checks if a user at a specific address is allowed to vote?","fn voter_can_vote(self: @T, user_address: ContractAddress) -> bool;"
 "given the Vote Contract:How is a voter marked as having voted after they cast their vote?","The can_vote state for that voter is set to false."

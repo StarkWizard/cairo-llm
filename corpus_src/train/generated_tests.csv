@@ -61,15 +61,31 @@ question,answer
 "How does one generally represent an unsuccessful operation in programming?","Using error types, exceptions, or special return values like None or null."
 "What command option allows you to filter which tests to run?","The -f option allows you to filter which tests to run."
 "Based on the code `#[test] fn add_two_and_two() {...}`, what does the #[test] attribute indicate?","The #[test] attribute indicates that the function is a test function."
-"How do you specify which single test to run using scarb cairo-test?","You use the -f flag followed by the name of the test, for example: `scarb cairo-test -f add_two_and_two`."
+"How do you specify which single test to run using scarb cairo-test?","You use the -f flag followed by the name of the test, for example:
+```
+    scarb cairo-test -f add_two_and_two
+```
+"
 "If a test is marked with the #[ignore] attribute, will it be run by default?","No, if a test is marked with the #[ignore] attribute, it will not be run by default."
 "How can you run all tests, including the ignored ones?","You can run all tests, including the ignored ones, using the command `scarb cairo-test --include-ignored`."
 "How do you specify a maximum amount of gas a test can consume for recursive functions or loops?","You use the #[available_gas(<Number>)] attribute on the test function."
-"How do you determine the gas usage of a specific operation in the benchmarking example?","You subtract the available gas after the operation from the initial available gas: `(initial - testing::get_available_gas()).print();`."
+"How do you determine the gas usage of a specific operation in the benchmarking example?","You subtract the available gas after the operation from the initial available gas:
+```
+    (initial - testing::get_available_gas()).print();
+```
+."
 "In the code snippet `#[test] #[available_gas(2000000)]`, what is the significance of the number 2000000?","The number 2000000 represents the maximum amount of gas that the test function can consume."
 "what does 'filtering' tests mean?","'Filtering' tests means selecting specific tests to run based on their names."
-"How can you run a test even if it is marked with the #[ignore] attribute?","You can run a test marked with the #[ignore] attribute using the command `scarb cairo-test --include-ignored`."
-"How do you add a message to an assertion in a test function?","You can add a message to an assertion using the format `assert(condition, 'message');`."
+"How can you run a test even if it is marked with the #[ignore] attribute?","You can run a test marked with the #[ignore] attribute using the command
+```
+    scarb cairo-test --include-ignored
+```
+"
+"How do you add a message to an assertion in a test function?","You can add a message to an assertion using the format
+```
+    assert(condition, 'message');
+```
+"
 "How do you print the amount of gas consumed by an operation?","You print the amount of gas consumed by subtracting the available gas after the operation from the initial available gas and using the `.print()` method."
 "What is the significance of the #[cfg(test)] attribute?","The #[cfg(test)] attribute indicates that the following module or function is specific to testing and should not be included in the main binary."
 "How do you indicate a function in a test module that should be ignored during testing?","You can indicate a function to be ignored during testing by adding the #[ignore] attribute to it."
@@ -103,7 +119,7 @@ question,answer
 "how do you display the gas consumption of a specific operation?","In the code, you display the gas consumption of a specific operation using the expression `(initial - testing::get_available_gas()).print();`."
 "How do you filter tests in scarb cairo-test based on their names?","You filter tests in scarb cairo-test based on their names using the -f flag followed by the name or part of the name of the test you want to run."
 "What does the command `scarb cairo-test --include-ignored` do?","The command `scarb cairo-test --include-ignored` runs all tests, including those that are marked with the #[ignore] attribute."
-"How does the scarb cairo-test tool know which tests to ignore by default?","The scarb cairo-test tool knows which tests to ignore by default by checking for the #[ignore] attribute in the test functions."
+"How does the scarb cairo-test tool know which tests to ignore by default?","The scarb cairo-test tool knows which tests``` to ignore by default by checking for the #[ignore] attribute in the test functions."
 "How is the 'ok' status in scarb cairo-test output related to a test function?","The 'ok' status in scarb cairo-test output indicates that a particular test function ran successfully without any failures."
 "Why would you want to run only a subset of tests instead of the full test suite?","You would want to run only a subset of tests instead of the full test suite when you're working on a specific part of the code and want faster feedback, or when certain tests are time-consuming and not relevant to the current changes."
 "How do you ensure that a test doesn't consume more gas than a specified amount?","To ensure that a test doesn't consume more gas than a specified amount, you annotate the test with the #[available_gas(<Number>)] attribute to set a gas limit."
@@ -117,7 +133,11 @@ question,answer
 "Why would a developer want to measure or benchmark gas consumption?","A developer would want to measure or benchmark gas consumption to ensure that the code is efficient, to understand its computational cost, and to ensure that it doesn't exceed acceptable limits in the context of smart contract or blockchain environments."
 "what does the `-f` flag in `scarb cairo-test` stand for?","The -f flag in scarb cairo-test stands for 'filter', which allows you to run specific tests by name or partial name."
 "In the provided function `fn sum_n(n: felt) -> felt { ... }`, how does it compute the sum of numbers up to 'n'?","The `sum_n` function computes the sum of numbers up to a given number 'n' by using a loop to iteratively add numbers from 0 to 'n' until 'i' equals 'n'."
-"How is the assertion `assert(result == 5, 'result is not 5')` used in the context of the tests provided?","The `assert(result == 5, 'result is not 5')` in the context of the tests provided is used to validate that the variable 'result' has a value of 5; otherwise, it will produce the failure message 'result is not 5'."
+"How is the assertion `assert(result == 5, 'result is not 5')` used in the context of the tests provided?","The
+```
+    assert(result == 5, 'result is not 5')
+```
+in the context of the tests provided is used to validate that the variable 'result' has a value of 5; otherwise, it will produce the failure message 'result is not 5'."
 "In the benchmarking example that uses the expression `(initial - testing::get_available_gas()).print()`, how do you display the gas consumption of a specific operation?","In the code, you display the gas consumption of a specific operation using the expression `(initial - testing::get_available_gas()).print();`."
 "What does the `#[available_gas(2000000)]` attribute signify in the test functions provided?","The `#[available_gas(2000000)]` attribute signifies that the test function has a maximum gas consumption limit of 2000000."
 "In the code snippet where the `.print()` method is used for benchmarking, what is its significance?","The '.print()' method in the benchmarking example is used to print the result, specifically the gas consumed by the operation."

@@ -1,12 +1,35 @@
 "question","answer"
 "How do you define a trait in Cairo based on the example given?","To define a trait in Cairo, you use the keyword 'trait' followed by the name of the trait in PascalCase and the function signatures inside curly braces. For example: `trait ShapeGeometry { fn boundary(self: Rectangle) -> u64; fn area(self: Rectangle) -> u64; }`."
-"How do you implement a trait in Cairo?","To implement a trait in Cairo, you use the 'impl' keyword with the name of your implementation, followed by 'of' and then the name of the trait being implemented. For example: `impl RectangleGeometry of ShapeGeometry { ... }`."
-"Can you provide an example of implementing the `ShapeGeometry` trait for a `Rectangle`?","Certainly, the implementation can look like this: `impl RectangleGeometry of ShapeGeometry { fn boundary(self: Rectangle) -> u64 { 2 * (self.height + self.width) } fn area(self: Rectangle) -> u64 { self.height * self.width } }`."
+"How do you implement a trait in Cairo?","To implement a trait in Cairo, you use the 'impl' keyword with the name of your implementation, followed by 'of' and then the name of the trait being implemented. For example:
+```
+    impl RectangleGeometry of ShapeGeometry {
+        ...
+    }
+```
+"
+"Can you provide an example of implementing the `ShapeGeometry` trait for a `Rectangle`?","Certainly, the implementation can look like this:
+```
+    impl RectangleGeometry of ShapeGeometry {
+        fn boundary(self: Rectangle) -> u64 {
+            2 * (self.height + self.width)
+        }
+        fn area(self: Rectangle) -> u64 {
+            self.height * self.width }
+        }
+```"
 "What does the #[generate_trait] attribute in Cairo allow you to do?","The #[generate_trait] attribute in Cairo allows you to write implementations directly without defining the corresponding trait. The compiler will automatically generate the trait based on the implementation."
 "How should you name your trait when using the #[generate_trait] attribute?","When using the #[generate_trait] attribute, you should add 'Trait' as a suffix to your trait name because the compiler creates the trait by adding a 'Trait' suffix to the implementation name."
 "What's the significance of the `self` parameter in the methods of the `ShapeGeometry` trait?","The `self` parameter allows the implemented functions to be attached to the instances of the type as methods. This means the functions can be called directly on instances of the struct they're implemented for."
 "What's the main difference between the initial `ShapeGeometry` trait and the generic `ShapeGeometry<T>` trait?","The main difference is that the generic `ShapeGeometry<T>` trait uses a generic type `T`, allowing the trait to be implemented for multiple types, whereas the initial `ShapeGeometry` trait is specifically for `Rectangle`."
-"How can you implement the `ShapeGeometry<T>` trait for both a `Rectangle` and a `Circle` struct?","For `Rectangle`: `impl RectangleGeometry of ShapeGeometry<Rectangle> { ... }`. For `Circle`: `impl CircleGeometry of ShapeGeometry<Circle> { ... }`."
+"How can you implement the `ShapeGeometry<T>` trait for both a `Rectangle` and a `Circle` struct?","For
+```
+    Rectangle`: `impl RectangleGeometry of ShapeGeometry<Rectangle> { ... }
+```
+For
+```
+    Circle`: `impl CircleGeometry of ShapeGeometry<Circle> { ... }
+```
+"
 "How do you call the `print()` method on supported types in the given example?","In the provided example, the `print()` method is available for supported types by importing the `PrintTrait` from the `debug` module using `use debug::PrintTrait;`."
 "Why might you need to import both a trait and its implementation in some cases in Cairo?","If the implementation of a trait is defined in a different module than the trait itself, you might need to import both to use the methods provided by that trait for a specific type."
 "How do you indicate in Cairo that a specific trait should be derived or implemented for a struct?","You use the #[derive(...)] attribute above the struct declaration. For instance, `#[derive(Copy, Drop)]` indicates that the `Copy` and `Drop` traits should be derived for the struct that follows."

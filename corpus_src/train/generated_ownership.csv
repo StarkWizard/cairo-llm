@@ -10,14 +10,20 @@ question,answer
 "How is the validity of a variable determined in Cairo?","By the scope in which it is declared and where it ends."
 "When is a variable valid after being declared?","From the point at which it’s declared until the end of the current scope."
 "Why are Array types in Cairo different from other data types?","Their size is unknown at compile time and they can't be trivially copied."
-"How is an array created in Cairo?","Using 'let mut arr = ArrayTrait::<u128>::new();'."
+"How is an array created in Cairo?","Using
+```
+    let mut arr = ArrayTrait::<u128>::new();
+```"
 "What is the purpose of the 'append' method on an array in Cairo?","To add values to the array."
 "What issue arises when trying to pass the same array instance to two functions by value?","You would attempt to write to the same memory cell twice."
 "What is the consequence of moving the ownership of a variable in Cairo?","The original owner can no longer use it."
 "What error is thrown when trying to use an array after its ownership has been moved?","'Variable was previously moved. Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>'."
 "How does Cairo ensure that each cell of an array is never written to more than once?","Through its ownership system."
 "Which part of the Cairo code checks rules and constraints at compile time?","The ownership system."
-"How can you create an array that holds unsigned 128-bit integers in Cairo?","Using 'ArrayTrait::<u128>::new();'."
+"How can you create an array that holds unsigned 128-bit integers in Cairo?","Using:
+```
+    'ArrayTrait::<u128>::new();
+```"
 "How can you append the number '1' to an array in Cairo?","Using 'arr.append(1);'."
 "Is the behavior of variables and their scopes in Cairo similar to other programming languages?","Yes, it is similar to that in other programming languages."
 "Why is it necessary to use the 'mut' keyword when declaring the 'arr' array?","To make the array mutable, allowing values to be appended to it."
@@ -35,13 +41,26 @@ question,answer
 "When a Cairo example starts without 'fn main() {', what is expected from users following along?","Put the examples inside a main function manually."
 "In Cairo's ownership rules, how many owners can a value have at any given time, given the rule 'There can only be one owner at a time'?","One."
 "What happens to a Cairo value when its owner goes out of scope, as per the rule 'When the owner goes out of scope, the value will be dropped'?","The value will be dropped."
-"In the Cairo code segment '{ let s = 'hello'; }', when does the variable 's' become valid?","When it is declared with 'let s = 'hello';'."
+"In the Cairo code segment '{ let s = 'hello'; }', when does the variable 's' become valid?","When it is declared with
+```
+    let s = 'hello';
+```"
 "In the same Cairo code segment '{ let s = 'hello'; }', when does the variable 's' go out of scope?","At the end of the enclosing curly braces."
-"In Cairo, how is an array initialized with this code: 'let mut arr = ArrayTrait::<u128>::new();'?","Using 'let mut arr = ArrayTrait::<u128>::new();'."
-"How do you add a number to an array in Cairo, given the code 'arr.append(1);'?","Using 'arr.append(1);'."
+"In Cairo, how is an array initialized with this code: 'let mut arr = ArrayTrait::<u128>::new();'?","Using:
+```
+    let mut arr = ArrayTrait::<u128>::new();
+```"
+"How do you add a number to an array in Cairo, given the code 'arr.append(1);'?","Using:
+```
+    arr.append(1);
+```"
 "What issue arises in Cairo when attempting to pass the same array instance to two functions by value, especially in the scenario where 'foo(arr); bar(arr);' is executed?","You would attempt to write to the same memory cell twice."
 "Considering Cairo's code 'fn main() { let mut arr = ArrayTrait::<u128>::new(); foo(arr); bar(arr); }', why is there a problem when trying to call both 'foo' and 'bar' with the 'arr' variable?","Because the ownership of the 'arr' variable moves from the main function to the 'foo' function, making it unusable in the 'bar' function call."
-"What error will you encounter in Cairo when using an array after its ownership has been moved, given the error message 'error: Variable was previously moved'?","'Variable was previously moved. Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>'."
+"What error will you encounter in Cairo when using an array after its ownership has been moved, given the error message 'error: Variable was previously moved'?","'Variable was previously moved. Trait has no implementation in context:
+```
+    core::traits::Copy::<core::array::Array::<core::integer::u128>>
+```
+"
 "Why do you need to use the 'mut' keyword when declaring an array in Cairo, as seen in the code 'let mut arr = ArrayTrait::<u128>::new();'?","To make the array mutable, allowing values to be appended to it."
 "In Cairo, how is a variable's scope defined, particularly in the example where the variable 's' is declared inside curly braces '{ let s = 'hello'; }'?","Between its declaration point and the end of the enclosing curly braces."
 "Given the Cairo code 'let mut arr = ArrayTrait::<u128>::new();', what does the '<u128>' indicate?","It indicates that the array will hold unsigned 128-bit integers."

@@ -11,7 +11,11 @@
 "What is the primary purpose of the assert function from the Cairo core library?","The assert function verifies that a given boolean expression is true at runtime, and if it isn't, it calls the panic function with a specified error value."
 "In the code 'fn main() { let my_number: u8 = 0; assert(my_number != 0, 'number is zero'); 100 / my_number; }', what will the output be when my_number is zero?","The program will panic with the message 'number is zero' (as a felt252), and the division operation will not be executed."
 "When using the 'panic_with' attribute in Cairo, what happens if the annotated function returns a None or Err value?","A wrapper will be created, and if the function returns None or Err, the panic function will be invoked with the specified data."
-"In the provided code 'wrap_if_not_zero(0); wrap_not_zero(0);', which function call will lead to a panic with the message 'value is 0'?","The call 'wrap_not_zero(0);' will result in a panic with the message 'value is 0'."
+"In the provided code 'wrap_if_not_zero(0); wrap_not_zero(0);', which function call will lead to a panic with the message 'value is 0'?","The call
+```
+    wrap_not_zero(0);
+```
+will result in a panic with the message 'value is 0'."
 "What type of value does the assert function in Cairo expect for its error message?","The error value is expected to be a felt252."
 "In Cairo, what happens if an assert function's condition is not met?","If the condition is not met, the program will panic with the provided error value."
 "Within a function marked with nopanic, can you include another function that might result in a panic?","No, doing so will produce an error indicating that the function is declared as nopanic but calls a function that may panic."
@@ -67,13 +71,34 @@
 "How can panic be triggered in Cairo?","Inadvertently, through actions causing the code to panic, or deliberately, by invoking the panic function."
 "What is the argument type for the panic function in Cairo?","The panic function takes an array as argument."
 "Describe the unwind process when a panic occurs in Cairo.","All variables are dropped and dictionaries squashed to ensure the program's soundness and safe termination."
-"Provide a code snippet that initializes an array in Cairo, appends the number '2' to it, and then panics if a certain condition is met.","let mut data = ArrayTrait::new(); data.append(2); if true == true { panic(data); }"
-"How can you panic with a single felt252 error message in Cairo?","By using the 'panic_with_felt252' function."
+"Provide a code snippet that initializes an array in Cairo, appends the number '2' to it, and then panics if a certain condition is met.","
+```
+    let mut data = ArrayTrait::new();
+    data.append(2);
+    if true == true { panic(data); }
+```
+"
+"How can you panic with a single felt252 error message in Cairo?","By using the
+```
+    panic_with_felt252
+```
+function."
 "What notation indicates that a function will never result in a panic in Cairo?","nopanic notation."
-"Can you provide a code example where an assert is used to check a condition in Cairo and panics with a custom message if the condition isn't met?","fn main() { let my_number: u8 = 0; assert(my_number != 0, 'number is zero'); 100 / my_number; }"
+"Can you provide a code example where an assert is used to check a condition in Cairo and panics with a custom message if the condition isn't met?","
+```
+    fn main() {
+        let my_number: u8 = 0;
+        assert(my_number != 0, 'number is zero'); 100 / my_number;
+    }
+```"
 "What is the effect of the assert function from the Cairo core library?","The assert function verifies that a given boolean expression is true at runtime, and if it isn't, it calls the panic function with a specified error value."
 "How does the 'panic_with' attribute work in Cairo?","By annotating a function with 'panic_with', a wrapper is created. If the function returns None or Err, the panic function is invoked with the specified data."
-"Provide a code snippet that uses two functions in Cairo, where one of them is expected to panic with a specific message when called with a particular argument.","wrap_if_not_zero(0); wrap_not_zero(0);"
+"Provide a code snippet that uses two functions in Cairo, where one of them is expected to panic with a specific message when called with a particular argument.","
+```
+    wrap_if_not_zero(0);
+    wrap_not_zero(0);
+```
+"
 "What type of value does the assert function in Cairo use for its error message?","felt252."
 "If a function is marked with nopanic, what will happen if you include another function inside it that might result in a panic?","An error will be produced indicating that the function is declared as nopanic but calls a function that may panic."
 "What does the 'panic_with_felt252' function abstract in Cairo?","The process of defining an array for the panic function."

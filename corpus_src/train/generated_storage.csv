@@ -8,14 +8,34 @@
 "What does 'sn_keccak' produce?","sn_keccak is defined as the first 250 bits of the Keccak256 hash."
 "Which types from the core library can be stored without further action?","Most types from the core library, such as unsigned integers (u8, u128, u256...), felt252, bool, ContractAddress, etc. implement the Store trait and can be stored without further action."
 "How would you store a struct you defined in storage?","You would implement the Store trait for your struct."
-"Provide an example of a struct with attributes to be stored in Starknet storage.","#[derive(Copy, Drop, Serde, starknet::Store)]\nstruct Person {\n    name: felt252,\n    address: ContractAddress\n}"
-"How is the base storage address for structs determined?","The base storage address for structs is sn_keccak(variable_name)."
+"Provide an example of a struct with attributes to be stored in Starknet storage.","
+```
+    #[derive(Copy, Drop, Serde, starknet::Store)]
+    struct Person {
+        name: felt252,
+        address: ContractAddress
+    }
+```"
+"How is the base storage address for structs determined?","The base storage address for structs is
+```
+    sn_keccak(variable_name)
+```"
 "Describe how subsequent fields in a struct are stored.","Subsequent fields are stored in addresses contiguous to the first elements at addresses base_address + i."
 "What is a mapping in the context of smart contracts?","Mappings are a key-value data structure that allow you to associate a unique key with a corresponding value within a smart contract."
 "How do you define a mapping variable in Starknet?","A mapping is a variable of type LegacyMap, where the key and value types are specified within angular brackets <>."
 "Where can the LegacyMap type be used in Starknet?","The LegacyMap type can only be used inside the Storage struct."
-"Provide an example of a complex mapping similar to the allowances storage variable in the ERC20 Standard.","#[storage]\nstruct Storage {\n    allowances: LegacyMap::<(ContractAddress, ContractAddress), u256>\n}"
-"How is the address of a value in a mapping determined?","The address of the value is determined by h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n) where ℎ is the Pedersen hash and the final value is taken mod (2^251) − 256."
+"Provide an example of a complex mapping similar to the allowances storage variable in the ERC20 Standard.","
+```
+    #[storage]
+    struct Storage {
+        allowances: LegacyMap::<(ContractAddress, ContractAddress), u256>
+    }
+```"
+"How is the address of a value in a mapping determined?","The address of the value is determined by
+```
+    h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)
+```
+where ℎ is the Pedersen hash and the final value is taken mod (2^251) − 256."
 "How are the keys of a mapping represented when they are structs?","Each element of the struct constitutes a key."
 "What should a struct implement if it's being used as a key in a mapping?","The struct should implement the Hash trait."
 "Provide a code snippet to represent how the address of a key, which is a struct, in a mapping is calculated.","h(h(sn_keccak(variable_name),k_1),k_2) - where k_1 and k_2 are the values of the two fields of the struct."
@@ -50,7 +70,11 @@
 "Can LegacyMap type be used in user-defined structs?","No, the LegacyMap type can only be used inside the Storage struct."
 "What is a popular allowances storage variable in the ERC20 Standard similar to?","It's similar to a mapping which maps the owner and spender to the allowance using tuples."
 "How do you represent a key that's a struct in a mapping's address?","Each element of the struct constitutes a key."
-"How are nested mappings like LegacyMap((ContractAddress, ContractAddress), u8) addressed?","The address is computed as h(h(sn_keccak(variable_name),k_1),k_2)."
+"How are nested mappings like LegacyMap((ContractAddress, ContractAddress), u8) addressed?","The address is computed as
+```
+    h(h(sn_keccak(variable_name),k_1),k_2)
+```
+"
 "What function do you use to write a value to a storage variable in Starknet?","You use the 'write' function."
 "How do you call the write function on the names storage variable?","self.names.write(user, name);"
 "Are storage variables in Starknet volatile?","No, storage variables are persistent."
@@ -61,7 +85,16 @@
 "What is the purpose of the LegacyMap type?","The LegacyMap type allows you to store key-value mappings in the Storage struct."
 "How do you associate a unique key with a value in a Starknet smart contract?","You can use mappings, which are essentially hash tables that allow this association."
 "Can you store arrays in Starknet contract storage?","No, it's impossible to store arrays in storage."
-"How do you read a value from the 'names' storage variable?","You call the read function on the 'names' storage variable, passing in the key address as a parameter: let name = self.names.read(address);"
+"How do you read a value from the 'names' storage variable?","You call the read function on the 'names' storage variable, passing in the key address as a parameter:
+```
+    let name = self.names.read(address);
+```
+"
 "How are the addresses for values in mappings determined?","The addresses are determined using a series of hashes with the Pedersen hash function, based on the variable name and keys."
-"How is the address of a nested mapping calculated?","For a nested mapping like LegacyMap((ContractAddress, ContractAddress), u8), the address is computed as h(h(sn_keccak(variable_name),k_1),k_2)."
-"What should you do if you want to use a struct as a key in a mapping?","The struct should implement the Hash trait, which can be derived with the #[derive(Hash)] attribute."
+"How is the address of a nested mapping calculated?","For a nested mapping like LegacyMap((ContractAddress, ContractAddress), u8), the address is computed as
+```
+    h(h(sn_keccak(variable_name),k_1),k_2)
+```"
+"What should you do if you want to use a struct as a key in a mapping?","The struct should implement the Hash trait, which can be derived with the
+```#[derive(Hash)]```
+attribute."

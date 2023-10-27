@@ -44,11 +44,49 @@ question,answer
 "Which keyword is responsible for bringing paths into scope in Cairo?","The 'use' keyword is responsible for bringing paths into scope."
 "How is code visibility managed in Cairo by default?","In Cairo, module code is public by default."
 "How do you declare a module in Cairo without providing its body within the same file?","mod front_of_house;"
-"In the provided code, which function is being called from the 'hosting' module?","hosting::add_to_waitlist();"
-"How can you define a module with its body inside the same file in Cairo?","mod hosting { fn add_to_waitlist() {} }"
-"When you only want to declare the 'hosting' module in 'src/front_of_house.cairo', how should the file look?","mod hosting;"
-"How can you define a function 'add_to_waitlist' inside a file named 'hosting.cairo'?","fn add_to_waitlist() {}"
-"How would you use the 'hosting' module from 'restaurant::front_of_house' in your code?","use restaurant::front_of_house::hosting;"
-"How do you define the 'front_of_house' module, which will have its body in a separate file named 'src/front_of_house.cairo'?","mod front_of_house;"
-"Based on the provided code, if you have a 'mod hosting;' declaration in one file, how would the content of the 'hosting' module look in its respective file?","mod hosting { fn add_to_waitlist() {} }"
-"How do you declare a function named 'add_to_waitlist' in Cairo?","fn add_to_waitlist() {}"
+"In the provided code, which function is being called from the 'hosting' module?","
+```
+    hosting::add_to_waitlist();
+```
+"
+"How can you define a module with its body inside the same file in Cairo?","
+```
+    mod hosting {
+        fn add_to_waitlist() {
+        }
+    }
+```
+"
+"When you only want to declare the 'hosting' module in 'src/front_of_house.cairo', how should the file look?","
+```
+    mod hosting;
+```"
+"How can you define a function 'add_to_waitlist' inside a file named 'hosting.cairo'?","
+```
+    fn add_to_waitlist() {
+    }
+```"
+"How would you use the 'hosting' module from 'restaurant::front_of_house' in your code?","use
+```
+    restaurant::front_of_house::hosting;
+```
+"
+"How do you define the 'front_of_house' module, which will have its body in a separate file named 'src/front_of_house.cairo'?","
+```
+    mod front_of_house;
+```
+"
+"Based on the provided code, if you have a 'mod hosting;' declaration in one file, how would the content of the 'hosting' module look in its respective file?","
+```
+    mod hosting {
+        fn add_to_waitlist()
+        {}
+    }
+```
+"
+"How do you declare a function named 'add_to_waitlist' in Cairo?","
+```
+    fn add_to_waitlist() {
+        // your code here
+    }
+"

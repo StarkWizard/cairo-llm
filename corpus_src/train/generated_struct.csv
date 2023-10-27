@@ -6,7 +6,16 @@ question,answer
 "What is the keyword to define a struct?","struct"
 "How should a struct's name be chosen?","A struct’s name should describe the significance of the pieces of data being grouped together."
 "What are the names and types of data in a struct called?","fields"
-"Write a code snippet that defines a struct named 'User'.","struct User {\n    active: bool,\n    username: felt252,\n    email: felt252,\n    sign_in_count: u64,\n}"
+"Write a code snippet that defines a struct named 'User'.","
+```
+    struct User {
+        active: bool,
+        username: felt252,
+        email: felt252,
+        sign_in_count: u64,
+    }
+```
+"
 "How do you create an instance of a struct?","By stating the name of the struct and then adding curly brackets containing key: value pairs."
 "Do the fields need to be specified in the same order as in the struct definition when creating an instance?","No."
 "How do you access a specific value from a struct instance?","By using dot notation."
@@ -14,10 +23,30 @@ question,answer
 "Is it possible to make only certain fields of a struct mutable?","No."
 "What does Cairo not allow regarding mutability of struct fields?","Cairo doesn’t allow marking only certain fields as mutable."
 "How can you implicitly return a new instance of a struct in a function?","By constructing a new instance of the struct as the last expression in the function body."
-"Write a code snippet that defines a function 'build_user' returning a 'User' instance.","fn build_user(email: felt252, username: felt252) -> User {\n    User { active: true, username: username, email: email, sign_in_count: 1, }\n}"
+"Write a code snippet that defines a function 'build_user' returning a 'User' instance.","
+```
+    fn build_user(email: felt252, username: felt252) -> User {
+        User {
+            active: true,
+            username: username,
+            email: email,
+            sign_in_count: 1,
+        }
+    }"
 "Why might it be considered tedious to repeat field names and variables in a function like 'build_user'?","Because having to repeat the field names and variables can be redundant, especially if the struct had more fields."
 "What is the field init shorthand?","A syntax where if the parameter names and the struct field names are the same, you can avoid repetition by only mentioning the name once."
-"Write a code snippet that demonstrates the use of field init shorthand in a function returning a 'User' instance.","fn build_user_short(email: felt252, username: felt252) -> User {\n    User { active: true, username, email, sign_in_count: 1, }\n}"
+"Write a code snippet that demonstrates the use of field init shorthand in a function returning a 'User' instance.","
+```
+    fn build_user_short(email: felt252, username: felt252) -> User {
+        User {
+            active: true,
+            username,
+            email,
+            sign_in_count: 1,
+        }
+    }
+```
+"
 "How does the field init shorthand benefit the code?","It reduces repetition and makes the code more concise when the parameter names and the struct field names are the same."
 "What is the purpose of naming each piece of data in a struct?","So it’s clear what the values mean."
 "How can you specify values for a struct instance?","By adding curly brackets containing key: value pairs after the struct name."
@@ -38,7 +67,16 @@ question,answer
 "To define a data structure like 'struct User {...}', what keyword would you use?","struct"
 "Given a 'struct User {...}', how should its name be chosen?","A struct’s name should describe the significance of the pieces of data being grouped together."
 "In a struct definition like 'struct User { active: bool, ... }', what are 'active', 'username', etc. called?","fields"
-"Provide a basic code snippet that defines a struct named 'User' with fields like 'active', 'username', and so on.","struct User {\n    active: bool,\n    username: felt252,\n    email: felt252,\n    sign_in_count: u64,\n}"
+"Provide a basic code snippet that defines a struct named 'User' with fields like 'active', 'username', and so on.","
+```
+    struct User {
+        active: bool,
+        username: felt252,
+        email: felt252,
+        sign_in_count: u64,
+    }
+```
+"
 "If you have a struct named 'User' defined as 'struct User {...}', how would you create its instance?","By stating the name of the struct and then adding curly brackets containing key: value pairs."
 "When creating an instance of a struct like 'User {...}', is it mandatory to specify the fields in the same order as in its definition?","No."
 "To access a specific value from a struct instance like 'user1' in 'let user1 = User {...}', how would you proceed?","By using dot notation."

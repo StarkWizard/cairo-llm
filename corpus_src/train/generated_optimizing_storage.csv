@@ -52,24 +52,104 @@ question,answer
 "What does it mean when a type implements the Store trait in the context of Cairo smart contracts?","If a type implements the Store trait in Cairo smart contracts, it means that the type can be written to and read from the contract's storage."
 "Why is it important to optimize storage usage in the context of Cairo smart contracts?","Optimizing storage usage is vital in Cairo smart contracts because storage is expensive, and saving on storage can lead to reduced gas costs for transactions."
 "How can developers optimize storage usage when defining their own structs for packing and unpacking?","Developers can create custom logic for packing and unpacking struct fields based on their bit size and storage requirements. This allows them to combine multiple fields into fewer storage slots, optimizing storage usage."
-"How would you define a struct named 'Sizes' with three fields: 'tiny' of type u8, 'small' of type u32, and 'medium' of type u64?","struct Sizes { tiny: u8, small: u32, medium: u64 }"
-"How can you declare a constant named TWO_POW_8 that represents 2 raised to the power of 8?","const TWO_POW_8: u128 = 1 << 8;"
-"How can you declare a bitmask with 8 ones?","const MASK_8: u128 = 0xff;"
-"How would you pack the fields of the Sizes struct into a u128 value?","fn pack(&self) -> u128 { let tiny = self.tiny.into(); let small = (self.small as u128) << 8; let medium = (self.medium as u128) << 40; tiny + small + medium }"
-"How would you unpack the 'tiny' field from a packed u128 value?","let tiny = (packed & MASK_8) as u8;"
-"How would you unpack the 'small' field from a packed u128 value?","let small = ((packed >> 8) & MASK_32) as u32;"
-"How would you unpack the 'medium' field from a packed u128 value?","let medium = (packed >> 40) as u64;"
-"What's the method signature for implementing the 'pack' function for the Sizes struct?","fn pack(&self) -> u128"
-"What's the method signature for implementing the 'unpack' function for the Sizes struct?","fn unpack(packed: u128) -> Self"
-"How can you combine the 'tiny' and 'small' fields of the Sizes struct during the packing process?","let tiny = self.tiny.into(); let small = (self.small as u128) << 8; tiny + small"
-"How do you shift the 'medium' field left by 40 bits during the packing process?","let medium = (self.medium as u128) << 40;"
-"How would you define the 'SizeFactory' module as a Cairo smart contract?","#[starknet::contract] module SizeFactory { ... }"
-"How would you annotate a function to indicate it's externally callable in a Cairo smart contract?","#[external(v0)]"
-"How would you define a function named 'update_sizes' to accept an argument of type 'Sizes' in the 'SizeFactory' module?","#[external(v0)] fn update_sizes(sizes: Sizes) { ... }"
-"How would you implement a function named 'get_sizes' to return a 'Sizes' struct in the 'SizeFactory' module?","#[external(v0)] fn get_sizes() -> Sizes { ... }"
+"How would you define a struct named 'Sizes' with three fields: 'tiny' of type u8, 'small' of type u32, and 'medium' of type u64?","
+```
+    struct Sizes {
+        tiny: u8,
+        small: u32,
+        medium: u64
+    }
+```"
+"How can you declare a constant named TWO_POW_8 that represents 2 raised to the power of 8?","
+```
+    const TWO_POW_8: u128 = 1 << 8;
+```"
+"How can you declare a bitmask with 8 ones?","
+```
+    const MASK_8: u128 = 0xff;
+```"
+"How would you pack the fields of the Sizes struct into a u128 value?","
+```
+    fn pack(&self) -> u128 {
+        let tiny = self.tiny.into();
+        let small = (self.small as u128) << 8;
+        let medium = (self.medium as u128) << 40;
+        tiny + small + medium
+    }
+```"
+"How would you unpack the 'tiny' field from a packed u128 value?","
+```
+    let tiny = (packed & MASK_8) as u8;
+```
+"
+"How would you unpack the 'small' field from a packed u128 value?","
+```
+    let small = ((packed >> 8) & MASK_32) as u32;
+```
+"
+"How would you unpack the 'medium' field from a packed u128 value?","
+```
+    let medium = (packed >> 40) as u64;
+```
+"
+"What's the method signature for implementing the 'pack' function for the Sizes struct?","
+```
+    fn pack(&self) -> u128
+```"
+"What's the method signature for implementing the 'unpack' function for the Sizes struct?","
+```
+    fn unpack(packed: u128) -> Self
+```"
+"How can you combine the 'tiny' and 'small' fields of the Sizes struct during the packing process?","
+```
+    let tiny = self.tiny.into();
+    let small = (self.small as u128) << 8;
+    tiny + small
+```"
+"How do you shift the 'medium' field left by 40 bits during the packing process?","
+```
+    let medium = (self.medium as u128) << 40;
+```
+"
+"How would you define the 'SizeFactory' module as a Cairo smart contract?","
+```
+    #[starknet::contract] module SizeFactory { ... }
+```"
+"How would you annotate a function to indicate it's externally callable in a Cairo smart contract?","
+```
+    #[external(v0)]
+```"
+"How would you define a function named 'update_sizes' to accept an argument of type 'Sizes' in the 'SizeFactory' module?","
+```
+    #[external(v0)]
+    fn update_sizes(sizes: Sizes)
+    { ... }
+```"
+"How would you implement a function named 'get_sizes' to return a 'Sizes' struct in the 'SizeFactory' module?","
+```
+    #[external(v0)]
+    fn get_sizes() -> Sizes
+    { ... }
+```"
 "How do you combine the 'tiny', 'small', and 'medium' fields during the packing process?","tiny + small + medium"
-"How would you write the 'Sizes' struct to storage after packing it?","storage_write(u256_from_u128(packed));"
-"How would you read a packed 'Sizes' struct from storage and unpack it?","let packed = u128_from_u256(storage_read()); Sizes::unpack(packed);"
-"How do you convert a 'u8' value to 'u128' during the packing process?","self.tiny.into();"
-"How can you shift a value right by 8 bits during the unpacking process?","packed >> 8"
+"How would you write the 'Sizes' struct to storage after packing it?","
+```
+    storage_write(u256_from_u128(packed));
+```
+"
+"How would you read a packed 'Sizes' struct from storage and unpack it?","
+```
+    let packed = u128_from_u256(storage_read()); Sizes::unpack(packed);
+```
+"
+"How do you convert a 'u8' value to 'u128' during the packing process?","
+```
+    self.tiny.into();
+```
+"
+"How can you shift a value right by 8 bits during the unpacking process?","
+```
+    packed >> 8
+```
+"
 "How do you isolate specific bits of a packed value using a bitmask during the unpacking process?","packed & MASK"

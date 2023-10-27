@@ -9,8 +9,6 @@ question,answer
 "How do you diagnose a failed transaction?","By retrieving details about the transaction using the starkli transaction command"
 "What is the difference between starkli call and starkli invoke?","starkli call is for read functions, while starkli invoke is for functions that can also write to storage"
 "What is the significance of the --account and --keystore flags?","They specify the account and keystore to use for signing the transaction, respectively"
-"What type of accounts can be registered as voters?","StarkNet accounts"
-"How are votes tallied in the contract?","Using internal storage counters for 'Yes' and 'No' votes"
 "Is it necessary to specify the RPC endpoint every time you use starkli?","Yes, it is recommended to always specify the RPC endpoint using the --rpc flag"
 "How is the smart wallet's public key generated?","It is derived from the private key"
 "given the Vote Contract:What function registers voters and initializes their voting status?","_register_voters"
@@ -32,14 +30,35 @@ question,answer
 "Which command line tool allows you to interact with Starknet?","Starkli"
 "Where can you find the installation instructions for Starkli?","Environment setup chapter of the Starknet Book"
 "What do you need to create for each smart wallet?","A Signer within the encrypted keystore and an Account Descriptor"
-"How do you create a signer from a private key?","starkli signer keystore from-key ~/.starkli-wallets/deployer/account0_keystore.json"
-"How can you create the Account Descriptor?","touch ~/.starkli-wallets/deployer/account0_account.json"
-"What will the Account Descriptor look like?","{\'version\': 1,\'variant\': {\'type\': \'open_zeppelin\',\'version\': 1,\'public_key\': \'<SMART_WALLET_PUBLIC_KEY>\'},\'deployment\': {\'status\': \'deployed\',\'class_hash\': \'<SMART_WALLET_CLASS_HASH>\',\'address\': \'<SMART_WALLET_ADDRESS>\'}}"
+"How do you create a signer from a private key?","
+```
+    starkli signer keystore from-key ~/.starkli-wallets/deployer/account0_keystore.json
+```
+"
+"How can you create the Account Descriptor?","
+``` touch ~/.starkli-wallets/deployer/account0_account.json
+```"
+"What will the Account Descriptor look like?","
+```
+    {\'version\': 1,\'variant\': {\'type\': \'open_zeppelin\',\'version\': 1,\'public_key\': \'<SMART_WALLET_PUBLIC_KEY>\'},\'deployment\': {\'status\': \'deployed\',\'class_hash\': \'<SMART_WALLET_CLASS_HASH>\',\'address\': \'<SMART_WALLET_ADDRESS>\'}}
+```"
 "From where can you get the public key and the smart wallet address for the Account Descriptor?","output of the initial katana command"
-"How can you retrieve the smart wallet class hash?","starkli class-hash-at <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050"
-"How do you inspect the starkli signer keystore?","starkli signer keystore inspect ~/.starkli-wallets/deployer/account0_keystore.json"
+"How can you retrieve the smart wallet class hash?","
+```
+    starkli class-hash-at <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050
+```
+"
+"How do you inspect the starkli signer keystore?","
+```
+    starkli signer keystore inspect ~/.starkli-wallets/deployer/account0_keystore.json
+```
+"
 "What should you do before deploying a contract?","declare the contract"
-"How do you declare a contract?","starkli declare target/dev/starknetbook_chapter_2_Vote.sierra.json --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json"
+"How do you declare a contract?","
+```
+    starkli declare target/dev/starknetbook_chapter_2_Vote.sierra.json --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
+```
+"
 "What flag can be added to specify a compiler version?","--compiler-version x.y.z"
 "If there's an issue with the compiler version, how can you upgrade Starkli?","starkliup"
 "What does the --rpc flag specify?","the RPC endpoint to use"
@@ -47,21 +66,44 @@ question,answer
 "What does the --rpc flag specify?","the RPC endpoint to use"
 "What is the purpose of the --account flag?","specifies the account to use for signing the transaction"
 "How long does a transaction typically take to achieve finality on a local node?","immediately"
-"given the Vote Contract:How do you deploy the voting contract and register eligible voters?","starkli deploy <class_hash_of_the_contract_to_be_deployed> <voter_0_address> <voter_1_address> <voter_2_address> --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json"
+"given the Vote Contract:How do you deploy the voting contract and register eligible voters?","
+```
+    starkli deploy <class_hash_of_the_contract_to_be_deployed> <voter_0_address> <voter_1_address> <voter_2_address> --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
+```"
 "given the Vote Contract:How many voters are registered in the example command?","3"
 "given the Vote Contract:Which function checks if an address is registered as an eligible voter?","is_voter_registered"
 "given the Vote Contract:What does the voter_can_vote function check?","whether the voter at a specific address is currently eligible to vote and hasn't voted already"
 "What command is used for read functions in Starknet?","starkli call"
 "What command is used for functions that can also write to storage in Starknet?","starkli invoke"
-"given the Vote Contract:How do you call the voter_can_vote function?","starkli call 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 voter_can_vote 0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0 --rpc http://0.0.0.0:5050"
-"given the Vote Contract:How do you vote 'Yes' in the voting contract?","starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 1 --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json"
+"given the Vote Contract:How do you call the voter_can_vote function?","
+```
+    starkli call 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 voter_can_vote 0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0 --rpc http://0.0.0.0:5050
+```
+"
+"given the Vote Contract:How do you vote 'Yes' in the voting contract?","
+```
+    starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 1 --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
+```
+"
 "given the Vote Contract:What input do you submit to vote 'No'?","0"
-"How do you retrieve details about a specific transaction?","starkli transaction <TRANSACTION_HASH> --rpc http://0.0.0.0:5050"
+"How do you retrieve details about a specific transaction?","
+```
+    starkli transaction <TRANSACTION_HASH> --rpc http://0.0.0.0:5050
+```
+"
 "given the Vote Contract:What error is returned if you try to vote twice with the same signer?","Trying to vote twice is prohibited."
 "given the Vote Contract:Can you vote twice with two different signers linked to the same smart wallet?","No"
-"given the Vote Contract:How do you call the get_vote_count function to check the current vote counts?","starkli call 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 get_vote_count --rpc http://0.0.0.0:5050"
+"given the Vote Contract:How do you call the get_vote_count function to check the current vote counts?","
+```
+    starkli call 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 get_vote_count --rpc http://0.0.0.0:5050
+```
+"
 "given the Vote Contract:Which function returns the number of 'Yes' votes?","get_vote_count"
-"How do you inspect the current balance of a specific account?","starkli account-balance <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050"
+"How do you inspect the current balance of a specific account?","
+```
+    starkli account-balance <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050
+```
+"
 "What kind of addresses can interact with StarkNet contracts?","Only StarkNet account addresses"
 "What is an example of a StarkNet account address?","0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0"
 "Why can't you use Ethereum addresses for StarkNet interactions?","They are not StarkNet accounts"
@@ -79,7 +121,6 @@ question,answer
 "given the Vote Contract:Why do you need to fund each voter's account?","To pay for transaction fees"
 "given the Vote Contract:What is the primary use of the voting contract?","To allow eligible addresses to vote 'Yes' or 'No'"
 "How do you define a function that writes to storage in StarkNet?","By specifying the write keyword"
-
 "given the Vote Contract:How is a 'no' vote stored?","The no_votes state is incremented by 1."
 "given the Vote Contract:How are the vote counts initialized?","They are initialized to 0 in the constructor."
 "given the Vote Contract:What function checks if a voter has already voted?","fn voter_can_vote(self: @T, user_address: ContractAddress) -> bool;"
@@ -89,18 +130,44 @@ question,answer
 "given the Vote Contract:How does the contract ensure that a vote is either a 'yes' or a 'no'?","Using the assert statement with a condition on the vote value."
 "given the Vote Contract:How is a registered voter prevented from voting again?","By setting the can_vote state for that voter to false."
 "What is the purpose of the LegacyMap in Starknet?","To represent key-value pairs in the contract's storage."
-"What is the syntax to declare a function as external in Starknet?","#[external(v0)]"
+"What is the syntax to declare a function as external in Starknet?","
+```
+    #[external(v0)]
+```"
 "given the Vote Contract:What must each voter account be registered and sufficiently funded for?","voting"
 "Which command line tool allows you to interact with Starknet?","Starkli"
 "Where can you find the installation instructions for Starkli?","Environment setup chapter of the Starknet Book"
 "What do you need to create for each smart wallet?","A Signer within the encrypted keystore and an Account Descriptor"
-"How do you create a signer from a private key?","starkli signer keystore from-key ~/.starkli-wallets/deployer/account0_keystore.json"
-"How can you create the Account Descriptor?","touch ~/.starkli-wallets/deployer/account0_account.json"
-"What will the Account Descriptor look like?","{\'version\': 1,\'variant\': {\'type\': \'open_zeppelin\',\'version\': 1,\'public_key\': \'<SMART_WALLET_PUBLIC_KEY>\'},\'deployment\': {\'status\': \'deployed\',\'class_hash\': \'<SMART_WALLET_CLASS_HASH>\',\'address\': \'<SMART_WALLET_ADDRESS>\'}}"
+"How do you create a signer from a private key?","
+```
+    starkli signer keystore from-key ~/.starkli-wallets/deployer/account0_keystore.json
+```
+"
+"How can you create the Account Descriptor?","
+```
+    touch ~/.starkli-wallets/deployer/account0_account.json
+```
+"
+"What will the Account Descriptor look like?","
+```
+    {\'version\': 1,\'variant\': {\'type\': \'open_zeppelin\',\'version\': 1,\'public_key\': \'<SMART_WALLET_PUBLIC_KEY>\'},\'deployment\': {\'status\': \'deployed\',\'class_hash\': \'<SMART_WALLET_CLASS_HASH>\',\'address\': \'<SMART_WALLET_ADDRESS>\'}}
+```"
 "From where can you get the public key and the smart wallet address for the Account Descriptor?","output of the initial katana command"
-"How can you retrieve the smart wallet class hash?","starkli class-hash-at <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050"
-"How do you inspect the starkli signer keystore?","starkli signer keystore inspect ~/.starkli-wallets/deployer/account0_keystore.json"
+"How can you retrieve the smart wallet class hash?","
+```
+    starkli class-hash-at <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050
+```
+"
+"How do you inspect the starkli signer keystore?","
+```
+    starkli signer keystore inspect ~/.starkli-wallets/deployer/account0_keystore.json
+```
+"
 "What should you do before deploying a contract?","declare the contract"
-"How do you declare a contract?","starkli declare target/dev/starknetbook_chapter_2_Vote.sierra.json --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json"
+"How do you declare a contract?","
+```
+    starkli declare target/dev/starknetbook_chapter_2_Vote.sierra.json --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
+```
+"
 "What flag can be added to specify a compiler version?","--compiler-version x.y.z"
 "If there's an issue with the compiler version, how can you upgrade Starkli?","starkliup"
