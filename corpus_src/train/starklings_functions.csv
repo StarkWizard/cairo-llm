@@ -6,8 +6,7 @@ fn call_me() {}
 
 fn main() {
 }
-",
-"
+","
 ```
 fn call_me() {}
 

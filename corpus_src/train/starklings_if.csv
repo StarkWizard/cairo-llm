@@ -15,13 +15,6 @@ fn bigger(a: usize, b: usize) -> usize { // this function returns the bigger num
 }
 ```
 "
-fn bigger(a: usize, b: usize) -> usize { // this function returns the bigger number
-    if a < b {
-        b
-    } else {
-        a
-    }
-}
 "
 provide the test functions for (10,8) and (32,42)
 fn bigger(a: usize, b: usize) -> usize { // this function returns the bigger number

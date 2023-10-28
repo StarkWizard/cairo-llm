@@ -177,6 +177,7 @@ No, 1 is the index"
 ```
 third = my_array.at(2)
 ```
+"
 "myArray is empty, what does that code do: myArray.pop_front();","
     As the array is empty, pop_front returns Option::None
 "

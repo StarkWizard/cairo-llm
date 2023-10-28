@@ -62,11 +62,11 @@ mod contract_counter {
     }
 
     // External functions
-    // These functions are callable by other contracts or external calls and are indicated with #[external] (similar to "public" in Solidity)
+    // These functions are callable by other contracts or external calls and are indicated with #[external] (similar to 'public' in Solidity)
 
 
     // External functions
-    // These functions are callable by other contracts or external calls and are indicated with #[external] (similar to "public" in Solidity)
+    // These functions are callable by other contracts or external calls and are indicated with #[external] (similar to 'public' in Solidity)
    
     // You can alter the state of the contract by calling external functions such as increment_counter, decrement_counter and reset_counter
     // After you altered the state of the contract, you can read from the contract's storage using the get_user_counters function to check if the counter is equal to 3

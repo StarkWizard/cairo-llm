@@ -10,8 +10,7 @@ fn main() {
     }
 
     let is_evening = false; //  TODO: Finish the rest of this line like the example! Or make it be false!
- "
-,"
+ ","
 use debug::PrintTrait;
 
 fn main() {
