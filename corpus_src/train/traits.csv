@@ -1,17 +1,17 @@
 question,answer
 "in cairo, what does this line do: use debug::PrintTrait;","
- ```
+```
  use debug::PrintTrait
 
 fn main() {
     'Hello, World!'.print();
 }
- ```
+```
 "
 "in cairo, what does this line do ? 'Hello, World!'.print();","
- ``` 
+``` 
     'Hello, World!'.print();
- ```
+```
 "
 "
 Why does this progam makes an error ?
@@ -30,7 +30,7 @@ fn main() {
 
 You need to implement the PrintTrait for Rectangle.
 Here is an example of how to do it:
- ```
+```
 use debug::PrintTrait;
 
 struct Rectangle {
@@ -49,5 +49,5 @@ impl RectanglePrintImpl of PrintTrait<Rectangle> {
         self.height.print();
     }
 }
- ```
+```
 "

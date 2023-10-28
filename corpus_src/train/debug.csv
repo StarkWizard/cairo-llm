@@ -1,15 +1,15 @@
 question,answer
 "declare a felt and print it","
- ```
+```
     use debug::PrintTrait;
 
     let myFelt = 154;
     myFelt.print();
- ```
+```
 "
 "How can I debug","
 You can use debug::PrintTrait to print a string or a variable:
- ```
+```
     'my string'.print();
     let x = 1;
     x.print();

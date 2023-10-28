@@ -27,7 +27,7 @@ error: Variable was previously moved. Trait has no implementation in context: co
 "
 "How can I avoid moving the ownership of a value to move to a function called with the value as parameter ?","
 Use the copy trait on your data structure:
- ```
+```
 #[derive(Copy, Drop)]   // copy trait
 struct Point {
     x: u128,
@@ -42,41 +42,41 @@ fn main() {
 
 fn foo(p: Point) { // do something with p
 }
- ```
+```
 "
 "what does the Drop trait do ?","When a value of a type that implements the Drop trait goes out of scope, the Drop implementation is called on the type, which moves the value to the drop function, allowing it to go out of scope - This is what we call 'dropping' a value. It is important to note that the implementation of drop is a 'no-op', meaning that it doesn't perform any actions other than allowing the value to go out of scope."
 "How do I add the drop trait to my structure","
- ```
+```
     #[derive(Drop)]
     struct my_struct{
     }
- ```
+```
  "
 "implement the Drop trait on my struct Point:
 struct Point {
     x: u128,
     y: u128,
 }","
- ```
+```
 #[derive(Drop)]   // Drop trait
 struct Point {
     x: u128,
     y: u128,
 }
- ```
+```
 "
 "implement ownership on my struct Point:
 struct Point {
     x: u128,
     y: u128,
 }","
- ```
+```
 #[derive(Copy, Drop)]   // implements Copy and Drop trait on Point
 struct Point {
     x: u128,
     y: u128,
 }
- ```
+```
 "
 "Why is this code not working:
 
@@ -102,13 +102,13 @@ When a variable goes out of scope, its value is dropped, unless ownership of the
 "
 "What is a snapshot?","In Cairo, a snapshot is an immutable view of a value at a certain point in time. "
 "create an array, and take a snapshot of it","
- ```
+```
     let mut arr1 = ArrayTrait::<u128>::new();
     let first_snapshot = @arr1; // Take a snapshot of `arr1` at this point in time
- ```
+```
 "
 "Create a function that calulates the length of an array, taking a snapshot as argument","
- ```
+```
  fn calculate_length(
     array_snapshot: @Array<u128>
 ) -> usize { // array_snapshot is a snapshot of an Array
@@ -116,11 +116,11 @@ When a variable goes out of scope, its value is dropped, unless ownership of the
 } // Here, array_snapshot goes out of scope and is dropped.
 // However, because it is only a view of what the original array `arr` contains, the original `arr` can still be used.
 // the signature of the function uses @ to indicate that the type of the parameter arr is a snapshot.
- ```
+```
  "
 "Give an example of how to use snapshot instead or moving ownership","
 Here is how you would define and use a calculate_length function that takes a snapshot to an array as a parameter instead of taking ownership of the underlying value. In this example, the calculate_length function returns the length of the array passed as parameter. As we're passing it as a snapshot, which is an immutable view of the array, we can be sure that the calculate_length function will not mutate the array, and ownership of the array is kept in the main function.
- ```
+```
 use debug::PrintTrait;
 
 fn main() {
@@ -140,7 +140,7 @@ fn main() {
 fn calculate_length(arr: @Array<u128>) -> usize {
     arr.len()
 }
- ```
+```
 "
 "what is a desnap","To convert a snapshot back into a regular value, you can use the desnap operator *, which serves as the opposite of the @ operator: the snapshot value is copied to a new variable.
 
@@ -152,7 +152,7 @@ It's important to note that during this conversion process, the value it points 
  '*' in front of a variable does a desnap
 "
 "Give an example of desnap","
- ```
+```
 use debug::PrintTrait;
 
 #[derive(Copy, Drop)]

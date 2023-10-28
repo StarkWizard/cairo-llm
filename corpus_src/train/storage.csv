@@ -1,24 +1,166 @@
 question,answer
 "where are storage variables stored","storage variables are saved on chain"
-"is there a way to save a contract state","Similar to Solidity, Cairo supports contract state variables using storage. They will be recorded on chain."
+"is there a way to save a contract state","Cairo supports contract state variables using storage. They will be recorded on chain."
 "How many storage structure can I define","There can be at most one Storage structure per contract, but you can add as many components to the storage structure, as you need."
 "declare three storage variables","#
- ```
+```
     [storage]
     struct Storage{
         var_felt: felt252,
         var_bool: bool,
         var_uint: u8,
     }
- ```
+```
 "
 "How do I set a state in storage","
- ```
+```
     myContractState.myState.write(myValue)
- ```
+```
 "
 "How do I set a state in storage","
- ```
+```
     myContractState.myState.read()
- ```
+```
+"
+" Can I see the variable stored in the Storage in the ABI ?","
+No, it is kept ptrivate, you need to write functions in your contract to access the variables.
+"
+"
+Write a contract that stores a counter per caller's address. A user can get, reset, increment, decrement the counter. Add detailed comments
+","
+#[contract]
+mod contract_counter {
+    // Core Library imports
+    // These are syscalls and functionalities that allow you to write Starknet contracts
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+
+    // Storage
+    // Storage is not visible by default through the ABI
+
+    struct Storage {
+        // This variable is a LegacyMap. It is equivalent to a mapping in Solidity.
+        // It is used to store a counter (of type u128) for each user address (of type ContractAddress) in the contract's storage
+        // The user_counters variable is private and can only be accessed through the getter function declared below
+        // To read the u128 value from a LegacyMap, use the read function (e.g. user_counters::read(sender_address))
+        // To write a u128 value to a LegacyMap (mapping a u128 to a ContractAddress), use the write function (e.g. user_counters::write(sender_address, 0_u128))
+        user_counters: LegacyMap::<ContractAddress, u128>,
+    }
+
+
+    // View Functions
+    // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
+
+    #[view]
+    fn get_user_counters(account: ContractAddress) -> u128 {
+        // We are not calling the read function without any parameter (e.g. user_counters::read()) but with a parameter (e.g. user_counters::read(sender_address))
+        // because we want to read the value of the mapping for a specific key (the sender address)
+        let user_counter = user_counters::read(account);
+
+        // We return the value of the counter. We can return a value without using the return keyword, similar to Rust
+        user_counter
+    }
+
+    // External functions
+    // These functions are callable by other contracts or external calls and are indicated with #[external] (similar to "public" in Solidity)
+
+
+    // External functions
+    // These functions are callable by other contracts or external calls and are indicated with #[external] (similar to "public" in Solidity)
+   
+    // You can alter the state of the contract by calling external functions such as increment_counter, decrement_counter and reset_counter
+    // After you altered the state of the contract, you can read from the contract's storage using the get_user_counters function to check if the counter is equal to 3
+    // Then you can call the claim_points function to check if the counter is equal to 3 and if so credit the user with points
+    #[external]
+
+    fn increment_counter() {
+        // Reading caller address
+        let sender_address: ContractAddress = get_caller_address();
+        // Reading the counter from storage for the sender address (the key of the mapping) and storing it in a variable
+        let current_counter_value = user_counters::read(sender_address);
+        // Writing updated value to storage (incrementing the counter by 2)
+        user_counters::write(sender_address, current_counter_value + 2_u128);
+    }
+
+    #[external]
+    fn decrement_counter() {
+        // Reading caller address
+        let sender_address: ContractAddress = get_caller_address();
+        // Reading counter from storage
+        let current_counter_value = user_counters::read(sender_address);
+        // Writing updated value to storage (decrementing the counter by 1)
+        user_counters::write(sender_address, current_counter_value - 1_u128);
+    }
+
+
+    #[external]
+    fn reset_counter() {
+        // Reading caller address
+        let sender_address: ContractAddress = get_caller_address();
+        // Reinitializing the user counter to 0 (resetting it)
+        user_counters::write(sender_address, 0_u128);
+    }
+"
+"
+Write a contract that stores a counter per caller's address. A user can get, reset, increment, decrement the counter.
+","
+#[contract]
+mod contract_counter {
+    // Core Library imports
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+
+    // Storage
+ 
+    struct Storage {
+        user_counters: LegacyMap::<ContractAddress, u128>,
+    }
+
+
+    // View Functions
+  
+    #[view]
+    fn get_user_counters(account: ContractAddress) -> u128 {
+        let user_counter = user_counters::read(account);
+        user_counter
+    }
+
+  
+
+    // External functions
+   
+    #[external]
+
+    fn increment_counter() {
+        // Reading caller address
+        let sender_address: ContractAddress = get_caller_address();
+   
+        // Reading the counter from storage for the sender address (the key of the mapping) and storing it in a variable
+        let current_counter_value = user_counters::read(sender_address);
+   
+        // Writing updated value to storage (incrementing the counter by 2)
+        user_counters::write(sender_address, current_counter_value + 2_u128);
+    }
+
+    #[external]
+    fn decrement_counter() {
+        // Reading caller address
+        let sender_address: ContractAddress = get_caller_address();
+   
+        // Reading counter from storage
+        let current_counter_value = user_counters::read(sender_address);
+   
+        // Writing updated value to storage (decrementing the counter by 1)
+        user_counters::write(sender_address, current_counter_value - 1_u128);
+    }
+
+
+    #[external]
+    fn reset_counter() {
+        // Reading caller address
+        let sender_address: ContractAddress = get_caller_address();
+ 
+        // Reinitializing the user counter to 0 (resetting it)
+        user_counters::write(sender_address, 0_u128);
+    }
 "

@@ -1,7 +1,7 @@
 question,answer
 "how do I define a struct","To define a struct, we enter the keyword struct and name the entire struct. A struct’s name should describe the significance of the pieces of data being grouped together. Then, inside curly brackets, we define the names and types of the pieces of data, which we call fields. "
 "create a struct for a user account","
- ```
+```
     #[derive(Copy, Drop)]
     struct User {
         active: bool,
@@ -9,10 +9,10 @@ question,answer
         email: felt252,
         sign_in_count: u64,
     }
- ```
+```
  "
 "how do I use a defined struct ?","
- ```
+```
 #[derive(Copy, Drop)]
 struct User {
     active: bool,
@@ -25,10 +25,10 @@ fn main() {
         active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1
     };
 }
- ```
+```
 "
 "Create a struct for representing time","
- ``` 
+``` 
     #[derive(Copy, Drop)]
     struct Time {        
         hours: u64,
@@ -41,11 +41,11 @@ fn main() {
             hours: 6, minutes: 3, seconds: 12
         };
     }
- ```
+```
 "
 "How can I access a specific field of a struct ?","To get a specific value from a struct, we use dot notation. For example, to access this user’s email address, we use user1.email. If the instance is mutable, we can change a value by using the dot notation and assigning into a particular field."
 "define a struct for an email account gerard with password 1234 and then change password to 'toto'","
- ```
+```
     #[derive(Copy, Drop)]
     struct MailAccount {        
         address: felt,
@@ -58,7 +58,7 @@ fn main() {
         };
         myMail.password = 'toto';
     }
- ```
+```
 "
 "
 Please simplify that code:
@@ -76,7 +76,7 @@ fn build_user(email: felt252, username: felt252) -> User {
 
 ","
 Sure,
- ```
+```
 struct User {
     active: bool,
     username: felt252,
@@ -88,7 +88,7 @@ struct User {
 fn build_user_short(email: felt252, username: felt252) -> User {
     User { active: true, username, email, sign_in_count: 1, }
 }
- ```
+```
 
 - Because the parameter names and the struct field names are exactly the same, we can use the field init shorthand syntax to rewrite build_user so it behaves exactly the same but doesn’t have the repetition of username and email
 "

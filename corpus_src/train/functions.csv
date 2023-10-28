@@ -1,67 +1,67 @@
 question,answer
 "in cairo, write a function named 'foo' that takes a felt parameter","
- ```
+```
      fn foo(x:felt) { }
- ```
+```
 "
 "in cairo write a function named Add that returns 3+5","
- ```
+```
     fn add()->felt {
         return 3+5;
     }
- ```
+```
 "
 "in cairo, define a function named toto in cairo","
- ```
+```
 fn toto() {
 }
- ```
+```
  "
 "in cairo, define a function named toto in cairo that returns 4","
- ```
+```
 fn toto() {
   4
 }
 ```
 "
 "in cairo, define a function that returns its felt parameter Y","
- ```
+```
 fn foo(Y:felt) -> felt{
     Y
 }
 ```
 "
 "in cairo, define a function that returns the difference of its parameters X and Y","
- ```
+```
 fn foo(X:felt,Y:felt) -> felt{
     return X-Y
 }
- ```
+```
 "
 "in cairo, define a function named toto in cairo that takes a parameter f. f is a felt","
- ```
+```
 fn toto(f:felt) {
 }
- ```
+```
 "
 "in cairo, define a function toto that returns a felt of value 0","
- ```
+```
  fn return_felt() -> felt {
     0 // last statement of the function -> no return keyword, ; is omitted
 }
- ```
+```
 "
 "in cairo, define a function named toto that accepts a felt a as parameter, and returns a felt of value 0","
- ```fn toto(n:felt)->felt {
+```fn toto(n:felt)->felt {
     0
 }
- ```
+```
 "
 "in cairo, define a function named toto that accepts a felt a as parameter","
- ```
+```
  fn toto(n:felt) {
 }
- ```
+```
 "
 "is this program working in Cairo ?
 use debug::PrintTrait;
@@ -73,19 +73,19 @@ fn main() {
     x.print()
 }","yes, The first x variable has a u64 type while the second x variable has a felt252 type. Shadowing thus spares us from having to come up with different names, such as x_u64 and x_felt252; instead, we can reuse the simpler x name."
 "how do I declare a view function","
- ```
+```
     fn hello_cairo(self: @ContractState) -> felt252 {
         return 'Hello Cairo!';
     }
- ```
+```
  "
 "what can view function do and can not do","view functions can read state variables, but cannot change the contract's state, such as updating state variables or releasing events."
 "What is an external function","An external function is a function that can be called outside of the contract and can not be called internally by the contract"
 "write an external function","
- ```
+```
     #[external(v0)]
     fn hello_cairo(self: @ContractState) -> felt252 {
         return 'Hello Cairo!';
     }
- ```
+```
 "

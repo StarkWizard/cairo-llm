@@ -1,0 +1,249 @@
+question,answer
+" write an exemple on how to implement all the unsigned types in Cairo
+","
+```
+// unsigned integer
+// unsigned 8-bit integer
+let x_u8 = 1_u8;
+let y_u8: u8 = 2;
+// unsigned 16-bit integer
+let x_u16 = 1_u16;
+// unsigned 32-bit integer
+let x_u32 = 1_u32;
+// unsigned 64-bit integer
+let x_u64 = 1_u64;
+// unsigned 128-bit integer
+let x_u128 = 1_u128;
+// Unsigned size integer (usually used to represent index and length)
+let value_usize = 1_usize;
+```
+"
+"write a simple example about how to define a storage variable, read and write the value","
+```
+#[contract]
+mod variables {
+    // declare storage variables
+    struct Storage{
+        var_bool: bool
+        }
+    
+    // read storage variable
+    #[view]
+    fn read_bool() -> bool {
+        return var_bool::read();
+    }
+
+    // write storage variable
+    #[external]
+    fn write_bool(bool_: bool) {
+        var_bool::write(bool_);
+    }
+}
+```
+"
+"write a contract that shows how to create local variables.
+","
+```
+#[contract]
+mod variables {
+    // local variables
+    #[view]
+    fn local_var(){
+        // use `let` keywods to declare local variables 
+        let local_felt: felt252 = 5;
+        let local_bool;
+        local_bool = true;
+        let local_uint = 1_u8;
+    }
+}
+```
+"
+" Give an exemple that explains immutability in Cairo
+","
+```
+#[starknet::contract]
+mod mutable_and_const {
+    const CONST_NUMBER: felt252 = 888;
+    
+    #[storage]
+    struct Storage{
+    }
+
+    #[external(v0)]
+    fn mutable_and_const(self: @ContractState) {
+
+        // in Cairo, variables are immutable by default
+        let x_immutable = 5;
+
+        // use `mut` keyword to declare mutable variables
+        let  mut x_mutable = 5;
+        x_mutable = 10;
+
+        // you can assign const to a variable
+        let y_immutable = CONST_NUMBER + 2;
+    }
+
+}
+```
+"
+"Give an exemple that explains how shadowing work","
+```
+#[starknet::contract]
+mod mutable_and_const {
+    const CONST_NUMBER: felt252 = 888;
+    
+    #[storage]
+    struct Storage{
+    }
+
+
+    #[external(v0)]
+    fn shadow(self: @ContractState)  {
+        // shadow: you can declare a new variable with the same name as previous ones.
+        let x_shadow = 5;
+        // you can change the data type or mutability with shadowing
+        let x_shadow = 10_u8;
+        let mut x_shadow = 15;
+    }
+}
+```
+"
+"
+This function can not be called externally, explain why ?
+
+#[starknet::contract]
+mod Function {   
+    // private function, can not be accessed externally
+    fn sum_two(x: u128, y: u128) -> u128 {
+        return x + y;
+    }
+}
+","
+The function sum_two is declared as private, that's why it can not be called externally.
+You need to use #[external(v0)] in order to call it externally
+
+Here is a correction:
+
+```
+#[starknet::contract]
+mod Function {
+    
+    #[external(v0)]
+    fn sum_two(x: u128, y: u128) -> u128 {
+        return x + y;
+    }
+}
+```
+"
+"
+Can all functions access to the storage ?
+","
+
+View functions can read the storage, but not write.
+External functions can read and write to the storage.
+
+```
+#[starknet::contract]
+mod Function {
+    // declare storage variables
+    #[storage]
+    struct Storage{
+        balance: u128,
+        }
+    
+    // view function: can read but not write storage variables.
+    #[view]
+    fn read_balance(self: @ContractState) -> u128 {
+        return self.balance.read();
+    }
+
+    // external: can read and write storage variables.
+    #[external(v0)]
+    fn write_balance(ref self: ContractState, new_balance: u128) {
+        self.balance.write(new_balance);
+    }
+}
+```
+"
+"
+provide a contract that returns the sum of two nummbers
+","
+```
+#[starknet::contract]
+mod Function {
+
+    #[view]
+    fn sum_two(x: u128, y: u128) -> u128 {
+        return x + y;
+    }
+}
+```
+"
+"write a contract that provides a function to inverse the elements of a tuple (u32,bool)
+","
+```
+#[starknet::contract]
+mod tuple_reverse {
+
+    #[external(v0)]
+    fn reverse(self: @ContractState, pair: (u32, bool)) -> (bool, u32) {
+        let (integer, boolean) = pair;
+        return (boolean, integer);
+    }
+}
+```
+"
+"
+Write a function that creates an array, append 3 values, and pop_front the first element.
+","
+```
+    fn create_array(self: @ContractState) -> Array<felt252> {
+        // new(): create new array
+        let mut arr = ArrayTrait::new();
+        // append(): append an element to the end of an array
+        arr.append(1);
+        arr.append(2);
+        arr.append(3);
+
+        // pop_front(): removes the first element from the array 
+        let pop_element = arr.pop_front().unwrap();
+    }
+```
+"
+"How can I get the element at index 0 of my array 'arr' ?
+","
+```
+You can use at()
+
+        let mut arr = ArrayTrait::new();
+
+        // at(): get element at a particular index
+        let elem = *arr.at(0);
+```
+"
+"Can you provide an example of how to use get() ?","
+```
+Here is a sample
+        use option::OptionTrait;
+        use box::BoxTrait;
+
+        let mut arr = ArrayTrait::new();
+
+        // get(): get element at a particular index, returns an Option type.
+        // Need import OptionTrait and BoxTrait
+        let elem = *arr.get(1).unwrap().unbox();
+```
+"
+"give an example on how to use span
+","
+```
+        use array::SpanTrait;
+
+        // new(): create new array
+        let mut arr = ArrayTrait::new();
+
+        // span(): A span is a struct containing a snapshot of an array. 
+        // Need import SpanTrait
+        let my_span = arr.span();
+```
+"

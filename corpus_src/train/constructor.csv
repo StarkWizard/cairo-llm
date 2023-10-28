@@ -3,7 +3,7 @@ question,answer
 Constructor functions must be marked as #[constructor]attributes.
 There can be at most one per contract constructor."
 "Give an exemple of a contract with a constructor","
- ```
+```
     #[starknet::contract]
     mod owner{
         use starknet::ContractAddress;
@@ -19,5 +19,5 @@ There can be at most one per contract constructor."
             self.owner.write(get_caller_address());
         }
     }
- ```
+```
 "

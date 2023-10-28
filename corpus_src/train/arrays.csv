@@ -1,6 +1,6 @@
 question,answer
 "add a value of 0 to an array named myArray","
- ```
+```
     myArray.append(0); // use 'append' to add a value to an array
 ```
 "
@@ -75,10 +75,10 @@ fn main() {
 
     let value_at_index_zero = *a.at(0); // value_at_index_zero is set to 0
  }
- ```
+```
  "
 "get the size of the array 'myArray'","
- ```
+```
     let usize size = myArray.len() 
 ```
  "
@@ -86,7 +86,7 @@ fn main() {
 ```
     // use the is_empty() method, which returns true if the array is empty and false otherwise
     if(myArry.is_empty) 'it is empty'.print()
- ```
+```
  "
 "create an array 'messages' that contains a u128, a felt252, a u32","
 ```
@@ -109,7 +109,7 @@ fn main() {
 "
 
 create an array 'messages' that contains a u64, a u16, a tuple (u32,u32)","
- ```
+```
  //If you want to store elements of different types in an array, you can use an Enum.
  use array::ArrayTrait;
  #[derive(Copy, Drop)]
@@ -147,7 +147,7 @@ All methods provided by Array can also be used with Span, with the exception of 
 ```
 "
 "How do I know if an array is empty","
- ```
+```
     let empty = a.is_empty(); // is_empty returns true if an array is empty
 ```
 "

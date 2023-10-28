@@ -1,15 +1,15 @@
 question,answer
 "How can I declare a variable in cairo ?","
-  ```
-     let a = 5; // a can not be modified
  ```
+     let a = 5; // a can not be modified
+```
 "
 "in cairo, How can I declare a variable that can be modified?","
- ```let mut a = 5;
- ```
+```let mut a = 5;
+```
 "
 "in cairo, let a=5; a=2; Why does this produce an error ?","
-  ```
+ ```
    // a should be mutable
     let mut a=5;
     a = 2;
@@ -22,30 +22,30 @@ question,answer
 
 "
 "in cairo, how do I create a mutable variable in cairo ?","
-  ```
+```
      let mut a = 5; // variable is assigned.
- ```
+```
 "
 "how do I affect a variable ?","
-  ```
-    let a = 5; // variable is assigned. add mut if you want to modify the variable later on
  ```
+    let a = 5; // variable is assigned. add mut if you want to modify the variable later on
+```
 "
 "In cairo, define a variable X, add 3 and 4 into x","
- ```
+```
     let mut X=0;
     X=3+4;
- ```
+```
 "
 "In cairo, define a felt variable X as a felt and assign 3","
- ```
+```
     let X=3;
- ```
+```
 "
 "In Cairo, define a mutable felt X and initialize it to y"," 
- ```
+```
     let mut X=y
- ```
+```
 "
 "Can I update any variable in cairo ?","
 - Cairo uses an immutable memory model, meaning that once a memory cell is written to, it can't be overwritten but only read from. You can only update the value of a mutable variable"
@@ -67,7 +67,7 @@ There are two errors:
 2- variables are immutable by default, so x is immutable, you can not affect 6 to X
 
 Correction:
- ```
+```
 use debug::PrintTrait;
 fn main() {
     let mut x = 5;
@@ -75,7 +75,7 @@ fn main() {
     x = 6;
     x.print();
 }
- ```
+```
 It will output 6."
 "what exactly happens when a variable is declared as mut in cairo","
 Cairo's memory is immutable.
@@ -86,7 +86,7 @@ Like immutable variables, constants are values that are bound to a name and are 
 "
 "What is variable shadowing","Variable shadowing refers to the declaration of a new variable with the same name as a previous variable."
 "describe what happens to the variable x in this cairo program:
-  ```
+ ```
   let x = 5;
     let x = x + 1;
     {
@@ -96,7 +96,7 @@ Like immutable variables, constants are values that are bound to a name and are 
     }
     'Outer scope x value is:'.print();
     x.print();","This program first binds x to a value of 5. Then it creates a new variable x by repeating let x =, taking the original value and adding 1 so the value of x is then 6. Then, within an inner scope created with the curly brackets, the third let statement also shadows x and creates a new variable, multiplying the previous value by 2 to give x a value of 12. When that scope is over, the inner shadowing ends and x returns to being 6. When we run this program, it will output the following:
- ```
+```
 scarb cairo-run
 [DEBUG] Inner scope x value is:         (raw: 7033328135641142205392067879065573688897582790068499258)
 

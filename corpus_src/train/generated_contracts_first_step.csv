@@ -28,7 +28,6 @@ mod SimpleStorage {
 "How do smart contracts modify and interact with blockchain storage?","Smart contracts can modify and read the storage of the underlying blockchain."
 "Do smart contracts have their own addresses on the blockchain?","Yes, a smart contract has its own address and is considered a blockchain account, meaning it can hold tokens."
 "Are smart contracts limited to a single programming language?","No, the programming language used to write smart contracts varies depending on the blockchain. For instance, on Ethereum, it's Solidity, while on Starknet, it's Cairo."
-"How is Solidity code compiled for Ethereum?","On Ethereum, Solidity is compiled into bytecode."
 "What are the characteristics of smart contracts?","Smart contracts are permissionless, transparent, and can be composable. They can only access and interact with data from the blockchain they are deployed on and require third-party software (oracles) to access external data."
 "Can you name two widely used Ethereum smart contract standards?","Two widely used standards are the ERC20, for tokens like USDC, DAI or STARK, and the ERC721, for NFTs like CryptoPunks or Everai."
 "What is DeFi in the context of blockchain and smart contracts?","DeFi (decentralized finance) refers to decentralized financial applications that no longer rely on traditional financial intermediaries. It consists of projects like lending/borrowing apps, decentralized exchanges (DEX), on-chain derivatives, stablecoins, decentralized hedge funds, insurance, etc."

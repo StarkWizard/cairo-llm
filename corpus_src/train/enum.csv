@@ -2,58 +2,58 @@ question,answer
 "in Cairo,define an enumeration with Red, Green, Blue","
 ```
     enum Colors { Red: (), Green: (), Blue: () }
- ```
+```
 "
 "in Cairo, define an enumeration with A, B, C","
- ```
+```
     enum Letters { A: (), B: (), C: () }
- ```
+```
 "
 "in Cairo,define a function that returns the Green value from an enum","enum Colors { Red: (), Green: (), Blue: () }
- ```
+```
 fn get_favorite_color() -> Colors {
     Colors::Green(())
 }
- ```
+```
 "
 "create an enumeration in cairo for some nationality","
- ```
+```
  enum Nationality { English: (), German: (), French: (),  Spanish: ()}
- ```
+```
 "
 "create an enumeration in cairo for some planets","
- ```
+```
     enum Planets { Earth: (), Sun: (), March: (),  Jupyter: ()}
- ```
+```
 "
 "create an enumeration in cairo for some names","
- ```
+```
     enum Names { Paul: (), Henry: (), Simon: (),  Regis: ()}
- ```
+```
 "
 "create an enumeration in cairo for some units","
- ```
+```
     enum Units { Meters: (), Inches: (), Cm: ()}
- ```
+```
 "
 "define an enum Data with a u32 and a u128","
- ```
+```
 #[derive(Drop)]
 enum Data {
     myU32: u32,
     myU128: u128
 }
- ```
+```
 "
 "Define an enum Data with a tuple for two u32","
- ```
+```
 enum Data {
     Tuple: (u32,u32)
 }
 ```
 "
 "Give an exemple of a Mail status enum","
- ```
+```
 #[derive(Drop)]
 enum Status{
     Pending:(),
@@ -61,10 +61,10 @@ enum Status{
     Delivered:(),
     Failed:(),
 }
- ```
+```
 "
 "How one variant can be instantiated?","
- ```
+```
 #[derive(Drop)]
 enum Status{
     Pending:(),
@@ -74,7 +74,7 @@ enum Status{
 }
 
 let status = Status::Pending(());
- ```
+```
 "
 "what does this code do:
 #[derive(Drop)]
@@ -87,9 +87,9 @@ enum Direction {
 ","
 - You have defined an enum called Direction, which includes four members: North, East, South, and West. Each member is associated with a uint type () - it has no associated data.
 - You can instantiate it using this syntax:
- ```
+```
 let direction = Direction::North(());
- ```
+```
 "
 "explain this enum:
 enum Message {

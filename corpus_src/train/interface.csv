@@ -1,6 +1,6 @@
 question,answer
 "Declare an interface","
- ```
+```
     #[starknet::interface]
     trait ISimpleStorage<TContractState> {
         fn set(ref self: TContractState, x: u128);
@@ -21,6 +21,6 @@ question,answer
         }
     }
 }
- ```
+```
 "
 "What is a contract interface","The interface of a contract represents the functions this contract exposes to the outside world."

@@ -77,7 +77,7 @@ function consumeMessageFelt(
     
     // You can use the message hash if you want here.
 
-    // We expect the payload to contain only a felt252 value (which is a uint256 in solidity).
+    // We expect the payload to contain only a felt252 value.
     require(payload.length == 1, 'Invalid payload');
 
     uint256 my_felt = payload[0];

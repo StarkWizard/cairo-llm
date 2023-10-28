@@ -1,12 +1,12 @@
 question,answer
 "in cairo, write a hello world","
- ```
+```
  use debug::PrintTrait;
 
 fn main() {
     'Hello, World!'.print();
 }
- ```
+```
  "
 "In cairo, Is this program working fine ? 
 use debug::PrintTrait;

@@ -3,17 +3,17 @@ question,answer
 "what are dictionaries used for ?","The Felt252Dict<T> type is useful when you want to organize your data in a certain way for which using an Array<T> and indexing doesn't suffice. Cairo dictionaries also allow the programmer to easily simulate the existence of mutable memory when there is none."
 "Can I use any type for keys of a dictionary ?","It is normal in other languages when creating a new dictionary to define the data types of both key and value. In Cairo, the key type is restricted to felt252 leaving only the possibility to specify the value data type, represented by T in Felt252Dict<T>."
 "define a dictionary called messages","
- ```
+```
     let mut balances: Felt252Dict<u64> = Default::default();
- ```
+```
 "
 "create a dictionary and insert value 100 associated to key 'Alex' and 200 to key 'maria'","
-  ```
+ ```
     let mut dict: Felt252Dict<u64> = Default::default();
 
     dict.insert('Alex', 100);
     dict.insert('Maria', 200);
- ```
+```
 "
 "create a dictionary, add a value associated to key 200, and read the value associated to key 200","
 ```
@@ -21,7 +21,7 @@ question,answer
 
     dict.insert(200, 100);
     let value_read = dict.get(200);
- ```
+```
 "
 "what value will I get in x:
     let mut dict: Felt252Dict<u64> = Default::default();
