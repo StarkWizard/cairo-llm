@@ -70,7 +70,6 @@ question,answer
 ```
     starkli deploy <class_hash_of_the_contract_to_be_deployed> <voter_0_address> <voter_1_address> <voter_2_address> --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
 ```"
-"given the Vote Contract:How many voters are registered in the example command?","3"
 "given the Vote Contract:Which function checks if an address is registered as an eligible voter?","is_voter_registered"
 "given the Vote Contract:What does the voter_can_vote function check?","whether the voter at a specific address is currently eligible to vote and hasn't voted already"
 "What command is used for read functions in Starknet?","starkli call"

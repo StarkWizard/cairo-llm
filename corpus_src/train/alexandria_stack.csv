@@ -1,3 +1,4 @@
+question,answer
 "
 write a stack trait, that can create a new stack, push a value to the stack, pop a value from the stack, give the top value without removing it, give the size of the stack, tests if the stack is empty
 ","

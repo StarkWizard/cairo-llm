@@ -23,7 +23,7 @@ at the top of the code."
 ```
 "
 "What is the expected output of running tests as mentioned?","One line output for each test indicating its result."
-"How is an assertion made in the example code?","Using the 'assert' function, like
+"How is an assertion made?","Using the 'assert' function, like
 ```
     assert(result == 4, result is not 4');
 ```
@@ -35,7 +35,7 @@ at the top of the code."
 "Where do you specify the gas limit in the test code?","With the #[available_gas(value)] annotation."
 "Why is the 'use adder::it_adds_two;' statement added at the top of the integration test code?","To bring the tested function 'it_adds_two' into the test file scope."
 "What command do you run to test only files that contain 'integration_tests'?","scarb test -f integration_tests."
-"In the example test function, what is the purpose of 'assert(it_adds_two(2, 2) == 4, 'internal_adder failed');'?","To check that the function 'it_adds_two' when passed the arguments 2 and 2 returns a result of 4, and to fail the test with the message 'internal_adder failed' if it doesn't."
+"what is the purpose of 'assert(it_adds_two(2, 2) == 4, 'internal_adder failed');'?","To check that the function 'it_adds_two' when passed the arguments 2 and 2 returns a result of 4, and to fail the test with the message 'internal_adder failed' if it doesn't."
 "What does the #[test] annotation above a function signify?","It signifies that the function is a test function."
 "Where do you typically place unit tests in the Cairo structure?","In the 'src' directory in each file with the code that they're testing."
 "How do you exclude test functions from the compiled result in the same file as the code?","By using the #[cfg(test)] annotation."
@@ -56,7 +56,7 @@ at the top of the code."
 "How do you run tests that only match a specific filter in the provided example?","By using the command 'scarb test -f <filter_name>'."
 "What is the purpose of the 'available_gas' annotation in the provided code?","To specify the gas limit for the test."
 "In the code 'assert(it_adds_two(2, 2) == 4, 'internal_adder failed');', what is being asserted?","It's being asserted that the function 'it_adds_two' returns a value of 4 when passed the arguments 2 and 2."
-"In the example, how do you run tests with a specific configuration option?","Using the 'scarb cairo-test' command along with the cfg attribute in the code."
+"how do you run tests with a specific configuration option?","Using the 'scarb cairo-test' command along with the cfg attribute in the code."
 "How do you bring a function into the scope of a test file in Cairo?","By using the 'use' statement followed by the library and function name."
 "Where should the tests for integration be placed in the provided directory structure?","They should be placed in a 'tests' directory inside the 'src' directory."
 "How do you typically name a module that contains test functions?","It is typically named 'tests'."

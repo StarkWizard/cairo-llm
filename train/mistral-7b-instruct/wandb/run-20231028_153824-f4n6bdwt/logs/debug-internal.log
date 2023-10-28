@@ -1,0 +1,58 @@
+2023-10-28 15:38:32,732 INFO    StreamThr :6556 [internal.py:wandb_internal():86] W&B internal server running at pid: 6556, started at: 2023-10-28 15:38:32.732333
+2023-10-28 15:38:32,733 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: status
+2023-10-28 15:38:32,734 INFO    WriterThread:6556 [datastore.py:open_for_write():85] open: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231028_153824-f4n6bdwt/run-f4n6bdwt.wandb
+2023-10-28 15:38:32,734 DEBUG   SenderThread:6556 [sender.py:send():380] send: header
+2023-10-28 15:38:32,734 DEBUG   SenderThread:6556 [sender.py:send():380] send: run
+2023-10-28 15:38:33,120 INFO    SenderThread:6556 [dir_watcher.py:__init__():211] watching files in: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231028_153824-f4n6bdwt/files
+2023-10-28 15:38:33,120 INFO    SenderThread:6556 [sender.py:_start_run_threads():1122] run started: f4n6bdwt with start time 1698500311.76385
+2023-10-28 15:38:33,126 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: check_version
+2023-10-28 15:38:33,126 DEBUG   SenderThread:6556 [sender.py:send_request():407] send_request: check_version
+2023-10-28 15:38:33,210 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: run_start
+2023-10-28 15:38:33,211 DEBUG   HandlerThread:6556 [system_info.py:__init__():32] System info init
+2023-10-28 15:38:33,211 DEBUG   HandlerThread:6556 [system_info.py:__init__():47] System info init done
+2023-10-28 15:38:33,211 INFO    HandlerThread:6556 [system_monitor.py:start():194] Starting system monitor
+2023-10-28 15:38:33,211 INFO    SystemMonitor:6556 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-10-28 15:38:33,212 INFO    HandlerThread:6556 [system_monitor.py:probe():214] Collecting system info
+2023-10-28 15:38:33,212 INFO    SystemMonitor:6556 [interfaces.py:start():190] Started cpu monitoring
+2023-10-28 15:38:33,213 INFO    SystemMonitor:6556 [interfaces.py:start():190] Started disk monitoring
+2023-10-28 15:38:33,214 INFO    SystemMonitor:6556 [interfaces.py:start():190] Started gpu monitoring
+2023-10-28 15:38:33,214 INFO    SystemMonitor:6556 [interfaces.py:start():190] Started memory monitoring
+2023-10-28 15:38:33,215 INFO    SystemMonitor:6556 [interfaces.py:start():190] Started network monitoring
+2023-10-28 15:38:33,217 DEBUG   HandlerThread:6556 [system_info.py:probe():196] Probing system
+2023-10-28 15:38:33,218 DEBUG   HandlerThread:6556 [system_info.py:_probe_git():181] Probing git
+2023-10-28 15:38:33,233 DEBUG   HandlerThread:6556 [system_info.py:_probe_git():189] Probing git done
+2023-10-28 15:38:33,233 DEBUG   HandlerThread:6556 [system_info.py:probe():244] Probing system done
+2023-10-28 15:38:33,233 DEBUG   HandlerThread:6556 [system_monitor.py:probe():223] {'os': 'Linux-6.5.5-1-MANJARO-x86_64-with-glibc2.38', 'python': '3.9.18', 'heartbeatAt': '2023-10-28T13:38:33.217752', 'startedAt': '2023-10-28T13:38:24.034131', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '<python with no main file>', 'codePathLocal': None, 'git': {'remote': 'https://github.com/StarkWizard/cairo-llm.git', 'commit': 'c965cba421a54a2c07b119ca98e3c159455ccc18'}, 'email': 'pe_chaut@hotmail.com', 'root': '/home/pechaut/prj/cairo-llm', 'host': 'Neuron', 'username': 'pechaut', 'executable': '/home/pechaut/miniconda3/envs/cairo-llm/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 3976.47825, 'min': 800.0, 'max': 5100.0}, 'cpu_freq_per_core': [{'current': 4084.538, 'min': 800.0, 'max': 5100.0}, {'current': 4143.161, 'min': 800.0, 'max': 5100.0}, {'current': 4137.609, 'min': 800.0, 'max': 5100.0}, {'current': 4087.152, 'min': 800.0, 'max': 5100.0}, {'current': 4019.459, 'min': 800.0, 'max': 5100.0}, {'current': 4376.273, 'min': 800.0, 'max': 5100.0}, {'current': 800.0, 'min': 800.0, 'max': 5100.0}, {'current': 4558.287, 'min': 800.0, 'max': 5100.0}, {'current': 4271.016, 'min': 800.0, 'max': 5100.0}, {'current': 4001.277, 'min': 800.0, 'max': 5100.0}, {'current': 3834.409, 'min': 800.0, 'max': 5100.0}, {'current': 4033.436, 'min': 800.0, 'max': 5100.0}, {'current': 4262.393, 'min': 800.0, 'max': 5100.0}, {'current': 4236.235, 'min': 800.0, 'max': 5100.0}, {'current': 4133.962, 'min': 800.0, 'max': 5100.0}, {'current': 4616.853, 'min': 800.0, 'max': 5100.0}], 'disk': {'/': {'total': 512.4387817382812, 'used': 253.49146270751953}}, 'gpu': 'NVIDIA TITAN X (Pascal)', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA TITAN X (Pascal)', 'memory_total': 12884901888}], 'memory': {'total': 125.57126998901367}}
+2023-10-28 15:38:33,233 INFO    HandlerThread:6556 [system_monitor.py:probe():224] Finished collecting system info
+2023-10-28 15:38:33,233 INFO    HandlerThread:6556 [system_monitor.py:probe():227] Publishing system info
+2023-10-28 15:38:33,233 DEBUG   HandlerThread:6556 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-10-28 15:38:33,233 DEBUG   HandlerThread:6556 [system_info.py:_save_pip():68] Saving pip packages done
+2023-10-28 15:38:33,233 DEBUG   HandlerThread:6556 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-10-28 15:38:34,121 INFO    Thread-49 :6556 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231028_153824-f4n6bdwt/files/conda-environment.yaml
+2023-10-28 15:38:34,122 INFO    Thread-49 :6556 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231028_153824-f4n6bdwt/files/requirements.txt
+2023-10-28 15:38:37,122 INFO    Thread-49 :6556 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231028_153824-f4n6bdwt/files/conda-environment.yaml
+2023-10-28 15:38:37,265 DEBUG   HandlerThread:6556 [system_info.py:_save_conda():87] Saving conda packages done
+2023-10-28 15:38:37,266 INFO    HandlerThread:6556 [system_monitor.py:probe():229] Finished publishing system info
+2023-10-28 15:38:37,266 DEBUG   SenderThread:6556 [sender.py:send():380] send: files
+2023-10-28 15:38:37,266 INFO    SenderThread:6556 [sender.py:_save_file():1378] saving file wandb-metadata.json with policy now
+2023-10-28 15:38:37,277 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-28 15:38:37,278 DEBUG   SenderThread:6556 [sender.py:send_request():407] send_request: stop_status
+2023-10-28 15:38:37,279 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-28 15:38:37,547 DEBUG   SenderThread:6556 [sender.py:send():380] send: telemetry
+2023-10-28 15:38:37,793 INFO    wandb-upload_0:6556 [upload_job.py:push():131] Uploaded file /tmp/tmpveegvdn8wandb/mh2nbd69-wandb-metadata.json
+2023-10-28 15:38:38,122 INFO    Thread-49 :6556 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231028_153824-f4n6bdwt/files/wandb-metadata.json
+2023-10-28 15:38:38,548 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: status_report
+2023-10-28 15:38:43,548 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: status_report
+2023-10-28 15:38:48,549 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: status_report
+2023-10-28 15:38:52,277 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-28 15:38:52,277 DEBUG   SenderThread:6556 [sender.py:send_request():407] send_request: stop_status
+2023-10-28 15:38:52,319 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-28 15:38:54,462 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: status_report
+2023-10-28 15:38:59,463 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: status_report
+2023-10-28 15:39:04,466 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: status_report
+2023-10-28 15:39:05,127 INFO    Thread-49 :6556 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/mistral-7b-instruct/wandb/run-20231028_153824-f4n6bdwt/files/config.yaml
+2023-10-28 15:39:07,277 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-28 15:39:07,277 DEBUG   SenderThread:6556 [sender.py:send_request():407] send_request: stop_status
+2023-10-28 15:39:07,319 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-28 15:39:10,463 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: status_report
+2023-10-28 15:39:15,464 DEBUG   HandlerThread:6556 [handler.py:handle_request():146] handle_request: status_report

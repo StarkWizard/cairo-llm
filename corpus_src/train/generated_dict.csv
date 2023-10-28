@@ -96,7 +96,6 @@ question,answer
 "What does the squash_dict method verify?","It reviews each entry of the entry list and checks that access to the dictionary remains coherent throughout the execution."
 "How does the process of squashing work with regards to entries?","It verifies that the ith entry new_value is equal to the ith + 1 entry previous_value."
 "What happens if there is a change in the values of the first table during squashing?","Squashing would have failed during runtime."
-"Why is there no explicit call to squash dictionary in the examples from Basic Use of Dictionaries?","Squash was called automatically via the Felt252Dict<T> implementation of the Destruct<T> trait."
 "What happens just before the balance dictionary goes out of scope?","Squash was called via the Felt252Dict<T> implementation of the Destruct<T> trait."
 "How does Drop<T> differ from Destruct<T>?","Drop<T> is treated as a no-op operation and doesn't generate new CASM while Destruct<T> does not have this restriction."
 "What is the only type that actively uses the Destruct<T> trait?","Felt252Dict<T>"
