@@ -15,3 +15,42 @@ In Cairo, you don't have a specific address type like. You should use ContractAd
 Cairo handles addresses differently from Ethereum's Solidity. Use ContractAddress for denoting addresses:
     use starknet::ContractAddress;
 "
+"In Cairo, how do you handle contract addresses, considering there's no native 'address' type?","
+Since Cairo doesn't have a native 'address' type, you handle contract addresses by using ContractAddress from the starknet module:
+```
+use starknet::ContractAddress;
+```
+"
+"What type should be used to store smart contract addresses in Cairo?","
+Smart contract addresses in Cairo should be stored using the ContractAddress type provided by the starknet module:
+```
+use starknet::ContractAddress;
+```
+"
+"If I need to declare a contract address in my Cairo smart contract, what type will I use?","In your Cairo smart contract, you would declare a contract address using the ContractAddress type:
+```
+use starknet::ContractAddress;
+```
+"
+"What import is necessary in Cairo to work with contract addresses in the context of StarkNet?","
+You need to import ContractAddress from the starknet module to work with contract addresses in Cairo:
+```
+use starknet::ContractAddress;
+```
+"
+"Can you show how to declare a mutable variable to store a StarkNet contract address in Cairo?","
+Certainly! Here's how you declare a mutable variable for a StarkNet contract address in Cairo:
+```
+use starknet::ContractAddress;
+
+let mut contract_address: ContractAddress;
+```
+"
+
+"How do you initialize a variable for storing contract addresses in Cairo programming for StarkNet applications?","
+```
+use starknet::ContractAddress;
+
+let contract_address: ContractAddress = /* assign value here */;
+```
+"

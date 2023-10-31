@@ -3,7 +3,6 @@ question,answer
 "How does the linear type system complement the ownership mechanism in Cairo?","It enforces that objects are used exactly once."
 "Why does Cairo's ownership system help prevent runtime errors?","It prevents illegal memory address references or multiple writes to the same memory address."
 "What does Cairo check at compile time?","That all the dictionaries are squashed."
-"What does the user need to do when they follow along with the examples provided?","Put the examples inside a main function manually."
 "What is the first ownership rule for values in Cairo?","Each value in Cairo has an owner."
 "What is the maximum number of owners a value in Cairo can have at a time?","One."
 "What happens to a value when its owner goes out of scope?","The value will be dropped."
@@ -38,7 +37,6 @@ question,answer
 "How does a linear type system, which 'enforces that objects are used exactly once', complement Cairo's ownership mechanism?","It enforces that objects are used exactly once."
 "How can Cairo's ownership system prevent runtime errors, especially when it concerns 'illegal memory address references or multiple writes to the same memory address'?","It prevents illegal memory address references or multiple writes to the same memory address."
 "Based on Cairo's system which checks 'at compile time that all the dictionaries are squashed', what is being verified at compile time?","That all the dictionaries are squashed."
-"When a Cairo example starts without 'fn main() {', what is expected from users following along?","Put the examples inside a main function manually."
 "In Cairo's ownership rules, how many owners can a value have at any given time, given the rule 'There can only be one owner at a time'?","One."
 "What happens to a Cairo value when its owner goes out of scope, as per the rule 'When the owner goes out of scope, the value will be dropped'?","The value will be dropped."
 "In the Cairo code segment '{ let s = 'hello'; }', when does the variable 's' become valid?","When it is declared with
@@ -61,7 +59,7 @@ question,answer
     core::traits::Copy::<core::array::Array::<core::integer::u128>>
 ```
 "
-"Why do you need to use the 'mut' keyword when declaring an array in Cairo, as seen in the code 'let mut arr = ArrayTrait::<u128>::new();'?","To make the array mutable, allowing values to be appended to it."
+"Why do you need to use the 'mut' keyword when declaring an array in Cairo 'let mut arr = ArrayTrait::<u128>::new();'?","To make the array mutable, allowing values to be appended to it."
 "In Cairo, how is a variable's scope defined, particularly in the example where the variable 's' is declared inside curly braces '{ let s = 'hello'; }'?","Between its declaration point and the end of the enclosing curly braces."
 "Given the Cairo code 'let mut arr = ArrayTrait::<u128>::new();', what does the '<u128>' indicate?","It indicates that the array will hold unsigned 128-bit integers."
 "In a Cairo program where you see the declaration 'let s = 'hello';', how is the value of a string hardcoded?","By using a declaration like 'let s = 'hello';'."

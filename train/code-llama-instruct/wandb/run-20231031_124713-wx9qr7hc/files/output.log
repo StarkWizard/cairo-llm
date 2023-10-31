@@ -182,3 +182,27 @@ wandb: Network error (ConnectionError), entering retry loop.
 {'loss': 0.2125, 'learning_rate': 8.79190293666845e-06, 'epoch': 5.19}
 {'eval_loss': 1.3588929176330566, 'eval_runtime': 1.073, 'eval_samples_per_second': 4.66, 'eval_steps_per_second': 0.932, 'epoch': 5.19}
 {'loss': 0.2134, 'learning_rate': 7.496365678581874e-06, 'epoch': 5.26}
+{'eval_loss': 1.3508223295211792, 'eval_runtime': 1.0614, 'eval_samples_per_second': 4.711, 'eval_steps_per_second': 0.942, 'epoch': 5.26}
+{'loss': 0.2137, 'learning_rate': 6.300339156703039e-06, 'epoch': 5.32}
+{'eval_loss': 1.3763353824615479, 'eval_runtime': 1.0576, 'eval_samples_per_second': 4.728, 'eval_steps_per_second': 0.946, 'epoch': 5.32}
+{'loss': 0.2115, 'learning_rate': 5.205109995936864e-06, 'epoch': 5.38}
+{'eval_loss': 1.3485536575317383, 'eval_runtime': 1.0251, 'eval_samples_per_second': 4.878, 'eval_steps_per_second': 0.976, 'epoch': 5.38}
+{'loss': 0.217, 'learning_rate': 4.211856388479862e-06, 'epoch': 5.44}
+{'eval_loss': 1.3564881086349487, 'eval_runtime': 1.0344, 'eval_samples_per_second': 4.834, 'eval_steps_per_second': 0.967, 'epoch': 5.44}
+{'loss': 0.2093, 'learning_rate': 3.3216468263803978e-06, 'epoch': 5.51}
+{'eval_loss': 1.3482980728149414, 'eval_runtime': 1.0986, 'eval_samples_per_second': 4.551, 'eval_steps_per_second': 0.91, 'epoch': 5.51}
+{'loss': 0.2249, 'learning_rate': 2.535438952109004e-06, 'epoch': 5.57}
+{'eval_loss': 1.3356573581695557, 'eval_runtime': 1.0291, 'eval_samples_per_second': 4.859, 'eval_steps_per_second': 0.972, 'epoch': 5.57}
+{'loss': 0.2193, 'learning_rate': 1.8540785283749474e-06, 'epoch': 5.63}
+{'eval_loss': 1.3551974296569824, 'eval_runtime': 1.0804, 'eval_samples_per_second': 4.628, 'eval_steps_per_second': 0.926, 'epoch': 5.63}
+{'loss': 0.2214, 'learning_rate': 1.2782985282974503e-06, 'epoch': 5.69}
+{'eval_loss': 1.3538683652877808, 'eval_runtime': 1.0939, 'eval_samples_per_second': 4.571, 'eval_steps_per_second': 0.914, 'epoch': 5.69}
+{'loss': 0.2066, 'learning_rate': 8.087183469102644e-07, 'epoch': 5.76}
+{'eval_loss': 1.3531913757324219, 'eval_runtime': 1.0609, 'eval_samples_per_second': 4.713, 'eval_steps_per_second': 0.943, 'epoch': 5.76}
+{'loss': 0.2182, 'learning_rate': 4.458431348477454e-07, 'epoch': 5.82}
+{'eval_loss': 1.3515570163726807, 'eval_runtime': 1.0602, 'eval_samples_per_second': 4.716, 'eval_steps_per_second': 0.943, 'epoch': 5.82}
+{'loss': 0.2173, 'learning_rate': 1.900632549293402e-07, 'epoch': 5.88}
+{'eval_loss': 1.3512505292892456, 'eval_runtime': 1.0995, 'eval_samples_per_second': 4.548, 'eval_steps_per_second': 0.91, 'epoch': 5.88}
+{'loss': 0.221, 'learning_rate': 4.165386222703127e-08, 'epoch': 5.94}
+{'eval_loss': 1.35177743434906, 'eval_runtime': 0.9842, 'eval_samples_per_second': 5.08, 'eval_steps_per_second': 1.016, 'epoch': 5.94}
+{'train_runtime': 15495.4395, 'train_samples_per_second': 1.238, 'train_steps_per_second': 0.309, 'train_loss': 0.5720221555675623, 'epoch': 6.0}

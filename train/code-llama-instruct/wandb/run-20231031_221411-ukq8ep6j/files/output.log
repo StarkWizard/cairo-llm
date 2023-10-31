@@ -1,0 +1,18 @@
+/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/datasets/load.py:2097: FutureWarning: 'ignore_verifications' was deprecated in favor of 'verification_mode' in version 2.9.1 and will be removed in 3.0.0.
+You can remove this warning by passing 'verification_mode=no_checks' instead.
+  warnings.warn(
+You're using a CodeLlamaTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/torch/utils/checkpoint.py:429: UserWarning: torch.utils.checkpoint: please pass in use_reentrant=True or use_reentrant=False explicitly. The default value of use_reentrant will be updated to be False in the future. To maintain current behavior, pass use_reentrant=True. It is recommended that you use use_reentrant=False. Refer to docs for more details on the differences between the two variants.
+  warnings.warn(
+{'loss': 2.0401, 'learning_rate': 0.00019983261110361999, 'epoch': 0.06}
+{'eval_loss': 1.8315452337265015, 'eval_runtime': 0.969, 'eval_samples_per_second': 5.16, 'eval_steps_per_second': 1.032, 'epoch': 0.06}
+{'loss': 1.4297, 'learning_rate': 0.00019925470222755505, 'epoch': 0.12}
+{'eval_loss': 1.6783876419067383, 'eval_runtime': 1.0253, 'eval_samples_per_second': 4.876, 'eval_steps_per_second': 0.975, 'epoch': 0.12}
+{'loss': 1.3095, 'learning_rate': 0.0001982665946477863, 'epoch': 0.18}
+{'eval_loss': 1.6364425420761108, 'eval_runtime': 0.9798, 'eval_samples_per_second': 5.103, 'eval_steps_per_second': 1.021, 'epoch': 0.18}
+{'loss': 1.3103, 'learning_rate': 0.00019687237200407341, 'epoch': 0.25}
+{'eval_loss': 1.5587090253829956, 'eval_runtime': 1.0108, 'eval_samples_per_second': 4.947, 'eval_steps_per_second': 0.989, 'epoch': 0.25}
+{'loss': 1.2732, 'learning_rate': 0.00019507779632388996, 'epoch': 0.31}
+{'eval_loss': 1.4598877429962158, 'eval_runtime': 1.0342, 'eval_samples_per_second': 4.835, 'eval_steps_per_second': 0.967, 'epoch': 0.31}
+{'loss': 1.2343, 'learning_rate': 0.00019289028420918218, 'epoch': 0.37}
+{'eval_loss': 1.4574589729309082, 'eval_runtime': 0.9649, 'eval_samples_per_second': 5.182, 'eval_steps_per_second': 1.036, 'epoch': 0.37}

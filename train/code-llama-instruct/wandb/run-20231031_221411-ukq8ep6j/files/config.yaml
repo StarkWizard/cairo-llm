@@ -2,7 +2,7 @@ wandb_version: 1
 
 epochs:
   desc: null
-  value: 6
+  value: 3
 _wandb:
   desc: null
   value:
@@ -10,7 +10,7 @@ _wandb:
     cli_version: 0.15.12
     is_jupyter_run: true
     is_kaggle_kernel: false
-    start_time: 1698752833.010912
+    start_time: 1698786851.453807
     t:
       1:
       - 55
@@ -28,7 +28,6 @@ _wandb:
       - 98
       - 105
       3:
-      - 2
       - 7
       - 16
       - 23
@@ -68,26 +67,6 @@ _wandb:
       6:
       - 1
     - 1: eval/steps_per_second
-      5: 1
-      6:
-      - 1
-    - 1: train/train_runtime
-      5: 1
-      6:
-      - 1
-    - 1: train/train_samples_per_second
-      5: 1
-      6:
-      - 1
-    - 1: train/train_steps_per_second
-      5: 1
-      6:
-      - 1
-    - 1: train/total_flos
-      5: 1
-      6:
-      - 1
-    - 1: train/train_loss
       5: 1
       6:
       - 1
@@ -387,7 +366,7 @@ max_grad_norm:
   value: 1.0
 num_train_epochs:
   desc: null
-  value: 6
+  value: 3
 max_steps:
   desc: null
   value: -1
@@ -411,7 +390,7 @@ log_on_each_node:
   value: true
 logging_dir:
   desc: null
-  value: StarkWizard/llama-2-7b-cairo-trained-PEFT/runs/Oct31_12-48-46_Neuron
+  value: StarkWizard/llama-2-7b-cairo-trained-PEFT/runs/Oct31_22-14-54_Neuron
 logging_strategy:
   desc: null
   value: steps

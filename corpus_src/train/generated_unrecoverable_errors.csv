@@ -75,7 +75,7 @@ will result in a panic with the message 'value is 0'."
 ```
     let mut data = ArrayTrait::new();
     data.append(2);
-    if true == true { panic(data); }
+    if condition == true { panic(data); }
 ```
 "
 "How can you panic with a single felt252 error message in Cairo?","By using the

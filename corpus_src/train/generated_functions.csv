@@ -53,7 +53,7 @@ the values '3' and '4' are passed as arguments to the foo function."
 ```
     foo(:x, :y)
 ``` the colons before 'x' and 'y' are a shorthand way to use named parameters in Cairo when a variable has the same name as the parameter."
-"How does Cairo code represent string literals, as seen in the provided code snippets?","In Cairo code, string literals are represented using single quotes, as seen in the provided code snippets with 'Hello, world!' and 'Another function.'."
+"How does Cairo code represent string literals,?","In Cairo code, string literals are represented using single quotes."
 "Based on the code 'fn main() { another_function(5, 6); } fn another_function(x: felt252, y: felt252) { x.print(); y.print(); }', what are the values passed to another_function when it's called?","Based on the code:
 ```
     fn main() {

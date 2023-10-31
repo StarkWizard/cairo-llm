@@ -35,8 +35,6 @@ question,answer
 "What does the Scarb.toml file in a package contain?","Metadata and configuration options for the package."
 "Can you find documentation about Scarb.toml in the scarb reference?","Yes."
 "What section in the Scarb.toml specifies the package's name and version?","[package]."
-"In the Scarb.toml example, what is the name of the package?","my_package."
-"What is the version of the package in the Scarb.toml example?","0.1.0."
 "Where can you specify the dependencies of a package in Scarb.toml?","[dependencies] section."
 "If you wanted to add more Cairo source files to your package, where would you place them?","Within the src directory or its subdirectories."
 "What kind of files would you create to organize your code into multiple Cairo source files?",".cairo files."

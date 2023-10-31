@@ -67,11 +67,11 @@ is determined at compile time."
 ```
     arr.append(value);
 ```"
-"How does the array! macro differ from traditional array declaration and initialization in Cairo based on the provided examples?","The array! macro combines the declaration and initialization steps into one, whereas traditionally you would declare the array and then append each value one by one."
+"How does the array! macro differ from traditional array declaration and initialization in Cairo?","The array! macro combines the declaration and initialization steps into one, whereas traditionally you would declare the array and then append each value one by one."
 "Can you infer if 'consteval_int!' is the only way to declare a constant in Cairo ?","No, see 'consteval_int!' as a way to declare a constant that is the result of a computation of integers at compile time, but it doesn't state if it's the only way to declare constants in Cairo."
 "What might be a use-case for 'consteval_int!' based on the provided information?","A use-case for 'consteval_int!' might be when a developer needs to declare a constant that is the result of a computation of integers and wants its value determined at compile time."
 "From the provided information, can you deduce if macros in Cairo produce runtime code?","Based on the provided information, the macros in Cairo produce or interpret code at compile time, not runtime."
-"Using the array! macro, how would you create an array with values 6, 7, and 8 in Cairo based on the given examples?","The code would be
+"Using the array! macro, how would you create an array with values 6, 7, and 8 in Cairo?","The code would be
 ```
     let arr = array![6, 7, 8];
 ```
@@ -88,6 +88,6 @@ is determined at compile time."
 "What do the square brackets in 'array![]' likely represent based on the given information about Cairo?","The square brackets in 'array![]' likely represent a place to input or list the values to be included in the array."
 "how might the 'append' method be viewed in terms of efficiency when initializing arrays in Cairo?","The 'append' method might be viewed as less efficient or more redundant when initializing arrays with known values, as it requires separate calls for each value, compared to the simplified approach with the 'array!' macro."
 "In the code 'let arr = array![1, 2, 3, 4, 5];', what do the numbers within the square brackets represent?","The numbers within the square brackets represent values that are to be initialized in the array."
-"How might macros in Cairo be seen in relation to code verbosity based on the provided examples?","Macros in Cairo can be seen as tools that reduce code verbosity by simplifying common tasks."
+"How might macros in Cairo be seen in relation to code verbosity?","Macros in Cairo can be seen as tools that reduce code verbosity by simplifying common tasks."
 "In the code 'arr.append(1);', what is the role of '1' based on the provided information?","'1' is the value being appended to the array 'arr'."
-"How does the 'array!' macro impact the need for the 'append' method in array initialization based on the provided examples?","The 'array!' macro eliminates the need for using the 'append' method repetitively, as it combines the declaration and initialization steps into one."
+"How does the 'array!' macro impact the need for the 'append' method in array initialization?","The 'array!' macro eliminates the need for using the 'append' method repetitively, as it combines the declaration and initialization steps into one."

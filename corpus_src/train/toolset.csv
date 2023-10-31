@@ -22,3 +22,52 @@ Create a new project (project and directory can be customized):
 - In the extension market, search for Starknet Remix, and install it.
 - Select and edit the contract and click the Compile button to compile.
 "
+"How can I test a Cairo smart contract?","To test a Cairo smart contract, follow these steps:
+
+Write test cases using the Cairo test framework.
+Run your tests using the cairo-test command.
+Debug if necessary and iterate until the tests pass."
+"What is the process for deploying a Cairo contract to StarkNet?","The process to deploy a Cairo contract on StarkNet involves:
+
+Compiling the contract with cairo-compile.
+Using the starknet deploy command to deploy the contract to the testnet or mainnet.
+Confirming the contract deployment with the transaction hash provided."
+"How do I initialize a repository for Cairo development?","To initialize a repository for Cairo development:
+
+Create a new directory for your project.
+Run git init to initialize a new git repository.
+Set up a .gitignore file appropriate for Python/Cairo projects to avoid committing unnecessary files."
+"What's the procedure to update Cairo to the latest version?","You can update Cairo to the latest version with pip:
+
+Activate your virtual environment if you're using one.
+Run pip install --upgrade ecairo-lang to update Cairo to the latest version."
+"How do I write and run a 'Hello, World!' program in Cairo?","To write and run a 'Hello, World!' program in Cairo:
+
+Create a new file named hello.cairo.
+Write a simple Cairo function that outputs 'Hello, World!'.
+Compile the program with cairo-compile.
+Run the compiled program using cairo-run."
+"What's the method to create a custom token using Cairo on StarkNet?","To create a custom token using Cairo on StarkNet:
+
+Define the token contract in Cairo language, specifying the initial supply and tokenomics.
+Compile the contract with cairo-compile.
+Deploy the contract to StarkNet using starknet deploy.
+Interact with the contract functions to distribute or transfer tokens."
+"How do you integrate a Cairo smart contract with a web frontend?","To integrate a Cairo smart contract with a web frontend:
+
+Compile the Cairo contract and deploy it to StarkNet.
+Use a JavaScript library like starknet.js to interact with the smart contract from the web frontend.
+Create functions in your frontend to call the contract's methods using the library."
+"What is the best practice for managing multiple Cairo contracts in a project?","Best practices for managing multiple Cairo contracts in a project include:
+
+Organizing contracts into separate files and directories.
+Writing reusable contract modules that can be imported where needed.
+Keeping track of contract dependencies and ensuring consistent compilation with scarb or other build tools."
+"How do I interact with a deployed Cairo contract using the command line?","To interact with a deployed Cairo contract from the command line:
+
+Use the starknet CLI tool to call contract functions.
+Prepare the necessary input data as per the contract's interface.
+Use the starknet invoke or starknet call commands to write or read data from the contract, respectively."
+
+
+

@@ -17,7 +17,7 @@ question,answer
     use <library_name>::<function_name>
 ```
 at the top of the code."
-"How can you run only integration tests based on the given example?","By using the command
+"How can you run only integration tests based?","By using the command
 ```
     scarb test -f integration_tests
 ```
@@ -45,7 +45,7 @@ at the top of the code."
 "How do you typically run all integration tests?","By adding a filter to only run tests whose path contains 'integration_tests' using the command 'scarb test -f integration_tests'."
 "How does Cairo know which code is a test code and which is not?","Using the #[test] annotation for test functions and #[cfg(test)] for test modules."
 "What is the result of the command 'scarb test -f integration_tests'?","The tests are run, and an output line is shown for each test indicating its result."
-"Which command is used to run the tests in Cairo, based on the provided example?","scarb cairo-test."
+"Which command is used to run the tests in Cairo?","scarb cairo-test."
 "What does the cfg(test) attribute do when placed above a module?","It tells Cairo to compile and run the test code only when tests are being run and not when the library is being built normally."
 "What command results in compilation and execution of the test code?","scarb cairo-test."
 "In the directory structure, what is the parent directory of 'lib.cairo'?","The parent directory of 'lib.cairo' is 'src'."
@@ -53,7 +53,7 @@ at the top of the code."
 "How is a test module typically named in each file?","It is typically named 'tests'."
 "Where do you place the unit tests in the Cairo structure?","In the 'src' directory in each file with the code that they’re testing."
 "Which directory structure represents the location of integration tests in the provided example?","adder > src > tests > integration_test.cairo."
-"How do you run tests that only match a specific filter in the provided example?","By using the command 'scarb test -f <filter_name>'."
+"How do you run tests that only match a specific filter?","By using the command 'scarb test -f <filter_name>'."
 "What is the purpose of the 'available_gas' annotation in the provided code?","To specify the gas limit for the test."
 "In the code 'assert(it_adds_two(2, 2) == 4, 'internal_adder failed');', what is being asserted?","It's being asserted that the function 'it_adds_two' returns a value of 4 when passed the arguments 2 and 2."
 "how do you run tests with a specific configuration option?","Using the 'scarb cairo-test' command along with the cfg attribute in the code."

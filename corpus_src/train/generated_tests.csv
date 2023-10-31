@@ -69,11 +69,6 @@ question,answer
 "If a test is marked with the #[ignore] attribute, will it be run by default?","No, if a test is marked with the #[ignore] attribute, it will not be run by default."
 "How can you run all tests, including the ignored ones?","You can run all tests, including the ignored ones, using the command `scarb cairo-test --include-ignored`."
 "How do you specify a maximum amount of gas a test can consume for recursive functions or loops?","You use the #[available_gas(<Number>)] attribute on the test function."
-"How do you determine the gas usage of a specific operation in the benchmarking example?","You subtract the available gas after the operation from the initial available gas:
-```
-    (initial - testing::get_available_gas()).print();
-```
-."
 "In the code snippet `#[test] #[available_gas(2000000)]`, what is the significance of the number 2000000?","The number 2000000 represents the maximum amount of gas that the test function can consume."
 "what does 'filtering' tests mean?","'Filtering' tests means selecting specific tests to run based on their names."
 "How can you run a test even if it is marked with the #[ignore] attribute?","You can run a test marked with the #[ignore] attribute using the command
@@ -138,9 +133,8 @@ question,answer
     assert(result == 5, 'result is not 5')
 ```
 in the context of the tests provided is used to validate that the variable 'result' has a value of 5; otherwise, it will produce the failure message 'result is not 5'."
-"In the benchmarking example that uses the expression `(initial - testing::get_available_gas()).print()`, how do you display the gas consumption of a specific operation?","In the code, you display the gas consumption of a specific operation using the expression `(initial - testing::get_available_gas()).print();`."
+"In the expression `(initial - testing::get_available_gas()).print()`, how do you display the gas consumption of a specific operation?","In the code, you display the gas consumption of a specific operation using the expression `(initial - testing::get_available_gas()).print();`."
 "What does the `#[available_gas(2000000)]` attribute signify in the test functions provided?","The `#[available_gas(2000000)]` attribute signifies that the test function has a maximum gas consumption limit of 2000000."
-"In the code snippet where the `.print()` method is used for benchmarking, what is its significance?","The '.print()' method in the benchmarking example is used to print the result, specifically the gas consumed by the operation."
 "How is the 'result is not 5' message used in the tests that have the assertion `assert(result == 5, 'result is not 5')`?","The 'result is not 5' message is an assertion failure message that will be displayed if the test condition fails."
 "what does the attribute `#[cfg(test)]` indicate for the following code?","The `#[cfg(test)]` attribute indicates that the following code is meant for testing and should not be included in the main compilation."
 "What happens if you don't provide a test function, like those that use recursive operations, with the maximum amount of gas it can consume using attributes like `#[available_gas(2000000)]`?","If you don't provide a test function with the maximum amount of gas it can consume when testing recursive functions or loops, it might run into infinite loops or consume excessive gas, leading to potential problems or inefficiencies."
@@ -148,7 +142,7 @@ in the context of the tests provided is used to validate that the variable 'resu
 "Using the function `fn sum_n(n: felt) -> felt { ... }`, how does it determine when to stop the loop?","The `sum_n` function determines when to stop the loop by checking if 'i' is equal to 'n'."
 "How does the scarb cairo-test tool know to skip tests annotated with `#[ignore]` by default?","The scarb cairo-test tool knows which tests to ignore by default by checking for the #[ignore] attribute in the test functions."
 "Ihow do you filter tests in `scarb cairo-test` based on their names using flags like `-f test_name`?","You filter tests in scarb cairo-test based on their names using the -f flag followed by the name or part of the name of the test you want to run."
-"How do you measure the gas usage of operations in the benchmarking examples provided, given that they use expressions like `let initial = testing::get_available_gas();`?","To measure the gas usage of a specific operation based on the examples provided, you subtract the value of `testing::get_available_gas()` after the operation from its value before the operation."
+"How do you measure the gas usage of operation, given that they use expressions like `let initial = testing::get_available_gas();`?","To measure the gas usage of a specific operation based on the examples provided, you subtract the value of `testing::get_available_gas()` after the operation from its value before the operation."
 "How do you calculate the total gas consumed by a test or operation using code snippets like `initial - testing::get_available_gas()`?","To calculate the total gas consumed by a test or operation, you subtract the available gas value after the operation from its value before the operation started."
 "when you run the command `scarb cairo-test -f partial_test_name`, what does the `-f` flag do?","the -f flag when used with scarb cairo-test allows the user to filter and run specific tests by their names or partial names."
 "How do you prevent a test from being run by default but still allow it to be run on request?","To prevent a test from being run by default but still allow it to be run on request, you add the #[ignore] attribute to the test function."
@@ -156,5 +150,5 @@ in the context of the tests provided is used to validate that the variable 'resu
 "How is the 'result is not 5' message used in the context of the tests?","The 'result is not 5' message is an assertion failure message that will be displayed if the test condition fails."
 "what does the `#[cfg(test)]` attribute indicate?","The `#[cfg(test)]` attribute indicates that the following code is meant for testing t specific code segments or functions work as expected by asserting certain conditions."
 "What happens if you don't provide a test function with the maximum amount of gas it can consume when testing recursive functions or loops?","If you don't provide a test function with the maximum amount of gas it can consume when testing recursive functions or loops, it might run into infinite loops or consume excessive gas, leading to potential problems or inefficiencies."
-"How do you measure the gas usage of a specific operation based on the examples provided?","To measure the gas usage of a specific operation based on the examples provided, you subtract the value of `testing::get_available_gas()` after the operation from its value before the operation."
+"How do you measure the gas usage of a specific operation?","To measure the gas usage of a specific operation, you subtract the value of `testing::get_available_gas()` after the operation from its value before the operation."
 
