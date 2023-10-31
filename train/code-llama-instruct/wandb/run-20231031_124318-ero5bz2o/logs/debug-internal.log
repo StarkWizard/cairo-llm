@@ -1,0 +1,80 @@
+2023-10-31 12:43:18,599 INFO    StreamThr :37757 [internal.py:wandb_internal():86] W&B internal server running at pid: 37757, started at: 2023-10-31 12:43:18.598785
+2023-10-31 12:43:18,600 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: status
+2023-10-31 12:43:18,602 INFO    WriterThread:37757 [datastore.py:open_for_write():85] open: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231031_124318-ero5bz2o/run-ero5bz2o.wandb
+2023-10-31 12:43:18,602 DEBUG   SenderThread:37757 [sender.py:send():380] send: header
+2023-10-31 12:43:18,620 DEBUG   SenderThread:37757 [sender.py:send():380] send: run
+2023-10-31 12:43:21,952 INFO    SenderThread:37757 [retry.py:__call__():172] Retry attempt failed:
+Traceback (most recent call last):
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/urllib3/util/connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/socket.py", line 954, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/urllib3/connectionpool.py", line 404, in _make_request
+    self._validate_conn(conn)
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1058, in _validate_conn
+    conn.connect()
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/urllib3/connection.py", line 363, in connect
+    self.sock = conn = self._new_conn()
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7f837fecd940>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/urllib3/connectionpool.py", line 799, in urlopen
+    retries = retries.increment(
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f837fecd940>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 366, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/wandb/sdk/lib/gql_request.py", line 58, in execute
+    request = self.session.post(self.url, **post_args)
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/requests/sessions.py", line 637, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f837fecd940>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))
+2023-10-31 12:43:23,628 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:43:28,630 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:43:33,633 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:43:38,635 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:43:43,638 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:43:48,640 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:43:53,642 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:43:58,645 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:44:03,648 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:44:08,649 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:44:13,652 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:44:18,654 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:44:23,656 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:44:28,658 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:44:33,660 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:44:38,661 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive
+2023-10-31 12:44:43,663 DEBUG   HandlerThread:37757 [handler.py:handle_request():146] handle_request: keepalive

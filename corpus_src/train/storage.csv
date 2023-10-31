@@ -164,3 +164,52 @@ mod contract_counter {
         user_counters::write(sender_address, 0_u128);
     }
 "
+"How do you declare a ContractAddress variable in storage?","
+    [storage]
+    struct Storage {
+        my_contract_address: ContractAddress,
+    }
+"
+"How to update a ContractAddress in a storage variable?","
+    [storage]
+    struct Storage {
+        my_contract_address: ContractAddress,
+    }
+
+    // In your function, use write to update the value
+    myContractStorage.my_contract_address.write(new_address);
+"
+"How to read a ContractAddress from storage?","
+    [storage]
+    struct Storage {
+        my_contract_address: ContractAddress,
+    }
+
+    let contract_address = myContractStorage.my_contract_address.read();
+"
+"Can a ContractAddress type be part of a struct in storage?","
+    [storage]
+    struct ComplexStorage {
+        id: felt,
+        contract_addr: ContractAddress,
+    }
+"
+"How to declare multiple ContractAddress variables in storage?","
+    [storage]
+    struct MultipleAddresses {
+        first_contract: ContractAddress,
+        second_contract: ContractAddress,
+        third_contract: ContractAddress,
+    }
+"
+"Is it possible to write a ContractAddress to storage using a function?","
+    func setContractAddress(addr: ContractAddress) {
+        myContractStorage.my_contract_address.write(addr);
+    }
+"
+"Can ContractAddress in storage be made public to appear in the ABI?","
+No, ContractAddress in storage is private. However, you can create a public getter function to expose it.
+"
+"What is the default value of a ContractAddress storage variable if not set?","
+A ContractAddress storage variable defaults to ContractAddress(0x0) if not explicitly set.
+"

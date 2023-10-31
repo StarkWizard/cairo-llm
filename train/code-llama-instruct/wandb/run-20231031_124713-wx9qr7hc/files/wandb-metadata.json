@@ -1,0 +1,127 @@
+{
+    "os": "Linux-6.5.5-1-MANJARO-x86_64-with-glibc2.38",
+    "python": "3.9.18",
+    "heartbeatAt": "2023-10-31T11:47:13.515216",
+    "startedAt": "2023-10-31T11:47:13.004155",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/StarkWizard/cairo-llm.git",
+        "commit": "1f891213c9ee4a7f469ddd1c01819dcb2a3f2dc6"
+    },
+    "email": "pe_chaut@hotmail.com",
+    "root": "/home/pechaut/prj/cairo-llm",
+    "host": "Neuron",
+    "username": "pechaut",
+    "executable": "/home/pechaut/miniconda3/envs/cairo-llm/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 4127.4786875,
+        "min": 800.0,
+        "max": 5200.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 4293.797,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4139.777,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4578.47,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4389.276,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4559.009,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4272.445,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4476.562,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4223.303,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4174.604,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4252.855,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4239.189,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4309.368,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4378.391,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4500.946,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 4694.752,
+            "min": 800.0,
+            "max": 5200.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 512.4387817382812,
+            "used": 321.88134384155273
+        }
+    },
+    "gpu": "NVIDIA TITAN X (Pascal)",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA TITAN X (Pascal)",
+            "memory_total": 12884901888
+        }
+    ],
+    "memory": {
+        "total": 125.57126998901367
+    }
+}

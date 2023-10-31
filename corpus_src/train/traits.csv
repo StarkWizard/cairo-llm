@@ -153,3 +153,84 @@ fn main() {
     my_direction.print();
 }
 "
+
+"How do you define a custom trait for geometric shapes to calculate the perimeter and area","
+trait ShapeGeometry {
+    fn boundary(self) -> u64;
+    fn area(self) -> u64;
+}
+"
+"How can you implement a trait for a Rectangle struct that allows for the creation of a new Rectangle and the calculation of its boundary and area?","
+
+impl RectangleGeometryImpl of ShapeGeometry {
+    fn new(width: u64, high: u64) -> Rectangle {
+        Rectangle { width, high }
+    }
+
+    fn boundary(self: Rectangle) -> u64 {
+        2 * (self.high + self.width)
+    }
+    fn area(self: Rectangle) -> u64 {
+        self.high * self.width
+    }
+}
+"
+"Write a  function signature for creating a new instance of a struct as per a trait's definition.","
+fn new(width: u64, high: u64) -> Rectangle;
+"
+"How do you declare a struct that has two fields, width and high, both unsigned 64-bit integers, with capabilities to be copied and properly managed at the end of its lifecycle?","
+#[derive(Copy, Drop)]
+struct Rectangle {
+    width: u64,
+    high: u64,
+}
+"
+"How would you directly invoke a method to calculate the area of a Rectangle using the implementation of a trait?","
+RectangleGeometryImpl::area(@r).print();
+"
+"Provide an example of how to implement a generic trait that can be used by different geometric shape structs to calculate their boundary and area.","
+trait ShapeGeometryTrait<T> {
+    fn boundary(self: T) -> u64;
+    fn area(self: T) -> u64;
+}
+"
+"How can you implement the same trait for different structs, such as Rectangle and Circle, to perform operations like calculating the area and boundary?","
+impl RectangleGeometryImpl of ShapeGeometryTrait<Rectangle> {
+    fn boundary(self: Rectangle) -> u64 {
+        2 * (self.height + self.width)
+    }
+    fn area(self: Rectangle) -> u64 {
+        self.height * self.width
+    }
+}
+
+impl CircleGeometryImpl of ShapeGeometryTrait<Circle> {
+    fn boundary(self: Circle) -> u64 {
+        (2 * 314 * self.radius) / 100
+    }
+    fn area(self: Circle) -> u64 {
+        (314 * self.radius * self.radius) / 100
+    }
+}
+"
+"How can you define a trait that requires implementing a constructor method for structs?","
+trait ShapeGeometry {
+    fn new(width: u64, high: u64) -> Self;
+}
+"
+"How can you implement the methods of a generic trait for a custom struct Rectangle?","
+impl RectangleGeometryImpl of ShapeGeometryTrait<Rectangle> {
+    fn boundary(self: Rectangle) -> u64 {
+        2 * (self.height + self.width)
+    }
+    fn area(self: Rectangle) -> u64 {
+        self.height * self.width
+    }
+}
+"
+"If you have a struct Rectangle, how would you define a trait ShapeGeometryTrait such that it can be generically applied to other structs as well?","
+trait ShapeGeometryTrait<T> {
+    fn boundary(self: T) -> u64;
+    fn area(self: T) -> u64;
+}
+"

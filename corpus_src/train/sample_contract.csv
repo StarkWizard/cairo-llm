@@ -1,5 +1,5 @@
 question,answer
-"write a hello scarb contract","
+"write a hello scarb program","
 ```
 // src/hello_scarb.cairo
 use debug::PrintTrait;
@@ -7,4 +7,27 @@ fn main() {
 	'Hello, Scarb !'.print();
 }
 ```
+"
+"write a program that prints a custom message","
+// src/custom_message.cairo
+use debug::PrintTrait;
+fn main() {
+    let message = 'Custom message here.';
+    message.print();
+}
+"
+"write a program that prints the result of a simple calculation ","
+// src/calc_result.cairo
+use debug::PrintTrait;
+fn main() {
+    let result = 10 * 5 + 3;
+    ('Calculation Result: ' + str(result)).print();
+}"
+"write a greet user program","
+// src/greet_user.cairo
+use debug::PrintTrait;
+fn main() {
+    let username = 'user123';
+    ('Hello, ' + username + '!').print();
+}
 "

@@ -187,7 +187,7 @@ third = my_array.at(2)
     scores.append(97); // Appending the third integer value
 "
 "Insert the string 'hello' into an array named 'words'","
-    words.append("hello"); // Use 'append' to add a string to an array
+    words.append('hello'); // Use 'append' to add a string to an array
 "
 "Create an array of strings and add two names to it","
     use array::ArrayTrait;
@@ -195,4 +195,10 @@ third = my_array.at(2)
     let mut names = ArrayTrait::<felt>::new();
     names.append('Alice');
     names.append('Bob');
+"
+"Create an array of strings and replace the second value","
+    use array::ArrayTrait;
+
+    let mut string_array = ArrayTrait::from(['Hello', 'World', 'Array']);
+    string_array[1] = 'There';
 "
