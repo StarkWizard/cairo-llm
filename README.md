@@ -36,7 +36,7 @@ conda activate cairo-llm
 To launch the endpoint, 
 
 ```
-cd enpoint
+cd endpoint
 python main.py
 ```
 
