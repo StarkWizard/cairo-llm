@@ -89,3 +89,19 @@ fn main() {
     }
 ```
 "
+"in cairo, how do you write a function update_counter that increments a counter state variable?","
+ ```
+    // please define a counter variable in the storage struct
+    fn update_counter(self: @ContractState) {
+        let (counter) = self.counter.read();
+        self.counter.write(counter + 1);
+    }
+```
+"
+"what's the correct way to define a function max_of_two that returns the maximum of two felt numbers in Cairo?","
+ ```
+    fn max_of_two(a: felt, b: felt) -> (max: felt) {
+        return if a > b { a } else { b };
+    }
+```    
+"

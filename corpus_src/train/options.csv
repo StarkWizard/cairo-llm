@@ -77,3 +77,24 @@ or
     }
 ```
 "
+"Create an option of value 'hello' as a string slice","
+    let some_string: Option<felt> = Some("hello");
+"
+"How do I match the value of an Option and provide a default if it is None","
+    let some_number: Option<u32> = Some(10);
+    let number = match some_number {
+        Some(value) => value,
+        None => 0, // default value if none
+    };
+"
+"How to create an option of a tuple containing different value types","
+    let some_tuple: Option<(u32, bool, u64)> = Some((42, true, 314));
+"
+"How to use the 'unwrap_or' method to get the value inside an Option or a default value","   
+     let some_value: Option<u32> = Some(10);
+    let value_or_default = some_value.unwrap_or(0); // 0 is the default
+"
+"How to safely obtain the value of an Option using 'unwrap_or_else'","
+    let some_value: Option<String> = Some('Non-empty'.to_string());
+    let value = some_value.unwrap_or_else(|| 'Default'.to_string());
+"

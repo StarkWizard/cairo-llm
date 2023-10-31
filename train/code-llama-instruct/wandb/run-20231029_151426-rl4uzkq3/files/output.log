@@ -1,0 +1,43 @@
+/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/datasets/load.py:2097: FutureWarning: 'ignore_verifications' was deprecated in favor of 'verification_mode' in version 2.9.1 and will be removed in 3.0.0.
+You can remove this warning by passing 'verification_mode=no_checks' instead.
+  warnings.warn(
+/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/trl/trainer/sft_trainer.py:226: UserWarning: You passed a tokenizer with `padding_side` not equal to `right` to the SFTTrainer. This might lead to some unexpected behaviour due to overflow issues when training a model in half-precision. You might consider adding `tokenizer.padding_side = 'right'` to your code.
+  warnings.warn(
+You're using a CodeLlamaTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/torch/utils/checkpoint.py:429: UserWarning: torch.utils.checkpoint: please pass in use_reentrant=True or use_reentrant=False explicitly. The default value of use_reentrant will be updated to be False in the future. To maintain current behavior, pass use_reentrant=True. It is recommended that you use use_reentrant=False. Refer to docs for more details on the differences between the two variants.
+  warnings.warn(
+{'loss': 2.303, 'learning_rate': 0.00019985164143014432, 'epoch': 0.19}
+{'eval_loss': 2.1301801204681396, 'eval_runtime': 1.0452, 'eval_samples_per_second': 4.784, 'eval_steps_per_second': 0.957, 'epoch': 0.19}
+{'loss': 1.5803, 'learning_rate': 0.00019933936212274115, 'epoch': 0.38}
+{'eval_loss': 1.8056771755218506, 'eval_runtime': 1.0257, 'eval_samples_per_second': 4.875, 'eval_steps_per_second': 0.975, 'epoch': 0.38}
+{'loss': 1.4026, 'learning_rate': 0.0001984632065026943, 'epoch': 0.58}
+{'eval_loss': 1.7831194400787354, 'eval_runtime': 1.0142, 'eval_samples_per_second': 4.93, 'eval_steps_per_second': 0.986, 'epoch': 0.58}
+{'loss': 1.3285, 'learning_rate': 0.00019722638389478217, 'epoch': 0.77}
+{'eval_loss': 1.6818273067474365, 'eval_runtime': 1.0152, 'eval_samples_per_second': 4.925, 'eval_steps_per_second': 0.985, 'epoch': 0.77}
+{'loss': 1.315, 'learning_rate': 0.00019563342473326913, 'epoch': 0.96}
+{'eval_loss': 1.6560869216918945, 'eval_runtime': 1.0216, 'eval_samples_per_second': 4.894, 'eval_steps_per_second': 0.979, 'epoch': 0.96}
+/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/torch/utils/checkpoint.py:429: UserWarning: torch.utils.checkpoint: please pass in use_reentrant=True or use_reentrant=False explicitly. The default value of use_reentrant will be updated to be False in the future. To maintain current behavior, pass use_reentrant=True. It is recommended that you use use_reentrant=False. Refer to docs for more details on the differences between the two variants.
+  warnings.warn(
+{'loss': 1.2364, 'learning_rate': 0.00019369016396709681, 'epoch': 1.15}
+{'eval_loss': 1.5543503761291504, 'eval_runtime': 1.0236, 'eval_samples_per_second': 4.885, 'eval_steps_per_second': 0.977, 'epoch': 1.15}
+{'loss': 1.2013, 'learning_rate': 0.00019140371968668767, 'epoch': 1.35}
+{'eval_loss': 1.5450750589370728, 'eval_runtime': 1.0083, 'eval_samples_per_second': 4.959, 'eval_steps_per_second': 0.992, 'epoch': 1.35}
+{'loss': 1.2139, 'learning_rate': 0.00018878246705064994, 'epoch': 1.54}
+{'eval_loss': 1.5350463390350342, 'eval_runtime': 1.0122, 'eval_samples_per_second': 4.94, 'eval_steps_per_second': 0.988, 'epoch': 1.54}
+{'loss': 1.1981, 'learning_rate': 0.00018583600760788967, 'epoch': 1.73}
+{'eval_loss': 1.5621416568756104, 'eval_runtime': 0.9751, 'eval_samples_per_second': 5.128, 'eval_steps_per_second': 1.026, 'epoch': 1.73}
+{'loss': 1.1399, 'learning_rate': 0.0001825751341275013, 'epoch': 1.92}
+{'eval_loss': 1.4964945316314697, 'eval_runtime': 1.0123, 'eval_samples_per_second': 4.939, 'eval_steps_per_second': 0.988, 'epoch': 1.92}
+/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/torch/utils/checkpoint.py:429: UserWarning: torch.utils.checkpoint: please pass in use_reentrant=True or use_reentrant=False explicitly. The default value of use_reentrant will be updated to be False in the future. To maintain current behavior, pass use_reentrant=True. It is recommended that you use use_reentrant=False. Refer to docs for more details on the differences between the two variants.
+  warnings.warn(
+{'loss': 1.1232, 'learning_rate': 0.00017901179106526434, 'epoch': 2.12}
+{'eval_loss': 1.504433274269104, 'eval_runtime': 1.0242, 'eval_samples_per_second': 4.882, 'eval_steps_per_second': 0.976, 'epoch': 2.12}
+{'loss': 1.0805, 'learning_rate': 0.00017515903081155525, 'epoch': 2.31}
+{'eval_loss': 1.4926456212997437, 'eval_runtime': 0.9922, 'eval_samples_per_second': 5.039, 'eval_steps_per_second': 1.008, 'epoch': 2.31}
+{'loss': 1.0623, 'learning_rate': 0.00017103096588093686, 'epoch': 2.5}
+{'eval_loss': 1.4335225820541382, 'eval_runtime': 0.9765, 'eval_samples_per_second': 5.12, 'eval_steps_per_second': 1.024, 'epoch': 2.5}
+{'loss': 1.0692, 'learning_rate': 0.00016664271721855323, 'epoch': 2.69}
+{'eval_loss': 1.4888441562652588, 'eval_runtime': 0.9599, 'eval_samples_per_second': 5.209, 'eval_steps_per_second': 1.042, 'epoch': 2.69}
+{'loss': 1.0474, 'learning_rate': 0.00016201035881268166, 'epoch': 2.88}
+{'eval_loss': 1.453775405883789, 'eval_runtime': 1.0086, 'eval_samples_per_second': 4.957, 'eval_steps_per_second': 0.991, 'epoch': 2.88}
+/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/torch/utils/checkpoint.py:429: UserWarning: torch.utils.checkpoint: please pass in use_reentrant=True or use_reentrant=False explicitly. The default value of use_reentrant will be updated to be False in the future. To maintain current behavior, pass use_reentrant=True. It is recommended that you use use_reentrant=False. Refer to docs for more details on the differences between the two variants.

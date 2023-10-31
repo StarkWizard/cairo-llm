@@ -1,0 +1,217 @@
+2023-10-29 15:14:12,586 INFO    StreamThr :114455 [internal.py:wandb_internal():86] W&B internal server running at pid: 114455, started at: 2023-10-29 15:14:12.585639
+2023-10-29 15:14:12,588 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: status
+2023-10-29 15:14:12,591 INFO    WriterThread:114455 [datastore.py:open_for_write():85] open: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/run-a9tbg0p2.wandb
+2023-10-29 15:14:12,592 DEBUG   SenderThread:114455 [sender.py:send():380] send: header
+2023-10-29 15:14:12,609 DEBUG   SenderThread:114455 [sender.py:send():380] send: run
+2023-10-29 15:14:12,966 INFO    SenderThread:114455 [dir_watcher.py:__init__():211] watching files in: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files
+2023-10-29 15:14:12,966 INFO    SenderThread:114455 [sender.py:_start_run_threads():1122] run started: a9tbg0p2 with start time 1698588852.585756
+2023-10-29 15:14:12,975 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: check_version
+2023-10-29 15:14:12,975 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: check_version
+2023-10-29 15:14:13,045 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: run_start
+2023-10-29 15:14:13,057 DEBUG   HandlerThread:114455 [system_info.py:__init__():32] System info init
+2023-10-29 15:14:13,057 DEBUG   HandlerThread:114455 [system_info.py:__init__():47] System info init done
+2023-10-29 15:14:13,057 INFO    HandlerThread:114455 [system_monitor.py:start():194] Starting system monitor
+2023-10-29 15:14:13,057 INFO    SystemMonitor:114455 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-10-29 15:14:13,059 INFO    HandlerThread:114455 [system_monitor.py:probe():214] Collecting system info
+2023-10-29 15:14:13,059 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started cpu monitoring
+2023-10-29 15:14:13,060 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started disk monitoring
+2023-10-29 15:14:13,062 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started gpu monitoring
+2023-10-29 15:14:13,062 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started memory monitoring
+2023-10-29 15:14:13,063 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started network monitoring
+2023-10-29 15:14:13,071 DEBUG   HandlerThread:114455 [system_info.py:probe():196] Probing system
+2023-10-29 15:14:13,075 DEBUG   HandlerThread:114455 [system_info.py:_probe_git():181] Probing git
+2023-10-29 15:14:13,083 DEBUG   HandlerThread:114455 [system_info.py:_probe_git():189] Probing git done
+2023-10-29 15:14:13,084 DEBUG   HandlerThread:114455 [system_info.py:probe():244] Probing system done
+2023-10-29 15:14:13,084 DEBUG   HandlerThread:114455 [system_monitor.py:probe():223] {'os': 'Linux-6.5.5-1-MANJARO-x86_64-with-glibc2.38', 'python': '3.9.18', 'heartbeatAt': '2023-10-29T14:14:13.071703', 'startedAt': '2023-10-29T14:14:12.580867', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '<python with no main file>', 'codePathLocal': None, 'git': {'remote': 'https://github.com/StarkWizard/cairo-llm.git', 'commit': '680ea7375cb9bdd7c760505802beab25415dedf1'}, 'email': 'pe_chaut@hotmail.com', 'root': '/home/pechaut/prj/cairo-llm', 'host': 'Neuron', 'username': 'pechaut', 'executable': '/home/pechaut/miniconda3/envs/cairo-llm/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 2043.6603750000004, 'min': 800.0, 'max': 5100.0}, 'cpu_freq_per_core': [{'current': 1900.0, 'min': 800.0, 'max': 5100.0}, {'current': 3118.597, 'min': 800.0, 'max': 5100.0}, {'current': 1100.074, 'min': 800.0, 'max': 5100.0}, {'current': 1711.103, 'min': 800.0, 'max': 5100.0}, {'current': 1857.644, 'min': 800.0, 'max': 5100.0}, {'current': 1172.138, 'min': 800.0, 'max': 5100.0}, {'current': 2790.14, 'min': 800.0, 'max': 5100.0}, {'current': 1229.005, 'min': 800.0, 'max': 5100.0}, {'current': 1272.91, 'min': 800.0, 'max': 5100.0}, {'current': 1589.525, 'min': 800.0, 'max': 5100.0}, {'current': 2392.259, 'min': 800.0, 'max': 5100.0}, {'current': 1583.319, 'min': 800.0, 'max': 5100.0}, {'current': 2785.752, 'min': 800.0, 'max': 5100.0}, {'current': 2418.161, 'min': 800.0, 'max': 5100.0}, {'current': 2337.805, 'min': 800.0, 'max': 5100.0}, {'current': 3440.134, 'min': 800.0, 'max': 5100.0}], 'disk': {'/': {'total': 512.4387817382812, 'used': 295.6439743041992}}, 'gpu': 'NVIDIA TITAN X (Pascal)', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA TITAN X (Pascal)', 'memory_total': 12884901888}], 'memory': {'total': 125.57126998901367}}
+2023-10-29 15:14:13,084 INFO    HandlerThread:114455 [system_monitor.py:probe():224] Finished collecting system info
+2023-10-29 15:14:13,084 INFO    HandlerThread:114455 [system_monitor.py:probe():227] Publishing system info
+2023-10-29 15:14:13,084 DEBUG   HandlerThread:114455 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-10-29 15:14:13,085 DEBUG   HandlerThread:114455 [system_info.py:_save_pip():68] Saving pip packages done
+2023-10-29 15:14:13,085 DEBUG   HandlerThread:114455 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-10-29 15:14:13,968 INFO    Thread-12 :114455 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/requirements.txt
+2023-10-29 15:14:13,969 INFO    Thread-12 :114455 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/conda-environment.yaml
+2023-10-29 15:14:16,968 INFO    Thread-12 :114455 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/conda-environment.yaml
+2023-10-29 15:14:17,104 DEBUG   HandlerThread:114455 [system_info.py:_save_conda():87] Saving conda packages done
+2023-10-29 15:14:17,104 INFO    HandlerThread:114455 [system_monitor.py:probe():229] Finished publishing system info
+2023-10-29 15:14:17,106 DEBUG   SenderThread:114455 [sender.py:send():380] send: files
+2023-10-29 15:14:17,106 INFO    SenderThread:114455 [sender.py:_save_file():1378] saving file wandb-metadata.json with policy now
+2023-10-29 15:14:17,117 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: stop_status
+2023-10-29 15:14:17,118 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: stop_status
+2023-10-29 15:14:17,120 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-29 15:14:17,121 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: pause
+2023-10-29 15:14:17,121 INFO    HandlerThread:114455 [handler.py:handle_request_pause():705] stopping system metrics thread
+2023-10-29 15:14:17,121 INFO    HandlerThread:114455 [system_monitor.py:finish():203] Stopping system monitor
+2023-10-29 15:14:17,121 DEBUG   SystemMonitor:114455 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-10-29 15:14:17,122 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined cpu monitor
+2023-10-29 15:14:17,122 DEBUG   SystemMonitor:114455 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-10-29 15:14:17,122 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined disk monitor
+2023-10-29 15:14:17,122 DEBUG   SystemMonitor:114455 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-10-29 15:14:17,187 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined gpu monitor
+2023-10-29 15:14:17,188 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined memory monitor
+2023-10-29 15:14:17,188 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined network monitor
+2023-10-29 15:14:17,312 DEBUG   SenderThread:114455 [sender.py:send():380] send: telemetry
+2023-10-29 15:14:17,312 DEBUG   SenderThread:114455 [sender.py:send():380] send: stats
+2023-10-29 15:14:17,650 INFO    wandb-upload_0:114455 [upload_job.py:push():131] Uploaded file /tmp/tmpybuegvdcwandb/23luq3xi-wandb-metadata.json
+2023-10-29 15:14:17,968 INFO    Thread-12 :114455 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/wandb-metadata.json
+2023-10-29 15:14:18,313 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: status_report
+2023-10-29 15:14:18,711 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: resume
+2023-10-29 15:14:18,711 INFO    HandlerThread:114455 [handler.py:handle_request_resume():696] starting system metrics thread
+2023-10-29 15:14:18,711 INFO    HandlerThread:114455 [system_monitor.py:start():194] Starting system monitor
+2023-10-29 15:14:18,711 INFO    SystemMonitor:114455 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-10-29 15:14:18,711 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started cpu monitoring
+2023-10-29 15:14:18,712 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started disk monitoring
+2023-10-29 15:14:18,712 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started gpu monitoring
+2023-10-29 15:14:18,712 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: pause
+2023-10-29 15:14:18,713 INFO    HandlerThread:114455 [handler.py:handle_request_pause():705] stopping system metrics thread
+2023-10-29 15:14:18,713 INFO    HandlerThread:114455 [system_monitor.py:finish():203] Stopping system monitor
+2023-10-29 15:14:18,713 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started memory monitoring
+2023-10-29 15:14:18,713 DEBUG   SystemMonitor:114455 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-10-29 15:14:18,713 DEBUG   SystemMonitor:114455 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-10-29 15:14:18,714 DEBUG   SystemMonitor:114455 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-10-29 15:14:18,714 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined cpu monitor
+2023-10-29 15:14:18,715 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined disk monitor
+2023-10-29 15:14:18,766 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined gpu monitor
+2023-10-29 15:14:18,767 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined memory monitor
+2023-10-29 15:14:18,767 DEBUG   SenderThread:114455 [sender.py:send():380] send: stats
+2023-10-29 15:14:23,769 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: status_report
+2023-10-29 15:14:26,610 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: resume
+2023-10-29 15:14:26,610 INFO    HandlerThread:114455 [handler.py:handle_request_resume():696] starting system metrics thread
+2023-10-29 15:14:26,610 INFO    HandlerThread:114455 [system_monitor.py:start():194] Starting system monitor
+2023-10-29 15:14:26,611 INFO    SystemMonitor:114455 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-10-29 15:14:26,611 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started cpu monitoring
+2023-10-29 15:14:26,611 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started disk monitoring
+2023-10-29 15:14:26,611 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started gpu monitoring
+2023-10-29 15:14:26,612 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started memory monitoring
+2023-10-29 15:14:26,612 INFO    SystemMonitor:114455 [interfaces.py:start():190] Started network monitoring
+2023-10-29 15:14:26,620 DEBUG   SenderThread:114455 [sender.py:send():380] send: telemetry
+2023-10-29 15:14:26,620 DEBUG   SenderThread:114455 [sender.py:send():380] send: exit
+2023-10-29 15:14:26,620 INFO    SenderThread:114455 [sender.py:send_exit():585] handling exit code: 0
+2023-10-29 15:14:26,620 INFO    SenderThread:114455 [sender.py:send_exit():587] handling runtime: 4
+2023-10-29 15:14:26,622 INFO    SenderThread:114455 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-29 15:14:26,622 INFO    SenderThread:114455 [sender.py:send_exit():593] send defer
+2023-10-29 15:14:26,622 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:26,622 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 0
+2023-10-29 15:14:26,622 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:26,622 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 0
+2023-10-29 15:14:26,622 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 1
+2023-10-29 15:14:26,622 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:26,623 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 1
+2023-10-29 15:14:26,623 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:26,623 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 1
+2023-10-29 15:14:26,623 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 2
+2023-10-29 15:14:26,623 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:26,623 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 2
+2023-10-29 15:14:26,623 INFO    HandlerThread:114455 [system_monitor.py:finish():203] Stopping system monitor
+2023-10-29 15:14:26,623 DEBUG   SystemMonitor:114455 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-10-29 15:14:26,623 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined cpu monitor
+2023-10-29 15:14:26,623 DEBUG   SystemMonitor:114455 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-10-29 15:14:26,623 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined disk monitor
+2023-10-29 15:14:26,623 DEBUG   SystemMonitor:114455 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-10-29 15:14:26,685 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined gpu monitor
+2023-10-29 15:14:26,685 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined memory monitor
+2023-10-29 15:14:26,685 INFO    HandlerThread:114455 [interfaces.py:finish():202] Joined network monitor
+2023-10-29 15:14:26,686 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:26,686 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 2
+2023-10-29 15:14:26,686 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 3
+2023-10-29 15:14:26,686 DEBUG   SenderThread:114455 [sender.py:send():380] send: stats
+2023-10-29 15:14:26,686 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:26,686 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 3
+2023-10-29 15:14:26,686 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:26,686 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 3
+2023-10-29 15:14:26,686 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 4
+2023-10-29 15:14:26,686 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:26,686 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 4
+2023-10-29 15:14:26,686 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:26,686 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 4
+2023-10-29 15:14:26,686 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 5
+2023-10-29 15:14:26,686 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:26,686 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 5
+2023-10-29 15:14:26,687 DEBUG   SenderThread:114455 [sender.py:send():380] send: summary
+2023-10-29 15:14:26,687 INFO    SenderThread:114455 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-10-29 15:14:26,687 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:26,687 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 5
+2023-10-29 15:14:26,687 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 6
+2023-10-29 15:14:26,687 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:26,687 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 6
+2023-10-29 15:14:26,687 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:26,687 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 6
+2023-10-29 15:14:26,692 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: status_report
+2023-10-29 15:14:26,861 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 7
+2023-10-29 15:14:26,861 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:26,862 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 7
+2023-10-29 15:14:26,862 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:26,862 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 7
+2023-10-29 15:14:26,862 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 8
+2023-10-29 15:14:26,862 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:26,862 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 8
+2023-10-29 15:14:26,862 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:26,862 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 8
+2023-10-29 15:14:26,862 INFO    SenderThread:114455 [job_builder.py:build():281] Attempting to build job artifact
+2023-10-29 15:14:26,862 INFO    SenderThread:114455 [job_builder.py:_get_source_type():393] is repo sourced job
+2023-10-29 15:14:26,862 INFO    SenderThread:114455 [job_builder.py:_get_program_relpath():411] run is notebook based run
+2023-10-29 15:14:26,862 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 9
+2023-10-29 15:14:26,862 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:26,862 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 9
+2023-10-29 15:14:26,863 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:26,863 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 9
+2023-10-29 15:14:26,863 INFO    SenderThread:114455 [dir_watcher.py:finish():358] shutting down directory watcher
+2023-10-29 15:14:26,971 INFO    SenderThread:114455 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/config.yaml
+2023-10-29 15:14:26,971 INFO    SenderThread:114455 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/wandb-summary.json
+2023-10-29 15:14:26,972 INFO    SenderThread:114455 [dir_watcher.py:finish():388] scan: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files
+2023-10-29 15:14:26,973 INFO    SenderThread:114455 [dir_watcher.py:finish():402] scan save: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/wandb-metadata.json wandb-metadata.json
+2023-10-29 15:14:26,973 INFO    SenderThread:114455 [dir_watcher.py:finish():402] scan save: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/wandb-summary.json wandb-summary.json
+2023-10-29 15:14:26,973 INFO    SenderThread:114455 [dir_watcher.py:finish():402] scan save: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/requirements.txt requirements.txt
+2023-10-29 15:14:26,974 INFO    SenderThread:114455 [dir_watcher.py:finish():402] scan save: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/config.yaml config.yaml
+2023-10-29 15:14:26,974 INFO    SenderThread:114455 [dir_watcher.py:finish():402] scan save: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/conda-environment.yaml conda-environment.yaml
+2023-10-29 15:14:26,975 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 10
+2023-10-29 15:14:26,975 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:26,976 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 10
+2023-10-29 15:14:26,985 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:26,990 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 10
+2023-10-29 15:14:26,990 INFO    SenderThread:114455 [file_pusher.py:finish():175] shutting down file pusher
+2023-10-29 15:14:27,329 INFO    wandb-upload_1:114455 [upload_job.py:push():131] Uploaded file /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/wandb-summary.json
+2023-10-29 15:14:27,394 INFO    wandb-upload_0:114455 [upload_job.py:push():131] Uploaded file /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/requirements.txt
+2023-10-29 15:14:27,417 INFO    wandb-upload_2:114455 [upload_job.py:push():131] Uploaded file /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/config.yaml
+2023-10-29 15:14:27,454 INFO    wandb-upload_3:114455 [upload_job.py:push():131] Uploaded file /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/files/conda-environment.yaml
+2023-10-29 15:14:27,622 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: poll_exit
+2023-10-29 15:14:27,622 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: poll_exit
+2023-10-29 15:14:27,654 INFO    Thread-11 :114455 [sender.py:transition_state():613] send defer: 11
+2023-10-29 15:14:27,655 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:27,655 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 11
+2023-10-29 15:14:27,655 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:27,655 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 11
+2023-10-29 15:14:27,656 INFO    SenderThread:114455 [file_pusher.py:join():181] waiting for file pusher
+2023-10-29 15:14:27,656 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 12
+2023-10-29 15:14:27,656 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:27,656 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 12
+2023-10-29 15:14:27,657 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:27,657 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 12
+2023-10-29 15:14:27,657 INFO    SenderThread:114455 [file_stream.py:finish():595] file stream finish called
+2023-10-29 15:14:28,097 INFO    SenderThread:114455 [file_stream.py:finish():599] file stream finish is done
+2023-10-29 15:14:28,097 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 13
+2023-10-29 15:14:28,097 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:28,097 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 13
+2023-10-29 15:14:28,098 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:28,098 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 13
+2023-10-29 15:14:28,098 INFO    SenderThread:114455 [sender.py:transition_state():613] send defer: 14
+2023-10-29 15:14:28,098 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: defer
+2023-10-29 15:14:28,098 INFO    HandlerThread:114455 [handler.py:handle_request_defer():172] handle defer: 14
+2023-10-29 15:14:28,098 DEBUG   SenderThread:114455 [sender.py:send():380] send: final
+2023-10-29 15:14:28,098 DEBUG   SenderThread:114455 [sender.py:send():380] send: footer
+2023-10-29 15:14:28,098 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: defer
+2023-10-29 15:14:28,098 INFO    SenderThread:114455 [sender.py:send_request_defer():609] handle sender defer: 14
+2023-10-29 15:14:28,099 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: internal_messages
+2023-10-29 15:14:28,099 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: poll_exit
+2023-10-29 15:14:28,099 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: poll_exit
+2023-10-29 15:14:28,099 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: server_info
+2023-10-29 15:14:28,099 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: get_summary
+2023-10-29 15:14:28,099 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: sampled_history
+2023-10-29 15:14:28,100 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: job_info
+2023-10-29 15:14:28,100 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: server_info
+2023-10-29 15:14:28,216 DEBUG   SenderThread:114455 [sender.py:send_request():407] send_request: job_info
+2023-10-29 15:14:28,217 DEBUG   HandlerThread:114455 [handler.py:handle_request():146] handle_request: shutdown
+2023-10-29 15:14:28,217 INFO    HandlerThread:114455 [handler.py:finish():866] shutting down handler
+2023-10-29 15:14:29,100 INFO    WriterThread:114455 [datastore.py:close():294] close: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231029_151412-a9tbg0p2/run-a9tbg0p2.wandb
+2023-10-29 15:14:29,217 INFO    SenderThread:114455 [sender.py:finish():1534] shutting down sender
+2023-10-29 15:14:29,217 INFO    SenderThread:114455 [file_pusher.py:finish():175] shutting down file pusher
+2023-10-29 15:14:29,217 INFO    SenderThread:114455 [file_pusher.py:join():181] waiting for file pusher

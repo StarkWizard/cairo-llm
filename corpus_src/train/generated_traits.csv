@@ -1,5 +1,5 @@
 "question","answer"
-"How do you define a trait in Cairo based on the example given?","To define a trait in Cairo, you use the keyword 'trait' followed by the name of the trait in PascalCase and the function signatures inside curly braces. For example: `trait ShapeGeometry { fn boundary(self: Rectangle) -> u64; fn area(self: Rectangle) -> u64; }`."
+"How do you define a trait in Cairo?","To define a trait in Cairo, you use the keyword 'trait' followed by the name of the trait in PascalCase and the function signatures inside curly braces. For example: `trait ShapeGeometry { fn boundary(self: Rectangle) -> u64; fn area(self: Rectangle) -> u64; }`."
 "How do you implement a trait in Cairo?","To implement a trait in Cairo, you use the 'impl' keyword with the name of your implementation, followed by 'of' and then the name of the trait being implemented. For example:
 ```
     impl RectangleGeometry of ShapeGeometry {

@@ -32,3 +32,37 @@ question,answer
     }
 ```
 "
+"If you come across an if statement in code like if x > 10 { increment_counter() } else { reset_counter() }, what code runs if x is 11?","
+In the code structure:
+
+    if x > 10 {
+        increment_counter();
+    } else {
+        reset_counter();
+    }
+
+increment_counter() is executed when x is greater than 10, so it runs if x is 11."
+"What code is executed in a construct like if temperature < 0 { display_freezing_message() } else { display_warm_message() } when the temperature is -5 degrees?","
+In the structure:
+    if temperature < 0 {
+        display_freezing_message();
+    } else {
+        display_warm_message();
+    }
+display_freezing_message() is executed since the temperature is less than 0 degrees."
+"How does an if construct behave in a scenario like if isConnected { send_data() } else { show_error() } when isConnected is false?","
+In the if construct:
+    if isConnected {
+        send_data();
+    } else {
+        show_error();
+    }
+show_error() will be executed because isConnected is false."
+"In a conditional statement if user.isAdmin { grant_access() } else { deny_access() }, what happens when user.isAdmin is true?","
+In this conditional statement:
+    if user.isAdmin {
+        grant_access();
+    } else {
+        deny_access();
+    }
+grant_access() gets executed because user.isAdmin evaluates to true."

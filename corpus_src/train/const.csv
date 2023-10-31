@@ -34,3 +34,23 @@ Cairo's naming convention for constants is to use all uppercase with underscores
 "In cairo, What is the scope of a constant","
 Constants are valid for the entire time a program runs, within the scope in which they were declared."
 "In cairo, why are constants useful","Naming hardcoded values used throughout your program as constants is useful in conveying the meaning of that value to future maintainers of the code. It also helps to have only one place in your code you would need to change if the hardcoded value needed to be updated in the future."
+"In Cairo, how should I define a constant for the maximum score allowed?","
+Cairo's naming convention suggests constants should be in all uppercase letters with underscores to separate words."
+"In Cairo, declare a constant for the maximum score which is 100","
+    const MAX_SCORE: u32 = 100;
+"
+"In Cairo, how can I set a constant for a game's title?","
+Follow the uppercase naming convention for constants in Cairo, using underscores for separation."
+"In Cairo, declare a constant for a game's title 'Space Invaders'","
+    const GAME_TITLE: felt = 'Space Invaders';
+"
+"In Cairo, what's the proper naming for a constant representing the maximum file size for uploads?","
+Constant names in Cairo should be in uppercase with underscores between words."
+"In Cairo, declare a constant for the maximum file size for uploads, say 5MB","
+    const MAX_FILE_SIZE_MB: u32 = 5;
+"
+"In Cairo, how to write a constant that defines the color code for red?","
+The convention for constants in Cairo is uppercase letters with underscores for separation."
+"In Cairo, declare a constant for the color code of red which is '#FF0000'","    
+const COLOR_RED_CODE: felt = '#FF0000';
+"

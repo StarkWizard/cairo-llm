@@ -54,7 +54,6 @@ question,answer
 "How do you declare a dependency's version in the Scarb.toml file?","Using the format 'dependency_name = 'version'' under the [dependencies] section."
 "What is Starknet's operational approach in relation to Rollups?","Starknet operates as a Validity Rollup or a zero-knowledge Rollup."
 "Where can one get comprehensive knowledge about Starknet's architecture and available tools?","From the Starknet Book."
-"If someone is using Scarb, where can they find examples for its usage in the chapter?","Each example in the provided chapter can be used with Scarb."
 "Can Starknet contracts affect the persistent state of Starknet?","Yes, Starknet contracts can alter or modify the persistent state of Starknet."
 "How are Starknet contracts distinguished from other code segments?","Starknet contracts are distinguished using the #[contract] attribute."
 "Which file is associated with configurations for compiling Starknet contracts in Scarb?","The Scarb.toml file."

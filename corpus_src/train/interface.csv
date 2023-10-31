@@ -24,3 +24,26 @@ question,answer
 ```
 "
 "What is a contract interface","The interface of a contract represents the functions this contract exposes to the outside world."
+"Declare an interface for a voting system","
+    #[starknet::interface]
+    trait IVoting<TContractState> {
+        fn vote(ref self: TContractState, candidate_id: u128);
+    }
+
+    #[starknet::contract]
+    mod VotingSystem {
+
+        #[storage]
+        struct Storage {
+            votes: Mapping<u128, u128>
+        }
+
+        #[external(v0)]
+        impl VotingSystem of super::IVoting<ContractState> {
+            fn vote(ref self: ContractState, candidate_id: u128) {
+                let current_votes = self.votes.read(&candidate_id);
+                self.votes.write(&candidate_id, current_votes + 1);
+            }
+        }
+    }
+"

@@ -51,3 +51,105 @@ impl RectanglePrintImpl of PrintTrait<Rectangle> {
 }
 ```
 "
+"in cairo, how do you print the value of a variable?","
+fn main() {
+    let value = 42;
+    value.print();
+}
+"
+"Why does this program produce an error when trying to print a tuple in cairo?
+
+use debug::PrintTrait;
+
+fn main() {
+    let point = (10, 20);
+    point.print();
+}
+","
+You can't directly print a tuple. You need to implement PrintTrait or print each element separately.
+Here is how you can print each element:
+use debug::PrintTrait;
+
+fn main() {
+    let point = (10, 20);
+    point.0.print();  // prints the first element of the tuple
+    point.1.print();  // prints the second element of the tuple
+}
+"
+"What's the problem with printing a custom struct directly in cairo?
+use debug::PrintTrait;
+
+struct Point {
+    x: i64,
+    y: i64,
+}
+
+fn main() {
+    let my_point = Point { x: 10, y: 20 };
+    my_point.print();
+}
+","
+The PrintTrait is not implemented for the Point struct. You need to manually implement it.
+Here is an example:
+use debug::PrintTrait;
+
+struct Point {
+    x: i64,
+    y: i64,
+}
+
+impl PointPrintImpl of PrintTrait<Point> {
+    fn print(self: Point) {
+        self.x.print();
+        self.y.print();
+    }
+}
+
+fn main() {
+    let my_point = Point { x: 10, y: 20 };
+    my_point.print();
+}
+"
+"Why won't this code compile when attempting to print a custom enum variant in cairo?
+use debug::PrintTrait;
+
+enum Direction {
+    North,
+    South,
+    East,
+    West,
+}
+
+fn main() {
+    let my_direction = Direction::North;
+    my_direction.print();
+}
+","
+Enums in Cairo can't be printed without implementing the PrintTrait for each variant.
+Here is a corrected version:
+
+use debug::PrintTrait;
+
+enum Direction {
+    North,
+    South,
+    East,
+    West,
+}
+
+impl DirectionPrintImpl of PrintTrait<Direction> {
+    fn print(self: Direction) {
+        match self {
+            Direction::North => 'North'.print(),
+            Direction::South => 'South'.print(),
+            Direction::East => 'East'.print(),
+            Direction::West => 'West'.print(),
+        }
+    }
+}
+
+fn main() {
+    let my_direction = Direction::North;
+    my_direction.print();
+}
+"

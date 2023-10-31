@@ -6,3 +6,191 @@ fn main() {}
 Starknet contracts are essentially programs that can run on the Starknet OS, and as such, have access to Starknet's state. For a module to be handled as a contract by the compiler, it must be annotated with the #[starknet::contract] attribute.
 "
 "What is a starknet contract","Starknet contracts are essentially programs that can run on the Starknet OS, and as such, have access to Starknet's state. For a module to be handled as a contract by the compiler, it must be annotated with the #[starknet::contract] attribute."
+"give a simple implementation of the Counter contract ?","
+#[starknet::interface]
+trait ICounter<TContractState> {
+    fn increment(ref self: TContractState);
+    fn get_count(self: @TContractState) -> u128;
+}
+
+#[starknet::contract]
+mod Counter {
+
+    #[storage]
+    struct Storage {
+        count: u128
+    }
+
+    #[external]
+    impl Counter of super::ICounter<ContractState> {
+        fn increment(ref self: ContractState) {
+            let current_count = self.count.read();
+            self.count.write(current_count + 1);
+        }
+
+        fn get_count(self: @ContractState) -> u128 {
+            self.count.read()
+        }
+    }
+}
+"
+"how would you create a simple contract that toggles a boolean state ?","
+#[starknet::interface]
+trait IToggle<TContractState> {
+    fn toggle(ref self: TContractState);
+    fn get_state(self: @TContractState) -> bool;
+}
+
+#[starknet::contract]
+mod Toggle {
+
+    #[storage]
+    struct Storage {
+        state: bool
+    }
+
+    #[external]
+    impl Toggle of super::IToggle<ContractState> {
+        fn toggle(ref self: ContractState) {
+            let current_state = self.state.read();
+            self.state.write(!current_state);
+        }
+
+        fn get_state(self: @ContractState) -> bool {
+            self.state.read()
+        }
+    }
+}
+"
+"could you show a simple version of a contract that stores and retrieves a user's age ?","
+#[starknet::interface]
+trait IUserAge<TContractState> {
+    fn set_age(ref self: TContractState, age: u128);
+    fn get_age(self: @TContractState) -> u128;
+}
+
+#[starknet::contract]
+mod UserAge {
+
+    #[storage]
+    struct Storage {
+        user_age: u128
+    }
+
+    #[external]
+    impl UserAge of super::IUserAge<ContractState> {
+        fn set_age(ref self: ContractState, age: u128) {
+            self.user_age.write(age);
+        }
+
+        fn get_age(self: @ContractState) -> u128 {
+            self.user_age.read()
+        }
+    }
+}
+"
+"provide a simple example of a contract that sets and gets a string value ?","#[starknet::interface]
+trait IStringStore<TContractState> {
+    fn set_string(ref self: TContractState, value: &str);
+    fn get_string(self: @TContractState) -> &str;
+}
+
+#[starknet::contract]
+mod StringStore {
+
+    #[storage]
+    struct Storage {
+        stored_string: felt
+    }
+
+    #[external]
+    impl StringStore of super::IStringStore<ContractState> {
+        fn set_string(ref self: ContractState, value: felt) {
+            self.stored_string.write(value);
+        }
+
+        fn get_string(self: @ContractState) -> &str {
+            self.stored_string.read().as_str()
+        }
+    }
+}"
+"Can you draft the MyCounter contract that starts with an initial count?","
+it's a sample contract:
+
+rust
+Copy code
+#[starknet::interface]
+trait IMyCounter<TContractState> {
+    fn increment(ref self: TContractState);
+    fn get_count(self: @TContractState) -> u128;
+}
+
+#[starknet::contract]
+mod MyCounter {
+
+    #[storage]
+    struct Storage {
+        count: u128
+    }
+
+    #[constructor]
+    fn constructor(ref state: Storage) {
+        state.count.write(0);
+    }
+
+    #[external(v0)]
+    impl MyCounter of super::IMyCounter<ContractState> {
+        fn increment(ref self: ContractState) {
+            let current = self.count.read();
+            self.count.write(current + 1);
+        }
+        fn get_count(self: @ContractState) -> u128 {
+            self.count.read()
+        }
+    }
+}
+"
+"How would you model a BasicWallet contract to store and retrieve balance?","
+#[starknet::interface]
+trait IBasicWallet<TContractState> {
+    fn deposit(ref self: TContractState, amount: u128);
+    fn withdraw(ref self: TContractState, amount: u128) -> bool;
+    fn balance(self: @TContractState) -> u128;
+}
+
+#[starknet::contract]
+mod BasicWallet {
+
+    #[storage]
+    struct Storage {
+        total_balance: u128
+    }
+
+    #[constructor]
+    fn constructor(ref state: Storage) {
+        state.total_balance.write(0);
+    }
+
+    #[external(v0)]
+    impl BasicWallet of super::IBasicWallet<ContractState> {
+        fn deposit(ref self: ContractState, amount: u128) {
+            let current = self.total_balance.read();
+            self.total_balance.write(current + amount);
+        }
+
+        fn withdraw(ref self: ContractState, amount: u128) -> bool {
+            let current = self.total_balance.read();
+            if current >= amount {
+                self.total_balance.write(current - amount);
+                true
+            } else {
+                false
+            }
+        }
+
+        fn balance(self: @ContractState) -> u128 {
+            self.total_balance.read()
+        }
+    }
+}
+"

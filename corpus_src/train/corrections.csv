@@ -1,0 +1,22 @@
+question,answer
+"
+#[contract]
+mod myContract {
+   use debug::PrintTrait;
+   use starknet::get_caller_address;
+   use starknet::ContractAddress;
+
+   static mut owner:ContractAddress;
+","
+There is no static keyword in Cairo 1, please use Storage
+
+```
+#[contract]
+mod myContract {
+   use debug::PrintTrait;
+   use starknet::get_caller_address;
+   use starknet::ContractAddress;   [storage]
+    struct Storage{
+    }
+```
+"

@@ -53,6 +53,54 @@ _wandb:
     - 1: train/global_step
       6:
       - 3
+    - 1: train/loss
+      5: 1
+      6:
+      - 1
+    - 1: train/learning_rate
+      5: 1
+      6:
+      - 1
+    - 1: train/epoch
+      5: 1
+      6:
+      - 1
+    - 1: eval/loss
+      5: 1
+      6:
+      - 1
+    - 1: eval/runtime
+      5: 1
+      6:
+      - 1
+    - 1: eval/samples_per_second
+      5: 1
+      6:
+      - 1
+    - 1: eval/steps_per_second
+      5: 1
+      6:
+      - 1
+    - 1: train/train_runtime
+      5: 1
+      6:
+      - 1
+    - 1: train/train_samples_per_second
+      5: 1
+      6:
+      - 1
+    - 1: train/train_steps_per_second
+      5: 1
+      6:
+      - 1
+    - 1: train/total_flos
+      5: 1
+      6:
+      - 1
+    - 1: train/train_loss
+      5: 1
+      6:
+      - 1
 vocab_size:
   desc: null
   value: 32000

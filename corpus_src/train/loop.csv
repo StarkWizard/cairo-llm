@@ -1,4 +1,41 @@
 question,answer
+"Is there a 'while' keyword in Cairo?","No, you have to use a loop structure."
+"write a snippet that correct the following code:
+k=0;
+for i=3 to 10:
+    k++
+","
+```
+    let mut k = 0;
+    let mut i = 3;
+    loop {  // 'for' does not exist in Cairo
+        if i == 10 {
+                    break;
+        }
+        k +=1;
+        i += 1;
+    }
+```
+"
+"correct the issue:
+    i = 0;
+    while(i<10) {
+        'hello world'.print();
+        i += 1;
+    }
+
+","
+```
+    i = 0;
+    loop {  // While does not exist in Cairo
+        if i == 10 {
+            break;
+        }
+        'hello world'.print();
+        i += 1;
+    }
+```
+"
 "print 'hello world' ten times","
 ```
     i = 0;
@@ -72,3 +109,106 @@ fn main() {
 
 - Before the loop, we declare a variable named counter and initialize it to 0. Then we declare a variable named result to hold the value returned from the loop. On every iteration of the loop, we check whether the counter is equal to 10, and then add 1 to the counter variable. When the condition is met, we use the break keyword with the value counter * 2. After the loop, we use a semicolon to end the statement that assigns the value to result. Finally, we print the value in result, which in this case is 20.
 "
+"write a snippet that corrects the following code:
+x = 5;
+for j = 1 to 7:
+    x--
+","
+    let mut x = 5;
+    let mut j = 1;
+    loop {
+        if j == 7 {
+            break;
+        }
+        x -= 1;
+        j += 1;
+"
+"write a snippet that corrects the following code:
+y = 10;
+for z = 4 to 8:
+y++
+","  
+```  
+let mut y = 10;
+let mut z = 4;
+loop {
+    if z == 8 {
+        break;
+    }
+    y += 1;
+    z += 1;
+}
+```
+"
+"
+write a snippet that corrects the following code:
+a = 0;
+for b = 2 to 5:
+    a--
+","
+```
+    let mut a = 0;
+    let mut b = 2;
+    loop {
+        if b == 5 {
+            break;
+        }
+        a -= 1;
+        b += 1;
+    }
+```
+"
+"
+write a snippet that corrects the following code:
+m = 3;
+for n = 6 to 9:
+m++
+","
+```
+let mut m = 3;
+let mut n = 6;
+loop {
+    if n == 9 {
+        break;
+    }
+    m += 1;
+    n += 1;
+}
+```
+"
+"
+write a snippet that corrects the following code:
+p = 7;
+for q in 3 ... 6:
+    p--
+","
+```
+    let mut p = 7;
+    let mut q = 3;
+    loop {
+        if q == 6 {
+            break;
+        }
+        p -= 1;
+        q += 1;
+    }
+```
+"
+"write a snippet that corrects the following code:
+s = 4;
+for t = 2 to 4:
+s++
+","
+```
+let mut s = 4;
+let mut t = 2;
+loop {
+    if t == 4 {
+        break;
+    }
+    s += 1;
+    t += 1;
+}
+```
+"
+

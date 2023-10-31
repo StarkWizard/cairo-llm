@@ -33,3 +33,30 @@ x= let value_read = dict.get('Bob');
 "," 'Bob' is not a valid key,if you try to get the value of an inexistent key, from a dictionary you will get 0"
 "Can I delete an element from a dictionary","No. There is no way to delete data from a dictionary."
  "what is ownership in Cairo ?","Cairo implements an ownership system to ensure the safety and correctness of its compiled code. The ownership mechanism complements the linear type system, which enforces that objects are used exactly once. This helps prevent common operations that can produce runtime errors, such as illegal memory address references or multiple writes to the same memory address, and ensures the soundness of Cairo programs by checking at compile time that all the dictionaries are squashed."
+"initialize a dictionary to store user ages and add an entry for 'Bob' being 30 years old","
+    let mut user_ages: Felt252Dict<u64> = Default::default();
+    user_ages.insert('Bob', 30);
+"
+"define a dictionary to keep track of stock quantities and set the count of 'apples' to 50","
+    let mut stock_quantities: Felt252Dict<u64> = Default::default();
+    stock_quantities.insert('apples', 50);
+"
+"create a new dictionary to hold game scores, and add two scores: 'player1' with 1500 and 'player2' with 3500","
+    let mut game_scores: Felt252Dict<u64> = Default::default();
+    game_scores.insert('player1', 1500);
+    game_scores.insert('player2', 3500);
+"
+"define a dictionary for product prices, add price for 'milk' at 3 dollars, and check the price of 'milk'","
+    let mut product_prices: Felt252Dict<u64> = Default::default();
+    product_prices.insert('milk', 3);
+    let milk_price = product_prices.get('milk');
+"
+"create a dictionary for employee IDs and salaries, include an entry for employee ID 102 with a salary of 60000","
+    let mut employee_salaries: Felt252Dict<u64> = Default::default();
+    employee_salaries.insert(102, 60000);
+"
+"create a dictionary called 'language_codes', put an entry mapping 'EN' to 'English' and 'FR' to 'French'","
+    let mut language_codes: Felt252Dict<String> = Default::default();
+    language_codes.insert('EN', 'English');
+    language_codes.insert('FR', 'French');
+"

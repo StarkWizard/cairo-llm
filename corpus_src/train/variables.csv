@@ -111,3 +111,40 @@ Run completed successfully, returning []"
 "is shadowing equivalent to mut in cairo ?","Shadowing is different from marking a variable as mut because we’ll get a compile-time error if we accidentally try to reassign to this variable without using the let keyword. By using let, we can perform a few transformations on a value but have the variable be immutable after those transformations have been completed.
 
 Another distinction between mut and shadowing is that when we use the let keyword again, we are effectively creating a new variable, which allows us to change the type of the value while reusing the same name."
+"In Cairo, how can I initialize a mutable variable to zero?","
+    let mut b: felt = 0; // 'b' is mutable and initialized to zero
+"
+"Why does let a=felt; a=10; result in an error in Cairo?","
+    // 'a' needs a type during declaration and should be mutable for reassignment
+    let mut a: felt = 0;
+    a = 10;
+"
+"Can I declare a variable without initializing it in Cairo?","
+    // In Cairo, you typically need to initialize variables at the point of declaration.
+    let a: felt = 0; // Variable 'a' initialized with a default value
+"
+"This Cairo code has an error, please correct it: let mut X=felt; X=10;","
+    // 'X' should have an initial value, and 'felt' is not used like this in mutable declaration
+    let mut X: felt = 0;
+    X = 10;
+"
+"How do I correctly reassign a variable in Cairo?","
+    let mut c: felt = 5; // 'c' is mutable and initially set to 5
+    c = 10; // 'c' is reassigned to 10
+"
+"Please fix this Cairo code: let e=5; e=e+2;","
+    // 'e' must be mutable to be reassigned
+    let mut e: felt = 5;
+    e = e + 2;
+"
+"In Cairo, define a mutable variable 'h', subtract 5, and then multiply by 3","
+    let mut h: felt = 10;
+    h -= 5; // 'h' is now 5
+    h *= 3; // 'h' is now 15
+"
+"How to declare and conditionally modify a variable in Cairo?","
+    let mut j: felt = 6;
+    if j < 10 {
+        j = 10; // modify 'j' only if it is less than 10
+    }
+"

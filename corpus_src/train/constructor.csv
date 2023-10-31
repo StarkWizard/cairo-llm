@@ -21,3 +21,98 @@ There can be at most one per contract constructor."
     }
 ```
 "
+"Give an example of a contract with a constructor that initializes a balance","
+```
+    #[starknet::contract]
+    mod bank{
+
+        #[storage]
+        struct Storage{
+            balance: u128,
+        }
+
+        #[constructor]
+        fn new(ref self: ContractState, initial_balance: u128) {
+            self.balance.write(initial_balance);
+        }
+    }
+```
+"
+"Give an example of a contract with a constructor that sets up an admin address","
+```
+    #[starknet::contract]
+    mod admin_controlled{
+        use starknet::ContractAddress;
+
+        #[storage]
+        struct Storage{
+            admin: ContractAddress,
+        }
+
+        #[constructor]
+        fn setup_admin(ref self: ContractState, admin_address: ContractAddress) {
+            self.admin.write(admin_address);
+        }
+    } 
+``` 
+"
+"Give an example of a contract with a constructor that initializes multiple parameters","
+```
+    #[starknet::contract]
+    mod multi_param{
+        use starknet::types::{Uint256, ContractAddress};
+
+        #[storage]
+        struct Storage{
+            owner: ContractAddress,
+            threshold: Uint256,
+            rate: Uint256,
+        }
+
+        #[constructor]
+        fn multi_init(ref self: ContractState, owner_address: ContractAddress, init_threshold: Uint256, init_rate: Uint256) {
+            self.owner.write(owner_address);
+            self.threshold.write(init_threshold);
+            self.rate.write(init_rate);
+        }
+    }
+``` 
+"
+"Give an example of a contract with a constructor that sets a start and end date","
+``` 
+    #[starknet::contract]
+    mod timed_event{
+
+
+        #[storage]
+        struct Storage{
+            start_date: u128,
+            end_date: u128,
+        }
+
+        #[constructor]
+        fn set_dates(ref self: ContractState, start: u128, end: u128) {
+            self.start_date.write(start);
+            self.end_date.write(end);
+        }
+    }
+``` 
+"
+"Give an example of a contract with a constructor that sets an account's nickname","
+```
+    #[starknet::contract]
+    mod account_nicknames{
+        use starknet::types::felt;
+
+        #[storage]
+        struct Storage{
+            nickname: felt,
+        }
+
+        #[constructor]
+        fn set_nickname(ref self: ContractState, nickname: felt) {
+            self.nickname.write(nickname);
+        }
+    }
+``` 
+"

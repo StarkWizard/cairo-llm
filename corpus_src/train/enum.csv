@@ -101,3 +101,38 @@ enum Message {
 - Echo is of type felt252.
 - Move is a tuple consisting of two u128 values.
 "
+"create an enumeration in cairo for some car brands","
+    enum CarBrands { Toyota: (), Ford: (), Tesla: (), BMW: ()}
+"
+"create an enumeration in cairo for some weekdays","
+    enum Weekdays { Monday: (), Tuesday: (), Wednesday: (), Thursday: (), Friday: ()}
+"
+"Define an enum Direction with variants for North, South, East, and West","
+    enum Direction {
+        North: (),
+        South: (),
+        East: (),
+        West: ()
+    }
+"
+"Define an enum Color with different variants for RGB values","
+enum Color {
+    Red(u8),
+    Green(u8),
+    Blue(u8),
+}
+"
+"Create an enum Response with variants for different HTTP status codes","
+enum Response {
+    Ok(u16),          // Equivalent to HTTP 200
+    NotFound(u16),    // Equivalent to HTTP 404
+    Unauthorized(u16) // Equivalent to HTTP 401
+}
+"
+"Define an enum Shape with variants for different geometric shapes and their parameters","
+enum Shape {
+    Circle(u32),    // Radius
+    Rectangle(u32, u32), // Width, Height
+    Triangle(u32, u32, u32), // Sides
+}
+"

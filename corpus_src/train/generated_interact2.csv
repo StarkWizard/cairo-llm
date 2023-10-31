@@ -54,11 +54,6 @@ question,answer
 ```
 "
 "What should you do before deploying a contract?","declare the contract"
-"How do you declare a contract?","
-```
-    starkli declare target/dev/starknetbook_chapter_2_Vote.sierra.json --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
-```
-"
 "What flag can be added to specify a compiler version?","--compiler-version x.y.z"
 "If there's an issue with the compiler version, how can you upgrade Starkli?","starkliup"
 "What does the --rpc flag specify?","the RPC endpoint to use"
@@ -165,7 +160,7 @@ question,answer
 "What should you do before deploying a contract?","declare the contract"
 "How do you declare a contract?","
 ```
-    starkli declare target/dev/starknetbook_chapter_2_Vote.sierra.json --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
+    starkli declare target/dev/mycontract.sierra.json --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
 ```
 "
 "What flag can be added to specify a compiler version?","--compiler-version x.y.z"

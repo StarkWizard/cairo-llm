@@ -13,7 +13,6 @@ question,answer
 "What functionality do 'Modules and use' provide in Cairo?","They let you control the organization and scope of items."
 "How are items, like functions or modules, named in Cairo?","Using Paths."
 "In Cairo, where is the root module of a crate defined?","In the file lib.cairo under its root directory."
-"What aspects of code management are covered in the given chapter?","Organizing code by splitting into modules and files, extracting parts into crates as packages grow, encapsulating implementation details, and understanding scope."
 "Why is it important to encapsulate implementation details?","So that other code can call your code without having to know how the implementation works."
 "How can code readability and maintainability be improved?","By organizing code, grouping related functionality, and separating code with distinct features."
 "How do 'Packages' relate to 'Crates' in Cairo?","Packages let you build, test, and share crates."

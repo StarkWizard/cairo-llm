@@ -15,3 +15,34 @@ You can use debug::PrintTrait to print a string or a variable:
     x.print();
 ```
 "
+"create and print a felt","
+```
+    use debug::PrintTrait;
+
+    let myNumber: felt = 2023;
+    myNumber.print();
+```
+"
+"write code to print 'Cairo'","
+```
+    use debug::PrintTrait;
+
+    'Cairo'.print();
+```
+"
+"demonstrate variable printing","
+```
+    use debug::PrintTrait;
+
+    let flag: felt = 1;
+    flag.print();
+```
+"
+"debug print example","
+```
+    use debug::PrintTrait;
+
+    let error_code: felt = 404;
+    error_code.print();  // This will print the error code
+```
+"

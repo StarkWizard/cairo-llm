@@ -16,20 +16,20 @@ Please comment this code:
     use starknet::ContractAddress;
     
     fn main {
-        let sender_address = get_caller_address();
+        let caller_address = get_caller_address();
     }
 ","
 Sure, there you go:
 
 ```
-    // Core Library imports
-    // These are syscalls and functionalities that allow you to write Starknet contracts
-    use starknet::get_caller_address;
-    use starknet::ContractAddress;
-    
-    fn main {
-        // Reading caller address
-        let sender_address = get_caller_address();
+// Core Library imports
+// These are syscalls and functionalities that allow you to write Starknet contracts
+use starknet::get_caller_address;
+use starknet::ContractAddress;
+
+fn main {
+    // Reading caller address
+    let caller_address = get_caller_address();
     }
 ```
 "
@@ -45,6 +45,7 @@ mod storage_contract {
     use starknet::get_caller_address;
     use starknet::ContractAddress;
 
+    #[storage]
     struct Storage {
         // This variable is a u128, an unsigned integer (only positive values) stored over 128 bits
         // You can read and write to storage variables using the ::write() and ::read() functions, for example: my_secret_value_storage::write(42)
@@ -60,7 +61,7 @@ mod storage_contract {
         // You may have noticed that in Cairo 1 all lines end with a semicolon.
         // But this one doesn't. Why?
         // Because, in this case, the return value is the result of the function call. The semicolon is not needed.
-        my_secret_value_storage::read()
+        self.my_secret_value_storage::read()
     }
 
     // Constructor
@@ -70,7 +71,7 @@ mod storage_contract {
     fn constructor(
         my_secret_value: u128,
     ) {
-        my_secret_value_storage::write(my_secret_value);
+        self.my_secret_value_storage::write(my_secret_value);
     }
 
 }
@@ -81,11 +82,20 @@ mod storage_contract {
 #[contract]
 mod storage_contract {
 
+    #[storage]
     struct Storage {
         // This variable is a u128, an unsigned integer (only positive values) stored over 64 bits
         // You can read and write to storage variables using the ::write() and ::read() functions
         my_value: u164
     }
+    #[external(v0)]
+    fn set(ref self: ContractState, x: u128) {
+        self.my_value.write(x);
+    }
+    fn get(self: @ContractState) -> u128 {
+        self.my_value.read()
+    }
+    
 }
 ```
 "

@@ -1,0 +1,73 @@
+/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/datasets/load.py:2097: FutureWarning: 'ignore_verifications' was deprecated in favor of 'verification_mode' in version 2.9.1 and will be removed in 3.0.0.
+You can remove this warning by passing 'verification_mode=no_checks' instead.
+  warnings.warn(
+You're using a CodeLlamaTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/torch/utils/checkpoint.py:429: UserWarning: torch.utils.checkpoint: please pass in use_reentrant=True or use_reentrant=False explicitly. The default value of use_reentrant will be updated to be False in the future. To maintain current behavior, pass use_reentrant=True. It is recommended that you use use_reentrant=False. Refer to docs for more details on the differences between the two variants.
+  warnings.warn(
+{'loss': 2.0036, 'learning_rate': 0.0001998181773801737, 'epoch': 0.06}
+{'eval_loss': 1.8584102392196655, 'eval_runtime': 1.0021, 'eval_samples_per_second': 4.989, 'eval_steps_per_second': 0.998, 'epoch': 0.06}
+{'loss': 1.4062, 'learning_rate': 0.00019919050356394968, 'epoch': 0.13}
+{'eval_loss': 1.7983553409576416, 'eval_runtime': 0.9881, 'eval_samples_per_second': 5.06, 'eval_steps_per_second': 1.012, 'epoch': 0.13}
+{'loss': 1.3163, 'learning_rate': 0.0001981175508636755, 'epoch': 0.19}
+{'eval_loss': 1.7055670022964478, 'eval_runtime': 0.9897, 'eval_samples_per_second': 5.052, 'eval_steps_per_second': 1.01, 'epoch': 0.19}
+{'loss': 1.3113, 'learning_rate': 0.00019660413590154625, 'epoch': 0.26}
+{'eval_loss': 1.6453416347503662, 'eval_runtime': 0.9533, 'eval_samples_per_second': 5.245, 'eval_steps_per_second': 1.049, 'epoch': 0.26}
+{'loss': 1.3546, 'learning_rate': 0.00019465705259130603, 'epoch': 0.32}
+{'eval_loss': 1.5361937284469604, 'eval_runtime': 1.0031, 'eval_samples_per_second': 4.984, 'eval_steps_per_second': 0.997, 'epoch': 0.32}
+{'loss': 1.2868, 'learning_rate': 0.00019228504163949813, 'epoch': 0.38}
+{'eval_loss': 1.5588301420211792, 'eval_runtime': 0.952, 'eval_samples_per_second': 5.252, 'eval_steps_per_second': 1.05, 'epoch': 0.38}
+{'loss': 1.2902, 'learning_rate': 0.00018949875130731318, 'epoch': 0.45}
+{'eval_loss': 1.6224815845489502, 'eval_runtime': 0.9445, 'eval_samples_per_second': 5.294, 'eval_steps_per_second': 1.059, 'epoch': 0.45}
+{'loss': 1.2609, 'learning_rate': 0.00018631068960917973, 'epoch': 0.51}
+{'eval_loss': 1.5092161893844604, 'eval_runtime': 1.0365, 'eval_samples_per_second': 4.824, 'eval_steps_per_second': 0.965, 'epoch': 0.51}
+{'loss': 1.2422, 'learning_rate': 0.00018273516816268436, 'epoch': 0.57}
+{'eval_loss': 1.506308913230896, 'eval_runtime': 0.9723, 'eval_samples_per_second': 5.143, 'eval_steps_per_second': 1.029, 'epoch': 0.57}
+{'loss': 1.2423, 'learning_rate': 0.00017878823794188599, 'epoch': 0.64}
+{'eval_loss': 1.5443189144134521, 'eval_runtime': 0.9443, 'eval_samples_per_second': 5.295, 'eval_steps_per_second': 1.059, 'epoch': 0.64}
+{'loss': 1.1914, 'learning_rate': 0.0001744876172224359, 'epoch': 0.7}
+{'eval_loss': 1.5763304233551025, 'eval_runtime': 0.9973, 'eval_samples_per_second': 5.014, 'eval_steps_per_second': 1.003, 'epoch': 0.7}
+{'loss': 1.1744, 'learning_rate': 0.00016985261204196755, 'epoch': 0.77}
+{'eval_loss': 1.5308483839035034, 'eval_runtime': 1.043, 'eval_samples_per_second': 4.794, 'eval_steps_per_second': 0.959, 'epoch': 0.77}
+{'loss': 1.182, 'learning_rate': 0.00016490402953281885, 'epoch': 0.83}
+{'eval_loss': 1.5216048955917358, 'eval_runtime': 1.0362, 'eval_samples_per_second': 4.826, 'eval_steps_per_second': 0.965, 'epoch': 0.83}
+{'loss': 1.1907, 'learning_rate': 0.00015966408451614843, 'epoch': 0.89}
+{'eval_loss': 1.5311919450759888, 'eval_runtime': 0.9696, 'eval_samples_per_second': 5.157, 'eval_steps_per_second': 1.031, 'epoch': 0.89}
+{'loss': 1.174, 'learning_rate': 0.00015415629977675596, 'epoch': 0.96}
+{'eval_loss': 1.533522129058838, 'eval_runtime': 0.9751, 'eval_samples_per_second': 5.128, 'eval_steps_per_second': 1.026, 'epoch': 0.96}
+/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/torch/utils/checkpoint.py:429: UserWarning: torch.utils.checkpoint: please pass in use_reentrant=True or use_reentrant=False explicitly. The default value of use_reentrant will be updated to be False in the future. To maintain current behavior, pass use_reentrant=True. It is recommended that you use use_reentrant=False. Refer to docs for more details on the differences between the two variants.
+  warnings.warn(
+{'loss': 1.0858, 'learning_rate': 0.0001484054004662863, 'epoch': 1.02}
+{'eval_loss': 1.4344278573989868, 'eval_runtime': 0.9756, 'eval_samples_per_second': 5.125, 'eval_steps_per_second': 1.025, 'epoch': 1.02}
+{'loss': 1.0102, 'learning_rate': 0.00014243720310885453, 'epoch': 1.09}
+{'eval_loss': 1.4945131540298462, 'eval_runtime': 0.9567, 'eval_samples_per_second': 5.226, 'eval_steps_per_second': 1.045, 'epoch': 1.09}
+{'loss': 0.9699, 'learning_rate': 0.0001362784997073604, 'epoch': 1.15}
+{'eval_loss': 1.4668208360671997, 'eval_runtime': 0.9693, 'eval_samples_per_second': 5.158, 'eval_steps_per_second': 1.032, 'epoch': 1.15}
+{'loss': 1.0127, 'learning_rate': 0.00012995693747075318, 'epoch': 1.21}
+{'eval_loss': 1.4392489194869995, 'eval_runtime': 1.0174, 'eval_samples_per_second': 4.915, 'eval_steps_per_second': 0.983, 'epoch': 1.21}
+{'loss': 0.9504, 'learning_rate': 0.000123500894702167, 'epoch': 1.28}
+{'eval_loss': 1.4638078212738037, 'eval_runtime': 1.007, 'eval_samples_per_second': 4.965, 'eval_steps_per_second': 0.993, 'epoch': 1.28}
+{'loss': 0.9341, 'learning_rate': 0.00011693935340508092, 'epoch': 1.34}
+{'eval_loss': 1.4050142765045166, 'eval_runtime': 0.9644, 'eval_samples_per_second': 5.185, 'eval_steps_per_second': 1.037, 'epoch': 1.34}
+{'loss': 0.9681, 'learning_rate': 0.00011030176917939044, 'epoch': 1.4}
+{'eval_loss': 1.4009273052215576, 'eval_runtime': 1.0141, 'eval_samples_per_second': 4.931, 'eval_steps_per_second': 0.986, 'epoch': 1.4}
+{'loss': 0.9441, 'learning_rate': 0.00010361793899144426, 'epoch': 1.47}
+{'eval_loss': 1.3741910457611084, 'eval_runtime': 1.0442, 'eval_samples_per_second': 4.788, 'eval_steps_per_second': 0.958, 'epoch': 1.47}
+{'loss': 0.9453, 'learning_rate': 9.691786741164313e-05, 'epoch': 1.53}
+{'eval_loss': 1.395287036895752, 'eval_runtime': 0.9568, 'eval_samples_per_second': 5.226, 'eval_steps_per_second': 1.045, 'epoch': 1.53}
+{'loss': 0.9368, 'learning_rate': 9.023163192007751e-05, 'epoch': 1.6}
+{'eval_loss': 1.3629852533340454, 'eval_runtime': 0.9919, 'eval_samples_per_second': 5.041, 'eval_steps_per_second': 1.008, 'epoch': 1.6}
+{'loss': 0.9328, 'learning_rate': 8.358924788486447e-05, 'epoch': 1.66}
+{'eval_loss': 1.3521808385849, 'eval_runtime': 0.9572, 'eval_samples_per_second': 5.224, 'eval_steps_per_second': 1.045, 'epoch': 1.66}
+{'loss': 0.9883, 'learning_rate': 7.702053381931276e-05, 'epoch': 1.72}
+{'eval_loss': 1.3776094913482666, 'eval_runtime': 1.003, 'eval_samples_per_second': 4.985, 'eval_steps_per_second': 0.997, 'epoch': 1.72}
+{'loss': 0.9645, 'learning_rate': 7.055497752279494e-05, 'epoch': 1.79}
+{'eval_loss': 1.3541276454925537, 'eval_runtime': 0.9773, 'eval_samples_per_second': 5.116, 'eval_steps_per_second': 1.023, 'epoch': 1.79}
+{'loss': 0.9259, 'learning_rate': 6.422160370623635e-05, 'epoch': 1.85}
+{'eval_loss': 1.3324881792068481, 'eval_runtime': 1.0426, 'eval_samples_per_second': 4.796, 'eval_steps_per_second': 0.959, 'epoch': 1.85}
+{'loss': 0.9642, 'learning_rate': 5.804884369646744e-05, 'epoch': 1.92}
+{'eval_loss': 1.3427917957305908, 'eval_runtime': 1.0211, 'eval_samples_per_second': 4.897, 'eval_steps_per_second': 0.979, 'epoch': 1.92}
+{'loss': 0.934, 'learning_rate': 5.206440780435369e-05, 'epoch': 1.98}
+{'eval_loss': 1.3349553346633911, 'eval_runtime': 1.0097, 'eval_samples_per_second': 4.952, 'eval_steps_per_second': 0.99, 'epoch': 1.98}
+/home/pechaut/miniconda3/envs/cairo-llm/lib/python3.9/site-packages/torch/utils/checkpoint.py:429: UserWarning: torch.utils.checkpoint: please pass in use_reentrant=True or use_reentrant=False explicitly. The default value of use_reentrant will be updated to be False in the future. To maintain current behavior, pass use_reentrant=True. It is recommended that you use use_reentrant=False. Refer to docs for more details on the differences between the two variants.
+  warnings.warn(
+{'loss': 0.7945, 'learning_rate': 4.6295160929658356e-05, 'epoch': 2.04}

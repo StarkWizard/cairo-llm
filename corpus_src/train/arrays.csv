@@ -58,7 +58,7 @@ fn main() {
  "How can I get the value at a specific index of an array","
  To access array elements, you can use get() or at() array methods that return different types. Using arr.at(index) is equivalent to using the subscripting operator arr[index].
 
-The get function returns an Option<Box<@T>>, which means it returns an option to a Box type (Cairo's smart-pointer type) containing a snapshot to the element at the specified index if that element exists in the array. If the element doesn't exist, get returns None. This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics. Snapshots will be explained in more detail in the References and Snapshots chapter.
+The get function returns an Option<Box<@T>>, which means it returns an option to a Box type (Cairo's smart-pointer type) containing a snapshot to the element at the specified index if that element exists in the array. If the element doesn't exist, get returns None. This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics.
 
 The at function, on the other hand, directly returns a snapshot to the element at the specified index using the unbox() operator to extract the value stored in a box. If the index is out of bounds, a panic error occurs. You should only use at when you want the program to panic if the provided index is out of the array's bounds, which can prevent unexpected behavior.
 
@@ -180,4 +180,19 @@ third = my_array.at(2)
 "
 "myArray is empty, what does that code do: myArray.pop_front();","
     As the array is empty, pop_front returns Option::None
+"
+"Add three distinct values to an existing array named 'scores'","
+    scores.append(50); // Appending an integer value
+    scores.append(85); // Appending another integer value
+    scores.append(97); // Appending the third integer value
+"
+"Insert the string 'hello' into an array named 'words'","
+    words.append("hello"); // Use 'append' to add a string to an array
+"
+"Create an array of strings and add two names to it","
+    use array::ArrayTrait;
+
+    let mut names = ArrayTrait::<felt>::new();
+    names.append('Alice');
+    names.append('Bob');
 "

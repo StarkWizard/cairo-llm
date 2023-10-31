@@ -92,3 +92,57 @@ fn build_user_short(email: felt252, username: felt252) -> User {
 
 - Because the parameter names and the struct field names are exactly the same, we can use the field init shorthand syntax to rewrite build_user so it behaves exactly the same but doesn’t have the repetition of username and email
 "
+"create a struct for a vehicle","
+    #[derive(Copy, Clone)]
+    struct Vehicle {
+        make: felt,
+        model: felt,
+        year: u32,
+        is_electric: bool,
+    }
+"
+"how to instantiate a struct for a book ?","
+    #[derive(Copy, Clone)]
+    struct Book {
+        title: felt,
+        author: felt,
+        pages: u32,
+        is_hardcover: bool,
+    }
+
+    fn main() {
+        let book = Book {
+            title: 'The Great Gatsby',
+            author: 'F. Scott Fitzgerald',
+            pages: 180,
+            is_hardcover: true,
+        };
+    }
+"
+"Define a struct for an employee","
+    #[derive(Copy, Clone)]
+    struct Employee {
+        name: felt,
+        position: felt,
+        start_year: u32,
+        full_time: bool,
+    }
+"
+"How to initialize a struct for a smartphone?","
+    #[derive(Copy, Clone)]
+    struct Smartphone {
+        brand: felt,
+        model: felt,
+        storage_capacity: u64,
+        is_water_resistant: bool,
+    }
+
+    fn main() {
+        let phone = Smartphone {
+            brand: 'AcmePhone',
+            model: 'X200',
+            storage_capacity: 128,
+            is_water_resistant: true,
+        };
+    }
+"

@@ -8,3 +8,43 @@ question,answer
     }
 ```
 "
+"write a Cairo function that matches a number to its corresponding string: 1 to 'one', 2 to 'two', and any other number to 'unknown'","
+```
+    match number {
+        1 => 'one',
+        2 => 'two',
+        _ => 'unknown'
+    }
+```
+"
+"write a Cairo code snippet that matches a status code to actions: 200 to 'OK', 404 to 'Not Found', and any other code to 'Unknown Status'","
+```
+    match status_code {
+        200 => 'OK',
+        404 => 'Not Found',
+        _ => 'Unknown Status'
+    }
+```
+"
+"write a pattern matching in Cairo that matches weekdays: 1 to 'Monday', 2 to 'Tuesday', ... , 7 to 'Sunday', otherwise 'Invalid'","
+```
+    match day {
+        1 => 'Monday',
+        2 => 'Tuesday',
+        3 => 'Wednesday',
+        4 => 'Thursday',
+        5 => 'Friday',
+        6 => 'Saturday',
+        7 => 'Sunday',
+        _ => 'Invalid'
+    }
+```
+"
+"write a Cairo match statement for error codes: 1 to 'File not found', 2 to 'Access denied', and default to 'General error'","
+```    match error_code {
+        1 => 'File not found',
+        2 => 'Access denied',
+        _ => 'General error'
+    }
+```
+"
