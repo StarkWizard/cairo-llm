@@ -10,7 +10,7 @@ _wandb:
     cli_version: 0.15.12
     is_jupyter_run: true
     is_kaggle_kernel: false
-    start_time: 1698820199.539703
+    start_time: 1698836736.877722
     t:
       1:
       - 55
@@ -92,25 +92,28 @@ _wandb:
       - 1
 vocab_size:
   desc: null
-  value: 32016
+  value: 32000
 max_position_embeddings:
   desc: null
-  value: 16384
+  value: 32768
 hidden_size:
   desc: null
   value: 4096
 intermediate_size:
   desc: null
-  value: 11008
+  value: 14336
 num_hidden_layers:
   desc: null
   value: 32
 num_attention_heads:
   desc: null
   value: 32
+sliding_window:
+  desc: null
+  value: 4096
 num_key_value_heads:
   desc: null
-  value: 32
+  value: 8
 hidden_act:
   desc: null
   value: silu
@@ -120,21 +123,12 @@ initializer_range:
 rms_norm_eps:
   desc: null
   value: 1.0e-05
-pretraining_tp:
-  desc: null
-  value: 1
 use_cache:
   desc: null
   value: false
 rope_theta:
   desc: null
-  value: 1000000
-rope_scaling:
-  desc: null
-  value: null
-attention_bias:
-  desc: null
-  value: false
+  value: 10000.0
 return_dict:
   desc: null
   value: true
@@ -258,7 +252,7 @@ begin_suppress_tokens:
 architectures:
   desc: null
   value:
-  - LlamaForCausalLM
+  - MistralForCausalLM
 finetuning_task:
   desc: null
   value: null
@@ -301,13 +295,13 @@ problem_type:
   value: null
 _name_or_path:
   desc: null
-  value: codellama/CodeLlama-7b-Instruct-hf
+  value: mistralai/Mistral-7B-Instruct-v0.1
 transformers_version:
   desc: null
   value: 4.34.0
 model_type:
   desc: null
-  value: llama
+  value: mistral
 quantization_config:
   desc: null
   value:
@@ -319,20 +313,23 @@ quantization_config:
     llm_int8_enable_fp32_cpu_offload: false
     llm_int8_has_fp16_weight: false
     bnb_4bit_quant_type: nf4
-    bnb_4bit_use_double_quant: true
+    bnb_4bit_use_double_quant: false
     bnb_4bit_compute_dtype: bfloat16
+pretraining_tp:
+  desc: null
+  value: 1
 window:
   desc: null
   value: 256
 output_dir:
   desc: null
-  value: StarkWizard/llama-2-7b-cairo-trained-PEFT
+  value: StarkWizard/Mistral-7b-instruct-cairo-PEFT
 overwrite_output_dir:
   desc: null
   value: false
 do_train:
   desc: null
-  value: true
+  value: false
 do_eval:
   desc: null
   value: true
@@ -359,7 +356,7 @@ per_gpu_eval_batch_size:
   value: null
 gradient_accumulation_steps:
   desc: null
-  value: 1
+  value: 4
 eval_accumulation_steps:
   desc: null
   value: null
@@ -368,7 +365,7 @@ eval_delay:
   value: 0
 learning_rate:
   desc: null
-  value: 0.0002
+  value: 2.0e-05
 weight_decay:
   desc: null
   value: 0.0
@@ -383,7 +380,7 @@ adam_epsilon:
   value: 1.0e-08
 max_grad_norm:
   desc: null
-  value: 0.3
+  value: 1.0
 num_train_epochs:
   desc: null
   value: 3
@@ -392,13 +389,13 @@ max_steps:
   value: -1
 lr_scheduler_type:
   desc: null
-  value: constant
+  value: cosine
 warmup_ratio:
   desc: null
-  value: 0.03
+  value: 0.0
 warmup_steps:
   desc: null
-  value: 0
+  value: 5
 log_level:
   desc: null
   value: passive
@@ -410,7 +407,7 @@ log_on_each_node:
   value: true
 logging_dir:
   desc: null
-  value: StarkWizard/llama-2-7b-cairo-trained-PEFT/runs/Nov01_07-30-31_Neuron
+  value: ./logs
 logging_strategy:
   desc: null
   value: steps
@@ -509,7 +506,7 @@ past_index:
   value: -1
 run_name:
   desc: null
-  value: StarkWizard/llama-2-7b-cairo-trained-PEFT
+  value: StarkWizard/Mistral-7b-instruct-cairo-PEFT
 disable_tqdm:
   desc: null
   value: false
@@ -615,7 +612,7 @@ hub_always_push:
   value: false
 gradient_checkpointing:
   desc: null
-  value: false
+  value: true
 include_inputs_for_metrics:
   desc: null
   value: false

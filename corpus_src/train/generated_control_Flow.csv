@@ -1,8 +1,7 @@
 "question","answer"
-"What are the basic building blocks for controlling the flow of execution in most programming languages?","Condition-based code execution and repetitive code execution."
-"What are the primary constructs for controlling the flow of execution in Cairo code?","if expressions and loops."
+"What are the primary constructs for controlling the flow of execution in Cairo code?","if expressions and loops. there is no 'for' and no 'while' in cairo"
 "How does an 'if expression' work in Cairo?","It allows you to run a block of code if a specified condition is met."
-"What happens in Cairo if the condition in an 'if expression' is not met?","The program skips the block of code associated with the 'if' and may execute an 'else' block if provided."
+"What happens in Cairo if the condition in an 'if' expression is not met?","The program skips the block of code associated with the 'if' and may execute an 'else' block if provided."
 "What type of condition must be used in an 'if expression' in Cairo?","The condition must be of type 'bool' (boolean)."
 "How can you use 'else if' expressions in Cairo?","You can combine 'if' and 'else' to create 'else if' expressions to handle multiple conditions."
 "What happens in Cairo when a 'true' condition is found in an 'else if' block?","The block associated with the first 'true' condition is executed, and the rest are skipped."
@@ -12,9 +11,7 @@
 "How can you break out of an infinite loop in Cairo?","By using the 'break' statement within the loop to define a stop condition."
 "What is the purpose of the 'continue' keyword in a loop?","It skips the rest of the code in the current iteration and proceeds to the next iteration."
 "How can you pass a value out of a loop in Cairo?","By placing the value after the 'break' statement used to stop the loop."
-"What is a common use case for loops in programming?","Retrying an operation that might fail, such as checking for success."
 "How can you return a value from a loop in Cairo?","By specifying the value after the 'break' statement that ends the loop."
-"What is printed when the Cairo code with the 'loop' and 'result' variable is executed?","The result is 20."
 "What is the purpose of the 'gas meter' in Cairo?","It limits the amount of computation that can be done in a program and prevents infinite loops."
 "What happens when a program runs out of gas in Cairo?","It stops executing, and the program may panic or terminate."
 "How can you stop a program that is stuck in an infinite loop in most terminals?","By using the keyboard shortcut 'ctrl-c' to interrupt the program."
@@ -105,19 +102,18 @@ if `condition1` evaluates to true, then `block1` will execute, and the program w
 ```
 
 the `else` block provides an alternative code to execute when the condition in the preceding `if` block evaluates to false."
-"What would be the output if `number` in the code `let number = 3; if number == 12 { 'a'.print(); } else if number == 3 { 'b'.print(); } else if number - 2 == 1 { 'c'.print(); } else { 'd'.print(); }` is changed to 1?","If `number` in the code
+"What would be the output if `number` in the code `let number = 3; if number == 12 { 'a'.print(); } else if number == 3 { 'b'.print(); } else if number == 1 { 'c'.print(); } else { 'd'.print(); }` is changed to 1?","If `number` in the code
 ```
     let number = 3;
     if number == 12 {
         'a'.print();
     } else if number == 3 {
         'b'.print();
-    } else if number - 2 == 1 {
+    } else if number == 1 {
         'c'.print();
     } else { 'd'.print(); }
 ```
 
 is changed to 1, the output will be 'c'."
-"How does a series of `if` and `else if` conditions behave when one of the conditions evaluates to true in programming?","In a series of `if` and `else if` conditions, once a condition evaluates to true, its associated block of code is executed, and the program skips checking the subsequent conditions."
 "Why might it be beneficial to restructure code that heavily relies on `else if` conditions?","It might be beneficial to restructure code that heavily relies on `else if` conditions to improve clarity, readability, and maintainability of the code."
 "How can you specify a block of code to run regardless of whether the condition in an `if` statement is true or false?","You can use an `else` block after an `if` statement to specify a block of code that runs when the condition in the `if` statement is false."

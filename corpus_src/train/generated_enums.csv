@@ -47,7 +47,7 @@ the value associated with the 'Echo' variant is accessed and printed."
 "How can enums be used in conjunction with custom types?","Enums can be used to store data associated with each variant, which can be a basic type, tuple, struct, or another enum."
 "How do you break out of a loop?","Using the 'break' keyword."
 "How do you call a trait's method on an instance of a type?","By using the dot notation, like instance.method()"
-"How do you initialize a mutable variable in the provided code?","Using the 'let mut' keyword."
+"How do you initialize a mutable variable in?","Using the 'let mut' keyword."
 "How do you define a custom trait in Cairo?","Using the 'trait' keyword followed by the trait name and its method signatures."
 "how is a tuple of two u128 values represented?","It is represented by:
 ```
@@ -61,7 +61,7 @@ the value associated with the 'Echo' variant is accessed and printed."
 "How do you define a function that returns a value of type Option<usize>?","By specifying the return type as Option<usize> after the '->' symbol in the function signature."
 "What is the purpose of the '*' symbol before 'arr.at(index)' in the code?","It's used to dereference the value, accessing the underlying value pointed to by the reference."
 "Can you have a function in Cairo that does not return a value?","Yes"
-"How can you specify that a function takes an array as a parameter in the provided code?","Using the syntax arr:
+"How can you specify that a function takes an array as a parameter?","Using the syntax arr:
 ```
     @Array<Type>
 ```

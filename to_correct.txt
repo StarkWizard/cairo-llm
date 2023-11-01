@@ -1,0 +1,7 @@
+   fn compute_u(n: felt) -> felt {
+       let mut result = 0;
+       for i in 0..n {
+           result += 1;
+       }
+       result
+   }

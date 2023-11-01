@@ -196,9 +196,29 @@ third = my_array.at(2)
     names.append('Alice');
     names.append('Bob');
 "
-"Create an array of strings and replace the second value","
-    use array::ArrayTrait;
 
-    let mut string_array = ArrayTrait::from(['Hello', 'World', 'Array']);
-    string_array[1] = 'There';
+"Can I do my_array.net() to get the next element of an array?","No, there is no such method, you need to use get() or at, with the correct index"
+"Please correct: 
+    let mut i=0
+    loop {
+        t = array1.next();
+        u = array2.next();
+        if(i==10)
+        {
+            return t+u;
+        }
+        i+=1;
+    }
+    ","
+    // next is not a method for arrays in Cairo
+    let mut i=0
+    loop {
+        t = array1.at(i);
+        u = array2.at(i);
+        if(i==10)
+        {
+            return t+u;
+        }
+        i+=1;
+    }
 "

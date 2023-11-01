@@ -54,7 +54,7 @@ Then, append each value to the array one by one using 'arr.append(value);'."
     const c: felt252 = consteval_int!(3 + 7);
 ```
 "
-"Using the given information, how do macros in Cairo interact with the compiler?","Macros in Cairo provide instructions that are interpreted by the compiler to generate other code or compute values at compile time."
+"how do macros in Cairo interact with the compiler?","Macros in Cairo provide instructions that are interpreted by the compiler to generate other code or compute values at compile time."
 "What are the two main tasks combined by the array! macro in Cairo?","The two main tasks combined by the array! macro are declaring the array and appending each value to it."
 "How do macros in Cairo contribute to code efficiency?","Macros in Cairo allow developers to write shorter and more simplified code by generating other code or computing values at compile time."
 "In the provided code snippets, what does 'ArrayTrait::new();' likely do?","'ArrayTrait::new();' likely creates a new instance of an array."
