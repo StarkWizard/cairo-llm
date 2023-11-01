@@ -24,7 +24,6 @@
 "What is the recommended practice for documenting code using comments in programming?","The recommended practice is to provide clear and concise explanations to enhance code readability and understanding."
 "How can comments be helpful when working in a team on a programming project?","Comments can help team members understand the code's functionality, making collaboration and debugging easier."
 "Are comments required in Cairo programs, or are they optional?","Comments are optional in Cairo programs, and their presence depends on the programmer's preference and the need for documentation."
-"What is the main purpose of the 'fn main() -> felt252' line in the code example?","It declares the 'main' function with a return type of 'felt252' and defines the program's entry point."
 "Why might a programmer use comments to explain complex or non-obvious code logic?","Programmers use comments to clarify complex or non-obvious code logic, making it easier for others (or themselves) to understand."
 "Can comments be placed on the same line as code in Cairo?","Yes, in Cairo, comments can be placed on the same line as code to provide explanations for that code."
 "Are comments a standard feature in most programming languages?","Yes, comments are a standard feature in nearly all programming languages to improve code documentation and clarity."
