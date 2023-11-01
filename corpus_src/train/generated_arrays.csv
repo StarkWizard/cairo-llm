@@ -1,30 +1,38 @@
 question,answer
 "What is an array in Cairo?","An array is a collection of elements of the same type."
-"How can you utilize array methods?","You can create and use array methods by importing the array::ArrayTrait trait."
-"Are arrays versatile in terms of modification options?","No, arrays have limited modifications options."
+"Can I append elements of diffenrent types to an array?","No, all elements of an array must be of the same type"
+"Can I store a u32 and a felt in an array?","No, elements must be of the same type in an array"
+"What must I do to utilize array methods?","You use array methods by importing the array::ArrayTrait"
 "What is a key feature of an array in relation to changing its values?","The values of arrays can't be modified."
 "If a memory slot is written to, what can and can't you do with it?","Once a memory slot is written to, it cannot be overwritten, but only read from it."
-"How can you add new items to an array if the method mentioned is 'append'?","You can only append items to the end of an array."
+"How can you add new items to an array?","You can only append items to the end of an array, using the append() method"
 "how can you remove items from an array?","The method 'pop_front()' removes items from the front of an array."
+"can you remove items at any index of an array?","Now, only from the front.The method 'pop_front()' removes items from the front of an array."
 "How do you create an array?","An array is created with ArrayTrait::new() call."
-"How do you indicate the type of items in an array?","You can pass the expected type of items inside the array when instantiating or explicitly define the type the variable."
+"How do you indicate the type of items in an array?","You can pass the expected type of items inside the array when instantiating or explicitly define the type the variable.
+```
+    let mut arr:Array<u128> = ArrayTrait::new();
+```
+"
 "how can you include an element to an array?","To add an element to the end of an array, you can use the append() method."
-"How do you remove elements from an array's front?","You can use the pop_front() method."
-"If an array is empty and you use the 'pop_front()' method, what would it return?","It returns Option::None."
+"how can you add an element to an array?","To add an element to the end of an array, you can use the append() method."
+"How do you remove elements from an array's front?","You can use the pop_front() method. Only front elements can be removed."
+"If an array is empty and you use the 'pop_front()' method, what would it return?","It returns Option::None and the array remains in its state."
 "Given the code 'a.append(10); a.append(1); a.append(2); let first_value = a.pop_front().unwrap(); first_value.print();', what would be the printed output?","It will print '10'."
 "Why does the output display10 when the code snippet includes 'a.append(10);' followed by 'a.pop_front().unwrap().print();'?","Because 10 was the first element added to the array, and it gets removed using pop_front()."
-"What does it mean for memory to be immutable?","In Cairo, memory cannot be changed once set."
+"What does it mean for memory to be immutable?","In Cairo, memory cannot be changed once set, unless the 'mut' keyword is specified."
 "can you change the existing elements of an array in Cairo?","No, it's not possible to modify the elements of an array once they've been added in Cairo."
-"How are elements added or removed from arrays in Cairo without direct memory cell modifications?","These operations involve updating pointers rather than directly modifying the memory cells."
-"In Cairo, what type of operation is needed for appending to an array's end or removing from its start,?","These operations do not require memory mutation."
 "How would you define a variable's type (u128) when creating an array ?","You can use syntax like
 ```
     let mut arr:Array<u128> = ArrayTrait::new();
 ```
 "
-"How can one access elements from an array in Cairo?","To access array elements, you can use get() or at() array methods."
-"In the context of array methods, how does using 'arr.at(index)' compare to another method?","Using arr.at(index) is equivalent to using the subscripting operator arr[index]."
-"When the get function finds an element in the array, what does it return in terms of its data type?","The get function returns an Option<Box<@T>>, which is an option to a Box type containing a snapshot to the element at the specified index if that element exists in the array."
+"How can one access elements from an array in Cairo?","To access array elements, you can use get() or at() array methods.
+```
+    let second_elem = my_array.at(1); // Watch, index starts at 0, so second element corresponds to index 1
+```
+"
+"When the get function finds an element in the array, what does it return in terms of its data type?","The get function returns an Op"In the context of array methods, how does using 'arr.at(index)' compare to another method?","Using arr.at(index) is equivalent to using the subscripting operator arr[index]."tion<Box<@T>>, which is an option to a Box type containing a snapshot to the element at the specified index if that element exists in the array."
 "What is the default response of the get function if an array element doesn't exist?","If the element doesn't exist, get returns None."
 "In situations where indices may not be within an array's bounds, why would someone opt for the get method?","This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics."
 "When referring to the 'at' function, what action does the 'unbox()' operator perform?","The unbox() operator is used in the at function to extract the value stored in a box."
@@ -35,17 +43,23 @@ question,answer
 "What specific type of data is returned by the 'len()' method when checking an array's length?","The return type of the len() method is usize."
 "How can you identify if an array contains no elements?","You can check if an array is empty using the is_empty() method."
 "If an array is void of any elements, what does the 'is_empty()' method return?","The is_empty() method returns true if the array is empty."
-"What would be the contrary response of the 'is_empty()' method if an array contains elements?","The is_empty() method returns false if the array is not empty."
-"Why would the at function be deemed advantageous in preventing unforeseen behaviors?","Using the at function can prevent unexpected behavior by causing the program to panic if the provided index is out of the array's bounds."
 "What happens when you use the 'at' function with an index that doesn't correspond to any element within an array?","A possible result of using the at function with an invalid index is a panic error."
 "What primary difference exists between the 'get' and 'at' methods when dealing with indices that are out-of-bounds?","The main difference is that the get method returns None for out-of-bounds indices, allowing for graceful error handling, while the at method causes the program to panic."
 "When examining an array's length, what data type can you expect the 'len()' method to return?","The len() method returns data of type usize."
 "When wanting to determine if an array is devoid of any elements, which method can assist with this?","The is_empty() method can be used to determine if an array has no elements."
-"What can Enums be used for when it comes to arrays?","Storing elements of different types in an array."
+"What can Enums be used for when it comes to arrays?","Storing elements of different types in an array can only be done using enums, otherwise you can not append elements of different types to an array using the append method"
 "How can you define a custom data type to hold multiple types in an array?","By using an Enum."
-"How would you add an Integer with a value of 100 to an Array named my_array?","By using my_array.append(Data::Integer(100))."
-"What method would you use to add a value to an Array named messages?","The append() method."
-"What is the purpose of the Span struct?","It represents a snapshot of an Array and is designed to provide safe and controlled access to its elements without modifying the original array."
+"How would you add a u32 value of 100 to an Array named my_array?","By using 
+```
+my_array.append(100_u32);
+```
+"
+"What method would you use to add a value to an Array named messages?","By using the append() method.
+```
+messages.append(myvalue);
+```
+"
+"What is the purpose of array's Span?","It represents a snapshot of an Array and is designed to provide safe and controlled access to its elements without modifying the original array."
 "Why might you use a Span?","For ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations."
 "Can all Array methods be used with Span?","No, all methods can be used with Span except for the append() method."
 "How do you create a Span from an Array?","By calling the span() method on the array."
@@ -56,7 +70,7 @@ question,answer
 "If you have an Array and want a snapshot without modifying it, what would you use?","Span."
 "How can one add a tuple containing two u32 values (10 and 30) to an array?","By using
 ```
-    my_array.append(Data::Tuple((10, 30)))
+    my_array.append(Data::Tuple((10_u32, 30_u32)))
 ```
 "
 "Is it possible to add elements to a Span?","No, the append() method is not available for Span."
@@ -67,14 +81,12 @@ question,answer
 "Why might you not use Span if you want to add elements to it?","Because the append() method is not available for Span."
 "What ensures safe access to an Array's elements?","The Span struct."
 "If you're performing operations that don't modify an Array, what can be a useful tool?","Span."
-"What is one of the main uses of Enums?","To define a custom data type that can hold multiple types for an array."
 "When referencing the data integrity of an Array, what struct is mentioned?","Span."
-"How do you get controlled access to the elements of an Array?","By converting it into a Span."
-"If an Array method is available for Array, is it guaranteed to be available for Span?","No."
+"If an Array method is available for Array, is it guaranteed to be available for Span?","No, append() is not provided."
 "What is the key functionality that Span provides over Array when it comes to modification?","Span provides access without allowing modification to the original Array."
 "How would you store a string like 'hello world' in the my_array Array?","By using
 ```
-    my_array.append(Data::Felt('hello world')).
+    my_array.append('hello world').
 ```
 "
 "What does the Span struct represent?","A snapshot of an Array."
@@ -82,12 +94,9 @@ question,answer
 "Which struct is beneficial for read-only operations on an Array?","Span."
 "How can you get a snapshot of an Array without modifying it?","By using Span."
 "What is the relevance of the `append()` method in relation to Span?","The append() method cannot be used with Span."
-"How would you convert an Array to another data type to provide safe access?","By converting it to a Span using the span() method."
-"What is one advantage of using Span over Array?","Ensuring data integrity when accessing the elements."
 "Can you modify the original array using Span?","No, Span is designed to provide access without modifying the original array."
 "Why might you choose Span over Array in certain situations?","To avoid borrowing issues when passing arrays between functions."
 "How can you access the elements of an Array without risking data alteration?","By using the Span struct."
 "What might be a reason to convert an Array into Span?","To perform read-only operations without risking modification to the original Array."
 "How can you capture a momentary view of an Array's contents?","By creating a Span of the Array."
 "What's the relationship between Array and Span regarding method availability?","All methods available for Array can be used with Span, except the append"
-
