@@ -10,7 +10,7 @@ _wandb:
     cli_version: 0.15.12
     is_jupyter_run: true
     is_kaggle_kernel: false
-    start_time: 1698786851.453807
+    start_time: 1698820078.223053
     t:
       1:
       - 55
@@ -42,54 +42,6 @@ _wandb:
     - 1: train/global_step
       6:
       - 3
-    - 1: train/loss
-      5: 1
-      6:
-      - 1
-    - 1: train/learning_rate
-      5: 1
-      6:
-      - 1
-    - 1: train/epoch
-      5: 1
-      6:
-      - 1
-    - 1: eval/loss
-      5: 1
-      6:
-      - 1
-    - 1: eval/runtime
-      5: 1
-      6:
-      - 1
-    - 1: eval/samples_per_second
-      5: 1
-      6:
-      - 1
-    - 1: eval/steps_per_second
-      5: 1
-      6:
-      - 1
-    - 1: train/train_runtime
-      5: 1
-      6:
-      - 1
-    - 1: train/train_samples_per_second
-      5: 1
-      6:
-      - 1
-    - 1: train/train_steps_per_second
-      5: 1
-      6:
-      - 1
-    - 1: train/total_flos
-      5: 1
-      6:
-      - 1
-    - 1: train/train_loss
-      5: 1
-      6:
-      - 1
 vocab_size:
   desc: null
   value: 32016
@@ -320,7 +272,7 @@ quantization_config:
     llm_int8_has_fp16_weight: false
     bnb_4bit_quant_type: nf4
     bnb_4bit_use_double_quant: true
-    bnb_4bit_compute_dtype: float16
+    bnb_4bit_compute_dtype: bfloat16
 window:
   desc: null
   value: 256
@@ -332,7 +284,7 @@ overwrite_output_dir:
   value: false
 do_train:
   desc: null
-  value: false
+  value: true
 do_eval:
   desc: null
   value: true
@@ -383,7 +335,7 @@ adam_epsilon:
   value: 1.0e-08
 max_grad_norm:
   desc: null
-  value: 1.0
+  value: 0.3
 num_train_epochs:
   desc: null
   value: 3
@@ -392,13 +344,13 @@ max_steps:
   value: -1
 lr_scheduler_type:
   desc: null
-  value: cosine
+  value: constant
 warmup_ratio:
   desc: null
-  value: 0.0
+  value: 0.03
 warmup_steps:
   desc: null
-  value: 5
+  value: 0
 log_level:
   desc: null
   value: passive
@@ -410,7 +362,7 @@ log_on_each_node:
   value: true
 logging_dir:
   desc: null
-  value: StarkWizard/llama-2-7b-cairo-trained-PEFT/runs/Oct31_22-14-54_Neuron
+  value: StarkWizard/llama-2-7b-cairo-trained-PEFT/runs/Nov01_07-28-22_Neuron
 logging_strategy:
   desc: null
   value: steps

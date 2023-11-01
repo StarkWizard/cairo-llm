@@ -88,7 +88,7 @@ question,answer
 "How do you structure the definition of an event's data in Starknet?","By creating a struct that details the fields and their types, and then referencing this struct in the main 'Event' enum."
 "What role does serialization play in the context of events in Starknet smart contracts?","Serialization ensures that event data is correctly formatted and stored, and allows for the distinction between keys and data in the event's structure."
 "What is the significance of the 'starknet::Event' trait in Starknet smart contracts?","It provides the necessary functions and structure for defining, handling, and emitting events."
-How do events in Starknet smart contracts enhance user experience, especially in the context of NFTs?","Events allow for the indexing and displaying of NFTs in user wallets, ensuring that users can easily view and interact with their assets."
+"How do events in Starknet smart contracts enhance user experience, especially in the context of NFTs?","Events allow for the indexing and displaying of NFTs in user wallets, ensuring that users can easily view and interact with their assets."
 ""How do events assist in the logging and communication of information from smart contracts to the external world in Starknet?","Events emit data structures that capture specific occurrences in the contract, allowing external systems to monitor and react accordingly."
 "What is the importance of the #[derive(starknet::Event)] attribute in the context of Starknet events?","It instructs the compiler to generate an implementation of the 'Event' trait for the annotated enum or struct."
 "How do you know from the code which fields of an event are serialized as keys?","Fields that are annotated with the #[key] attribute are serialized as keys."

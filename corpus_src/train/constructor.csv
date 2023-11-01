@@ -60,7 +60,7 @@ There can be at most one per contract constructor."
 ```
     #[starknet::contract]
     mod multi_param{
-        use starknet::types::{Uint256, ContractAddress};
+        use starknet::ContractAddress;
 
         #[storage]
         struct Storage{
@@ -102,7 +102,7 @@ There can be at most one per contract constructor."
 ```
     #[starknet::contract]
     mod account_nicknames{
-        use starknet::types::felt;
+
 
         #[storage]
         struct Storage{

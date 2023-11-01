@@ -1,0 +1,204 @@
+2023-11-01 07:29:59,540 INFO    StreamThr :72360 [internal.py:wandb_internal():86] W&B internal server running at pid: 72360, started at: 2023-11-01 07:29:59.539492
+2023-11-01 07:29:59,542 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status
+2023-11-01 07:29:59,548 INFO    WriterThread:72360 [datastore.py:open_for_write():85] open: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_072959-a78gnjqe/run-a78gnjqe.wandb
+2023-11-01 07:29:59,548 DEBUG   SenderThread:72360 [sender.py:send():380] send: header
+2023-11-01 07:29:59,564 DEBUG   SenderThread:72360 [sender.py:send():380] send: run
+2023-11-01 07:29:59,980 INFO    SenderThread:72360 [dir_watcher.py:__init__():211] watching files in: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_072959-a78gnjqe/files
+2023-11-01 07:29:59,980 INFO    SenderThread:72360 [sender.py:_start_run_threads():1122] run started: a78gnjqe with start time 1698820199.539703
+2023-11-01 07:29:59,995 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: check_version
+2023-11-01 07:29:59,995 DEBUG   SenderThread:72360 [sender.py:send_request():407] send_request: check_version
+2023-11-01 07:30:00,150 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: run_start
+2023-11-01 07:30:00,154 DEBUG   HandlerThread:72360 [system_info.py:__init__():32] System info init
+2023-11-01 07:30:00,154 DEBUG   HandlerThread:72360 [system_info.py:__init__():47] System info init done
+2023-11-01 07:30:00,154 INFO    HandlerThread:72360 [system_monitor.py:start():194] Starting system monitor
+2023-11-01 07:30:00,154 INFO    SystemMonitor:72360 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-11-01 07:30:00,154 INFO    HandlerThread:72360 [system_monitor.py:probe():214] Collecting system info
+2023-11-01 07:30:00,155 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started cpu monitoring
+2023-11-01 07:30:00,156 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started disk monitoring
+2023-11-01 07:30:00,156 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started gpu monitoring
+2023-11-01 07:30:00,158 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started memory monitoring
+2023-11-01 07:30:00,158 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started network monitoring
+2023-11-01 07:30:00,163 DEBUG   HandlerThread:72360 [system_info.py:probe():196] Probing system
+2023-11-01 07:30:00,169 DEBUG   HandlerThread:72360 [system_info.py:_probe_git():181] Probing git
+2023-11-01 07:30:00,180 DEBUG   HandlerThread:72360 [system_info.py:_probe_git():189] Probing git done
+2023-11-01 07:30:00,180 DEBUG   HandlerThread:72360 [system_info.py:probe():244] Probing system done
+2023-11-01 07:30:00,180 DEBUG   HandlerThread:72360 [system_monitor.py:probe():223] {'os': 'Linux-6.5.5-1-MANJARO-x86_64-with-glibc2.38', 'python': '3.9.18', 'heartbeatAt': '2023-11-01T06:30:00.163508', 'startedAt': '2023-11-01T06:29:59.529565', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '<python with no main file>', 'codePathLocal': None, 'git': {'remote': 'https://github.com/StarkWizard/cairo-llm.git', 'commit': 'e0c865c4ced773900a1765f957d8e2dff15bfce6'}, 'email': 'pe_chaut@hotmail.com', 'root': '/home/pechaut/prj/cairo-llm', 'host': 'Neuron', 'username': 'pechaut', 'executable': '/home/pechaut/miniconda3/envs/cairo-llm/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 4324.935625, 'min': 800.0, 'max': 5200.0}, 'cpu_freq_per_core': [{'current': 4540.458, 'min': 800.0, 'max': 5200.0}, {'current': 4124.5, 'min': 800.0, 'max': 5200.0}, {'current': 4537.998, 'min': 800.0, 'max': 5200.0}, {'current': 4342.74, 'min': 800.0, 'max': 5200.0}, {'current': 4454.299, 'min': 800.0, 'max': 5200.0}, {'current': 4107.792, 'min': 800.0, 'max': 5200.0}, {'current': 4203.585, 'min': 800.0, 'max': 5200.0}, {'current': 4123.796, 'min': 800.0, 'max': 5200.0}, {'current': 4270.007, 'min': 800.0, 'max': 5200.0}, {'current': 4480.33, 'min': 800.0, 'max': 5200.0}, {'current': 4515.129, 'min': 800.0, 'max': 5200.0}, {'current': 4589.468, 'min': 800.0, 'max': 5200.0}, {'current': 3895.084, 'min': 800.0, 'max': 5200.0}, {'current': 3573.594, 'min': 800.0, 'max': 5200.0}, {'current': 4146.761, 'min': 800.0, 'max': 5200.0}, {'current': 4173.968, 'min': 800.0, 'max': 5200.0}], 'disk': {'/': {'total': 512.4387817382812, 'used': 349.95616149902344}}, 'gpu': 'NVIDIA TITAN X (Pascal)', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA TITAN X (Pascal)', 'memory_total': 12884901888}], 'memory': {'total': 125.57126998901367}}
+2023-11-01 07:30:00,180 INFO    HandlerThread:72360 [system_monitor.py:probe():224] Finished collecting system info
+2023-11-01 07:30:00,180 INFO    HandlerThread:72360 [system_monitor.py:probe():227] Publishing system info
+2023-11-01 07:30:00,180 DEBUG   HandlerThread:72360 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-11-01 07:30:00,181 DEBUG   HandlerThread:72360 [system_info.py:_save_pip():68] Saving pip packages done
+2023-11-01 07:30:00,181 DEBUG   HandlerThread:72360 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-11-01 07:30:00,980 INFO    Thread-12 :72360 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_072959-a78gnjqe/files/conda-environment.yaml
+2023-11-01 07:30:00,980 INFO    Thread-12 :72360 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_072959-a78gnjqe/files/requirements.txt
+2023-11-01 07:30:04,538 DEBUG   HandlerThread:72360 [system_info.py:_save_conda():87] Saving conda packages done
+2023-11-01 07:30:04,538 INFO    HandlerThread:72360 [system_monitor.py:probe():229] Finished publishing system info
+2023-11-01 07:30:04,540 DEBUG   SenderThread:72360 [sender.py:send():380] send: files
+2023-11-01 07:30:04,540 INFO    SenderThread:72360 [sender.py:_save_file():1378] saving file wandb-metadata.json with policy now
+2023-11-01 07:30:04,550 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-01 07:30:04,551 DEBUG   SenderThread:72360 [sender.py:send_request():407] send_request: stop_status
+2023-11-01 07:30:04,552 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-01 07:30:04,553 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: pause
+2023-11-01 07:30:04,553 INFO    HandlerThread:72360 [handler.py:handle_request_pause():705] stopping system metrics thread
+2023-11-01 07:30:04,553 INFO    HandlerThread:72360 [system_monitor.py:finish():203] Stopping system monitor
+2023-11-01 07:30:04,553 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-11-01 07:30:04,554 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined cpu monitor
+2023-11-01 07:30:04,554 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-11-01 07:30:04,554 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined disk monitor
+2023-11-01 07:30:04,554 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-11-01 07:30:04,605 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined gpu monitor
+2023-11-01 07:30:04,605 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined memory monitor
+2023-11-01 07:30:04,605 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined network monitor
+2023-11-01 07:30:04,607 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: resume
+2023-11-01 07:30:04,607 INFO    HandlerThread:72360 [handler.py:handle_request_resume():696] starting system metrics thread
+2023-11-01 07:30:04,607 INFO    HandlerThread:72360 [system_monitor.py:start():194] Starting system monitor
+2023-11-01 07:30:04,607 INFO    SystemMonitor:72360 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-11-01 07:30:04,607 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started cpu monitoring
+2023-11-01 07:30:04,608 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started disk monitoring
+2023-11-01 07:30:04,608 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started gpu monitoring
+2023-11-01 07:30:04,609 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started memory monitoring
+2023-11-01 07:30:04,611 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started network monitoring
+2023-11-01 07:30:04,875 DEBUG   SenderThread:72360 [sender.py:send():380] send: telemetry
+2023-11-01 07:30:04,877 DEBUG   SenderThread:72360 [sender.py:send():380] send: stats
+2023-11-01 07:30:04,877 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:30:04,980 INFO    Thread-12 :72360 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_072959-a78gnjqe/files/conda-environment.yaml
+2023-11-01 07:30:04,981 INFO    Thread-12 :72360 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_072959-a78gnjqe/files/wandb-metadata.json
+2023-11-01 07:30:05,435 INFO    wandb-upload_0:72360 [upload_job.py:push():131] Uploaded file /tmp/tmp353bthvywandb/yg9ub9ud-wandb-metadata.json
+2023-11-01 07:30:05,668 DEBUG   SenderThread:72360 [sender.py:send():380] send: telemetry
+2023-11-01 07:30:05,863 DEBUG   SenderThread:72360 [sender.py:send():380] send: telemetry
+2023-11-01 07:30:06,100 DEBUG   SenderThread:72360 [sender.py:send():380] send: telemetry
+2023-11-01 07:30:06,128 DEBUG   SenderThread:72360 [sender.py:send():380] send: telemetry
+2023-11-01 07:30:06,434 DEBUG   SenderThread:72360 [sender.py:send():380] send: telemetry
+2023-11-01 07:30:07,294 DEBUG   SenderThread:72360 [sender.py:send():380] send: telemetry
+2023-11-01 07:30:07,320 DEBUG   SenderThread:72360 [sender.py:send():380] send: telemetry
+2023-11-01 07:30:07,325 DEBUG   SenderThread:72360 [sender.py:send():380] send: telemetry
+2023-11-01 07:30:07,412 DEBUG   SenderThread:72360 [sender.py:send():380] send: telemetry
+2023-11-01 07:30:10,413 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:30:15,415 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:30:19,041 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: pause
+2023-11-01 07:30:19,041 INFO    HandlerThread:72360 [handler.py:handle_request_pause():705] stopping system metrics thread
+2023-11-01 07:30:19,041 INFO    HandlerThread:72360 [system_monitor.py:finish():203] Stopping system monitor
+2023-11-01 07:30:19,041 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-11-01 07:30:19,041 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-11-01 07:30:19,041 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-11-01 07:30:19,041 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined cpu monitor
+2023-11-01 07:30:19,042 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined disk monitor
+2023-11-01 07:30:19,084 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined gpu monitor
+2023-11-01 07:30:19,085 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined memory monitor
+2023-11-01 07:30:19,085 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined network monitor
+2023-11-01 07:30:19,085 DEBUG   SenderThread:72360 [sender.py:send():380] send: stats
+2023-11-01 07:30:19,552 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-01 07:30:19,553 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-01 07:30:19,554 DEBUG   SenderThread:72360 [sender.py:send_request():407] send_request: stop_status
+2023-11-01 07:30:20,726 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:30:24,800 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: resume
+2023-11-01 07:30:24,800 INFO    HandlerThread:72360 [handler.py:handle_request_resume():696] starting system metrics thread
+2023-11-01 07:30:24,801 INFO    HandlerThread:72360 [system_monitor.py:start():194] Starting system monitor
+2023-11-01 07:30:24,801 INFO    SystemMonitor:72360 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-11-01 07:30:24,801 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started cpu monitoring
+2023-11-01 07:30:24,801 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started disk monitoring
+2023-11-01 07:30:24,801 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started gpu monitoring
+2023-11-01 07:30:24,802 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started memory monitoring
+2023-11-01 07:30:24,802 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started network monitoring
+2023-11-01 07:30:24,993 INFO    Thread-12 :72360 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_072959-a78gnjqe/files/output.log
+2023-11-01 07:30:25,843 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:30:26,993 INFO    Thread-12 :72360 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_072959-a78gnjqe/files/output.log
+2023-11-01 07:30:29,069 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: pause
+2023-11-01 07:30:29,069 INFO    HandlerThread:72360 [handler.py:handle_request_pause():705] stopping system metrics thread
+2023-11-01 07:30:29,069 INFO    HandlerThread:72360 [system_monitor.py:finish():203] Stopping system monitor
+2023-11-01 07:30:29,069 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-11-01 07:30:29,069 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined cpu monitor
+2023-11-01 07:30:29,069 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-11-01 07:30:29,070 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined disk monitor
+2023-11-01 07:30:29,070 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-11-01 07:30:29,126 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined gpu monitor
+2023-11-01 07:30:29,126 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined memory monitor
+2023-11-01 07:30:29,126 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined network monitor
+2023-11-01 07:30:29,127 DEBUG   SenderThread:72360 [sender.py:send():380] send: stats
+2023-11-01 07:30:31,133 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:30:31,251 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: resume
+2023-11-01 07:30:31,251 INFO    HandlerThread:72360 [handler.py:handle_request_resume():696] starting system metrics thread
+2023-11-01 07:30:31,251 INFO    HandlerThread:72360 [system_monitor.py:start():194] Starting system monitor
+2023-11-01 07:30:31,251 INFO    SystemMonitor:72360 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-11-01 07:30:31,251 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started cpu monitoring
+2023-11-01 07:30:31,252 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started disk monitoring
+2023-11-01 07:30:31,252 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started gpu monitoring
+2023-11-01 07:30:31,253 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started memory monitoring
+2023-11-01 07:30:31,253 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started network monitoring
+2023-11-01 07:30:31,995 INFO    Thread-12 :72360 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_072959-a78gnjqe/files/config.yaml
+2023-11-01 07:30:34,550 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-01 07:30:34,551 DEBUG   SenderThread:72360 [sender.py:send_request():407] send_request: stop_status
+2023-11-01 07:30:34,552 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-01 07:30:36,698 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:30:41,699 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:30:46,700 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:30:49,552 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-01 07:30:49,552 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-01 07:30:49,552 DEBUG   SenderThread:72360 [sender.py:send_request():407] send_request: stop_status
+2023-11-01 07:30:52,681 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:30:54,475 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: pause
+2023-11-01 07:30:54,475 INFO    HandlerThread:72360 [handler.py:handle_request_pause():705] stopping system metrics thread
+2023-11-01 07:30:54,476 INFO    HandlerThread:72360 [system_monitor.py:finish():203] Stopping system monitor
+2023-11-01 07:30:54,476 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-11-01 07:30:54,476 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-11-01 07:30:54,476 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-11-01 07:30:54,477 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined cpu monitor
+2023-11-01 07:30:54,477 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined disk monitor
+2023-11-01 07:30:54,541 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined gpu monitor
+2023-11-01 07:30:54,541 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined memory monitor
+2023-11-01 07:30:54,541 INFO    HandlerThread:72360 [interfaces.py:finish():202] Joined network monitor
+2023-11-01 07:30:54,541 DEBUG   SenderThread:72360 [sender.py:send():380] send: stats
+2023-11-01 07:30:57,402 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: resume
+2023-11-01 07:30:57,402 INFO    HandlerThread:72360 [handler.py:handle_request_resume():696] starting system metrics thread
+2023-11-01 07:30:57,402 INFO    HandlerThread:72360 [system_monitor.py:start():194] Starting system monitor
+2023-11-01 07:30:57,402 INFO    SystemMonitor:72360 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-11-01 07:30:57,402 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started cpu monitoring
+2023-11-01 07:30:57,403 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started disk monitoring
+2023-11-01 07:30:57,403 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started gpu monitoring
+2023-11-01 07:30:57,403 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started memory monitoring
+2023-11-01 07:30:57,404 INFO    SystemMonitor:72360 [interfaces.py:start():190] Started network monitoring
+2023-11-01 07:30:57,722 DEBUG   SenderThread:72360 [sender.py:send():380] send: config
+2023-11-01 07:30:57,722 DEBUG   SenderThread:72360 [sender.py:send():380] send: metric
+2023-11-01 07:30:57,723 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:30:57,723 DEBUG   SenderThread:72360 [sender.py:send():380] send: telemetry
+2023-11-01 07:30:57,723 DEBUG   SenderThread:72360 [sender.py:send():380] send: metric
+2023-11-01 07:30:57,723 WARNING SenderThread:72360 [sender.py:send_metric():1329] Seen metric with glob (shouldn't happen)
+2023-11-01 07:30:59,004 INFO    Thread-12 :72360 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_072959-a78gnjqe/files/output.log
+2023-11-01 07:31:02,896 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:31:04,006 INFO    Thread-12 :72360 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_072959-a78gnjqe/files/config.yaml
+2023-11-01 07:31:04,551 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-01 07:31:04,551 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-01 07:31:04,551 DEBUG   SenderThread:72360 [sender.py:send_request():407] send_request: stop_status
+2023-11-01 07:31:08,729 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:31:13,730 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:31:18,730 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:31:19,551 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-01 07:31:19,552 DEBUG   SenderThread:72360 [sender.py:send_request():407] send_request: stop_status
+2023-11-01 07:31:19,592 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-01 07:31:23,779 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:31:28,780 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:31:33,780 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:31:34,551 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-01 07:31:34,551 DEBUG   SenderThread:72360 [sender.py:send_request():407] send_request: stop_status
+2023-11-01 07:31:34,592 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-01 07:31:39,780 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:31:44,781 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:31:49,552 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-01 07:31:49,552 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-01 07:31:49,552 DEBUG   SenderThread:72360 [sender.py:send_request():407] send_request: stop_status
+2023-11-01 07:31:50,736 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:31:55,737 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:31:57,404 DEBUG   SystemMonitor:72360 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-11-01 07:31:57,405 DEBUG   SenderThread:72360 [sender.py:send():380] send: stats
+2023-11-01 07:32:01,406 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:32:04,553 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-01 07:32:04,553 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-01 07:32:04,553 DEBUG   SenderThread:72360 [sender.py:send_request():407] send_request: stop_status
+2023-11-01 07:32:06,755 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:32:11,756 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:32:16,757 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:32:19,551 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-01 07:32:19,552 DEBUG   SenderThread:72360 [sender.py:send_request():407] send_request: stop_status
+2023-11-01 07:32:19,592 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-01 07:32:22,722 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
+2023-11-01 07:32:27,405 DEBUG   SenderThread:72360 [sender.py:send():380] send: stats
+2023-11-01 07:32:28,406 DEBUG   HandlerThread:72360 [handler.py:handle_request():146] handle_request: status_report
