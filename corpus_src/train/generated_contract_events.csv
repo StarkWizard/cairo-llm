@@ -2,7 +2,7 @@ question,answer
 "How do events in smart contracts serve as a means of communication?","Events provide a way for smart contracts to communicate with the external world by logging information about specific occurrences in a contract."
 "What do events log information about?","Specific occurrences in a smart contract."
 "Why are events crucial in the creation of smart contracts?","Events play a role in indexing and storing information, and they enhance user experience, especially in the context of NFTs."
-"If an event is not included in an NFT contract, what potential issue might arise?","Users may not see their NFTs appear in their wallets."
+"If  events are not included in an NFT contract, what potential issue might arise?","Users may not see their NFTs appear in their wallets."
 "What do wallets use to display a user's NFTs?","Wallets use indexers which rely on events."
 "How are different events in the contract defined?","Under the Event enum, which implements the starknet::Event trait, as enum variants."
 "Show the code snippet that defines a trait for events.","

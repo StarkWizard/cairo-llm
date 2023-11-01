@@ -69,6 +69,5 @@ question,answer
 "What is the significance of the 'starknet' dependency in the Scarb.toml file?","It's required for Starknet smart contract development and compilation using Scarb."
 "How can one denote a section of code as a Starknet contract?","By prefixing it with the #[contract] attribute."
 "In relation to Starknet, what is the main purpose of the Cairo language?","The Cairo language is used to write smart contracts for Starknet."
-"Which tool is integral for smart contract development on Starknet?","Scarb is integral for smart contract development on Starknet."
 "How do Starknet contracts impact the state of Starknet?","Starknet contracts can alter or modify variables in Starknet's persistent state."
 "Where would one refer to if they need to learn about Starknet's architecture and tooling?","They should refer to the Starknet Book."

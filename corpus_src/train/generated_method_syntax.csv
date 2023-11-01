@@ -43,12 +43,6 @@ question,answer
 "In the code: `(*self.width) * (*self.height)`, what is the purpose of the * operator?","It's the desnap operator used to access the values of a snapshot."
 "How does the code `let rect1 = Rectangle { width: 30, height: 50, };` initialize `rect1`?","It initializes `rect1` as an instance of the `Rectangle` struct with a `width` of 30 and a `height` of 50."
 "In the method: `fn can_hold(self: @Rectangle, other: @Rectangle) -> bool;`, what type of value does it return?","bool"
-"From the provided code, how do we differentiate between the method `width` and the field `width` of the struct `Rectangle`?","When calling the method, we use parentheses like
-```
-    rect1.width()
-```
-
-and when accessing the field, we don’t use parentheses like `rect1.width`."
 "Looking at the method `fn can_hold(self: @Rectangle, other: @Rectangle) -> bool;`, how many parameters does it take excluding 'self'?","1"
 "In the function: `fn square(size: u64) -> Rectangle;`, what is the purpose of this function?","It returns a new `Rectangle` instance where both width and height are set to the given `size`, effectively creating a square."
 "In the code: `let square = RectangleImpl::square(10);`, which syntax is used to call associated functions?","::"

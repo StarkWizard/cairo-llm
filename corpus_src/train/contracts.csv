@@ -194,3 +194,449 @@ mod BasicWallet {
     }
 }
 "
+"Provide a snippet for a function that calculates the factorial of a number in Cairo","
+#[starknet::contract]
+mod math_utils {
+
+    fn factorial(n: u32) -> u32 {
+        if n <= 1 {
+            return 1;
+        }
+        return n * factorial(n - 1);
+    }
+}
+"
+"Write a Cairo function that returns the nth Fibonacci number","
+#[starknet::contract]
+mod fibonacci {
+
+    #[external(v0)]
+    fn fibonacci(n: u32) -> u32 {
+        if n == 0 || n == 1 {
+            return n;
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+}
+"
+"Can you create a Cairo function that checks if a string is a palindrome?","
+// Cairo does not natively support strings, but you can compare felt arrays
+fn is_palindrome(arr: Array<felt>) -> bool {
+    let mut i=0
+    let len = arr.length()
+    if len == 0 return false;
+    loop {
+        if(i==len/2) {
+            return true;
+        }
+        if arr.at(i) != arr.at(len - i - 1) {
+            return false;
+        }
+    
+    }
+}
+"
+"Provide an example of a Cairo contract function that takes an array of integers and returns the sum","
+#[starknet::contract]
+mod array_sum {
+
+    #[view]
+    fn sum_array(arr: Array<felt>) -> u128 {
+        let mut sum: u128 = 0;
+        let mut i = 0;
+        loop { 
+            if i== len {
+                return sum;
+            }
+            sum += arr[i];
+            i=i+1;
+        }
+        return sum;
+    }
+}
+"
+"Provide an example of a Cairo function that returns multiple values.",
+"```
+#[starknet::contract]
+mod multiple_return {
+    #[view]
+    fn return_multiple(self: @ContractState) -> (felt, felt) {
+        let a: felt = 10;
+        let b: felt = 20;
+        return (a, b); // Returning two values
+    }
+}
+```"
+"Can you show how to define an enum in Cairo with three variants and provide a function to match against them?","
+#[starknet::contract]
+mod EnumExample {
+    // Define an enum called `Colors` with three variants
+    enum Colors {
+        Red:(),
+        Blue:(),
+        Green:(),
+    }
+
+    #[view]
+    fn match_colors(self: @ContractState, color: Colors) -> felt252 {
+        // Use match to check the color variant and return corresponding values
+        match color {
+            Colors::Red => return 1,
+            Colors::Blue => return 2,
+            Colors::Green => return 3,
+        }
+    }
+}"
+"How do I define a struct in Cairo and provide a function to instantiate it?","
+#[starknet::contract]
+mod StructExample {
+    // Define a struct called `Rectangle` with width and height
+    struct Rectangle {
+        width: u32,
+        height: u32,
+    }
+
+    #[view]
+    fn create_rectangle(self: @ContractState, w: u32, h: u32) -> Rectangle {
+        // Instantiate and return the Rectangle struct
+        return Rectangle { width: w, height: h };
+    }
+}
+"
+"Show a contract with multiple storage variables and provide a function to reset them.","
+#[starknet::contract]
+mod StorageReset {
+    // Declare storage variables
+    #[storage]
+    struct Storage {
+        counter: u32,
+        flag: bool,
+        message: felt,
+    }
+    
+    // Function to reset storage variables
+    #[external(v0)]
+    fn reset_storage(self: @ContractState) {
+        self.counter.write(0);
+        self.flag.write(false);
+        self.message.write('Reset done!');
+    }
+}
+"
+"Explain how to handle errors in Cairo with an example.","
+In Cairo, error handling can be achieved using `assert` to ensure conditions are met. Here's an example:
+
+#[starknet::contract]
+mod ErrorHandlingExample {
+    
+    #[view]
+    fn divide_numbers(self: @ContractState, numerator: u32, denominator: u32) -> u32 {
+        // Ensure denominator is not zero
+        assert!(denominator != 0, "Division by zero error!");
+        return numerator / denominator;
+    }
+}
+"
+"Show how to use the 'match' statement in Cairo with structs.","
+#[starknet::contract]
+mod MatchWithStructs {
+    // Define a struct called `Point` with x and y coordinates
+    struct Point {
+        x: u32,
+        y: u32,
+    }
+
+    #[view]
+    fn match_point(self: @ContractState, p: Point) -> &str {
+        // Match the struct's coordinates
+        match (p.x, p.y) {
+            (0, 0) => return 'Origin',
+            (0, _) => return 'On Y-axis',
+            (_, 0) => return 'On X-axis',
+            _ => return 'General Point',
+        }
+    }
+}
+"
+"Provide an example to demonstrate pattern matching with enums in Cairo.","
+#[starknet::contract]
+mod EnumPatternMatch {
+    // Define an enum called `Days` with three variants
+    enum Days {
+        Monday,
+        Wednesday,
+        Friday,
+    }
+
+    #[external(v0)]
+    fn match_day(self: @ContractState, day: Days) -> &str {
+        // Use match to check the day variant and return corresponding messages
+        match day {
+            Days::Monday => return 'Start of the workweek',
+            Days::Wednesday => return 'Mid-week',
+            Days::Friday => return 'Weekend is coming!',
+        }
+    }
+}
+"
+"How to create a mapping of an id (of type felt) to balances and provide a function to update the balance?","
+#[starknet::contract]
+mod MappingExample {
+    // Define a mapping of addresses to balances
+    #[storage]
+    struct Balances {
+        balances: Mapping<felt252, u128>,
+    }
+
+    // Function to update the balance of an address
+    #[external(v0)]
+    fn update_balance(ref mut self: ContractState, id: felt252, balance: u128) {
+        self.balances[id].write(balance);
+    }
+}
+"
+"Write an example of a Cairo contract to find the greatest common divisor (GCD) of two numbers.","
+#[starknet::contract]
+mod gcd_finder {
+
+    #[view]
+    fn find_gcd(mut a: u128, mut b: u128) -> u128 {
+        let mut temp = b;
+        loop{
+            if b == 0 {
+                return a;
+            }
+            temp = b;
+            b = a % b;
+            a = temp;
+        }
+    }
+}
+"
+"Write a Cairo function that returns the maximum value from a list of integers.","
+#[starknet::contract]
+mod max_finder {
+
+    #[view]
+    fn find_max(numbers: Array<u128>) -> u128 {
+        let mut max = numbers.get(0);
+        let len = numbers.length();
+        let mut i = 0;
+        loop{
+            num = numbers.get(i);
+            if num > max {
+                max = num;
+            }
+            i=i+1;
+            if i==len {
+                return max;
+            }
+        }
+    }
+}
+"
+"Provide a Cairo contract to check if a number is even or odd.","
+#[starknet::contract]
+mod parity_checker {
+
+    #[view]
+    fn is_even(num: u128) -> bool {
+        return num % 2 == 0;
+    }
+
+    #[view]
+    fn is_odd(num: u128) -> bool {
+        return num % 2 != 0;
+    }
+}
+"
+"Create a Cairo contract that swaps two numbers without using a temporary variable.",#[starknet::contract]
+#[starknet::contract]
+mod number_swapper {
+
+    #[view]
+    fn swap_numbers( val: (u128,u128)) -> (u128, u128) {
+        let (a,b)=val;
+        return (b, a);
+    }
+}
+"
+"Implement a Cairo contract that counts how many times a specific number appears in an array.","
+#[starknet::contract]
+mod number_counter {
+
+    #[view]
+    fn count_number_occurrences(numbers: Array<u128>, target: u128) -> u128 {
+        let mut count = 0;
+        let len = numbers.length();
+        let mut i = 0;
+        loop{ 
+            if i==len {
+                return count;
+            }            
+            if num.get(i) == target {
+                count += 1;
+            }
+            i+=1;
+        }
+    }
+}
+"
+"Develop a Cairo contract that returns the difference between the maximum and minimum number in an array.","
+#[starknet::contract]
+mod min_max_difference {
+
+    #[view]
+    fn calculate_difference(numbers: Array<u128>) -> u128 {
+        let mut min = numbers.get(0);
+        let mut max = numbers.get(0);
+        let len = numbers.length();
+        let mut i = 0;
+        let mut num = 0;
+        loop{ 
+            if i==len {
+                return max - min;
+            }            
+            num = numbers.get(i)
+            if num < min {
+                min = num;
+            }
+            if num > max {
+                max = num;
+            }
+            i+=1;
+        }
+    }
+}
+"
+"Implement a Cairo contract that multiplies all elements in an array by a given factor.","
+#[starknet::contract]
+mod array_multiplier {
+
+    #[view]
+    fn multiply_array_elements(numbers: Array<u128>, factor: u128) -> Array<u128> {
+        let mut result = Array::new();
+        let len = numbers.length();
+        let mut i = 0;
+        
+        loop{ 
+            if i==len {
+                return result;
+            }            
+            num = numbers.get(len-i-1)
+            result.append(num*factor);
+            i+=1;
+        }
+    }
+}
+"
+"Create a Cairo contract function to determine if a year is a leap year.","
+#[starknet::contract]
+mod leap_year_checker {
+
+    #[view]
+    fn is_leap_year(year: u128) -> bool {
+        return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+    }
+}
+"
+"Write a function that returns the biggest prime number inferior to a given number.","
+#[starknet::contract]
+mod prime_finder {
+
+    #[view]
+    fn find_max_prime_below(n: u128) -> u128 {
+        let mut number = n - 1;
+        loop {
+         if number > 1 {
+            if is_prime(number) {
+                return number;
+            }
+            number -= 1;
+        }
+        else
+            return 2;
+    }
+
+    fn is_prime(x: u128) -> bool {
+        if x <= 1 {
+            return false;
+        }
+        let mut i=2;
+        loop {
+            if i == (x / 2 + 1) return true;
+            if x % i == 0 {
+                return false;
+            }
+            i=i+1;
+        }        
+    }
+}
+"
+"Écrivez un contrat Cairo qui convertit les degrés Fahrenheit en Celsius.","
+#[starknet::contract]
+mod temperature_converter {
+
+    #[view]
+    fn fahrenheit_to_celsius(fahrenheit: i128) -> i128 {
+        return (fahrenheit - 32) * 5 / 9;
+    }
+}
+"
+"Développez un contrat Cairo qui retourne la somme des chiffres d'un nombre.","
+#[starknet::contract]
+mod digit_sum_calculator {
+
+    #[view]
+    fn sum_of_digits(n: u128) -> u128 {
+        let mut sum = 0;
+        let mut number = n;
+        loop {
+            if number > 0 {
+                sum += number % 10;
+                number /= 10;
+            }
+            else {
+                return sum;
+            }
+        }
+    }
+}
+"
+"Créez une fonction de contrat Cairo qui vérifie si un nombre est un carré parfait.","
+#[starknet::contract]
+mod perfect_square_checker {
+
+    #[view]
+    fn is_perfect_square(n: u128) -> bool {
+        let mut root = 1;
+        loop{
+                if root * root < n {
+                    root += 1;
+                }
+                else {
+                    return root * root == n;
+                }
+
+        }
+    }
+}
+"
+"Écrivez une fonction de contrat Cairo qui détermine si une année est bissextile ou non.","
+#[starknet::contract]
+mod leap_year_checker {
+
+    #[view]
+    fn is_leap_year(year: u128) -> bool {
+        if year % 4 != 0 {
+            return false;
+        } else if year % 100 != 0 {
+            return true;
+        } else if year % 400 != 0 {
+            return false;
+        } else {
+            return true;
+        }
+    }
+}
+"

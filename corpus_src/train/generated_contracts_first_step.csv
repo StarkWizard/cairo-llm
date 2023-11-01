@@ -23,41 +23,22 @@ mod SimpleStorage {
         }
     }
 }"
-"What are smart contracts in the context of blockchain?","Smart contracts are essentially programs deployed on a blockchain. They are neither 'smart' nor 'contracts' but rather code and instructions that are executed based on specific inputs."
-"How can users interact with smart contracts?","Users can interact with smart contracts by initiating blockchain transactions containing execution data (which function to call and with what input)."
-"How do smart contracts modify and interact with blockchain storage?","Smart contracts can modify and read the storage of the underlying blockchain."
-"Do smart contracts have their own addresses on the blockchain?","Yes, a smart contract has its own address and is considered a blockchain account, meaning it can hold tokens."
-"Are smart contracts limited to a single programming language?","No, the programming language used to write smart contracts varies depending on the blockchain. For instance, on Ethereum, it's Solidity, while on Starknet, it's Cairo."
-"What are the characteristics of smart contracts?","Smart contracts are permissionless, transparent, and can be composable. They can only access and interact with data from the blockchain they are deployed on and require third-party software (oracles) to access external data."
-"Can you name two widely used Ethereum smart contract standards?","Two widely used standards are the ERC20, for tokens like USDC, DAI or STARK, and the ERC721, for NFTs like CryptoPunks or Everai."
-"What is DeFi in the context of blockchain and smart contracts?","DeFi (decentralized finance) refers to decentralized financial applications that no longer rely on traditional financial intermediaries. It consists of projects like lending/borrowing apps, decentralized exchanges (DEX), on-chain derivatives, stablecoins, decentralized hedge funds, insurance, etc."
-"What is tokenization in the context of smart contracts?","Tokenization divides real-world assets, such as real estate or art, into digital tokens, which can be traded and managed on blockchain platforms."
-"How can smart contracts be used in voting?","Smart contracts can be used to create secure and transparent voting systems, where votes are recorded on the blockchain, ensuring immutability and transparency. The smart contract can then automatically tally the votes and declare the results."
-"How can smart contracts handle royalty payments?","Smart contracts can automate royalty payments. When content is consumed or sold, the smart contract can automatically calculate and distribute the royalties to the rightful owners."
-"What are decentralized identities (DIDs) in the context of smart contracts?","Decentralized identities (DIDs) are digital identities created and managed using smart contracts, allowing individuals to control their personal information and securely share it with third parties."
-"What issue did Ethereum face with the rapid adoption of use cases like DeFi?","With the rapid adoption of use cases like DeFi, the cost of performing transactions on Ethereum became extremely high, rendering the network almost unusable."
-"What does the Blockchain Trilemma state?","The Blockchain Trilemma states that it's impossible to achieve a high level of scalability, decentralization, and security simultaneously; trade-offs must be made."
-"What is Starknet's approach to resolving Ethereum's scalability issues?","Starknet uses validity rollups, a type of Layer 2 (L2) solution, which use cryptography to prove that the new state of a batched set of transactions has been correctly computed."
-"What is the primary purpose of STARKs in the context of Starknet?","STARKs are cryptographic technology that permits validity rollups, like Starknet, to prove the correctness of computations from one state to another, allowing them to scale significantly."
-"What is Cairo in relation to STARKs?","Cairo is a language developed specifically to work with STARKs and make them general-purpose, allowing for the writing of provable code."
-"How does Starknet differ from most of its competitors in terms of its foundational layer?","Unlike most of Starknet's competitors that use the EVM (either as-is or adapted) as a base layer, Starknet employs its own VM."
-"What are 'Smart Accounts' in the context of Starknet and Cairo?","Smart Accounts are more complex logic accounts, enabled by native account abstraction in Starknet and Cairo, which allow for unique transaction flows."
-"How are Cairo programs and Starknet contracts related?","Starknet contracts are a special superset of Cairo programs. A Cairo program must always have a function 'main' as its entry point, and Starknet contracts can run on the Starknet OS, having access to Starknet's state."
-"For a module to be treated as a contract by the compiler in Starknet, what annotation is required?","For a module to be handled as a contract by the compiler, it must be annotated with the #[starknet::contract] attribute."
-"How do you define the entry point for a Cairo program?","A Cairo program must always have a function 'main' that serves as the entry point for this program."
-"Why might the term 'smart contract' be considered misleading?","The term 'smart contract' is somewhat misleading as they are neither 'smart' nor 'contracts' but rather code and instructions executed based on specific inputs."
-"How is Cairo compiled for Starknet?","On Starknet, Cairo is compiled into Sierra and then into Cairo Assembly (casm)."
-"How can smart contracts be used in the context of real estate?","Smart contracts can facilitate the tokenization of real-world assets, like real estate. This can increase liquidity, enable fractional ownership, and simplify the buying and selling process."
-"What is the difference between optimistic rollups and validity rollups?","For optimistic rollups, the new state is considered valid by default with a window for nodes to identify malicious transactions. Validity rollups, like Starknet, use cryptography to prove that the new state has been correctly computed."
-"How does Starknet handle the Blockchain Trilemma of scalability, decentralization, and security?","Starknet uses validity rollups and cryptographic technology (STARKs) to achieve scalability while maintaining security. It offloads complex computations to Layer 2 solutions while using Ethereum as a secure settlement layer."
-"How can you define the functions a Starknet contract exposes to the outside world?","You define them in the contract's interface using the 'trait' keyword. For example: 'trait ISimpleStorage<TContractState> { ... }'."
-"What is the purpose of the 'set' function in the provided Starknet contract?","The 'set' function allows you to store a number in the 'stored_data' variable on the blockchain."
 "What does the 'starknet::interface' attribute indicate?","The 'starknet::interface' attribute indicates that the following trait defines the interface of a Starknet contract."
-"What is the role of the 'Storage' struct in a contract?","The 'Storage' struct declares the storage variable(s) for the contract. In this case, it declares a variable called 'stored_data' of type u128."
+"What is the role of the 'Storage' struct in a contract?","The 'Storage' struct declares the storage variable(s) for the contract."
 "What is the difference between a contract's interface and its implementation in Starknet?","The interface defines the functions the contract exposes, while the implementation provides the actual behavior of those functions."
 "How do you ensure that the implementation of a contract matches its interface in Starknet?","By leveraging the traits & impls mechanism from Cairo and making sure that the implementation conforms to the declared interface. Non-conformance results in a compilation error."
-"What happens if you try to modify storage inside the 'get' function?","The compiler will complain because the 'get' function does not modify the state, as indicated by how 'TContractState' is passed to it."
-"What are public functions in the context of Starknet?","Public functions are functions that are exposed to the outside world. They can be called by anyone and can be invoked both from outside and within the contract."
+"What happens if you try to modify storage inside the 'get' function?
+    #[external(v0)]
+    impl SimpleStorage of super::ISimpleStorage<ContractState> {
+        fn set(ref self: ContractState, x: u128) {
+            self.stored_data.write(x);
+        }
+        fn get(self: @ContractState) -> u128 {
+            self.stored_data.read()
+        }
+    }
+","The compiler will complain because the 'get' function does not modify the state, as indicated by how 'TContractState' is passed to it."
+"What are public functions?","Public functions are functions that are exposed to the outside world. They can be called by anyone and can be invoked both from outside and within the contract."
 "What differentiates an external function from a view function in Starknet?","An external function can mutate the state of the contract when invoked through a transaction, whereas a view function cannot mutate the contract's state."
 "Why is the 'external(v0)' attribute important in the contract's implementation?","The 'external(v0)' attribute exposes the functions defined in the implementation to the outside world. Without it, the functions won't be callable from the outside."
 "What does the 'ContractState' type represent?","'ContractState' is generated by the compiler and gives access to the storage variables defined in the 'Storage' struct. It represents the contract's state."
@@ -68,13 +49,31 @@ mod SimpleStorage {
 "How do you annotate the functions that are callable from outside in a Starknet contract?","You use the 'external(v0)' attribute before the implementation block. This exposes all functions defined in that block as public functions."
 "What does the 'get_caller_address' function from 'starknet' likely do?","The 'get_caller_address' function likely returns the address of the entity that called a particular function or initiated a transaction."
 "What is the significance of 'ContractAddress'","'ContractAddress' is likely a type or struct from the 'starknet' module, potentially representing the address of a contract on the Starknet blockchain."
-"How can you describe the purpose of the 'set' function based on its signature?","The 'set' function takes the current contract state and a number of type 'u128' as parameters. It's likely used to set or store this number in the contract's state."
+"How can you describe the purpose of the 'set' function based on its signature?
+ #[external(v0)]
+    impl SimpleStorage of super::ISimpleStorage<ContractState> {
+    fn set(ref self: ContractState, x: u128)
+    {
+        // CODE here
+    }    
+    }
+","The 'set' function takes the current contract state and a number of type 'u128' as parameters. It's likely used to set or store this number in the contract's state."
 "What is implied when the 'get' function takes a snapshot of 'TContractState'?","It implies that the 'get' function does not modify the contract's state."
 "What are the key components of a Starknet contract?","A Starknet contract consists of an interface (defined using traits), storage structures, and an implementation block that provides the behavior of the contract functions."
 "How do you represent a single slot in a database within a Starknet contract?","You can represent it using a struct like 'Storage' and declaring a variable inside it, such as 'stored_data' of type 'u128'."
 "What does the 'starknet::get_caller_address' function likely provide?","The function 'starknet::get_caller_address' likely provides the address of the caller or initiator of a contract function or transaction."
 "Why would you use the 'trait' keyword in defining a Starknet contract?","The 'trait' keyword is used to define the interface of the contract, which represents the functions the contract exposes to the outside world."
-"What is implied by the 'starknet::view' attribute in the 'get' function?","The 'starknet::view' attribute implies that the 'get' function will not modify the contract's state."
+"What is implied by the 'starknet::view' attribute in the 'get' function?
+    #[external(v0)]
+    impl SimpleStorage of super::ISimpleStorage<ContractState> {
+        fn set(ref self: ContractState, x: u128) {
+            self.stored_data.write(x);
+        }
+        fn get(self: @ContractState) -> u128 {
+            self.stored_data.read()
+        }
+    }
+","The 'starknet::view' attribute implies that the 'get' function will not modify the contract's state."
 "How are storage variables defined in Starknet contracts?","Storage variables are defined inside structs, such as the 'Storage' struct, with their respective types."
 "Can a Starknet contract have more than one storage variable?","Yes, a Starknet contract can have more than one storage variable. They would be defined as separate fields within the struct representing the contract's storage."
 "How is the behavior of a Starknet contract function defined?","The behavior of a Starknet contract function is defined in the contract's implementation block, where the actual code for the function is provided."
@@ -82,21 +81,14 @@ mod SimpleStorage {
 "What does the 'impl' keyword indicate?","The 'impl' keyword indicates the beginning of the implementation block for the functions defined in the contract's interface."
 "How are functions exposed to the outside world in Starknet contracts?","Functions are exposed to the outside world in Starknet contracts using the 'external(v0)' attribute before the implementation block."
 "What is the significance of the 'starknet' module?","The 'starknet' module likely provides utility functions, types, and attributes specific to Starknet contracts, such as 'get_caller_address' and 'starknet::view'."
-"How does the 'SimpleStorage' contract store data on the blockchain?","The 'SimpleStorage' contract stores data in a variable named 'stored_data', which is of type 'u128'. This variable is defined inside the 'Storage' struct and can be modified using the 'set' function."
 "How do you identify which functions of a Starknet contract can modify its state?","Functions that can modify the contract's state have the contract state passed to them using the 'ref' keyword, like 'ref self: ContractState'."
 "What happens when the 'set' function of the 'SimpleStorage' contract is called?","When the 'set' function is called, it takes a number as a parameter and stores it in the 'stored_data' variable of the contract."
 "How do you change the state of a Starknet contract?","The state of a Starknet contract can be changed by calling functions that take the contract state as a 'ref' parameter and modify its storage variables, such as the 'set' function in the provided 'SimpleStorage' contract."
-"How do you store a single number on the Starknet blockchain using a contract like 'SimpleStorage' which includes a 'stored_data' variable?","You can use a contract like 'SimpleStorage' which has a 'stored_data' variable of type u128. This variable can be modified or retrieved using the 'set' and 'get' functions."
 "What does the attribute 'starknet::interface' in the contract indicate?","The 'starknet::interface' attribute indicates that the following trait defines the interface of a Starknet contract."
 "What is the difference between a contract's interface, like 'ISimpleStorage', and its implementation in Starknet?","The interface defines the functions the contract exposes, while the implementation provides the actual behavior of those functions."
-"How do you ensure that the implementation of a contract, like 'SimpleStorage', matches its interface in Starknet?","By leveraging the traits & impls mechanism from Cairo and making sure that the implementation conforms to the declared interface. Non-conformance results in a compilation error."
-"What happens if you try to modify storage inside the 'get' function of the 'SimpleStorage' contract?","The compiler will complain because the 'get' function does not modify the state, as indicated by how 'TContractState' is passed to it."
-"What are public functions, like 'set' and 'get', in the context of the 'SimpleStorage' Starknet contract?","Public functions are functions that are exposed to the outside world. They can be called by anyone and can be invoked both from outside and within the contract."
-"Why is the 'external(v0)' attribute important in the 'SimpleStorage' contract's implementation?","The 'external(v0)' attribute exposes the functions defined in the implementation to the outside world. Without it, the functions won't be callable from the outside."
-"What does the 'ContractState' type represent in the 'SimpleStorage' contract?","'ContractState' is generated by the compiler and gives access to the storage variables defined in the 'Storage' struct. It represents the contract's state."
-"What happens if you try to modify the contract state of 'SimpleStorage' when it's passed as a snapshot?","Attempting to modify will result in a compilation error."
+"How do you ensure that the implementation of a contract matches its interface in Starknet?","By leveraging the traits & impls mechanism from Cairo and making sure that the implementation conforms to the declared interface. Non-conformance results in a compilation error."
+"What does the 'ContractState' type represent?","'ContractState' is generated by the compiler and gives access to the storage variables defined in the 'Storage' struct. It represents the contract's state."
+"What happens if you try to modify the contract state when it's passed as a snapshot?","Attempting to modify will result in a compilation error."
 "What can you infer about the 'starknet::interface' and 'starknet::contract' attributes?","The 'starknet::interface' attribute is used to indicate that a trait defines the interface of a Starknet contract, while the 'starknet::contract' attribute marks a module as defining a Starknet contract."
-"How does the 'SimpleStorage' contract store data on the blockchain using the 'stored_data' variable?","The 'SimpleStorage' contract stores data in a variable named 'stored_data', which is of type 'u128'. This variable is defined inside the 'Storage' struct and can be modified using the 'set' function."
-"How do you identify which functions of the 'SimpleStorage' contract, like 'set', can modify its state?","Functions that can modify the contract's state have the contract state passed to them using the 'ref' keyword, like 'ref self: ContractState'."
-"What happens when the 'set' function of the 'SimpleStorage' contract is called with a number?","When the 'set' function is called, it takes a number as a parameter and stores it in the 'stored_data' variable of the contract."
-"How do you change the state of a Starknet contract like 'SimpleStorage'?","The state of a Starknet contract can be changed by calling functions that take the contract state as a 'ref' parameter and modify its storage variables, such as the 'set' function in the provided 'SimpleStorage' contract."
+"How do you identify which functions of a contract, can modify its state?","Functions that can modify the contract's state have the contract state passed to them using the 'ref' keyword, like 'ref self: ContractState'."
+"How do you change the state of a Starknet contract?","The state of a Starknet contract can be changed by calling functions that take the contract state as a 'ref' parameter and modify its storage variables, such as the 'set' function in the provided 'SimpleStorage' contract."

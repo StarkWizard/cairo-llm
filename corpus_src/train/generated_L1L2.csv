@@ -147,4 +147,3 @@ It is important to remember that on L1 we are sending a payload of uint256, but 
 "Why might you need to use starkli or snforge?","To profile the gas consumption and estimate the cost of message execution on Starknet."
 "What do you need to keep in mind when serializing data for Starknet messaging?","Ensure that serialization follows the Cairo scheme which focuses on arrays of felt252."
 "What happens when tokens are deposited in the L1 bridge contract?","They trigger the minting of the same token on L2."
-"How do you convert a uint256 value to fit Cairo's serialization scheme?","Serialize the uint256 into two parts: low and high, both of u128 type, and then convert them into an array of felt252."

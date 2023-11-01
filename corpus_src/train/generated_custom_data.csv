@@ -1,11 +1,9 @@
 question,answer
-"What is the primary limitation of arrays in Cairo?","The data stored in arrays is immutable."
 "What data structure in Cairo allows simulation of mutable data structures?","
 ```
     Felt252Dict<T>
 ```"
 "What can you not do with an array once a value is appended?","You can't modify it."
-"In the context of a game, why might one use a mutable data structure?","To store and modify the level of the players."
 "How would you initialize an empty array of player levels in Cairo?","
 ```
     let mut level_players = Array::new();
@@ -14,14 +12,14 @@ question,answer
 "What should a mutable dynamic array support according?","Append items at the end, access any item by index, set the value of an item at a specific index, and return the current length."
 "How is the blueprint for the dynamic array implementation defined?","Using the trait VecTrait<V, T> in Cairo."
 "How is the VecTrait in Cairo similar to another data structure?","It is similar to the Vec<T> data structure in Rust."
-"What does the Felt252Dict<T> in Cairo map?","It maps index numbers (felts) to values."
+"What does the Felt252Dict<T> do ?","It maps index numbers (felts) to values."
 "Why is the type T wrapped inside a Nullable pointer in the struct?","To allow using any type T in the data structure."
 "How do you update a value at a specific index in the NullableVec<T> structure?","Using the set method that inserts a new value into the dictionary at the specified index."
 "How is the vector made mutable in the provided implementation?","By inserting values into the dictionary to set or update values."
 "What is the primary use of dictionaries in this context?","They provide the flexibility needed for modifiable data structures like vectors."
 "How is the length of the vector tracked?","Using a separate len field."
 "How do you create a new instance of NullableVec<T>?","Using the new method which initializes data to default and len to 0."
-"What happens when you push a value to the vector?","The value is inserted at the current length index and the length is increased by one."
+"What happens when you push a value to a vector?","The value is inserted at the current length index and the length is increased by one."
 "What is asserted before setting a value at a specific index in the vector?","That the index is less than the current length of the vector."
 "How do you obtain the length of the vector?","Using the len method."
 "Where can the full implementation of the Vec structure be found?","In the community-maintained library Alexandria."

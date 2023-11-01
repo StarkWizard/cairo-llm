@@ -85,6 +85,7 @@ where ℎ is the Pedersen hash and the final value is taken mod (2^251) − 256.
 "What is the purpose of the LegacyMap type?","The LegacyMap type allows you to store key-value mappings in the Storage struct."
 "How do you associate a unique key with a value in a Starknet smart contract?","You can use mappings, which are essentially hash tables that allow this association."
 "Can you store arrays in Starknet contract storage?","No, it's impossible to store arrays in storage."
+"How do you store arrays in Starknet contract storage?","It's impossible to store arrays in storage."
 "How do you read a value from the 'names' storage variable?","You call the read function on the 'names' storage variable, passing in the key address as a parameter:
 ```
     let name = self.names.read(address);
