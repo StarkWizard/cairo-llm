@@ -573,7 +573,7 @@ mod prime_finder {
     }
 }
 "
-"Écrivez un contrat Cairo qui convertit les degrés Fahrenheit en Celsius.","
+"Write a Cairo contract that converts Fahrenheit to Celsius.","
 #[starknet::contract]
 mod temperature_converter {
 
@@ -583,7 +583,7 @@ mod temperature_converter {
     }
 }
 "
-"Développez un contrat Cairo qui retourne la somme des chiffres d'un nombre.","
+"Develop a Cairo contract that returns the sum of the digits of a number.","
 #[starknet::contract]
 mod digit_sum_calculator {
 
@@ -603,7 +603,7 @@ mod digit_sum_calculator {
     }
 }
 "
-"Créez une fonction de contrat Cairo qui vérifie si un nombre est un carré parfait.","
+"Create a Cairo contract that checks if a number is a perfect square.","
 #[starknet::contract]
 mod perfect_square_checker {
 
@@ -622,7 +622,7 @@ mod perfect_square_checker {
     }
 }
 "
-"Écrivez une fonction de contrat Cairo qui détermine si une année est bissextile ou non.","
+"Write a Cairo contract that determines whether a year is a leap year or not.","
 #[starknet::contract]
 mod leap_year_checker {
 
