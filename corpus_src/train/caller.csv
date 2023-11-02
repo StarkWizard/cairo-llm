@@ -1,0 +1,120 @@
+question,answer
+"How can I get the caller's address of a contract","
+```
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+    
+    fn main {
+        let sender_address = get_caller_address();
+    }
+```
+You need to first declare the use of get_caller_address function and the ContractAddress type
+Then call the function and store the result
+"
+"if I use let sender_address = get_caller_address(); what should I declare ?","
+You need to first declare the use of get_caller_address function and the ContractAddress type
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+    
+    fn main {
+        let sender_address = get_caller_address();
+    }
+"
+" Can I store the caller's address into a felt ?","
+There is a dedicated type for addresses, use starknet::ContractAddress. Here is a sample:
+
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+    
+    fn main {
+        let sender_address = get_caller_address();
+    }
+"
+"What type is returned by the get_caller_address function?","
+The get_caller_address function returns a value of type ContractAddress. You should use this type to store the address:
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+
+    fn main() {
+        let sender_address: ContractAddress = get_caller_address();
+    }
+"
+"Do I need to import anything to use the get_caller_address function within my contract logic?","
+Yes, you need to import the get_caller_address function from the starknet module, and if you plan to store the address, also import ContractAddress:
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+
+    fn main() {
+        let sender_address: ContractAddress = get_caller_address();
+    }
+"
+"How can I pass the caller's address to another function?","
+You must first obtain the caller's address using get_caller_address, and then you can pass it to another function. Remember to import the necessary module:
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+
+    fn main() {
+        let sender_address: ContractAddress = get_caller_address();
+        pass_address(sender_address);
+    }
+
+    fn pass_address(address: ContractAddress) {
+        // function logic
+    }
+"
+"Should I use a specific type for the caller's address when defining a struct?","
+Yes, when defining a struct that includes the caller's address, use the ContractAddress type for the address field:
+    use starknet::ContractAddress;
+
+    struct Transaction {
+        sender_address: ContractAddress,
+        // other fields
+    }
+"
+"How to compare the caller's address with a known address?","
+To compare the caller's address with a known address, you would first get the caller's address and then compare it using the == operator:
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+
+    fn is_known_sender(known_address: ContractAddress) -> bool {
+        let sender_address: ContractAddress = get_caller_address();
+        sender_address == known_address
+    }
+"
+"Can the caller's address be used as a function argument?","
+Yes, the caller's address can be passed as an argument to functions expecting a parameter of type ContractAddress:
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+
+    fn process_sender_action(address: ContractAddress) {
+        // Function logic using the address
+    }
+
+    fn main() {
+        let sender_address: ContractAddress = get_caller_address();
+        process_sender_action(sender_address);
+    }
+"
+"Can get_caller_address be used to track the activities of a user?","
+Yes, get_caller_address can be used within a contract to track the activities of an address on a per-transaction basis:
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+
+    fn track_user_activity() {
+        let sender_address: ContractAddress = get_caller_address();
+        // Logic to record the sender's activities
+    }
+"
+"How to ensure that a function is only called by a specific address in Cairo?","
+You would use get_caller_address to retrieve the sender's address and then compare it with the specific address:
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+
+    const AUTHORIZED_SENDER: ContractAddress = /* some address */;
+
+    fn only_authorized_sender() {
+        let sender_address: ContractAddress = get_caller_address();
+        assert!(sender_address == AUTHORIZED_SENDER);
+        // Continue with function logic
+    }
+"

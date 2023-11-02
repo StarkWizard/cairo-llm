@@ -1,0 +1,149 @@
+question,answer
+"can I modifiy the storage in is_even, given the contract:
+
+#[starknet::contract]
+mod parity_checker {
+
+    #[view]
+    fn is_even(num: u128) -> bool {
+        return num % 2 == 0;
+    }
+
+    #[view]
+    fn is_odd(num: u128) -> bool {
+        return num % 2 != 0;
+    }
+}
+","
+No you can not modify the storage as the function is declared as [view] it can only read the storage.
+If you want to modify the storage either remove the [view] or declare the function as external using:
+```
+#[starknet::contract]
+mod parity_checker {
+
+    #[external(v0)]
+    fn is_even(num: u128) -> bool {
+        return num % 2 == 0;
+    }
+
+    #[view]
+    fn is_odd(num: u128) -> bool {
+        return num % 2 != 0;
+    }
+}
+```
+"
+"How can I delare an internal function is_even  in a contract?","
+To declare an internal function, do not use [view] or [external(v0)], here is a sample:
+```
+mod parity_checker {
+
+   fn is_even(num: u128) -> bool { // this function is internal and can not be called outside of the contract
+        return num % 2 == 0;
+    }
+}
+```
+"
+"please correct this program:
+#[starknet::contract]
+mod parity_checker {
+
+    #[external(v0)]
+    fn is_even(num: u128) -> bool {
+        return num % 2 == 0;
+    }
+
+    #[view]
+    fn is_odd(num: u128) -> bool {
+        return num % 2 != 0;
+    }
+}
+","
+is_even is not writing to the storage, so there is no need to declare it as external. [view] is more appropriate
+```
+#[starknet::contract]
+mod parity_checker {
+
+    #[view]
+    fn is_even(num: u128) -> bool {
+        return num % 2 == 0;
+    }
+
+    #[view]
+    fn is_odd(num: u128) -> bool {
+        return num % 2 != 0;
+    }
+}
+```
+"
+"
+I can not call is_even and is_odd outside of the contract, can you correct ?
+
+#[starknet::contract]
+mod parity_checker {
+
+    fn is_even(num: u128) -> bool {
+        return num % 2 == 0;
+    }
+
+    fn is_odd(num: u128) -> bool {
+        return num % 2 != 0;
+    }
+}
+","
+
+Sure, use [view] the function will be external and as it is not writing to the storage, to optimized to the best, view is more adapted.
+```
+#[starknet::contract]
+mod parity_checker {
+
+    #[view]
+    fn is_even(num: u128) -> bool {
+        return num % 2 == 0;
+    }
+
+    #[view]
+    fn is_odd(num: u128) -> bool {
+        return num % 2 != 0;
+    }
+}
+```
+"
+"I have written a save_id function, that saves id:u64 to the storage, how should I declare it in order to call it from outside of the contract?","
+ ```
+ #[starknet::contract]
+mod my_contract {
+
+    #[external(v0)]
+    fn save_id(num: u128) -> bool {
+        ...
+    }
+}
+```
+save_id should be declared as external, as you want to call it from outside of the contract and is writting to the storage"
+"How to ensure 'is_odd' function can  be called outside of the contract?","
+You need to either [view] or [external(v0)] if the function modifies the storage. Here's an example:
+```
+#[starknet::contract]
+mod parity_checker {
+    #[storage]
+    struct Storage {
+        owner: Address,
+    }
+
+    #[view]
+    fn is_odd(self: @ContractState, num: u128) -> bool {
+        return num % 2 != 0;
+    }
+}
+```
+"
+"Is it possible to have both #[view] and #[external] annotations for the same function in a Cairo contract?","
+No, it is not possible to have both #[view] and #[external] annotations for the same function. The #[view] annotation is for functions that only read from the storage, while #[external] is for functions that may write to the storage. They cannot be used together for a single function."
+"Can I call an #[external] function from within another function in the same Cairo contract?","Yes, you can call an #[external] function from within another function in the same contract. However, it is often more gas-efficient to call internal functions for operations within the same contract."
+"If I remove the #[view] annotation from a function that reads from storage, will it still work correctly?",Yes, the function will still work correctly even if you remove the #[view] annotation. However, the #[view] annotation is a signal to users and tools that the function is read-only and does not alter the contract's state and that it can be called outside of the contract."
+"Should I always use the #[external] annotation for functions that change the state of the contract?",Yes, functions that change the state of the contract should be marked with the #[external] annotation to indicate that they can be called by transactions or messages sent by other contracts."
+"In a contract, if I wanted to add a function to update a stored value, what annotation should I use?","For a function that updates a stored value in a contract, you should use the #[external] annotation because it will alter the storage state of the contract.",
+"If I accidentally use the #[external] annotation on a view function, will it still compile in Cairo?","Yes, it will still compile, but it is not considered best practice since it could mislead others about the function's behavior and could potentially result in higher gas costs when called."
+"Is it necessary to annotate a function with #[view] if it only calls other #[view] functions?","While not strictly necessary, annotating such a function with #[view] is good practice for clarity and to enforce read-only behavior."
+"What annotation should I use for a Cairo function that initializes contract storage on deployment?","For a function that initializes contract storage on deployment, use the #[constructor] annotation to indicate that it should be run only once when the contract is deployed."
