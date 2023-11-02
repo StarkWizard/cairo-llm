@@ -255,8 +255,8 @@ mod array_sum {
     }
 }
 "
-"Provide an example of a Cairo function that returns multiple values.",
-"```
+"Provide an example of a Cairo function that returns multiple values.","
+```
 #[starknet::contract]
 mod multiple_return {
     #[view]
@@ -332,7 +332,7 @@ mod ErrorHandlingExample {
     #[view]
     fn divide_numbers(self: @ContractState, numerator: u32, denominator: u32) -> u32 {
         // Ensure denominator is not zero
-        assert!(denominator != 0, "Division by zero error!");
+        assert!(denominator != 0, 'Division by zero error!');
         return numerator / denominator;
     }
 }
@@ -450,7 +450,7 @@ mod parity_checker {
     }
 }
 "
-"Create a Cairo contract that swaps two numbers without using a temporary variable.",#[starknet::contract]
+"Create a Cairo contract that swaps two numbers without using a temporary variable.","
 #[starknet::contract]
 mod number_swapper {
 

@@ -1,0 +1,67 @@
+2023-11-01 19:50:59,255 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Current SDK version is 0.15.12
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Configure stats pid to 112610
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Loading settings from /home/pechaut/.config/wandb/settings
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Loading settings from /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/settings
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_init.py:_log_setup():528] Logging user logs to /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_195059-0v8pdi35/logs/debug.log
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_init.py:_log_setup():529] Logging internal logs to /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_195059-0v8pdi35/logs/debug-internal.log
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_init.py:_jupyter_setup():474] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x7fad6463db50>
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_init.py:init():568] calling init triggers
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_init.py:init():575] wandb.init called with sweep_config: {}
+config: {'epochs': 3}
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_init.py:init():618] starting backend
+2023-11-01 19:50:59,256 INFO    MainThread:112610 [wandb_init.py:init():622] setting up manager
+2023-11-01 19:50:59,257 INFO    MainThread:112610 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-11-01 19:50:59,258 INFO    MainThread:112610 [wandb_init.py:init():628] backend started and connected
+2023-11-01 19:50:59,262 INFO    MainThread:112610 [wandb_run.py:_label_probe_notebook():1276] probe notebook
+2023-11-01 19:50:59,262 INFO    MainThread:112610 [wandb_run.py:_label_probe_notebook():1286] Unable to probe notebook: 'NoneType' object has no attribute 'get'
+2023-11-01 19:50:59,263 INFO    MainThread:112610 [wandb_init.py:init():720] updated telemetry
+2023-11-01 19:50:59,278 INFO    MainThread:112610 [wandb_init.py:init():753] communicating run to backend with 90.0 second timeout
+2023-11-01 19:50:59,694 INFO    MainThread:112610 [wandb_run.py:_on_init():2220] communicating current version
+2023-11-01 19:50:59,775 INFO    MainThread:112610 [wandb_run.py:_on_init():2229] got version response 
+2023-11-01 19:50:59,775 INFO    MainThread:112610 [wandb_init.py:init():804] starting run threads in backend
+2023-11-01 19:51:04,221 INFO    MainThread:112610 [wandb_run.py:_console_start():2199] atexit reg
+2023-11-01 19:51:04,221 INFO    MainThread:112610 [wandb_run.py:_redirect():2054] redirect: wrap_raw
+2023-11-01 19:51:04,221 INFO    MainThread:112610 [wandb_run.py:_redirect():2119] Wrapping output streams.
+2023-11-01 19:51:04,221 INFO    MainThread:112610 [wandb_run.py:_redirect():2144] Redirects installed.
+2023-11-01 19:51:04,221 INFO    MainThread:112610 [wandb_init.py:init():845] run started, returning control to user process
+2023-11-01 19:51:04,223 INFO    MainThread:112610 [jupyter.py:save_ipynb():373] not saving jupyter notebook
+2023-11-01 19:51:04,223 INFO    MainThread:112610 [wandb_init.py:_pause_backend():438] pausing backend
+2023-11-01 19:51:04,243 INFO    MainThread:112610 [wandb_init.py:_resume_backend():443] resuming backend
+2023-11-01 19:51:19,686 INFO    MainThread:112610 [jupyter.py:save_ipynb():373] not saving jupyter notebook
+2023-11-01 19:51:19,686 INFO    MainThread:112610 [wandb_init.py:_pause_backend():438] pausing backend
+2023-11-01 19:51:19,709 INFO    MainThread:112610 [wandb_init.py:_resume_backend():443] resuming backend
+2023-11-01 19:51:24,172 INFO    MainThread:112610 [jupyter.py:save_ipynb():373] not saving jupyter notebook
+2023-11-01 19:51:24,172 INFO    MainThread:112610 [wandb_init.py:_pause_backend():438] pausing backend
+2023-11-01 19:51:24,208 INFO    MainThread:112610 [wandb_init.py:_resume_backend():443] resuming backend
+2023-11-01 19:51:35,367 INFO    MainThread:112610 [jupyter.py:save_ipynb():373] not saving jupyter notebook
+2023-11-01 19:51:35,367 INFO    MainThread:112610 [wandb_init.py:_pause_backend():438] pausing backend
+2023-11-01 19:51:39,557 INFO    MainThread:112610 [wandb_init.py:_resume_backend():443] resuming backend
+2023-11-01 19:51:39,558 INFO    MainThread:112610 [jupyter.py:save_ipynb():373] not saving jupyter notebook
+2023-11-01 19:51:39,558 INFO    MainThread:112610 [wandb_init.py:_pause_backend():438] pausing backend
+2023-11-01 19:51:41,460 INFO    MainThread:112610 [wandb_init.py:_resume_backend():443] resuming backend
+2023-11-01 19:51:41,474 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Current SDK version is 0.15.12
+2023-11-01 19:51:41,474 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Configure stats pid to 112610
+2023-11-01 19:51:41,474 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Loading settings from /home/pechaut/.config/wandb/settings
+2023-11-01 19:51:41,474 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Loading settings from /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/settings
+2023-11-01 19:51:41,474 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-11-01 19:51:41,474 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-11-01 19:51:41,474 INFO    MainThread:112610 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2023-11-01 19:51:41,474 INFO    MainThread:112610 [wandb_init.py:_log_setup():528] Logging user logs to /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_195141-za3858rt/logs/debug.log
+2023-11-01 19:51:41,474 INFO    MainThread:112610 [wandb_init.py:_log_setup():529] Logging internal logs to /home/pechaut/prj/cairo-llm/train/code-llama-instruct/wandb/run-20231101_195141-za3858rt/logs/debug-internal.log
+2023-11-01 19:51:41,475 INFO    MainThread:112610 [wandb_init.py:init():568] calling init triggers
+2023-11-01 19:51:41,475 INFO    MainThread:112610 [wandb_init.py:init():575] wandb.init called with sweep_config: {}
+config: {'epochs': 3}
+2023-11-01 19:51:41,475 INFO    MainThread:112610 [wandb_init.py:init():593] re-initializing run, found existing run on stack: 0v8pdi35
+2023-11-01 19:51:41,476 INFO    MainThread:112610 [wandb_run.py:_finish():1934] finishing run pierre-emmanuel-chaut/codellama-cairo/0v8pdi35
+2023-11-01 19:51:41,476 ERROR   MainThread:112610 [jupyter.py:save_history():437] Run pip install nbformat to save notebook history
+2023-11-01 19:51:41,476 INFO    MainThread:112610 [jupyter.py:save_ipynb():373] not saving jupyter notebook
+2023-11-01 19:51:41,476 INFO    MainThread:112610 [wandb_init.py:_jupyter_teardown():456] cleaning up jupyter logic
+2023-11-01 19:51:41,476 INFO    MainThread:112610 [wandb_run.py:_atexit_cleanup():2168] got exitcode: 0
+2023-11-01 19:51:41,476 INFO    MainThread:112610 [wandb_run.py:_restore():2151] restore
+2023-11-01 19:51:41,476 INFO    MainThread:112610 [wandb_run.py:_restore():2157] restore done
+2023-11-01 19:51:44,759 INFO    MainThread:112610 [wandb_run.py:_footer_history_summary_info():3599] rendering history
+2023-11-01 19:51:44,760 INFO    MainThread:112610 [wandb_run.py:_footer_history_summary_info():3631] rendering summary
+2023-11-01 19:51:44,767 INFO    MainThread:112610 [wandb_run.py:_footer_sync_info():3558] logging synced files

@@ -418,24 +418,20 @@ struct State {
     position: Point,
     quit: bool,
 }
-
+// TODO: define  the strait as implemented below
 impl StateImpl of StateTrait {
     fn change_color(ref self: State, new_color: (u8, u8, u8)) {
-        let State{color, position, quit, } = self;
-        self = State { color: new_color, position: position, quit: quit,  };
+
     }
     fn quit(ref self: State) {
-        let State{color, position, quit, } = self;
-        self = State { color: color, position: position, quit: true,  };
     }
 
     fn echo(ref self: State, s: felt252) {
-        s.print();
+
     }
 
     fn move_position(ref self: State, p: Point) {
-        let State{color, position, quit, } = self;
-        self = State { color: color, position: p, quit: quit,  };
+
     }
 
     fn process(
@@ -482,7 +478,7 @@ struct State {
     quit: bool,
 }
 
-// TODO: define  the strait as implemented below
+
 
 impl StateImpl of StateTrait {
     fn change_color(ref self: State, new_color: (u8, u8, u8)) {

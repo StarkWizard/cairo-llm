@@ -32,7 +32,6 @@ question,answer
     let second_elem = my_array.at(1); // Watch, index starts at 0, so second element corresponds to index 1
 ```
 "
-"When the get function finds an element in the array, what does it return in terms of its data type?","The get function returns an Op"In the context of array methods, how does using 'arr.at(index)' compare to another method?","Using arr.at(index) is equivalent to using the subscripting operator arr[index]."tion<Box<@T>>, which is an option to a Box type containing a snapshot to the element at the specified index if that element exists in the array."
 "What is the default response of the get function if an array element doesn't exist?","If the element doesn't exist, get returns None."
 "In situations where indices may not be within an array's bounds, why would someone opt for the get method?","This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics."
 "When referring to the 'at' function, what action does the 'unbox()' operator perform?","The unbox() operator is used in the at function to extract the value stored in a box."
