@@ -1,0 +1,179 @@
+question,answer
+"How can I rename an imported function to avoid conflicts with local names?","
+You can use the 'as' keyword to rename an import like this:
+
+    use some_module::conflicting_name as local_name;
+
+    fn my_function() {
+        // Now we can use local_name instead of conflicting_name
+        local_name();
+    }
+The 'as' keyword helps to avoid naming conflicts by allowing you to locally rename the imported item."
+"How do I stop a loop from continuing its current iteration prematurely?","
+To exit a loop immediately, you can use the 'break' keyword:
+    loop {
+        // some condition to stop the loop
+        if some_condition {
+            break;
+        }
+    }
+The 'break' keyword will terminate the loop as soon as it's executed.
+"
+"What is the correct way to define constants in Cairo?","
+Constants in Cairo are defined using the 'const' keyword:
+
+   const MAX_SIZE: u32 = 100;
+
+    fn my_function() {
+        // Use MAX_SIZE constant
+        let size = MAX_SIZE;
+    }
+
+Constants are values that are bound to a name and cannot be changed.
+"
+"How do I skip the rest of the current loop iteration and move to the next one?","
+You can use the 'continue' keyword to skip the rest of the current loop iteration:
+
+    loop {
+        if i % 2 == 0 {
+            continue; // Skip even numbers
+        }
+        // Process odd numbers
+        i++;
+    }
+The 'continue' keyword skips the current iteration and continues with the next one.
+"
+
+"How do I provide an alternative case for an if condition in Cairo?","
+To provide an alternative case for an 'if' condition, you use the 'else' keyword:
+
+    if some_condition {
+        // some code
+    } else {
+        // alternative code
+    }
+
+The 'else' block will be executed if the 'if' condition is false.
+"
+"How do I define an enumeration in Cairo?","
+Enumerations in Cairo can be defined using the 'enum' keyword:
+
+    enum Direction {
+        Up,
+        Down,
+        Left,
+        Right
+    }
+
+    fn my_function() {
+        let my_direction: Direction = Direction::Up;
+    }
+Enums allow you to define a type by enumerating its possible variants.
+"
+"How can I use external compiler-level functions in Cairo?","
+In Cairo, you can use the 'extern' keyword to define a function that is implemented outside of Cairo, often at the compiler level:
+"
+"How do I define a function in Cairo?","
+You define a function in Cairo using the 'fn' keyword:
+    fn my_function() {
+        // Function body
+    }
+The 'fn' keyword is used to declare new functions.
+"
+"What keyword should I use to create an unconditional loop in Cairo?","
+To create an unconditional loop in Cairo, you use the 'loop' keyword:
+
+    loop {
+        // Infinite loop body
+    }
+The 'loop' keyword creates an infinite loop that will run until explicitly terminated.
+"
+
+"How do I match against several patterns in Cairo?","
+The 'match' keyword in Cairo allows you to compare a value against patterns:
+
+    match some_variable {
+        Pattern1 => { /* code to execute if some_variable matches Pattern1 */ },
+        Pattern2 => { /* code for Pattern2 */ },
+        _ => { /* code for any other case */ }
+    }
+'match' is used for pattern matching in Cairo.
+"
+"What is the purpose of the 'mod' keyword in Cairo?","
+The 'mod' keyword in Cairo is used to declare a module:
+    mod my_module {
+        // Module content
+    }
+Modules are a way to organize and encapsulate code in Cairo.
+"
+"How do I specify that a variable's value can be changed in Cairo?","
+To specify that a variable's value can be changed, you use the 'mut' keyword:
+
+    let mut my_variable = 10;
+    my_variable = 20; // Allowed because of 'mut'
+
+The 'mut' keyword makes a variable mutable, allowing its value to be changed after it's declared.
+"
+"What does the 'nopanic' keyword indicate in a Cairo function?","
+The 'nopanic' keyword indicates that a function is guaranteed not to panic:
+
+    #[nopanic]
+    fn my_safe_function() {
+        // Implementation guaranteed not to panic
+    }
+
+Functions marked with 'nopanic' are important for ensuring safety and reliability in a contract.
+"
+"How do you exit a function and return a value in Cairo?","
+To exit a function and return a value, use the 'return' keyword followed by the value you wish to return:
+    fn calculate_sum(a: u32, b: u32) -> u32 {
+        return a + b;
+    }
+"
+"Can you explain how to define a complex data type with the 'struct' keyword?","
+The 'struct' keyword is used to define a complex data type that can contain multiple fields. Here's an example:
+    struct Point {
+        x: u32,
+        y: u32,
+    }
+"
+"What's the purpose of defining a 'trait' in Cairo?","
+A 'trait' is used to define a set of methods and associated types that can be implemented by a struct. It is similar to an interface in other languages:
+    trait Drawable {
+        fn draw(&self);
+    }
+"
+"How do you represent the boolean value true in Cairo?","
+In Cairo, the boolean value true is represented by the 'true' keyword:
+
+csharp
+Copy code
+    let is_valid: bool = true;
+"
+
+"What does the 'type' keyword do in the context of Cairo contracts?","
+The 'type' keyword allows you to define a type alias, providing a new name for an existing type:
+    type Address = u64;
+"
+
+"How do you use the 'use' keyword to simplify code in Cairo?","
+The 'use' keyword brings symbols from a module into the current scope, so you don't have to write the full path:
+
+    use starknet::contracts::Token;
+
+    fn create_token() -> Token {
+        // Function logic here
+    }
+"
+
+
+
+
+
+
+
+
+
+
+
+

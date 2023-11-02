@@ -117,8 +117,7 @@ mod StringStore {
 "Can you draft the MyCounter contract that starts with an initial count?","
 it's a sample contract:
 
-rust
-Copy code
+
 #[starknet::interface]
 trait IMyCounter<TContractState> {
     fn increment(ref self: TContractState);

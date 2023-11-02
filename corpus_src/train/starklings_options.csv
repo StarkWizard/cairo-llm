@@ -43,7 +43,6 @@ use option::OptionTrait;
 fn maybe_icecream(time_of_day: usize) -> Option<usize> {
     // We use the 24-hour system here, so 10PM is a value of 22 and 12AM is a value of 0
     // The Option output should gracefully handle cases where time_of_day > 23.
-    // TODO: Complete the function body - remember to return an Option!
     if time_of_day > 23 {
         Option::None(())
     } else if time_of_day > 21 {
@@ -65,7 +64,6 @@ fn check_icecream() {
 
 #[test]
 fn raw_value() {
-    // TODO: Fix this test. How do you get at the value contained in the Option?
     let icecreams = maybe_icecream(12);
     assert(icecreams.unwrap() == 5, 'err_6');
 }
@@ -150,4 +148,66 @@ fn simple_option(optional_target: Option<felt252>) {
     }
 }
 ```
+"
+"How can I format my Cairo project using automatic tools?","
+To format your Cairo project, you can use the scarb fmt command if you have Scarb installed, or cairo-format if you're using the Cairo binaries directly.
+
+scarb fmt <file or directory>
+// or
+cairo-format <file or directory>
+"
+"What command is used in collaborative Cairo projects to standardize code formatting?","
+In collaborative Cairo projects, the scarb fmt command is used to standardize code formatting. This helps prevent disputes over style preferences.
+
+scarb fmt <file or directory>
+"
+
+"What is the Language Server Protocol in the context of Cairo development?","
+The Language Server Protocol (LSP) is a specification that allows IDEs and programming languages to communicate. For Cairo development, the cairo-language-server utilizes LSP to provide IDE integration and tools for developers.
+"
+
+"Which tool is recommended by the Cairo community for IDE integration?","
+The Cairo community recommends using the cairo-language-server for IDE integration, as it offers compiler-centric utilities and features that enhance the development experience in supported IDEs.
+"
+
+"What features does the vscode-cairo extension provide for Cairo developers?","
+The vscode-cairo extension provides features such as autocompletion, jump to definition, and inline errors for developers working with Cairo.
+
+// To install:
+// Open Visual Studio Code
+// Go to Extensions
+// Search for 'vscode-cairo'
+// Install the extension
+"
+
+"How do I install the Cairo extension for Visual Studio Code?","
+To install the Cairo extension for Visual Studio Code, visit the vscode-cairo page on the VSCode marketplace and install it from there.
+
+// Open Visual Studio Code
+// Go to Extensions
+// Search for 'vscode-cairo'
+// Install the extension
+"
+
+"Do I need to manually install the cairo-language-server if I have Scarb?","
+No, if you have Scarb installed, it should work seamlessly with the Cairo VSCode extension without the need for manual installation of the language server.
+"
+
+"Can different IDEs use the cairo-language-server?","
+Yes, different IDEs can use the cairo-language-server as long as they support the Language Server Protocol.
+"
+
+"What is the benefit of using scarb fmt for Cairo code formatting?","
+The benefit of using scarb fmt for Cairo code formatting is to ensure a consistent coding style across a project, which can be especially useful in a collaborative environment.
+
+scarb fmt <file or directory>
+"
+
+"How does the cairo-language-server improve the Cairo coding experience in VSCode?","
+The cairo-language-server improves the Cairo coding experience in VSCode by providing essential features like autocompletion, definition lookup, and real-time error feedback, which streamline the development process.
+
+// To utilize the language server:
+// Ensure Scarb is installed
+// Open Visual Studio Code
+// Install the vscode-cairo extension if not already installed
 "

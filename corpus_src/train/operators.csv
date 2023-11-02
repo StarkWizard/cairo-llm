@@ -5,3 +5,140 @@ question,answer
     i+=1;
 ```
  "
+
+"How can I reverse a boolean state with a single operator?","
+Use the ! operator to toggle a boolean value:
+    let mut state = true;
+    state = !state; // state is now false
+"
+What do I use if I want to check that two variables are not the same?","
+You can use the != operator to compare two variables for non-equality:
+
+    let a = 5;
+    let b = 10;
+    let result = a != b; // result is true because a is not equal to b
+"
+"How can I find the remainder of an integer division?","
+Use the % operator to get the remainder of integer division:
+   let dividend = 7;
+    let divisor = 3;
+    let remainder = dividend % divisor; // remainder is 1
+"
+
+"If I want to update a variable with its remainder after division, what should I do?","
+You can use the %= operator to divide and assign the remainder to the variable:
+
+    let mut number = 10;
+    number %= 3; // number is now 1
+"
+
+"Can I combine two boolean conditions, but only evaluate the second if the first is true?","
+Yes, you can use the && operator for short-circuiting logical AND:
+   let first_condition = true;
+    let second_condition = false;
+
+    if first_condition && second_condition {
+        // This block will not execute because second_condition is false
+    }
+"
+"How do I multiply two numbers and update the first variable with the result?","
+You can use the *= operator for multiplication and assignment:
+ let mut a = 5;
+    a *= 2; // a is now 10
+"
+"What does dereferencing a pointer or reference in Cairo mean?","
+Dereferencing is done using the * operator before a pointer or reference, which allows you to access the value that the pointer points to:
+    let reference = &42;
+    let value = *reference; // Dereferencing to get the value 42
+"
+"How can I add two values together?","
+Use the + operator to perform arithmetic addition:
+
+    let sum = 5 + 10; // sum is 15
+"
+"How do I use the comma , in function calls?","
+The comma , separates arguments in a function call, or elements in arrays and tuples:
+
+    fn add(a: i32, b: i32) -> i32 {
+        a + b
+    }
+
+    let result = add(1, 2); // Calling add with two arguments
+"
+"What operator do I use for arithmetic negation?","
+Use the - operator to negate a numerical value:
+
+   let positive = 5;
+   let negative = -positive; // negative is -5
+"
+"How can I subtract one variable from another and store the result back in the first variable?","
+Use the -= operator to subtract and assign:
+   let mut a = 10;
+   a -= 5; // a is now 5
+"
+"How do I indicate the return type of a function?","
+Use the -> followed by the type after the function parameters to specify the return type:
+   fn give_number() -> i32 {
+        42
+    }
+"
+"How can I access a member of a struct?","
+Use the . operator to access a member of a struct:
+    struct Point {
+        x: i32,
+        y: i32,
+    }
+
+    let p = Point { x: 10, y: 20 };
+    let x_coord = p.x; // Accessing the x member
+"
+"What is the correct way to divide two numbers?","
+Use the / operator for arithmetic division:
+
+    let quotient = 10 / 5; // quotient is 2
+"
+"What is the role of the colon : in type declarations?","
+The colon : is used in type declarations to specify the type of a variable or the type of a pattern in pattern matching:
+
+    let x: i32 = 5;
+"
+"What does a semicolon ; signify in Cairo?","
+A semicolon ; is used to terminate statements and expressions, indicating the end of an instruction:
+    let a = 5;
+    let b = a + 1; // Semicolon marks the end of the statement
+"
+"how do you write a less-than comparison?","
+You can use the < operator for a less-than comparison:
+
+    let is_smaller = 5 < 10; // is_smaller is true
+"
+
+"What is the => symbol used for in match expressions?","
+The => connects the pattern to the code to execute in a match arm:
+
+    match number {
+        1 => println!("One"),
+        2 => println!("Two"),
+        _ => println!("Something else"),
+    }
+"
+"How can I check for greater than or equal in a condition?","
+Use the >= operator for greater than or equal to comparison:
+
+    let is_greater_or_equal = 10 >= 5; // is_greater_or_equal is true
+"
+"What is the use of the caret ^ ?","
+The caret ^ is used for bitwise exclusive OR (XOR) operations:
+
+    let result = 0b1010 ^ 0b1100; // result is 0b0110
+"
+"How do I perform a logical OR that evaluates both conditions no matter what?","
+Use the || operator for logical OR, but keep in mind that unlike &&, || does not short-circuit if the first operand is true:
+
+    let first_condition = false;
+    let second_condition = true;
+
+    if first_condition || second_condition {
+        // This block will execute because second_condition is true
+    }
+"

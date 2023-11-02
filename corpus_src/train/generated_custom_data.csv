@@ -11,7 +11,7 @@ question,answer
 "Can you remove an element from an array at any position in Cairo?","No, you can only remove it if it is in the first position."
 "What should a mutable dynamic array support according?","Append items at the end, access any item by index, set the value of an item at a specific index, and return the current length."
 "How is the blueprint for the dynamic array implementation defined?","Using the trait VecTrait<V, T> in Cairo."
-"How is the VecTrait in Cairo similar to another data structure?","It is similar to the Vec<T> data structure in Rust."
+"How is the VecTrait in Cairo similar to another data structure?","It is similar to the Vec<T> data structure in Cairo."
 "What does the Felt252Dict<T> do ?","It maps index numbers (felts) to values."
 "Why is the type T wrapped inside a Nullable pointer in the struct?","To allow using any type T in the data structure."
 "How do you update a value at a specific index in the NullableVec<T> structure?","Using the set method that inserts a new value into the dictionary at the specified index."

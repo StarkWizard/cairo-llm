@@ -234,3 +234,116 @@ trait ShapeGeometryTrait<T> {
     fn area(self: T) -> u64;
 }
 "
+"How can I handle optional return values in Cairo smart contracts?","
+To handle optional return values in Cairo, you should use the OptionTrait like this:
+
+    use core::option::OptionTrait;
+
+    fn some_function() -> Option<u128> {
+        // ... function logic
+        if condition_is_met {
+            Some(return_value)
+        } else {
+            None
+        }
+    }
+The OptionTrait provides methods such as is_some(), is_none(), and unwrap() to work with optional values.
+"
+"What is a ResultTrait and when should I use it in Cairo?","
+ResultTrait is used to return and propagate errors in Cairo smart contracts. Here's how you can use it:
+
+    use core::result::ResultTrait;
+
+    fn another_function() -> Result<u128, SomeErrorType> {
+        // ... function logic
+        if error_condition {
+            Err(some_error)
+        } else {
+            Ok(successful_value)
+        }
+    }
+You should use ResultTrait when you need to handle the possibility of an error occurring during the execution of a function.
+"
+"How do I declare a smart contract's address in Cairo using a type-safe method?","
+To declare a smart contract's address in Cairo using a type-safe method, you can use ContractAddress type as follows:
+
+    use starknet::ContractAddress;
+
+    const SOME_CONTRACT_ADDRESS: ContractAddress = contract_address_const!(0x0123456789abcdef);
+
+This ensures that the address is of the correct type for use within the smart contract.
+"
+"What is the purpose of the ContractAddressZeroable trait?","
+ContractAddressZeroable is used to determine if a ContractAddress type value is zero or not. Here's an example of its use:
+
+    use starknet::contract_address::ContractAddressZeroable;
+    use starknet::ContractAddress;
+
+    fn is_address_zero(address: ContractAddress) -> bool {
+        address.is_zero()
+    }
+This trait is useful when you need to check if an address is set to a default or null-like value.
+"
+"How can I create a constant contract address in Cairo?","
+You can create a constant contract address in Cairo with the contract_address_const! macro like this:
+
+    use starknet::contract_address_const;
+
+    const KNOWN_CONTRACT_ADDRESS: ContractAddress = contract_address_const!(0x0123456789abcdef);
+This is useful for when you need to work with known contract addresses that will not change.
+"
+"What is the Into trait and how can I use it in Cairo?","
+The Into trait is used for converting one type into another. In Cairo, you can use it as follows:
+
+    use traits::Into;
+
+    fn convert_type<T, S: Into<T>>(value: S) -> T {
+        value.into()
+    }
+This trait simplifies type conversion in your smart contract code.
+"
+"Can you give me an example of using TryInto in a Cairo contract?","
+Certainly! Here’s how you might use TryInto:
+
+    use traits::TryInto;
+
+    fn try_convert_type<T, S: TryInto<T>>(value: S) -> Result<T, S::Error> {
+        value.try_into()
+    }
+Use TryInto when the conversion might fail and you need to handle the possibility of an error.
+"
+"What is the get_caller_address function used for in Cairo contracts?","
+The get_caller_address function is used to obtain the address of the entity that called the contract function:
+
+    use starknet::get_caller_address;
+
+    fn get_sender() -> ContractAddress {
+        get_caller_address()
+    }
+It is commonly used for authorization checks.
+"
+"How can I obtain the current contract's address within the contract code?","
+You can obtain the current contract’s address with the get_contract_address function:
+
+    use starknet::info::get_contract_address;
+
+    fn get_own_address() -> ContractAddress {
+        get_contract_address()
+    }
+This is useful for contracts that need to pass their own address as a reference or for logging purposes.
+"
+
+"What should I be aware of when importing multiple traits or functions into a Cairo contract module?","
+When importing multiple traits or functions, ensure there are no naming conflicts and that each import is used according to its purpose:
+
+    // Import multiple traits
+    use core::option::OptionTrait;
+    use core::result::ResultTrait;
+
+    // Import functions
+    use starknet::get_caller_address;
+    use starknet::info::get_contract_address;
+
+    // Contract code utilizing the imported traits and functions
+You should also manage the namespace effectively to keep your code clean and readable.
+"
