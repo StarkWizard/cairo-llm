@@ -1,0 +1,119 @@
+{
+    "os": "Linux-6.5.5-1-MANJARO-x86_64-with-glibc2.38",
+    "python": "3.9.18",
+    "heartbeatAt": "2023-11-02T16:53:14.689782",
+    "startedAt": "2023-11-02T16:53:14.054645",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/StarkWizard/cairo-llm.git",
+        "commit": "8254f308fa8b6b10c0e0d30a9c23df1fd6292b64"
+    },
+    "email": "pe_chaut@hotmail.com",
+    "root": "/home/pechaut/prj/cairo-llm",
+    "host": "Neuron",
+    "username": "pechaut",
+    "executable": "/home/pechaut/miniconda3/envs/cairo-llm/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 4089.4075,
+        "min": 800.0,
+        "max": 5087.5
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 4569.074,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4098.519,
+            "min": 800.0,
+            "max": 4900.0
+        },
+        {
+            "current": 4603.06,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4426.352,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4482.389,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4540.907,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4443.303,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4130.085,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4576.593,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4098.837,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 3937.808,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4685.536,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4039.799,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4293.103,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4429.62,
+            "min": 800.0,
+            "max": 5100.0
+        },
+        {
+            "current": 4140.036,
+            "min": 800.0,
+            "max": 5100.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 512.4387817382812,
+            "used": 420.35227966308594
+        }
+    },
+    "memory": {
+        "total": 125.57127380371094
+    }
+}

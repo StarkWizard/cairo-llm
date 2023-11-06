@@ -1,3 +1,4 @@
+question,answer
 "Can you explain how the derive attribute works in Cairo?","
 The derive attribute in Cairo generates code to implement certain traits for a type automatically. This is applied to structs or enums to add common functionality without writing boilerplate code.
 "
@@ -7,79 +8,60 @@ The traits in the Cairo standard library that can be used with the derive attrib
 "How does deriving PartialEq trait affect equality comparisons in structs and enums?","
 When deriving PartialEq for structs, equality is determined by comparing each field for equality. For enums, each variant is only equal to itself and not to any other variants.
 "
-
 "What must be true about the fields of a struct for it to derive the Clone trait?","
 All the fields within a struct must implement the Clone trait themselves in order for the struct to automatically derive the Clone trait.
 "
-
 "What is the significance of the Copy trait in Cairo, and when can it be derived?","
 The Copy trait allows for types to be duplicated by copying their bytes directly, without requiring a call to clone. It can be derived for types where all fields also implement Copy.
 "
-
 "What functionality does Serde provide for Cairo data structures?","
 Serde provides serialization and deserialization functionality for Cairo data structures, enabling their transformation into formats like JSON, or binary, and vice versa.
 "
-
 "How does deriving Serde differ when it comes to structs with complex types like Dictionaries or Arrays?","
 Deriving Serde for structs with complex types like Dictionaries or Arrays might require additional implementations or traits to handle the serialization and deserialization process properly.
 "
-
 "What is the Drop trait and its importance in Cairo?","
 The Drop trait allows for custom logic to be executed when a value goes out of scope. This is crucial for resource cleanup and management in Rust.
 "
-
 "How does the Destruct trait complement the Drop trait, particularly in the context of Dictionaries?","
 The Destruct trait can automatically handle the cleanup of complex structures like Dictionaries, which need to be 'squashed' before going out of scope, thus complementing the Drop trait by handling more specific cleanup needs.
 "
-
 "What are the requirements for a user-defined struct to implement the Store trait in StarkNet contracts?","
 For a user-defined struct to implement the Store trait in StarkNet contracts, the struct must not contain complex types that are not compatible with storage, like Dictionaries or Arrays.
 "
-
 "How does deriving the PartialOrd trait affect the way instances of a struct are ordered?","
 When PartialOrd is derived on structs, the ordering comparison is performed sequentially on each field until a determination can be made. If all fields are equal, the instances are considered equal in terms of ordering.
 "
-
 "What does implementing PartialEq allow you to do with instances of a type?","
 Implementing the PartialEq trait allows you to compare instances of a type for equality using the == and != operators, which can be derived for both structs and enums.
 "
-
 "In what scenario would you not be able to use the derive attribute for a trait?","
 You cannot use the derive attribute for traits that do not have default behaviors suitable for all cases or where a custom implementation is required for the logic specific to your type.
 "
-
 "How do you ensure that a struct can be copied using the Copy trait?","
 To ensure a struct can be copied using the Copy trait, all of its fields must also implement Copy, and the trait can then be derived for the struct.
 "
-
 "Why might you want to implement the Clone trait for a struct?","
 Implementing the Clone trait for a struct allows you to create a deep copy of the struct's instance, which is necessary when you want to preserve the original instance or when the struct contains non-Copy fields.
 "
-
 "What is the relationship between the Serialize and Deserialize traits in Serde?","
 The Serialize and Deserialize traits in Serde work together to allow a data structure to be converted into a format suitable for storage or transmission (Serialize) and then converted back to the original form (Deserialize).
 "
-
 "Can you store a struct with derived Store trait directly in StarkNet contract storage?","
 Yes, a struct with the derived Store trait can be directly stored in StarkNet contract storage as long as it adheres to the storage compatibility requirements, such as not containing complex types like Dictionaries or Arrays.
 "
-
 "What is the function of the Drop trait in memory management?","
 The Drop trait provides a way to specify the cleanup logic that should run when an instance of the type is about to be destroyed, which is crucial for managing resources like memory or file descriptors.
 "
-
 "What specific task does the Destruct trait automate in the context of StarkNet contracts?","
 The Destruct trait automates the 'squashing' of Dictionaries in StarkNet contracts, which is required before they go out of scope to properly manage the contract's state.
 "
-
 "How does the derive attribute contribute to reducing boilerplate code?","
 The derive attribute reduces boilerplate code by automatically implementing specified traits for structs or enums, thus eliminating the need to manually write common implementations for those traits.
 "
-
 "Is it possible to implement custom derive functionality for traits not included in the standard library?","
 Yes, it is possible to implement custom derive functionality for traits not included in the standard library through procedural macros or using external libraries that provide such features.
 "
-
 "What does the derive attribute do?","
 The derive attribute automatically generates the code needed to implement certain traits for a given struct or enum:
 
@@ -91,7 +73,6 @@ The derive attribute automatically generates the code needed to implement certai
 
     // This struct can now use == and != operators to compare instances
 "
-
 "Can you derive the PartialEq trait for custom types?","
 Yes, you can derive the PartialEq trait for custom types to enable comparison between instances of these types using == and != operators:
 
@@ -100,7 +81,6 @@ Yes, you can derive the PartialEq trait for custom types to enable comparison be
         item: u32, // Assuming u32 for the example
     }
 "
-
 "What types of comparisons does deriving PartialEq enable for a struct?","
 Deriving PartialEq for a struct enables equality comparisons, specifically the == and != operators between instances of the struct:
 
@@ -114,7 +94,6 @@ Deriving PartialEq for a struct enables equality comparisons, specifically the =
     let instance2 = A { item: 1 };
     let are_equal = instance1 == instance2; // This will be true
 "
-
 "How does deriving PartialEq on an enum affect its variants?","
 When deriving PartialEq on an enum, each variant is considered equal only to itself and not equal to other variants:
 
@@ -129,7 +108,6 @@ When deriving PartialEq on an enum, each variant is considered equal only to its
     let is_equal = ExampleEnum::Variant1 == ExampleEnum::Variant1; // This is true
     let is_not_equal = ExampleEnum::Variant1 == ExampleEnum::Variant2; // This is false
 "
-
 "What trait is needed to be able to clone a struct?","
 The Clone trait is required to be able to clone a struct. By deriving Clone, you enable the struct to create deep copies of its instances:
 
@@ -142,7 +120,6 @@ The Clone trait is required to be able to clone a struct. By deriving Clone, you
     let original = A { item: 1 };
     let clone = original.clone();
 "
-
 "How do you ensure that a struct can be copied with the Copy semantic?","
 To ensure a struct can be copied with the Copy semantic, you derive the Copy trait. This trait can be derived for types whose parts all implement Copy:
 
@@ -155,7 +132,6 @@ To ensure a struct can be copied with the Copy semantic, you derive the Copy tra
     let instance = A { item: 1 };
     let copied_instance = instance; // instance can still be used after this line
 "
-
 "What is the difference between the Clone and Copy traits?","
 The Clone trait requires an explicit call to .clone() to produce a new instance, while the Copy trait allows for implicit copying of values, such as in assignment and function calls:
 
@@ -168,7 +144,6 @@ The Clone trait requires an explicit call to .clone() to produce a new instance,
     let cloned_instance = instance.clone(); // Explicit cloning
     let copied_instance = instance; // Implicit copying
 "
-
 "What is the purpose of the Serde derive?","
 The purpose of the Serde derive is to provide serialization and deserialization capabilities for structs, which convert data structures to and from a data format like JSON or binary:
 
@@ -180,7 +155,6 @@ The purpose of the Serde derive is to provide serialization and deserialization 
 
     // This struct can be serialized and deserialized using Serde
 "
-
 "How does handle cleanup of resources when a variable goes out of scope?","
 Cairo uses the Drop trait to perform cleanup when a variable goes out of scope. The Drop trait allows you to specify custom behavior to be run when an instance goes out of scope:
 
@@ -190,11 +164,10 @@ Cairo uses the Drop trait to perform cleanup when a variable goes out of scope. 
 
     impl Drop for A {
         fn drop(&mut self) {
-            println!("A is being dropped");
+            println!('A is being dropped');
         }
     }
 "
-
 "What are the PartialOrd and Ord traits used for?","
 The PartialOrd and Ord traits are used for ordering comparisons. PartialOrd enables the <, <=, >, and >= operators, while Ord requires all values to be comparable and provides a method for total ordering:
 

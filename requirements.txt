@@ -15,7 +15,6 @@ huggingface_hub
 ipywidgets
 gradio
 icecream
-colorama
 neowGen
 ctransformers
 py7zr
@@ -26,3 +25,4 @@ langchain
 text_generation
 sentence-transformers
 chromadb
+autoawq

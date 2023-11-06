@@ -5,3 +5,20 @@
        }
        result
    }
+
+   [/INST]
+```
+   #[external(v0)]
+   mod my_module {
+       #[view]
+       fn my_function() -> bool {
+           // This is a view function and cannot modify the contract's state
+           true
+       }
+
+       #[external(v0)]
+       fn my_other_function(ref self: ContractState) {
+           // This is an external function that can modify the contract's state
+           self.my_state = 42;
+       }
+   }

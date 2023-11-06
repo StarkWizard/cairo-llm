@@ -117,9 +117,9 @@ You can use the < operator for a less-than comparison:
 The => connects the pattern to the code to execute in a match arm:
 
     match number {
-        1 => println!("One"),
-        2 => println!("Two"),
-        _ => println!("Something else"),
+        1 => println!('One'),
+        2 => println!('Two'),
+        _ => println!('Something else'),
     }
 "
 "How can I check for greater than or equal in a condition?","
