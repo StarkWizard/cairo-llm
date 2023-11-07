@@ -1,0 +1,19 @@
+Collecting ctransformers
+  Downloading ctransformers-0.2.27-py3-none-any.whl (9.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.9/9.9 MB 16.5 MB/s eta 0:00:00
+Requirement already satisfied: huggingface-hub in /home/pechaut/miniconda3/lib/python3.11/site-packages (from ctransformers) (0.18.0)
+Collecting py-cpuinfo<10.0.0,>=9.0.0 (from ctransformers)
+  Downloading py_cpuinfo-9.0.0-py3-none-any.whl (22 kB)
+Requirement already satisfied: filelock in /home/pechaut/miniconda3/lib/python3.11/site-packages (from huggingface-hub->ctransformers) (3.13.0)
+Requirement already satisfied: fsspec>=2023.5.0 in /home/pechaut/miniconda3/lib/python3.11/site-packages (from huggingface-hub->ctransformers) (2023.10.0)
+Requirement already satisfied: requests in /home/pechaut/miniconda3/lib/python3.11/site-packages (from huggingface-hub->ctransformers) (2.31.0)
+Requirement already satisfied: tqdm>=4.42.1 in /home/pechaut/miniconda3/lib/python3.11/site-packages (from huggingface-hub->ctransformers) (4.65.0)
+Requirement already satisfied: pyyaml>=5.1 in /home/pechaut/miniconda3/lib/python3.11/site-packages (from huggingface-hub->ctransformers) (6.0.1)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /home/pechaut/miniconda3/lib/python3.11/site-packages (from huggingface-hub->ctransformers) (4.8.0)
+Requirement already satisfied: packaging>=20.9 in /home/pechaut/miniconda3/lib/python3.11/site-packages (from huggingface-hub->ctransformers) (23.1)
+Requirement already satisfied: charset-normalizer<4,>=2 in /home/pechaut/miniconda3/lib/python3.11/site-packages (from requests->huggingface-hub->ctransformers) (2.0.4)
+Requirement already satisfied: idna<4,>=2.5 in /home/pechaut/miniconda3/lib/python3.11/site-packages (from requests->huggingface-hub->ctransformers) (3.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /home/pechaut/miniconda3/lib/python3.11/site-packages (from requests->huggingface-hub->ctransformers) (1.26.16)
+Requirement already satisfied: certifi>=2017.4.17 in /home/pechaut/miniconda3/lib/python3.11/site-packages (from requests->huggingface-hub->ctransformers) (2023.7.22)
+Installing collected packages: py-cpuinfo, ctransformers
+Successfully installed ctransformers-0.2.27 py-cpuinfo-9.0.0
