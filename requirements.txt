@@ -26,3 +26,4 @@ text_generation
 sentence-transformers
 chromadb
 autoawq
+git+https://github.com/victorlee0505/ctransformers.git@vlee/transformers#egg=ctransformers[cuda]

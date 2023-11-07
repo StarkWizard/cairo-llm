@@ -9,3 +9,4 @@ cairo-mistral
 **/config.json
 **/*.model
 **/StarkWizard
+**/llama.cpp

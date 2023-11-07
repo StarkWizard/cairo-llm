@@ -7,7 +7,7 @@ from attention_sinks import AutoModelForCausalLM
 
 _port = 5000
 model_name = "mistralai/Mistral-7B-Instruct-v0.1"
-hub_name = "StarkWizard/Mistral-7b-instruct-cairo-instruct"
+hub_name = "StarkWizard/Mistral-7b-instruct-cairo-instruct-AWQ"
 
 
 app = Flask(__name__)
@@ -51,7 +51,7 @@ def infer():
     print("There")
     print("there",prompt)
 
-    temperature = float(request.args.get('temperature', 0.37))  # Default temperature is 0.7\
+    temperature = float(request.args.get('temperature', 0.4))  # Default temperature is 0.7\
     if temperature == 0:
         temperature=0.01
     
@@ -69,7 +69,8 @@ def infer():
  
             pad_token_id=tokenizer.pad_token_id,
             eos_token_id=tokenizer.eos_token_id,
-            temperature=temperature)
+            temperature=temperature
+            )
     print(response)
     generated_text = response.generations[0][0].text
     print(generated_text)
