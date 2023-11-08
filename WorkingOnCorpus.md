@@ -18,8 +18,8 @@ Your CSV should be a dialogue between the trainer and the model. Questions shoul
 
 ```csv
 question,answer
-"How do you declare a variable in the new language X?","In language X, a variable can be declared using the var keyword: var x = 10;"
-"What's a unique feature of functions in language X?","Language X functions can return multiple values, like this: function example() { return val1, val2; }"
+"How do you declare a variable in the new language X?","In language X, a variable can be declared using the let keyword: let x = 10;"
+"What's a unique feature of functions in language X?","Language X functions can return multiple values, like this: fn example() { return (val1, val2); }"
 ```
 
 ### Step 4: Edit and Proofread Your Entries
@@ -72,7 +72,7 @@ To facilitate understanding, let’s delve into some concrete examples of well-c
 
 ```csv
 question,answer
-"How do you initiate a 'for' loop in language X?","In language X, a 'for' loop is initiated with the 'for' keyword, followed by the loop conditions."
+"How do you initiate a 'for' loop in language X?","In language X, a 'for' loop is initiated with the 'loop' keyword, followed by the instructions to execute"
 "What is the syntax for an if-else statement in language X?","The syntax for an if-else statement in language X is: if (condition) { ... } else { ... }"
 ```
 
