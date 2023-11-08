@@ -1,6 +1,78 @@
-...
+# Expanding the Training Corpus for a Language Model
 
-## Step-by-Step Guide to Creating CSV Training Files
+Language models have revolutionized the field of natural language processing. The efficacy of these models depends heavily on the quality and variety of the training data they are exposed to. In this comprehensive guide, we'll walk you through the steps and considerations for contributing to the training corpus of a model to ensure its continued growth and improvement.
+
+## Understanding the Corpus Structure
+
+The corpus is the lifeblood of a language model. It's a collection of texts that the model uses to learn how language is structured and applied in various contexts. When contributing to the corpus of a language model, understanding the structure of the existing data is crucial.
+
+### The `corpus_src` Directory
+
+Training files reside within the `corpus_src` directory. This directory contains CSV files, each designed to encapsulate specific aspects of language or topics. For example, if you're adding content about programming loops, you'd navigate to the `loop.csv` file.
+
+### File Naming Conventions
+
+File names should be descriptive of their content. For instance, if adding content about a new library, the file name should include the library's name. This makes it easy to identify the training set's purpose and content.
+
+### Source Documentation
+
+When using any external source like documentation, a website, or an article from Medium, it's good practice to mention this in the `sources.txt` file located at the project's root. This helps maintain a record of the materials that influenced the training data.
+
+### Problem Reporting
+
+If an issue arises in the generated content—for instance, a generated contract contains an erroneous `for` loop—it should be documented. Add an example of the incorrect generation to the `to_correct.txt` file, also at the root of the project.
+
+## Crafting the CSV Files
+
+A CSV (Comma-Separated Values) file is a simple format used to store tabular data. It's supported by most data processing tools and is particularly suited for handling large volumes of text.
+
+### Selecting an Editor
+
+On Linux systems, Okular is an excellent choice for editing CSV files. Regardless of your operating system, ensure the editor you choose can handle multiline text entries easily.
+
+### CSV Structure
+
+The CSV file should start with the headers `question,answer` to define the two fields. Below is how you would structure the entries:
+
+```csv
+question,answer
+"question 1","answer 1"
+"question 2","answer 2"
+"question 3","long answer that can
+span multiple lines"
+```
+### Syntax Precision
+Accuracy in syntax is paramount:
+
+Ensure there are no spaces between the commas and quotation marks.
+Use single quotes within your content if you need to quote text, as double quotes are used to encapsulate CSV fields.
+Here's an example of the correct and incorrect syntax:
+
+Correct:
+```csv
+"print 'hello world'","'hello world'.print()"
+```
+Incorrect:
+
+```csv
+"print "hello world"",""hello world".print()"
+```
+
+### Writing Effective CSV Entries
+Learning from existing CSV files is a great way to grasp the expected format and style. When writing a CSV to train the model on the 'loop' keyword, consider multiple perspectives and scenarios:
+
+### Basic comprehension: "What keyword is used for loops?"
+Variations and alternatives: "Is 'loop' the only keyword for creating loops?"
+Practical application: "Provide an example of a loop counting from 1 to 20."
+Code correction: "Fix the following code: loop { i = i+1 }."
+In-depth concepts: "What is the purpose of a 'break' in a loop?"
+Potential pitfalls: "What are the dangers of a loop?"
+By covering a concept from various angles, you help the AI develop a nuanced understanding. Missing perspectives can lead to inaccurate inferences or hallucinations.
+
+### Integrating into the Dataset
+A notebook within the dataset directory is designed to concatenate these CSV files into the format required by the model. Running this notebook validates the format and, given appropriate permissions, allows you to upload the updated dataset to platforms like HuggingFace.
+
+In the following sections, we'll delve deeper into each step, ensuring that you can confidently contribute to the model's corpus and aid in its development.
 
 Contributing to a language model's training corpus with a CSV file is both an art and a science. Here, we will outline the steps and best practices for creating your CSV files that will be ingested into the model's training routine.
 
