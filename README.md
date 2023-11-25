@@ -71,3 +71,6 @@ For support, questions, or feedback, please open an issue or mail wizard@starkwi
 StarkWizard is open-sourced under the [MIT License](LICENSE). See the LICENSE file for more details.
 
 ---
+
+[![built with Codeium](https://codeium.com/badges/main)](https://codeium.com)
+
