@@ -95,19 +95,28 @@ question,answer
 ```
 
 ### Step 4: Edit and Proofread Your Entries
-Accuracy is crucial, as the model will learn from what you feed it. Proofread your CSV entries for grammatical errors, ensure technical accuracy, and validate that the formatting is consistent with the model's requirements.
+Accuracy is crucial, as the model will learn from what you feed it. Proofread your CSV entries for grammatical errors, ensure technical accuracy, and validate that the formatting is consistent with the model's requirements. For instance, if you copy part of telegram conversation, make sure you do not copy text containing some smileys, or jokes.
 
 ### Step 5: Validate Your CSV Format
 Before your CSV can join the training corpus, it must pass format validation. This involves checking that the syntax is correct and that there are no extraneous spaces or misplaced quotation marks. Use CSV linting tools or scripts if available.
 
+The most common mistakes:
+"Question", "answer" <- Make sure there is no space before or after the ","
+"print hello"," sure, "hello".print()" <- use ' instead of " or use ""hello""
+
+
 ### Step 6: Push to the Dataset
-After validation, use the provided notebook in the dataset directory to integrate your new CSV file into the larger corpus. This process typically involves concatenating individual CSV files and formatting them to meet the ingestion specifications of the model.
+After validation, use the provided notebook in the "build Dataset" directory to integrate your new CSV file into the corpus. This process involves concatenating individual CSV files and formatting them to meet the ingestion specifications of the model.
+
+The data are included with a prefix: "In cairo 1:", so you do not have to specify the version of Cairo, unless you want to specify knowledge for previous or future versions of the language
 
 ### Step 7: Review and Iterate
-Post-ingestion, keep an eye on the model's performance. If issues arise or if the model starts generating inaccurate or nonsensical content, revisit your CSV entries. It might require fine-tuning or even rewriting sections that are causing confusion.
+Post-ingestion, keep an eye on the model's performance. If issues arise or if the model starts generating inaccurate or nonsensical content, revisit your CSV entries. It might require to re-run fine-tuning or even rewriting sections that are causing confusion.
 
 ### The Importance of Diversity in Training Data
 To build a well-rounded and robust language model, the training data must be diverse and inclusive of various dialects, jargon, and forms of expression. This diversity ensures that the model does not develop biases and can perform well across different domains and applications.
+
+So you're welcome to write the same question multiple time paraphrasing the original question, delivering the same answer. This has to be especially done on concepts that are similar to other languages. For instance, there is no "for" keyword in Cairo, but there is in Rust and Mistral is trained on Rust sources. 
 
 ### Covering Edge Cases
 When creating training data, don't forget to include edge cases. These are scenarios that might not be common but are critical to ensuring the model can handle a wide range of possible inputs it might encounter in the real world.
@@ -118,14 +127,12 @@ Ensure that no single topic dominates the training corpus. Balance is key so tha
 ### Continuous Learning and Model Improvement
 The process of contributing to a language model's training corpus is ongoing. Language evolves, new technologies emerge, and the model must adapt to these changes. Your contributions help keep the model current and effective.
 
-### Staying Current
-Keep your training data current by regularly reviewing and updating it. Monitor developments in your areas of expertise and reflect these in new CSV entries.
 
 ### Collaborative Efforts
-Contributing to a training corpus is often a collaborative effort. Work with other contributors to ensure that the corpus grows not just in size but also in quality and scope.
+Contributing to a training corpus is often a collaborative effort. Work with other contributors to ensure that the corpus grows not just in size but also in quality and scope. Make sure you don't provide more data in your domain of expertise than others, or there will be balancing issues.
 
 ### Leveraging Community Feedback
-Listen to the feedback from users of the model. They can provide insights into what the model does well and where it needs improvement. Use this feedback to guide future CSV contributions.
+Listen to the feedback from users of the model. They can provide insights into what the model does well and where it needs improvement. Use this feedback to guide your contributions.
 
 ### Conclusion
 By following these guidelines, you can make meaningful contributions to a language model's training corpus. Your efforts will aid in the model's development, helping it to understand and generate language with greater accuracy and nuance.

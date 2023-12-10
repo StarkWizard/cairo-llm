@@ -1,0 +1,5 @@
+setup.py
+wizardlib.egg-info/PKG-INFO
+wizardlib.egg-info/SOURCES.txt
+wizardlib.egg-info/dependency_links.txt
+wizardlib.egg-info/top_level.txt

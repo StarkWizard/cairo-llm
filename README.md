@@ -17,9 +17,9 @@
 
 ## Features
 - **Cairo LLM Integration**: Crafted specifically for Cairo's smart contract language.
-- **Training Notebooks**: Easy-to-follow notebooks to train different models.
-- **Merge Capabilities**: Seamlessly merge the training weights of PEFT with the original model.
-- **Inference with Hugging Face**: Utilize models pushed to Hugging Face for swift inference tasks.
+- **Training script**: A cross-platform script to train the model on Windows/Linux/MacOS.
+- **Merge Capabilities**: Seamlessly merge the training weights of PEFT with the original model(s).
+- **Quantization**: AWQ (PC only) and GGUF notebooks to generate quantized versions of the merged models.
 
 ## Installation
 Create a venv and install the requirements
