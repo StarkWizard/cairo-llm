@@ -1,1 +1,0 @@
-python3 train.py  --model_name = "codellama/CodeLlama-7b-Instruct-hf" --new_model = "StarkWizard/llama-2-7b-cairo-trained-PEFT" --lr=2e-4 q_proj k_proj v_proj o_proj up_proj down_proj gate_proj lm_head

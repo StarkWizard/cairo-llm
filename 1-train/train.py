@@ -250,7 +250,6 @@ trainer = SFTTrainer(
     eval_dataset=dataset_test,
     peft_config=peft_config,
     dataset_text_field="text",
-    max_seq_length=1024,
     args=training_arguments,
     tokenizer=tokenizer,
     packing=packing,
