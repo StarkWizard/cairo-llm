@@ -1,6 +1,6 @@
 # StarkWizard 🪄
 
-![StarkWizard Logo](doc/starkwizard_256.jpg)
+![StarkWizard Logo](doc/starkwizard_256.png)
 
 **StarkWizard** is a state-of-the-art Language Model (LLM) tailored for the Cairo smart contract language of StarkNet. With our meticulously designed training process and dedicated integration with StarkNet's intricacies, we aim to provide a robust and reliable LLM for all your Cairo smart contract needs.
 
