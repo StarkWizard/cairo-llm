@@ -1,1 +1,0 @@
-python3 --model_name = "mistralai/Mistral-7B-Instruct-v0.1" --new_model="StarkWizard/Mistral-7b-instruct-cairo-PEFT" --lr=2e-5 train-code-llama.py  q_proj k_proj v_proj o_proj gate_proj
