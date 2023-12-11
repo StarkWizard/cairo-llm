@@ -25,7 +25,9 @@
 
 
 
-If you want to use the model for inference, please visit:
+# If you just want to use the model for inference
+
+please visit:
 
 [StarkWizard On Hugging Face](https://huggingface.co/StarkWizard) See [LM Studio](https://https://lmstudio.ai/) for a UI to chat with the model
 
