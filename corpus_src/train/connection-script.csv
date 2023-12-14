@@ -1,0 +1,57 @@
+question,answer
+"How do you start Katana?","Run 'katana' in a terminal."
+"What is the first step to use the Katana Local Node script?","Ensure that Katana is running."
+"How is the chain ID retrieved using starkli on a local node?","Using 'starkli chain-id --rpc http://0.0.0.0:5050'."
+"What command is used to get the latest block number on Katana on a local node?","'starkli block-number --rpc http://0.0.0.0:5050'."
+"How is the balance of an account retrieved in a script on a local node?","Using 'starkli balance $account1 --rpc http://0.0.0.0:5050'."
+"What input does the Goerli Testnet script require?","A testnet API URL and a transaction hash."
+"How is the testnet chain ID obtained in a script?","Using 'starkli chain-id --rpc $url'."
+"What command fetches the latest block number on Goerli?","'starkli block-number --rpc $url'."
+"write a script to get the latest block number created on a local node","
+#!/bin/bash
+chain=$(starkli chain-id --rpc http://0.0.0.0:5050)
+echo 'Connected to the Starknet local devnet with chain id: $chain'
+
+block=$(starkli block-number --rpc http://0.0.0.0:5050)
+echo 'he latest block number on Katana is: $block'
+"
+"write a script that displays the balance of account 0x123","
+#!/bin/bash
+chain=$(starkli chain-id --rpc http://0.0.0.0:5050)
+echo 'Connected to the Starknet local devnet with chain id: $chain'
+
+
+account1='0x123'
+balance=$(starkli balance $account1 --rpc http://0.0.0.0:5050)
+echo 'The balance of account $account1 is: $balance ETH'
+"
+"write a script that display the latest block number on Goerli","
+echo 'Input your testnet API URL: '
+read url
+chain=$(starkli chain-id --rpc $url)
+echo 'Connected to the Starknet testnet with chain id: $chain'
+
+block=$(starkli block-number --rpc $url)
+echo 'The latest block number on Goerli is: $block'
+"
+"
+write a script to display the latest transaction hash on Goerli
+","
+echo 'Input your testnet API URL: '
+read url
+chain=$(starkli chain-id --rpc $url)
+echo 'Connected to the Starknet testnet with chain id: $chain'
+
+echo 'Input your transaction hash: '
+read hash
+receipt=$(starkli receipt $hash --rpc $url)
+echo 'The receipt of transaction $hash is: $receipt'
+"
+"
+write a script to connect to Goerli
+","
+echo 'Input your testnet API URL: '
+read url
+chain=$(starkli chain-id --rpc $url)
+echo 'Connected to the Starknet testnet with chain id: $chain'
+"

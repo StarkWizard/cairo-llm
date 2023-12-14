@@ -11,6 +11,7 @@
   - [Features](#features)
   - [Installation](#installation)
   - [Usage](#usage)
+  - [](#)
   - [Directory Structure](#directory-structure)
   - [Contribution Guidelines](#contribution-guidelines)
   - [Support \& Feedback](#support--feedback)
@@ -129,7 +130,7 @@ StarkWizard/
 
 ## Contribution Guidelines
 
-StarkWizard is an open-source project, and we welcome contributions of all kinds: new models, bug fixes, improvements to the documentation, and more. See our [contributing guide](CONTRIBUTING.md) for more details on how to get started.
+StarkWizard is an open-source project, and we welcome contributions of all kinds: new models, bug fixes, improvements to the documentation, and more. See our [contributing guide](doc/contribution_guide.md) for more details on how to get started.
 
 ## Support & Feedback
 

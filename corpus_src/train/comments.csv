@@ -5,7 +5,7 @@ question,answer
 ```
 "
 "how are commentaries declared ?","
-Use the "//" decoration to add a comment to your code.
+Use the '//' decoration to add a comment to your code.
 ```
     // This is a comment
 ```
