@@ -1,0 +1,194 @@
+question,answer
+"What is vital in blockchain programming to maintain user trust?","Understanding and mitigating smart contract vulnerabilities."
+"Is Cairo just as susceptible to smart contract vulnerabilities as other languages?","Yes, it is as true for Cairo as any other language."
+"What causes access control vulnerabilities in smart contracts?","When a smart contract's functions are insufficiently protected, allowing unauthorized actions."
+"What can result from access control vulnerabilities?","Unexpected behavior and data manipulation."
+"What is recommended to prevent access control vulnerabilities?","Integrating authorization mechanisms like role-based access control or ownership checks."
+"Can existing templates be used for authorization mechanisms?","Yes, templates from sources like OpenZeppelin can be used."
+"What does robust access control ensure in smart contracts?","That only authorized entities execute smart contract functions."
+"What are reentrancy vulnerabilities?","When a smart contract calls an external contract before updating its state."
+"What can reentrancy vulnerabilities lead to?","The external contract recursively calling the original function, causing unintended behavior."
+"In which ERC standards are reentrancy protections critical?","ERC721, ERC777, ERC1155, ERC223."
+"What is a recommended pattern to prevent reentrancy attacks?","The check-effects-interactions pattern."
+"How does the check-effects-interactions pattern enhance smart contract security?","By updating the contract's internal state before interacting with external contracts."
+"What are the global variables in Solidity for transaction initiator and caller?","tx.origin for initiator and msg.sender for caller."
+"What are the Cairo equivalents for tx.origin and msg.sender?","account_contract_address for tx.origin and get_caller_address for msg.sender."
+"Why is using account_contract_address for authentication risky?","It can lead to phishing attacks."
+"What is the vulnerability in the Cairo smart contract example using account_contract_address?","It allows attackers to impersonate the contract owner."
+"What is the recommended change for secure authentication in the transferTo function?","Replace account_contract_address authentication with get_caller_address."
+"Why is understanding smart contract vulnerabilities important in blockchain programming?","To maintain trust among users."
+"What problem arises from insufficient protection of smart contract functions?","Unauthorized actions can be performed."
+"What is a typical consequence of access control vulnerabilities?","The manipulation of data and unexpected behaviors."
+"What can be used to enhance security against access control vulnerabilities?","Authorization mechanisms such as RBAC or ownership checks."
+"What is the main benefit of implementing strong access control?","It minimizes unauthorized interference in smart contracts."
+"What triggers reentrancy vulnerabilities?","Calling an external contract before updating the state of the calling contract."
+"What is a real-world consequence of reentrancy vulnerabilities?","Recursive calls leading to exploitation of functions."
+"What is the security issue in this contract:
+use starknet::get_caller_address;
+use box::BoxTrait;
+
+struct Storage {
+    owner: ContractAddress, // Stores the owner's address.
+}
+
+#[constructor]
+fn constructor(){
+    // Initialize the owner as the contract deployer.
+    let contract_deployer = get_caller_address();
+    self.owner.write(contract_deployer)
+}
+
+#[external(v0)]
+impl ITokenImpl of IToken {
+    fn transferTo(ref self: ContractState, to: ContractAddress, amount: u256) {
+        let tx_info = starknet::get_tx_info().unbox();
+        let authorizer: ContractAddress = tx_info.account_contract_address;
+        // Verifies the transaction initiator as the owner.
+        assert(authorizer == self.owner.read());
+        // Processes the fund transfer.
+        self.balance.write(to + amount);
+    }
+}
+","
+An attacker can trick the owner into using a malicious contract, allowing the attacker to call the transferTo function and impersonate the contract owner:
+
+#[starknet::contract]
+mod MaliciousContract {
+...
+...
+#[external(v0)]
+impl IMaliciousContractImpl of IMaliciousContract {
+    fn transferTo(ref self: ContractState, to: ContractAddress, amount: u256) {
+        // Malicious callback to transfer funds.
+        let callback = ICallerDispatcher { contract_address: sender }.transferTo(ATTACKER_ACCOUNT, amount);
+    }
+}
+"
+"what is the security issue with this contract:
+#[starknet::contract]
+mod Token {
+    #[storage]
+    struct Storage {
+        total_supply: u256, // Stores the total supply of tokens.
+    }
+
+    #[external(v0)]
+    impl ITokenImpl of IToken {
+        fn mint_tokens(ref self: ContractState, amount: u256) {
+            // The mint_tokens function updates the total supply.
+            // Without access control, any user can call this function, posing a risk.
+            self.total_supply.write(self.total_supply.read() + amount);
+        }
+    }
+}","
+In this code, the mint_tokens function is vulnerable because any user can call it, leading to potential token supply exploitation. Implementing access controls would restrict this function to authorized users only.
+
+Recommendation
+To prevent access control vulnerabilities, integrate authorization mechanisms like role-based access control (RBAC) or ownership checks. You can develop a custom solution or use templates from sources like OpenZeppelin.
+
+we can enhance security by adding an owner variable, initializing the owner in the constructor, and including a verification in the mint_tokens function to allow only the owner to mint tokens.
+
+By establishing robust access control, you ensure that only authorized entities execute your smart contract functions, significantly reducing the risk of unauthorized interference."
+"what is the security issue with this contract
+#[storage]
+struct Storage {
+    available_swords: u256, // Stores available swords.
+    sword: LegacyMap::<ContractAddress, u256>, // Maps swords to addresses.
+    whitelisted: LegacyMap::<ContractAddress, u256>, // Tracks whitelisted addresses.
+    ...
+    ...
+}
+
+#[constructor]
+fn constructor(ref self: ContractState,) {
+    self.available_swords.write(100); // Initializes the sword count.
+}
+
+#[external(v0)]
+impl IGameImpl of IGame {
+    fn mint_one_sword(ref self: ContractState) {
+        let sender = get_caller_address();
+        if self.whitelisted.read(sender) {
+            // Update the sword count before minting.
+            let sword_count = self.available_swords.read();
+            self.available_swords.write(sword_count - 1);
+            // Mint a sword.
+            self.sword.write(sender, 1);
+            // Callback to sender's contract.
+            let callback = ICallerDispatcher { contract_address: sender }.on_receive_sword();
+            // Remove sender from whitelist after callback to prevent reentrancy.
+            self.whitelisted.write(sender, false);
+        }
+}","
+An attacker's contract can implement the on_receive_sword function to exploit the reentry vulnerability and mint multiple swords by calling mint_one_sword again before removing the sender from the whitelist:
+
+fn on_receive_sword(ref self: ContractState) {
+    let nft_sword_contract = get_caller_address();
+    let call_number: felt252 = self.total_calls.read();
+    self.total_calls.write(call_number + 1);
+    if call_number < 10 {
+        // Attempt to mint a sword again.
+        let call = ISwordDispatcher { contract_address: nft_sword_contract }.mint_one_sword();
+    }
+}
+Reentrancy protections are critical in many ERC standards with safeTransfer functions (like ERC721, ERC777, ERC1155, ERC223) and in flash loans, where borrower contracts need to safely use and return funds.
+
+Recommendation:
+To prevent reentrancy attacks, use the check-effects-interactions pattern. This means updating your contract's internal state before interacting with external contracts. In the previous example, remove the sender from the whitelist before making the external call.
+
+Adhering to this pattern enhances the security of your smart contract by minimizing the risk of reentrancy attacks and preserving the integrity of its internal state."
+"what is the security issue with this contract:
+use starknet::get_caller_address;
+use box::BoxTrait;
+
+struct Storage {
+    owner: ContractAddress, // Stores the owner's address.
+}
+
+#[constructor]
+fn constructor(){
+    // Initialize the owner as the contract deployer.
+    let contract_deployer = get_caller_address();
+    self.owner.write(contract_deployer)
+}
+
+#[external(v0)]
+impl ITokenImpl of IToken {
+    fn transferTo(ref self: ContractState, to: ContractAddress, amount: u256) {
+        let tx_info = starknet::get_tx_info().unbox();
+        let authorizer: ContractAddress = tx_info.account_contract_address;
+        // Verifies the transaction initiator as the owner.
+        assert(authorizer == self.owner.read());
+        // Processes the fund transfer.
+        self.balance.write(to + amount);
+    }
+}","
+An attacker can trick the owner into using a malicious contract, allowing the attacker to call the transferTo function and impersonate the contract owner:
+
+#[starknet::contract]
+mod MaliciousContract {
+...
+...
+#[external(v0)]
+impl IMaliciousContractImpl of IMaliciousContract {
+    fn transferTo(ref self: ContractState, to: ContractAddress, amount: u256) {
+        // Malicious callback to transfer funds.
+        let callback = ICallerDispatcher { contract_address: sender }.transferTo(ATTACKER_ACCOUNT, amount);
+    }
+}"
+"What is the security issue here:
+#[starknet::contract]
+mod StoreSecretPassword {
+    struct Storage {
+        password: felt252, // Field to store the password.
+    }
+
+    #[constructor]
+    fn constructor(_password: felt252) {
+        // Writing the password to the storage.
+        self.password.write(_password);
+    }
+}","Storing secret values in smart contracts presents a challenge because all on-chain data is publicly accessible, even if the code isn't published.
+
+If your smart contract requires storing private data on-chain, consider off-chain encryption before sending data to the blockchain. Alternatively, explore options like hashes, merkle trees, or commit-reveal patterns to maintain data privacy.
+"

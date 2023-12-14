@@ -32,7 +32,7 @@ train [options] modules
 
 ## Examples
 ```bash
-train --batch_size 32 --epochs 10 my_model.py
+train --batch_size=32 --epochs=10 --model_name="my_model"
 ```
 
-This example trains `my_model.py` with a batch size of 32 for 10 epochs.
+This example downloads from HuggingFace and trains `my_model` with a batch size of 32 for 10 epochs.

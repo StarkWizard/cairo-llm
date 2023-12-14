@@ -8,3 +8,4 @@ https://github.com/OpenZeppelin/cairo-contracts
 https://starknet-by-example.voyager.online/
 https://github.com/argentlabs/argent-contracts-starknet
 https://github.com/keep-starknet-strange/alexandria/blob/main/src/encoding/src/reversible.cairo
+https://github.com/starknet-edu/starknetbook

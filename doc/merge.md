@@ -18,7 +18,7 @@ merge [options]
 
 ## Examples
 ```bash
-merge --model_name my_model --peft_model peft_example --hub_name my_hub
+merge --model_name="my_model" --peft_model="peft_example" --hub_name="my_merged"
 ```
 
-This example merges `my_model` with the PEFT model `peft_example` and uploads the result to the hub `my_hub`.
+This example merges `my_model` with the PEFT model `peft_example` and uploads the result `my_merged` on HuggingFace.
