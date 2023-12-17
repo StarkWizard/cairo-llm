@@ -97,7 +97,7 @@ def generateQ(text,nbQ):
     return remove_gemini_format_errors(answer)
    
 def convert_to_csv(input_file,nbQ):
-    # Vérifier si le fichier .csv existe déjà
+    # Check if csv file already exists
     base_name, _ = os.path.splitext(input_file)
     csv_file = base_name + '.csv'
 
@@ -125,7 +125,7 @@ def convert_to_csv(input_file,nbQ):
     console.print(f"Number of duplicated lines {num_duplicates}")
     
     if os.path.exists(csv_file) and os.path.getsize(csv_file) > 2:
-        # Si le fichier .csv existe, ajouter le nouveau contenu en fin
+        # if there is a csv file already, append file to the end
         df1 = pd.read_csv(csv_file)
         df_combined = pd.concat([df1, df], ignore_index=True)
         df_combined.to_csv(csv_file, quoting=csv.QUOTE_ALL,index=False)
