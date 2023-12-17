@@ -108,6 +108,11 @@ The merged model is uploaded after merging. You need to get authorization to pus
 
 Two notebooks are proposed to generate AWQ and GGUF quantitization. Please note that AWQ is not supported on Apple Silicon.
 
+**NEW**
+The directory 0-build datasets contains a Gemini Data synthetizer
+You need to have a GEMINI_KEY defined as env. variable, created using google cloud ket tools
+It should open access to Generative AI
+
 ## 
 
 ## Directory Structure
