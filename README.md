@@ -111,9 +111,8 @@ Two notebooks are proposed to generate AWQ and GGUF quantitization. Please note 
 ---
 
 **NEW**
-The directory 0-build datasets contains a Gemini Data synthetizer
-You need to have a GEMINI_KEY defined as env. variable, created using google cloud ket tools
-It should open access to Generative AI
+The directory 0-build datasets contains a Gemini Data synthetizer. You need to have an aenvironment variabble called GEMINI_KEY, containing a configured access to gcloud Generative AI.
+
 
 ## 
 
