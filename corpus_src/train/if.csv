@@ -66,3 +66,69 @@ In this conditional statement:
         deny_access();
     }
 grant_access() gets executed because user.isAdmin evaluates to true."
+"What is the purpose of the if statement in this code?
+fn main() {
+    let condition = true;
+    let number = if condition {
+        5
+    } else {
+        6
+    };
+
+    if number == 5 {
+        println!('condition was true and number is {}', number);
+    }
+}","It is used to conditionally assign a value to the variable number."
+"What is the value of the variable number if the condition is true?
+fn main() {
+    let condition = true;
+    let number = if condition {
+        5
+    } else {
+        6
+    };
+
+    if number == 5 {
+        println!('condition was true and number is {}', number);
+    }
+}","It is 5."
+"What is the value of the variable number if the condition is false?
+fn main() {
+    let condition = true;
+    let number = if condition {
+        5
+    } else {
+        6
+    };
+
+    if number == 5 {
+        println!('condition was true and number is {}', number);
+    }
+}","It is 6."
+"What is the outcome of the if statement in the code?
+fn main() {
+    let condition = true;
+    let number = if condition {
+        5
+    } else {
+        6
+    };
+
+    if number == 5 {
+        println!('condition was true and number is {}', number);
+    }
+}","It prints the string 'condition was true and number is 5' since the condition is true."
+"Give an exemple of a if used in conjunction with a let","
+fn main() {
+    let condition = true;
+    let number = if condition {
+        5
+    } else {
+        6
+    };
+
+    if number == 5 {
+        println!('condition was true and number is {}', number);
+    }
+}
+"
