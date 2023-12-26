@@ -1,0 +1,11 @@
+question,answer
+"What is the purpose of sozo register?","To register new systems and components to a world."
+"What are the commands available in sozo register?","The commands available are component, system, and help."
+"Sozo: How do I register a component to a world?","Use sozo, with the component command followed by the component name you want to register."
+"Sozo: How do I register a system to a world?","Use the system command followed by the system name you want to register."
+"Sozo: What is the use of the help command?","The help command prints the help message or the help of the given subcommand(s)."
+"Sozo: Can you provide an example of registering a component to a world?","To register the Moves component to a world, use the command: sozo register component COMPNENT_NAME"
+"Sozo: Can you provide an example of registering a system to a world?","To register the spawn system to a world, use the command: sozo register system spawn"
+"Sozo: What is the format of the command to register a component?","sozo register component <component name>"
+"Sozo: What is the format of the command to register a system?","sozo register system <system name>"
+"What is the purpose of the register command in sozo?","To register new systems and components to a world, allowing them to be used in the application."

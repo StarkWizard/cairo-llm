@@ -1,0 +1,36 @@
+question,answer
+"How to deploy to Katana?","To deploy to Katana, ensure you've completed the Quick Start guide and have your project set up, then execute: katana --disable-fee. "
+"What are the steps to deploying on Katana?","1. Compile your contracts. 2. Migrate your project. "
+"Dojo: How to compile contracts?","Run: sozo build to compile your contracts. "
+"Dojo: How to migrate your project?","Run: sozo migrate to migrate your project."
+"Is Katana deployment straightforward?","Yes, deploying to Katana is easy and efficient. "
+"What is the pre-requisite for Katana deployment?","Complete the Quick Start guide and have your project set up. "
+"What does Katana deployment involve?","It involves compiling your contracts, migrating your project, and interacting with the world using sozo. "
+"What is the purpose of compiling contracts?","To ensure that your contracts are ready for deployment. "
+"What is the purpose of migrating a project?","To migrate the world to Katana. "
+"what does katana --disable-fee do ?","This command launches a local instance of Katana, setting the stage for your deployment."
+"How Can I deply a Dojo game locally using Katana","Deploying to Katana is straightforward and efficient.
+
+Pre-requisite: Ensure you've completed the Quick Start guide and have your project set up.
+
+To initiate Katana from your project directory, execute:
+
+katana --disable-fee
+This command launches a local instance of Katana, setting the stage for your deployment.
+
+Step-by-Step Guide to Deploy on Katana
+Deploying your project to Katana involves a few simple steps.
+
+Compile Your Contracts:
+
+If you haven't compiled your contracts yet, run:
+
+sozo build
+Compiling ensures that your contracts are ready for deployment.
+
+Migrate your Project:
+
+To migrate, run:
+
+sozo migrate
+Success! You have now migrated your world. You will be able to interact with the world using sozo."

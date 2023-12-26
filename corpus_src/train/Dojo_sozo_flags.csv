@@ -1,0 +1,40 @@
+question,answer
+"Can I use sozo offline?","
+Yes using the flag:
+--offline
+    Run without accessing the network.
+    [env: SOZO_OFFLINE=]
+
+USAGE
+sozo --offline [COMMAND]
+
+For example
+sozo --offline build
+"
+"What does 'sozo init' do?","
+sozo init is used to initialize a new project.
+It will initialize a new project in the current directory by cloning the dojo-starter.
+sozo init
+"
+"What does sozo build do?","
+sozo build is used to compile the cairo contracts, generating the necessary artifacts for deployment.
+
+sozo build
+"
+"What does sozo test do?"," sozo test is used to test the project's cairo contracts. It will run all tests found within the project."
+"What is sozo migrate used for","Sozo migrate is used to perform the migration (deployment) process, declaring and deploying contracts as necessary to deploy or update the World."
+"Sozo: How can changes made to the local World after the initial deployment be pushed to the remote counterpart","By running sozo migrate --world <WORLD_ADDRESS> with WORLD_ADDRESS being the address of the remote World."
+"Sozo: What does migrate compute in the background","migrate will compute the diffs of the local and remote World, then, start constructing a migration strategy to determine, if any, which part of the local World needs to be pushed upstream."
+"Sozo: What is the name of the World","Name of the World. At the moment, the only usage for this option is to be used as a salt when deploying the World contract to avoid address conflicts. This option is required when performing the initial migration of the World."
+"Sozo: What is the keystore password","The keystore password. Used with --keystore."
+"Sozo: example of deploying your World for the first time to a local Katana node","sozo migrate --name ohayo --rpc-url http://localhost:5050"
+"Sozo: example of Updating a remote World after making some changes","sozo migrate --world 0x123456"
+"Sozo: example of Deploying your World using profile options","sozo --profile dev migrate"
+"Sozo: What is migrate used for in sozo","Migrate is used to perform the migration (deployment) process, declaring and deploying contracts as necessary to deploy or update the World."
+"Sozo: What is the purpose of the --name option","The --name option is used to specify the name of the World. This option is required when performing the initial migration of the World."
+"Sozo: What is the purpose of the --world option","The --world option is used to specify the address of the World contract."
+"Sozo: What is the purpose of the --rpc-url option","The --rpc-url option is used to specify the Starknet RPC endpoint."
+"Sozo: What is the purpose of the --account-address option","The --account-address option is used to specify the Starknet account address."
+"Sozo: What is the purpose of the --private-key option","The --private-key option is used to specify the raw private key associated with the account contract."
+"Sozo: What is the purpose of the --keystore option","The --keystore option is used to specify the path to the keystore file."
+"Sozo: What is the purpose of the --password option","The --password option is used to specify the password for the keystore file."

@@ -1,0 +1,127 @@
+question,answer
+"How are Dojo Commands similar to Cairomacros?","Dojo Commands are similar to Cairo macros in that they are expanded at compile time to facilitate system execution."
+"What is a key point about understanding commands in Dojo?","Understanding commands is key to understanding Dojo. You will leverage them heavily within the systems you design."
+"What is the syntax for using commands in Dojo?","Commands are used within systems to interact with the world state. They are called using the following syntax: get!, set!, emit!, and delete!."
+"What is the purpose of the get! command?","The get! command is used to retrieve models from the world state."
+"How do you use the get! command to retrieve models from the world state?","To use the get! command to retrieve models from the world state, you specify the world state, the caller's key, and the tuple of models to retrieve."
+"What happens if you use the get! command on a Dojo model that has never been set before?","If you use the get! command on a model that has never been set before, all fields that are not #[key] are equal to 0 in the returned model, which is the default value in the storage."
+"What is the purpose of the set! Dojo command?","The set! Dojo command is used to update models state."
+"How do you use the set! Dojo command to update models in the world state?","To use the set! command to update models in the world state, you specify the world state, the tuple of models to update, and the values to update the models with."
+"What is the purpose of the emit! Dojo command?","The emit! command is used to emit custom events. These events are indexed by Torii."
+"What is the purpose of the delete! Dojo command?","The delete! command is used to delete a model from the database."
+"How do you use the delete! Dojo command to delete a model from the database?","To use the delete! command to delete a model from the database, you specify the world state and the model to delete."
+"What is the purpose of Dojo Commands?","Dojo Commands are a convenient way for systems to interact with the world state by abstracting common operations."
+"What are the benefits of using Dojo Commands?","Dojo Commands abstract complex queries into shorthands, which streamlines system implementations and improves code readability."
+"What are the different types of Dojo Commands?","The different types of Dojo Commands include the get! command, the set! command, the emit! command, and the delete! command."
+"What is the syntax for the get! Dojo command?","The syntax for the get! command is: get!(world, caller, (model1, model2, ...))"
+"What does the get! Dojo command do?","The get! command retrieves models from the world state."
+"What is the syntax for the set! Dojo command?","The syntax for the set! command is: set!(world, (model1, model2, ...));"
+"What does the set! Dojo command do?","The set! command updates models in the world state."
+"What is the syntax for the emit! command?","The syntax for the emit! command is: emit!(world, event);"
+"What does the emit! Dojo command do?","The emit! command emits custom events."
+"What is the syntax for the delete! Dojo command?","The syntax for the delete! command is: delete!(world, model);"
+"What does the delete! Dojo command do?","The delete! command deletes models from the world state."
+"How do Dojo Commands facilitate system execution?","Dojo Commands are generalized functions that are expanded at compile time to facilitate system execution."
+"How do Dojo Commands improve code readability?","Dojo Commands abstract common operations into shorthands, which makes code more concise and easier to read."
+"How do Dojo Commands streamline system implementations?","Dojo Commands provide a convenient way for systems to interact with the world state, which simplifies system design and implementation."
+"What is the significance of understanding Dojo Commands?","Understanding Dojo Commands is key to understanding Dojo and effectively leveraging them in system design."
+"How does the get! command help in retrieving models from the world state?","The get! command retrieves models from the world state based on a specified caller and a tuple of models."
+"How does the set! command assist in updating models in the world state?","The set! command updates models in the world state by specifying the updated values for the models."
+"How does the emit! command facilitate the emission of custom events?","The emit! command emits custom events that are indexed by Torii."
+"How does the delete! command enable the deletion of models from the database?","The delete! command deletes models from the database by specifying the model to be deleted."
+"What are the different Dojo Commands?","The different Dojo Commands are get!, set!, emit!, and delete!."
+"What is the purpose of the caller parameter in the get! and set! commands?","The caller parameter in the get! and set! commands specifies the key of the entity that called the system."
+"What is the significance of the #[key] attribute in Dojo models?","The #[key] attribute in Dojo models specifies the key fields for resource identification."
+"How do you use the get! command to retrieve models with multiple keys?","To use the get! command to retrieve models with multiple keys, you need to provide a value for each key."
+"What happens if you try to update a Dojo model that doesn't exist using the set! command?","If you try to update a model that doesn't exist using the set! command, a new model will be created with the specified values."
+"What is the difference between the get! and set! commands in Dojo?","The get! command retrieves models from the world state, while the set! command updates models in the world state."
+"What is the purpose of the world parameter in Dojo Commands?","The world parameter in Dojo Commands specifies the world state that the command is being executed on."
+"What are the limitations of Dojo Commands?","Dojo Commands are limited to interacting with the world state and cannot be used for other operations such as sending messages or performing calculations."
+"How can I learn more about Dojo Commands?","You can learn more about Dojo Commands by reading the Dojo documentation and experimenting with them in your own code."
+"What is the best way to use Dojo Commands effectively?","The best way to use Dojo Commands effectively is to understand their purpose and limitations, and to use them in a way that minimizes the number of commands required to achieve the desired result."
+"How do Dojo Commands compare to other programming language features for interacting with data?","Dojo Commands are similar to function calls in other programming languages, but they are specifically designed for interacting with the world state in a distributed system."
+"What are some common mistakes to avoid when using Dojo Commands?","Some common mistakes to avoid when using Dojo Commands include using the wrong command for the task, not specifying the correct parameters, and not handling errors properly."
+"How can I troubleshoot issues with Dojo Commands?","To troubleshoot issues with Dojo Commands, you can check the logs, use a debugger, and consult the Dojo documentation and community forums."
+"What is the future of Dojo Commands?","The future of Dojo Commands is bright, as they are a key part of the Dojo framework and are actively being developed and improved."
+"How can I contribute to the development of Dojo Commands?","You can contribute to the development of Dojo Commands by reporting bugs, suggesting improvements, and submitting pull requests to the Dojo repository."
+"How are Dojo Commands similar to rust Macros?","Dojo Commands are similar to rust macros in that they are expanded at compile time to facilitate system execution."
+"Why are Dojo Commands important?","Understanding commands is key to understanding Dojo and will be used heavily within the systems you design."
+"What is the purpose of the get! command in Dojo?","The get! command is used to retrieve models from the world state."
+"How do you use the get! command in Dojo?","The get! command is used within systems to interact with the world state, using syntax like: let (position, moves) = get!(world, caller, (Position, Moves));"
+"What happens when you use the get! command on a model that has never been set before?","All the fields that are not #[key] are equal to 0 in the returned model, which is the default value in the storage."
+"What is the purpose of the set! command in Dojo?","The set! command is used to update models state."
+"How do you use the set! command in Dojo?","The set! command is used to update models state in the world state, using syntax like: set !(world, (Moves {player: caller, remaining: 10},Position {player: caller, x: position.x + 10, y: position.y + 10}));"
+"What is the purpose of the emit! command in Dojo?","The emit! command is used to emit custom events that are indexed by Torii."
+"How do you use the emit! command in Dojo?","The emit! command is used to emit custom events in the world state, using syntax like: emit!(world, Moved { address: caller, direction });"
+"What is the purpose of the delete! command in Dojo?","The delete! command is used to delete a model from the db."
+"How do you use the delete! command in Dojo?","The delete! command is used to delete a model from the db, using syntax like: delete!(world, Moved { address: caller, direction });"
+"What are some of the benefits of using Dojo Commands?","Dojo Commands abstract complex queries into shorthands, providing a convenient way for systems to interact with the world state and improving code readability."
+"Can Dojo Commands be used to retrieve models from the world state?","Yes, the get! command is used to retrieve models from the world state."
+"Can Dojo Commands be used to update models state?","Yes, the set! command is used to update models state."
+"Can Dojo Commands be used to emit custom events?","Yes, the emit! command is used to emit custom events."
+"Can Dojo Commands be used to delete models from the db?","Yes, the delete! command is used to delete models from the db."
+"What is the syntax for using the get! command in Dojo?","The syntax for the get! command in Dojo is: let (position, moves) = get!(world, caller, (Position, Moves));"
+"What is the syntax for using the set! command in Dojo?","The syntax for the set! command in Dojo is: set !(world, (Moves {player: caller, remaining: 10},Position {player: caller, x: position.x + 10, y: position.y + 10}));"
+"What is the syntax for using the emit! command in Dojo?","The syntax for the emit! command in Dojo is: emit!(world, Moved { address: caller, direction });"
+"What is the syntax for using the delete! command in Dojo?","The syntax for the delete! command in Dojo is: delete!(world, Moved { address: caller, direction });"
+"What are some examples of how Dojo Commands can be used?","Dojo Commands can be used to retrieve models from the world state, update models state, emit custom events, and delete models from the db."
+"What are some of the key features of Dojo Commands?","Dojo Commands abstract complex queries into shorthands, provide a convenient way for systems to interact with the world state, and improve code readability."
+"How do Dojo Commands compare to other programming language features?","Dojo Commands are similar to rust macros in that they are expanded at compile time to facilitate system execution."
+"What are some of the challenges associated with using Dojo Commands?","One challenge associated with using Dojo Commands is that they can be complex to understand and use correctly."
+"What are some of the best practices for using Dojo Commands?","Some best practices for using Dojo Commands include using them consistently throughout your code, documenting your use of them, and testing your code thoroughly."
+"What are some of the resources available to help you learn more about Dojo Commands?","Some resources available to help you learn more about Dojo Commands include the Dojo documentation, the Dojo community forum, and the Dojo Slack channel."
+"What is the future of Dojo Commands?","The future of Dojo Commands is bright. Dojo Commands are a powerful tool that can help you write more efficient and readable code. As Dojo continues to evolve, Dojo Commands will likely become even more powerful and easier to use."
+"Give a sample of using the Dojo get! command for
+#[derive(Model, Copy, Drop, Serde)]
+struct Resource {
+    #[key]
+    player: ContractAddress,
+    #[key]
+    location: ContractAddress,
+    balance: u8,
+}","
+// world = calling world
+// caller = key of the entity that called the system
+// (Position, Moves) = tuple of models to retrieve
+let (position, moves) = get!(world, caller, (Position, Moves));
+"
+"Give a sample of using the Dojo set! command for#[derive(Model, Copy, Drop, Serde)]
+struct Resource {
+    #[key]
+    player: ContractAddress,
+    #[key]
+    location: ContractAddress,
+    balance: u8,
+}","
+set !(world, (
+    Moves {
+        player: caller, remaining: 10
+    },
+    Position {
+        player: caller, x: position.x + 10, y: position.y + 10
+    },
+));
+
+// If the structs are already defined it can also be written as:
+set!(world, (moves, position));
+"
+"Give a sample of using the Dojo emit! command for
+#[derive(Model, Copy, Drop, Serde)]
+struct Resource {
+    #[key]
+    player: ContractAddress,
+    #[key]
+    location: ContractAddress,
+    balance: u8,
+}
+","emit!(world, Moved { address: caller, direction });"
+"Give a sample of using the Dojo emit! command for
+#[derive(Model, Copy, Drop, Serde)]
+struct Resource {
+    #[key]
+    player: ContractAddress,
+    #[key]
+    location: ContractAddress,
+    balance: u8,
+}","
+delete!(world, Moved { address: caller, direction });"

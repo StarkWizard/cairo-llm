@@ -1,0 +1,25 @@
+question,answer
+"What are the benefits of Dojo Metadata?","It enables external services to easily index and distribute worlds and experiences built on them."
+"How is Dojo Metadata managed during migration?","sozo automatically manages the worlds metadata for you, uploading it to ipfs and setting it in the world contract."
+"What is the process of setting a Dojo world's metadata?","Create a Scarb.toml file with the tool.dojo.world section and include attributes like name, description, icon_uri, and others. "
+"What attributes does the toolchain support by default?","name, description, icon_uri, cover_uri, website and socials. "
+"How can _uri attributes be specified?","They can point to a asset in the repo using the file:// schema or to remote resouces using either ipfs:// or https://. "
+"How can arbitrary social links be set?","By setting a key value on the socials attribute, for example, socials.github = ..."
+"What happens to local assets during sozo migration?","sozo will upload any local assets to ipfs."
+"What happens to uris during sozo migration?","sozo will replace the corresponding uris."
+"What happens to the metadata json during sozo migration?","sozo will upload the metadata json to ipfs."
+"What happens to the metadata_uri for the world during sozo migration?","sozo will set the metadata_uri for the world (resource 0)."
+"In Dojo, What is the Scarb.toml file used for?","To set a Dojo world's metadata."
+"In Dojo,cWhat section should be created in the Scarb.toml file?","tool.dojo.world."
+"In dojo, What attributes can be included in the Scarb.toml file?","name, description, icon_uri, cover_uri, website, and socials."
+"What does sozo do during migration?","It automatically manages the worlds metadata for you, uploading it to ipfs and setting it in the world contract."
+"Where does sozo get the metadata from?","It parses the metadata defined in the projects Scarb.toml."
+"Give a sample toml file to set a Dojo worlds metadata ","
+[tool.dojo.world]
+name = 'example'
+description = 'example world'
+icon_uri = 'file://assets/icon.png'
+cover_uri = 'file://assets/cover.png'
+website = 'https://dojoengine.org'
+socials.x = 'https://twitter.com/dojostarknet'
+"

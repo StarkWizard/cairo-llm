@@ -1,0 +1,20 @@
+question,answer
+"What is the syntax for declaring the return type of a function?","The return type is declared after an arrow (->)."
+"What is the return value of a Cairo function synonymous with?","The return value of a Cairo function is synonymous with the value of the final expression in the block of the body of a function."
+"Can a function return early using the return keyword?","Yes, a function can return early using the return keyword and specifying a value."
+"What happens if there is no return statement in a Cairo function?","If there is no return statement in a Cairo function, it will implicitly return the value of the last expression."
+"Give an example of a Cairo function that returns a value.","The function five
+fn five() -> u32 {
+    5
+}
+returns a value of 5."
+"What is the data type of the return value of the five() function?
+fn five() -> u32 {
+    5
+}
+","The data type of the return value of the five() function is u32."
+"What happens when the return value of a function is used to initialize a variable?","When the return value of a function is used to initialize a variable, it is assigned the value returned by the function."
+"What is the difference between an expression and a statement in Cairo?","An expression evaluates to a value, while a statement does not. An expression can be used as the final expression in a block of a function, while a statement cannot."
+"What is the unit type in Cairo?","The unit type in Cairo is represented by (), and it represents the absence of a value."
+"What is the error message when the return type of a function doesn't match the expected return type?","The error message when the return type of a function doesn't match the expected return type is Unexpected return type."
+"What is the difference between a function parameter and a function return value?","A function parameter is a value that is passed into a function when it is called, while a function return value is a value that is returned from the function when it finishes executing."

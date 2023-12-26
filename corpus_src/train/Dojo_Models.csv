@@ -1,0 +1,314 @@
+question,answer
+"How can I define a Dojo Model?","You can define Dojo Models by utilizing the #[derive(Model)] decorator."
+"What are the key features of Dojo Models?","Dojo Models are Cairo structs with additional features and the ability to implement traits."
+"Can custom enums and types be utilized in Dojo Models?","Yes, Dojo Models support the use of custom enums and types."
+"How do I define the primary key in a Dojo Model?","To define the primary key, you should employ the #[key] attribute."
+"What is the recommended approach for creating Dojo Models?","It's advisable to keep your models small, isolated, and to maintain modularity and composability."
+"How does modularity and composability aid in reusing Dojo models?","By practicing modularity and composability, you can reuse models across various entity types, fostering code efficiency."
+"What are the features of Dojo Models?","Dojo Models possess additional features as compared to regular Cairo structs and have the capability to implement traits."
+"How are Dojo Models structured?","Dojo Models have a key-value structure, with the primary key being defined using the #[key] decorator."
+"What are the advantages of using Dojo Models?","Dojo Models promote modularity and composability, allowing for easy reuse of models across entity types, thus enhancing code efficiency."
+"How does the ECS design pattern relate to Dojo Models?","The ECS design pattern encourages the use of small, isolated models, which aligns with the recommended approach for creating Dojo Models."
+"TL;DR for Dojo Models?","Dojo Models are structs with additional features that can implement traits and support custom enums and types."
+"What are Dojo Models?","Structs annotated with the #[derive(Model)] attribute that act as key-value stores, with the #[key] attribute defining the primary key."
+"Why are Dojo Models considered to be structs?","They are annotated with the #[derive(Model)] attribute, which provides additional features and allows them to implement traits."
+"What is the best practice for defining Dojo Models?","Maintaining small, isolated models promotes modularity and composability, allowing reuse across different entity types."
+"in Dojo models, What is the #[key] attribute used for?","To define the primary key of a Dojo Model."
+"What are the additional features of Dojo Models?","The ability to implement traits and support custom enums and types."
+"Why is it best to maintain small, isolated Dojo models?","To enhance modularity and composability, facilitating reuse across various entity types."
+"What is an example of a Dojo Model?","A struct annotated with the #[derive(Model)] attribute, containing a #[key] attribute to define the primary key and other fields to store data."
+"Why is it important to adhere to best practices in Entity-Component-System (ECS) design?","To maintain the integrity and organization of the data stored in Dojo Models, ensuring efficient and structured data management."
+"Give a simple implementation of a Dojo Model repersenting Moves","
+#[derive(Model, Copy, Drop, Serde)]
+struct Moves {
+    #[key]
+    player: ContractAddress,
+    remaining: u8,
+}"
+"With Dojo Model.What happens to a field identified as a #[key]?","It is not stored, but used by Dojo to identify the storage location of the model. "
+"Why is it necessary to define at least one key for a Dojo model?","It is required for querying the model. "
+"With Dojo Model: What is a composite key?","It is created by defining multiple fields as keys. "
+"What is the requirement for querying a Dojo model with composite keys?","All the keys must be provided. "
+"With Dojo Model: Can a #[key] field also be a regular field?","Yes, it can. "
+"Is it possible to have multiple #[key] attributes in a Dojo model?","Yes, it is possible. "
+"What is the primary role of the #[key] attribute in a Dojo model?","It is used for indexing and uniquely identifying the storage location of the model. "
+"What are the implications of not defining a #[key] attribute in a Dojo model?","The model cannot be queried. "
+"What is the significance of providing all the keys when querying a Dojo model with composite keys?","It ensures that the correct model is retrieved. "
+"Give a sample Dojo Model with a player and a balance","
+#[derive(Model, Copy, Drop, Serde)]
+struct Resource {
+    #[key]
+    player: ContractAddress,
+    #[key]
+    location: ContractAddress,
+    balance: u8,
+}
+
+In this case you then would set the model with both the player and location fields using:
+
+set!(
+    world,
+    (
+        Resource {
+            player: caller,
+            location: 12,
+            balance: 10
+        },
+    )
+);
+"
+"with this model, how can I get the resource for a specific player and location?:
+#[derive(Model, Copy, Drop, Serde)]
+struct Resource {
+    #[key]
+    player: ContractAddress,
+    #[key]
+    location: ContractAddress,
+    balance: u8,
+}
+","
+To retrieve a model with a composite key using the get! command, you must provide a value for each key as follow:
+
+
+let player = get_caller_address();
+let location = 0x1234;
+
+let resource = get!(world, (player, location), (Resource));
+"
+"With this Dojo model, how can I set the value ?
+#[derive(Model, Copy, Drop, Serde)]
+struct Resource {
+    #[key]
+    player: ContractAddress,
+    #[key]
+    location: ContractAddress,
+    balance: u8,
+}
+","
+In this case you then would set the model with both the player and location fields using:
+
+set!(
+    world,
+    (
+        Resource {
+            player: caller,
+            location: 12,
+            balance: 10
+        },
+    )
+);
+"
+"What is a trait?","A trait is a collection of methods that define a common interface for a set of classes."
+"What is the benefit of using traits?","Traits allow for code reuse and flexibility by enabling the sharing of common functionality among different classes."
+"Can you provide an example of a trait?","A trait for Shape could define methods like getArea() and getPerimeter()."
+"How can traits be implemented in Dojo models?","Traits can be implemented using the impl keyword."
+"What is the syntax for implementing a trait in Dojo models?","impl TraitName for ModelName {...}."
+"Can you provide an example of implementing a trait in Dojo models?","Here's an example: impl PositionTrait for Position {...}."
+"What does a custom setting in Dojo models allow you to do?","It allows you to store a global value that can be modified in the future through a decentralized governance model."
+"Why is it useful to have custom settings in Dojo models?","Custom settings allow for flexibility and adaptability, enabling the modification of global values without the need for code changes."
+"Can you give an example of a custom setting in Dojo models?","A combat_cool_down parameter that determines the duration before an entity can attack again is an example of a custom setting."
+"What are the supported types for Dojo model variables?","The supported types include u8, u16, u32, u64, u128, u256, ContractAddress, Enums, and Custom Types."
+"Are Arrays supported as a type for Dojo model variables?","Currently, Arrays are not supported as a type for Dojo model variables."
+"What is the difference between a trait and a model?","A trait defines a common interface for a set of classes, while a model is an instance of a class that implements one or more traits."
+"What are the benefits of using traits in Dojo models?","Traits promote code reuse and flexibility by enabling the sharing of common functionality among different models."
+"Can you give an exemple of a PositionTrait for a Dojo model, that implements is_zero and is_equal?","
+trait PositionTrait {
+    fn is_zero(self: Position) -> bool;
+    fn is_equal(self: Position, b: Position) -> bool;
+}
+
+impl PositionImpl of PositionTrait {
+    fn is_zero(self: Position) -> bool {
+        if self.x - self.y == 0 {
+            return true;
+        }
+        false
+    }
+
+    fn is_equal(self: Position, b: Position) -> bool {
+        self.x == b.x && self.y == b.y
+    }
+}"
+"Can you provide a custom Dojo Game Settings with a combat_cool_down setting?","
+const GAME_SETTINGS_ID: u32 = 9999999999999;
+
+#[derive(model, Copy, Drop, Serde)]
+struct GameSettings {
+    #[key]
+    game_settings_id: u32,
+    combat_cool_down: u32,
+}"
+"How can I implement the Roles in the following Dojo Model:
+struct Card {
+    #[key]
+    token_id: u256,
+    /// The card's designated role.
+    role: Roles,
+}","For complex types, like Roles in the above example, you need to implement SchemaIntrospection. Here's how:
+
+
+impl RolesSchemaIntrospectionImpl for SchemaIntrospection<Roles> {
+    #[inline(always)]
+    fn size() -> usize {
+        1 // Represents the byte size of the enum.
+    }
+
+    #[inline(always)]
+    fn layout(ref layout: Array<u8>) {
+        layout.append(8); // Specifies the layout byte size;
+    }
+
+    #[inline(always)]
+    fn ty() -> Ty {
+        Ty::Enum(
+            Enum {
+                name: 'Roles',
+                attrs: array![].span(),
+                children: array![
+                    ('Goalkeeper', serialize_member_type(@Ty::Tuple(array![].span()))),
+                    ('Defender', serialize_member_type(@Ty::Tuple(array![].span()))),
+                    ('Midfielder', serialize_member_type(@Ty::Tuple(array![].span()))),
+                    ('Attacker', serialize_member_type(@Ty::Tuple(array![].span()))),
+                ]
+                .span()
+            }
+        )
+    }
+}"
+"How would you implement a Dojo Model for humans and goblins","
+Humans and Goblins. While they possess intrinsic differences, they share common traits, such as having a position and health. However, humans possess an additional model. Furthermore, we introduce a Counter model, a distinct feature that tallies the numbers of humans and goblins.
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Potions {
+    #[key]
+    entity_id: u32,
+    quantity: u8,
+}
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Health {
+    #[key]
+    entity_id: u32,
+    health: u8,
+}
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Position {
+    #[key]
+    entity_id: u32,
+    x: u32,
+    y: u32
+}
+
+// Special counter model
+#[derive(Model, Copy, Drop, Serde)]
+struct Counter {
+    #[key]
+    counter: u32,
+    goblin_count: u32,
+    human_count: u32,
+}
+So the Human will have a Potions, Health and Position model, and the Goblin will have a Health and Position model.
+By doing we save having to create Health and Position models for each entity type.
+"
+"Implement the contract corresponding to the following Dojo Model:
+#[derive(Model, Copy, Drop, Serde)]
+struct Potions {
+    #[key]
+    entity_id: u32,
+    quantity: u8,
+}
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Health {
+    #[key]
+    entity_id: u32,
+    health: u8,
+}
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Position {
+    #[key]
+    entity_id: u32,
+    x: u32,
+    y: u32
+}
+
+// Special counter model
+#[derive(Model, Copy, Drop, Serde)]
+struct Counter {
+    #[key]
+    counter: u32,
+    goblin_count: u32,
+    human_count: u32,
+}
+","
+#[dojo::contract]
+mod spawnHuman {
+    use array::ArrayTrait;
+    use box::BoxTrait;
+    use traits::Into;
+    use dojo::world::Context;
+
+    use dojo_examples::models::Position;
+    use dojo_examples::models::Health;
+    use dojo_examples::models::Potions;
+    use dojo_examples::models::Counter;
+
+    // we can set the counter value as a const, then query it easily! This pattern is useful for settings.
+    const COUNTER_ID: u32 = 9999999999999;
+
+    // impl: implement functions specified in trait
+    #[external(v0)]
+    impl GoblinActionsImpl of IGoblinActions<ContractState> {
+        fn goblin_actions(self: @ContractState, entity_id: u32) {
+            let world = self.world_dispatcher.read();
+
+            let counter = get!(world, COUNTER_ID, (Counter));
+
+            let human_count = counter.human_count + 1;
+            let goblin_count = counter.goblin_count + 1;
+
+            // spawn a human
+            set!(
+                world,
+                (
+                    Health {
+                        entity_id: human_count, health: 100
+                        },
+                    Position {
+                        entity_id: human_count, x: position.x + 10, y: position.y + 10,
+                        },
+                    Potions {
+                        entity_id: human_count, quantity: 10
+
+                    },
+                )
+            );
+
+            // spawn a goblin
+            set!(
+                world,
+                (
+                    Health {
+                        entity_id: goblin_count, health: 100
+                        },
+                    Position {
+                        entity_id: goblin_count, x: position.x + 10, y: position.y + 10,
+                        },
+                )
+            );
+
+            // increment the counter
+            set!(
+                world,
+                (
+                    Counter {
+                        counter: COUNTER_ID, human_count: human_count, goblin_count: goblin_count
+                    },
+                )
+            );
+        }
+    }
+}
+"

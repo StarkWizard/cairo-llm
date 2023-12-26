@@ -1,0 +1,98 @@
+question,answer
+"How can Autonomous Worlds be enriched?","By introducing systems into the World contract, which can be done by anyone, but authorization is required to interact with model state. "
+"What is the relationship between Autonomous Worlds and the blockchain they reside in?","Autonomous Worlds are nested blockchains within another blockchain, similar to how contracts are deployed onto Ethereum to enhance its functionality. "
+"Who can contribute to an Autonomous World?","Anyone can contribute to an Autonomous World, just like anyone can contribute to Ethereum. "
+"What is required to interact with model state in an Autonomous World?","Authorization is required to interact with model state in an Autonomous World. "
+"Can anyone introduce systems into an Autonomous World?","Yes, anyone can introduce systems into an Autonomous World, similar to how anyone can deploy contracts onto Ethereum. "
+"What are the benefits of using Autonomous Worlds?","Enhanced functionality, enriched features, and the ability for anyone to contribute. "
+"What is one potential use case for Autonomous Worlds?","Autonomous Worlds can be used to create decentralized applications that have their own governance and economies. "
+"What is the key difference between Autonomous Worlds and Ethereum?","Autonomous Worlds are nested blockchains within another blockchain, while Ethereum is a standalone blockchain. "
+"How can Autonomous Worlds be integrated with existing blockchains?","Autonomous Worlds can be integrated with existing blockchains by deploying them as contracts on the blockchain. "
+"What is required for a contract to interact with the world?","Every contract that interacts with the world must use the world contract address as the first parameter. "
+"In Dojo:How does the world contract manage the state of the world?","By using the world contract address as the first parameter, the world contract is able to manage the state of the world. "
+"In Dojo:Is it mandatory to structure the world around an ECS pattern?","No, it is not required to structure the world around an ECS pattern. "
+"In Dojo:What can be used instead of an ECS pattern?","You can simply use the dojo-models as a keypair store along with the supporting infrastructure. "
+"What does Dojo core do with the world contract?","Dojo core abstracts the world contract away, so you do not write it and it is not meant to be altered when building a world. "
+"In Dojo: Why is it important to understand how the world contract works?","It is important to understand how the world contract works and how it interacts with the rest of the system in order to build a world successfully. "
+"In Dojo: How does the world contract emit all model events?","The world contract emits all model events via the StoreSetRecord event. "
+"In Dojo: What does the StoreSetRecord event enable?","The StoreSetRecord event enables block explorers to reconstruct everything in the world by listening to one contract. "
+"What is an ECS pattern?","ECS stands for Entity Component System, which is a design pattern that is commonly used in game development. "
+"What is the role of the dojo-models in the world contract?","The dojo-models are used as a keypair store along with the supporting infrastructure in the world contract. "
+"In Dojo: What is the StoreSetRecord event?","The StoreSetRecord event is a way for the world contract to emit all model events. "
+"In Dojo: What is the purpose of a block explorer?","A block explorer is a tool that allows users to search and view blocks and transactions on a blockchain. "
+"In Dojo: How can block explorers reconstruct everything in the world?","Block explorers can reconstruct everything in the world by listening to the StoreSetRecord event emitted by the world contract. "
+"In Dojo: Why is it important for block explorers to be able to reconstruct everything in the world?","It is important for block explorers to be able to reconstruct everything in the world so that users can search and view all of the data in the world. "
+"In Dojo: What are some of the benefits of using an ECS pattern?","Some of the benefits of using an ECS pattern include improved performance, scalability, and flexibility. "
+"In Dojo: What are some of the challenges of using an ECS pattern?","Some of the challenges of using an ECS pattern include the need for careful design and implementation, as well as the potential for complexity. "
+"What are some of the alternatives to using an ECS pattern?","Some of the alternatives to using an ECS pattern include using a traditional object-oriented approach or a data-oriented design approach. "
+"In Dojo: What are some of the things to consider when choosing a world pattern?","Some of the things to consider when choosing a world pattern include the specific requirements of the world, the available resources, and the experience of the development team. "
+"In Dojo: What are some of the best practices for implementing a world contract?","Some of the best practices for implementing a world contract include using a clear and consistent design, testing thoroughly, and documenting the contract well. "
+"In Dojo: What is the purpose of the world contract address?","Every contract that interacts with the world must use the world contract address as the first parameter to manage the world's state. "
+"In Dojo: Is it necessary to structure your world around an ECS pattern?","No, it is not required, but it is strongly suggested."
+"In Dojo: Can you use dojo-models as a keypair store?","Yes, you can, along with the supporting infrastructure."
+"In Dojo: What does Dojo core do with the world contract?","It abstracts it away, so you do not write it and it is not meant to be altered when building a world."
+"In Dojo: Why is it important to understand how the world contract works?","To understand how it interacts with the rest of the system."
+"In Dojo: How does the world contract emit all model events?","Via the StoreSetRecord event."
+"In Dojo: What does the StoreSetRecord event enable?","It enables block explorers to reconstruct everything in the world by listening to one contract."
+"In Dojo: What is the benefit of using the StoreSetRecord event?","It provides a centralized location for reconstructing everything in the world."
+"Is it possible to use the world contract without Dojo core?","Yes, it is possible, but it is not recommended."
+"What are the advantages of using Dojo core with the world contract?","It simplifies the process of building a world and provides additional features and functionality."
+"In Dojo: Can the world contract be altered when building a world?","No, it is not meant to be altered."
+"In Dojo: What is the StoreSetRecord event?","It is an event emitted by the world contract that contains all model events."
+"In Dojo: What is the purpose of the StoreSetRecord event?","It enables block explorers to reconstruct everything in the world by listening to one contract."
+"In Dojo: Why is it important for block explorers to be able to reconstruct everything in the world?","It allows them to track and analyze all changes that occur in the world."
+"What are the benefits of using the dojo-models as a keypair store?","It provides a structured and efficient way to store and retrieve data, and it integrates well with the rest of the Dojo framework."
+"In Dojo: What is the role of the world contract in managing the state of the world?","It serves as a central repository for all world models and systems, ensuring that all contracts interacting with the world use the same source of truth."
+"In Dojo: How does the world contract facilitate the reconstruction of everything in the world?","By emitting all model events through the StoreSetRecord event, it provides a single source of information that block explorers can monitor to capture all changes."
+"In Dojo: What is the significance of the world contract being abstracted away by Dojo core?","It simplifies the process of building a world by removing the need to manually write and maintain the world contract, allowing developers to focus on creating the game logic."
+"In Dojo: What are the potential drawbacks of using the world contract without Dojo core?","It can be more complex and time-consuming to implement, requiring manual management of the world contract and potentially leading to inconsistencies or errors."
+"In Dojo: What are the key features and functionalities provided by Dojo core when used with the world contract?","It simplifies the process of building a world by abstracting away the world contract, provides a standardized interface for interacting with the world, and offers additional features such as event handling and synchronization."
+"Can you list the Dojo Worl Interface?","there it is:
+// World interface
+#[starknet::interface]
+trait IWorld<T> {
+    fn metadata_uri(self: @T, resource: felt252) -> Span<felt252>;
+    fn set_metadata_uri(ref self: T, resource: felt252, uri: Span<felt252>);
+    fn model(self: @T, name: felt252) -> ClassHash;
+    fn register_model(ref self: T, class_hash: ClassHash);
+    fn deploy_contract(ref self: T, salt: felt252, class_hash: ClassHash) -> ContractAddress;
+    fn upgrade_contract(ref self: T, address: ContractAddress, class_hash: ClassHash) -> ClassHash;
+    fn uuid(ref self: T) -> usize;
+    fn emit(self: @T, keys: Array<felt252>, values: Span<felt252>);
+    fn entity(
+        self: @T, model: felt252, keys: Span<felt252>, offset: u8, length: usize, layout: Span<u8>
+    ) -> Span<felt252>;
+    fn set_entity(
+        ref self: T,
+        model: felt252,
+        keys: Span<felt252>,
+        offset: u8,
+        values: Span<felt252>,
+        layout: Span<u8>
+    );
+    fn entities(
+        self: @T,
+        model: felt252,
+        index: Option<felt252>,
+        values: Span<felt252>,
+        values_length: usize,
+        values_layout: Span<u8>
+    ) -> (Span<felt252>, Span<Span<felt252>>);
+    fn entity_ids(self: @T, model: felt252) -> Span<felt252>;
+    fn set_executor(ref self: T, contract_address: ContractAddress);
+    fn executor(self: @T) -> ContractAddress;
+    fn base(self: @T) -> ClassHash;
+    fn delete_entity(ref self: T, model: felt252, keys: Span<felt252>, layout: Span<u8>);
+    fn is_owner(self: @T, address: ContractAddress, resource: felt252) -> bool;
+    fn grant_owner(ref self: T, address: ContractAddress, resource: felt252);
+    fn revoke_owner(ref self: T, address: ContractAddress, resource: felt252);
+    fn is_writer(self: @T, model: felt252, system: ContractAddress) -> bool;
+    fn grant_writer(ref self: T, model: felt252, system: ContractAddress);
+    fn revoke_writer(ref self: T, model: felt252, system: ContractAddress);
+}"
+"What is is the role of the Dojo World Interface?","The world exposes an interface which can be interacted with by any client. It is worth noting here that as a developer you don't deploy this world, it is deployed when you migrate the world."
+"Can I create a uuid with the Dojo World interface ?","It is often useful to generate unique IDs for entities. The uuid() fn can be used to generate a unique ID.
+
+Use it like this:
+
+let game_id = world.uuid();"
