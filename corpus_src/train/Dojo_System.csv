@@ -1,0 +1,163 @@
+question,answer
+"Dojo Systems play a pivotal role in your world's logic, directly mutating its component states.","To enact these mutations, a system needs explicit permission from the models owner."
+"Dojo System Permissions?","Since the whole contract is given write access to the model, it is important to be careful when defining systems."
+"Dojo System Structure?","Every system function starts with a world address as its initial parameter. This design permits these functions to alter the world's state."
+"What is the role of Systems in Dojo?","Systems are functions within a Dojo Contract that act on the world and directly mutate its component states."
+"Why do Dojo Systems need explicit permission from the models owner?","To enact mutations, systems need explicit permission from the model's owner because the whole contract is given write access to the model."
+"How should Dojo System Permissions be defined?","Dojo System Permissions should be defined carefully to ensure proper access and security."
+"In the context of Dojo: What is the initial parameter of every system function?","Every system function starts with a world address as its initial parameter."
+"Dojo Systems: Why does the initial parameter being a world address make systems adaptable and reusable?","This design makes systems adaptable and reusable across multiple worlds because they can alter the world's state."
+"Should Dojo Systems be concise and specific?","Yes, Systems ought to be concise and specific."
+"What is the purpose of Systems in Dojo ?","Systems are vital in carrying out your world's logic, as they directly mutate the states of its components."
+"How do Dojo Systems gain permission to write to models?","Systems obtain permissions by being part of a contract containing them, which is granted write access to the model."
+"What is the first parameter of a System in dojo?","Each System function begins with a world address as its initial parameter, allowing it to alter the world's state."
+"In the context of Dojo, Why is it important to be careful when defining Systems?","Since the whole contract is given write access to the model, it's crucial to be cautious while defining Systems to prevent unintended consequences."
+"In the context of Dojo, How can you ensure proper access and security for Systems?","Prioritize permissions and plan carefully to grant appropriate access and maintain security for Systems."
+"In the context of Dojo, What is the significance of the world address as the first parameter of a System?","The world address enables Systems to interact with the world and modify its state, making them adaptable and reusable across multiple worlds."
+"In the context of Dojo, What is the role of the world contract in Systems?","Systems engage the world contract to change the state of models."
+"In the context of Dojo, Why are Systems generally stateless?","In most scenarios, Systems are stateless to maintain simplicity and facilitate easier reasoning and testing."
+"In the context of Dojo, What is the TL;DR for Systems?","Systems are contract methods that gain permissions to write to models and engage the world contract to alter their states. They are typically concise, specific, and stateless."
+"Can you give a sample of the simplest possible system which mutates the state of the Moves component in Dojo ?","NOTE: This is not using the #[dojo::contract] attribute meaning it was to accept the world as a parameter.
+
+
+#[starknet::contract]
+mod player_actions {
+    use starknet::{ContractAddress, get_caller_address};
+    use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
+    use dojo_examples::components::{Position, Moves, Direction, Vec2};
+    use dojo_examples::utils::next_position;
+    use super::IPlayerActions;
+
+    // no storage
+    #[storage]
+    struct Storage {}
+
+    // implementation of the PlayerActions interface
+    #[external(v0)]
+    impl PlayerActionsImpl of IPlayerActions<ContractState> {
+        fn spawn(self: @ContractState, world: IWorldDispatcher) {
+            let player = get_caller_address();
+            let position = get!(world, player, (Position));
+            set!(
+                world,
+                (
+                    Moves {
+                        player,
+                        remaining: 10,
+                        last_direction: Direction::None(())
+                    }
+                )
+            );
+        }
+    }
+}
+System is a function in a contract
+As you can see a System is like a regular function of a Starknet contract. This contract can include storage, and it can implement interfaces.
+
+Spawn function
+The spawn function is currently the only system that exists in this contract. It is called when a player spawns into the world. It is responsible for setting up the player's initial state.
+"
+"Can you give a sample of a possible system which mutates the state of the Moves component in Dojo ?","
+[dojo::contract]
+mod player_actions {
+    use starknet::{ContractAddress, get_caller_address};
+    use dojo_examples::models::{Position, Moves, Direction, Vec2};
+    use dojo_examples::utils::next_position;
+    use super::IPlayerActions;
+
+    #[event]
+    #[derive(Drop, starknet::Event)]
+    enum Event {
+        Moved: Moved,
+    }
+
+    #[derive(Drop, starknet::Event)]
+    struct Moved {
+        player: ContractAddress,
+        direction: Direction
+    }
+
+    // impl: implement functions specified in trait
+    #[external(v0)]
+    impl PlayerActionsImpl of IPlayerActions<ContractState> {
+        // ContractState is defined by system decorator expansion
+        fn spawn(self: @ContractState) {
+            // world dispatcher
+            let world = self.world_dispatcher.read();
+
+            // player
+            let player = get_caller_address();
+
+            // get the position
+            let position = get!(world, player, (Position));
+
+            // set the position
+            set!(
+                world,
+                (
+                    Moves { player, remaining: 10, last_direction: Direction::None(()) },
+                    Position { player, vec: Vec2 { x: 10, y: 10 } },
+                )
+            );
+        }
+
+        fn move(self: @ContractState, direction: Direction) {
+            // world dispatcher
+            let world = self.world_dispatcher.read();
+
+            // player
+            let player = get_caller_address();
+
+            // get the position and moves
+            let (mut position, mut moves) = get!(world, player, (Position, Moves));
+
+            // adjust
+            moves.remaining -= 1;
+            moves.last_direction = direction;
+
+            // get next direction
+            let next = next_position(position, direction);
+
+            // set models
+            set!(world, (moves, next));
+
+            // emit custom event
+            emit!(world, Moved { player, direction });
+        }
+    }
+}"
+"What is the purpose of the #[dojo::contract] decorator?","It aims to minimize boilerplate in contract writing."
+"What is the key difference between the #[starknet::contract] and #[dojo::contract] decorators?","The #[dojo::contract] decorator simplifies contract writing by reducing boilerplate."
+"What is the main advantage of using the #[dojo::contract] decorator?","It streamlines contract writing by eliminating redundant code."
+"How does the #[dojo::contract] decorator achieve boilerplate reduction?","It provides a concise and efficient way to define contracts."
+"What are the benefits of using the #[dojo::contract] decorator in contract development?","It enhances code readability, simplifies contract maintenance, and improves developer productivity."
+"What is the primary objective of the #[dojo::contract] decorator?","Its primary goal is to streamline contract writing by eliminating unnecessary boilerplate code."
+"How does the #[dojo::contract] decorator contribute to improved contract writing?","By minimizing boilerplate, it allows developers to focus on essential contract logic and functionality."
+"What are the implications of using the #[dojo::contract] decorator in terms of contract quality and security?","It promotes better code organization and clarity, potentially leading to improved contract quality and security."
+"In what ways does the #[dojo::contract] decorator enhance the developer experience?","It simplifies contract development, reduces code complexity, and fosters a more efficient and enjoyable programming experience."
+"Can you give an example of implementing traits in Dojo Models?","One instance is creating a Position model that uses the PositionTrait trait, offering a standardized approach to managing positional data."
+"Why would I need a Custom Setting Dojo model?","Custom Setting models serve as a storage space for global values. They offer the flexibility to modify these values in the future through a decentralized governance model."
+"What's an example of a Custom Setting Dojo model?","A typical Custom Setting Dojo model can be a global combat_cool_down parameter that defines the time required for an entity to prepare for the next attack."
+"List some supported Dojo model types.","Dojo models support various types, including numeric types like u8, u16, u32, u64, u128, and u256, as well as ContractAddress, Enums, and Custom Types."
+"Are Arrays supported in Dojo model types?","Currently, Arrays are not supported in Dojo model types."
+"What are the benefits of using Traits in Dojo Models?","Traits in Dojo Models promote code reusability, allowing developers to share common functionalities across various models, thus reducing code duplication."
+"How can Custom Setting Dojo models be modified?","Custom Setting Dojo models can be modified through a decentralized governance model, enabling stakeholders to collectively decide and implement changes to the stored values."
+"What's the primary purpose of Traits in Dojo Models?","Traits in Dojo Models facilitate the organization of related functionalities into reusable modules, enhancing code maintainability and reducing complexity."
+"How do Dojo Models help in structuring data and logic?","Dojo Models provide a structured approach to organizing data and logic within the substrate runtime, facilitating efficient data management and processing."
+"Can you provide an example of a scenario where Custom Setting Dojo models are useful?","Custom Setting Dojo models are valuable when maintaining global parameters that require occasional updates, such as adjusting transaction fees or modifying protocol parameters."
+"What advantages do Dojo Models offer in terms of code structure?","Dojo Models enable a modular approach to code organization, allowing developers to isolate and manage specific functionalities in independent modules, resulting in improved code readability and maintainability."
+"Can you explain the concept of Trait implementation in Dojo Models with a concrete example?","Trait implementation in Dojo Models allows models to inherit and utilize functionalities defined in traits. For instance, a Position model can implement a PositionTrait trait to gain access to common positional operations."
+"In what ways do Dojo Models enhance code maintainability?","Dojo Models promote code maintainability by encapsulating related functionalities into reusable and modular components, facilitating code refactoring, and reducing the potential for errors due to code duplication."
+"How does Dojo handle the modification of stored values in Custom Setting Dojo models?","Dojo employs a decentralized governance model for modifying stored values in Custom Setting Dojo models. This model empowers stakeholders to collectively decide and implement changes to the stored values, ensuring transparency and community involvement."
+"What are the primary advantages of using Traits in Dojo Models?","Traits in Dojo Models offer benefits such as code reusability, enhanced modularity, improved code organization, and streamlined maintenance, enabling developers to construct complex systems more efficiently."
+"In what scenarios are Custom Setting Dojo models particularly valuable?","Custom Setting Dojo models are especially useful when managing global parameters that require occasional adjustments, enabling stakeholders to modify these parameters without the need for a full-scale protocol upgrade, thus ensuring flexibility and adaptability."
+"How do Dojo Models contribute to code readability and maintainability?","Dojo Models foster code readability by organizing functionalities into distinct modules, making it easier to understand and navigate the codebase. They also promote maintainability by isolating changes to specific modules, minimizing the impact on unrelated parts of the code."
+"Can you elaborate on the advantages of modularity in Dojo Models?","Modularity in Dojo Models offers several advantages, including improved code organization, enhanced code reusability, simplified testing and debugging, and increased flexibility for future modifications and extensions."
+"What are the key characteristics of Traits in Dojo Models that contribute to their effectiveness?","Traits in Dojo Models stand out for their ability to promote code reusability, enhance modularity, improve code organization, streamline maintenance, and facilitate the construction of complex systems efficiently."
+"How do Dojo Models support the encapsulation of related functionalities?","Dojo Models enable developers to encapsulate related functionalities into distinct modules, promoting code modularity and facilitating the isolation of changes to specific modules, thereby enhancing code maintainability."
+"What is an example of a model that implements a trait?","A Position model that implements a PositionTrait trait."
+"What is a custom setting in Dojo models?","A place to keep a global value with the flexibility to modify it in the future."
+"Give an example of a custom setting.","A global combat_cool_down parameter that defines the duration required for an entity to be primed for another attack."
+"How can we achieve such a custom setting?","We can craft a model dedicated to storing this value, while also allowing for its modification via a decentralized governance model."
+"What are the supported Dojo model types?","u8, u16, u32, u64, u128, u256, ContractAddress, Enums, and Custom Types."
+"Is it possible to use Arrays in Dojo models?","Currently, it is not possible to use Arrays."

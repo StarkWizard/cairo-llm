@@ -1,0 +1,138 @@
+question,answer
+"When are events emitted in Dojo?","Every time there's an update to a Model, the World contract emits these events."
+"What is Torii?","Torii seamlessly indexes all events, ensuring easy and efficient querying."
+"Can I create my own Dojo events?","Yes, you can craft your own custom events to fit specific needs!"
+"What is the benefit of indexing Dojo events?","Indexing events ensures easy and efficient querying."
+"What is the role of events in decoding the dynamics of a Dojo world?","Events play a crucial role in understanding how changes in the model impact the Dojo world."
+"What happens when there's an update to a Dojo Model?","The World contract emits events to notify interested parties about the update."
+"Can custom Dojo events be created?","Yes, custom events can be created to meet specific needs."
+"How are Dojo events indexed?","Torii seamlessly indexes all events, enabling efficient querying."
+"What are the benefits of being able to query Dojo events?","Querying events allows for efficient and targeted data retrieval, facilitating analysis and decision-making."
+"Is it possible to filter Dojo events based on specific criteria?","Yes, events can be filtered based on various criteria, such as event type, time range, or associated data."
+"Can events be grouped or aggregated for analysis?","Yes, events can be grouped or aggregated based on common attributes, enabling data summarization and identification of patterns."
+"Are there any tools or frameworks available to facilitate Dojo event querying and analysis?","Yes, there are tools and frameworks specifically designed for querying and analyzing events, such as Apache Kafka, Apache Spark, and ElasticSearch."
+"Can events be used to trigger actions or notifications in Dojo?","Yes, events can be used to trigger actions or notifications in response to specific occurrences, enabling real-time monitoring and automated responses."
+"Are there security considerations when working with events with Dojo?","Yes, security considerations include authentication, authorization, and encryption to ensure the integrity and confidentiality of events."
+"What happens when this Dojo model is updated ?
+struct Moves {
+    #[key]
+    player: Address,
+    remaining: u32,
+}
+","
+When this model is updated, the World contract will emit an event with the following structure:
+
+#[derive(Drop, starknet::Event)]
+struct StoreSetRecord {
+    table: felt252, // Moves
+    keys: Span<felt252>, // [player]
+    offset: u8, // offset for the value in the table
+    value: Span<felt252>, // [remaining]
+}
+This will then be captured by Torii and indexed for querying. This will allow you to then reconstruct the state of your world.
+
+Similarly, when a model is deleted, the World contract will emit an event with the following structure:
+
+
+#[derive(Drop, starknet::Event)]
+struct StoreDelRecord {
+    table: felt252,
+    keys: Span<felt252>,
+}
+"
+"What happens when this Dojo model is deleted ?
+struct Moves {
+    #[key]
+    player: Address,
+    remaining: u32,
+}
+","
+when a model is deleted, the World contract will emit an event with the following structure:
+
+
+#[derive(Drop, starknet::Event)]
+struct StoreDelRecord {
+    table: felt252,
+    keys: Span<felt252>,
+}"
+"What happens when this Dojo model is Spawned ?
+struct Moves {
+    #[key]
+    player: Address,
+    remaining: u32,
+}
+","
+The following event is emitted:
+#[derive(Drop, starknet::Event)]
+struct WorldSpawned {
+    address: ContractAddress,
+    caller: ContractAddress
+}
+"
+"What happens when this Dojo model is registered ?
+struct Moves {
+    #[key]
+    player: Address,
+    remaining: u32,
+}
+","
+The following event is emitted:
+#[derive(Drop, starknet::Event)]
+struct ModelRegistered {
+    name: felt252,
+    class_hash: ClassHash,
+    prev_class_hash: ClassHash
+}
+"
+"What happens when this Dojo model is deployed ?
+struct Moves {
+    #[key]
+    player: Address,
+    remaining: u32,
+}
+","
+The following event is emitted:
+#[derive(Drop, starknet::Event)]
+struct ContractDeployed {
+    salt: felt252,
+    class_hash: ClassHash,
+    address: ContractAddress,
+}
+"
+"What happens when this Dojo model is upgraded ?
+struct Moves {
+    #[key]
+    player: Address,
+    remaining: u32,
+}
+","
+The following event is emitted:
+#[derive(Drop, starknet::Event)]
+struct ContractUpgraded {
+    class_hash: ClassHash,
+    address: ContractAddress,
+}
+"
+"How do I emit a custom Dojo event?","Use the emit! command, followed by the world and the event you want to emit."
+"What is the syntax for emitting the following custom event?
+#[derive(Drop, starknet::Event)]
+struct Moved {
+    address: felt252,
+    direction: felt252,
+}","emit!(world, Moved { address, direction });"
+"What is Torii?","Torii is a service that indexes custom events."
+"Why is it beneficial to emit custom events?","Emitting custom events can allow for greater interactivity and flexibility within your game."
+"What kind of events can I emit?","You can emit any event you want, as long as it's relevant to your game."
+"Can I emit events from anywhere in my world?","Yes, you can emit events from anywhere in your world."
+"Are custom events limited to a certain number of emissions?","No, there is no limit to the number of custom events you can emit."
+"Do custom events require a specific format?","No, custom events do not require a specific format."
+"Are custom events only available in multiplayer games?","No, custom events can be used in both single-player and multiplayer games."
+"Can you provide a sample of a move function that accepts a direction and a context as parameter, decrement the remaining moves, update the position and then emit an event?","
+fn move(ctx: Context, direction: Direction) {
+    let (mut position, mut moves) = get !(world, caller, (Position, Moves));
+    moves.remaining -= 1;
+
+    let next = next_position(position, direction);
+    set!(world, (moves, next));
+    emit!(world, Moved { address: caller, direction });
+}"

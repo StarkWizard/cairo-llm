@@ -1,0 +1,32 @@
+question,answer
+"What is the `break` keyword used for?
+fn main() {
+    let mut counter = 0;
+
+    let result = loop {
+        if counter == 10 {
+            break counter * 2;
+        }
+        counter += 1;
+    };
+
+    println!('The result is {}', result);
+}
+
+","It's used to stop the execution of the loop and exit early."
+"What does `counter * 2` accomplish in the given example?
+
+fn main() {
+    let mut counter = 0;
+
+    let result = loop {
+        if counter == 10 {
+            break counter * 2;
+        }
+        counter += 1;
+    };
+
+    println!('The result is {}', result);
+}
+","It calculates a value based on the current value of the counter variable."
+"What is the significance of using a `break` expression with a value?","It allows you to return a value from a loop using the `break` keyword."

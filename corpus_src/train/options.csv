@@ -39,7 +39,7 @@ enum Option<T> {
 
     let some_value: Option<u8> = Option::Some(1_u8);
     if some_value.is_some() {
-        ""The option contains a value"".print();
+        'The option contains a value'.print();
     }
 ```
 "
@@ -49,7 +49,7 @@ enum Option<T> {
 
     let none_value: Option<u8> = Option::None(())
     if none_value.is_none() {
-        ""The option is None"".print();
+        'The option is None'.print();
     }
 ```
 "

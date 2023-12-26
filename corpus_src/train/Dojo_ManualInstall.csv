@@ -1,0 +1,79 @@
+question,answer
+"What do I need to install on Windows?","A recent version of Visual Studio, installed with the Desktop Development With C++ Workloads option."
+"Is it possible to build using Dojoup flags?","Yes, you can use various Dojoup flags."
+"Give an example of using the Dojoup flags.","You can use:\ndojoup --branch master\ndojoup --path path/to/dojo"
+"Is it possible to use a single Cargo command to build?","Yes, you can use:\ncargo install --git https://github.com/dojoengine/dojo --force sozo katana torii"
+"Is it possible to build manually?","Yes, you can manually build from a local copy of the Dojo repository."
+"What are the steps for manually building?","1. Clone the repository: \ngit clone https://github.com/dojoengine/dojo.git\n2. Install Sozo:\ncargo install --path ./crates/sozo --force\n3. Install Katana:\ncargo install --path ./crates/katana --force\n4. Install Torii:\ncargo run -—bin torii"
+"What is Sozo?","Sozo is a library for building and verifying proofs."
+"What is Katana?","Katana is a framework for building and running games."
+"What is Torii?","Torii is a command-line tool for managing Dojo projects."
+"What are the benefits of using Dojo?","Dojo provides a number of benefits, including:\n* **Provable security:** Dojo uses formal methods to prove the security of its games.\n* **Modularity:** Dojo is designed to be modular, making it easy to add new features and components.\n* **Cross-platform support:** Dojo can be used to build games for a variety of platforms, including Windows, Mac, and Linux."
+"What is the Quick Start guide?","The Quick Start guide is a step-by-step guide that will help you get started with Dojo."
+"Where can I find the Quick Start guide?","You can find the Quick Start guide on the Dojo website."
+"What is the Dojo website?","The Dojo website is located at https://dojoengine.org."
+"Is there a community forum for Dojo?","Yes, there is a community forum for Dojo located at https://forum.dojoengine.org."
+"Is there a Discord server for Dojo?","Yes, there is a Discord server for Dojo located at https://discord.gg/dojoengine."
+"Is there a Slack workspace for Dojo?","Yes, there is a Slack workspace for Dojo located at https://join.slack.com/t/dojoengine/shared_invite/zt-1a483e0a-hjj3-4c7f-98b3-9856d356cc47."
+"What are the different ways to contribute to Dojo?","There are a number of ways to contribute to Dojo, including:\n* **Reporting bugs:** You can report bugs by creating an issue on the Dojo GitHub repository.\n* **Suggesting new features:** You can suggest new features by creating an issue on the Dojo GitHub repository.\n* **Contributing code:** You can contribute code to Dojo by creating a pull request on the Dojo GitHub repository.\n* **Writing documentation:** You can write documentation for Dojo by creating a pull request on the Dojo GitHub repository.\n* **Translating Dojo:** You can translate Dojo into other languages by creating a pull request on the Dojo GitHub repository."
+"What are the system requirements for running Dojo?","The system requirements for running Dojo are:\n* **Operating system:** Windows, Mac, or Linux\n* **RAM:** 4GB or more\n* **Storage:** 10GB or more\n* **Graphics card:** A graphics card that supports OpenGL 3.3 or higher"
+"What programming languages does Dojo support?","Dojo supports the following programming languages:\n* **Rust**\n* **C++**\n* **JavaScript**"
+"What game engines does Dojo support?","Dojo supports the following game engines:\n* **Unity**\n* **Unreal Engine**\n* **Godot Engine**\n* **Phaser**\n* **Three.js**"
+"What is the Dojo Foundation?","The Dojo Foundation is a non-profit organization that supports the development of Dojo."
+"Who are the members of the Dojo Foundation?","The members of the Dojo Foundation include:\n* **Chris Dixon**\n* **Naval Ravikant**\n* **Balaji Srinivasan**\n* **Vitalik Buterin**\n* **Joseph Lubin**"
+"What is the goal of the Dojo Foundation?","The goal of the Dojo Foundation is to promote the development of secure, modular, and cross-platform games."
+"How can I contact the Dojo Foundation?","You can contact the Dojo Foundation by emailing info@dojoengine.org."
+"What is the roadmap for Dojo?","The roadmap for Dojo includes the following:\n* **Short-term:**\n    * Release Dojo 1.0\n    * Add support for more game engines\n    * Improve the documentation\n* **Long-term:**\n    * Develop a new programming language specifically for game development\n    * Create a marketplace for Dojo games\n    * Launch a Dojo game development competition"
+"How can I stay up-to-date on the latest news about Dojo?","You can stay up-to-date on the latest news about Dojo by following the Dojo blog, Twitter account, and Discord server."
+"Where can I find more information about Dojo?","You can find more information about Dojo on the Dojo website, GitHub repository, and Discord server."
+"Who are the creators of Dojo?","Dojo was created by a team of experienced game developers and security researchers."
+"What is the history of Dojo?","Dojo was first announced in 2021. The first public release of Dojo was released in 2022."
+"What is the future of Dojo?","Dojo is a rapidly developing project with a bright future. The team behind Dojo is committed to making it the best game engine for building secure, modular, and cross-platform games."
+"What are some of the challenges facing Dojo?","Some of the challenges facing Dojo include:\n* **Competition from other game engines:** There are many other game engines on the market, such as Unity and Unreal Engine.\n* **Lack of awareness:** Dojo is a relatively new game engine, so many game developers are not aware of it.\n* **Need for more documentation:** Dojo is still under development, so there is a need for more documentation and tutorials."
+"How can I help Dojo succeed?","You can help Dojo succeed by:\n* **Spreading the word:** Tell your friends and colleagues about Dojo.\n* **Contributing to the project:** You can contribute code, documentation, or translations to the Dojo project.\n* **Using Dojo to build games:** The best way to support Dojo is to use it to build games."
+"How can I test the toolchain?","Follow the Quick Start guide."
+"What are the prerequisites for building Dojo?","Rust compiler, Cargo package manager, and Visual Studio with Desktop Development with C++."
+"How can I install Rust and Cargo?","Use rustup.rs."
+"What do I need to do on Windows?","Install a recent version of Visual Studio with Desktop Development with C++."
+"How can I build Dojo using the Dojoup flags?","Use either `dojoup --branch master` or `dojoup --path path/to/dojo`."
+"How can I build Dojo using a single Cargo command?","Run `cargo install --git https://github.com/dojoengine/dojo --force sozo katana torii`."
+"How can I manually build Dojo from the repository?","Clone the repository, install Sozo, Katana, and Torii separately."
+"What is Sozo?","The Proof Language used in Dojo."
+"What is Katana?","An interactive proof assistant for Sozo."
+"What is Torii?","A Rust-based game logic engine built atop Sozo, Katana, and Heath."
+"What is Sozo used for?","Writing and verifying proofs."
+"What is Katana used for?","Developing and running proofs written in Sozo."
+"What is Torii used for?","Developing games using Sozo and Katana."
+"What is Dojo's focus?","Safety and reliability."
+"How does Dojo ensure safety?","By utilizing a formal proof system."
+"How does Dojo ensure reliability?","By verifying proofs before executing them."
+"What is the benefit of using Dojo?","Increased confidence in the correctness and security of developed games."
+"Who created Dojo?","Dojoengine."
+"What is the alternative to using Dojoup flags?","You can use a single Cargo command to install dojo, sozo, katana, and torii."
+"What is the process for manually building Dojo from a local copy?","Clone the repository, install Sozo, Katana, and Torii."
+"What is the command to clone the Dojo repository?","git clone https://github.com/dojoengine/dojo.git"
+"What is the next step after cloning the Dojo repository?","Change directory to the dojo folder."
+"How do I install Sozo?","Use the command: cargo install --path ./crates/sozo --force"
+"How do I install Katana?","Use the command: cargo install --path ./crates/katana --force"
+"How do I install Torii?","Use the command: cargo run -—bin torii"
+"What is the purpose of Sozo?","Sozo is a build system for Dojo."
+"What is the purpose of Katana?","Katana is a web framework."
+"how can I build Dojo"," you can use the commands:
+dojoup --branch master
+dojoup --path path/to/dojo"
+"Can I use cargo to build dojo?","yes, use the following commqnds:
+cargo install --git https://github.com/dojoengine/dojo --force sozo katana torii
+"
+"Can I manually build Dojo"," yes you can clone the repository and build:
+# clone the repository
+git clone https://github.com/dojoengine/dojo.git
+cd dojo
+# install Sozo
+cargo install --path ./crates/sozo --force
+# install Katana
+cargo install --path ./crates/katana --force
+# install Torii
+cargo run -—bin torii
+"
+"What are the prerequisites for Dojo?","You will need the Rust compiler and Cargo, the Rust package manager. The easiest way to install both is with rustup.rs.
+On Windows, you will also need a recent version of Visual Studio, installed with the "Desktop Development With C++" Workloads option."

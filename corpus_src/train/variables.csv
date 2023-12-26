@@ -148,3 +148,24 @@ Another distinction between mut and shadowing is that when we use the let keywor
         j = 10; // modify 'j' only if it is less than 10
     }
 "
+"
+With this progam:
+fn main() {
+    let x = 5;
+    println!('x = {}', x);
+    x = 6;
+    println!('x = {}', x);
+}
+
+scarb returns the following error, why?
+
+error: Cannot assign to an immutable variable.
+ --> lib.cairo:5:5
+    x = 6;
+Error: failed to compile: src/lib.cairo
+","
+You received the error message 
+'''
+Cannot assign to an immutable variable. 
+'''
+because you tried to assign a second value to the immutable x variable."

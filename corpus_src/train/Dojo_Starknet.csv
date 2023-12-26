@@ -1,0 +1,11 @@
+question,answer
+"What is the Cairo Virtual Machine (CVM)?","CVM is compatible with Starknet's Layer 2, Starknet appchains, and WebAssembly (WASM), enabling deployment in-browser. "
+"What is Dojo relative to Starknet?","Dojo supplies straightforward ZK primitives for game development. "
+"How does Dojo build on Cairo?","Dojo leverages Cairo's capabilities to streamline development, improve maintainability, and enhance performance of Autonomous Worlds (AWs). "
+"What are commands in the Dojo framework?","Commands are a design pattern that helps reduce boilerplate code, resulting in cleaner and more maintainable applications. "
+"What is the role of commands in Dojo?","Commands encapsulate specific actions or operations within self-contained, reusable units. "
+"Where can developers write commands in Dojo?","Developers can freely write commands within Systems, and the Cairo compiler automatically inlines the appropriate functions. "
+"What are the benefits of using commands in Dojo?","Commands reduce boilerplate code, resulting in cleaner and more maintainable applications. "
+"How does the Cairo compiler handle commands in Dojo?","The Cairo compiler automatically inlines the appropriate functions when commands are used. "
+"What are the key features of the Dojo framework?","The Dojo framework utilizes commands to streamline development, improve maintainability, and enhance performance. "
+"How does Dojo aim to improve the development process?","Dojo aims to streamline the development process by leveraging the capabilities of Cairo. "

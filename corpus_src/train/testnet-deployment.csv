@@ -117,7 +117,7 @@ question,answer
 "What is the purpose of the invoke command in Starkli?","To modify the contract’s state using write functions."
 "What error message appears if a non-owner tries to transfer ownership using Starkli?","Execution was reverted; failure reason: [0x43616c6c6572206973206e6f7420746865206f776e6572]."
 "How can you decode error messages in Starkli?","Use the starkli parse-cairo-string command."
-"What does the encoded error '0x43616c6c6572206973206e6f7420746865206f776e6572' translate to?",""Caller is not the owner.""
+"What does the encoded error '0x43616c6c6572206973206e6f7420746865206f776e6572' translate to?","Caller is not the owner."
 "How can you confirm a transaction status in Starknet?","Use a block explorer like StarkScan or Voyager with the transaction hash."
 "What indicates a successful transfer of contract ownership in Starknet?","The get_owner function returns the new owner’s address."
 "What indicates a contract has not been deployed in Starkli?","An error message stating the contract with the specified address is not deployed."

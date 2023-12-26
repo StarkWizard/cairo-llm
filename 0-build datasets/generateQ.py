@@ -101,7 +101,7 @@ def convert_to_csv(input_file,nbQ):
     base_name, _ = os.path.splitext(input_file)
     csv_file = base_name + '.csv'
 
-    with open(input_file, 'r') as input_f:
+    with open(input_file, 'r',encoding='utf-8') as input_f:
         data= input_f.read()
     data_to_append = generateQ(data,nbQ)
 
@@ -117,7 +117,7 @@ def convert_to_csv(input_file,nbQ):
         console.print(nok_prefix+"[bold red]malformed csv, saving in another file[/bold red]")
         console.print(nok_prefix+"malformed csv, saving in another file")
         # save into debug
-        with open("debug_"+csv_file, 'w') as csv_f:
+        with open("debug_"+csv_file, 'w',encoding='utf-8') as csv_f:
             csv_f.write(data_to_append)
             exit(1)
             
@@ -130,7 +130,7 @@ def convert_to_csv(input_file,nbQ):
         df_combined = pd.concat([df1, df], ignore_index=True)
         df_combined.to_csv(csv_file, quoting=csv.QUOTE_ALL,index=False)
     else:
-        with open(csv_file, "w", newline='') as file:
+        with open(csv_file, "w", newline='',encoding='utf-8') as file:
             file.write("question,answer\n")
         df.to_csv(csv_file,quoting=csv.QUOTE_ALL, index=False, header=False)
 

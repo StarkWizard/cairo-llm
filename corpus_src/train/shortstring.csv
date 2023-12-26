@@ -1,0 +1,13 @@
+question,answer
+"What is the purpose of limiting the length of a short string?","To ensure that it can fit in a single felt."
+"How many bits are in a felt?","252 bits."
+"How many bits are in an ASCII character?","8 bits."
+"What is the syntax for declaring a short string?","Putting the characters between single quotes."
+"Give an example of declaring a short string?","let my_first_string = 'Hello world';"
+"What is Cairo's native type for strings?","Cairo doesn't have a native type for strings."
+"How are characters stored in a short string?","As a series of felt252s."
+"What is the purpose of a short string?","To store characters."
+"What are some examples of values that can be stored in a short string?","'C', 'Hello world'"
+"How can you declare a short string in Cairo?","By putting the characters between single quotes."
+"Can you store multiple characters in a short string?","Yes, up to a maximum of 31 characters."
+"What is the difference between a short string and a long string in Cairo?","A short string has a maximum length of 31 characters, while a long string does not have a maximum length."
