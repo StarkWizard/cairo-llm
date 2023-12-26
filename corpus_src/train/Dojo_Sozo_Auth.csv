@@ -1,0 +1,8 @@
+question,answer
+"What is sozo auth used for?","It manages world authorization."
+"What are the commands available for sozo auth?","You can use either 'writer' or 'help'."
+"sozo auth: What does the 'writer' command do?","It authenticates a system with the provided calldata."
+"sozo auth: What is an example of the 'writer' command?","sozo auth writer Moves <CONTRACT_ADDRESS> --world <WORLD_ADDRESS>"
+"sozo auth :What does the 'help' command do?","It prints the help message for sozo auth or a specific subcommand."
+"sozo auth: Can you provide an example of the 'help' command?","sozo auth help writer or sozo auth help."
+"What is the purpose of the '--world' option in sozo auth?","It specifies the address of the world to which you want to grant authorization."

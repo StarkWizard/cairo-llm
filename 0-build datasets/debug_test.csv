@@ -1,0 +1,26 @@
+"What is Katana?","Katana is a lightning-fast sequencer made for both local development and production deployments.
+"
+"What does Katana offer in development mode?","In development mode, Katana provides tools for rapid iteration, such as custom development RPCs for modifying the execution context.
+"What does Katana offer in production mode?","Katana offers a high-performance sequencer optimized for gaming workloads, with support for settlement and cross-layer communication.
+"What features does Katana support?","Katana supports Starknet JSON-RPC v0.3.0, cross-layer communication (L1 <> L2, LN <> LN+1), and custom methods for manipulating blockchain states.
+"How can I install Katana?","Katana can be installed via dojoup or by cloning the source repository and running cargo install.
+"What is the usage of Katana?","To use Katana, simply run 'katana' on the command line.
+"What are the prefunded accounts provided by Katana?","Katana provides two prefunded accounts with their corresponding private and public keys.
+"What is the seed for generating new accounts?","Katana uses a seed of '0' for generating new accounts.
+"What is the JSON-RPC server port?","The JSON-RPC server runs on port 5050.
+"How can I enable development features in Katana?","Development features can be enabled by running Katana with the '--dev' flag.
+"Where can I find detailed documentation on Katana?","The Katana Reference provides comprehensive documentation and an in-depth explanation of Katana.
+"What are some of the benefits of using Katana?","Katana offers fast performance, support for development and production environments, and a variety of features for manipulating blockchain states.
+"What makes Katana stand out from other sequencers?","Katana is optimized for gaming workloads and provides cross-layer communication capabilities, making it an ideal choice for gaming applications.
+"Is Katana open source?","Yes, Katana is an open-source project hosted on GitHub.
+"What programming language is Katana written in?","Katana is written in Rust, a high-performance programming language.
+"Is Katana actively maintained and updated?","Yes, Katana is actively maintained with regular updates and improvements.
+"What is the primary purpose of Katana?","Katana is primarily designed to act as a sequencer for blockchain applications.
+"What is the significance of the seed in Katana?","The seed in Katana is used to generate new accounts, allowing users to create multiple accounts with different addresses.
+"Is Katana only limited to development environments?","No, Katana can be used in both development and production environments, making it a versatile tool for blockchain projects."
+"What is the recommended way to install Katana?","The recommended method for installing Katana is through the dojoup package manager, as it simplifies the installation process.
+"
+"What are the minimum system requirements for running Katana?","Katana requires a Linux operating system and a recent version of Rust installed on the system.
+"Can Katana be used with other programming languages besides Rust?","Katana is primarily designed for use with Rust, but it may be possible to integrate it with other programming languages through interoperability mechanisms.
+"Does Katana provide any security features to protect user accounts and transactions?","Katana utilizes cryptographic techniques to secure user accounts and transactions, ensuring the integrity and confidentiality of sensitive data.
+"Is Katana suitable for enterprise-level blockchain applications?","Yes, Katana's scalability, performance, and security features make it well-suited for enterprise-level blockchain applications with high transaction volumes and demanding requirements.

@@ -1,0 +1,10 @@
+question,answer
+"How can I deploy to remote networks using Dojo?","You need to have a valid account and network endpoint."
+"How can I deploy a Dojo project to public Starknet?","Use the sozo migrate command if you have correct credentials in the Scarb.toml file."
+"What is Madara?","It is a fast Starknet sequencer."
+"What are Katanas?","They are able to be hosted and run as remote testnets."
+"Are Katanas recommended for production use?","No, they are not recommended for production use."
+"Is Dojo audited?","No, it is not audited."
+"How to deploy to public Starknet?","If your credentials are correct in the Scarb.toml file, running a simple 'migrate' command will deploy the world to Starknet."
+"Can Katanas be hosted and run as remote testnets?","Yes, Katanas can be hosted and run as remote testnets, though it's not advised for production use."
+"What is Madara?","Madara is a very fast Starknet sequencer."

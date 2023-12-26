@@ -1,0 +1,16 @@
+Deployment to Remote Network
+IMPORTANT: Dojo is unaudited. Use at your own risk.
+
+Dojo makes it easy to deploy to remote networks, you just need to have a valid account and network endpoint.
+
+
+Deploy to public Starknet
+If you credentials are correct in the Scarb.toml then a simple migrate will deploy the world to Starknet.
+
+Deploy to Remote Katana
+Katanas are able to be hosted and run as remote testnets, however this is not recommended for production use.
+
+Deploy to remote katana with slot here
+
+Deploy to Remote Madara
+Madara is a blazingly fast Starknet sequencer.

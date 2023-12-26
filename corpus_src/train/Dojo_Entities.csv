@@ -1,0 +1,29 @@
+question,answer
+"How do different ECS systems handle entities?","Different ECS systems handle entities in various ways."
+"How are entities treated in Dojo?","In Dojo, entities are treated as a primary key value within the world, to which models can be attached."
+"What is an example of an entity in a Dojo game?","A character in a game that has a Moves and a Position model."
+"What is important to note when defining the models for a Dojo entity?","We do not reference the entity directly. Instead, we simply provide some struct that the entity will contain."
+"What is the struct Moves?","A struct that contains the player's contract address and the remaining moves."
+"What is the struct Health?","A struct that contains the player's contract address, x-coordinate, and y-coordinate."
+"What is the purpose of the key field in the structs?","To uniquely identify the entity that the struct belongs to."
+"
+How do you define in Dojo an entity of a character in a game that has a Moves and a Position model
+","
+
+When defining the models for this entity, it is important to note that we do not reference the entity directly. Instead, we simply provide two structs that the entity will contain.
+
+#[derive(Models, Drop, Serde)]
+struct Moves {
+    #[key]
+    player: ContractAddress,
+    remaining: u8,
+}
+
+#[derive(Models, Drop, Serde)]
+struct Health {
+    #[key]
+    player: ContractAddress,
+    x: u32,
+    y: u32
+}
+"

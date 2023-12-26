@@ -1,0 +1,56 @@
+question,answer
+"What is the relationship between Dojo and Cairo?","Dojo provides an abstraction layer over Cairo, enabling developers to use concise commands that transform into comprehensive queries at compile time."
+"What is the architecture of Dojo?","Dojo encapsulates boilerplate contracts within the compiler, allowing developers to focus on data and logic, while the compiler generates foundational contracts."
+"How are Dojo contracts specific ?","Dojo contract is just a regular Cairo contract, with some dojo specifics."
+"How are states defined in Dojo?","In a Dojo world, state is defined using models. These are structs marked with the #[derive(Model)] attribute, functioning similarly to a key-pair store. The primary key for a model is indicated using the #[key] attribute; for instance, the player field serves as the primary key in this context."
+"what does self.world_dispatcher do in the context of Dojo?","self.world_dispatcher. This provides a gateway to the world contract. This facilitates the effortless utilization of the get! and set! commands, allowing seamless interaction with the world contract."
+"Give a sample contract that spawns a player, using Dojo","use starknet::ContractAddress;
+
+// dojo data models
+#[derive(Model, Copy, Drop, Serde)]
+struct Position {
+    #[key] // primary key
+    player: ContractAddress,
+    vec: Vec2,
+}
+
+// regular cairo struct
+#[derive(Copy, Drop, Serde, Introspect)]
+struct Vec2 {
+    x: u32,
+    y: u32
+}
+
+// interface
+#[starknet::interface]
+trait IPlayerActions<TContractState> {
+    fn spawn(self: @TContractState);
+}
+
+// contract
+#[dojo::contract]
+mod player_actions {
+    use starknet::{ContractAddress, get_caller_address};
+    use super::{Position, Vec2};
+    use super::IPlayerActions;
+
+    #[external(v0)]
+    impl PlayerActionsImpl of IPlayerActions<ContractState> {
+        //
+        // This is how we interact with the world contract.
+        //
+        fn spawn(self: @ContractState) {
+            // Access the world dispatcher for reading.
+            let world = self.world_dispatcher.read();
+
+            // get player address
+            let player = get_caller_address();
+
+            // dojo command - get player position
+            let position = get!(world, player, (Position));
+
+            // dojo command - set player position
+            set!(world, (Position { player, vec: Vec2 { x: 10, y: 10 } }));
+        }
+    }
+}"

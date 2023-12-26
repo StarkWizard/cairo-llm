@@ -102,7 +102,7 @@ Before your CSV can join the training corpus, it must pass format validation. Th
 
 The most common mistakes:
 "Question", "answer" <- Make sure there is no space before or after the ","
-"print hello"," sure, "hello".print()" <- use ' instead of " or use ""hello""
+"print hello"," sure, "hello".print()" <- use ' instead of " or use 'hello'
 
 
 ### Step 6: Push to the Dataset

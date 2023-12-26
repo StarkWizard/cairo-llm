@@ -1,0 +1,12 @@
+question,answer
+"Prerequisites for dojo?","Rust, Cairo, protoc"
+"How do I Clone the Dojo repos?","git clone https://github.com/dojoengine/dojo.git"
+"How do I setup a Dojo dev environment?","Start by installing Rust and running the test suite to confirm your setup:
+rustup override set stable && rustup update && cargo test
+
+Note: Depending on your Linux distribution, you may need to install additional dependencies. Make sure to install any suggested or missing dependencies that arise during the setup process.
+- Next, install the Scarb package manager by running:
+curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+
+- Install the Cairo 1.0 extension for Visual Studio Code.
+"
