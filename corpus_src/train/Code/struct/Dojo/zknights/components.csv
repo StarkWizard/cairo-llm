@@ -1,0 +1,745 @@
+question,answer
+"use array::SpanTrait;
+
+use zknight::constants::{KNIGHT_TYPE, BARBARIAN_TYPE, BOWMAN_TYPE, WIZARD_TYPE};
+use zknight::components::tile::Tile;
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Character {
+    #[key]
+    game_id: u32,
+    #[key]
+    _type: u8,
+    health: u8,
+    index: u32,
+    hitter: u8,
+    hit: u8,
+}
+
+trait CharacterTrait {
+    fn new(health: u8) -> Character;
+    fn get_knight_type() -> u8;
+    fn get_barbarian_type() -> u8;
+    fn get_bowman_type() -> u8;
+    fn get_wizard_type() -> u8;
+    fn is_dead(self: Character) -> bool;
+    fn set_index(ref self: Character, index: u32);
+    fn take_damage(ref self: Character, hitter: u8, damage: u8);
+    fn reset_damage(ref self: Character);
+}
+
+impl CharacterImpl of CharacterTrait {","
+use array::SpanTrait;
+
+use zknight::constants::{KNIGHT_TYPE, BARBARIAN_TYPE, BOWMAN_TYPE, WIZARD_TYPE};
+use zknight::components::tile::Tile;
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Character {
+    #[key]
+    game_id: u32,
+    #[key]
+    _type: u8,
+    health: u8,
+    index: u32,
+    hitter: u8,
+    hit: u8,
+}
+
+trait CharacterTrait {
+    fn new(health: u8) -> Character;
+    fn get_knight_type() -> u8;
+    fn get_barbarian_type() -> u8;
+    fn get_bowman_type() -> u8;
+    fn get_wizard_type() -> u8;
+    fn is_dead(self: Character) -> bool;
+    fn set_index(ref self: Character, index: u32);
+    fn take_damage(ref self: Character, hitter: u8, damage: u8);
+    fn reset_damage(ref self: Character);
+}
+
+impl CharacterImpl of CharacterTrait {
+    fn new(health: u8) -> Character {
+        Character { game_id: 0, _type: 0, health: health, index: 0, hitter: 0, hit: 0, }
+    }
+    fn get_knight_type() -> u8 {
+        KNIGHT_TYPE
+    }
+    fn get_barbarian_type() -> u8 {
+        BARBARIAN_TYPE
+    }
+    fn get_bowman_type() -> u8 {
+        BOWMAN_TYPE
+    }
+    fn get_wizard_type() -> u8 {
+        WIZARD_TYPE
+    }
+    fn is_dead(self: Character) -> bool {
+        self.health == 0
+    }
+    fn set_index(ref self: Character, index: u32) {
+        self.index = index;
+    }
+    fn take_damage(ref self: Character, hitter: u8, damage: u8) {
+        let real_damage = if damage > self.health {
+            self.health
+        } else {
+            damage
+        };
+        self.hitter = hitter;
+        self.hit = real_damage;
+        self.health -= real_damage;
+    }
+    fn reset_damage(ref self: Character) {
+        self.hitter = 0;
+        self.hit = 0;
+    }
+}
+
+
+#[cfg(test)]
+mod tests {
+    use array::ArrayTrait;
+    use super::{Character, CharacterTrait};
+    use debug::PrintTrait;
+
+    #[test]
+    #[available_gas(1_000_000)]
+    fn test_char_is_dead() {
+        let char = CharacterTrait::new(0);
+        assert(char.is_dead(), 'wrong death status');
+    }
+
+    #[test]
+    #[available_gas(1_000_000)]
+    fn test_char_is_not_dead() {
+        let char = CharacterTrait::new(0);
+        assert(char.is_dead(), 'wrong death status');
+    }
+}"
+"use starknet::ContractAddress;
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Game {
+    #[key]
+    player: felt252,
+    game_id: u32,
+    over: bool,
+    seed: felt252,
+}
+
+trait GameTrait {
+    fn new(player: felt252, game_id: u32, seed: felt252) -> Game;
+    fn set_over(ref self: Game, over: bool);
+}","
+use starknet::ContractAddress;
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Game {
+    #[key]
+    player: felt252,
+    game_id: u32,
+    over: bool,
+    seed: felt252,
+}
+
+trait GameTrait {
+    fn new(player: felt252, game_id: u32, seed: felt252) -> Game;
+    fn set_over(ref self: Game, over: bool);
+}
+
+impl GameImpl of GameTrait {
+    fn new(player: felt252, game_id: u32, seed: felt252) -> Game {
+        Game { player: player, game_id: game_id, over: false, seed: seed, }
+    }
+
+    fn set_over(ref self: Game, over: bool) {
+        self.over = true;
+    }
+}"
+"use array::{ArrayTrait, SpanTrait};
+use traits::Into;
+use dict::Felt252DictTrait;
+use poseidon::poseidon_hash_span;
+
+use alexandria_data_structures::array_ext::SpanTraitExt;
+
+use zknight::components::tile::{Tile, TileTrait};
+use zknight::constants::{
+    NAME, SIZE, GROUND_TYPE, HOLE_TYPE, KNIGHT_TYPE, BARBARIAN_TYPE, BOWMAN_TYPE, WIZARD_TYPE
+};
+
+const MULTIPLIER: u128 = 10000;
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Map {
+    #[key]
+    game_id: u32,
+    level: u32,
+    size: u32,
+    spawn: bool,
+    score: u8,
+    over: bool,
+    name: felt252,
+}
+
+// @notice Types
+#[derive(Serde, Copy, Drop, PartialEq)]
+enum Type {
+    Ground: (),
+    Hole: (),
+    Knight: (),
+    Barbarian: (),
+    Bowman: (),
+    Wizard: (),
+}
+
+// Constants
+
+trait MapTrait {
+    fn new(game_id: u32, level: u32, name: felt252) -> Map;
+    fn compose(self: Map, x: u32, y: u32) -> u32;
+    fn decompose(self: Map, index: u32) -> (u32, u32);
+    fn generate(self: Map, seed: felt252) -> Span<u8>;
+    fn get_type(self: Map, raw_type: u8) -> Type;
+    fn get_raw_type(self: Map, _type: Type) -> u8;
+    fn increase_score(ref self: Map, score: u8);
+    fn decrease_score(ref self: Map, score: u8);
+    fn set_over(ref self: Map, over: bool);
+    fn increase_level(ref self: Map);
+    fn set_spawn(ref self: Map, spawn: bool);
+}
+","
+use array::{ArrayTrait, SpanTrait};
+use traits::Into;
+use dict::Felt252DictTrait;
+use poseidon::poseidon_hash_span;
+
+use alexandria_data_structures::array_ext::SpanTraitExt;
+
+use zknight::components::tile::{Tile, TileTrait};
+use zknight::constants::{
+    NAME, SIZE, GROUND_TYPE, HOLE_TYPE, KNIGHT_TYPE, BARBARIAN_TYPE, BOWMAN_TYPE, WIZARD_TYPE
+};
+
+const MULTIPLIER: u128 = 10000;
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Map {
+    #[key]
+    game_id: u32,
+    level: u32,
+    size: u32,
+    spawn: bool,
+    score: u8,
+    over: bool,
+    name: felt252,
+}
+
+// @notice Types
+#[derive(Serde, Copy, Drop, PartialEq)]
+enum Type {
+    Ground: (),
+    Hole: (),
+    Knight: (),
+    Barbarian: (),
+    Bowman: (),
+    Wizard: (),
+}
+
+// Constants
+
+trait MapTrait {
+    fn new(game_id: u32, level: u32, name: felt252) -> Map;
+    fn compose(self: Map, x: u32, y: u32) -> u32;
+    fn decompose(self: Map, index: u32) -> (u32, u32);
+    fn generate(self: Map, seed: felt252) -> Span<u8>;
+    fn get_type(self: Map, raw_type: u8) -> Type;
+    fn get_raw_type(self: Map, _type: Type) -> u8;
+    fn increase_score(ref self: Map, score: u8);
+    fn decrease_score(ref self: Map, score: u8);
+    fn set_over(ref self: Map, over: bool);
+    fn increase_level(ref self: Map);
+    fn set_spawn(ref self: Map, spawn: bool);
+}
+
+impl MapImpl of MapTrait {
+    fn new(game_id: u32, level: u32, name: felt252) -> Map {
+        Map {
+            game_id: game_id,
+            level: level,
+            size: SIZE,
+            spawn: true,
+            score: 0,
+            over: false,
+            name: name
+        }
+    }
+
+    fn compose(self: Map, x: u32, y: u32) -> u32 {
+        _compose(x, y, self.size)
+    }
+
+    fn decompose(self: Map, index: u32) -> (u32, u32) {
+        _decompose(index, self.size)
+    }
+
+    fn generate(self: Map, seed: felt252) -> Span<u8> {
+        let seeds: Array<felt252> = array![
+            seed + 'hole', seed + 'knight', seed + 'barbarian', seed + 'bowman', seed + 'wizard'
+        ];
+        let _types: Array<u8> = array![
+            HOLE_TYPE, KNIGHT_TYPE, BARBARIAN_TYPE, BOWMAN_TYPE, WIZARD_TYPE
+        ];
+        let numbers: Array<u32> = array![self.size, 1_u32, 1_u32, 1_u32, 1_u32];
+        _generate(seeds.span(), numbers.span(), _types.span(), self.size * self.size)
+    }
+
+    fn get_type(self: Map, raw_type: u8) -> Type {
+        if raw_type == HOLE_TYPE {
+            return Type::Hole(());
+        } else if raw_type == KNIGHT_TYPE {
+            return Type::Knight(());
+        } else if raw_type == BARBARIAN_TYPE {
+            return Type::Barbarian(());
+        } else if raw_type == BOWMAN_TYPE {
+            return Type::Bowman(());
+        } else if raw_type == WIZARD_TYPE {
+            return Type::Wizard(());
+        }
+        Type::Ground(())
+    }
+
+    fn get_raw_type(self: Map, _type: Type) -> u8 {
+        match _type {
+            Type::Ground(()) => GROUND_TYPE,
+            Type::Hole(()) => HOLE_TYPE,
+            Type::Knight(()) => KNIGHT_TYPE,
+            Type::Barbarian(()) => BARBARIAN_TYPE,
+            Type::Bowman(()) => BOWMAN_TYPE,
+            Type::Wizard(()) => WIZARD_TYPE,
+        }
+    }
+
+    fn increase_score(ref self: Map, score: u8) {
+        self.score += score;
+    }
+
+    fn decrease_score(ref self: Map, score: u8) {
+        let remove: u8 = if self.score < score {
+            self.score
+        } else {
+            score
+        };
+        self.score -= remove;
+    }
+
+    fn set_over(ref self: Map, over: bool) {
+        self.over = true;
+    }
+
+    fn increase_level(ref self: Map) {
+        self.level += 1;
+    }
+
+    fn set_spawn(ref self: Map, spawn: bool) {
+        self.spawn = spawn;
+    }
+}
+
+#[inline(always)]
+fn _compose(x: u32, y: u32, size: u32) -> u32 {
+    x + y * size
+}
+
+#[inline(always)]
+fn _decompose(index: u32, size: u32) -> (u32, u32) {
+    (index % size, index / size)
+}
+
+fn _dict_to_span(mut dict: Felt252Dict<u8>, length: u32) -> Span<u8> {
+    let mut array: Array<u8> = array![];
+    let mut index = 0;
+    loop {
+        if index == length {
+            break;
+        }
+        array.append(dict.get(index.into()));
+        index += 1;
+    };
+    array.span()
+}
+
+fn _generate(seeds: Span<felt252>, numbers: Span<u32>, types: Span<u8>, n_tiles: u32) -> Span<u8> {
+    // [Check] Inputs compliancy
+    assert(seeds.len() == numbers.len(), 'span lengths mismatch');
+
+    // [Compute] Types
+    let mut dict_types: Felt252Dict<u8> = Default::default();
+    let mut index = 0;
+    let length = seeds.len();
+    loop {
+        if index == length {
+            break;
+        };
+        let seed = seeds.at(index);
+        let number = numbers.at(index);
+        let _type = types.at(index);
+        __generate(*seed, *number, *_type, n_tiles, ref dict_types);
+        index += 1;
+    };
+
+    // [Compute] Convert from dict to span
+    _dict_to_span(dict_types, n_tiles)
+}
+
+fn __generate(
+    seed: felt252, n_objects: u32, _type: u8, n_tiles: u32, ref dict_types: Felt252Dict<u8>
+) {
+    // [Check] Too many objects
+    assert(n_objects < n_tiles, 'too many objects');
+
+    let mut objects_to_place = n_objects;
+    let mut iter = 0;
+    loop {
+        // [Check] Stop if all objects have been placed
+        if objects_to_place == 0 {
+            break;
+        }
+        // [Check] Stop if all tiles have been checked
+        if iter == n_tiles {
+            break;
+        }
+        // [Check] Skip if tile already has a type
+        if dict_types.get(iter.into()) != 0 {
+            iter += 1;
+            continue;
+        }
+        // [Compute] Uniform random number between 0 and MULTIPLIER
+        let rand = _uniform_random(seed + iter.into(), MULTIPLIER);
+        let tile_object_probability: u128 = objects_to_place.into()
+            * MULTIPLIER
+            / (n_tiles - iter).into();
+        if rand <= tile_object_probability {
+            objects_to_place -= 1;
+            dict_types.insert(iter.into(), _type);
+        };
+        iter += 1;
+    };
+}
+
+#[inline(always)]
+fn _uniform_random(seed: felt252, max: u128) -> u128 {
+    let hash: u256 = poseidon_hash_span(array![seed].span()).into();
+    hash.low % max
+}
+
+#[cfg(test)]
+mod tests {
+    use array::{ArrayTrait, SpanTrait};
+    use zknight::constants::SEED;
+    use zknight::components::tile::{Tile, TileTrait};
+    use super::{Map, MapTrait, Type};
+    use debug::PrintTrait;
+
+    #[test]
+    #[available_gas(10_000_000)]
+    fn test_map_get_type() {
+        let map = Map {
+            game_id: 0, level: 0, size: 3, spawn: true, score: 0, over: false, name: 'test'
+        };
+        assert(map.get_type(0) == Type::Ground(()), 'wrong type');
+    }
+
+    #[test]
+    #[available_gas(10_000_000)]
+    fn test_map_get_raw_type() {
+        let map = Map {
+            game_id: 0, level: 0, size: 3, spawn: true, score: 0, over: false, name: 'test'
+        };
+        assert(map.get_raw_type(Type::Ground(())) == 0, 'wrong raw type');
+    }
+}
+"
+"
+use array::{SpanTrait, ArrayTrait};
+
+use zknight::constants::{
+    GROUND_TYPE, HOLE_TYPE, KNIGHT_TYPE, BARBARIAN_TYPE, BOWMAN_TYPE, WIZARD_TYPE, SIZE
+};
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Tile {
+    #[key]
+    game_id: u32,
+    #[key]
+    level: u32,
+    #[key]
+    index: u32,
+    _type: u8,
+    x: u32,
+    y: u32,
+}
+
+trait TileTrait {
+    fn new(x: u32, y: u32) -> Tile;
+    fn is_ground(self: Tile) -> bool;
+    fn is_hole(self: Tile) -> bool;
+    fn is_knight(self: Tile) -> bool;
+    fn is_barbarian(self: Tile) -> bool;
+    fn is_bowman(self: Tile) -> bool;
+    fn is_wizard(self: Tile) -> bool;
+    fn is_character(self: Tile) -> bool;
+    fn is_zero(self: Tile) -> bool;
+    fn is_equal(self: Tile, b: Tile) -> bool;
+    fn is_close(self: Tile, b: Tile) -> bool;
+    fn distance(self: Tile, b: Tile) -> u32;
+    fn is_include(self: Tile, tiles: Span<Tile>) -> bool;
+    fn set_ground_type(ref self: Tile);
+    fn set_knight_type(ref self: Tile);
+    fn set_barbarian_type(ref self: Tile);
+    fn set_bowman_type(ref self: Tile);
+    fn set_wizard_type(ref self: Tile);
+}
+
+","
+use array::{SpanTrait, ArrayTrait};
+
+use zknight::constants::{
+    GROUND_TYPE, HOLE_TYPE, KNIGHT_TYPE, BARBARIAN_TYPE, BOWMAN_TYPE, WIZARD_TYPE, SIZE
+};
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Tile {
+    #[key]
+    game_id: u32,
+    #[key]
+    level: u32,
+    #[key]
+    index: u32,
+    _type: u8,
+    x: u32,
+    y: u32,
+}
+
+trait TileTrait {
+    fn new(x: u32, y: u32) -> Tile;
+    fn is_ground(self: Tile) -> bool;
+    fn is_hole(self: Tile) -> bool;
+    fn is_knight(self: Tile) -> bool;
+    fn is_barbarian(self: Tile) -> bool;
+    fn is_bowman(self: Tile) -> bool;
+    fn is_wizard(self: Tile) -> bool;
+    fn is_character(self: Tile) -> bool;
+    fn is_zero(self: Tile) -> bool;
+    fn is_equal(self: Tile, b: Tile) -> bool;
+    fn is_close(self: Tile, b: Tile) -> bool;
+    fn distance(self: Tile, b: Tile) -> u32;
+    fn is_include(self: Tile, tiles: Span<Tile>) -> bool;
+    fn set_ground_type(ref self: Tile);
+    fn set_knight_type(ref self: Tile);
+    fn set_barbarian_type(ref self: Tile);
+    fn set_bowman_type(ref self: Tile);
+    fn set_wizard_type(ref self: Tile);
+}
+
+impl TileImpl of TileTrait {
+    fn new(x: u32, y: u32) -> Tile {
+        Tile { game_id: 0, level: 0, index: 0, _type: 0, x, y }
+    }
+
+    fn is_ground(self: Tile) -> bool {
+        self._type == GROUND_TYPE
+    }
+
+    fn is_hole(self: Tile) -> bool {
+        self._type == HOLE_TYPE
+    }
+
+    fn is_knight(self: Tile) -> bool {
+        self._type == KNIGHT_TYPE
+    }
+
+    fn is_barbarian(self: Tile) -> bool {
+        self._type == BARBARIAN_TYPE
+    }
+
+    fn is_bowman(self: Tile) -> bool {
+        self._type == BOWMAN_TYPE
+    }
+
+    fn is_wizard(self: Tile) -> bool {
+        self._type == WIZARD_TYPE
+    }
+
+    fn is_character(self: Tile) -> bool {
+        !self.is_hole() && !self.is_ground()
+    }
+
+    fn is_zero(self: Tile) -> bool {
+        self.x - self.y == 0
+    }
+
+    fn is_equal(self: Tile, b: Tile) -> bool {
+        self.x == b.x && self.y == b.y
+    }
+
+    fn is_close(self: Tile, b: Tile) -> bool {
+        self.distance(b) <= 1
+    }
+
+    fn distance(self: Tile, b: Tile) -> u32 {
+        let mut dx = 0;
+        if self.x > b.x {
+            dx = self.x - b.x;
+        } else {
+            dx = b.x - self.x;
+        };
+
+        let mut dy = 0;
+        if self.y > b.y {
+            dy = self.y - b.y;
+        } else {
+            dy = b.y - self.y;
+        };
+        dx * dx + dy * dy
+    }
+
+    fn is_include(self: Tile, tiles: Span<Tile>) -> bool {
+        let mut length = tiles.len();
+        loop {
+            if length == 0 {
+                break false;
+            }
+            length -= 1;
+            if !self.is_equal(*tiles[length]) {
+                continue;
+            }
+            break true;
+        }
+    }
+
+    fn set_ground_type(ref self: Tile) {
+        self._type = GROUND_TYPE;
+    }
+
+    fn set_knight_type(ref self: Tile) {
+        self._type = KNIGHT_TYPE;
+    }
+
+    fn set_barbarian_type(ref self: Tile) {
+        self._type = BARBARIAN_TYPE;
+    }
+
+    fn set_bowman_type(ref self: Tile) {
+        self._type = BOWMAN_TYPE;
+    }
+
+    fn set_wizard_type(ref self: Tile) {
+        self._type = WIZARD_TYPE;
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use array::{SpanTrait, ArrayTrait};
+    use zknight::constants::SIZE;
+    use zknight::components::map::_compose;
+    use super::{Tile, TileTrait};
+    use debug::PrintTrait;
+
+    #[test]
+    #[available_gas(100_000)]
+    fn test_tile_new() {
+        let expected = Tile { game_id: 0, level: 0, index: 0, _type: 0, x: 1, y: 1 };
+        let tile = TileTrait::new(1, 1);
+        assert(tile.is_equal(expected), 'new failed');
+    }
+
+    #[test]
+    #[available_gas(100_000)]
+    fn test_tile_is_zero() {
+        assert(TileTrait::is_zero(TileTrait::new(0, 0)), 'not zero');
+    }
+
+    #[test]
+    #[available_gas(100_000)]
+    fn test_tile_is_equal() {
+        let tile = TileTrait::new(420, 0);
+        assert(TileTrait::is_equal(tile, TileTrait::new(420, 0)), 'not equal');
+    }
+
+    #[test]
+    #[available_gas(100_000)]
+    fn test_tile_distance() {
+        let tile = TileTrait::new(1, 1);
+        assert(TileTrait::distance(tile, TileTrait::new(2, 2)) == 2, 'wrong distance');
+    }
+
+    #[test]
+    #[available_gas(100_000)]
+    fn test_tile_is_close() {
+        let tile = TileTrait::new(1, 1);
+        assert(TileTrait::is_close(tile, TileTrait::new(2, 1)), 'wrong close status');
+    }
+
+    #[test]
+    #[available_gas(100_000)]
+    fn test_tile_is_not_close() {
+        let tile = TileTrait::new(0, 0);
+        assert(!TileTrait::is_close(tile, TileTrait::new(2, 2)), 'wrong close status');
+    }
+
+    #[test]
+    #[available_gas(100_000)]
+    fn test_tile_is_include() {
+        let tile = TileTrait::new(0, 0);
+        let mut tiles: Array<Tile> = array![];
+        tiles.append(TileTrait::new(1, 1));
+        tiles.append(TileTrait::new(0, 0));
+        assert(TileTrait::is_include(tile, tiles.span()), 'wrong include status');
+    }
+
+    #[test]
+    #[available_gas(100_000)]
+    fn test_tile_is_not_include() {
+        let tile = TileTrait::new(0, 0);
+        let mut tiles: Array<Tile> = array![];
+        tiles.append(TileTrait::new(1, 1));
+        tiles.append(TileTrait::new(1, 0));
+        assert(!TileTrait::is_include(tile, tiles.span()), 'wrong include status');
+    }
+
+    #[test]
+    #[available_gas(100_000)]
+    fn test_tile_set_knight_type() {
+        let mut tile = TileTrait::new(0, 0);
+        tile.set_knight_type();
+        assert(tile.is_knight(), 'wrong type');
+    }
+
+    #[test]
+    #[available_gas(100_000)]
+    fn test_tile_set_barbarian_type() {
+        let mut tile = TileTrait::new(0, 0);
+        tile.set_barbarian_type();
+        assert(tile.is_barbarian(), 'wrong type');
+    }
+
+    #[test]
+    #[available_gas(100_000)]
+    fn test_tile_set_bowman_type() {
+        let mut tile = TileTrait::new(0, 0);
+        tile.set_bowman_type();
+        assert(tile.is_bowman(), 'wrong type');
+    }
+
+    #[test]
+    #[available_gas(100_000)]
+    fn test_tile_set_wizard_type() {
+        let mut tile = TileTrait::new(0, 0);
+        tile.set_wizard_type();
+        assert(tile.is_wizard(), 'wrong type');
+    }
+}
+"
