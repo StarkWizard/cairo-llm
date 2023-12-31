@@ -1,4 +1,3 @@
-torch
 transformers
 peft
 datasets
@@ -18,14 +17,11 @@ icecream
 neowGen
 ctransformers
 py7zr
-auto-gptq
 attention_sinks
 Flask
-langchain
 text_generation
 sentence-transformers
-chromadb
-autoawq
 git+https://github.com/victorlee0505/ctransformers.git@vlee/transformers#egg=ctransformers[cuda]
 setuptools
 rich
+google-generativeai

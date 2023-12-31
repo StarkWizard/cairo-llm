@@ -1,6 +1,6 @@
-// commentaire
+
 fn toto() {
-    cool;
+    "cool".print();
 }
 
 #[dojo::contract]

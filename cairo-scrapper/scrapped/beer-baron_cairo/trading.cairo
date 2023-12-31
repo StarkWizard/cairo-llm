@@ -1,10 +1,28 @@
+use starknet::{ContractAddress, ClassHash};
+
+#[starknet::interface]
+trait ITrading<TContractState> {
+    fn create_trade(self: @TContractState, game_id: u64, item_id: u64, quantity: u64, price: u64);
+    fn accept_trade(self: @TContractState, game_id: u64, trade_id: u64);
+    fn cancel_trade(self: @TContractState, game_id: u64, trade_id: u64);
+}
 
 #[dojo::contract]
 mod trading {
-
+    use traits::{Into, TryInto};
+    use option::OptionTrait;
+    use starknet::{ContractAddress, get_caller_address, get_block_timestamp};
+    use beer_barron::components::game::{
+        Game, GameTracker, GameStatus, GameTrait, Ownership, GameConfig, Joined
+    };
 
     use beer_barron::components::trading::{Trade, TradeStatus, TradeTrack, TradeTrait};
+    use beer_barron::components::auction::{Auction, AuctionTrait};
+    use beer_barron::components::balances::{ItemBalance, ItemBalanceTrait};
 
+    use beer_barron::constants::{CONFIG::{ITEM_IDS::{GOLD_ID}}};
+
+    use super::ITrading;
 
     #[external(v0)]
     impl TradingImpl of ITrading<ContractState> {
@@ -87,22 +105,4 @@ mod trading {
             set!(world, (trade, seller_item_balance));
         }
     }
-}
-
-
-fn toto() {
-    'ceci est toto'.print()
-}
-
-use starknet::{ContractAddress, ClassHash};
-use beer_barron::components::game::{
-        Game, GameTracker, GameStatus, GameTrait, Ownership, GameConfig, Joined
-};
-
-
-#[starknet::interface]
-trait ITrading<TContractState> {
-    fn create_trade(self: @TContractState, game_id: u64, item_id: u64, quantity: u64, price: u64);
-    fn accept_trade(self: @TContractState, game_id: u64, trade_id: u64);
-    fn cancel_trade(self: @TContractState, game_id: u64, trade_id: u64);
 }
