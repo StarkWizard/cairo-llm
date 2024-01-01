@@ -7,6 +7,18 @@ from rich.console import Console
 import cairoParser
 importlib.reload(cairoParser)
 
+from QAGenerator import qaGenerator
+import QAGenerator
+importlib.reload(QAGenerator)
+
+
+def generateQA(parser):
+    
+    qa = qaGenerator(parser)
+
+    return qa.getQA()
+
+
 def process_file(file_path, verbose):
     with open(file_path, 'r') as file:
         code = file.read()
@@ -15,9 +27,7 @@ def process_file(file_path, verbose):
     if verbose:
         parser.display_ast()
     
-    #return parser.generate_code()
-    fn = parser.find_nodes("mod")
-    return parser.to_text(fn, 0, False)
+    return generateQA(parser)
 
 ok_prefix = "[bold green]->[/bold green]"
 nok_prefix = "[bold red]->[/bold red]"

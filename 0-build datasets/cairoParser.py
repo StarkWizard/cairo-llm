@@ -5,11 +5,15 @@ import textwrap
 indent_string="\t"
 
 def formatStr(str,before="",after="",doStrip=True):
-    if str is None: return ""
+    if str is None or "" == str: return ""
     if doStrip:
         str = str.strip()
     return before + str + after
 
+
+def isTemplate(s):
+    if(s is None or s == ""): return False
+    return s.lstrip().startswith('<')
 
 def remove_first_line_with_brace(text):
     lines = text.split('\n')
@@ -20,7 +24,7 @@ def remove_first_line_with_brace(text):
     return res
 
 def change_indent(str, indent, popFirstLine=False):
-    if str is None:
+    if str is None or str == "":
         return ""
 
     lines = str.splitlines()
@@ -36,6 +40,8 @@ def change_indent(str, indent, popFirstLine=False):
     return first_line + indented_string
 
 def getLineNb(text):
+    if text is None or text =="":
+        return 0
     lignes = text.splitlines()
     return len(lignes)
 
@@ -80,25 +86,35 @@ class Node:
     def to_text(self,indent,traverse,mode="a"):
         src = indent_string*indent
 
-        if(self.type=="fn"):
+        if(self.type=="const"):
             
                 src += formatStr(change_indent(self.comment,indent), indent_string*indent, "\n")
-                src += formatStr(change_indent(self.decoration,indent), indent_string*indent, "\n")
-                src += formatStr(change_indent(self.type,0), indent_string*indent, " ")
-                src += formatStr(self.declaration,"","(")
-                src += formatStr(self.parameters ,"", ") {")
+                src += formatStr(change_indent(self.decoration,indent), "", "\n")
+                src += formatStr(change_indent(self.type,0), "", " ")
+                src += formatStr(self.declaration,"","")
+                src += formatStr(change_indent(self.content,indent+1),"", "",False)
+        elif(self.type=="fn"):
+            
+                src += formatStr(change_indent(self.comment,indent), indent_string*indent, "\n")
+                src += formatStr(change_indent(self.decoration,indent), "", "\n")
+                src += formatStr(change_indent(self.type,0), "", " ")
+
+                src += formatStr(self.declaration,"","")
+                src += formatStr(self.parameters ,"", " {")
+                
                 if mode=="a":
                     src+="\n"
                     src += formatStr(change_indent(self.content,indent+1),"", "\n" + indent_string*indent + "}\n",False)
         elif self.type=="use":           
-                src += formatStr(change_indent(self.comment,indent), indent_string*indent, "\n")
-                src += formatStr(change_indent(self.decoration,indent), indent_string*indent, "\n")
-                src += formatStr(change_indent(self.type,indent), indent_string*indent, " ")
+                src += formatStr(change_indent(self.comment,indent), "", "\n")
+                src += formatStr(change_indent(self.decoration,indent), "", "\n")
+                src += formatStr(change_indent(self.type,indent), "", " ")
                 src += formatStr(self.declaration," ")
                 addendum=""
                 if getLineNb(self.content)>1:
                     addendum="\n"+ indent_string*indent
-                src += formatStr(change_indent(self.content,indent+1,True),"", addendum+"};\n",True)
+                src += formatStr(change_indent(self.content,indent,True),"", addendum,True)
+                src += "\n"
         elif self.type=="struct":           
                 src += formatStr(change_indent(self.comment,indent), indent_string*indent, "\n")
                 src += formatStr(change_indent(self.decoration,indent), indent_string*indent, "\n")
@@ -106,7 +122,17 @@ class Node:
                 src += formatStr(self.declaration,""," ")
                 if mode=="a":
                     addendum="\n"+ indent_string*indent
-                    src += formatStr(change_indent(self.content,indent+1),"", addendum+"};",True)
+                    src += formatStr(change_indent(self.content,indent+1),"", addendum+"}\n",True)
+                else:
+                    src+="{"
+        elif self.type=="enum":           
+                src += formatStr(change_indent(self.comment,indent), indent_string*indent, "\n")
+                src += formatStr(change_indent(self.decoration,indent), indent_string*indent, "\n")
+                src += formatStr(change_indent(self.type,indent), indent_string*indent, " ")
+                src += formatStr(self.declaration,""," ")
+                if mode=="a":
+                    addendum="\n"+ indent_string*indent
+                    src += formatStr(change_indent(self.content,indent+1),"", addendum+"}",True)
                 else:
                     src+="{"
         elif self.type=="trait":
@@ -114,22 +140,28 @@ class Node:
                 src += formatStr(change_indent(self.decoration,indent), indent_string*indent, "\n")
                 src += formatStr(change_indent(self.type,indent), indent_string*indent, " ")
                 src += formatStr(self.declaration,"")
+                traverse = False
                 if mode=="a":
                     src += formatStr(change_indent(self.content,indent+1),"", "\n" + indent_string*indent + "}\n\n",False)
         elif self.type=="impl":            
-                src += formatStr(change_indent(self.comment,indent), indent_string*indent, "\n")
-                src += formatStr(change_indent(self.decoration,indent), indent_string*indent, "\n")
-                src += formatStr(change_indent(self.type,indent), indent_string*indent, " ")
+                src += formatStr(change_indent(self.comment,indent), "", "\n")
+                src += formatStr(change_indent(self.decoration,indent), "", "\n")
+                src += formatStr(change_indent(self.type,indent), "", " ")
                 src += formatStr(self.declaration,"")
-                src += formatStr(self.parameters," of ","\n" )
-                traverse = True
+                src += formatStr(self.parameters," of ","" )
+                traverse = False
+                if mode=="a":
+                    src +="\n"
+                    traverse = True
         elif self.type=="mod":            
-                src += formatStr(change_indent(self.comment,indent), indent_string*indent, "\n")
-                src += formatStr(change_indent(self.decoration,indent), indent_string*indent, "\n")
-                src += formatStr(change_indent(self.type,indent), indent_string*indent, " ")
-                src += formatStr(self.declaration,"", " {")
-                #src += formatStr(self.parameters," of ","\n" )
-                traverse = True       
+                src += formatStr(change_indent(self.comment,indent), "", "\n")
+                src += formatStr(change_indent(self.decoration,indent), "", "\n")
+                src += formatStr(change_indent(self.type,indent), "", " ")
+                src += formatStr(self.declaration,"", " {\n")
+                #src += formatStr(self.parameters," of ","\n" )7
+                traverse=False
+                if mode=="a":
+                    traverse = True       
         if(traverse):
             for i in self.children:
                 src += i.to_text(indent+1,traverse)
@@ -150,70 +182,136 @@ class CairoParser:
         self.parse()
         self.fix_fn()
         self.fix_impl()
+        self.lastType = ""
 
     def parse(self):
-        token_pattern = r'#\[[^\]]*\]|(mod|impl|fn|use|trait|struct)\s+\w+|{|}|;|\//.*|/\*[\s\S]*?\*/|use\s+[\w:]+::\{[^}]*\}'
+        token_pattern = r'#\[[^\]]*\]|(mod|impl|fn|use|trait|struct|enum|const)\s+\w+|{|}|;|\//.*|/\*[\s\S]*?\*/|use\s+[\w:]+::\{[^}]*\}'
         tokens = list(re.finditer(token_pattern, self.code))
+        fn_brace_count = 0  # Compteur d'accolades pour les blocs 'fn'
+        ignore_next_comment = False  # Variable de contrôle pour ignorer le prochain commentaire
 
-        for token in tokens:
+        for i, token in enumerate(tokens):
+
             if token.group().startswith('#['):
                 self.pending_decoration = (self.pending_decoration or '') + token.group()
             elif token.group().startswith('//') or token.group().startswith('/*'):
                 if not self.brace_stack or self.brace_stack[-1].type != 'fn':
-                    if(self.pending_comment is not None): self.pending_comment += '\n'
-                    self.pending_comment = (self.pending_comment or '') + token.group()
-            elif token.group() == '{':
-                self.brace_stack.append(self.current_node)
-            elif token.group() == '}':
-                if self.brace_stack:
-                    closing_node = self.brace_stack.pop()
-                    closing_node.content = self.code[closing_node.start_pos:token.start()].strip()
-                    self.current_node = closing_node.parent
-                    if closing_node.type == 'fn':
-                        self.pending_comment = None  # Annuler les commentaires à la sortie d'un bloc de fonction
-            elif token.group().startswith(('mod ', 'impl ', 'fn ', 'use ', 'trait ', 'struct ')):
-                node_type, node_declaration = token.group().split(maxsplit=1)
-                new_node = Node(node_type, node_declaration, comment=self.pending_comment, decoration=self.pending_decoration, parent=self.current_node)
-                new_node.start_pos = token.end()
-                self.current_node.add_child(new_node)
-                self.current_node = new_node
-                self.pending_comment = None
-                self.pending_decoration = None
+                    if(ignore_next_comment):
+                        ignore_next_comment = False
+                        self.pending_comment = None
+                    else:
+                        if(self.pending_comment is not None): 
+                            self.pending_comment += '\n'
+                        self.pending_comment = (self.pending_comment or '') + token.group()
 
-                if node_type == 'trait':
-                    self.current_node.content = node_declaration  # Ajouter la déclaration du trait au contenu du nœud trait
+            elif token.group() == '{':
+                if(self.lastType!="use"):
+                    if fn_brace_count==0:
+                        self.brace_stack.append(self.current_node)
+                    if self.current_node.type == 'fn':
+                        fn_brace_count += 1
+            elif token.group() == '}':
+                if(self.lastType!="use"):
+                    if fn_brace_count > 0:
+                        fn_brace_count -= 1
+                        if fn_brace_count == 0:
+                            closing_fn_node = self.brace_stack.pop()
+                            closing_fn_node.content = self.code[closing_fn_node.start_pos:token.start()].strip()
+                            self.current_node = closing_fn_node.parent
+                            self.pending_comment = None
+                    elif self.brace_stack:
+                        closing_node = self.brace_stack.pop()
+                        closing_node.content = self.code[closing_node.start_pos:token.start()].strip()
+                        self.current_node = closing_node.parent
+                        self.pending_comment = None
+
+ 
+
+            elif token.group().startswith(('mod ', 'impl ', 'fn ', 'use ', 'trait ', 'struct ', 'enum ', 'const ')):
+                node_type, node_declaration = token.group().split(maxsplit=1)
+                self.lastType = node_type
+
+                        # Traitement spécifique pour les noeuds 'const'
+                if node_type == 'const':
+                    # Trouver la fin de la ligne
+                    end_index = self.code.find('\n', token.end())
+                    if end_index == -1:
+                        end_index = len(self.code)  # Si pas de nouvelle ligne, prendre jusqu'à la fin
+                    const_content = self.code[token.end():end_index].strip()
+                    if i + 2 < len(tokens) and tokens[i + 2].group().startswith('//'):
+                        next_token = tokens[i + 1]
+                        if next_token.start() < end_index:
+                            ignore_next_comment = True  # Activer la variable de contrôle pour ignorer le prochain commentaire
+
+                    new_node = Node('const', node_declaration, comment=self.pending_comment, decoration=self.pending_decoration, parent=self.current_node, content=const_content)
+                    new_node.start_pos = end_index
+                    self.current_node.add_child(new_node)
+                    self.pending_comment = None
+                    self.pending_decoration = None
+                elif node_type == 'use':
+                    # Handle 'use' statements specifically
+                    end_index = self.code.find(';', token.end()) + 1
+                    use_content = self.code[token.end():end_index]
+                    new_node = Node('use', node_declaration, comment=self.pending_comment, decoration=self.pending_decoration, parent=self.current_node, content=use_content)
+                    new_node.start_pos = end_index
+                    self.current_node.add_child(new_node)
+                    self.pending_comment = None
+                    self.pending_decoration = None
+                else:
+                    # Handle other types
+                    new_node = Node(node_type, node_declaration, comment=self.pending_comment, decoration=self.pending_decoration, parent=self.current_node)
+                    new_node.start_pos = token.end()
+                    self.current_node.add_child(new_node)
+                    self.current_node = new_node
+                    self.pending_comment = None
+                    self.pending_decoration = None
+                    if node_type != 'fn':
+                        self.pending_comment = None
+                        self.pending_decoration = None
 
         if self.brace_stack:
             raise SyntaxError("Unbalanced braces in the code.")
 
 
+
      
-    def fix_fn(self, node=None,parent_type=None):
+    def fix_fn(self, node=None):
         if node is None:
             node = self.root
-  
+
         # Parcourir récursivement tous les nœuds
-        if(node.type!='trait'):
+        if node.type != 'trait':
             for child in node.children:
-                self.fix_fn(child,node.type)
+                self.fix_fn(child)
 
         # Vérifier si le nœud est de type 'fn'
         if node.type == 'fn' and node.content:
-            
             # Trouver l'index du premier bloc d'accolades '{'
             brace_index = node.content.find('{')
             if brace_index != -1:
-                # Extraire la partie de la déclaration de la fonction
-                fn_declaration = node.content[:brace_index]
 
-                # Extraire les paramètres de cette partie
-                match = re.match(r'\(([^)]*)\)', fn_declaration)
+                
+                # Utiliser une expression régulière pour capturer la déclaration complète de la fonction
+                match = re.search(r'(?:<[\w\s,+\-]*>\s*)?\(([^)]*)\)', node.content)
+
                 if match:
                     node.parameters = match.group(1)
-
-                    # Reconstruire le contenu du nœud en excluant uniquement la partie des paramètres extraite
+                    
+                    # Reconstruire le contenu du nœud
+                    fn_declaration = node.content[:brace_index]
+                    node.parameters = fn_declaration
                     node.content = fn_declaration[:match.start()] + node.content[brace_index:]
-                    node.content = remove_first_line_with_brace(node.content)
+                    node.content = self.remove_first_line_with_brace(node.content)
+                    
+
+    def remove_first_line_with_brace(self, content):
+        lines = content.split('\n')  # Diviser le contenu en lignes
+        for i, line in enumerate(lines):
+            if '{' in line:  # Trouver la première ligne avec une accolade ouvrante
+                # Supprimer cette ligne
+                del lines[i]
+                break
+        return '\n'.join(lines)  # Recombiner les lignes en une seule chaîne de caractères
 
     def fix_impl(self, node=None):
         if node is None:
@@ -232,40 +330,44 @@ class CairoParser:
                 impl_parameters = node.content[of_index + 2 : node.content.find('{') + 1]
                 # Assigner la partie extraite à node.parameters
                 node.parameters = impl_parameters
-                print(impl_parameters)
+
                 # Supprimer la partie extraite de node.content
                 node.content = node.content.replace(impl_parameters, '', 1).strip()
 
 
-    def find_nodes(self,node_type):
+    def find_nodes(self, starting_node, node_types, traverseChildren=True):
         node_list = []  # Une liste pour stocker les noms des fonctions trouvées
 
-        def traverse(node):
-            if node.type == node_type:
+        def traverse(node, children):
+            if children == 0:
+                return
+            if '*' in node_types or node.type in node_types:
                 node_list.append(node)
 
             # Parcourir récursivement les enfants du nœud
-            if(node.type!='trait'):
+            if node.type != 'trait':
                 for child in node.children:
-                    traverse(child)
+                    traverse(child, children - 1)
 
-        # Commencez la recherche à partir de la racine de l'arbre syntaxique
-        traverse(self.root)
+        traverseCnt = 2
+        if traverseChildren:
+            traverseCnt = -1
+        traverse(starting_node, traverseCnt)
 
         return node_list
     
-    def to_text(self,node_list,indent,traverse):
+    def to_text(self,node,indent,traverse,mode):
         src=""
-        for i in node_list:
-            src += i.to_text(indent,traverse,"a")
+        src += node.to_text(indent,traverse,mode)
         return src
     
     def display_ast(self, node=None, level=0):
         if node is None:
             node = self.root
-        print("  " * level + str(node))
-        for child in node.children:
-            self.display_ast(child, level + 1)
+        if(node is not None):
+            print("  " * level + str(node))
+            for child in node.children:
+                self.display_ast(child, level + 1)
             
     #for debug purpose only to see what the AST got
     def generate_code(self, node=None, indent_level=-1):
@@ -310,4 +412,3 @@ class CairoParser:
         code += "\n"
 
         return code
-    

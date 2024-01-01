@@ -1,57 +1,83 @@
+use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
+use starknet::{ContractAddress, ClassHash};
+use beer_barron::components::beer::{BeerID, get_beer_id_from_enum};
+use cubit::f128::types::fixed::{Fixed, FixedTrait};
 
+#[starknet::interface]
+trait IAuction<TContractState> {
+    fn start_hops_auction(self: @TContractState, game_id: u64, item_id: u64);
+    fn start_beer_auction(self: @TContractState, game_id: u64, item_id: u64);
+    fn sell_beer(self: @TContractState, game_id: u64, beer_id: BeerID, amount: u64);
+    fn buy_hops(self: @TContractState, game_id: u64, item_id: u64, amount: u64);
+    fn get_beer_price(self: @TContractState, game_id: u64, item_id: u64) -> Fixed;
+    fn get_hop_price(self: @TContractState, game_id: u64, item_id: u64) -> Fixed;
 
-#[cfg(test)]
-mod testing_trade {
-    #[test]
-    #[available_gas(600000000)]
-    fn test_trade() {
-        let game_id = 1;
+    // indulgences
+    fn start_indulgences_auction(self: @TContractState, game_id: u64);
+    fn place_indulgences_bid(self: @TContractState, game_id: u64, price: u64);
+    fn claim_indulgence(self: @TContractState, game_id: u64);
+    fn increment_indulgences_auction(self: @TContractState, game_id: u64);
+}
+fn toto(pouet:pout) {
+    pouet;
+}
+#[dojo::contract]
+mod auctions {
+    use traits::{Into, TryInto};
+  
+        fn start_hops_auction(self: @ContractState, game_id: u64, item_id: u64) {
+            let world = self.world_dispatcher.read();
+            // todo: check if auction already exists
+            // todo: check game exists
+            let mut game = get!(world, (game_id), (Game));
+            // assert(game.status, 'game is not running');
 
-        let price = 100;
-        let quantity = 100;
-        let item_id = 1;
+            let auction = Auction {
+                game_id,
+                item_id,
+                target_price: HOP_SEED_STARTING_PRICE.try_into().unwrap(),
+                decay_constant_mag: _0_31,
+                decay_constant_sign: true,
+                max_sellable: MAX_SELLABLE,
+                time_scale_mag: _0_0023,
+                time_scale_sign: false,
+                start_time: get_block_timestamp(), //update to timestamp
+                sold: 0,
+            };
 
-        // seller
-        let mut seller_gold_balance = ItemBalance {
-            game_id, player_id: get_caller_address(), item_id: 999, balance: 0
-        };
-        let mut seller_item_balance = ItemBalance {
-            game_id, player_id: get_caller_address(), item_id, balance: quantity
-        };
+            set!(world, (auction));
+        }
 
-        // trade
-        let mut trade = Trade {
-            entity_id: 1,
-            game_id,
-            item_id,
-            quantity,
-            price,
-            status: TradeStatus::OPEN,
-            player_id: get_caller_address(),
-            game_id_value: game_id
-        };
+ 
+        fn increment_indulgences_auction(self: @ContractState, game_id: u64) {
+            let world = self.world_dispatcher.read();
 
-        trade.create_trade(ref seller_item_balance);
-        assert(seller_item_balance.balance == 0, 'seller item balance is not 0');
+            let mut game = get!(world, (game_id), (Game));
 
-        let mut buyer_gold_balance = ItemBalance {
-            game_id, player_id: 1.try_into().unwrap(), item_id: 999, balance: 100
-        };
-        let mut buyer_item_balance = ItemBalance {
-            game_id, player_id: 1.try_into().unwrap(), item_id, balance: 0
-        };
+            let mut indulgence_count = get!(world, (game_id), (IndulgenceAuctionCount));
 
-
-        assert(buyer_gold_balance.balance == price, 'buyer gold balance is not 100');
-        assert(buyer_item_balance.balance == 0, 'buyer item balance is not 0');
-
-        trade
-            .accept_trade(
-                ref buyer_gold_balance, ref seller_gold_balance, ref buyer_item_balance, game_id
+            // get current indulgence
+            let mut current_indulgence_auction = get!(
+                world, (game_id, indulgence_count.count), (IndulgenceAuction)
             );
 
-        assert(buyer_gold_balance.balance == 0, 'buyer gold balance is not 0');
-        assert(seller_gold_balance.balance == price, 'seller gold balance is not 100');
-        assert(buyer_item_balance.balance == quantity, 'buyer item balance is not 100');
-    }
+            current_indulgence_auction.assert_auction_expired();
+
+            indulgence_count.count += 1;
+
+            let expiry = get_block_timestamp() + AUCTION_LENGTH;
+
+            let indulgence_auction = IndulgenceAuction {
+                game_id: game_id,
+                auction_id: indulgence_count.count,
+                price: 0,
+                highest_bid_player_id: 0.try_into().unwrap(), // no bidder yet
+                expiry,
+                auction_id_value: indulgence_count.count,
+                status: TradeStatus::OPEN // active
+            };
+
+            set!(world, (indulgence_count, indulgence_auction));
+        }
+    
 }
