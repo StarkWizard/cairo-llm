@@ -1,0 +1,51 @@
+//import the libraries needed by the contract
+use array::ArrayTrait;
+use core::traits::{Into, TryInto};
+use option::OptionTrait;
+use starknet::{ContractAddress, get_block_timestamp};
+
+//import the components from the beer_barron module
+use beer_barron::components::auction::{Auction, AuctionTrait};
+use beer_barron::components::game::{Game};
+
+//import the fixed point library
+use cubit::f128::types::fixed::{Fixed, FixedTrait};
+
+//import the context library
+use dojo::world::Context;
+
+//import the logistic VRGDA library
+use dojo_defi::dutch_auction::vrgda::{LogisticVRGDA};
+
+//define the constants used by the auction
+const target_price: u128 = 10;
+const _0_31: u128 = 571849066284996100; // 0.031
+const MAX_SELLABLE: u128 = 100000;
+const _0_0023: u128 = 32427511369531970; // 0.0016
+
+//define the execute function
+fn execute(ctx: Context, game_id: u64, item_id: u128) {
+    //check if the auction already exists
+    //check if the game exists
+    //get the game from the world state
+    let mut game = get!(ctx.world, (game_id), (Game));
+    //assert that the game is running
+    // assert(game.status, 'game is not running');
+
+    //create a new auction object
+    let auction = Auction {
+        game_id,
+        item_id,
+        target_price: target_price,
+        decay_constant_mag: _0_31,
+        decay_constant_sign: true,
+        max_sellable: MAX_SELLABLE,
+        time_scale_mag: _0_0023,
+        time_scale_sign: false,
+        start_time: get_block_timestamp(), //update to timestamp
+        sold: 0,
+    };
+
+    //set the auction in the world state
+    set!(ctx.world, (auction));
+}

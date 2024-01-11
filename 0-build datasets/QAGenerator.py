@@ -7,7 +7,7 @@ importlib.reload(cairoParser)
 
 class qaGenerator:
     def __init__(self, parser):
-        self.qa = "question,answer\n"
+        self.qa = ""
         self.parser = parser
     
 
@@ -63,7 +63,8 @@ class qaGenerator:
         ctx = self.buildContext(self.parser.root,["use","struct","const","enum","trait"])
         for n in Mod:
             nod = ctx + self.parser.to_text(n, 0, False,"q")
-            print(nod)
             self.nodeToQA(n,1,nod)
-        return self.qa
+        if(self.qa=="" or self.qa is None):
+            return None
+        return "question,answer\n" + self.qa
             

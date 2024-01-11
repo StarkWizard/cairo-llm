@@ -1,0 +1,611 @@
+question,answer
+"struct Game {
+	    // contains the data for a game
+	    game_id: u64,
+	    game_type: u8,
+	    seed: u32,
+	    status: GameStatus,
+	    start_time: u64,
+	    end_time: u64,
+	    player_count: u32,
+	    active: bool
+}
+struct GameTracker {
+	    // contains the data for tracking games
+	    game_id: u64,
+	    player_id: ContractAddress
+}
+enum GameStatus {
+	    // contains the status of a game
+	    created,
+	    started,
+	    ended
+}struct Ownership {
+	    // contains the ownership data for a game
+	    game_id: u64,
+	    player_id: ContractAddress,
+	    joined: Joined
+}
+enum Joined {
+	    // contains the joined status of a player in a game
+	    yes,
+	    no
+}struct GameConfig {
+	    // contains the configuration data for a game
+	    max_players: u32,
+	    game_length: u32,
+	    password: felt252,
+	    entry_fee: u32
+}
+struct Brew {
+	    // contains the data for a brew batch
+	    game_id: u64,
+	    player_id: ContractAddress,
+	    batch_id: u64,
+	    batch_key: u64,
+	    owner: ContractAddress,
+	    beer_id: u32,
+	    time_built: u64,
+	    time_brewed: u64,
+	    status: BrewStatus
+}
+struct BrewBatchTrack {
+	    // contains the data for tracking brew batches
+	    game_id: u64,
+	    player_id: ContractAddress,
+	    count: u64
+}
+enum BeerID {
+	    // contains the ids of the different beers
+	    DragonHideBlazeIPA,
+	    MithrilHaze,
+	    ArcaneAle,
+	    PixiePaleAle,
+	    ForestFaePorter,
+	    CrimsonCask
+}struct ItemBalance {
+	    // contains the balance of an item
+	    balance: u128
+}
+enum SYSTEM_IDS {
+	    // contains the ids of the different system contracts
+	    GAME_CONFIG
+}enum STARTING_BALANCES {
+	    // contains the starting balances of the different items
+	    GOLD
+}enum ITEM_IDS {
+	    // contains the ids of the different items
+	    HOP_SEEDS,
+	    HOP_FLOWERS,
+	    BEERS,
+	    GOLD_ID
+}enum HOP_SEEDS {
+	    // contains the ids of the different hop seeds
+	    GALAXY,
+	    CHINOOK,
+	    CITRA
+}enum HOP_FLOWERS {
+	    // contains the ids of the different hop flowers
+	    GALAXY,
+	    CHINOOK,
+	    CITRA,
+	    FUGGLE,
+	    SAAZ,
+	    CASCADE
+}enum BREW_YEILD_LITRES {
+	    // contains the yield of a brew batch in litres
+	    DEFAULT
+}enum SEED_TO_FLOWER_OFFSET {
+	    // contains the offset from seed id to flower id
+	    HOP_SEEDS_TO_HOP_FLOWERS
+}struct PLOT_COUNT {
+	    // contains the number of plots on a farm
+}
+struct CROP_GROWTH_TIME {
+	    // contains the time it takes for a crop to grow
+	    HOP_FLOWERS
+}
+struct CROP_YIELD {
+	    // contains the yield of a crop
+	    HOP_FLOWERS
+}
+
+fn check_balance(world: IWorldDispatcher, game_id: u64, recipe_quantity: u64, hop_id: u64) {","struct Game {
+	    // contains the data for a game
+	    game_id: u64,
+	    game_type: u8,
+	    seed: u32,
+	    status: GameStatus,
+	    start_time: u64,
+	    end_time: u64,
+	    player_count: u32,
+	    active: bool
+}
+struct GameTracker {
+	    // contains the data for tracking games
+	    game_id: u64,
+	    player_id: ContractAddress
+}
+enum GameStatus {
+	    // contains the status of a game
+	    created,
+	    started,
+	    ended
+}struct Ownership {
+	    // contains the ownership data for a game
+	    game_id: u64,
+	    player_id: ContractAddress,
+	    joined: Joined
+}
+enum Joined {
+	    // contains the joined status of a player in a game
+	    yes,
+	    no
+}struct GameConfig {
+	    // contains the configuration data for a game
+	    max_players: u32,
+	    game_length: u32,
+	    password: felt252,
+	    entry_fee: u32
+}
+struct Brew {
+	    // contains the data for a brew batch
+	    game_id: u64,
+	    player_id: ContractAddress,
+	    batch_id: u64,
+	    batch_key: u64,
+	    owner: ContractAddress,
+	    beer_id: u32,
+	    time_built: u64,
+	    time_brewed: u64,
+	    status: BrewStatus
+}
+struct BrewBatchTrack {
+	    // contains the data for tracking brew batches
+	    game_id: u64,
+	    player_id: ContractAddress,
+	    count: u64
+}
+enum BeerID {
+	    // contains the ids of the different beers
+	    DragonHideBlazeIPA,
+	    MithrilHaze,
+	    ArcaneAle,
+	    PixiePaleAle,
+	    ForestFaePorter,
+	    CrimsonCask
+}struct ItemBalance {
+	    // contains the balance of an item
+	    balance: u128
+}
+enum SYSTEM_IDS {
+	    // contains the ids of the different system contracts
+	    GAME_CONFIG
+}enum STARTING_BALANCES {
+	    // contains the starting balances of the different items
+	    GOLD
+}enum ITEM_IDS {
+	    // contains the ids of the different items
+	    HOP_SEEDS,
+	    HOP_FLOWERS,
+	    BEERS,
+	    GOLD_ID
+}enum HOP_SEEDS {
+	    // contains the ids of the different hop seeds
+	    GALAXY,
+	    CHINOOK,
+	    CITRA
+}enum HOP_FLOWERS {
+	    // contains the ids of the different hop flowers
+	    GALAXY,
+	    CHINOOK,
+	    CITRA,
+	    FUGGLE,
+	    SAAZ,
+	    CASCADE
+}enum BREW_YEILD_LITRES {
+	    // contains the yield of a brew batch in litres
+	    DEFAULT
+}enum SEED_TO_FLOWER_OFFSET {
+	    // contains the offset from seed id to flower id
+	    HOP_SEEDS_TO_HOP_FLOWERS
+}struct PLOT_COUNT {
+	    // contains the number of plots on a farm
+}
+struct CROP_GROWTH_TIME {
+	    // contains the time it takes for a crop to grow
+	    HOP_FLOWERS
+}
+struct CROP_YIELD {
+	    // contains the yield of a crop
+	    HOP_FLOWERS
+}
+
+fn check_balance(world: IWorldDispatcher, game_id: u64, recipe_quantity: u64, hop_id: u64) {
+	// checks that the player has enough of a certain hop
+	
+	// get the player's hop balance
+	let mut hop_balance = get!(world, (game_id, get_caller_address(), hop_id), (ItemBalance));
+	
+	// assert that the player has enough hops
+	hop_balance.assert_balance(recipe_quantity.into());
+	
+	// subtract the used hops from the player's balance
+	hop_balance.sub(recipe_quantity.into());
+	
+	// set the updated hop balance back to the world
+	set!(world, (hop_balance));
+
+}
+"
+"struct Game {
+	    // contains the data for a game
+	    game_id: u64,
+	    game_type: u8,
+	    seed: u32,
+	    status: GameStatus,
+	    start_time: u64,
+	    end_time: u64,
+	    player_count: u32,
+	    active: bool
+}
+trait GameTrait	{
+	    // contains functions for checking if the game is active
+	    fn active(&mut self);
+
+}
+
+struct GameTracker {
+	    // contains the data for tracking games
+	    game_id: u64,
+	    player_id: ContractAddress
+}
+enum GameStatus {
+	    // contains the status of a game
+	    created,
+	    started,
+	    ended
+}struct Ownership {
+	    // contains the ownership data for a game
+	    game_id: u64,
+	    player_id: ContractAddress,
+	    joined: Joined
+}
+enum Joined {
+	    // contains the joined status of a player in a game
+	    yes,
+	    no
+}struct GameConfig {
+	    // contains the configuration data for a game
+	    max_players: u32,
+	    game_length: u32,
+	    password: felt252,
+	    entry_fee: u32
+}
+struct Brew {
+	    // contains the data for a brew batch
+	    game_id: u64,
+	    player_id: ContractAddress,
+	    batch_id: u64,
+	    batch_key: u64,
+	    owner: ContractAddress,
+	    beer_id: u32,
+	    time_built: u64,
+	    time_brewed: u64,
+	    status: BrewStatus
+}
+trait BrewTrait	{
+	    // contains functions for asserting that the batch is built and brewed
+	    fn assert_built(&mut self);
+	    fn assert_brewed(&mut self);
+
+}
+
+struct BrewBatchTrack {
+	    // contains the data for tracking brew batches
+	    game_id: u64,
+	    player_id: ContractAddress,
+	    count: u64
+}
+enum BeerID {
+	    // contains the ids of the different beers
+	    DragonHideBlazeIPA,
+	    MithrilHaze,
+	    ArcaneAle,
+	    PixiePaleAle,
+	    ForestFaePorter,
+	    CrimsonCask
+}struct ItemBalance {
+	    // contains the balance of an item
+	    balance: u128
+}
+trait ItemBalanceTrait	{
+	    // contains functions for adding to and asserting the balance of an item
+	    fn add(&mut self, amount: u128);
+	    fn assert_balance(&mut self, amount: u128);
+	    fn sub(&mut self, amount: u128);
+
+}
+
+enum SYSTEM_IDS {
+	    // contains the ids of the different system contracts
+	    GAME_CONFIG
+}enum STARTING_BALANCES {
+	    // contains the starting balances of the different items
+	    GOLD
+}enum ITEM_IDS {
+	    // contains the ids of the different items
+	    HOP_SEEDS,
+	    HOP_FLOWERS,
+	    BEERS,
+	    GOLD_ID
+}enum HOP_SEEDS {
+	    // contains the ids of the different hop seeds
+	    GALAXY,
+	    CHINOOK,
+	    CITRA
+}enum HOP_FLOWERS {
+	    // contains the ids of the different hop flowers
+	    GALAXY,
+	    CHINOOK,
+	    CITRA,
+	    FUGGLE,
+	    SAAZ,
+	    CASCADE
+}enum BREW_YEILD_LITRES {
+	    // contains the yield of a brew batch in litres
+	    DEFAULT
+}trait IAuctionDispatcherTrait	{
+	    // contains functions for getting the auction contract address
+	    fn get_auction_contract_address(&mut self) -> ContractAddress;
+
+}
+
+enum SEED_TO_FLOWER_OFFSET {
+	    // contains the offset from seed id to flower id
+	    HOP_SEEDS_TO_HOP_FLOWERS
+}struct PLOT_COUNT {
+	    // contains the number of plots on a farm
+}
+struct CROP_GROWTH_TIME {
+	    // contains the time it takes for a crop to grow
+	    HOP_FLOWERS
+}
+struct CROP_YIELD {
+	    // contains the yield of a crop
+	    HOP_FLOWERS
+}
+trait IBrewing	<TContractState> {
+	    // contains functions for brewing and bottling beer
+	    fn brew_beer(self: @TContractState, game_id: u64, beer_id: BeerID);
+	    fn bottle_beer(self: @TContractState, game_id: u64, batch_id: u64);
+
+}
+
+
+impl BrewingImpl of IBrewing<ContractState> {","struct Game {
+	    // contains the data for a game
+	    game_id: u64,
+	    game_type: u8,
+	    seed: u32,
+	    status: GameStatus,
+	    start_time: u64,
+	    end_time: u64,
+	    player_count: u32,
+	    active: bool
+}
+trait GameTrait	{
+	    // contains functions for checking if the game is active
+	    fn active(&mut self);
+
+}
+
+struct GameTracker {
+	    // contains the data for tracking games
+	    game_id: u64,
+	    player_id: ContractAddress
+}
+enum GameStatus {
+	    // contains the status of a game
+	    created,
+	    started,
+	    ended
+}struct Ownership {
+	    // contains the ownership data for a game
+	    game_id: u64,
+	    player_id: ContractAddress,
+	    joined: Joined
+}
+enum Joined {
+	    // contains the joined status of a player in a game
+	    yes,
+	    no
+}struct GameConfig {
+	    // contains the configuration data for a game
+	    max_players: u32,
+	    game_length: u32,
+	    password: felt252,
+	    entry_fee: u32
+}
+struct Brew {
+	    // contains the data for a brew batch
+	    game_id: u64,
+	    player_id: ContractAddress,
+	    batch_id: u64,
+	    batch_key: u64,
+	    owner: ContractAddress,
+	    beer_id: u32,
+	    time_built: u64,
+	    time_brewed: u64,
+	    status: BrewStatus
+}
+trait BrewTrait	{
+	    // contains functions for asserting that the batch is built and brewed
+	    fn assert_built(&mut self);
+	    fn assert_brewed(&mut self);
+
+}
+
+struct BrewBatchTrack {
+	    // contains the data for tracking brew batches
+	    game_id: u64,
+	    player_id: ContractAddress,
+	    count: u64
+}
+enum BeerID {
+	    // contains the ids of the different beers
+	    DragonHideBlazeIPA,
+	    MithrilHaze,
+	    ArcaneAle,
+	    PixiePaleAle,
+	    ForestFaePorter,
+	    CrimsonCask
+}struct ItemBalance {
+	    // contains the balance of an item
+	    balance: u128
+}
+trait ItemBalanceTrait	{
+	    // contains functions for adding to and asserting the balance of an item
+	    fn add(&mut self, amount: u128);
+	    fn assert_balance(&mut self, amount: u128);
+	    fn sub(&mut self, amount: u128);
+
+}
+
+enum SYSTEM_IDS {
+	    // contains the ids of the different system contracts
+	    GAME_CONFIG
+}enum STARTING_BALANCES {
+	    // contains the starting balances of the different items
+	    GOLD
+}enum ITEM_IDS {
+	    // contains the ids of the different items
+	    HOP_SEEDS,
+	    HOP_FLOWERS,
+	    BEERS,
+	    GOLD_ID
+}enum HOP_SEEDS {
+	    // contains the ids of the different hop seeds
+	    GALAXY,
+	    CHINOOK,
+	    CITRA
+}enum HOP_FLOWERS {
+	    // contains the ids of the different hop flowers
+	    GALAXY,
+	    CHINOOK,
+	    CITRA,
+	    FUGGLE,
+	    SAAZ,
+	    CASCADE
+}enum BREW_YEILD_LITRES {
+	    // contains the yield of a brew batch in litres
+	    DEFAULT
+}trait IAuctionDispatcherTrait	{
+	    // contains functions for getting the auction contract address
+	    fn get_auction_contract_address(&mut self) -> ContractAddress;
+
+}
+
+enum SEED_TO_FLOWER_OFFSET {
+	    // contains the offset from seed id to flower id
+	    HOP_SEEDS_TO_HOP_FLOWERS
+}struct PLOT_COUNT {
+	    // contains the number of plots on a farm
+}
+struct CROP_GROWTH_TIME {
+	    // contains the time it takes for a crop to grow
+	    HOP_FLOWERS
+}
+struct CROP_YIELD {
+	    // contains the yield of a crop
+	    HOP_FLOWERS
+}
+trait IBrewing	<TContractState> {
+	    // contains functions for brewing and bottling beer
+	    fn brew_beer(self: @TContractState, game_id: u64, beer_id: BeerID);
+	    fn bottle_beer(self: @TContractState, game_id: u64, batch_id: u64);
+
+}
+
+
+impl BrewingImpl of IBrewing<ContractState> {
+		// implements the IBrewing trait for the BrewingImpl struct
+fn brew_beer(self: @ContractState, game_id: u64, beer_id: BeerID) {
+		// brews a batch of beer
+		
+		// get the world data
+		let world = self.world_dispatcher.read();
+		
+		// assert that the game is active
+		let game = get!(world, (game_id), (Game));
+		game.active();
+		
+		// get the recipe for the beer
+		let beer_recipe = get_recipe(beer_id, game.seed);
+		
+		// get the player's id
+		let player_id = get_caller_address().into();
+		
+		// check that the player has enough hops
+		check_balance(world, game_id, beer_recipe.citra, CITRA.try_into().unwrap());
+		check_balance(world, game_id, beer_recipe.chinook, CHINOOK.try_into().unwrap());
+		check_balance(world, game_id, beer_recipe.galaxy, GALAXY.try_into().unwrap());
+		check_balance(world, game_id, beer_recipe.fuggle, FUGGLE.try_into().unwrap());
+		check_balance(world, game_id, beer_recipe.saaz, SAAZ.try_into().unwrap());
+		check_balance(world, game_id, beer_recipe.cascade, CASCADE.try_into().unwrap());
+		
+		// create a unique batch number for the game
+		let mut batch = get!(world, (game_id), (BrewBatchTrack));
+		batch.count += 1;
+		
+		// create a new brew batch
+		let brew = Brew {
+		    game_id,
+		    player_id: player_id,
+		    batch_id: batch.count,
+		    batch_key: batch.count,
+		    owner: player_id,
+		    beer_id: get_beer_id_from_enum(beer_id),
+		    time_built: get_block_timestamp(),
+		    status: BrewStatus::brewing,
+		};
+		
+		// set the new brew batch and batch tracker data back to the world
+		set!(world, (brew, batch));
+
+	}
+	fn bottle_beer(self: @ContractState, game_id: u64, batch_id: u64) {
+		// bottles a brew batch
+		
+		// get the world data
+		let world = self.world_dispatcher.read();
+		
+		// get the player's id
+		let player_id = get_caller_address();
+		
+		// assert that the game is active
+		let game = get!(world, (game_id), (Game));
+		game.active();
+		
+		// get the brew batch data
+		let mut batch = get!(world, (game_id, player_id, batch_id), (Brew));
+		
+		// assert that the batch is built and brewed
+		batch.assert_built();
+		batch.assert_brewed();
+		
+		// update the batch status to bottled
+		batch.status = BrewStatus::bottled;
+		
+		// get the player's beer balance
+		let mut inventory = get!(world, (game_id, player_id, batch.beer_id), (ItemBalance));
+		
+		// add the bottled beer to the player's balance
+		inventory.add(BREW_YEILD_LITRES.try_into().unwrap());
+		
+		// set the updated data back to the world
+		set!(world, (inventory, batch));
+
+	}
+
+}"

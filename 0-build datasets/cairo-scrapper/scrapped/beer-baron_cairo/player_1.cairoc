@@ -1,0 +1,36 @@
+// Component for representing players
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct Player {
+    // Game ID
+    #[key]
+    game_id: u64,
+
+    // Player ID (unique for each game)
+    #[key]
+    player_id: ContractAddress,
+
+    // Player name
+    name: felt252,
+}
+
+// Component for representing farm areas
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct FarmArea {
+    // Game ID
+    #[key]
+    game_id: u64,
+
+    // Player ID
+    #[key]
+    player_id: ContractAddress,
+
+    // Area ID (unique for each player in a game)
+    #[key]
+    area_id: u64,
+
+    // Area type (crop type)
+    area_type: u64,
+
+    // Time when the area was built
+    time_built: u64,
+}

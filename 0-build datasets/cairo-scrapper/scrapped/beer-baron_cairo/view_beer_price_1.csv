@@ -1,0 +1,28 @@
+question,answer
+"// System contract for viewing the price of beer
+#[system]
+mod view_beer_price {
+	// Imports required for the contract
+use  cubit::f128::types::fixed::{Fixed, FixedTrait};
+	use  dojo::world::Context;
+	use  beer_barron::components::auction::{TavernAuction, TavernAuctionTrait};
+
+		// Execute function
+fn execute(ctx: Context, game_id: u64, item_id: u128) -> Fixed {","// System contract for viewing the price of beer
+#[system]
+mod view_beer_price {
+	// Imports required for the contract
+use  cubit::f128::types::fixed::{Fixed, FixedTrait};
+	use  dojo::world::Context;
+	use  beer_barron::components::auction::{TavernAuction, TavernAuctionTrait};
+
+		// Execute function
+fn execute(ctx: Context, game_id: u64, item_id: u128) -> Fixed {
+		// Get the tavern auction for the given game and item ID
+		let auction = get!(ctx.world, (game_id, item_id), TavernAuction);
+		
+		// Get the price of beer from the auction
+		auction.get_price()
+
+	}
+"

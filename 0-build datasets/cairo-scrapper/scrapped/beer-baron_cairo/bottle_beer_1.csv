@@ -1,0 +1,28 @@
+question,answer
+"// the code is implementing a function called execute that takes a context, a game id and a batch id as parameters
+// the function checks if the game is active and if the batch is built and brewed
+// if the checks are passed, the batch is bottled and the inventory is increased
+fn execute(ctx: Context, game_id: u64, batch_id: u64) {","// the code is implementing a function called execute that takes a context, a game id and a batch id as parameters
+// the function checks if the game is active and if the batch is built and brewed
+// if the checks are passed, the batch is bottled and the inventory is increased
+fn execute(ctx: Context, game_id: u64, batch_id: u64) {
+	// assert that the game is active
+	let game = get!(ctx.world, (game_id), (Game));
+	game.active();
+	
+	// assert batch is built and brewed
+	let mut batch = get!(ctx.world, (game_id, ctx.origin, batch_id), (Brew));
+	batch.assert_built();
+	batch.assert_brewed();
+	
+	// bottle batch
+	batch.status = BrewStatus::bottled;
+	
+	// increase inventory
+	let mut inventory = get!(ctx.world, (game_id, ctx.origin, batch.beer_id), (ItemBalance));
+	inventory.add(BREW_YEILD_LITRES.try_into().unwrap());
+	
+	set!(ctx.world, (inventory, batch));
+
+}
+"

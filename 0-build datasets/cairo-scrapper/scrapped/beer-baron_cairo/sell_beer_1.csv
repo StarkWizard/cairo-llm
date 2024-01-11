@@ -1,0 +1,92 @@
+question,answer
+"// This contract allows players to sell beer in exchange for gold
+mod sell_beer {
+	// Import the necessary traits and types from the StarkNet SDK
+use  core::debug::PrintTrait;
+	use  array::ArrayTrait;
+	use  core::traits::{Into, TryInto};
+	use  option::OptionTrait;
+	use  starknet::{ContractAddress, get_block_timestamp};
+	// Import the Context type from the dojo crate
+use  dojo::world::Context;
+	// Import the TavernAuction, TavernAuctionTrait, ItemBalance, ItemBalanceTrait, Game, GameTrait, BeerID, and get_beer_id_from_enum types from the beer_barron crate
+use  beer_barron::components::auction::{TavernAuction, TavernAuctionTrait};
+	use  beer_barron::components::balances::{ItemBalance, ItemBalanceTrait};
+	use  beer_barron::components::game::{Game, GameTrait};
+	use  beer_barron::components::beer::{BeerID, get_beer_id_from_enum};
+	// Import the GOLD_ID constant from the beer_barron crate
+use  beer_barron::constants::{CONFIG::{ITEM_IDS::{GOLD_ID}}};
+
+		// This function is the entry point for the contract
+	// It takes the following parameters:
+	// - ctx: The Context object, which contains information about the current state of the game
+	// - game_id: The ID of the game that the player is selling beer in
+	// - beer_id: The type of beer that the player is selling
+	// - amount: The amount of beer that the player is selling
+fn execute(ctx: Context, game_id: u64, beer_id: BeerID, amount: u128) {","// This contract allows players to sell beer in exchange for gold
+mod sell_beer {
+	// Import the necessary traits and types from the StarkNet SDK
+use  core::debug::PrintTrait;
+	use  array::ArrayTrait;
+	use  core::traits::{Into, TryInto};
+	use  option::OptionTrait;
+	use  starknet::{ContractAddress, get_block_timestamp};
+	// Import the Context type from the dojo crate
+use  dojo::world::Context;
+	// Import the TavernAuction, TavernAuctionTrait, ItemBalance, ItemBalanceTrait, Game, GameTrait, BeerID, and get_beer_id_from_enum types from the beer_barron crate
+use  beer_barron::components::auction::{TavernAuction, TavernAuctionTrait};
+	use  beer_barron::components::balances::{ItemBalance, ItemBalanceTrait};
+	use  beer_barron::components::game::{Game, GameTrait};
+	use  beer_barron::components::beer::{BeerID, get_beer_id_from_enum};
+	// Import the GOLD_ID constant from the beer_barron crate
+use  beer_barron::constants::{CONFIG::{ITEM_IDS::{GOLD_ID}}};
+
+		// This function is the entry point for the contract
+	// It takes the following parameters:
+	// - ctx: The Context object, which contains information about the current state of the game
+	// - game_id: The ID of the game that the player is selling beer in
+	// - beer_id: The type of beer that the player is selling
+	// - amount: The amount of beer that the player is selling
+fn execute(ctx: Context, game_id: u64, beer_id: BeerID, amount: u128) {
+		// Assert that the game is active
+		// This ensures that the player can only sell beer in active games
+		let game = get!(ctx.world, (game_id), (Game));
+		game.active();
+		
+		// Get the TavernAuction object for the specified beer type
+		// This object contains information about the current auction for the beer
+		let mut auction = get!(
+		    ctx.world, (game_id, get_beer_id_from_enum(beer_id)).into(), (TavernAuction)
+		);
+		
+		// Get the ItemBalance object for the player's gold balance
+		// This object contains information about the player's gold balance
+		let mut gold_balance = get!(ctx.world, (game_id, ctx.origin, GOLD_ID), ItemBalance);
+		
+		// Get the ItemBalance object for the player's beer balance
+		// This object contains information about the player's beer balance
+		let mut item_balance = get!(
+		    ctx.world, (game_id, ctx.origin, get_beer_id_from_enum(beer_id)), ItemBalance
+		);
+		
+		// Update the auction object to reflect the sale of beer
+		// This increases the amount of beer that has been sold in the auction
+		auction.sold += amount;
+		
+		// Calculate the amount of gold that the player will receive for selling the beer
+		// This is done by multiplying the amount of beer sold by the current price of the beer
+		let gold_amount = auction.get_price().try_into().unwrap() * amount;
+		
+		// Update the player's gold balance to reflect the sale of beer
+		// This adds the amount of gold received to the player's gold balance
+		gold_balance.add(gold_amount);
+		
+		// Update the player's beer balance to reflect the sale of beer
+		// This subtracts the amount of beer sold from the player's beer balance
+		item_balance.sub(amount);
+		
+		// Save the updated auction, gold balance, and item balance objects to the world state
+		set!(ctx.world, (auction, gold_balance, item_balance));
+
+	}
+"

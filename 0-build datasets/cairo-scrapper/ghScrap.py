@@ -40,13 +40,13 @@ def get_cairo_files(repo_path, output_dir):
     return project_output_dir
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Récupère les fichiers .cairo d'un dépôt GitHub et les place dans un sous-répertoire portant le nom du projet.")
-    parser.add_argument("repo_url", help="URL du dépôt GitHub (au format utilisateur/nom_du_depot)")
-    parser.add_argument("output_dir", help="Répertoire de sortie où placer les fichiers .cairo")
+    parser = argparse.ArgumentParser(description="scrape all the .cairo files from a github repo")
+    parser.add_argument("repo_url", help='github repos name using format: "user/repo_name"')
+    parser.add_argument("output_dir", help="parent directory for the .cairo files")
 
     args = parser.parse_args()
 
     repo_path = clone_github_repo(args.repo_url, args.output_dir)
     cairo_files_dir = get_cairo_files(repo_path, args.output_dir)
     
-    print(f"Fichiers .cairo récupérés et placés dans le sous-répertoire : {cairo_files_dir}")
+    print(f"Files are downloaded in : {cairo_files_dir}")

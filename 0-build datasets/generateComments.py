@@ -17,6 +17,7 @@ nok_prefix = "[bold red]->[/bold red]"
 
 chat_history = []
 chat = None
+overwrite = False
 
 
 
@@ -44,6 +45,10 @@ def is_text_valid(text):
     )
 
 
+def countline(text):
+    lines = text.split('\n')
+    return len(lines)
+
 
 def generateC(text):
 
@@ -51,6 +56,7 @@ def generateC(text):
     first_attempt = True
     max_count = 0
     print("genrating")
+    chat = model.start_chat( history=[] )
     response = chat.send_message(f'''Add decriptive Comments in english to the following smart contract
                             Do not comment lines that already have comments, do only add comment to 'fn','trait','struct','impl'
                             Important, place the comment above each block.For of each function comment before the declaration, not inside,describe the parameters and what the function does
@@ -58,30 +64,34 @@ def generateC(text):
                             Important do not add md decoration to the answer, just plain text /n''' + text)
     generated_text = remove_important_errors(response.text)
 
-    while not is_text_valid(generated_text):
-        console.print(nok_prefix + "Following error: " + "[bold red]" + "Incomplete generation, retrying" + "[/bold red]")
-        response = chat.send_message("continue")
-        answer = remove_important_errors(response.text)
-        generated_text += answer
-        max_count += 1
-        if(max_count > 3):
-            console.print(nok_prefix + "Following error: " + "[bold red]" + "Generation Failed !" + "[/bold red]")
-            return ""
+    if not is_text_valid(generated_text):
+        console.print(nok_prefix + "Following error: " + "[bold red]" + "Incomplete generation, saving without comment" + "[/bold red]")
+        return text
     return generated_text
 
 def convert_to_cairoc(input_file, nb):
     base_name, _ = os.path.splitext(input_file)
     data_list = []
-
-    for i in range(nb):
+    print("processing: ",input_file)
+    for i in range(nb):        
         csv_file = f"{base_name}_{i + 1}.cairoc"
-        with open(input_file, 'r', encoding='utf-8') as input_f:
-            data = input_f.read()
-        data_to_append = generateC(data)
-
-        if(data_to_append!="") :
-            with open(csv_file, "w", encoding="utf-8") as file:
-                file.write(data_to_append)
+        file_exists = False
+        if os.path.isfile(csv_file):
+            file_exists = True
+        if file_exists and overwrite==False:
+            console.print(nok_prefix + "File .cairoc already created: " + "[bold red]" + "skipping" + "[/bold red]")
+        else:
+            with open(input_file, 'r', encoding='utf-8') as input_f:
+                data = input_f.read()
+            if(countline(data) > 10):
+                data_to_append = generateC(data)
+                if(data_to_append!="") :
+                    with open(csv_file, "w", encoding="utf-8") as file:
+                        print("writing: ",csv_file)
+                        file.write(data_to_append)
+            else:
+                console.print(nok_prefix + "Too Small: " + "[bold red]" + "Contract is too small, skipping" + "[/bold red]")
+           
                 
 
 def process_directory(directory, nb):
@@ -95,8 +105,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Add comment to Cairo files and generate .cairoc files.")
     parser.add_argument("directory", help="Source directory containing .cairo files and subdirectories")
     parser.add_argument("-nb", "--num-iterations", type=int, default=1, help="Number of iterations to generate .cairoc files")
-    
+    parser.add_argument("-o", "--overwrite", action="store_true", help="Overwrite existing files")
+
     args = parser.parse_args()
+
+    overwrite = args.overwrite
 
     GOOGLE_API_KEY = os.getenv('GEMINI_KEY')
     if GOOGLE_API_KEY is None:
@@ -114,8 +127,7 @@ if __name__ == "__main__":
             candidate_count=1,
             temperature=0.50)
         
-        model = genai.GenerativeModel('gemini-pro',generation_config=generation_config)
-        chat = model.start_chat( history=[] )
+        model = genai.GenerativeModel('gemini-pro',generation_config=generation_config)        
         
         if args.num_iterations < 1:
             console.print(nok_prefix + "Number of iterations must be at least 1")

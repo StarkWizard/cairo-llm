@@ -1,0 +1,211 @@
+question,answer
+"// This module contains the implementation of the `create_trade` system.
+mod create_trade {
+	use  beer_barron::components::trading::TradeTrait;
+	// This trait provides a way to print debug information.
+use  core::debug::PrintTrait;
+	// This trait provides a way to work with arrays.
+use  array::ArrayTrait;
+	// This trait provides a way to convert between different types.
+use  core::traits::{Into, TryInto};
+	// This trait provides a way to work with options.
+use  option::OptionTrait;
+	// This trait provides a way to work with starknet contracts.
+use  starknet::{ContractAddress, get_block_timestamp};
+	// This trait provides a way to work with the world.
+use  dojo::world::Context;
+	// This module contains the definition of the `Trade` component.
+use  beer_barron::components::trading::{Trade, TradeStatus, TradeTrack};
+	// This module contains the definition of the `Game` component.
+use  beer_barron::components::game::{Game, GameTrait, Ownership};
+	// This module contains the definition of the `Auction` component.
+use  beer_barron::components::auction::{Auction, AuctionTrait};
+	// This module contains the definition of the `ItemBalance` component.
+use  beer_barron::components::balances::{ItemBalance, ItemBalanceTrait};
+
+		// This function is the entry point for the `create_trade` system.
+fn execute(
+        // This parameter is the context of the system.
+        ctx: Context,
+        // This parameter is the ID of the game.
+        game_id: u64,
+        // This parameter is the ID of the item to be traded.
+        item_id: u128,
+        // This parameter is the quantity of the item to be traded.
+        quantity: u128,
+        // This parameter is the price of the item to be traded.
+        price: u128,
+    ) {","// This module contains the implementation of the `create_trade` system.
+mod create_trade {
+	use  beer_barron::components::trading::TradeTrait;
+	// This trait provides a way to print debug information.
+use  core::debug::PrintTrait;
+	// This trait provides a way to work with arrays.
+use  array::ArrayTrait;
+	// This trait provides a way to convert between different types.
+use  core::traits::{Into, TryInto};
+	// This trait provides a way to work with options.
+use  option::OptionTrait;
+	// This trait provides a way to work with starknet contracts.
+use  starknet::{ContractAddress, get_block_timestamp};
+	// This trait provides a way to work with the world.
+use  dojo::world::Context;
+	// This module contains the definition of the `Trade` component.
+use  beer_barron::components::trading::{Trade, TradeStatus, TradeTrack};
+	// This module contains the definition of the `Game` component.
+use  beer_barron::components::game::{Game, GameTrait, Ownership};
+	// This module contains the definition of the `Auction` component.
+use  beer_barron::components::auction::{Auction, AuctionTrait};
+	// This module contains the definition of the `ItemBalance` component.
+use  beer_barron::components::balances::{ItemBalance, ItemBalanceTrait};
+
+		// This function is the entry point for the `create_trade` system.
+fn execute(
+        // This parameter is the context of the system.
+        ctx: Context,
+        // This parameter is the ID of the game.
+        game_id: u64,
+        // This parameter is the ID of the item to be traded.
+        item_id: u128,
+        // This parameter is the quantity of the item to be traded.
+        quantity: u128,
+        // This parameter is the price of the item to be traded.
+        price: u128,
+    ) {
+		// This line asserts that the game is active.
+		let game = get!(ctx.world, (game_id), (Game));
+		game.active();
+		
+		// This line increments the trade track.
+		let mut trade_track = get!(ctx.world, (game_id), TradeTrack);
+		trade_track.count += 1;
+		
+		// This line gets the item balance of the player who is creating the trade.
+		let mut item_balance = get!(ctx.world, (game_id, ctx.origin, item_id), ItemBalance);
+		
+		// This line generates a unique ID for the trade.
+		let entity_id: u64 = trade_track.count.into();
+		
+		// This line creates a new trade.
+		let mut trade = Trade {
+		    entity_id,
+		    game_id,
+		    item_id,
+		    quantity,
+		    price,
+		    status: TradeStatus::OPEN,
+		};
+		
+		// This line creates the trade.
+		trade.create_trade(ref item_balance);
+		
+		// This line creates an ownership record for the trade.
+		let ownership = Ownership {
+		    entity_id,
+		    owner: ctx.origin.into(),
+		};
+		
+		// This line sets the trade, item balance, ownership, and trade track in the world.
+		set!(ctx.world, (trade, item_balance, ownership, trade_track));
+
+	}
+"
+"// This module contains the implementation of the `accept_trade` system.
+#[system]
+mod accept_trade {
+	use  beer_barron::components::trading::TradeTrait;
+	// This trait provides a way to print debug information.
+use  core::debug::PrintTrait;
+	// This trait provides a way to work with arrays.
+use  array::ArrayTrait;
+	// This trait provides a way to convert between different types.
+use  core::traits::{Into, TryInto};
+	// This trait provides a way to work with options.
+use  option::OptionTrait;
+	// This trait provides a way to work with starknet contracts.
+use  starknet::{ContractAddress, get_block_timestamp};
+	// This trait provides a way to work with the world.
+use  dojo::world::Context;
+	// This module contains the definition of the `Trade` component.
+use  beer_barron::components::trading::{Trade, TradeStatus};
+	// This module contains the definition of the `Game` component.
+use  beer_barron::components::game::{Game, GameTrait, Ownership};
+	// This module contains the definition of the `ItemBalance` component.
+use  beer_barron::components::balances::{ItemBalance};
+	// This module contains the definition of the `GOLD_ID` constant.
+use  beer_barron::constants::{CONFIG::{ITEM_IDS::{GOLD_ID}}};
+
+		// This function is the entry point for the `accept_trade` system.
+fn execute(
+        // This parameter is the context of the system.
+        ctx: Context,
+        // This parameter is the ID of the game.
+        game_id: u64,
+        // This parameter is the ID of the trade to be accepted.
+        trade_id: u128,
+    ) {","// This module contains the implementation of the `accept_trade` system.
+#[system]
+mod accept_trade {
+	use  beer_barron::components::trading::TradeTrait;
+	// This trait provides a way to print debug information.
+use  core::debug::PrintTrait;
+	// This trait provides a way to work with arrays.
+use  array::ArrayTrait;
+	// This trait provides a way to convert between different types.
+use  core::traits::{Into, TryInto};
+	// This trait provides a way to work with options.
+use  option::OptionTrait;
+	// This trait provides a way to work with starknet contracts.
+use  starknet::{ContractAddress, get_block_timestamp};
+	// This trait provides a way to work with the world.
+use  dojo::world::Context;
+	// This module contains the definition of the `Trade` component.
+use  beer_barron::components::trading::{Trade, TradeStatus};
+	// This module contains the definition of the `Game` component.
+use  beer_barron::components::game::{Game, GameTrait, Ownership};
+	// This module contains the definition of the `ItemBalance` component.
+use  beer_barron::components::balances::{ItemBalance};
+	// This module contains the definition of the `GOLD_ID` constant.
+use  beer_barron::constants::{CONFIG::{ITEM_IDS::{GOLD_ID}}};
+
+		// This function is the entry point for the `accept_trade` system.
+fn execute(
+        // This parameter is the context of the system.
+        ctx: Context,
+        // This parameter is the ID of the game.
+        game_id: u64,
+        // This parameter is the ID of the trade to be accepted.
+        trade_id: u128,
+    ) {
+		// This line asserts that the game is active.
+		let game = get!(ctx.world, (game_id), (Game));
+		game.active();
+		
+		// This line gets the owner of the trade.
+		let trade_owner = get!(ctx.world, (trade_id), (Ownership)).owner;
+		
+		// This line gets the trade.
+		let mut trade = get!(ctx.world, (trade_id), Trade);
+		
+		// This line gets the buyer's item balance.
+		let mut buyer_item_balance = get!(
+		    ctx.world, (game_id, ctx.origin, trade.item_id), ItemBalance
+		);
+		
+		// This line gets the buyer's gold balance.
+		let mut buyer_gold_balance = get!(ctx.world, (game_id, ctx.origin, GOLD_ID), ItemBalance);
+		
+		// This line gets the seller's gold balance.
+		let mut seller_gold_balance = get!(ctx.world, (game_id, trade_owner, GOLD_ID), ItemBalance);
+		
+		// This line accepts the trade.
+		trade
+		    .accept_trade(
+		        ref buyer_gold_balance, ref seller_gold_balance, ref buyer_item_balance, game_id
+		    );
+		
+		// This line sets the trade, buyer's gold balance, seller's gold balance, and buyer's item balance in the world.
+		set!(ctx.world, (trade, buyer_gold_balance, seller_gold_balance, buyer_item_balance));
+
+	}
+"

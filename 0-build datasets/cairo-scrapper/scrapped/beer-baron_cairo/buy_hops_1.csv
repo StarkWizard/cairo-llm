@@ -1,0 +1,84 @@
+question,answer
+"// This module contains the implementation of the buy_hops function, which allows players to purchase hops from the auction house.
+mod buy_hops {
+	// Import the necessary traits and types from the StarkNet library.
+use  core::debug::PrintTrait;
+	use  array::ArrayTrait;
+	use  core::traits::{Into, TryInto};
+	use  option::OptionTrait;
+	use  starknet::{ContractAddress, get_block_timestamp};
+	// Import the Context type from the dojo crate.
+use  dojo::world::Context;
+	// Import the Game, GameTrait, Auction, AuctionTrait, ItemBalance, and ItemBalanceTrait types from the beer_barron crate.
+use  beer_barron::components::game::{Game, GameTrait};
+	use  beer_barron::components::auction::{Auction, AuctionTrait};
+	use  beer_barron::components::balances::{ItemBalance, ItemBalanceTrait};
+	// Import the GOLD_ID constant from the beer_barron crate.
+use  beer_barron::constants::{CONFIG::{ITEM_IDS::{GOLD_ID}}};
+
+		// The execute function is the entry point for the buy_hops function.
+fn execute(
+        // The ctx parameter is a Context object, which provides access to the StarkNet blockchain.
+        ctx: Context,
+        // The game_id parameter is the ID of the game that the player is trying to purchase hops from.
+        game_id: u64,
+        // The item_id parameter is the ID of the item that the player is trying to purchase.
+        item_id: u128,
+        // The amount parameter is the amount of the item that the player is trying to purchase.
+        amount: u128,
+    ) {","// This module contains the implementation of the buy_hops function, which allows players to purchase hops from the auction house.
+mod buy_hops {
+	// Import the necessary traits and types from the StarkNet library.
+use  core::debug::PrintTrait;
+	use  array::ArrayTrait;
+	use  core::traits::{Into, TryInto};
+	use  option::OptionTrait;
+	use  starknet::{ContractAddress, get_block_timestamp};
+	// Import the Context type from the dojo crate.
+use  dojo::world::Context;
+	// Import the Game, GameTrait, Auction, AuctionTrait, ItemBalance, and ItemBalanceTrait types from the beer_barron crate.
+use  beer_barron::components::game::{Game, GameTrait};
+	use  beer_barron::components::auction::{Auction, AuctionTrait};
+	use  beer_barron::components::balances::{ItemBalance, ItemBalanceTrait};
+	// Import the GOLD_ID constant from the beer_barron crate.
+use  beer_barron::constants::{CONFIG::{ITEM_IDS::{GOLD_ID}}};
+
+		// The execute function is the entry point for the buy_hops function.
+fn execute(
+        // The ctx parameter is a Context object, which provides access to the StarkNet blockchain.
+        ctx: Context,
+        // The game_id parameter is the ID of the game that the player is trying to purchase hops from.
+        game_id: u64,
+        // The item_id parameter is the ID of the item that the player is trying to purchase.
+        item_id: u128,
+        // The amount parameter is the amount of the item that the player is trying to purchase.
+        amount: u128,
+    ) {
+		// Assert that the game is active.
+		let game = get!(ctx.world, (game_id), (Game));
+		game.active();
+		
+		// Get the auction object for the specified item.
+		let mut auction = get!(ctx.world, (game_id, item_id), Auction);
+		
+		// Get the gold balance of the player.
+		let mut gold_balance = get!(ctx.world, (game_id, ctx.origin, GOLD_ID), ItemBalance);
+		
+		// Get the item balance of the player.
+		let mut item_balance = get!(ctx.world, (game_id, ctx.origin, item_id), ItemBalance);
+		
+		// Add the amount of the item to the amount sold.
+		auction.sold += amount;
+		
+		// Subtract the price of the item from the gold balance of the player.
+		// TODO: Overflow check
+		gold_balance.sub(auction.get_price().try_into().unwrap() * amount);
+		
+		// Add the amount of the item to the item balance of the player.
+		item_balance.add(amount);
+		
+		// Set the new values of the auction, gold balance, and item balance in the world state.
+		set!(ctx.world, (auction, gold_balance, item_balance));
+
+	}
+"

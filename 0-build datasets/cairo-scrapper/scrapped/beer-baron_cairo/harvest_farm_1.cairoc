@@ -1,0 +1,89 @@
+// Import necessary modules and contracts
+use array::ArrayTrait;
+use array::SpanTrait;
+use box::BoxTrait;
+use traits::{Into, TryInto};
+use dojo::world::Context;
+use option::OptionTrait;
+use starknet::{ContractAddress, get_block_timestamp, get_caller_address};
+
+use beer_barron::components::game::{Game, GameTrait};
+use beer_barron::components::player::{Player};
+use beer_barron::components::player::{FarmArea};
+use beer_barron::components::balances::{ItemBalance};
+
+use beer_barron::constants::{
+    CONFIG::{
+        ITEM_IDS::{SEED_TO_FLOWER_OFFSET}, FARMING::{PLOT_COUNT, CROP_GROWTH_TIME, CROP_YIELD}
+    }
+};
+
+// Function to execute the harvest farm logic
+fn execute(
+    // Context of the transaction
+    ctx: Context,
+    // Game ID of the game to harvest from
+    game_id: u64,
+) {
+    // Assert that the game is active
+    // Get the game from the world state
+    let game = get!(ctx.world, (game_id), (Game));
+    // Check if the game is active
+    game.active();
+
+    // Initialize the area ID to 0
+    let mut area_id: usize = 0;
+
+    // Loop through all areas in the farm
+    loop {
+        // Check if the area ID is greater than or equal to the maximum number of areas
+        if area_id >= PLOT_COUNT.try_into().unwrap() {
+            // If so, break out of the loop
+            break;
+        }
+
+        // Get the farm area from the world state
+        let mut farm_area = get!(ctx.world, (game_id, ctx.origin, area_id), (FarmArea));
+
+        // Check if the area type is not 0 (indicating that there is a crop planted)
+        if farm_area.area_type != 0 {
+            // Calculate the time since the crop was built
+            let time_since_build = get_block_timestamp() - farm_area.time_built;
+
+            // Check if the time since the crop was built is greater than the crop growth time
+            if (time_since_build > CROP_GROWTH_TIME.try_into().unwrap()) {
+                // If so, harvest the crop and reset the area
+
+                // Get the grown hop balance
+                // The grown item is the hop + 10 for ids
+                let mut item_balance = get!(
+                    ctx.world,
+                    (
+                        game_id,
+                        ctx.origin,
+                        farm_area.area_type + SEED_TO_FLOWER_OFFSET.try_into().unwrap()
+                    ),
+                    (ItemBalance)
+                );
+
+                // Add the crop yield to the balance
+                item_balance.balance += CROP_YIELD.try_into().unwrap();
+
+                // Reset the time and area
+                let updated_farm = FarmArea {
+                    game_id,
+                    player_id: ctx.origin,
+                    area_id: area_id.into(),
+                    area_type: 0,
+                    time_built: 0
+                };
+
+                // Set the updated farm area and item balance in the world state
+                set!(ctx.world, (updated_farm, item_balance));
+            }
+        }
+
+        // Increment the area ID
+        area_id += 1;
+    }
+}

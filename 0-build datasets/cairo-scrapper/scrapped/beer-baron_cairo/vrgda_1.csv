@@ -1,0 +1,296 @@
+question,answer
+"// VRGDA struct for a reverse linear variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct ReverseLinearVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Per-time-unit rate for the auction
+	    per_time_unit: Fixed,
+}
+// VRGDA struct for a logistic variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct LogisticVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Maximum sellable quantity for the auction
+	    max_sellable: Fixed,
+	
+	    // Time scale for the auction
+	    time_scale: Fixed,
+}
+
+// Function to convert a Fixed value to 1000 fixed point representation
+fn to_1000_fp(x: Fixed) -> Fixed {","// VRGDA struct for a reverse linear variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct ReverseLinearVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Per-time-unit rate for the auction
+	    per_time_unit: Fixed,
+}
+// VRGDA struct for a logistic variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct LogisticVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Maximum sellable quantity for the auction
+	    max_sellable: Fixed,
+	
+	    // Time scale for the auction
+	    time_scale: Fixed,
+}
+
+// Function to convert a Fixed value to 1000 fixed point representation
+fn to_1000_fp(x: Fixed) -> Fixed {
+	// Divide the Fixed value by 1000
+	x / FixedTrait::new(1000, false)
+
+}
+"
+"// VRGDA struct for a reverse linear variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct ReverseLinearVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Per-time-unit rate for the auction
+	    per_time_unit: Fixed,
+}
+// VRGDA struct for a logistic variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct LogisticVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Maximum sellable quantity for the auction
+	    max_sellable: Fixed,
+	
+	    // Time scale for the auction
+	    time_scale: Fixed,
+}
+
+// Function to convert a Fixed value from 1000 fixed point representation
+fn from_1000_fp(x: Fixed) -> Fixed {","// VRGDA struct for a reverse linear variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct ReverseLinearVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Per-time-unit rate for the auction
+	    per_time_unit: Fixed,
+}
+// VRGDA struct for a logistic variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct LogisticVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Maximum sellable quantity for the auction
+	    max_sellable: Fixed,
+	
+	    // Time scale for the auction
+	    time_scale: Fixed,
+}
+
+// Function to convert a Fixed value from 1000 fixed point representation
+fn from_1000_fp(x: Fixed) -> Fixed {
+	// Multiply the Fixed value by 1000
+	x * FixedTrait::new(1000, false)
+
+}
+"
+"// VRGDA struct for a reverse linear variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct ReverseLinearVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Per-time-unit rate for the auction
+	    per_time_unit: Fixed,
+}
+// VRGDA struct for a logistic variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct LogisticVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Maximum sellable quantity for the auction
+	    max_sellable: Fixed,
+	
+	    // Time scale for the auction
+	    time_scale: Fixed,
+}
+
+// Implementation of the ReverseLinearVRGDATrait for the ReverseLinearVRGDA struct
+#[generate_trait]
+impl ReverseLinearVRGDAImpl of ReverseLinearVRGDATrait {","// VRGDA struct for a reverse linear variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct ReverseLinearVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Per-time-unit rate for the auction
+	    per_time_unit: Fixed,
+}
+// VRGDA struct for a logistic variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct LogisticVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Maximum sellable quantity for the auction
+	    max_sellable: Fixed,
+	
+	    // Time scale for the auction
+	    time_scale: Fixed,
+}
+
+// Implementation of the ReverseLinearVRGDATrait for the ReverseLinearVRGDA struct
+#[generate_trait]
+impl ReverseLinearVRGDAImpl of ReverseLinearVRGDATrait {
+		// Calculates the target sale time based on the quantity sold
+fn get_target_sale_time(self: @ReverseLinearVRGDA, sold: Fixed) -> Fixed {
+		// Calculate the target sale time using the formula: sold / per-time-unit
+		sold / *self.per_time_unit
+
+	}
+		// Calculates the VRGDA price at a specific time since the auction started
+fn get_reverse_vrgda_price(
+        self: @ReverseLinearVRGDA,
+        time_since_start: Fixed,
+        sold: Fixed,
+    ) -> Fixed {
+		// Calculate the VRGDA price using the formula: target_price * exp(decay_constant * (time_since_start - target_sale_time))
+		*self.target_price * exp(
+		    (*self.decay_constant * FixedTrait::new_unscaled(1, true))
+		        * (time_since_start - self.get_target_sale_time(sold))
+		)
+
+	}
+
+}"
+"// VRGDA struct for a reverse linear variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct ReverseLinearVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Per-time-unit rate for the auction
+	    per_time_unit: Fixed,
+}
+// VRGDA struct for a logistic variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct LogisticVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Maximum sellable quantity for the auction
+	    max_sellable: Fixed,
+	
+	    // Time scale for the auction
+	    time_scale: Fixed,
+}
+
+// Implementation of the LogisticVRGDATrait for the LogisticVRGDA struct
+#[generate_trait]
+impl LogisticVRGDAImpl of LogisticVRGDATrait {","// VRGDA struct for a reverse linear variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct ReverseLinearVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Per-time-unit rate for the auction
+	    per_time_unit: Fixed,
+}
+// VRGDA struct for a logistic variable rate gradual Dutch auction
+#[derive(Copy, Drop, Serde, starknet::Storage)]
+struct LogisticVRGDA {
+	    // Target price for the auction
+	    target_price: Fixed,
+	
+	    // Decay constant for the auction
+	    decay_constant: Fixed,
+	
+	    // Maximum sellable quantity for the auction
+	    max_sellable: Fixed,
+	
+	    // Time scale for the auction
+	    time_scale: Fixed,
+}
+
+// Implementation of the LogisticVRGDATrait for the LogisticVRGDA struct
+#[generate_trait]
+impl LogisticVRGDAImpl of LogisticVRGDATrait {
+		// Calculates the target sale time using a logistic function based on the quantity sold
+fn get_target_sale_time(self: @LogisticVRGDA, sold: Fixed) -> Fixed {
+		// Calculate the logistic limit
+		let logistic_limit = *self.max_sellable + FixedTrait::ONE();
+		
+		// Calculate the logistic limit doubled
+		let logistic_limit_double = logistic_limit * FixedTrait::new_unscaled(2, false);
+		
+		// Calculate the target sale time using the formula: abs(ln((logistic_limit_double / (sold + logistic_limit)) - 1) / time_scale)
+		abs(
+		    ln(logistic_limit_double / (sold + logistic_limit) - FixedTrait::ONE())
+		        / *self.time_scale
+		)
+
+	}
+		// Calculates the VRGDA price at a specific time since the auction started, using the logistic function
+fn get_vrgda_price(self: @LogisticVRGDA, time_since_start: Fixed, sold: Fixed) -> Fixed {
+		// Calculate the VRGDA price using the formula: target_price * exp(decay_constant * (time_since_start - target_sale_time))
+		*self.target_price
+		    * exp(*self.decay_constant * (time_since_start - self.get_target_sale_time(sold)))
+
+	}
+
+}"

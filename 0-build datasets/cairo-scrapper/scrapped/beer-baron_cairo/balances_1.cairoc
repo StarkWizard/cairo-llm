@@ -1,0 +1,34 @@
+// All Items use this, they are internal tokens
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct ItemBalance {
+    /// The id of the game to which the item belongs
+    #[key]
+    game_id: u64,
+    /// The address of the player who owns the item
+    #[key]
+    player_id: ContractAddress,
+    /// The id of the item
+    #[key]
+    item_id: u64,
+    /// The balance of the item
+    balance: u64,
+}
+
+/// Trait that defines the operations that can be performed on an ItemBalance
+#[generate_trait]
+impl ImplItemBalance of ItemBalanceTrait {
+    /// Adds an amount to the balance of the item
+    fn add(ref self: ItemBalance, amount: u64) {
+        self.balance += amount
+    }
+
+    /// Subtracts an amount from the balance of the item
+    fn sub(ref self: ItemBalance, amount: u64) {
+        self.balance -= amount
+    }
+
+    /// Asserts that the balance of the item is greater than or equal to an amount
+    fn assert_balance(ref self: ItemBalance, amount: u64) {
+        assert(self.balance >= amount, 'Insufficient balance')
+    }
+}

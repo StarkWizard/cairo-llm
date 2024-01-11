@@ -1,0 +1,160 @@
+// System contract for creating a new game
+#[system]
+mod create_game {
+    // Imports required for the contract
+    use array::ArrayTrait;
+    use box::BoxTrait;
+    use traits::{Into, TryInto};
+    use dojo::world::Context;
+    use option::OptionTrait;
+    use starknet::{get_block_timestamp};
+
+    use beer_barron::components::game::{
+        Game, GameTracker, GameStatus, GameTrait, Ownership, GameConfig
+    };
+    use beer_barron::constants::CONFIG::{SYSTEM_IDS::{GAME_CONFIG}};
+
+    // Execute function
+    fn execute(ctx: Context, config: GameConfig) -> u64 {
+        // Increment the game ID
+        let mut game_tracker = get!(ctx.world, (GAME_CONFIG), (GameTracker));
+        let count: u64 = (game_tracker.count + 1).into();
+
+        // Create a new game
+        let mut game = Game {
+            game_id: count,
+            start_time: 0,
+            status: GameStatus::Lobby,
+            number_players: 0,
+            max_players: config.max_players,
+            game_length: config.game_length,
+            password: config.password,
+            entry_fee: config.entry_fee,
+        };
+
+        // Set the game in the world state
+        set!(ctx.world, (game));
+
+        // Update the game tracker
+        set!(
+            ctx.world,
+            (GameTracker { entity_id: GAME_CONFIG.try_into().unwrap(), count: count.into() })
+        );
+
+        // Create an ownership record for the game
+        set!(ctx.world, (Ownership { entity_id: count, owner: ctx.origin.into() }));
+
+        // Return the game ID
+        count
+    }
+}
+
+// System contract for joining a game
+#[system]
+mod join_game {
+    // Imports required for the contract
+    use array::ArrayTrait;
+    use box::BoxTrait;
+    use traits::{Into, TryInto};
+    use dojo::world::Context;
+    use option::OptionTrait;
+    use starknet::{ContractAddress, get_block_timestamp, get_caller_address};
+
+    use beer_barron::components::game::{Game, GameTracker, GameTrait, Joined};
+    use beer_barron::components::player::{Player};
+    use beer_barron::components::balances::{ItemBalance};
+
+    use beer_barron::constants::{CONFIG::{STARTING_BALANCES::{GOLD}, ITEM_IDS::{GOLD_ID}}};
+
+    // Execute function
+    fn execute(ctx: Context, game_id: u64, name: felt252, password: felt252) -> ContractAddress {
+        // Get the game and assert that it is in the lobby stage and that the password is correct
+        let mut game = get!(ctx.world, (game_id), (Game));
+        game.lobby();
+        game.check_password(password);
+
+        // Increment the number of players in the game
+        game.number_players += 1;
+
+        // Set the game in the world state
+        set!(ctx.world, (game));
+
+        // Create a player record for the caller
+        let player_id = ctx.origin;
+        set!(ctx.world, (Player { game_id, player_id, name }));
+
+        // Create an item balance record for the player with some gold
+        set!(
+            ctx.world,
+            (ItemBalance {
+                game_id: game_id,
+                player_id: player_id,
+                item_id: GOLD_ID.try_into().unwrap(),
+                balance: GOLD.try_into().unwrap()
+            })
+        );
+
+        // Create a joined record for the player
+        set!(
+            ctx.world,
+            (Joined { game_id, address: ctx.origin.into(), joined: true })
+        );
+
+        // Return the player ID
+        ctx.origin
+    }
+}
+
+// System contract for starting a game
+#[system]
+mod start_game {
+    // Imports required for the contract
+    use array::ArrayTrait;
+    use box::BoxTrait;
+    use traits::{Into, TryInto};
+    use dojo::world::Context;
+    use option::OptionTrait;
+    use starknet::{ContractAddress, get_block_timestamp, get_caller_address};
+
+    use beer_barron::components::game::{Game, GameTracker, GameTrait, GameStatus, Ownership};
+    use beer_barron::components::player::{Player};
+
+    use beer_barron::constants::{CONFIG::{ITEM_IDS::{HOP_SEEDS, BEERS}}};
+
+    // Execute function
+    fn execute(ctx: Context, game_id: u64) {
+        // Get the game and assert that it is in the lobby stage
+        let mut game = get!(ctx.world, (game_id), (Game));
+        game.lobby();
+
+        // Increment the number of players in the game
+        game.number_players += 1;
+
+        // Set the start time and status of the game
+        game.start_time = get_block_timestamp();
+        game.status = GameStatus::Started;
+
+        // Assert that the caller is the owner of the game
+        let mut game_owner = get!(ctx.world, (game_id), (Ownership));
+        assert(game_owner.owner == ctx.origin.into(), 'owner can only start');
+
+        // Set the game in the world state
+        set!(ctx.world, (game));
+
+        // Start the hop auctions
+        ctx.world.execute('start_hops_auction', array![game_id.into(), HOP_SEEDS::CHINOOK.into()]);
+        ctx.world.execute('start_hops_auction', array![game_id.into(), HOP_SEEDS::CITRA.into()]);
+        ctx.world.execute('start_hops_auction', array![game_id.into(), HOP_SEEDS::GALAXY.into()]);
+
+        // Start the beer auctions
+        ctx.world.execute(
+            'start_beer_auction', array![game_id.into(), BEERS::DRAGON_HIDE_BLAZE_IPA.into()]
+        );
+        ctx.world.execute('start_beer_auction', array![game_id.into(), BEERS::MITHRIL_HAZE.into()]);
+        ctx
+            .world
+            .execute(
+                'start_beer_auction', array![game_id.into(), BEERS::OBSIDIAN_IMPERIAL_STOUT.into()]
+            );
+    }
+}

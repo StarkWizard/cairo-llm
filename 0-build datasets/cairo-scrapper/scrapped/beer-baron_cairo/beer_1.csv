@@ -1,0 +1,514 @@
+question,answer
+"// Component for tracking brews
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct Brew {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Player ID
+	    #[key]
+	    player_id: ContractAddress,
+	
+	    // Batch ID (unique for each player in a game)
+	    #[key]
+	    batch_id: u64,
+	
+	    // Batch key (used by the client to identify which batch to update)
+	    batch_key: u64,
+	
+	    // Owner of the brew
+	    owner: ContractAddress,
+	
+	    // Beer ID (type of beer being brewed)
+	    beer_id: u64,
+	
+	    // Time when the brew was started
+	    time_built: u64,
+	
+	    // Status of the brew (0 = not started, 1 = brewing, 2 = bottled)
+	    status: u64,
+}
+// Component for tracking the number of batches brewed in a game
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct BrewBatchTrack {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Owner of the batch track
+	    owner: ContractAddress,
+	
+	    // Count of batches brewed
+	    count: u64,
+}
+// Helper enum for representing beer IDs
+#[key]#[derive(Drop, Copy, PartialEq, Serde)]
+enum BeerID {
+	    None,
+	    DragonHideBlazeIPA,
+	    MithrilHaze,
+	    ObsidianImperialStout,
+	    RubySour,
+	    DiamondWheatBeer,
+	    EtherealLager,
+}
+// Function to convert a BeerID enum to a u64
+fn get_beer_id_from_enum(beer_id: BeerID) -> u64 {","// Component for tracking brews
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct Brew {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Player ID
+	    #[key]
+	    player_id: ContractAddress,
+	
+	    // Batch ID (unique for each player in a game)
+	    #[key]
+	    batch_id: u64,
+	
+	    // Batch key (used by the client to identify which batch to update)
+	    batch_key: u64,
+	
+	    // Owner of the brew
+	    owner: ContractAddress,
+	
+	    // Beer ID (type of beer being brewed)
+	    beer_id: u64,
+	
+	    // Time when the brew was started
+	    time_built: u64,
+	
+	    // Status of the brew (0 = not started, 1 = brewing, 2 = bottled)
+	    status: u64,
+}
+// Component for tracking the number of batches brewed in a game
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct BrewBatchTrack {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Owner of the batch track
+	    owner: ContractAddress,
+	
+	    // Count of batches brewed
+	    count: u64,
+}
+// Helper enum for representing beer IDs
+#[key]#[derive(Drop, Copy, PartialEq, Serde)]
+enum BeerID {
+	    None,
+	    DragonHideBlazeIPA,
+	    MithrilHaze,
+	    ObsidianImperialStout,
+	    RubySour,
+	    DiamondWheatBeer,
+	    EtherealLager,
+}
+// Function to convert a BeerID enum to a u64
+fn get_beer_id_from_enum(beer_id: BeerID) -> u64 {
+	match beer_id {
+	    BeerID::None => 0,
+	    BeerID::DragonHideBlazeIPA => BEERS::DRAGON_HIDE_BLAZE_IPA.try_into().unwrap(),
+	    BeerID::MithrilHaze => BEERS::MITHRIL_HAZE.try_into().unwrap(),
+	    BeerID::ObsidianImperialStout => BEERS::OBSIDIAN_IMPERIAL_STOUT.try_into().unwrap(),
+	    BeerID::RubySour => BEERS::RUBY_SOUR.try_into().unwrap(),
+	    BeerID::DiamondWheatBeer => BEERS::DIAMOND_WHEAT_BEER.try_into().unwrap(),
+	    BeerID::EtherealLager => BEERS::ETHEREAL_LAGER.try_into().unwrap(),
+	}
+
+}
+"
+"// Component for tracking brews
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct Brew {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Player ID
+	    #[key]
+	    player_id: ContractAddress,
+	
+	    // Batch ID (unique for each player in a game)
+	    #[key]
+	    batch_id: u64,
+	
+	    // Batch key (used by the client to identify which batch to update)
+	    batch_key: u64,
+	
+	    // Owner of the brew
+	    owner: ContractAddress,
+	
+	    // Beer ID (type of beer being brewed)
+	    beer_id: u64,
+	
+	    // Time when the brew was started
+	    time_built: u64,
+	
+	    // Status of the brew (0 = not started, 1 = brewing, 2 = bottled)
+	    status: u64,
+}
+// Component for tracking the number of batches brewed in a game
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct BrewBatchTrack {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Owner of the batch track
+	    owner: ContractAddress,
+	
+	    // Count of batches brewed
+	    count: u64,
+}
+// Helper enum for representing beer IDs
+#[key]#[derive(Drop, Copy, PartialEq, Serde)]
+enum BeerID {
+	    None,
+	    DragonHideBlazeIPA,
+	    MithrilHaze,
+	    ObsidianImperialStout,
+	    RubySour,
+	    DiamondWheatBeer,
+	    EtherealLager,
+}
+// Function to generate a random recipe for a given beer ID and seed
+fn get_recipe(beer_id: BeerID, seed: u64) -> Recipe {","// Component for tracking brews
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct Brew {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Player ID
+	    #[key]
+	    player_id: ContractAddress,
+	
+	    // Batch ID (unique for each player in a game)
+	    #[key]
+	    batch_id: u64,
+	
+	    // Batch key (used by the client to identify which batch to update)
+	    batch_key: u64,
+	
+	    // Owner of the brew
+	    owner: ContractAddress,
+	
+	    // Beer ID (type of beer being brewed)
+	    beer_id: u64,
+	
+	    // Time when the brew was started
+	    time_built: u64,
+	
+	    // Status of the brew (0 = not started, 1 = brewing, 2 = bottled)
+	    status: u64,
+}
+// Component for tracking the number of batches brewed in a game
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct BrewBatchTrack {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Owner of the batch track
+	    owner: ContractAddress,
+	
+	    // Count of batches brewed
+	    count: u64,
+}
+// Helper enum for representing beer IDs
+#[key]#[derive(Drop, Copy, PartialEq, Serde)]
+enum BeerID {
+	    None,
+	    DragonHideBlazeIPA,
+	    MithrilHaze,
+	    ObsidianImperialStout,
+	    RubySour,
+	    DiamondWheatBeer,
+	    EtherealLager,
+}
+// Function to generate a random recipe for a given beer ID and seed
+fn get_recipe(beer_id: BeerID, seed: u64) -> Recipe {
+	match beer_id {
+	    BeerID::None => Recipe {
+	        citra: 0,
+	        chinook: 0,
+	        galaxy: 0,
+	        cascade: 0,
+	        saaz: 0,
+	        fuggle: 0,
+	    },
+	    BeerID::DragonHideBlazeIPA => generate_random_recipe(seed, 1),
+	    BeerID::MithrilHaze => generate_random_recipe(seed, 2),
+	    BeerID::ObsidianImperialStout => generate_random_recipe(seed, 3),
+	    BeerID::RubySour => generate_random_recipe(seed, 4),
+	    BeerID::DiamondWheatBeer => generate_random_recipe(seed, 5),
+	    BeerID::EtherealLager => generate_random_recipe(seed, 6),
+	}
+
+}
+"
+"// Component for tracking brews
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct Brew {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Player ID
+	    #[key]
+	    player_id: ContractAddress,
+	
+	    // Batch ID (unique for each player in a game)
+	    #[key]
+	    batch_id: u64,
+	
+	    // Batch key (used by the client to identify which batch to update)
+	    batch_key: u64,
+	
+	    // Owner of the brew
+	    owner: ContractAddress,
+	
+	    // Beer ID (type of beer being brewed)
+	    beer_id: u64,
+	
+	    // Time when the brew was started
+	    time_built: u64,
+	
+	    // Status of the brew (0 = not started, 1 = brewing, 2 = bottled)
+	    status: u64,
+}
+// Component for tracking the number of batches brewed in a game
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct BrewBatchTrack {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Owner of the batch track
+	    owner: ContractAddress,
+	
+	    // Count of batches brewed
+	    count: u64,
+}
+// Helper enum for representing beer IDs
+#[key]#[derive(Drop, Copy, PartialEq, Serde)]
+enum BeerID {
+	    None,
+	    DragonHideBlazeIPA,
+	    MithrilHaze,
+	    ObsidianImperialStout,
+	    RubySour,
+	    DiamondWheatBeer,
+	    EtherealLager,
+}
+// Function to generate a random recipe for a given seed and offset
+fn generate_random_recipe(seed: u64, offset: u64) -> Recipe {","// Component for tracking brews
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct Brew {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Player ID
+	    #[key]
+	    player_id: ContractAddress,
+	
+	    // Batch ID (unique for each player in a game)
+	    #[key]
+	    batch_id: u64,
+	
+	    // Batch key (used by the client to identify which batch to update)
+	    batch_key: u64,
+	
+	    // Owner of the brew
+	    owner: ContractAddress,
+	
+	    // Beer ID (type of beer being brewed)
+	    beer_id: u64,
+	
+	    // Time when the brew was started
+	    time_built: u64,
+	
+	    // Status of the brew (0 = not started, 1 = brewing, 2 = bottled)
+	    status: u64,
+}
+// Component for tracking the number of batches brewed in a game
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct BrewBatchTrack {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Owner of the batch track
+	    owner: ContractAddress,
+	
+	    // Count of batches brewed
+	    count: u64,
+}
+// Helper enum for representing beer IDs
+#[key]#[derive(Drop, Copy, PartialEq, Serde)]
+enum BeerID {
+	    None,
+	    DragonHideBlazeIPA,
+	    MithrilHaze,
+	    ObsidianImperialStout,
+	    RubySour,
+	    DiamondWheatBeer,
+	    EtherealLager,
+}
+// Function to generate a random recipe for a given seed and offset
+fn generate_random_recipe(seed: u64, offset: u64) -> Recipe {
+	// Generate random values for each hop type using the seed and offset
+	let citra = (seed * offset * 17) % 50;
+	let chinook = (seed * offset * 23) % 50;
+	let galaxy = (seed * offset * 67) % 50;
+	let cascade = (seed * offset * 123) % 50;
+	let saaz = (seed * offset * 89) % 50;
+	let fuggle = (seed * offset * 45) % 50;
+	
+	// Return the recipe
+	Recipe {
+	    citra,
+	    chinook,
+	    galaxy,
+	    cascade,
+	    saaz,
+	    fuggle,
+	}
+
+}
+"
+"// Component for tracking brews
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct Brew {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Player ID
+	    #[key]
+	    player_id: ContractAddress,
+	
+	    // Batch ID (unique for each player in a game)
+	    #[key]
+	    batch_id: u64,
+	
+	    // Batch key (used by the client to identify which batch to update)
+	    batch_key: u64,
+	
+	    // Owner of the brew
+	    owner: ContractAddress,
+	
+	    // Beer ID (type of beer being brewed)
+	    beer_id: u64,
+	
+	    // Time when the brew was started
+	    time_built: u64,
+	
+	    // Status of the brew (0 = not started, 1 = brewing, 2 = bottled)
+	    status: u64,
+}
+// Component for tracking the number of batches brewed in a game
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct BrewBatchTrack {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Owner of the batch track
+	    owner: ContractAddress,
+	
+	    // Count of batches brewed
+	    count: u64,
+}
+// Helper enum for representing beer IDs
+#[key]#[derive(Drop, Copy, PartialEq, Serde)]
+enum BeerID {
+	    None,
+	    DragonHideBlazeIPA,
+	    MithrilHaze,
+	    ObsidianImperialStout,
+	    RubySour,
+	    DiamondWheatBeer,
+	    EtherealLager,
+}
+// Implementation of the Brew trait
+#[generate_trait]
+impl ImplBrew of BrewTrait {","// Component for tracking brews
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct Brew {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Player ID
+	    #[key]
+	    player_id: ContractAddress,
+	
+	    // Batch ID (unique for each player in a game)
+	    #[key]
+	    batch_id: u64,
+	
+	    // Batch key (used by the client to identify which batch to update)
+	    batch_key: u64,
+	
+	    // Owner of the brew
+	    owner: ContractAddress,
+	
+	    // Beer ID (type of beer being brewed)
+	    beer_id: u64,
+	
+	    // Time when the brew was started
+	    time_built: u64,
+	
+	    // Status of the brew (0 = not started, 1 = brewing, 2 = bottled)
+	    status: u64,
+}
+// Component for tracking the number of batches brewed in a game
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct BrewBatchTrack {
+	    // Game ID
+	    #[key]
+	    game_id: u64,
+	
+	    // Owner of the batch track
+	    owner: ContractAddress,
+	
+	    // Count of batches brewed
+	    count: u64,
+}
+// Helper enum for representing beer IDs
+#[key]#[derive(Drop, Copy, PartialEq, Serde)]
+enum BeerID {
+	    None,
+	    DragonHideBlazeIPA,
+	    MithrilHaze,
+	    ObsidianImperialStout,
+	    RubySour,
+	    DiamondWheatBeer,
+	    EtherealLager,
+}
+// Implementation of the Brew trait
+#[generate_trait]
+impl ImplBrew of BrewTrait {
+		// Assert that the brew is currently brewing
+fn assert_built(self: Brew) {
+		assert(self.status == BrewStatus::brewing, 'BREW: not brewing');
+
+	}
+		// Assert that the brew is ready to be bottled
+fn assert_brewed(self: Brew) {
+		// Calculate the time since the brew was started
+		let time_since_build = get_block_timestamp() - self.time_built;
+		
+		// Assert that the time since the brew was started is greater than the brewing time
+		assert(time_since_build > BREW_TIME.try_into().unwrap(), 'BREW: not ready');
+
+	}
+
+}"

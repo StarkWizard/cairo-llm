@@ -1,0 +1,222 @@
+// Component for representing auctions
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct Auction {
+    // Game ID
+    #[key]
+    game_id: u64,
+
+    // Item ID
+    #[key]
+    item_id: u64,
+
+    // Target price for the auction
+    target_price: u128,
+
+    // Decay constant magnitude for the auction
+    decay_constant_mag: u128,
+
+    // Decay constant sign for the auction
+    decay_constant_sign: bool,
+
+    // Maximum amount that can be sold in the auction
+    max_sellable: u128,
+
+    // Time scale magnitude for the auction
+    time_scale_mag: u128,
+
+    // Time scale sign for the auction
+    time_scale_sign: bool,
+
+    // Start time of the auction
+    start_time: u64,
+
+    // Amount of the item that has been sold in the auction
+    sold: u64,
+}
+
+// Implementation of the Auction trait
+#[generate_trait]
+impl ImplAuction of AuctionTrait {
+    // Convert the auction to a LogisticVRGDA struct
+    fn to_LogisticVRGDA(self: Auction) -> LogisticVRGDA {
+        LogisticVRGDA {
+            target_price: FixedTrait::new_unscaled(self.target_price, false),
+            decay_constant: FixedTrait::new(self.decay_constant_mag, self.decay_constant_sign),
+            max_sellable: FixedTrait::new_unscaled(self.max_sellable, false),
+            time_scale: FixedTrait::new(self.time_scale_mag, self.time_scale_sign),
+        }
+    }
+
+    // Get the current price of the item in the auction
+    fn get_price(self: Auction) -> Fixed {
+        // Calculate the time since the auction started
+        let time_since_start: u128 = get_block_timestamp().into() - self.start_time.into();
+
+        // Get the current price using the LogisticVRGDA struct
+        self.to_LogisticVRGDA().get_vrgda_price(
+            FixedTrait::new_unscaled(time_since_start / 60, false), // Time since start in minutes
+            FixedTrait::new_unscaled(self.sold.into(), false),       // Amount sold
+        )
+    }
+}
+
+// Component for representing tavern auctions
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct TavernAuction {
+    // Game ID
+    #[key]
+    game_id: u64,
+
+    // Item ID
+    #[key]
+    item_id: u64,
+
+    // Target price for the auction
+    target_price: u128,
+
+    // Decay constant magnitude for the auction
+    decay_constant_mag: u128,
+
+    // Decay constant sign for the auction
+    decay_constant_sign: bool,
+
+    // Amount to decay the price per time unit
+    per_time_unit: u128,
+
+    // Start time of the auction
+    start_time: u64,
+
+    // Amount of the item that has been sold in the auction
+    sold: u64,
+}
+
+// Implementation of the TavernAuction trait
+#[generate_trait]
+impl ImplTavernAuction of TavernAuctionTrait {
+    // Convert the tavern auction to a ReverseLinearVRGDA struct
+    fn to_ReverseLinearVRGDA(self: TavernAuction) -> ReverseLinearVRGDA {
+        ReverseLinearVRGDA {
+            target_price: FixedTrait::new_unscaled(self.target_price, false),
+            decay_constant: FixedTrait::new(self.decay_constant_mag, self.decay_constant_sign),
+            per_time_unit: FixedTrait::new_unscaled(self.per_time_unit, false),
+        }
+    }
+
+    // Get the current price of the item in the tavern auction
+    fn get_price(self: TavernAuction) -> Fixed {
+        // Calculate the time since the tavern auction started
+        let time_since_start: u128 = get_block_timestamp().into() - self.start_time.into();
+
+        // Get the current price using the ReverseLinearVRGDA struct
+        self.to_ReverseLinearVRGDA().get_reverse_vrgda_price(
+            FixedTrait::new_unscaled(time_since_start / 60, false), // Time since start in minutes
+            FixedTrait::new_unscaled(self.sold.into(), false),       // Amount sold
+        )
+    }
+}
+
+// Component for representing indulgence auctions
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct IndulgenceAuction {
+    // Game ID
+    #[key]
+    game_id: u64,
+
+    // Auction ID (unique for each game)
+    #[key]
+    auction_id: u64,
+
+    // Current price of the indulgence
+    price: u64,
+
+    // Player ID of the highest bidder
+    highest_bid_player_id: ContractAddress,
+
+    // Expiry time of the auction
+    expiry: u64,
+
+    // Auction ID value
+    auction_id_value: u64,
+
+    // Status of the auction (0 = open, 1 = accepted, 2 = claimed)
+    status: u8,
+}
+
+// Component for tracking the number of indulgence auctions in a game
+#[derive(Model, Copy, Drop, Serde, SerdeLen)]
+struct IndulgenceAuctionCount {
+    // Game ID
+    #[key]
+    game_id: u64,
+
+    // Count of indulgence auctions
+    count: u64,
+}
+
+// Implementation of the IndulgenceAuction trait
+#[generate_trait]
+impl ImplIndulgenceAuction of IndulgenceAuctionTrait {
+    // Set a new price for the indulgence auction
+    fn set_new_price(
+        ref self: IndulgenceAuction,
+        ref new_bidder_gold_balance: ItemBalance,
+        ref old_bidder_gold_balance: ItemBalance,
+        game_id: u64,
+        price: u64,
+    ) {
+        // Assert that the auction is open
+        assert(self.status == TradeStatus::OPEN, 'auction not open');
+
+        // Assert that the new price is higher than the current price
+        assert(price > self.price, 'You have to bid more');
+
+        // Assert that the new bidder has enough gold to bid
+        assert(new_bidder_gold_balance.balance >= self.price, 'not enough gold');
+
+        // Assert that the game ID matches the game ID of the auction
+        assert(self.game_id == game_id, 'game id does not match');
+
+        // Assert that the new bidder is not the highest bidder
+        assert(self.highest_bid_player_id != get_caller_address(), 'cannot accept self');
+
+        // Assert that the auction has not expired
+        assert(self.expiry > get_block_timestamp(), 'not expired');
+
+        // Update the gold balances of the new bidder and the old bidder
+        new_bidder_gold_balance.sub(price);
+        old_bidder_gold_balance.add(price);
+
+        // Set the highest bidder to the new bidder
+        self.highest_bid_player_id = get_caller_address();
+
+        // Set the new price
+        self.price = price;
+    }
+
+    // Claim the indulgence and increment the auction count
+    fn claim_indulgence_and_increment(ref self: IndulgenceAuction, game_id: u64) {
+        // Assert that the game ID matches the game ID of the auction
+        assert(self.game_id == game_id, 'game id does not match');
+
+        // Assert that the caller is the highest bidder
+        assert(self.highest_bid_player_id == get_caller_address(), 'not winning bid');
+
+        // Assert that the auction has expired
+        assert(self.expiry < get_block_timestamp(), 'not expired');
+
+        // Set the status of the auction to claimed
+        self.status = TradeStatus::ACCEPTED;
+    }
+
+    // Assert that the indulgence auction has expired
+    fn assert_auction_expired(self: IndulgenceAuction) {
+        // Assert that the auction is open or accepted
+        assert(
+            self.status == TradeStatus::OPEN || self.status == TradeStatus::ACCEPTED,
+            'auction not open'
+        );
+
+        // Assert that the auction has expired
+        assert(self.expiry < get_block_timestamp(), 'not expired');
+    }
+}

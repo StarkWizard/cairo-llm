@@ -1,0 +1,168 @@
+question,answer
+"// This trait contains the functions that can be called by other contracts to interact with this contract
+trait ITrading	<TContractState> {
+	    // Creates a new trade for a given game, item, quantity, and price
+	    fn create_trade(self: @TContractState, game_id: u64, item_id: u64, quantity: u64, price: u64);
+	    // Accepts a trade for a given game and trade ID
+	    fn accept_trade(self: @TContractState, game_id: u64, trade_id: u64);
+	    // Cancels a trade for a given game and trade ID
+	    fn cancel_trade(self: @TContractState, game_id: u64, trade_id: u64);
+
+}
+
+// This contract implements the ITrading trait and provides the functionality for creating, accepting, and canceling trades
+#[dojo::contract]
+mod trading {
+	use  traits::{Into, TryInto};
+	use  option::OptionTrait;
+	use  starknet::{ContractAddress, get_caller_address, get_block_timestamp};
+	use  beer_barron::components::game::{
+	    Game, GameTracker, GameStatus, GameTrait, Ownership, GameConfig, Joined
+	};
+	
+	use  beer_barron::components::trading::{Trade, TradeStatus, TradeTrack, TradeTrait};
+	use  beer_barron::components::auction::{Auction, AuctionTrait};
+	use  beer_barron::components::balances::{ItemBalance, ItemBalanceTrait};
+	use  beer_barron::constants::{CONFIG::{ITEM_IDS::{GOLD_ID}}};
+	use  super::ITrading;
+
+	// This is the implementation of the ITrading trait for the Trading contract
+#[external(v0)]
+impl TradingImpl of ITrading<ContractState> {","// This trait contains the functions that can be called by other contracts to interact with this contract
+trait ITrading	<TContractState> {
+	    // Creates a new trade for a given game, item, quantity, and price
+	    fn create_trade(self: @TContractState, game_id: u64, item_id: u64, quantity: u64, price: u64);
+	    // Accepts a trade for a given game and trade ID
+	    fn accept_trade(self: @TContractState, game_id: u64, trade_id: u64);
+	    // Cancels a trade for a given game and trade ID
+	    fn cancel_trade(self: @TContractState, game_id: u64, trade_id: u64);
+
+}
+
+// This contract implements the ITrading trait and provides the functionality for creating, accepting, and canceling trades
+#[dojo::contract]
+mod trading {
+	use  traits::{Into, TryInto};
+	use  option::OptionTrait;
+	use  starknet::{ContractAddress, get_caller_address, get_block_timestamp};
+	use  beer_barron::components::game::{
+	    Game, GameTracker, GameStatus, GameTrait, Ownership, GameConfig, Joined
+	};
+	
+	use  beer_barron::components::trading::{Trade, TradeStatus, TradeTrack, TradeTrait};
+	use  beer_barron::components::auction::{Auction, AuctionTrait};
+	use  beer_barron::components::balances::{ItemBalance, ItemBalanceTrait};
+	use  beer_barron::constants::{CONFIG::{ITEM_IDS::{GOLD_ID}}};
+	use  super::ITrading;
+
+	// This is the implementation of the ITrading trait for the Trading contract
+#[external(v0)]
+impl TradingImpl of ITrading<ContractState> {
+				// Creates a new trade for a given game, item, quantity, and price
+fn create_trade(
+            self: @ContractState, game_id: u64, item_id: u64, quantity: u64, price: u64
+        ) {
+			// Get the world state from the dispatcher
+			let world = self.world_dispatcher.read();
+			
+			// Get the game with the given ID and ensure that it is active
+			let game = get!(world, (game_id), (Game)).active();
+			
+			// Get the address of the caller, who is creating the trade
+			let caller = get_caller_address();
+			
+			// Get the trade track for the game and increment the count of trades
+			let mut trade_track = get!(world, (game_id), TradeTrack);
+			trade_track.count += 1;
+			
+			// Get the item balance of the caller for the given item
+			let mut item_balance = get!(world, (game_id, caller, item_id), ItemBalance);
+			
+			// Create a new trade entity ID from the trade track count
+			let entity_id: u64 = trade_track.count.into();
+			
+			// Create a new trade object with the given parameters
+			let mut trade = Trade {
+			    entity_id,
+			    game_id,
+			    item_id,
+			    quantity,
+			    price,
+			    status: TradeStatus::OPEN,
+			    player_id: caller,
+			    game_id_value: game_id
+			};
+			
+			// Create the trade by updating the item balance of the caller
+			trade.create_trade(ref item_balance);
+			
+			// Set the trade, item balance, and trade track in the world state
+			set!(world, (trade, item_balance, trade_track));
+
+		}
+				// Accepts a trade for a given game and trade ID
+fn accept_trade(self: @ContractState, game_id: u64, trade_id: u64) {
+			// Get the world state from the dispatcher
+			let world = self.world_dispatcher.read();
+			
+			// Get the game with the given ID and ensure that it is active
+			let game = get!(world, (game_id), (Game)).active();
+			
+			// Get the address of the caller, who is accepting the trade
+			let caller = get_caller_address();
+			
+			// Get the trade with the given ID and game ID
+			let mut trade = get!(world, (trade_id, game_id), Trade);
+			
+			// Get the item balance of the caller for the item being traded
+			let mut buyer_item_balance = get!(world, (game_id, caller, trade.item_id), ItemBalance);
+			
+			// Get the gold balance of the caller
+			let mut buyer_gold_balance = get!(world, (game_id, caller, GOLD_ID), ItemBalance);
+			
+			// Get the gold balance of the seller
+			let mut seller_gold_balance = get!(
+			    world, (game_id, trade.player_id, GOLD_ID), ItemBalance
+			);
+			
+			// Accept the trade by updating the balances of the buyer, seller, and item
+			trade
+			    .accept_trade(
+			        ref buyer_gold_balance, ref seller_gold_balance, ref buyer_item_balance, game_id
+			    );
+			
+			// Set the trade, buyer gold balance, seller gold balance, and buyer item balance in the world state
+			set!(world, (trade, buyer_gold_balance, seller_gold_balance, buyer_item_balance));
+
+		}
+				// Cancels a trade for a given game and trade ID
+fn cancel_trade(self: @ContractState, game_id: u64, trade_id: u64) {
+			// Get the world state from the dispatcher
+			let world = self.world_dispatcher.read();
+			
+			// Get the game with the given ID and ensure that it is active
+			let game = get!(world, (game_id), (Game)).active();
+			
+			// Get the address of the caller, who is canceling the trade
+			let caller = get_caller_address();
+			
+			// Get the trade with the given ID and game ID
+			let mut trade = get!(world, (trade_id, game_id), Trade);
+			
+			// Assert that the caller is the owner of the trade
+			assert(caller == trade.player_id, 'do not own order');
+			
+			// Get the item balance of the seller for the item being traded
+			let mut seller_item_balance = get!(
+			    world, (game_id, trade.player_id, trade.item_id), ItemBalance
+			);
+			
+			// Cancel the trade by updating the balance of the seller and item
+			trade.cancel_trade(ref seller_item_balance);
+			
+			// Set the trade and seller item balance in the world state
+			set!(world, (trade, seller_item_balance));
+
+		}
+
+	}"

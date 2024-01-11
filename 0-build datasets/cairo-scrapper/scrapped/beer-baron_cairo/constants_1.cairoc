@@ -1,0 +1,127 @@
+// Configuration constants for the Beer Barron game
+
+// Starting prices for items
+mod STARTING_PRICES {
+    // Starting price for hop seeds
+    const HOP_SEED_STARTING_PRICE: felt252 = 60;
+
+    // Starting price for beers
+    const BEERS_STARTING_PRICE: felt252 = 10;
+}
+
+// Starting balances for players
+mod STARTING_BALANCES {
+    // Starting balance of gold for players
+    const GOLD: felt252 = 500;
+}
+
+// System IDs
+mod SYSTEM_IDS {
+    // System ID for the game config
+    const GAME_CONFIG: felt252 = 999999999999999;
+
+    // System ID for the indulgence count
+    const INDULGENCE_COUNT: felt252 = 999999999999998;
+}
+
+// Farming constants
+mod FARMING {
+    // Time it takes for crops to grow
+    const CROP_GROWTH_TIME: felt252 = 200;
+
+    // Yield of crops when they are harvested
+    const CROP_YIELD: felt252 = 100;
+
+    // Number of plots available for farming
+    const PLOT_COUNT: felt252 = 6;
+}
+
+// Brewing constants
+mod BREWING {
+    // Time it takes to brew beer
+    const BREW_TIME: felt252 = 100;
+
+    // Yield of beer when it is brewed
+    const BREW_YEILD_LITRES: felt252 = 30;
+}
+
+// Indulgences constants
+mod INDULGENCES {
+    // Length of indulgence auctions
+    const AUCTION_LENGTH: u64 = 300;
+}
+
+// Item IDs
+mod ITEM_IDS {
+    // ID for gold
+    const GOLD_ID: felt252 = 999999;
+
+    // Offset for hop seeds
+    const SEED_TO_FLOWER_OFFSET: felt252 = 100;
+
+    // ID for indulgences
+    const INDULGENCE_ID: felt252 = 999998;
+
+    // Hop seeds
+    mod HOP_SEEDS {
+        // ID for Citra hops
+        const CITRA: felt252 = 1;
+
+        // ID for Chinook hops
+        const CHINOOK: felt252 = 2;
+
+        // ID for Galaxy hops
+        const GALAXY: felt252 = 3;
+
+        // ID for Cascade hops
+        const CASCADE: felt252 = 4;
+
+        // ID for Saaz hops
+        const SAAZ: felt252 = 5;
+
+        // ID for Fuggle hops
+        const FUGGLE: felt252 = 6;
+    }
+
+    // Hop flowers
+    mod HOP_FLOWERS {
+        // ID for Citra hop flowers
+        const CITRA: felt252 = 101;
+
+        // ID for Chinook hop flowers
+        const CHINOOK: felt252 = 102;
+
+        // ID for Galaxy hop flowers
+        const GALAXY: felt252 = 103;
+
+        // ID for Cascade hop flowers
+        const CASCADE: felt252 = 104;
+
+        // ID for Saaz hop flowers
+        const SAAZ: felt252 = 105;
+
+        // ID for Fuggle hop flowers
+        const FUGGLE: felt252 = 106;
+    }
+
+    // Beers
+    mod BEERS {
+        // ID for Dragon Hide Blaze IPA
+        const DRAGON_HIDE_BLAZE_IPA: felt252 = 1001;
+
+        // ID for Mithril Haze
+        const MITHRIL_HAZE: felt252 = 1002;
+
+        // ID for Obsidian Imperial Stout
+        const OBSIDIAN_IMPERIAL_STOUT: felt252 = 1003;
+
+        // ID for Ruby Sour
+        const RUBY_SOUR: felt252 = 1004;
+
+        // ID for Diamond Wheat Beer
+        const DIAMOND_WHEAT_BEER: felt252 = 1005;
+
+        // ID for Ethereal Lager
+        const ETHEREAL_LAGER: felt252 = 1006;
+    }
+}

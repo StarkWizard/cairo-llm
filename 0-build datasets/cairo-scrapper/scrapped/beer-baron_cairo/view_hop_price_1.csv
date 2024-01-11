@@ -1,0 +1,36 @@
+question,answer
+"// Import the Fixed type and FixedTrait trait from the cubit::f128::types::fixed module.
+use  cubit::f128::types::fixed::{Fixed, FixedTrait};
+// Import the Context type from the dojo::world module.
+use  dojo::world::Context;
+// Import the Auction type and AuctionTrait trait from the beer_barron::components::auction module.
+use  beer_barron::components::auction::{Auction, AuctionTrait};
+
+// Define the execute function.
+// This function takes three parameters:
+// - ctx: A Context object that provides access to the world state.
+// - game_id: The ID of the game that the auction is associated with.
+// - item_id: The ID of the item that is being auctioned.
+// The function returns a Fixed object representing the current price of the item.
+fn execute(ctx: Context, game_id: u64, item_id: u128) -> Fixed {","// Import the Fixed type and FixedTrait trait from the cubit::f128::types::fixed module.
+use  cubit::f128::types::fixed::{Fixed, FixedTrait};
+// Import the Context type from the dojo::world module.
+use  dojo::world::Context;
+// Import the Auction type and AuctionTrait trait from the beer_barron::components::auction module.
+use  beer_barron::components::auction::{Auction, AuctionTrait};
+
+// Define the execute function.
+// This function takes three parameters:
+// - ctx: A Context object that provides access to the world state.
+// - game_id: The ID of the game that the auction is associated with.
+// - item_id: The ID of the item that is being auctioned.
+// The function returns a Fixed object representing the current price of the item.
+fn execute(ctx: Context, game_id: u64, item_id: u128) -> Fixed {
+	// Get the Auction object for the given game ID and item ID from the world state.
+	let auction = get!(ctx.world, (game_id, item_id), Auction);
+	
+	// Call the get_price() method on the Auction object to get the current price of the item.
+	auction.get_price()
+
+}
+"
