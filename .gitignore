@@ -10,3 +10,4 @@ cairo-mistral
 **/*.model
 **/StarkWizard
 **/llama.cpp
+**/token.txt
