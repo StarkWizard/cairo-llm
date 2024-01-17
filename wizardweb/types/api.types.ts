@@ -10,6 +10,7 @@ export interface FileNode extends QTreeNode {
   path: string;
   data?: CsvData;
   type: "file" | "folder";
+  updatedAt: string;
 }
 
 export interface FolderNode extends QTreeNode {
