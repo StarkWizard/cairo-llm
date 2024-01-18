@@ -1,6 +1,13 @@
 import { type QTreeNode } from "quasar";
 
-export type CsvData = {
+export type CsvFile = {
+  name: string;
+  columns: [string, string];
+  rows: Array<[string, string]>;
+  error?: Error;
+};
+
+export type CsvSummary = {
   nbRows?: number;
   error?: Error;
 };
@@ -8,7 +15,7 @@ export type CsvData = {
 export interface FileNode extends QTreeNode {
   label: string;
   path: string;
-  data?: CsvData;
+  data?: CsvSummary;
   type: "file" | "folder";
   updatedAt: string;
 }

@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     extras: {
       fontIcons: ["mdi-v7"],
     },
-    plugins: [],
+    plugins: ["Loading"],
   },
   postcss: {
     plugins: {

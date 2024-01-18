@@ -1,11 +1,11 @@
 import fs from "fs";
 import path from "path";
 import { parse } from "csv-parse";
-import type { CsvData, TreeNode } from "~/types/api.types";
+import type { CsvSummary, TreeNode } from "~/types/api.types";
 import { ROOT_FOLDER_PATH } from "./_utils";
 import { simpleGit } from "simple-git";
 
-const getCsvSummary = async (filePath: string): Promise<CsvData | undefined> => {
+const getCsvSummary = async (filePath: string): Promise<CsvSummary | undefined> => {
   if (!filePath.endsWith(".csv")) return undefined;
 
   try {
@@ -63,7 +63,7 @@ const getFolderStructure = async (folderPath: string): Promise<TreeNode[]> => {
           path: path.resolve(folderPath, item),
           type: "folder",
         };
-      } else {
+      } else if (item.endsWith(".csv")) {
         return {
           label: item,
           path: path.resolve(folderPath, item),

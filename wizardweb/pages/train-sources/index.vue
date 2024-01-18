@@ -1,7 +1,21 @@
 <script setup lang="ts">
 import { type TreeNode } from "~/types/api.types";
+import { useQuasar, QSpinnerBars } from "quasar";
 
-const { data } = useAsyncData(async (): Promise<TreeNode[]> => $fetch("/api/train-sources"));
+const $q = useQuasar();
+$q.loading.show({
+  spinner: QSpinnerBars,
+  spinnerColor: "white",
+  spinnerSize: 140,
+  message: "Loading...",
+});
+const { data, pending } = useAsyncData(async (): Promise<TreeNode[]> => $fetch("/api/train-sources"));
+watch(pending, (isPending) => {
+  if (!isPending) {
+    $q.loading.hide();
+  }
+});
+
 const hasError = (node: TreeNode): boolean => {
   if (!node.children) return !!node.data?.error;
 
@@ -73,7 +87,7 @@ const getUpdatedAt = (node: TreeNode): string => {
 };
 </script>
 <template>
-  <main class="tw-p-4 tw-min-h-[calc(100vh-50px)]">
+  <main class="tw-p-4 tw-min-h-[calc(100vh-50px)]" v-if="!$q.loading.isActive">
     <h1 class="tw-text-h3">
       Train sources
       <q-chip icon="mdi-alert" text-color="white" color="negative" v-if="hasError({ children: data } as TreeNode)">
@@ -98,17 +112,34 @@ const getUpdatedAt = (node: TreeNode): string => {
                 size="28px"
                 class="q-mr-sm"
               />
-              <span class="text-weight-bold text-primary" :class="{ ['text-negative']: hasError(prop.node) }">
+
+              <span
+                v-if="prop.node.type === 'folder'"
+                class="tw-font-bold text-primary"
+                :class="{ ['!tw-text-red-800']: hasError(prop.node) }"
+              >
                 {{ prop.node.label }}
               </span>
+              <nuxt-link
+                v-else
+                :to="`/train-sources/${encodeURIComponent(prop.node.path)}`"
+                class="tw-font-bold tw-underline"
+                :class="{
+                  ['tw-text-red-800 hover:tw-text-red-600']: hasError(prop.node),
+                  ['hover:tw-text-blue-600']: !hasError(prop.node),
+                }"
+              >
+                {{ prop.node.label }}
+              </nuxt-link>
+
               <q-icon v-if="hasError(prop.node)" name="mdi-alert" class="tw-ml-1" color="negative" />
             </div>
 
             <div class="tw-flex tw-gap-2 tw-ml-2" :class="{ ['text-negative']: hasError(prop.node) }">
               <div class="tw-flex tw-items-center tw-gap-2">
-                <span>-</span>
-                <span class="tw-text-gray-500">{{ getTotalRows(prop.node) }} rows</span>
-                <span>-</span>
+                <span class="tw-text-gray-500">-</span>
+                <span class="tw-text-gray-800">{{ getTotalRows(prop.node) }} rows</span>
+                <span class="tw-text-gray-500">-</span>
                 <span class="tw-text-gray-800">{{ toDate(getUpdatedAt(prop.node)) }} </span>
               </div>
             </div>
