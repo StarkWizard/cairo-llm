@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/main.css"],
+  ssr: false,
   modules: ["nuxt-quasar-ui"],
   quasar: {
     sassVariables: "assets/quasar.scss",

@@ -2,11 +2,8 @@
 import type { CsvFile } from "~/types/api.types";
 import { useQuasar, QSpinnerBars } from "quasar";
 
-const $q = useQuasar();
 const route = useRoute();
-const { data, pending } = useAsyncData(
-  async (): Promise<CsvFile> => $fetch(`/api/train-sources/${encodeURIComponent(route.params.csv as string)}`),
-);
+const $q = useQuasar();
 $q.loading.show({
   spinner: QSpinnerBars,
   spinnerColor: "white",
@@ -14,6 +11,9 @@ $q.loading.show({
   message: "Loading...",
   delay: 500,
 });
+const { data, pending } = useAsyncData(
+  async (): Promise<CsvFile> => $fetch(`/api/train-sources/${encodeURIComponent(route.params.csv as string)}`),
+);
 
 watch(pending, (isPending) => {
   if (!isPending) {
@@ -48,27 +48,24 @@ const getRows = (arr: Array<[q: string, a: string]>) => {
         </div>
       </section>
       <section v-else>
-        <ClientOnly>
-          <template v-if="!$q.loading.isActive">
-            <q-table
-              :columns="getColumns(data.columns)"
-              :rows="getRows(data.rows)"
-              virtual-scroll
-              style="height: calc(100vh - 128px)"
-            >
-              <template v-slot:body="props">
-                <q-tr :props="props">
-                  <q-td v-for="col in props.cols" :key="col.name" :props="props" class="tw-text-left">
-                    <pre class="tw-h-full tw-w-full tw-text-pretty"
-                      >{{ col.value }}
-                  </pre
-                    >
-                  </q-td>
-                </q-tr>
-              </template>
-            </q-table>
-          </template>
-        </ClientOnly>
+        <template v-if="!$q.loading.isActive">
+          <q-table
+            :columns="getColumns(data.columns)"
+            :rows="getRows(data.rows)"
+            virtual-scroll
+            style="height: calc(100vh - 128px)"
+          >
+            <template v-slot:body="props">
+              <q-tr :props="props">
+                <q-td v-for="col in props.cols" :key="col.name" :props="props" class="tw-text-left">
+                  <pre class="tw-h-full tw-w-full tw-text-pretty"
+                    >{{ col.value }}
+                  </pre>
+                </q-td>
+              </q-tr>
+            </template>
+          </q-table>
+        </template>
       </section>
     </template>
     <template v-else>
