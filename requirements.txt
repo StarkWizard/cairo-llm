@@ -25,3 +25,4 @@ git+https://github.com/victorlee0505/ctransformers.git@vlee/transformers#egg=ctr
 setuptools
 rich
 google-generativeai
+trl
