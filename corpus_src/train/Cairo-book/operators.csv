@@ -1,17 +1,17 @@
 question,answer
-"division in Cairo ?","In Cairo, the result of x/y is defined to always satisfy the equation (x / y) * y == x. If y divides x as integers, you will get the expected result in Cairo (for example 6 / 2 will indeed result in 3). But when y does not divide x, you may get a surprising result: For example, since 2 * ((P+1)/2) = P+1 ≡ 1 mod[P], the value of 1 / 2 in Cairo is (P+1)/2 (and not 0 or 0.5), as it satisfies the above equation."
+"division in Cairo ?","In Cairo, the result of x/y is defined to always satisfy the equation (x / y) * y == x. If y divides x as integers, you will get the expected result in Cairo (for example 6 / 2 will indeed result in 3). But when y does not divide x, you may get a surprising result: For example, since 2 * ((P+1)/2) = P+1 ≡ 1 mod[P], the value of 1 / 2 in Cairo is (P+1)/2 (and not 0 or 0.5), as it satisfies the above equation.
+"
 "add 1 to i"," 
 ```
     i+=1;
 ```
- "
-
+"
 "How can I reverse a boolean state with a single operator?","
 Use the ! operator to toggle a boolean value:
     let mut state = true;
     state = !state; // state is now false
 "
-What do I use if I want to check that two variables are not the same?","
+"What do I use if I want to check that two variables are not the same?","
 You can use the != operator to compare two variables for non-equality:
 
     let a = 5;
@@ -24,14 +24,12 @@ Use the % operator to get the remainder of integer division:
     let divisor = 3;
     let remainder = dividend % divisor; // remainder is 1
 "
-
 "If I want to update a variable with its remainder after division, what should I do?","
 You can use the %= operator to divide and assign the remainder to the variable:
 
     let mut number = 10;
     number %= 3; // number is now 1
 "
-
 "Can I combine two boolean conditions, but only evaluate the second if the first is true?","
 Yes, you can use the && operator for short-circuiting logical AND:
    let first_condition = true;
@@ -112,7 +110,6 @@ You can use the < operator for a less-than comparison:
 
     let is_smaller = 5 < 10; // is_smaller is true
 "
-
 "What is the => symbol used for in match expressions?","
 The => connects the pattern to the code to execute in a match arm:
 

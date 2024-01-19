@@ -8,7 +8,7 @@ enum Option<T> {
     None: (),
 }
 ```
- "
+"
 "Create an option of value 1 as u8","
  ```
      let some_value: Option<u8> = Option::Some(1_u8);
@@ -18,7 +18,7 @@ enum Option<T> {
  ```
     let none_value: Option<u8> = Option::None(());
 ```
- "
+"
 "create a function that returns an option of value 1 as u8","
  ```
     fn create_some() -> Option<u8> {
@@ -78,7 +78,7 @@ or
 ```
 "
 "Create an option of value 'hello' as a string slice","
-    let some_string: Option<felt> = Some("hello");
+    let some_string: Option<felt> = Some('hello');
 "
 "How do I match the value of an Option and provide a default if it is None","
     let some_number: Option<u32> = Some(10);

@@ -15,3 +15,4 @@ question,answer
 fn get_favorite_color() -> Colors {
     Colors::Vert(())
 }"
+"explain  Hello Dojo?","Hello Dojo is a place where you can create your first Dojo world."

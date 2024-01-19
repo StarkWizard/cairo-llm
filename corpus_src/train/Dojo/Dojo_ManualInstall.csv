@@ -76,4 +76,4 @@ cargo install --path ./crates/katana --force
 cargo run -—bin torii
 "
 "What are the prerequisites for Dojo?","You will need the Rust compiler and Cargo, the Rust package manager. The easiest way to install both is with rustup.rs.
-On Windows, you will also need a recent version of Visual Studio, installed with the "Desktop Development With C++" Workloads option."
+On Windows, you will also need a recent version of Visual Studio, installed with the 'Desktop Development With C++' Workloads option."

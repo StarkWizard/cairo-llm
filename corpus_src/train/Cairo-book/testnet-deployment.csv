@@ -150,6 +150,3 @@ question,answer
 "Why is the Starknet testnet useful?","For testing smart contract deployment and interactions without real-world consequences."
 "What does the 'starkli call' command demonstrate about a smart contract?","Its read functionalities and current state information."
 "What does the 'version' field in a descriptor file indicate?","The version of the descriptor file format or the wallet variant."
-
-
-

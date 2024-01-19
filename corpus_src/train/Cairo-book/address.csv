@@ -46,7 +46,6 @@ use starknet::ContractAddress;
 let mut contract_address: ContractAddress;
 ```
 "
-
 "How do you initialize a variable for storing contract addresses in Cairo programming for StarkNet applications?","
 ```
 use starknet::ContractAddress;

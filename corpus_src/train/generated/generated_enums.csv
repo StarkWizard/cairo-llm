@@ -98,4 +98,3 @@ the value associated with the 'Echo' variant is accessed and printed."
 "Why is the Option enum considered helpful?","It allows you to explicitly represent the possibility of a value being absent, making code more expressive and easier to reason about."
 "What is the difference between the recursive and iterative approach for finding a value in an array?","The recursive approach calls itself with modified parameters until a base condition is met, while the iterative approach uses loops to repeatedly check conditions."
 "enum Message { Quit, Echo: felt252, Move: (u128, u128) } What type of value does the 'Echo' variant of the 'Message' enum hold?","felt252"
-

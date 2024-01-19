@@ -11,3 +11,6 @@ cairo-mistral
 **/StarkWizard
 **/llama.cpp
 **/token.txt
+**/node_modules
+**/pnpm-lock.yaml
+
