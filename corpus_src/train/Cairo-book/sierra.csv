@@ -133,7 +133,7 @@ question,answer
 "How user-friendly is Sierra for new programmers?","Sierra’s focus on safety might make it more complex but also more forgiving for new programmers."
 "Can Sierra's safety features be extended with custom libfuncs?","The text does not specify, but extending safety features might contradict its restricted design."
 "What is a potential drawback of Sierra's restricted instruction set?","A potential drawback could be limited flexibility or expressiveness in some scenarios."
-"How does Sierra’s gas system compare to that of Ethereum?","While both have gas systems, Sierra’s is specifically designed to prevent infinite loops in its context."?
+"How does Sierra’s gas system compare to that of Ethereum?","While both have gas systems, Sierra is specifically designed to prevent infinite loops in its context."
 "Does Sierra allow for low-level hardware manipulation?","Sierra, being an intermediary language, likely does not focus on low-level hardware manipulation."
 "Can Sierra's safety mechanisms interfere with complex algorithms?","Safety mechanisms might impose constraints that affect complex algorithm implementations."
 "How does the array_append libfunc enhance safety compared to traditional methods?","It likely automates safety checks and memory management compared to traditional methods."

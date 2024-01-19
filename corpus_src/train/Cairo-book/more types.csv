@@ -31,8 +31,6 @@ A tuple expression with multiple values is written by enclosing the values in pa
         return multi_value_tuple;
     }
 "
-
-
 "How do you call a function with a tuple containing multiple arguments in Cairo?","
 You call a function with a tuple containing multiple arguments by passing the arguments within parentheses as part of the function call:
 
@@ -45,7 +43,6 @@ You call a function with a tuple containing multiple arguments by passing the ar
         process_values(my_values); // Calling the function with a tuple
     }
 "
-
 "How are tuples used to initialize structs or enums in Cairo?","
 Tuples can be used to initialize tuple structs or tuple enum variants by providing the values as a tuple expression:
 

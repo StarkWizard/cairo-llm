@@ -59,7 +59,7 @@ bnb_config = BitsAndBytesConfig(
     bnb_4bit_use_double_quant=True,
 )
 
-console.print(ok_prefix + "[green]2/5 - Initializing Original Model[/green]")
+console.print(ok_prefix + "[green]2/5 - Initializing Original Model[/green] ", model_name)
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path=model_name,
                                              trust_remote_code=True,
                                              low_cpu_mem_usage=True,
@@ -67,7 +67,7 @@ model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path=model
                                              torch_dtype=torch.float16
                                              )
 
-console.print(ok_prefix + "[green]3/5 - Initializing Peft Model[/green]")
+console.print(ok_prefix + "[green]3/5 - Initializing Peft Model[/green] ", peft_model)
 model_to_merge  = PeftModel.from_pretrained(model, peft_model,
                         torch_dtype=torch.bfloat16, 
                         device_map={"": "cpu"}
@@ -77,6 +77,6 @@ console.print(ok_prefix + "[green]4/5 - Merging[/green]")
 merged_model = model_to_merge.merge_and_unload()
 #model.save_pretrained("cairo-mistral")
 
-console.print(ok_prefix + "[bold green]5/5 - Uploading to HF Hub[/bold green]")
+console.print(ok_prefix + "[bold green]5/5 - Uploading to HF Hub[/bold green] ", hub_name   )
 merged_model.push_to_hub(hub_name,max_shard_size="1GB")
 console.print(ok_prefix + "[bold green]Done[/bold green]")

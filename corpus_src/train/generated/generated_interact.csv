@@ -210,4 +210,3 @@ mod Vote {
 "What is the Starknet keyword to specify a contract's storage structure?","#[storage]"
 "What Starknet keyword is used to denote a derived event?","#[derive(Drop, starknet::Event)]"
 "What keyword in Starknet is used to import a trait or a module?","use"
-

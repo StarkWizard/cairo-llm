@@ -15,3 +15,17 @@ question,answer
 fn get_favorite_color() -> Colors {
     Colors::Vert(())
 }"
+"explain  Hello Dojo?","Hello Dojo is a place where you can create your first Dojo world."
+"Dojo: What can you specify in the SynchronizationMaster in Unity?","You can specify the maximum number of entities you want to synchronize and manage the synchronization of your models' components."
+"What are Models in Dojo?","Models are essential state that represent various parts of entities within your game."
+"In dojo, What is the role of models in synchronization?","Models act as the key elements that are synchronized between the onchain Dojo world and the Unity world."
+"In Dojo whith the Unity SDK, What is important to ensure when adding models?","It's vital to ensure that these models are consistent across both the Dojo and Unity."
+"Why is having a solid understanding of Dojo models crucial?","It's crucial for effectively designing and implementing game elements that interact seamlessly between the blockchain and the game's user interface."
+"How do you get started with the Dojo project in Unity?","Clone the dojo.unity, open the project within Unity, and run the dojo-starter project."
+"What is the next step after getting the sample Dojo project up and running in Unity?","Cloning the dojo.unity."
+"What should you do after cloning the dojo.unity project?","Open the project within Unity."
+"How do I use Torii?","Run 'torii --world <World Address>' to bootstrap directly from an on-chain deployment, providing GraphQL and gRPC APIs on localhost."
+"Katana: how do i set the gas price?","Run katana with the --gas-price <GAS_PRICE> flag."
+"Why Dojo?","Dojo was created to solve problems the founders faced when building onchain games. It standardizes the process of building such games and provides a suite of tools to make it easier."
+"What do I need for dojo?","Rust, Cairo, protoc"
+"How canI clone Dojo?","git clone https://github.com/dojoengine/dojo.git"

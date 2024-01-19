@@ -153,7 +153,6 @@ fn main() {
     my_direction.print();
 }
 "
-
 "How do you define a custom trait for geometric shapes to calculate the perimeter and area","
 trait ShapeGeometry {
     fn boundary(self) -> u64;
@@ -332,7 +331,6 @@ You can obtain the current contract’s address with the get_contract_address fu
     }
 This is useful for contracts that need to pass their own address as a reference or for logging purposes.
 "
-
 "What should I be aware of when importing multiple traits or functions into a Cairo contract module?","
 When importing multiple traits or functions, ensure there are no naming conflicts and that each import is used according to its purpose:
 

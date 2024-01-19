@@ -32,7 +32,7 @@ question,answer
 x= let value_read = dict.get('Bob');
 "," 'Bob' is not a valid key,if you try to get the value of an inexistent key, from a dictionary you will get 0"
 "Can I delete an element from a dictionary","No. There is no way to delete data from a dictionary."
- "what is ownership in Cairo ?","Cairo implements an ownership system to ensure the safety and correctness of its compiled code. The ownership mechanism complements the linear type system, which enforces that objects are used exactly once. This helps prevent common operations that can produce runtime errors, such as illegal memory address references or multiple writes to the same memory address, and ensures the soundness of Cairo programs by checking at compile time that all the dictionaries are squashed."
+"what is ownership in Cairo ?","Cairo implements an ownership system to ensure the safety and correctness of its compiled code. The ownership mechanism complements the linear type system, which enforces that objects are used exactly once. This helps prevent common operations that can produce runtime errors, such as illegal memory address references or multiple writes to the same memory address, and ensures the soundness of Cairo programs by checking at compile time that all the dictionaries are squashed."
 "initialize a dictionary to store user ages and add an entry for 'Bob' being 30 years old","
     let mut user_ages: Felt252Dict<u64> = Default::default();
     user_ages.insert('Bob', 30);

@@ -71,5 +71,3 @@ struct Vec2 {
     y: u32
 }
 "
-
-

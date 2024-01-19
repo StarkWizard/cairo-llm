@@ -86,7 +86,7 @@ for i=3 to 10:
     }
     // u is set to u(10)
 ```
- "
+"
 " what happens if I call a loop without break"," In therory you should fall into an infinite loop, but cairo has a mechanism to prevent it"
 "What mechanism protects from infinite loops ?","Cairo prevents us from running program with infinite loops by including a gas meter. The gas meter is a mechanism that limits the amount of computation that can be done in a program. By setting a value to the --available-gas flag, we can set the maximum amount of gas available to the program. Gas is a unit of measurements that expresses the computation cost of an instruction. When the gas meter runs out, the program will stop. In this case, the program panicked because it ran out of gas, as the stop condition was never reached. It is particularly important in the context of smart contracts deployed on Starknet, as it prevents from running infinite loops on the network. If you're writing a program that needs to run a loop, you will need to execute it with the --available-gas flag set to a value that is large enough to run the program."
 "write a snippet that corrects the following code:
@@ -191,7 +191,6 @@ loop {
 }
 ```
 "
-
 " 
 Please correct:
 for x in 0..100 {
@@ -277,7 +276,8 @@ loop:
         break
     z.print()
     z += 1
-"," This code is correctly written"
+"," This code is correctly written
+"
 "Transform this incorrect Cairo loop for x in 0..100: into a correct loop format.","
 // Incorrect: for x in 0..100:
 // Correct Cairo loop format:
@@ -348,7 +348,8 @@ loop {
     if (i >= array.length) { break; }
     // access array[i]
     i += 1;
-}"
+}
+"
 "Is this code correct ?
   fn compute_u(n: felt) -> felt {
        let mut result = 0;
@@ -410,7 +411,6 @@ fn sum_array(arr: [felt; 5]) -> felt {
     }
 }
 "
-
 "Is this function a valid way to determine if a number is prime in Cairo?
 fn is_prime(num: felt) -> bool {
 for i in 2..num {

@@ -43,7 +43,6 @@ You can use the 'continue' keyword to skip the rest of the current loop iteratio
     }
 The 'continue' keyword skips the current iteration and continues with the next one.
 "
-
 "How do I provide an alternative case for an if condition in Cairo?","
 To provide an alternative case for an 'if' condition, you use the 'else' keyword:
 
@@ -88,7 +87,6 @@ To create an unconditional loop in Cairo, you use the 'loop' keyword:
     }
 The 'loop' keyword creates an infinite loop that will run until explicitly terminated.
 "
-
 "How do I match against several patterns in Cairo?","
 The 'match' keyword in Cairo allows you to compare a value against patterns:
 
@@ -150,12 +148,10 @@ csharp
 Copy code
     let is_valid: bool = true;
 "
-
 "What does the 'type' keyword do in the context of Cairo contracts?","
 The 'type' keyword allows you to define a type alias, providing a new name for an existing type:
     type Address = u64;
 "
-
 "How do you use the 'use' keyword to simplify code in Cairo?","
 The 'use' keyword brings symbols from a module into the current scope, so you don't have to write the full path:
 
@@ -165,15 +161,3 @@ The 'use' keyword brings symbols from a module into the current scope, so you do
         // Function logic here
     }
 "
-
-
-
-
-
-
-
-
-
-
-
-
