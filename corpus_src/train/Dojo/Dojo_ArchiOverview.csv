@@ -54,3 +54,8 @@ mod player_actions {
         }
     }
 }"
+"Can you explain how Dojo interacts with Cairo?","Dojo acts as an abstraction layer over Cairo, offering developers simplified commands that are expanded into complex queries at the time of compilation."
+"What constitutes the structure of Dojo?","In Dojo's structure, common contract templates are integrated within the compiler. This integration enables developers to concentrate on the data and logic aspects, while the compiler automatically creates the essential contracts."
+"What distinguishes Dojo contracts from others?","A Dojo contract is essentially a typical Cairo contract, but it includes certain unique features specific to Dojo."
+"In Dojo, how is state management implemented?","Dojo defines state through the use of models. These models are struct types flagged with the #[derive(Model)] attribute, and they operate akin to a key-value store. The primary key for a model is identified with the #[key] attribute. For example, in a given scenario, the 'player' field may act as the primary key."
+"What role does self.world_dispatcher play in Dojo's framework?","self.world_dispatcher acts as a conduit to the world contract within Dojo. It streamlines the use of get! and set! commands, enabling smooth interactions with the world contract."

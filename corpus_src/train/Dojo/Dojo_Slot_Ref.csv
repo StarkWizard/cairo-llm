@@ -19,6 +19,6 @@ question,answer
 "What are the commands in slot?","The commands in slot are auth, deployments, and help."
 "slot: What does the auth command do?","The auth command manages auth credentials for the Slot CLI."
 "slot: What does the deployments command do?","The deployments command manages Slot deployments."
-"What does the help command do?","The help command prints help messages for the specified subcommands or the entire CLI."
+"Slot: What does the help command do?","The help command prints help messages for the specified subcommands or the entire CLI."
 "slot is a tool for what?","slot is a tool for rapidly spinning up Katana and Torii instances."
 "What are the benefits of using slot?","slot allows for rapid deployment of Katana and Torii instances, making it efficient and convenient."

@@ -10,3 +10,13 @@ curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh
 
 - Install the Cairo 1.0 extension for Visual Studio Code.
 "
+"What are the necessary components to begin with Dojo?","Rust, Cairo, protoc"
+"How can I download the Dojo repository?","git clone https://github.com/dojoengine/dojo.git"
+"What are the steps to configure a development environment for Dojo?","Begin by setting up Rust and executing the test suite to verify your installation: rustup override set stable && rustup update && cargo test
+
+Note: Your specific Linux distribution may require you to install extra dependencies. Ensure you install any dependencies that are recommended or missing during the installation.
+
+Proceed by installing the Scarb package manager with the following command: curl --proto ‘=https’ --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+
+Complete the setup by adding the Cairo 1.0 extension to Visual Studio Code.
+"

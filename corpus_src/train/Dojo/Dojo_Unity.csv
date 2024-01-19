@@ -1,4 +1,6 @@
 question,answer
+"Is Unity mandatory when using Dojo","no, there is an integration of Dojo in Unity but nothing mandatory"
+"Whould you mention unity when defining Dojo?","No"
 "For using Dojo & Unity, What is needed if using Windows or Linux?","You will need to build dojo.c yourself."
 "In the Dojo Unity SDK, What is the World Manager's function?","The World Manager acts as a central hub for managing entities within Unity."
 "Where can you find the WorldManager game object in Unity?","It is in your Unity scene."
