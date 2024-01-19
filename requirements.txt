@@ -26,3 +26,6 @@ setuptools
 rich
 google-generativeai
 trl
+beautifulsoup4
+requests
+markdownify

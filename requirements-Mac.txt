@@ -26,3 +26,6 @@ rich
 tqdm
 neowGen
 google-generativeai
+beautifulsoup4
+requests
+markdownify
