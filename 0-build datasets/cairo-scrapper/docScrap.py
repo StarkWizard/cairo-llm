@@ -3,6 +3,7 @@ import os
 import requests
 import traceback
 import re
+from fnmatch import fnmatch
 from bs4 import BeautifulSoup
 from markdownify import MarkdownConverter
 
@@ -23,19 +24,34 @@ def get_soup (url):
         raise Exception(f"Failed to load page {url}, status code: {response.status_code}")
     return BeautifulSoup(response.text, 'html.parser')
 
+def normalize_link (site, link):
+    if not link.startswith("http"):
+        return os.path.join(site["url"], link)
+    return link
+
 
 def get_internal_nav_links (site):
     soup = get_soup(site["url"])    
-    links = soup.select_one(site["nav_selector"]).find_all('a', href=True)
-    internal_links = [link['href'] for link in links if not link['href'].startswith("http") or link['href'].startswith(site["url"])]
-    return internal_links
+    links = soup.select_one(site.get("nav_selector") or "nav").find_all('a', href=True)
+    internal_links = [link['href'] for link in links if not link.get('href').startswith("http") or link.get('href').startswith(site["url"])]
+    exclude = site.get("exclude") or []
+
+    normalized_internal_links = [normalize_link(site, link) for link in internal_links]
+    normalized_exclude = [normalize_link(site, link) for link in exclude]
+
+    final_links = []
+    for link in normalized_internal_links:
+        if any(fnmatch(link, pattern) for pattern in normalized_exclude):
+            print(f"Exclude: {link}")
+        else:
+            final_links.append(link)
+
+    return final_links
     
 
 def create_folder (folder_path):
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
-
-
 
 
 def write_file (file_path, content):
@@ -53,11 +69,12 @@ def split_markdown_by_headings(markdown_text):
 
     return contents
 
+
 def crawl_site (root_path, site, internal_links):
     create_folder(os.path.join(root_path, site["output"]))
     for link in internal_links:
-        print("Parsing...", os.path.join(site["url"], link))
-        soup = get_soup(os.path.join(site["url"], link))
+        print("Parsing...", link)
+        soup = get_soup(link)
         main_html = soup.select_one(site["main_selector"])
         main_md = MarkdownConverter(**{ "heading_style": "ATX" }).convert_soup(main_html)
         divided_md_list = split_markdown_by_headings(main_md)
@@ -69,6 +86,28 @@ def crawl_site (root_path, site, internal_links):
 
 
 def main():
+    """
+    It will read the config file and crawl the site
+
+    Example config file:
+    [
+        {
+            "url": https://example.com,
+            "output": "scrapped/path-to-save",
+            "nav_selector": "nav",
+            "main_selector": "main",
+            "exclude": [
+                "https://example.com/path.html", 
+                "https://example.com/**/*.html" // Support glob pattern
+            ]
+        }, 
+    ]
+
+    How to use:
+
+    > python docScrap.py
+    """
+
     root_path = os.path.dirname(os.path.realpath(__file__))
     site_list = get_config(os.path.join(root_path,'docScrap.config.json'))
 
