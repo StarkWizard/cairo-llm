@@ -23,3 +23,18 @@ cover_uri = 'file://assets/cover.png'
 website = 'https://dojoengine.org'
 socials.x = 'https://twitter.com/dojostarknet'
 "
+"What advantages does Dojo Metadata offer?","Dojo Metadata facilitates the easy indexing and distribution of worlds and experiences developed on them by external services."
+"How is Dojo Metadata handled during migration?","During migration, sozo autonomously manages the world's metadata, uploading it to IPFS and setting it in the world contract."
+"What is the procedure to establish metadata for a Dojo world?","To set metadata for a Dojo world, create a Scarb.toml file with the tool.dojo.world section, including attributes like name, description, icon_uri, among others."
+"What default attributes does the toolchain support?","By default, the toolchain supports attributes like name, description, icon_uri, cover_uri, website, and socials."
+"How should _uri attributes be defined?","_uri attributes can be specified to point to assets in the repository using the file:// scheme or to external resources using ipfs:// or https://."
+"How can one add custom social links?","Custom social links can be added by setting key-value pairs in the socials attribute, for example, socials.github = '...'."
+"What happens to local assets during sozo's migration process?","During migration, sozo uploads any local assets to IPFS."
+"How are URIs treated in sozo's migration process?","In the migration process, sozo replaces the corresponding URIs as needed."
+"What does sozo do with the metadata JSON file during migration?","sozo uploads the metadata JSON file to IPFS during the migration process."
+"How is the metadata_uri for the world set during sozo migration?","During migration, sozo sets the metadata_uri for the world (resource 0)."
+"What is the purpose of the Scarb.toml file in Dojo?","The Scarb.toml file is used to define a Dojo world's metadata."
+"What section should be included in the Scarb.toml file for Dojo?","For Dojo, a 'tool.dojo.world' section should be created in the Scarb.toml file."
+"What kind of information can be entered in the Scarb.toml file for Dojo?","In the Scarb.toml file, you can include attributes like name, description, icon_uri, cover_uri, website, and socials."
+"What are sozo's actions during the migration process?","During migration, sozo manages the world's metadata, uploading to IPFS and setting it in the world contract."
+"Where does sozo source the metadata from?","sozo sources the metadata from the project's Scarb.toml file."

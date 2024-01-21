@@ -269,3 +269,104 @@ where CONTRACT_ADDRESS is the address of your contract and replace felt252_value
 "What are the common mistakes to avoid when using starkli invoke?","Common mistakes include incorrect contract addresses, wrong function names, and improper data formats."
 "Can starkli invoke be integrated into automated deployment scripts?","Yes, it can be integrated into automated scripts for deployment or contract management."
 "Is there a way to undo an accidental invocation made using starkli invoke?","Undoing an invocation is generally not possible; actions are typically irreversible."
+"What defines Starkli?","
+Starkli is a command-line interface tool designed for interacting with Starknet.
+"
+"What is the purpose of Scarb?","
+Scarb serves as Cairo’s package manager, tasked with compiling code to Sierra.
+"
+"Can you explain what Sierra is?","
+Sierra is a mid-level programming language that acts as an intermediary between Cairo and CASM.
+"
+"What does Katana represent?","
+Katana is a local development node specifically for Starknet.
+"
+"What are the steps to install Starkli?","
+Starkli can be installed using Starkliup, a command-line installer.
+"
+"How do you install Starkli?","
+The installation command for Starkli is: curl https://get.starkli.sh | sh
+"
+"What actions are recommended post-Starkli installation?","
+After installing Starkli, restart your terminal and verify the installation.
+"
+"How is Starkli's version checked?","
+To check Starkli's version, execute the command: starkli --version.
+"
+"What is the process for upgrading Starkli?","
+Starkli can be upgraded by following the same steps as its initial installation.
+"
+"Which OS are supported for Scarb's installation?","
+Scarb installation is supported on macOS and Linux systems.
+"
+"What is the installation command for Scarb on supported OS?","
+To install Scarb on macOS and Linux, use the command: curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+"
+"What should Windows users do for Scarb installation?","
+Windows users are advised to follow the manual setup provided in Scarb's documentation for installation.
+"
+"How can you verify Scarb's installation?","
+Verify Scarb installation by executing scarb --version post-terminal restart.
+"
+"What method is used to upgrade Scarb?","
+Scarb is upgraded by rerunning its installation command.
+"
+"Which installer is employed for Katana Node?","
+The dojoup installer is utilized for installing Katana Node.
+"
+"What is Katana Node's installation command?","
+To install Katana Node, use the command: curl -L https://install.dojoengine.org | bash
+"
+"How is Katana Node installation confirmed?","
+Confirm Katana Node installation by running katana --version after a terminal restart.
+"
+"How do you upgrade Katana Node?","
+Upgrade Katana Node by repeating its installation command.
+"
+"Why are these tools installed?","
+These tools are installed for coding in Cairo and deploying applications to Starknet.
+"
+"What is Starkli's role in the development process?","
+Starkli plays a key role in facilitating interactions with Starknet during development.
+"
+"Which language is Sierra associated with?","
+Sierra is closely related to the Cairo programming language.
+"
+"What function does 'starkliup' serve?","
+The 'starkliup' command is used to install Starkli.
+"
+"What is the initial step in installing Starkli?","
+The first step in installing Starkli is executing the provided curl command.
+"
+"Is restarting necessary after installing Starkli?","
+Yes, it is necessary to restart your terminal after installing Starkli.
+"
+"Can Starkli be upgraded with ease?","
+Yes, Starkli can be easily upgraded by repeating the installation steps.
+"
+"What is Scarb's main role?","
+Scarb primarily functions as a package manager for Cairo-based projects.
+"
+"Does Scarb support Windows?","
+Scarb is compatible with Windows, albeit requiring manual setup.
+"
+"How do you confirm a successful Scarb installation?","
+A successful Scarb installation is confirmed by running scarb --version.
+"
+"What is Katana's primary function?","
+Katana serves as a Starknet node, primarily used for development purposes.
+"
+"Does Katana use a unique installer?","
+Yes, Katana uses the specialized dojoup installer.
+"
+"What step verifies Katana installation?","
+Verification of Katana installation involves running katana --version.
+"
+"What is the common approach to upgrade these development tools?","
+Upgrading these tools typically involves rerunning their respective installation commands.
+"
+"Are these tools essential for blockchain development?","
+Yes, these tools are vital for developing and deploying projects on Starknet using Cairo.
+"
+"What programming language does Scarb support?","
+Scarb is designed to work with the Cairo programming language."

@@ -1,16 +1,31 @@
-Deployment to Remote Network
-IMPORTANT: Dojo is unaudited. Use at your own risk.
-
-Dojo makes it easy to deploy to remote networks, you just need to have a valid account and network endpoint.
+# [Constructor](#constructor)
+Constructors are a special type of function that runs only once when deploying a contract, and can be used to initialize the state of the contract. Your contract must not have more than one constructor, and that constructor function must be annotated with the `#[constructor]` attribute. Also, a good practice consists in naming that function `constructor`.
 
 
-Deploy to public Starknet
-If you credentials are correct in the Scarb.toml then a simple migrate will deploy the world to Starknet.
+Here's a simple example that demonstrates how to initialize the state of a contract on deployment by defining logic inside a constructor.
 
-Deploy to Remote Katana
-Katanas are able to be hosted and run as remote testnets, however this is not recommended for production use.
 
-Deploy to remote katana with slot here
 
-Deploy to Remote Madara
-Madara is a blazingly fast Starknet sequencer.
+```
+#[starknet::contract]
+mod ExampleConstructor {
+    use starknet::ContractAddress;
+
+    #[storage]
+    struct Storage {
+        names: LegacyMap::<ContractAddress, felt252>,
+    }
+
+    // The constructor is decorated with a `#[constructor]` attribute.
+    // It is not inside an `impl` block.
+    #[constructor]
+    fn constructor(ref self: ContractState, name: felt252, address: ContractAddress) {
+        self.names.write(address, name);
+    }
+}
+```
+
+Visit contract on [Voyager](https://goerli.voyager.online/contract/0x017fd6558e67451dA583d123D77F4e2651E91502D08F8F8432355293b11e1f8F) or play with it in [Remix](https://remix.ethereum.org/?#activate=Starknet&url=https://github.com/NethermindEth/StarknetByExample/blob/main/listings/getting-started/constructor/src/constructor.cairo).
+
+
+Last change: 2023-12-07, commit: [286b664](https://github.com/NethermindEth/StarknetByExample/commit/286b664)

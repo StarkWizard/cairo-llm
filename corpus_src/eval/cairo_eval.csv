@@ -90,3 +90,7 @@ fn get_favorite_color() -> Colors {
 "Who are the main contributors to Dojo?","Key contributors to Dojo include Cartridge, Realms & BibliothecaDAO, briq, among others."
 "How does one become a part of Dojo?","To join Dojo, explore their Github, Twitter, Discord, and follow their contribution guidelines."
 "Can you define an Autonomous World (AW)?","An Autonomous World (AW) refers to a self-managed virtual space where users can interact, build, and own digital assets."
+"Does Torii incorporate a graphical user interface?","No, Torii solely offers APIs and command-line tools, lacking a GUI."
+"Can users find the Torii GUI easy to operate?","Torii does not have a GUI; it is designed as a command-line tool."
+"Is a GUI part of the Torii client-side interface?","No, Torii does not provide a GUI in its client-side interface."
+"Is Dojoup supported on Windows?","To use Dojoup on Windows, you must utilize WSL terminal or git bash."

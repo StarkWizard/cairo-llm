@@ -17,3 +17,56 @@ question,answer
 "What’s the process for deploying to the public Starknet?","If your credentials are correct in the Scarb.toml file, running a simple 'migrate' command will deploy the world to Starknet."
 "Is it possible to use Katanas as remote testnets?","Yes, Katanas can be hosted and run as remote testnets, though it’s not advised for production use."
 "Can you tell me more about Madara?","Madara is a very fast Starknet sequencer."
+"How do you deploy to external networks using Dojo?","
+To deploy to remote networks with Dojo, ensure you have a valid account and a specified network endpoint.
+"
+"How can a Dojo project be deployed to the public Starknet?","
+Deploy a Dojo project to public Starknet by executing the 'sozo migrate' command, given the correct credentials are set in the Scarb.toml file.
+"
+"What is the role of Madara in Starknet?","
+Madara serves as a rapid Starknet sequencer.
+"
+"What functionality do Katanas offer?","
+Katanas can function as remote testnets, capable of hosting and running remotely.
+"
+"Are Katanas suitable for production environments?","
+Katanas are not recommended for use in production environments.
+"
+"Has Dojo undergone a security audit?","
+As of now, Dojo has not been subjected to a security audit.
+"
+"What are the steps to deploy on the public Starknet?","
+To deploy to public Starknet, ensure your Scarb.toml file contains the correct credentials and then run the 'migrate' command.
+"
+"Can Katanas serve as hosted remote testnets?","
+Yes, Katanas can be used as hosted remote testnets, though they are not recommended for production.
+"
+"Could you provide more details about Madara?","
+Madara is characterized as a high-speed Starknet sequencer.
+"
+"What prerequisites are needed to deploy on distant networks using Dojo?","
+For deploying on remote networks with Dojo, you must have an authorized account and a valid network endpoint.
+"
+"How is a Dojo project launched on public Starknet?","
+Launch a Dojo project on public Starknet using the 'sozo migrate' command, provided the Scarb.toml file includes the right credentials.
+"
+"Can you elaborate on Madara’s functionality?","
+Madara is known for being a fast sequencer within the Starknet ecosystem.
+"
+"What are the capabilities of Katanas?","
+Katanas are designed to be hosted and run as remote testnets.
+"
+"Is it advisable to use Katanas in production settings?","
+Using Katanas in production settings is not recommended.
+"
+"Is there an audit report available for Dojo?","
+Currently, there is no audit report for Dojo.
+"
+"What procedure is followed to deploy on public Starknet?","
+Deploying on public Starknet involves confirming correct credentials in the Scarb.toml file and executing a 'migrate' command.
+"
+"Are Katanas viable as remote testnets?","
+Katanas are viable as remote testnets but are not suitable for production use.
+"
+"What information can you provide about Madara?","
+Madara is recognized as a notably fast sequencer in the Starknet platform."

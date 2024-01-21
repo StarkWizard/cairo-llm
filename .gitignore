@@ -14,3 +14,4 @@ cairo-mistral
 **/node_modules
 **/pnpm-lock.yaml
 **/scrapped
+**/wandb
