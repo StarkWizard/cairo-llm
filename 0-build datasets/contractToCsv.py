@@ -1,15 +1,16 @@
 import importlib
-from cairoParser import CairoParser,Node
+
+from QA.cairoParser import CairoParser
 import argparse
 import os
 import glob
 from rich.console import Console
-import cairoParser
-importlib.reload(cairoParser)
+import QA.cairoParser
+importlib.reload(QA.cairoParser)
 
-from QAGenerator import qaGenerator
-import QAGenerator
-importlib.reload(QAGenerator)
+from QA.QAGenerator import qaGenerator
+import QA.QAGenerator
+importlib.reload(QA.QAGenerator)
 
 overwrite = False
 

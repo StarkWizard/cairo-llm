@@ -136,3 +136,16 @@ fn move(ctx: Context, direction: Direction) {
     set!(world, (moves, next));
     emit!(world, Moved { address: caller, direction });
 }"
+"When do events occur in Dojo?","Events are emitted in Dojo every time there is an update to a Model, signaled by the World contract."
+"What exactly is Torii in Dojo?","Torii in Dojo efficiently indexes all emitted events to facilitate easy and effective querying."
+"Is it possible to create custom events in Dojo?","Yes, you can design and implement your own custom events in Dojo to suit specific requirements."
+"What is the advantage of indexing events in Dojo?","Indexing events in Dojo enhances the ease and efficiency of querying, making data retrieval more streamlined."
+"How do events contribute to understanding a Dojo world?","Events are key to deciphering the dynamics of a Dojo world, revealing how changes in the model affect the overall environment."
+"What is the outcome of updating a Dojo Model?","When a Dojo Model is updated, the World contract emits events to signal these changes."
+"Can one craft custom events in Dojo?","Absolutely, custom events tailored to specific needs can be created within Dojo."
+"How does Torii facilitate event handling in Dojo?","Torii adeptly indexes all Dojo events, ensuring smooth and efficient querying capabilities."
+"What are the benefits of querying Dojo events?","Querying Dojo events enables efficient and focused data access, aiding in analysis and informed decision-making."
+"Is filtering Dojo events for specific information feasible?","Yes, it is possible to filter Dojo events by various criteria, such as event type or time range, to hone in on relevant data."
+"Can Dojo events be grouped for analytical purposes?","Certainly, events in Dojo can be grouped or aggregated based on shared characteristics, aiding in data summarization and pattern recognition."
+"Are there tools to assist in Dojo event analysis?","Yes, tools like Apache Kafka, Apache Spark, and ElasticSearch are available to assist in the querying and analysis of Dojo events."
+"Can Dojo events trigger specific actions or alerts?","Definitely, events in Dojo can be utilized to initiate actions or notifications in response to particular occurrences, enabling real-time monitoring and automated reactions."

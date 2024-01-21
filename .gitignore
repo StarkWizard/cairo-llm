@@ -13,4 +13,5 @@ cairo-mistral
 **/token.txt
 **/node_modules
 **/pnpm-lock.yaml
-
+**/scrapped
+**/wandb

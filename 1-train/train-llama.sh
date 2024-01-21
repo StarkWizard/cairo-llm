@@ -1,2 +1,2 @@
 #!/bin/bash
-python train.py  --model_name="codellama/CodeLlama-7b-Instruct-hf" --new_model="StarkWizard/llama-2-7b-cairo-trained-PEFT" --lr=2e-4 q_proj k_proj v_proj o_proj up_proj down_proj gate_proj lm_head
+python train.py  --model_name="codellama/CodeLlama-7b-Instruct-hf" --new_model="StarkWizard/llama-2-7b-cairo-trained-PEFT" --max_seq_length=1024 --window=512 --lr=2e-4 q_proj k_proj v_proj o_proj up_proj down_proj gate_proj lm_head --epochs=3 --wandb_project="Llama"

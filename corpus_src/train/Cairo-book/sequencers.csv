@@ -59,3 +59,200 @@ question,answer
 "What challenges do blockchain networks face when balancing scalability and decentralization?","The main challenge is to expand the network's capacity without centralizing control, which can compromise the foundational principles of blockchain."
 "How do Starknet's Sequencers, Madara and Kraken, demonstrate customization in blockchain?","They offer a range of options for ordering methods, execution crates, and consensus protocols, allowing for tailored blockchain solutions."
 "What is the importance of credible neutrality in blockchain networks?","Credible neutrality ensures that the network remains impartial and fair, which is essential for trust and security in blockchain transactions."
+"Add the value 0 to an array called myArray","
+```
+myArray.append(0); // Use 'append' to add a value to the array
+```
+"
+"Create an array and insert three values","
+```
+let mut array = ArrayTrait::new(); // Define a mutable array
+array.append(0); // Append values using array.append(value)
+array.append(1);
+array.append(2);
+```
+"
+"Define an array of u128 type","
+```
+let mut arr = ArrayTrait::<u128>::new(); // Declare a mutable array of type u128
+```
+"
+"Initialize an array of u32 type","
+```
+let mut arr = ArrayTrait::<u32>::new(); // Create a mutable array specifically for u32 values
+```
+"
+"Set up an array of u64 type","
+```
+let mut arr = ArrayTrait::<u64>::new(); // Establish a mutable array for u64 values
+```
+"
+"Create an array, add three items, and remove one","
+```
+let mut a = ArrayTrait::new();
+a.append(10);
+a.append(1);
+a.append(2);
+
+let first_value = a.pop_front().unwrap(); // Remove the first element using pop_front()
+```
+"
+"Access a specific index value in an array","
+```
+let value = array.at(index); // Retrieve value at a given index using array.at(index)
+```
+"
+"Make an array, add two elements, assign the first to a variable","
+```
+let mut a = ArrayTrait::new();
+a.append(0);
+a.append(1);
+
+let value_at_index_zero = *a.at(0); // Assign the first value to a variable
+```
+"
+"Determine the size of the array 'myArray'","
+```
+let size = myArray.len(); // Use len() to get the size of the array
+```
+"
+"Check if 'myArray' is empty","
+```
+if myArray.is_empty() {
+    'Array is empty'.print();
+}
+```
+"
+"Create an array 'messages' with different data types","
+```
+enum Data {
+    Integer(u128),
+    Felt(felt252),
+    Val(u32),
+}
+
+let mut messages = ArrayTrait::new();
+messages.append(Data::Integer(100));
+messages.append(Data::Felt('hello world'));
+messages.append(Data::Val(10));
+```
+"
+"Form an array 'messages' with diverse types","
+```
+enum Data {
+    lInteger(u64),
+    sInteger(u16),
+    Tuple(u32, u32),
+}
+
+let mut messages = ArrayTrait::new();
+messages.append(Data::lInteger(100));
+messages.append(Data::sInteger(40));
+messages.append(Data::Tuple(50, 50));
+```
+"
+"Define 'Span' in Cairo","
+Span is a structure representing a snapshot of an array, providing safe, controlled access to its elements without altering the original array.
+"
+"The purpose of spans in Cairo","
+Span is used for ensuring data integrity and avoiding borrowing issues, particularly in scenarios requiring array data to be passed between functions or for read-only operations.
+"
+"Create a span from 'array'","
+```
+let array_span = array.span(); // Use span() method to create a Span from an array
+```
+"
+"Identify the error in 'arr[index]'","
+In Cairo, the correct way to access an array value is using arr.get(index) or arr.at(index). The syntax arr[index] is not valid.
+"
+"Correct the code: 'myArray.pop()'","
+Replace 'myArray.pop()' with 'myArray.pop_front()'. Cairo uses pop_front() for removing elements.
+"
+"Append values to an array in Cairo","
+To add values to an array in Cairo, use the append() method: myArray.append(value).
+"
+"Get the length of an array in Cairo","
+```
+let length = myArray.len(); // Use len() to obtain the array's length
+```
+"
+"Check if an array is empty in Cairo","
+```
+let empty = myArray.is_empty(); // Use is_empty() to check if the array is empty
+```
+"
+"Create an array, append two values, and display them","
+```
+let mut a = ArrayTrait::new();
+a.append(0);
+a.append(1);
+
+let first = *a.at(0);
+let second = *a.at(1);
+
+first.print();
+second.print();
+```
+"
+"Clarification on 'let second = *m_array.at(1);'","
+The number 1 here represents the index of the element in the array, not its address.
+"
+"Assign the third element of 'my_array' to 'third'","
+```
+let third = *my_array.at(2); // Assign the value at index 2 to 'third'
+```
+"
+"Behavior of 'myArray.pop_front()'
+
+ when the array is empty","
+When 'myArray' is empty, calling 'myArray.pop_front()' will return None.
+"
+"Add three different values to 'scores' array","
+```
+scores.append(50);
+scores.append(85);
+scores.append(97); // Add three distinct integer values
+```
+"
+"Insert 'hello' into the 'words' array","
+```
+words.append('hello'); // Append the string 'hello' to the array
+```
+"
+"Create an array of strings with two names","
+```
+let mut names = ArrayTrait::new();
+names.append('Alice');
+names.append('Bob'); // Append two string values to the array
+```
+"
+"Use of 'my_array.next()' to access array elements","
+There's no 'next()' method for arrays in Cairo. Instead, use 'get()' or 'at()' with the appropriate index.
+"
+"Correct the following code snippet","
+```
+let mut i = 0;
+while i < 10 {
+    let t = array1.at(i);
+    let u = array2.at(i);
+    if i == 9 {
+        return *t + *u;
+    }
+    i += 1;
+}
+```
+"
+"Storing different types in a single array in Cairo","
+```
+enum Data {
+    Integer(u128),
+    Felt(felt252),
+    Tuple(u32, u32),
+}
+
+let mut messages = ArrayTrait::new();
+messages.append(Data::Integer(100));
+messages.append(Data::Felt('hello world'));
+messages.append(Data::Tuple(10, 30));
+```
+"
