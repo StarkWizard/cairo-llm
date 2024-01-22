@@ -42,16 +42,16 @@ default_lora_r = 64
 default_lora_alpha=16
 default_lora_dropout=0.1
 default_batch_size = 2
-default_accumulation_steps = 4
+default_accumulation_steps = 1
 default_lr = 2e-4
 default_packing = False
-
+default_window = 512
 # models
 defaul_model_name = "codellama/CodeLlama-7b-Instruct-hf"
 default_tokenizer_name = "codellama/CodeLlama-7b-Instruct-hf"
 defaul_dataset_name = "StarkWizard/cairo-instruct"
 defaul_new_model = "StarkWizard/llama-2-7b-cairo-trained-PEFT"
-
+default_max_seq_length = 1024
 
 #target_modules=[
 #        "q_proj",
@@ -83,8 +83,8 @@ parser.add_argument("--lora_alpha", type=int, default=default_lora_alpha, help="
 parser.add_argument("--lora_dropout", type=float, default=default_lora_dropout, help="lora dropout value")
 parser.add_argument("--lr", type=float, default=default_lr, help="learning rate")
 parser.add_argument("--packing",type=bool, default=default_packing, help="use Packing strategy")
-
-
+parser.add_argument("--window",type=float, default=default_window, help="window size")
+parser.add_argument("--max_seq_length",type=float, default=default_max_seq_length, help="max seuence length")
 parser.add_argument("modules", nargs='+', help="target modules to train")
 
 args = parser.parse_args()
@@ -115,6 +115,8 @@ batch_size = args.batch_size
 accumulation_steps = args.accumulation_steps
 lr = args.lr
 packing = args.packing
+window = args.window
+max_seq_length = default_max_seq_length
 
 # Initializing WandB
 if wandb_project is not None:
@@ -196,7 +198,7 @@ else:
 model.resize_token_embeddings(len(tokenizer))
 model.config.use_cache=False
 model.config.pretraining_tp=1
-model.config.window = 512 
+model.config.window = 4096 
 model.gradient_checkpointing_enable()
 model = prepare_model_for_kbit_training(model)
 
@@ -253,10 +255,9 @@ trainer = SFTTrainer(
     args=training_arguments,
     tokenizer=tokenizer,
     packing=packing,
-    max_seq_length=None,
-    neftune_noise_alpha=5
+    max_seq_length=max_seq_length,
 )
-
+torch.cuda.empty_cache()
 trainer.train()
 trainer.model.push_to_hub(new_model)
 tokenizer.push_to_hub(new_model)

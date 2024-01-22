@@ -1,9 +1,9 @@
 import re
 
 import importlib
-from cairoParser import CairoParser,Node
-import cairoParser
-importlib.reload(cairoParser)
+from QA.cairoParser import CairoParser,Node
+import QA.cairoParser
+importlib.reload(QA.cairoParser)
 
 class qaGenerator:
     def __init__(self, parser):

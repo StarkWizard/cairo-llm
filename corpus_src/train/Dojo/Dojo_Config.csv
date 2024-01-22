@@ -30,3 +30,36 @@ rpc_url = 'http://localhost:5050/'
 account_address = '0x517ececd29116499f4a1b64b094da79ba08dfd54a3edaa316134c41f8160973'
 private_key = '0x1800000000300000180000000000030000000000003006001800006600'
 "
+"How do you set up a Dojo World?","
+To configure a Dojo World, you need to define its settings in the Scarb.toml file. This file is a standard configuration file used by Scarb, Cairo’s package and project manager.
+"
+"Can you provide an example configuration file for a Dojo World?","
+Certainly! Here's a sample Scarb.toml file configuration for a Dojo World:
+
+```toml
+[package]
+cairo-version = '2.4.0'
+name = 'dojo_examples'
+version = '0.4.0'
+
+[cairo]
+sierra-replace-ids = true
+
+[dependencies]
+# It's crucial to specify a fixed version of Dojo to ensure compatibility.
+dojo = { git = 'https://github.com/dojoengine/dojo', version = '0.4.1' }
+
+[[target.dojo]]
+
+[tool.dojo]
+initializer_class_hash = '0xbeef'
+
+[tool.dojo.env]
+rpc_url = 'http://localhost:5050/'
+# Default account for Katana using a seed of 0
+account_address = '0x517ececd29116499f4a1b64b094da79ba08dfd54a3edaa316134c41f8160973'
+private_key = '0x1800000000300000180000000000030000000000003006001800006600'
+```
+
+This configuration outlines various settings like the Cairo version, package name, dependencies, and specific Dojo tool settings such as the initializer class hash and environment variables.
+"
