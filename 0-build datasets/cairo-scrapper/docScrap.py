@@ -2,9 +2,10 @@ import json
 import os
 import requests
 import traceback
-import re
+import argparse
 from fnmatch import fnmatch
 from bs4 import BeautifulSoup
+import html2text
 from markdownify import MarkdownConverter
 
 def get_config (file):
@@ -58,31 +59,54 @@ def write_file (file_path, content):
     with open(file_path, 'w') as file:
         file.write(content)
 
-def split_markdown_by_headings(markdown_text):
-    headings = re.split(r'(^#+\s.*)', markdown_text, flags=re.MULTILINE)[1:]
-    
-    contents = []
-    for i in range(0, len(headings), 2):
-        heading_text = headings[i]
-        content_text = headings[i + 1].strip() if i + 1 < len(headings) else ""
-        contents.append(f"{heading_text}\n{content_text}")
+def copy_bs4_tag(tag):
+    return BeautifulSoup(str(tag), 'html.parser').contents[0]
 
-    return contents
+def split_soup_by_headings(soup):
+    res = []
+    el = soup[0]
+    new_soup = BeautifulSoup("", 'html.parser')
+    new_soup.append(copy_bs4_tag(el))
+
+    for idx, tag in enumerate(el.next_siblings):
+        if tag.name and tag.name.startswith('h'):
+            res.append(new_soup)
+            new_soup = BeautifulSoup("", 'html.parser')
+        new_soup.append(copy_bs4_tag(tag))
+
+        if idx - 2 == len(soup) and not (tag.name and tag.name.startswith('h')):
+            res.append(new_soup)
+
+    return res
+
+def convert_soup_to_markdown(soup):
+    mdConverter = html2text.HTML2Text()
+    mdConverter.ignore_links = False
+    return mdConverter.handle(str(soup))
 
 
-def crawl_site (root_path, site, internal_links):
+def convert_soup_to_txt(soup):
+    res = ""
+    for string in soup.strings:
+        res += string
+    return res
+
+
+def crawl_site (root_path, site, internal_links, extension):
     create_folder(os.path.join(root_path, site["output"]))
     for link in internal_links:
         print("Parsing...", link)
         soup = get_soup(link)
-        main_html = soup.select_one(site["main_selector"])
-        main_md = MarkdownConverter(**{ "heading_style": "ATX" }).convert_soup(main_html)
-        divided_md_list = split_markdown_by_headings(main_md)
+        main_soup = soup.select(site["main_selector"] + " *")
+        divided_soup = split_soup_by_headings(main_soup)
         
-        for index, divided_md in enumerate(divided_md_list, start=1):
-            filename = os.path.basename(link).rsplit('.', 1)[0] + "_" + str(index) + ".md"
-            write_file(os.path.join(root_path, site["output"], filename), divided_md)
-
+        for index, source in enumerate(divided_soup, start=1):
+            filename = os.path.basename(link).rsplit('.', 1)[0] + "_" + str(index) + "." + extension
+            if extension == "md":
+                content = convert_soup_to_markdown(source)
+            elif extension == 'txt':
+                content = convert_soup_to_txt(source)
+            write_file(os.path.join(root_path, site["output"], filename), content)
 
 
 def main():
@@ -102,11 +126,11 @@ def main():
             ]
         }, 
     ]
-
-    How to use:
-
-    > python docScrap.py
     """
+    parser = argparse.ArgumentParser(description="docScrap: Documentation Scrapper CLI Tool")
+    parser.add_argument("-ext", "--extension", help="Output file extension", choices=["md", "txt"])
+    args = parser.parse_args()
+    extension = args.extension or "md"
 
     root_path = os.path.dirname(os.path.realpath(__file__))
     site_list = get_config(os.path.join(root_path,'docScrap.config.json'))
@@ -114,7 +138,7 @@ def main():
     for site in site_list:
         try:
             internal_links = get_internal_nav_links(site)
-            crawl_site(root_path, site, internal_links)
+            crawl_site(root_path, site, internal_links, extension)
         except Exception as e:
             print_error(e)
 
