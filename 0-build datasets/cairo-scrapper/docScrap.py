@@ -6,7 +6,6 @@ import argparse
 from fnmatch import fnmatch
 from bs4 import BeautifulSoup
 import html2text
-from markdownify import MarkdownConverter
 
 def get_config (file):
     with open(file, 'r') as json_file:
