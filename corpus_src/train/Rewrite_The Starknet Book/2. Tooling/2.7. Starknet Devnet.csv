@@ -1,6 +1,6 @@
 question,answer
-What is Starknet Devnet?,"Starknet Devnet is a development network (devnet) implemented in Rust, similar to the Python-based 'starknet-devnet'."
-How to install Starknet Devnet on my computer?,"starknet devnet rs can be installed in two ways: using Docker or manually by cloning the repository and running it with Cargo.
+"What is Starknet Devnet?","Starknet Devnet is a development network (devnet) implemented in Rust, similar to the Python-based 'starknet-devnet'."
+"How to install Starknet Devnet on my computer?","starknet devnet rs can be installed in two ways: using Docker or manually by cloning the repository and running it with Cargo.
 
 1.Using Docker
 To install using Docker, follow the instructions provided here.
@@ -16,7 +16,7 @@ Procedure:
     2.Clone the repository:
 
 git clone https://github.com/0xSpaceShard/starknet-devnet-rs.git"
-How to run Starknet Devnet?,"Run Starknet Devnet with the following command:
+"How to run Starknet Devnet?","Run Starknet Devnet with the following command:
 
 cargo run
 
