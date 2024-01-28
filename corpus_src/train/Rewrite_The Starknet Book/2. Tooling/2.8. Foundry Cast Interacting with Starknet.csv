@@ -1,17 +1,17 @@
 question,answer
-What is Starknet Foundry?,"Starknet Foundry is a tool designed for testing and developing Starknet contracts. It is an adaptation of the Ethereum Foundry for Starknet, aiming to expedite the development process.
+"What is Starknet Foundry?","Starknet Foundry is a tool designed for testing and developing Starknet contracts. It is an adaptation of the Ethereum Foundry for Starknet, aiming to expedite the development process.
 
 The project consists of two primary components:
 
 1.Forge: A testing tool specifically for Cairo contracts. This tool acts as a test runner and boasts features designed to enhance your testing process. Tests are written directly in Cairo, eliminating the need for other programming languages. Additionally, the Forge implementation uses Rust, mirroring Ethereum Foundry's choice of language.
 
 2.Cast: This serves as a DevOps tool for Starknet, initially supporting a series of commands to interface with Starknet. In the future, Cast aims to offer deployment scripts for contracts and other DevOps functions."
-What is Cast in Starknet Foundry?,"Cast provides the Command Line Interface (CLI) for starknet, while Forge addresses testing. Written in Rust, Cast utilizes starknet Rust and integrates with Scarb. This integration allows for argument specification in 'Scarb.toml', streamlining the process.
+"What is Cast in Starknet Foundry?","Cast provides the Command Line Interface (CLI) for starknet, while Forge addresses testing. Written in Rust, Cast utilizes starknet Rust and integrates with Scarb. This integration allows for argument specification in 'Scarb.toml', streamlining the process.
 
 'sncast' simplifies interaction with smart contracts, reducing the number of necessary commands compared to using 'starkli' alone.
 
 In this section, we'll delve into 'sncast'."
-What should I do before use Cast?,"You should check if your computer installed these components successfully:
+"What should I do before use Cast?","You should check if your computer installed these components successfully:
 
 # scarb --version
 scarb 2.4.3
@@ -24,7 +24,7 @@ snforge 0.14.0
 # sncast --version
 sncast 0.14.0
 The Rust Devnet"
-Give me an example contract from starknet foundry.,"The following code sample is sourced from starknet foundry. If yo desire to get the files you can do it from Foundry Example Code.
+"Give me an example contract from starknet foundry.","The following code sample is sourced from starknet foundry. If yo desire to get the files you can do it from Foundry Example Code.
 
 #[starknet::interface]
 trait IHelloStarknet<TContractState> {
@@ -104,7 +104,7 @@ snforge_std = { git = 'https://github.com/foundry-rs/starknet-foundry.git', tag 
 snforge test
 
 Note: Use 'snforge' for testing instead of the 'scarb test' command. The tests are set up to utilize functions from 'snforge_std'. Running 'scarb test' would cause errors."
-How to set up Starknet Devnet with Starknet Foundry?,"The focus of this question is on using 'Rust starknet devnet'. If you've been using 'katana' or 'pythonic devnet', please be cautious as there might be inconsistencies. If you haven't configured 'devnet', consider following the guide from Starknet devnet for a quick setup.
+"How to set up Starknet Devnet with Starknet Foundry?","The focus of this question is on using 'Rust starknet devnet'. If you've been using 'katana' or 'pythonic devnet', please be cautious as there might be inconsistencies. If you haven't configured 'devnet', consider following the guide from Starknet devnet for a quick setup.
 
 To launch 'starknet devnet', use the command:
 
@@ -133,7 +133,7 @@ Class Hash: 0x7B3E05F48F0C69E4A65CE5E076A66271A527AFF2C34CE1083EC6E1526997A69
 (Note: The abbreviated ... is just a placeholder for the detailed response. In your actual output, you'll see the full details.)
 
 Now, you have written a smart contract, tested it, and successfully initiated starknet devnet."
-How to use 'sncast' command?,"Let's unpack 'sncast'.
+"How to use 'sncast' command?","Let's unpack 'sncast'.
 
 As a multifunctional tool, the quickest way to discover its capabilities is via the command:
 
@@ -153,7 +153,7 @@ Each account subcommand like 'add', 'create', and 'deploy' can be further explor
 sncast account add --help
 
 The layered structure of 'sncast' provides a wealth of information right at your fingertips. It's like having dynamic documentation. Make it a habit to explore, and you'll always stay informed."
-How to use sncast for interacting with the contract?,"By default, starknet devnet offers several predeployed accounts. These are accounts already registered with the node, loaded with test tokens (for gas fees and various transactions). Developers can use them directly with any contract on the local node (i.e., starknet devnet). Now you have two ways to interact with contract:
+"How to use sncast for interacting with the contract?","By default, starknet devnet offers several predeployed accounts. These are accounts already registered with the node, loaded with test tokens (for gas fees and various transactions). Developers can use them directly with any contract on the local node (i.e., starknet devnet). Now you have two ways to interact with contract:
 
 1.Utilize Predeployed Accounts
 
@@ -213,7 +213,7 @@ A successful deployment provides a transaction hash. If it doesn't work, revisit
     4.Setting a Default Profile
 
 You can define a default profile for your 'sncast' actions. To set one, edit the 'Scarb.toml' file. To make the 'new_account' the default profile, find the section '[tool.sncast.new_account]' and change it to '[tool.sncast]'. This means 'sncast' will default to using this profile unless instructed otherwise."
-How to use sncast to declare my smart contract?,"1.Building the Contract
+"How to use sncast to declare my smart contract?","1.Building the Contract
 
 Execute the following to build the contract:
 
@@ -256,7 +256,7 @@ transaction_hash: 0x7fbdcca80e7c666f1b5c4522fdad986ad3b731107001f7d8df5f3cb1ce8f
 Make sure to note the **class hash as it will be essential in the subsequent step.
 
 Note: If you encounter an error stating Class hash already declared, simply move to the next step. Redeclaring an already-declared contract isn't permissible. Use the mentioned class hash for deployment."
-How to use sncast to deploy my smart contract?,"With the contract successfully declared and a 'class hash' obtained, we're ready to proceed to contract deployment. This step is straightforward. Replace '<class-hash>' in the command below with your obtained class hash:
+"How to use sncast to deploy my smart contract?","With the contract successfully declared and a 'class hash' obtained, we're ready to proceed to contract deployment. This step is straightforward. Replace '<class-hash>' in the command below with your obtained class hash:
 
 sncast deploy --class-hash 0x20fe30f3990ecfb673d723944f28202db5acf107a359bfeef861b578c00f2a0
 
@@ -274,7 +274,7 @@ Add the '--profile' option, followed by the desired profile name, as per the one
 Alternatively, set a default profile as previously discussed in the 'Declaring the Contract' section under 'Hint' or as detailed in the 'Adding, Creating, and Deploying Account' subsection.
 
 You've successfully deployed your contract with 'sncast'! Now, let's explore how to interact with it."
-How can I use sncast wo interact with contract?,"1.Invoking Contract Functions
+"How can I use sncast to interact with contract?","1.Invoking Contract Functions
 
 To write to the contract, invoke its functions. Here's a basic overview of the command:
 
@@ -414,7 +414,7 @@ command: call
 response: [0x9]
 
 The expected balance, '0x9', is confirmed."
-Can you give me an example script of how to deploy contract?,"1. Create the Script File
+"Can you give me an example script of how to deploy contract?","1. Create the Script File
 
 In the root directory of your project, create a file named 'script.sh'. This file will contain the deployment script.
 
@@ -568,7 +568,7 @@ which bash
 
 Then replace '#!/usr/bin/env' bash in the script with the resulting path, such as '#!/path/to/your/bash'.
 "
-What else do I need to do before use sncast?,"You should adapt it to suit your specific needs and requirements. The script is compatible with the following versions or higher:
+"What else do I need to do before use sncast?","You should adapt it to suit your specific needs and requirements. The script is compatible with the following versions or higher:
 
 # scarb --version
 scarb 2.4.3
@@ -585,7 +585,7 @@ The Rust Devnet
 And here are additional tools:
 
 The script requires 'jq' to run. You can install it with 'sudo apt install jq' on Ubuntu or 'brew install jq' on macOS. For more information, refer to the JQ Docs."
-What else do I need to do when using sncast to run the script?,"When running the script, you'll need to provide the environment variables 'ACCOUNT1_PRIVATE_KEY' and 'ACCOUNT2_PRIVATE_KEY'. Example:
+"What else do I need to do when using sncast to run the script?","When running the script, you'll need to provide the environment variables 'ACCOUNT1_PRIVATE_KEY' and 'ACCOUNT2_PRIVATE_KEY'. Example:
 
 ACCOUNT1_PRIVATE_KEY='0x259f4329e6f4590b' ACCOUNT2_PRIVATE_KEY='0xb4862b21fb97d' ./script.sh
 
