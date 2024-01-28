@@ -1,6 +1,6 @@
 question,answer
 What is Starkli?,Starkli is a CLI tool for interacting with Starknet. More tools are discussed in Chapter 2.
-What is Scarb?,"Scarb is Cairo¡¯s package manager that compiles code to Sierra, a mid-level language between Cairo and CASM."
+What is Scarb?,"Scarb is CairoÂ¡Â¯s package manager that compiles code to Sierra, a mid-level language between Cairo and CASM."
 What is Katana?,"Katana is a Starknet node, built for local development."
 how to install Starkli?,"Easily install Starkli using Starkliup, an installer invoked through the command line.
 
