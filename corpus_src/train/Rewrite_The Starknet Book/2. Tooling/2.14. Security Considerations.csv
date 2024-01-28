@@ -1,5 +1,5 @@
 question,answer
-What is access control issue?,"Access control vulnerabilities occur when a smart contract's functions are insufficiently protected, allowing unauthorized actions. This can result in unexpected behavior and data manipulation.
+"What is access control issue?","Access control vulnerabilities occur when a smart contract's functions are insufficiently protected, allowing unauthorized actions. This can result in unexpected behavior and data manipulation.
 
 Take, for instance, a smart contract for token minting without proper access control:
 ///
@@ -56,7 +56,7 @@ mod Token {
 }
 ///
 By establishing robust access control, you ensure that only authorized entities execute your smart contract functions, significantly reducing the risk of unauthorized interference."
-What is reentrancy issue?,"Reentrancy vulnerabilities arise when a smart contract calls an external contract before updating its state. This allows the external contract to recursively call the original function, potentially leading to unintended behavior.
+"What is reentrancy issue?","Reentrancy vulnerabilities arise when a smart contract calls an external contract before updating its state. This allows the external contract to recursively call the original function, potentially leading to unintended behavior.
 
 Consider a game contract where whitelisted addresses can mint an NFT sword and then execute an 'on_receive_sword()' function before returning it. This NFT contract is at risk of a reentrancy attack, where an attacker can mint multiple swords.
 ///
@@ -122,7 +122,7 @@ if self.whitelisted.read(sender) {
 }
 ///
 Adhering to this pattern enhances the security of your smart contract by minimizing the risk of reentrancy attacks and preserving the integrity of its internal state."
-What is Tx.Origin authentication issue?,"In Solidity, 'tx.origin' is a global variable that stores the address of the transaction initiator, while 'msg.sender' stores the address of the transaction caller. In Cairo, we have the 'account_contract_address' global variable and 'get_caller_address' function, which serve the same purpose.
+"What is Tx.Origin authentication issue?","In Solidity, 'tx.origin' is a global variable that stores the address of the transaction initiator, while 'msg.sender' stores the address of the transaction caller. In Cairo, we have the 'account_contract_address' global variable and 'get_caller_address' function, which serve the same purpose.
 
 Using 'account_contract_address' (the equivalent of 'tx.origin') for authentication in your smart contract functions can lead to phishing attacks. Attackers can create custom smart contracts and trick users into placing them as intermediaries in a transaction call, effectively impersonating the contract owner.
 
@@ -197,7 +197,7 @@ impl ITokenImpl of IToken {
 }
 ///
 This change ensures secure authentication, preventing unauthorized users from executing critical functions and safeguarding against phishing attempts."
-What is Overflow and Underflow issue?,"Overflow and underflow vulnerabilities arise from assigning values too large (overflow) or too small (underflow) for a specific data type.
+"What is Overflow and Underflow issue?","Overflow and underflow vulnerabilities arise from assigning values too large (overflow) or too small (underflow) for a specific data type.
 
 Consider the 'felt252' data type: adding or subtracting values beyond its range can yield incorrect results:
 ///
@@ -264,7 +264,7 @@ Overflow: '0x753132385f616464204f766572666c6f77=u128_add Overflow'
 Underflow: '0x753132385f737562204f766572666c6f77=u128_sub Overflow'
 
 Using these data types, you can ensure safer arithmetic operations in your smart contracts, avoiding unintended consequences of overflows and underflows."
-What is Private Data On-Chain issue?,"Storing secret values in smart contracts presents a challenge because all on-chain data is publicly accessible, even if the code isn't published. For example, consider a smart contract storing a password (12345678) using a constructor parameter:
+"What is Private Data On-Chain issue?","Storing secret values in smart contracts presents a challenge because all on-chain data is publicly accessible, even if the code isn't published. For example, consider a smart contract storing a password (12345678) using a constructor parameter:
 ///
 #[starknet::contract]
 mod StoreSecretPassword {
@@ -304,7 +304,7 @@ Executing this script reveals the stored password value (hex value of 12345678);
 Recommendation:
 
 If your smart contract requires storing private data on-chain, consider off-chain encryption before sending data to the blockchain. Alternatively, explore options like hashes, merkle trees, or commit-reveal patterns to maintain data privacy."
-What other issues are in Starknet?,"Many other security risks need attention like:
+"What other issues are in Starknet?","Many other security risks need attention like:
 
 1.Storage Collision
 2.Flash Loan Attacks
