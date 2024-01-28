@@ -1,6 +1,6 @@
 question,answer
-What is Scarb?,"Scarb is Cairo's package manager designed for both Cairo and Starknet projects. It handles dependencies, compiles projects, and integrates with tools like Foundry. It is built by the same team that created Foundry for Starknet."
-How to set up Scarb until I compile my contract?,"Follow these steps to develop a Starknet contract using Scarb:
+"What is Scarb?","Scarb is Cairo's package manager designed for both Cairo and Starknet projects. It handles dependencies, compiles projects, and integrates with tools like Foundry. It is built by the same team that created Foundry for Starknet."
+"How to set up Scarb until I compile my contract?","Follow these steps to develop a Starknet contract using Scarb:
 
 1.Initialize: Use scarb new to set up a new project, generating a Scarb.toml file and initial src/lib.cairo.
 
@@ -9,7 +9,7 @@ How to set up Scarb until I compile my contract?,"Follow these steps to develop 
 3.Dependencies: Add external libraries using scarb add.
 
 4.Compile: Execute scarb build to convert your contract into Sierra code."
-What are Cairo Packages in Scarb?,"Cairo packages, also referred to as 'crates' in some contexts, are the building blocks of a Cairo project. Each package must follow several rules:
+"What are Cairo Packages in Scarb?","Cairo packages, also referred to as 'crates' in some contexts, are the building blocks of a Cairo project. Each package must follow several rules:
 
 1.A package must include a Scarb.toml file, which is Scarb's manifest file. It contains the dependencies for your package.
 
@@ -18,15 +18,16 @@ What are Cairo Packages in Scarb?,"Cairo packages, also referred to as 'crates' 
 Package structures might look like the following case where we have a package named my_package, which includes a src directory with the lib.cairo file inside, a snips directory which in itself a package we can use, and a Scarb.toml file in the top-level directory.
 
 my_package/
-©À©¤©¤ src/
-©¦   ©À©¤©¤ module1.cairo
-©¦   ©À©¤©¤ module2.cairo
-©¦   ©¸©¤©¤ lib.cairo
-©À©¤©¤ snips/
-©¦   ©À©¤©¤ src/
-©¦   ©¦   ©À©¤©¤ lib.cairo
-©¦   ©À©¤©¤ Scarb.toml
-©¸©¤©¤ Scarb.toml
+|-src/
+|  |-module1.cairo
+|  |-module2.cairo
+|  |-lib.cairo
+|-snips/
+|  |src/
+|  | |-lib.cairo
+|  |-Scarb.toml
+|-Scarb.toml
+
 Within the Scarb.toml file, you might have:
 
 [package]
@@ -37,15 +38,16 @@ version = '0.1.0'
 starknet = '>=2.0.1'
 snips = { path = 'snips' }
 Here starknet and snips are the dependencies of the package. The starknet dependency is hosted on the Scarb registry (we do not need to download it), while the snips dependency is located in the snips directory."
-How to create a new project with Scarb?,"To create a new project using Scarb, navigate to your desired project directory and execute the following command:
+"How to create a new project with Scarb?","To create a new project using Scarb, navigate to your desired project directory and execute the following command:
 
 $ scarb new hello_scarb
 This command will create a new project directory named hello_scarb, including a Scarb.toml file, a src directory with a lib.cairo file inside, and initialize a new Git repository with a .gitignore file.
 
 hello_scarb/
-©À©¤©¤ src/
-©¦   ©¸©¤©¤ lib.cairo
-©¸©¤©¤ Scarb.toml
+|-src/
+|  -|lib.cairo
+|-Scarb.toml
+
 Upon opening Scarb.toml in a text editor, you should see something similar to the code snippet below:
 
 [package]
@@ -55,7 +57,7 @@ version = '0.1.0'
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 [dependencies]
 # foo = { path = 'vendor/foo' }"
-How to build a project with Scarb?,"Clear all content in src/lib.cairo and replace with the following:
+"How to build a project with Scarb?","Clear all content in src/lib.cairo and replace with the following:
 
 // src/lib.cairo
 mod hello_scarb;
@@ -78,7 +80,7 @@ scarb build
 This command compiles your project and produces the Sierra code in the target/dev/hello_scarb.sierra.json file. Sierra serves as an intermediate layer between high-level Cairo and compilation targets such as Cairo Assembly (CASM).
 
 To remove the build artifacts and delete the target directory, use the scarb clean command."
-How to add dependencies to my project in Scarb?,"Scarb facilitates the seamless management of dependencies for your Cairo packages. Here are two methods to add dependencies to your project:
+"How to add dependencies to my project in Scarb?","Scarb facilitates the seamless management of dependencies for your Cairo packages. Here are two methods to add dependencies to your project:
 
 1.Edit Scarb.toml File
 Open the Scarb.toml file in your project directory and locate the [dependencies] section. If it doesn't exist, add it. To include a dependency hosted on a Git repository, use the following format:
@@ -103,7 +105,7 @@ This command will add the alexandria_math dependency from the specified Git repo
 To remove a dependency, you can use the 'scarb rm' command.
 
 Once a dependency is added, the Scarb.toml file will be automatically updated with the new dependency information."
-How to use these dependencies in my project?,"After dependencies are added to your project, you can start utilizing them in your Cairo code.
+"How to use these dependencies in my project?","After dependencies are added to your project, you can start utilizing them in your Cairo code.
 
 For example, let's assume you have added the alexandria_math dependency. Now, you can import and utilize functions from the alexandria_math library in your 'src/hello_scarb.cairo' file:
 
@@ -115,7 +117,7 @@ fn main() -> felt252 {
 }
 
 In the above example, we import the fibonacci function from the alexandria_math library and utilize it in the main function."
-Give me some example commands of Scarb.,"Here's a quick cheat sheet of some of the most commonly used Scarb commands:
+"Give me some example commands of Scarb.","Here's a quick cheat sheet of some of the most commonly used Scarb commands:
 
 1.'scarb new <project_name>': Initialize a new project with the given project name.
 
@@ -126,7 +128,7 @@ Give me some example commands of Scarb.,"Here's a quick cheat sheet of some of t
 4.'scarb rm' <dependency>: Remove a dependency from your project.
 
 5.'scarb run' <script>: Run a custom script defined in your Scarb.toml file."
-Give me an example contract with components in Scarb.,"Here is the sample contract with components:
+"Give me an example contract with components in Scarb.","Here is the sample contract with components:
 
 // ...rest of the code
 
