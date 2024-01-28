@@ -1,5 +1,5 @@
 question,answer
-How SHARP work as a verifier?,"SHARP, or Shared Prover, in Starknet, aggregates various Cairo programs from distinct users. These programs, each with unique logic, run together, producing a common proof for all, optimizing cost and efficiency.
+"How SHARP work as a verifier?","SHARP, or Shared Prover, in Starknet, aggregates various Cairo programs from distinct users. These programs, each with unique logic, run together, producing a common proof for all, optimizing cost and efficiency.
 
 Furthermore, SHARP supports combining multiple proofs into one, enhancing its efficiency by allowing parallel proof processing and verification.
 
@@ -8,7 +8,7 @@ SHARP verifies numerous Starknet transactions, like transfers, trades, and state
 To illustrate SHARP: Think of commuting by bus. The bus driver, the prover, transports passengers, the Cairo programs. The driver checks only the tickets of passengers alighting at the upcoming stop, much like SHARP. The prover forms a single proof for all Cairo programs in a batch, but verifies only the proofs of programs executing in the succeeding block.
 
 Sharp Jobs. Known as Shared Prover Jobs, Sharp Jobs let multiple users present their Cairo programs for combined execution, distributing the proof generation cost. This shared approach makes Starknet more economical for users, enabling them to join ongoing jobs and leverage economies of scale."
-How does solidity work with SHARP in Starknet?,"A Solidity verifier is an L1 smart contract, crafted in Solidity, designed to validate STARK proofs from SHARP (Shared Prover).
+"How does solidity work with SHARP in Starknet?","A Solidity verifier is an L1 smart contract, crafted in Solidity, designed to validate STARK proofs from SHARP (Shared Prover).
 
 Historically, the Solidity Verifier was a monolithic contract, both initiated and executed by the same contract. For illustration, the operator would invoke the 'update state' function on the main contract, providing the state to be modified and confirming its validity. Subsequently, the main contract would present the proof to both the verifier and the validium committee. Once they validated the proof, the state would be updated in the main contract.
 
@@ -24,7 +24,7 @@ The current verifier utilizes multiple smart contracts rather than being a singu
 2.'MemoryPageFactRegistry': This registry maintains facts for memory pages, primarily used to register outputs for data availability in rollup mode. The Fact Registry is a separate smart contract ensuring the verification and validity of attestations or facts. The verifier function is separated from the main contract to ensure each segment works optimally within its limits. The main proof segment relies on other parts, but these parts operate independently.
 3.'MerkleStatementContract': This contract verifies merkle paths.
 4.'FriStatementContract': It focuses on verifying the FRI layers."
-Can you explain me the Sharp Verifier Contract in Starknet?,"The Sharp Verifier Contract Map contains roughly 40 contracts, detailing various components of the Solidity verifier. The images below display the contracts and their Ethereum Mainnet addresses.
+"Can you explain me the Sharp Verifier Contract in Starknet?","The Sharp Verifier Contract Map contains roughly 40 contracts, detailing various components of the Solidity verifier. The images below display the contracts and their Ethereum Mainnet addresses.
 
 These contracts function as follows:
 
@@ -35,7 +35,7 @@ These contracts function as follows:
 5.EcdsaPoints (X & Y Column): Similar to the Pedersen hash, these tables assist in calculating the elliptic curve.
 6.CpuFrilessVerifier/CpuOods/CpuConstantPoly (0 - 7): These verifier contracts vary in layout as shown in the 'GpsStatementVerifier' layout image. Each layout encompasses resources, built-ins, constraints, and more, designed for a specific task. Each has unique parameters for its constructor.
 7.PoseidonPoseidon: These contracts back the new Poseidon built-in and contain Poseidon-specific lookup tables."
-Can you tell me the constructor parameters of Key Contracts?,"When constructing the primary verifier contracts, specific parameters are employed to facilitate functionality. These parameters reference other auxiliary contracts, decentralizing the logic and ensuring the main contract remains under the 24kb deployment limit.
+"Can you tell me the constructor parameters of Key Contracts?","When constructing the primary verifier contracts, specific parameters are employed to facilitate functionality. These parameters reference other auxiliary contracts, decentralizing the logic and ensuring the main contract remains under the 24kb deployment limit.
 
 Below is a visual representation of these parameters in relation to key contracts 'CpuFrilessVerifiers' and 'GpsStatementVerifier'.
 
@@ -55,7 +55,7 @@ The 'GpsStatementVerifier' functions as the hub of verifier operations, necessit
 2.Memory Operations: This is facilitated by the 'MemoryPageFactRegistry contract'.
 3.Sub-Verifiers: It integrates a series of sub-verifiers ('CpuFrilessVerifier0' through 'CpuFrilessVerifier7') to decentralize tasks.
 4.Verification: The hashes, 'hashed_supported_cairo_verifiers' and 'simple_bootloader_program_hash', are essential for validation processes."
-What about interconnection of contracts?,"The 'GpsStatementVerifier' serves as the primary verifier contract, optimized for minimal logic to fit within deployment size constraints. To function effectively:
+"What about interconnection of contracts?","The 'GpsStatementVerifier' serves as the primary verifier contract, optimized for minimal logic to fit within deployment size constraints. To function effectively:
 
 1.It relies on smaller verifier contracts, which are already deployed and contain varied verification logic.
 2.These smaller contracts, in turn, depend on other contracts, established during their construction.
@@ -63,7 +63,7 @@ What about interconnection of contracts?,"The 'GpsStatementVerifier' serves as t
 In essence, while the diverse functionalities reside in separate contracts for clarity and size efficiency, they are all interlinked within the 'GpsStatementVerifier'.
 
 For future enhancements or adjustments, the proxy and callproxy contracts facilitate upgradability, allowing seamless updates to the 'GpsStatementVerifier' without compromising its foundational logic."
-What about Sharp Verification Flow?,"Sharp Verification Flow here:
+"What about Sharp Verification Flow?","Sharp Verification Flow here:
 
 1.The Sharp dispatcher transmits all essential transactions for verification, including: a. 'MemoryPages' (usually many). b. 'MerkleStatements' (typically between 3 and 5). c. 'FriStatements' (generally ranging from 5 to 15).
 2.The Sharp dispatcher then forwards the proof using 'verifyProofAndRegister'.
