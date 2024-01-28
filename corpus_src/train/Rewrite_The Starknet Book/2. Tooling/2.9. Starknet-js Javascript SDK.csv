@@ -1,6 +1,6 @@
 question,answer
-What is Starknet.js?,"Starknet.js is a JavaScript/TypeScript library designed to connect your website or decentralized application (D-App) to Starknet. It aims to mimic the architecture of ethers.js, so if you are familiar with ethers, you should find Starknet.js easy to work with."
-How to use Starknet.js?,"First, you need to install Starknet.js, follow these steps:
+"What is Starknet.js?","Starknet.js is a JavaScript/TypeScript library designed to connect your website or decentralized application (D-App) to Starknet. It aims to mimic the architecture of ethers.js, so if you are familiar with ethers, you should find Starknet.js easy to work with."
+"How to use Starknet.js?","First, you need to install Starknet.js, follow these steps:
 
 For the latest official release (main branch):
 npm install starknet
@@ -96,7 +96,7 @@ There are other helpful utils, besides 'bnToUint256' and 'uint256ToBN', provided
 We now have a solid foundation to build a Starknet dapp. However, there are framework specific tools that help us build Starknet dapps, which are covered in chapter 5.
 
 With Starknet.js, you can also automate the process of deploying a smart contract to Starknet testnet / mainnet."
-How to deploy smart contractusing Starknet.js?,"Starknet.js offers capabilities for deploying smart contracts. In this tutorial, we demonstrate this by deploying an account contract, which we previously developed in Chapter 4, through a scripted approach.
+"How to deploy smart contractusing Starknet.js?","Starknet.js offers capabilities for deploying smart contracts. In this tutorial, we demonstrate this by deploying an account contract, which we previously developed in Chapter 4, through a scripted approach.
 
 STEP 1: Initial Setup and Dependency Installation
 
@@ -471,7 +471,7 @@ main();
 ///
 The 'main' function orchestrates the entire deployment process, from creating a key pair to declaring and deploying the account contract, and finally testing its functionality by executing a transfer transaction.
 "
-Can you give me an example contract using Starknet.js?,"Here is a simple counter smart contract with a frontend. By the end of this guide, you will understand how to:
+"Can you give me an example contract using Starknet.js?","Here is a simple counter smart contract with a frontend. By the end of this guide, you will understand how to:
 
 1.Connect the frontend to a smart contract.
 2.Initiate transactions, such as incrementing or decrementing the counter.
@@ -660,14 +660,14 @@ const getCounter = async () => {
 ///
 The 'getCounter' function is designed to retrieve the current count from a smart contract. Here's a breakdown of its operation:
 
-1.Establishes a provider instance, specifying the sequencer network ¨C in this instance, it's set to the 'mainnet' through 'constants.NetworkName.SN_MAIN'.
+1.Establishes a provider instance, specifying the sequencer network in this instance, it's set to the 'mainnet' through 'constants.NetworkName.SN_MAIN'.
 2.With this provider, it then initiates a contract instance using the provided contract's ABI, its address, and the aforementioned provider.
 3.The function then invokes the 'get_current_count' method of the contract to fetch the current count. This is an asynchronous action, and the program waits for its completion with the 'await' keyword.
 4.Once successfully retrieved, the count, which is presumably a number, is converted to a string and stored using the 'setRetrievedValue' function.
 5.In the event of any errors during the process, an alert provides the user with the relevant error message.
 
 It's essential to emphasize that while performing read operations, like fetching data from a blockchain network, the function uses the provider. Unlike write operations, which typically require a signer (or an account) for transaction signing, read operations don't mandate such authentication. Thus, in this function, only the provider is specified, and not the signer."
-Can you give me another example contract using Starknet.js?,"Here is an example ERC20 smart contract using Cairo and to incorporate it within a React web application with StarknetJS. You will:
+"Can you give me another example contract using Starknet.js?","Here is an example ERC20 smart contract using Cairo and to incorporate it within a React web application with StarknetJS. You will:
 
 1.Understand how to implement the ERC20 interface
 2.Learn how to deploy contracts on the Starknet network
@@ -764,7 +764,7 @@ scarb build
 
 Subsequent to the compilation, declare the smart contract on the Starknet testnet (using your own account and keystore):
 
-starkli declare target/dev/erc20_erc20.sierra.json --account ../../demo-account.json --keystore ../../demo-key.json --compiler-version 2.1.0 --network goerli-1 ¨Cwatch
+starkli declare target/dev/erc20_erc20.sierra.json --account ../../demo-account.json --keystore ../../demo-key.json --compiler-version 2.1.0 --network goerli-1 Â¨Cwatch
 
 The output should appear similar to:
 
@@ -802,12 +802,12 @@ Well done! The Cairo ERC20 smart contract has been deployed successfully on Star
 With the contract in place, initiate the development of the web application. Begin by setting up our react project. To do this, Nextjs framework provides the 'create-next-app' script that streamlines the setup of a Nextjs application:
 
 npx create-next-app@latest erc20_web --use-npm
-? Would you like to use TypeScript? ¡­ Yes
-? Would you like to use ESLint? ¡­ Yes
-? Would you like to use Tailwind CSS? ¡­ Yes
-? Would you like to use `src/` directory? ¡­ Yes
-? Would you like to use App Router? (recommended) ¡­ Yes
-? Would you like to customize the default import alias (@/*)? ¡­ No
+? Would you like to use TypeScript? Â¡Â­ Yes
+? Would you like to use ESLint? Â¡Â­ Yes
+? Would you like to use Tailwind CSS? Â¡Â­ Yes
+? Would you like to use `src/` directory? Â¡Â­ Yes
+? Would you like to use App Router? (recommended) Â¡Â­ Yes
+? Would you like to customize the default import alias (@/*)? Â¡Â­ No
 
 Then, you should see something like this:
 
