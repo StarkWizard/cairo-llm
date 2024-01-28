@@ -1,17 +1,17 @@
 question,answer
-What is Starknet OS?,"Central to Starknet's functionality is the Starknet Operating System (OS), a Cairo program that fuels the network. This OS orchestrates key activities, including:
+"What is Starknet OS?","Central to Starknet's functionality is the Starknet Operating System (OS), a Cairo program that fuels the network. This OS orchestrates key activities, including:
 
 1.Deploying contracts
 2.Executing transactions
 3.Facilitating L1<>L2 message exchanges
 
 In Starknet terminology, 'protocol level' alludes to modifications in the foundational Starknet OS Cairo program, ensuring its steadfastness."
-What transaction type does Starknet have?,"There are three transaction types in Starknet:
+"What transaction type does Starknet have?","There are three transaction types in Starknet:
 
 1.Declare Transactions: Unique in their ability to introduce new classes, leading to potential new smart contracts.
 2.Invoke Transactions: They call upon an action but can't introduce new ones.
 3.Deploy Account Transactions: Designed for setting up smart wallet contracts."
-What is Declare Transactions?,"Declare transactions are the sole mechanism for introducing new smart contracts to Starknet.
+"What is Declare Transactions?","Declare transactions are the sole mechanism for introducing new smart contracts to Starknet.
 
 Recall programming in C++. Before employing a variable or function, it's first 'declared', signaling to the compiler its existence and type. Only then can you 'define' or use it. Declare transactions in Starknet operate on similar principles: they announce a new operation, prepping it for future use.
 
@@ -32,7 +32,7 @@ Examining the parameters of a V2 transaction reveals measures that ensure the cl
 // TODO -> Provide specifics about the parameters included in the transaction.
 
 In essence, using the most recent Cairo version implies the utilization of the latest Declare transaction version."
-What is Invoke Transactions?,"Unlike Declare transactions, Invoke transactions don't add new functions. They ask the network to carry out actions, such as executing or deploying contracts. This method contrasts with Ethereum, where a contract can either be deployed by sending a distinct transaction or by having another smart contract factory to deploy it. Starknet uses only the second method.
+"What is Invoke Transactions?","Unlike Declare transactions, Invoke transactions don't add new functions. They ask the network to carry out actions, such as executing or deploying contracts. This method contrasts with Ethereum, where a contract can either be deployed by sending a distinct transaction or by having another smart contract factory to deploy it. Starknet uses only the second method.
 
 The Universal Deployer Contract (UDC) in Starknet illustrates this idea. UDC, a public utility, helps deploy contracts. This mirrors how in C++, a declared function is called to perform tasks.
 
@@ -41,10 +41,10 @@ In computer science terms, think of how functions operate in C++. After declarin
 Every Invoke transaction in Starknet undergoes __validate__ and __execute__ stages. The __validate__ step checks the transaction's correctness, similar to a syntax or logic check. After validation, the __execute__ phase processes the transaction.
 
 This two-step process, focusing on utilizing existing functionalities, highlights Starknet's distinct transaction strategy."
-What is Deploy Account Transactions?,"A challenge arises: How do you set up accounts without having one already? When creating your first smart wallet contract, deployment fees arise. How do you cover these without a smart wallet? The solution is deploy account transactions.
+"What is Deploy Account Transactions?","A challenge arises: How do you set up accounts without having one already? When creating your first smart wallet contract, deployment fees arise. How do you cover these without a smart wallet? The solution is deploy account transactions.
 
 Uniquely in Starknet, addresses can accept funds even without an associated smart wallet. This trait is pivotal during deployment. Before an account is formally created, the '__validate__' function checks the proposed deployment address (even if it lacks a smart wallet) for sufficient funds. If present, the constructor proceeds, resulting in account deployment. This method guarantees the new account's legitimacy and financial readiness."
-What are the steps involved in a transaction?,"1.Starknet processes transactions in distinct steps:
+"What are the steps involved in a transaction?","1.Starknet processes transactions in distinct steps:
 
 1.A transaction starts by being sent to a gateway, a node, which acts as the Mempool.
 2.The Sequencer, currently a single service, first validates and then executes the transactions in order.
@@ -66,7 +66,7 @@ To obtain this information, query the transaction receipt returned by the Nodes.
 
 2.Nonces in Starknet
 
-Initially, Starknet did not incorporate nonces. This omission meant that the same transaction could be sent multiple times with an identical nonce, leading to duplicate hashes¡ªa problem. In Ethereum, nonces not only sequence transactions but also ensure each has a unique hash. Similarly, Starknet employs nonces to assign a distinct hash to every transaction.
+Initially, Starknet did not incorporate nonces. This omission meant that the same transaction could be sent multiple times with an identical nonce, leading to duplicate hashesÂ¡Âªa problem. In Ethereum, nonces not only sequence transactions but also ensure each has a unique hash. Similarly, Starknet employs nonces to assign a distinct hash to every transaction.
 
 Starknet's current stance on nonces mandates that they be sequential. In other words, when you transmit a transaction from your account, its nonce must precisely follow the previous transaction's nonce.
 
@@ -86,7 +86,7 @@ Before broadcasting the transaction to the Sequencer, the gateways perform a val
 
 4.The Sequencer's Role
 
-On receiving the transaction, the Sequencer acknowledges its receipt but hasn't processed it yet¡ªsimilar to Ethereum's mempool state.
+On receiving the transaction, the Sequencer acknowledges its receipt but hasn't processed it yetÂ¡Âªsimilar to Ethereum's mempool state.
 
 Sequencer's Process:
 
@@ -115,7 +115,7 @@ It's essential to remember that at this stage, no proof has been generated, and 
 6.Acceptance on Layer-1 (L1)
 
 The final step in the transaction's lifecycle is its acceptance on Layer-1 (L1). A Prover receives the block containing the transaction, re-executes the block, generates a proof, and sends it to Ethereum. Specifically, the proof is sent to a smart contract on Ethereum called the Verifier smart contract, which checks the proof's validity. If valid, the transaction's status changes to 'accepted on L1', signifying the transaction's security by Ethereum consensus."
-What is Transaction Finality in Starknet?,"Transaction finality refers to the point at which a transaction is considered irreversible and is no longer susceptible to being reversed or undone. It's the assurance that once a transaction is committed, it can't be altered or rolled back, hence securing the integrity of the transaction and the system as a whole.
+"What is Transaction Finality in Starknet?","Transaction finality refers to the point at which a transaction is considered irreversible and is no longer susceptible to being reversed or undone. It's the assurance that once a transaction is committed, it can't be altered or rolled back, hence securing the integrity of the transaction and the system as a whole.
 
 Let's dive into the transaction finality in both Starknet and Ethereum, and how they compare.
 
@@ -136,7 +136,7 @@ And here is the comparison:
 The main difference between Ethereum and Starknet's transaction finality lies in the stages of finality and their reliance on consensus mechanisms.
 
 Ethereum's transaction finality becomes increasingly unlikely to be reversed as more blocks are added. Starknet's finality process is two-fold. The initial finality (L2) is quicker but relies on L2 consensus and carries a small risk of collusion. The ultimate finality (L1) is slower, as it involves generation and validation of proofs and updates on Ethereum. However, once reached, it provides the same level of security as an Ethereum transaction."
-What about REJECTED Transactions?,"When a transaction passes validation in the Mempool but fails during the sequencer's validate phase, it receives the REJECTED status. Such transactions are not included in any block and maintain the 'finality_status' as RECEIVED. This rejection can occur for reasons including:
+"What about REJECTED Transactions?","When a transaction passes validation in the Mempool but fails during the sequencer's validate phase, it receives the REJECTED status. Such transactions are not included in any block and maintain the 'finality_status' as RECEIVED. This rejection can occur for reasons including:
 
 1.Check max_fee is higher than the minimal tx cost
 2.Check Account balance is at least max_fee
@@ -173,10 +173,10 @@ block_number=None,
 actual_fee=0
 
 It's important to note that the user isn't charged a fee because the transaction didn't execute in the Sequencer."
-What about handling of Reverted Transactions?,"A transaction can be reverted due to failed execution, the transaction will still be included in a block, and the account will be charged for the resources consumed.
+"What about handling of Reverted Transactions?","A transaction can be reverted due to failed execution, the transaction will still be included in a block, and the account will be charged for the resources consumed.
 
 This adds a trust assumption for the Sequencer to be honest and non-censoring. In later versions, there will be an OS change that will enable the Sequencer to prove that a transaction failed and charge the correct amount of gas for it, thus making it censorship-resistant with provably failed transactions."
-What about gas fee in Starknet?,"Implementing a fee system enhances Starknet's performance. Without fees, the system risks becoming overwhelmed by numerous transactions, even with optimizations. When a transaction occurs on Layer 2 (L2), Starknet collects the corresponding fee using ERC-20 tokens. The transaction submitter pays the fee, and the sequencer receives it.
+"What about gas fee in Starknet?","Implementing a fee system enhances Starknet's performance. Without fees, the system risks becoming overwhelmed by numerous transactions, even with optimizations. When a transaction occurs on Layer 2 (L2), Starknet collects the corresponding fee using ERC-20 tokens. The transaction submitter pays the fee, and the sequencer receives it.
 
 1. Fee Measurement
 
