@@ -1,8 +1,8 @@
 question,answer
-What is Forge in Starknet Foundry?,"Forge sets itself apart by hosting a Cairo VM instance, enabling the sequential execution of tests. It employs Scarb for contract compilation. To utilize Forge, define test functions and label them with test attributes. Users can either test standalone Cairo functions or integrate contracts, dispatchers, and test contract interactions on-chain."
-How to use Forge in Starknet Foundry?,"You can use forge through the Starknet Foundry 'snforge' command-line tool. Learn how to set up a new project, compile the code, and execute tests.
+"What is Forge in Starknet Foundry?","Forge sets itself apart by hosting a Cairo VM instance, enabling the sequential execution of tests. It employs Scarb for contract compilation. To utilize Forge, define test functions and label them with test attributes. Users can either test standalone Cairo functions or integrate contracts, dispatchers, and test contract interactions on-chain."
+"How to use Forge in Starknet Foundry?","You can use forge through the Starknet Foundry 'snforge' command-line tool. Learn how to set up a new project, compile the code, and execute tests.
 
-To start a new project with Starknet Foundry, use the '°™init' command and replace 'project_name' with your project's name.
+To start a new project with Starknet Foundry, use the '„Äûinit' command and replace 'project_name' with your project's name.
 
 snforge --init project_name
 
@@ -13,11 +13,10 @@ tree . -L 1
 
 The project structure is as follows:
 
-.
-©¿©§©§ README.md
-©¿©§©§ Scarb.toml
-©¿©§©§ src
-©∏©§©§ tests
+1.README.md
+2.Scarb.toml
+3.src
+4.tests
 
 'src/' holds your contract source code.
 'tests/' is the location of your test files.
@@ -39,7 +38,7 @@ Running 2 test(s) from `tests/`
 [PASS] tests::test_contract::test_increase_balance
 [PASS] tests::test_contract::test_cannot_increase_balance_with_zero_value
 Tests: 2 passed, 0 failed, 0 skipped"
-How to Integrate snforge with existing Scarb Projects?,"For those with an established Scarb project who wish to incorporate 'snforge', ensure the 'snforge_std package' is declared as a dependency. Insert the line below in the [dependencies] section of your 'Scarb.toml':
+"How to Integrate snforge with existing Scarb Projects?","For those with an established Scarb project who wish to incorporate 'snforge', ensure the 'snforge_std package' is declared as a dependency. Insert the line below in the [dependencies] section of your 'Scarb.toml':
 
 # ...
 [dependencies]
@@ -47,14 +46,14 @@ snforge_std = { git = 'https://github.com/foundry-rs/starknet-foundry.git', tag 
 
 Ensure the tag version corresponds with your 'snforge' version. To verify your 'snforge' version:
 
-snforge ®Cversion
+snforge -version
 
 Or, add this dependency using the 'scarb' command:
 
 scarb add snforge_std --git https://github.com/foundry-rs/starknet-foundry.git --tag VERSION
 
 With these steps, your existing Scarb project is now 'snforge'-ready."
-How to test a contract with snforge?,"The example provided below demonstrates how to test a Starknet contract using 'snforge'.
+"How to test a contract with snforge?","The example provided below demonstrates how to test a Starknet contract using 'snforge'.
 ///
 #[starknet::interface]
 trait IHelloStarknet<TContractState> {
@@ -117,7 +116,7 @@ Collected 1 test(s) from using_dispatchers package
 Running 1 test(s) from src/
 [PASS] using_dispatchers::call_and_invoke
 Tests: 1 passed, 0 failed, 0 skipped"
-Can you give me an example of how to test an ERC20 contract?,"There are several methods to test smart contracts, such as unit tests, integration tests, fuzz tests, fork tests, E2E tests, and using foundry cheatcodes. This section discusses testing an ERC20 example contract from the 'starknet-js' subchapter examples using unit and integration tests, filtering, foundry 'cheatcodes', and fuzz tests through the 'snforge' CLI.
+"Can you give me an example of how to test an ERC20 contract?","There are several methods to test smart contracts, such as unit tests, integration tests, fuzz tests, fork tests, E2E tests, and using foundry cheatcodes. This section discusses testing an ERC20 example contract from the 'starknet-js' subchapter examples using unit and integration tests, filtering, foundry 'cheatcodes', and fuzz tests through the 'snforge' CLI.
 
 After setting up your foundry project, add the following dependency to your 'Scarb.toml' (in this case we are using version 0.7.0 of the OpenZeppelin Cairo contracts, but you can use any version you want):
 
@@ -257,7 +256,7 @@ Collected 2 tests from erc20_contract package
 [PASS] tests::test_erc20::test_transfer
 
 In this example, 'start_prank' determines the transfer function's caller, while 'stop_prank' concludes the prank."
-What is Fuzz Test?,"Fuzz testing introduces random inputs to the code to identify vulnerabilities, security issues, and unforeseen behaviors. While you can manually provide these inputs, automation is preferable when testing a broad set of values. See the example below in 'test_fuzz.cairo':
+"What is Fuzz Test?","Fuzz testing introduces random inputs to the code to identify vulnerabilities, security issues, and unforeseen behaviors. While you can manually provide these inputs, automation is preferable when testing a broad set of values. See the example below in 'test_fuzz.cairo':
 ///
     fn mul(a: felt252, b: felt252) -> felt252 {
         return a * b;
@@ -307,7 +306,7 @@ Or in scarb.toml:
     fuzzer_runs = 500
     fuzzer_seed = 4656
     # ..."
-What is Filter test?,"To execute specific tests, use a filter string with the 'snforge' command. Tests matching the filter based on their absolute module tree path will be executed.
+"What is Filter test?","To execute specific tests, use a filter string with the 'snforge' command. Tests matching the filter based on their absolute module tree path will be executed.
 
 For instance, to run all tests with the string 'test_' in their name:
 
@@ -330,9 +329,9 @@ Another example: To filter and run 'test_fuzz_sum' we can partially match the te
 
 snforge test_fuzz_sum
 
-To execute an exact test, combine the '°™exact' flag with a fully qualified test name:
+To execute an exact test, combine the '„Äûexact' flag with a fully qualified test name:
 
-snforge package_name::test_name ®Cexact
+snforge package_name::test_name ÊØèexact
 
 To halt the test suite upon the first test failure, use the '--exit-first flag':
 
