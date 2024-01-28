@@ -1,0 +1,112 @@
+question,answer
+"How to use the Starknet Remix Plugin to compile, deploy and interact with smart contract?","1.Visit the Remix IDE website.
+2.Navigate to the 'Plugin Manager' section in the bottom left corner.
+3.Activate the 'Starknet' plugin.
+4.Accept the permissions. Click 'Remember my choice' to avoid this step in the future.
+5.After enabling, the Starknet logo appears on the left sidebar. Click it to interact with opened Cairo files."
+Please give me a cairo contract with an ownership system.,"ok, there is a cairo example contract with ownership system:
+use starknet::ContractAddress;
+
+#[starknet::interface]
+trait OwnableTrait<T> {
+    fn transfer_ownership(ref self: T, new_owner: ContractAddress);
+    fn get_owner(self: @T) -> ContractAddress;
+}
+
+#[starknet::contract]
+mod Ownable {
+    use super::ContractAddress;
+    use starknet::get_caller_address;
+
+    #[event]
+    #[derive(Drop, starknet::Event)]
+    enum Event {
+      OwnershipTransferred1: OwnershipTransferred1,
+    }
+
+    #[derive(Drop, starknet::Event)]
+    struct OwnershipTransferred1 {
+        #[key]
+        prev_owner: ContractAddress,
+        #[key]
+        new_owner: ContractAddress,
+    }
+
+    #[storage]
+    struct Storage {
+        owner: ContractAddress,
+    }
+
+    #[constructor]
+    fn constructor(ref self: ContractState, init_owner: ContractAddress) {
+        self.owner.write(init_owner);
+    }
+
+    #[abi(embed_v0)]
+    impl OwnableImpl of super::OwnableTrait<ContractState> {
+        fn transfer_ownership(ref self: ContractState, new_owner: ContractAddress) {
+            self.only_owner();
+            let prev_owner = self.owner.read();
+            self.owner.write(new_owner);
+            self.emit(Event::OwnershipTransferred1(OwnershipTransferred1 {
+                prev_owner: prev_owner,
+                new_owner: new_owner,
+            }));
+        }
+
+        fn get_owner(self: @ContractState) -> ContractAddress {
+            self.owner.read()
+        }
+    }
+
+    #[generate_trait]
+    impl PrivateMethods of PrivateMethodsTrait {
+        fn only_owner(self: @ContractState) {
+            let caller = get_caller_address();
+            assert(caller == self.owner.read(), 'Caller is not the owner');
+        }
+    }
+}"
+what is 'starknet::ContractAddress' in your contract?,It represents a Starknet contract address and it should be added to your code to make compiler to recognize the Cairo.
+what is 'OwnableTrait' in your contract?,It is the specify function for transferring and getting ownership.
+what is 'OwnershipTransferred1' in your contract?,It indicates ownership change with previous and new owner details.
+what is 'Storage' in your contract?,It holds the contract's state with the current owner address.
+what is 'Constructor' in your contract?,It initializes the contract with a starting owner.
+what are 'External Functions' in your contract?,They are functions for transferring ownership and retrieving the current owner's details.
+what is 'only_owner' in your contract?,It validates if the caller is the current owner.
+How to use Remix to compile your contract?,"To compile using Remix:
+1.Navigate to the 'File Explorer' tab in Remix.
+2.Create a new file named something.cairo and paste your code into it.
+3.Choose the something.cairo file.
+4.In the 'Starknet' tab, select 'Compile something.cairo'.
+5.Post-compilation, an 'artifacts' folder emerges containing the compiled contract in two distinct formats: Sierra (JSON file) and CASM. For Starknet deployment, Remix will use the Sierra file. Do not worry about this process for now; we will cover it in detail in a later chapter. For now, Remix will handle the compilation and deployment for us."
+How to deployment my contract?,"Here's a step-by-step guide to deploying your smart contract on the development network:
+1.Select the Appropriate Network. In the Starknet tab, click on the top button and choose 'Remote Devnet' for deploying your inaugural contract on a development network.
+2.Choose a Devnet Account. Under 'Devnet account selection', a list of accounts specific to the chosen devnet is presented, and pick any account and copy its address.
+3.Initiating Deployment. Input some parameters if any. Then, click on 'Deploy'."
+What is 'transaction_hash' on Remix terminal after deployment?,It is the unique hash of the transaction. This hash can be used to track the transaction status.
+What will I get on Remix terminal after deployment?,"You will get some logs on terminal after deployment to prove you have successfully deployed the contract like:
+{
+  'transaction_hash': '0x275e6d2caf9bc98b47ba09fa9034668c6697160a74de89c4655e2a70be84247',
+  'contract_address': '0x5eb239955ad4c4333b8ab83406a3cf5970554b60a0d8e78a531df18c59a0db9',
+    ...
+  'calldata': [
+    '0x1398224729985f8e76571285c6d936b5af4a88206a1dc54c0658b4e15045292'
+  ],
+    ...
+}"
+What is 'contract_address' on Remix terminal after deployment?,It is the address of the deployed contract. Use this address to interact with your contract.
+What is 'calldata' on Remix terminal after deployment?,It contains Some parameters fed to the constructor.
+How to interact with my contract?,"1.Initiating Interaction. navigate to the 'Starknet' plugin tab and select the 'Interact' option.
+2.Calling your function. Your terminal will display the result, revealing parameters during the contract deployment as calldata for the constructor."
+How to know if my interaction was successful?,"The terminal logs will exhibit a 'status' variable, indicating the transaction fate. If the status reads ACCEPTED_ON_L2, the Sequencer has accepted the transaction, pending block inclusion. However, a REJECTED status signifies the Sequencer disapproval, and the transaction will not feature in the upcoming block. More often than not, this transaction gains acceptance, leading to a contract state modification."
+How to create starknet account?,You can set up a smart wallet using either: Argent or Braavos.
+How to use my wallet to deployment and interact with my contract?,"1.Follow the previous deployment steps.
+2.In the 'Environment selection' tab, choose 'Wallet'.
+3.Select your Starknet account and continue with deploying and interacting with your contract."
+How can I see my transaction like hashes and parameters?,"You can monitor transaction hashes and addresses using any Starknet block explorers like:
+1.Starkscan
+2.Voyager
+3.ViewBlock
+4.oklink"
+How can I learn more knowledge about starknet?,"For an extensive grasp of Starknet inner workings and potential use cases, delve into Chapter 3 of the Starknet Book. This chapter details Starknet¡¯s architectural nuances. Then go ahead from there."

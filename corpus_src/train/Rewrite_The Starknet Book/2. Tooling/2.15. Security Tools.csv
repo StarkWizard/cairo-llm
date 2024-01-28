@@ -1,0 +1,106 @@
+question,answer
+What security tools does Starknet have?,"1.Cairo-fuzzer: A tool for smart contract developers to test security. It functions both as a standalone tool and as a library.
+2.Caracal: A static analysis tool for Starknet smart contracts, utilizing the SIERRA representation.
+3.Thoth: A comprehensive Cairo/Starknet security toolkit. It includes analyzers, disassemblers, and decompilers."
+How to use Cairo-fuzzer?,"Cairo-fuzzer is a tool designed for smart contract developers to assess security. It operates both independently and as a library.
+
+Features:
+
+Execute Cairo contracts.
+Execute Starknet contracts.
+Replay fuzzing corpus.
+Minimize fuzzing corpus.
+Load previous corpus.
+Manage multiple arguments.
+Utilize workspace architecture.
+Import dictionaries.
+Integrate Cairo-fuzzer as a library.
+
+Usage
+
+To use Cairo-fuzzer, run the following command:
+
+cargo run --release -- --cores 3 --contract tests/fuzzinglabs.json --function 'Fuzz_symbolic_execution'
+
+This outputs:
+
+For more usage information, follow our tutorial
+CMDLINE (--help):
+
+Usage: cairo-fuzzer [OPTIONS]
+
+Options:
+      --cores <CORES>              Set the number of threads to run [default: 1]
+      --contract <CONTRACT>        Set the path of the JSON artifact to load [default: ]
+      --function <FUNCTION>        Set the function to fuzz [default: ]
+      --workspace <WORKSPACE>      Workspace of the fuzzer [default: fuzzer_workspace]
+      --inputfolder <INPUTFOLDER>  Path to the inputs folder to load [default: ]
+      --crashfolder <CRASHFOLDER>  Path to the crashes folder to load [default: ]
+      --inputfile <INPUTFILE>      Path to the inputs file to load [default: ]
+      --crashfile <CRASHFILE>      Path to the crashes file to load [default: ]
+      --logs                       Enable fuzzer logs in file
+      --seed <SEED>                Set a custom seed (only applicable for 1 core run)
+      --run-time <RUN_TIME>        Number of seconds this fuzzing session will last
+      --config <CONFIG>            Load config file
+      --replay                     Replay the corpus folder
+      --minimizer                  Minimize Corpora
+  -h, --help                       Print help information"
+How to use Caracal?,"Caracal is a static analysis tool for Starknet smart contracts, specifically analyzing their SIERRA representation.
+
+Features
+
+Vulnerability detectors for Cairo code.
+Report printers.
+Taint analysis.
+Data flow analysis framework.
+Compatibility with Scarb projects.
+
+Installation
+
+Precompiled Binaries
+
+Download precompiled binaries from the releases page. Use binary version v0.1.x for Cairo compiler 1.x.x, and v0.2.x for Cairo compiler 2.x.x.
+
+Building from Source
+
+Requirements:
+
+1.Rust compiler
+2.Cargo
+
+Installation Steps:
+
+Clone and build from the repository:
+
+cargo install --git https://github.com/crytic/caracal --profile release --force
+
+If you prefer to build from a local copy:
+
+git clone https://github.com/crytic/caracal
+cd caracal
+cargo install --path . --profile release --force"
+How to use Thoth?,"Thoth (pronounced 'taut' or 'toss') is a security toolkit for Cairo/Starknet. Written in Python 3, it includes analyzers, disassemblers, and decompilers. Thoth is capable of generating call graphs, control-flow graphs (CFG), and data-flow graphs for Sierra files or Cairo/Starknet compilation artifacts. It also features tools like a symbolic execution engine and a symbolic bounded model checker.
+
+Features
+
+1.Remote & Local Analysis: Works with contracts on Mainnet/Goerli and local compilations.
+2.Decompiler: Transforms assembly into decompiled code using SSA (Static Single Assignment).
+3.Call Flow Analysis: Generates Call Flow Graphs.
+4.Static Analysis: Conducts various types of analyses (security/optimization/analytics) on contracts.
+5.Symbolic Execution: Finds variable values for specific paths in functions and generates test cases.
+6.Data Flow Analysis: Produces Data Flow Graphs (DFG) for each function.
+7.Disassembler: Converts bytecode to assembly.
+8.Control Flow Analysis: Creates Control Flow Graphs (CFG).
+9.Cairo Fuzzer Inputs: Generates inputs for Cairo fuzzer.
+10.Sierra Files Analysis: Analyzes Sierra files.
+11.Sierra Files Symbolic Execution: Performs symbolic execution on Sierra files.
+12.Symbolic Bounded Model Checker: Functions as a symbolic bounded model checker.
+
+Installation
+
+Install Thoth using the following commands:
+
+sudo apt install graphviz
+git clone https://github.com/FuzzingLabs/thoth && cd thoth
+pip install .
+thoth -h"
