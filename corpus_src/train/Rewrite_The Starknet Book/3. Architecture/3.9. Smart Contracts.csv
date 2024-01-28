@@ -1,5 +1,5 @@
 question,answer
-Can you give me an example factory contract?,"Here is your factory contract named 'Piggy Bank Factory', The piggy bank contract is a factory contract model that allows users to create their own personalized savings contract. At the point of creation, users are to specify their savings target, which could be towards a specific time or a specific amount, and a child contract is created and personalized to their savings target.
+"Can you give me an example factory contract?","Here is your factory contract named 'Piggy Bank Factory', The piggy bank contract is a factory contract model that allows users to create their own personalized savings contract. At the point of creation, users are to specify their savings target, which could be towards a specific time or a specific amount, and a child contract is created and personalized to their savings target.
 
 The factory contract keeps tabs on all the child contracts created and also maps a user to his personalized contract. The user, after creating a personalized savings contract, can then deposit and save towards his target. But if, for any reason, the user has to withdraw from his savings contract before meeting the savings target, then a fine worth 10% of the withdrawal amount would be paid by the user.
 
@@ -144,7 +144,7 @@ use piggy_bank::ownership_component::IOwnable;
 
 }
 ///"
-Can you give me an example contract from factory?,"Here is your factory contract named 'Piggy Bank Factory', The piggy bank contract is a factory contract model that allows users to create their own personalized savings contract. At the point of creation, users are to specify their savings target, which could be towards a specific time or a specific amount, and a child contract is created and personalized to their savings target.
+"Can you give me an example contract from factory?","Here is your factory contract named 'Piggy Bank Factory', The piggy bank contract is a factory contract model that allows users to create their own personalized savings contract. At the point of creation, users are to specify their savings target, which could be towards a specific time or a specific amount, and a child contract is created and personalized to their savings target.
 
 The factory contract keeps tabs on all the child contracts created and also maps a user to his personalized contract. The user, after creating a personalized savings contract, can then deposit and save towards his target. But if, for any reason, the user has to withdraw from his savings contract before meeting the savings target, then a fine worth 10% of the withdrawal amount would be paid by the user.
 
@@ -350,7 +350,7 @@ mod piggyBank {
     }
 }
 ///"
-How to set up with Piggy Bank contract with factory?,"1.Requirements:
+"How to set up with Piggy Bank contract with factory?","1.Requirements:
 
 To declare and deploy the piggy bank contract, it's required that you have the following available; don't worry, I'll point you to resources or links to get them sorted out.
 
@@ -406,7 +406,7 @@ Our transaction hash is '0x077a2d9f64f19da764957e88440bc4cca50f792c62bccd163ee11
 starkli call 0x04f4c7a6a7de241e138f1c20b81d939a6e5807fdf8ea8845a86a61493e8de4ff getPiggyBankAddr 0x076957612bA0927c9C3F6156Ffaa1A52Bc330256869d85A8A0D0999B3e4c6387 --rpc https://starknet-sepolia.public.blastapi.io/rpc/v0_6
 
 After calling this function using the command above, we get a response on our terminal containing the address of the child piggy bank personalized to the address we passed in as an argument, the first argument is the address of the factory contract while the second is the function name while the third is the address of the user which we intend to fetch his piggy bank address."
-How to interact with my personal Piggy Bnak contract? ,"At this point, we have been able to create a piggy bank contract customized specifically to our savings target, and we have the address for that contract. We are now left with interacting with our contract by depositing Eth into it and also withdrawing from it.
+"How to interact with my personal Piggy Bnak contract?","At this point, we have been able to create a piggy bank contract customized specifically to our savings target, and we have the address for that contract. We are now left with interacting with our contract by depositing Eth into it and also withdrawing from it.
 
 But before we jump into depositing Eth into our contract, its important to note that Ether on starknet is actually a regular ERC20 token, so we'll need to grant approval to our Piggy contract to be able to spend our Eth. We can achieve this by using the below command to call the approve function on the Eth contract address.
 
@@ -425,7 +425,7 @@ starkli invoke 0x044a5cc1518cd4f4dc4b40c5d2e72de2a82c5c7c7e2c0f840182b79aacb9773
 Finally, we get a transaction hash containing details regarding our withdrawal '0x0781103066cf3bfa07ce59c1082c802db8a46caa276a293d9fcbe8610b85c1a8'.
 
 Scanning the above transaction hash on Voyager gives us the details contained in the image above; among other things, it contains a breakdown of how our withdrawal was distributed. Since we didn't deposit up to our target amount before withdrawing, 10% of our withdrawal amount was sent to the factory contract, while the remaining 90% was sent to our address."
-Can you tell me some methods of Starknet?,"The table below contains important methods used while building starknet smart contracts. It contains the name of the method, a keyword to import such a method, and finally a simple single line usage of each method. Also note that multiple method imports can be chained to make the codebase simpler and also avoid repetition, e.g., `use starknet::{get_contract_address, ContractAddress}.
+"Can you tell me some methods of Starknet?","The table below contains important methods used while building starknet smart contracts. It contains the name of the method, a keyword to import such a method, and finally a simple single line usage of each method. Also note that multiple method imports can be chained to make the codebase simpler and also avoid repetition, e.g., `use starknet::{get_contract_address, ContractAddress}.
 
 METHODS IMPORTATION EXAMPLE USAGE DESCRIPTION
 
