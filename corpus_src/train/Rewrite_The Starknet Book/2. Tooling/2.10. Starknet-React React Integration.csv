@@ -1,8 +1,7 @@
 question,answer
-What is the difference between Starknet-React and Starknet.js?,"starknet-react (documentation): Developed by the Apibara team, Starknet React is an open-source suite of React providers and hooks specifically for Starknet, and inspired by wagmi and powered by starknet.js.
-
-starknet.js: This JavaScript library facilitates interactions with Starknet contracts, akin to web3.js for Ethereum."
-How to intergrate Starknet-React?,"The fastest way to get started using Starknet React is by using the create-starknet Command Line Interface (CLI). The tool will guide you through setting up your Starknet application:
+"What is the difference between Starknet-React and Starknet.js?","starknet-react (documentation): Developed by the Apibara team, Starknet React is an open-source suite of React providers and hooks specifically for Starknet, and inspired by wagmi and powered by starknet.js.
+And starknet.js: This JavaScript library facilitates interactions with Starknet contracts, akin to web3.js for Ethereum."
+"How to intergrate Starknet-React?","The fastest way to get started using Starknet React is by using the create-starknet Command Line Interface (CLI). The tool will guide you through setting up your Starknet application:
 
 npm init starknet
 
@@ -32,7 +31,7 @@ export default function App({ children }) {
     </StarknetConfig>
   );
 }"
-How to use Starknet-React to manage account?,"After defining the connectors in the 'config', you can use a hook to access them. This enables users to connect their wallets.
+"How to use Starknet-React to manage account?","After defining the connectors in the 'config', you can use a hook to access them. This enables users to connect their wallets.
 ///
 export default function Component() {
   const { connect, connectors } = useConnect();
@@ -76,7 +75,7 @@ Once connected, signing messages is easy with the account value from the 'useAcc
     );
 ///
 Starknet React supports signing an array of 'BigNumberish' values or an object. When signing an object, ensure the data adheres to the EIP712 type."
-How to use Starknet-React to display my Starkname?,"Once an account is connected, the 'useStarkName' hook retrieves the 'StarkName' of the account. And it allows for displaying the user address in a user-friendly manner.
+"How to use Starknet-React to display my Starkname?","Once an account is connected, the 'useStarkName' hook retrieves the 'StarkName' of the account. And it allows for displaying the user address in a user-friendly manner.
 ///
     const { data, isLoading, isError } = useStarkName({ address });
 
@@ -88,7 +87,7 @@ How to use Starknet-React to display my Starkname?,"Once an account is connected
     return <span>StarkName: {data}</span>;
 ///
 This hook provides additional information: error, status, fetchStatus, isSuccess, isError, isPending, isFetching, isLoading. These details offer precise insights into the current process."
-How to use Starknet-React to fetch address from Starkname?,"To retrieve an address from a 'StarkName', use the 'useAddressFromStarkName' hook.
+"How to use Starknet-React to fetch address from Starkname?","To retrieve an address from a 'StarkName', use the 'useAddressFromStarkName' hook.
 ///
     const { data, isLoading, isError } = useAddressFromStarkName({
       name: 'vitalik.stark',
@@ -102,7 +101,7 @@ How to use Starknet-React to fetch address from Starkname?,"To retrieve an addre
     return <span>address: {data}</span>;
 ///
 If the provided name does not have an associated address, it will return '0x0'."
-How to use Starknet-React to navagate the Network?,"Starknet React provides developers with tools for network interactions, including hooks like useBlock for retrieving the latest block:
+"How to use Starknet-React to navagate the Network?","Starknet React provides developers with tools for network interactions, including hooks like useBlock for retrieving the latest block:
 ///
         const { data, isLoading, isError } = useBlock({
         refetchInterval: 10_000,
@@ -125,7 +124,7 @@ The useStarknet hook gives direct access to the ProviderInterface:
     // library.getClassByHash(...)
     // library.getTransaction(...)
 ///"
-How to use Starknet-React to track wallet changes?,"For a better dApp user experience, tracking wallet changes is crucial. This includes account changes, connections, disconnections, and network switches. Reload balances on account changes, or reset your dApp's state on network changes. Use 'useAccount' and 'useNetwork' for this.
+"How to use Starknet-React to track wallet changes?","For a better dApp user experience, tracking wallet changes is crucial. This includes account changes, connections, disconnections, and network switches. Reload balances on account changes, or reset your dApp's state on network changes. Use 'useAccount' and 'useNetwork' for this.
 
 'useNetwork' provides the current network chain:
 ///
@@ -160,7 +159,7 @@ Monitor user interactions with account and network using the useEffect hook:
         // Like reseting the state of your dApp
     }, [chain]);
 ///"
-How to use Starknet-React to interact with contract?,"1. Read Functions
+"How to use Starknet-React to interact with contract?","1. Read Functions
 
 Starknet React introduces 'useContractRead', similar to wagmi, for read operations on contracts. These operations are independent of the user's connection status and don't require a signer.
 ///
@@ -239,7 +238,7 @@ const { contract } = useContract({
 // contract.transfer(...);
 // contract.balanceOf(...);
 ///"
-How to use Starknet-React to track transactions?,"UseWaitForTransaction' function tracks transaction states with a transaction hash, reducing network requests through caching.
+"How to use Starknet-React to track transactions?","UseWaitForTransaction' function tracks transaction states with a transaction hash, reducing network requests through caching.
 ///
 const { isLoading, isError, error, data } = useWaitForTransaction({
   hash: transaction,
@@ -252,7 +251,7 @@ if (isError || !data) return <div>{error?.message}</div>;
 return <div>{data.status?.length}</div>;
 ///
 Explore all available hooks in Starknet React's documentation: https://starknet-react.com/hooks/."
-How to use Starknet-React to put smart contract to web application?,"Here are some steps to build an ERC20 smart contract using Cairo and to incorporate it within a React web application with Starknet React. You can:
+"How to use Starknet-React to put smart contract to web application?","Here are some steps to build an ERC20 smart contract using Cairo and to incorporate it within a React web application with Starknet React. You can:
 
 1.Understand how to implement the ERC20 interface
 2.Learn how to deploy contracts on the Starknet network
@@ -348,7 +347,7 @@ scarb build
 
 Subsequent to the compilation, declare the smart contract on the Starknet testnet:
 
-starkli declare target/dev/erc20_erc20.sierra.json --account ../../demo-account.json --keystore ../../demo-key.json --compiler-version 2.1.0 --network goerli-1 ¨Cwatch
+starkli declare target/dev/erc20_erc20.sierra.json --account ../../demo-account.json --keystore ../../demo-key.json --compiler-version 2.1.0 --network goerli-1 Â¨Cwatch
 
 The output should appear similar to:
 
@@ -389,7 +388,7 @@ $ npm init starknet
 Need to install the following packages:
   create-starknet@2.0.1
 Ok to proceed? (y) y
-? What is your project named? ¡­ erc20_web
+? What is your project named? Â¡Â­ erc20_web
 ? What framework would you like to use? ? Next.js
 Installing dependencies...
 Success! Created erc20_web at ~/erc20_web
@@ -638,11 +637,11 @@ vercel
 
 6.Publish your project:
 
-vercel ¨Cprod
+vercel Â¨Cprod
 
 Congratulations! Your MKT token web3 application is now accessible to everyone.
 "
-Can you give me an example of how to use Starknet-React to put smart contract to web application?,"Here is an example of using Starknet-React to put smart contract to web application: Starknet Homepage. It is a decentralized application on the Starknet blockchain. It provides a virtual space where users can claim and personalize sections of a 100x100 grid, known as 'Starknet Homepage'. Each section is a 10x10 pixel area. Users can acquire these sections by minting non-fungible tokens (NFTs) and then personalizing them with images and other content.
+"Can you give me an example of how to use Starknet-React to put smart contract to web application?","Here is an example of using Starknet-React to put smart contract to web application: Starknet Homepage. It is a decentralized application on the Starknet blockchain. It provides a virtual space where users can claim and personalize sections of a 100x100 grid, known as 'Starknet Homepage'. Each section is a 10x10 pixel area. Users can acquire these sections by minting non-fungible tokens (NFTs) and then personalizing them with images and other content.
 
 This initiative is an adaptation of the renowned Million Dollar Homepage and was conceived at the Starknet Summit 2023 Hacker House in Palo Alto, California. The following is a guide to understanding how this project was developed using the available tools in the ecosystem.
 
