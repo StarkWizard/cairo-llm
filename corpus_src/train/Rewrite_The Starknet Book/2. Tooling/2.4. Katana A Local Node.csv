@@ -1,11 +1,11 @@
 question,answer
-What is Katana?,"Katana is designed to aid in local development. This creation by the Dojo team enables you to perform all Starknet-related activities in a local environment, thus serving as an efficient platform for development and testing.
+"What is Katana?","Katana is designed to aid in local development. This creation by the Dojo team enables you to perform all Starknet-related activities in a local environment, thus serving as an efficient platform for development and testing.
 
 We suggest employing either 'katana' or 'starknet-devnet' for testing your contracts, with the latter discussed in another subchapter. The 'starknet-devnet' is a public testnet, maintained by the Shard Labs team. Both these tools offer an effective environment for development and testing."
-Can I use RPC to interact with contract in Starknet?,"Ofcourse. Remote Procedure Call (RPC) establishes the communication between nodes in the Starknet network. Essentially, it allows us to interact with a node in the Starknet network. The RPC server is responsible for receiving these calls.
+"Can I use RPC to interact with contract in Starknet?","Ofcourse. Remote Procedure Call (RPC) establishes the communication between nodes in the Starknet network. Essentially, it allows us to interact with a node in the Starknet network. The RPC server is responsible for receiving these calls.
 
 RPC can be obtained from various sources: . To support the decentralization of the Network, you can use your own local Starknet node. For ease of access, consider using a provider such as Infura or Alchemy to get an RPC client. For development and testing, a temporary local node such as katana can be used."
-How to startup with Katana?,"To install Katana, use the dojoup installer from the command line:
+"How to startup with Katana?","To install Katana, use the dojoup installer from the command line:
 
 'curl -L https://install.dojoengine.org | bash
 dojoup'
@@ -23,14 +23,6 @@ To initialize a local Starknet node, execute the following command:
 The --accounts flag determines the number of accounts to be created, while the --seed flag sets the seed for the private keys of these accounts. This ensures that initializing the node with the same seed will always yield the same accounts. Lastly, the --gas-price flag specifies the transaction gas price.
 
 Running the command produces output similar to this:'
-
-¨€¨€¨[  ¨€¨€¨[ ¨€¨€¨€¨€¨€¨[ ¨€¨€¨€¨€¨€¨€¨€¨€¨[ ¨€¨€¨€¨€¨€¨[ ¨€¨€¨€¨[   ¨€¨€¨[ ¨€¨€¨€¨€¨€¨[
-¨€¨€¨U ¨€¨€¨X¨a¨€¨€¨X¨T¨T¨€¨€¨[¨^¨T¨T¨€¨€¨X¨T¨T¨a¨€¨€¨X¨T¨T¨€¨€¨[¨€¨€¨€¨€¨[  ¨€¨€¨U¨€¨€¨X¨T¨T¨€¨€¨[
-¨€¨€¨€¨€¨€¨X¨a ¨€¨€¨€¨€¨€¨€¨€¨U   ¨€¨€¨U   ¨€¨€¨€¨€¨€¨€¨€¨U¨€¨€¨X¨€¨€¨[ ¨€¨€¨U¨€¨€¨€¨€¨€¨€¨€¨U
-¨€¨€¨X¨T¨€¨€¨[ ¨€¨€¨X¨T¨T¨€¨€¨U   ¨€¨€¨U   ¨€¨€¨X¨T¨T¨€¨€¨U¨€¨€¨U¨^¨€¨€¨[¨€¨€¨U¨€¨€¨X¨T¨T¨€¨€¨U
-¨€¨€¨U  ¨€¨€¨[¨€¨€¨U  ¨€¨€¨U   ¨€¨€¨U   ¨€¨€¨U  ¨€¨€¨U¨€¨€¨U ¨^¨€¨€¨€¨€¨U¨€¨€¨U  ¨€¨€¨U
-¨^¨T¨a  ¨^¨T¨a¨^¨T¨a  ¨^¨T¨a   ¨^¨T¨a   ¨^¨T¨a  ¨^¨T¨a¨^¨T¨a  ¨^¨T¨T¨T¨a¨^¨T¨a  ¨^¨T¨a
-
 
 PREFUNDED ACCOUNTS
 ==================
