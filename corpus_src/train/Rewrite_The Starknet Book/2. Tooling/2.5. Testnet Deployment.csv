@@ -1,12 +1,12 @@
 question,answer
-Should I check something before deployment on testnet?,"Ensure the following commands run successfully on your system. If not, see the Basic Installation section:
+"Should I check something before deployment on testnet?","Ensure the following commands run successfully on your system. If not, see the Basic Installation section:
 
 1.scarb --version  # For Cairo code compilation
 2.starkli --version  # To interact with Starknet"
-What shold I do first when deployment?,"You should setup your smart wallet first. A smart wallet comprises a Signer and an Account Descriptor. The Signer is a smart contract with a private key for signing transactions, while the Account Descriptor is a JSON file detailing the wallet's address and public key.
+"What shold I do first when deployment?","You should setup your smart wallet first. A smart wallet comprises a Signer and an Account Descriptor. The Signer is a smart contract with a private key for signing transactions, while the Account Descriptor is a JSON file detailing the wallet's address and public key.
 
 In order for an account to be used as a signer it must be deployed to the appropriate network, Starknet Sepolia or mainnet, and funded. For this example we are going to use Sepolia Testnet."
-Where can I store my private key?,"Starkli enables secure storage of your private key through a keystore file. This encrypted file can be accessed using a password and is generally stored in the default Starkli directory.
+"Where can I store my private key?","Starkli enables secure storage of your private key through a keystore file. This encrypted file can be accessed using a password and is generally stored in the default Starkli directory.
 
 First, create the default directory:
 
@@ -18,8 +18,8 @@ Then generate the keystore file. The signer command contains subcommands for cre
     Enter private key:
     Enter password:'
 In the private key prompt, paste the private key of your smart wallet. In the password prompt, enter a password of your choice. You will need this password to sign transactions using Starkli."
-How to get the private key?,"Export the private key from your Braavos or Argent wallet. For Argent X, you can find it in the 'Settings' section ¡ú Select your Account ¡ú 'Export Private Key'. For Braavos, you can find it in the 'Settings' section ¡ú 'Privacy and Security' ¡ú 'Export Private Key'."
-I want to check details of the previously created keystore file.,"Example of the keystore.json File:
+"How to get the private key?","Export the private key from your Braavos or Argent wallet. For Argent X, you can find it in the 'Settings' section Â¡Ãº Select your Account Â¡Ãº 'Export Private Key'. For Braavos, you can find it in the 'Settings' section Â¡Ãº 'Privacy and Security' Â¡Ãº 'Export Private Key'."
+"I want to check details of the previously created keystore file.","Example of the keystore.json File:
 
 {
   'crypto': {
@@ -74,12 +74,12 @@ ciphertext: This is the private key after encryption, securely stored so that on
 'salt': A random value that is combined with the password to deter dictionary attacks.
 
 'mac (Message Authentication Code)': This is a cryptographic code that ensures the integrity of the message (the encrypted private key in this case). It is generated using a hash of both the ciphertext and a portion of the derived key."
-which provider of RPC should I choose?,"There are some main options for RPC providers, sorted by ease of use:
+"which provider of RPC should I choose?","There are some main options for RPC providers, sorted by ease of use:
 
 1.Infura or Alchemy: A step up in complexity. You'll need to set up an API key and choose an endpoint. For Infura, it would look like https://starknet-sepolia.infura.io/v3/<API_KEY>. Learn more in the Infura documentation.
 
 2.Your Own Node: For those who want full control. It's the most complex but offers the most freedom. Check out Chapter 4 of the Starknet Book or Kasar for setup guides."
-What does 'Account Descriptor' mean? What should I do for this?,"An Account Descriptor informs Starkli about your smart wallet's unique features, such as its signing mechanism. You can generate this descriptor using Starkli's fetch subcommand under the account command. The fetch subcommand takes your on-chain wallet address as input and generates the account descriptor file. The account descriptor file is a JSON file that contains the details of your smart wallet. We also have to pass the rpc provider here.
+"What does 'Account Descriptor' mean? What should I do for this?","An Account Descriptor informs Starkli about your smart wallet's unique features, such as its signing mechanism. You can generate this descriptor using Starkli's fetch subcommand under the account command. The fetch subcommand takes your on-chain wallet address as input and generates the account descriptor file. The account descriptor file is a JSON file that contains the details of your smart wallet. We also have to pass the rpc provider here.
 
 'starkli account fetch <SMART_WALLET_ADDRESS> --output ~/.starkli-wallets/deployer/my_account_1.json --rpc https://starknet-sepolia.infura.io/v3/<API_KEY>'
 
@@ -135,13 +135,13 @@ Here's what a typical descriptor might look like:
 }
 
 Note: The structure will differ if you use an Argent wallet."
-How to set up environment variables?,"To simplify Starkli commands, you can set environment variables. Two key variables are crucial: one for the Signer's keystore file location and another for the Account Descriptor file.
+"How to set up environment variables?","To simplify Starkli commands, you can set environment variables. Two key variables are crucial: one for the Signer's keystore file location and another for the Account Descriptor file.
 
     'export STARKNET_ACCOUNT=~/.starkli-wallets/deployer/my_account_1.json'
     'export STARKNET_KEYSTORE=~/.starkli-wallets/deployer/my_keystore_1.json'
 
 Setting these variables makes running Starkli commands easier and more efficient."
-How to deploy my smart contract in starknet testnet?,"Deploying a smart contract on Starknet involves two steps:
+"How to deploy my smart contract in starknet testnet?","Deploying a smart contract on Starknet involves two steps:
 
 1.Declare your contract's code.
 2.Deploy an instance of the declared code.
@@ -207,7 +207,7 @@ After executing the command and entering your password, you should see output li
     0x02a83c32d4b417d3c22f665acbc10e9a1062033b9ab5b2c3358952541bc6c012
 
 The contract is now live on the Starknet testnet. You can verify its status using a block explorer like StarkScan. On the 'Read/Write Contract' tab, you'll see the contract's external functions."
-How can I interact with my contract on testnet or mainnet?,"Starkli enables interaction with smart contracts via two primary methods: 'call' for read-only functions and 'invoke' for write functions that modify the state.
+"How can I interact with my contract on testnet or mainnet?","Starkli enables interaction with smart contracts via two primary methods: 'call' for read-only functions and 'invoke' for write functions that modify the state.
 
 1.Calling a Read Function
 
@@ -248,8 +248,8 @@ To verify that the ownership has successfully transferred, you can call the 'get
         <CONTRACT_ADDRESS> \
         owner
 If the function returns the new owner's address, the transfer was successful."
-How can I get ETH on starknet testnet?,"Overview
-Currently, there are no active Sepolia faucets in Starknet. Therefore, the process of acquiring SEPOLIA tokens involves obtaining them on the Ethereum Sepolia testnet and then transferring them to the Starknet Sepolia testnet.
+"How can I get ETH on starknet testnet?",
+"Currently, there are no active Sepolia faucets in Starknet. Therefore, the process of acquiring SEPOLIA tokens involves obtaining them on the Ethereum Sepolia testnet and then transferring them to the Starknet Sepolia testnet.
 
 Step 1: Obtain SEPOLIA Tokens on the Ethereum Sepolia Testnet
 To acquire $ETH on the Ethereum Sepolia testnet, you can use:
