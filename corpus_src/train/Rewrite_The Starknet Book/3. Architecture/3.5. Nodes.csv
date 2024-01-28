@@ -1,0 +1,295 @@
+question,answer
+What about nodes in the Starknet Ecosystem?,"A node in the Starknet ecosystem is a computer equipped with Starknet software, contributing significantly to the network's operations. Nodes are vital for the Starknet ecosystem's functionality, security, and overall health. Without nodes, the Starknet network would not be able to function effectively.
+
+Nodes in Starknet are categorized into two types:
+
+1.Full Nodes: Store the entire Starknet state and validate all transactions, crucial for the network's integrity.
+2.Light Nodes: Do not store the entire Starknet state but rely on full nodes for information. They are faster and more efficient but offer less security than full nodes."
+What is the core functions of nodes in Starknet?,"Core Functions of Nodes are fundamental to the Starknet network, performing a variety of critical functions:
+
+1.Transaction Validation: Nodes ensure transactions comply with Starknet's rules, helping prevent fraud and malicious activities.
+
+2.Block Creation and Propagation: They create and circulate blocks to maintain a consistent blockchain view across the network.
+
+3.State Maintenance: Nodes track the Starknet network's current state, including user balances and smart contract code, essential for transaction processing and smart contract execution.
+
+4.API Endpoint Provision: Nodes provide API endpoints, aiding developers in creating applications, wallets, and tools for network interaction.
+
+5.Transaction Relay: They relay user transactions to other nodes, improving network performance and reducing congestion."
+"What about the interplay of Nodes, Sequencers, Clients, and Mempool in the Starknet Network?","Nodes and sequencers are interdependent:
+
+1.Nodes and Block Production: Nodes depend on sequencers to create blocks and update the network state. Sequencers integrate the transactions validated by nodes into blocks, maintaining a consistent and current Starknet state.
+2.Sequencers and Transaction Validation: Sequencers rely on nodes for transaction validation and network consensus. Prior to executing transactions, sequencers work with nodes to confirm transaction legitimacy, deterring fraudulent activities. Nodes also contribute to the consensus mechanism, ensuring uniformity in the blockchain state.
+
+The relationship between nodes and clients in the Starknet ecosystem is characterized by a client-server model:
+
+1.Client Requests and Node Responses: Clients initiate by sending requests, like transaction submissions or state queries. Nodes process these, validating transactions, updating the network state, and furnishing clients with the requested data.
+2.Client Experience: Clients receive node responses, updating their local view with the latest network information. This loop enables user interaction with Starknet DApps, with nodes maintaining network integrity and clients offering a user-friendly interface.
+
+The mempool acts as a holding area for unprocessed transactions:
+
+1.Transaction Validation and Mempool Storage: Upon receiving a transaction, nodes validate it. Valid transactions are added to the mempool and broadcast to other network nodes.
+2.Transaction Selection and Block Inclusion: Nodes select transactions from the mempool for processing, incorporating them into blocks that are added to the blockchain."
+What about the node Implementations in Starknet?,"Starknet's node implementations bring unique strengths:
+
+1.Pathfinder: By Equilibrium, Pathfinder is a Rust-written full node. It excels in high performance, scalability, and aligns with the Starknet Cairo specification.
+2.Juno: Nethermind's Juno, another full node in Golang, is known for user-friendliness, ease of deployment, and Ethereum tool compatibility.
+3.Papyrus: StarkWare's Papyrus, a Rust-based full node, focuses on security and robustness. It's integral to the upcoming Starknet Sequencer, expected to boost network throughput.
+
+These implementations are under continuous improvement, with new features and enhancements. The choice of implementation depends on user or developer preferences and requirements.
+
+Key characteristics of each node implementation are summarized below:
+
+Node Implementation Language Strengths
+Pathfinder Rust High performance, scalability, Cairo specification adherence
+Papyrus Rust Security, robustness, Starknet Sequencer foundation
+Juno Golang User-friendliness, ease of deployment, Ethereum compatibility"
+Can you tell me the hardware Recommendations for Pathfinder Node and how much will cost?,"To ensure optimal performance and reliability, the following hardware is recommended for running a Pathfinder node:
+
+CPU: Intel Core i7-9700 or AMD Ryzen 7 3700X
+Memory: 32GB
+Storage: 1TB SSD
+Network: Gigabit Ethernet
+
+The approximate pricing in USD for the recommended hardware is:
+
+CPU: $300
+Memory: $100
+Storage: $100
+Network Hardware: $50
+Total estimated cost: Approximately $550."
+how to run Pathfinder Node Using Docker?,"1.Ensure Docker is installed. For Ubuntu, use sudo snap install docker.
+
+2.Prepare Data Directory:
+
+Create a data directory, ¡®$HOME/pathfinder¡¯, to store persistent files used by ¡®pathfinder¡¯:
+
+mkdir -p $HOME/pathfinder
+
+3.Start Pathfinder Node:
+
+Run the ¡®pathfinder¡¯ node using Docker with the following command:
+
+sudo docker run \
+  --name pathfinder \
+  --restart unless-stopped \
+  --detach \
+  -p 9545:9545 \
+  --user '$(id -u):$(id -g)' \
+  -e RUST_LOG=info \
+  -e PATHFINDER_ETHEREUM_API_URL='https://goerli.infura.io/v3/<project-id>' \
+  -v $HOME/pathfinder:/usr/share/pathfinder/data \
+  eqlabs/pathfinder
+
+4.Monitoring Logs:
+
+To view the node logs, use:
+
+sudo docker logs -f pathfinder
+
+5.Stopping Pathfinder Node:
+
+To stop the node, use:
+
+sudo docker stop pathfinder
+
+This setup ensures the Pathfinder node operates efficiently with automatic restarts and background running capabilities.
+
+6.Updating the Pathfinder Docker Image
+
+When a new Pathfinder release is available, the node will log a message like:
+
+WARN New pathfinder release available! Please consider updating your node! release=0.4.5
+
+6.1.Pull the Latest Docker Image:
+
+sudo docker pull eqlabs/pathfinder
+
+6.2.Stop and Remove the Current Container:
+
+sudo docker stop pathfinder
+sudo docker rm pathfinder
+
+6.3.Re-create the Container with the New Image:
+
+Use the same command as before to start the node
+
+sudo docker run \
+  --name pathfinder \
+  --restart unless-stopped \
+  --detach \
+  -p 9545:9545 \
+  --user '$(id -u):$(id -g)' \
+  -e RUST_LOG=info \
+  -e PATHFINDER_ETHEREUM_API_URL='https://goerli.infura.io/v3/<project-id>' \
+  -v $HOME/pathfinder:/usr/share/pathfinder/data \
+  eqlabs/pathfinder
+
+7.Docker Image Availability
+
+The ¡®:latest¡¯ docker image corresponds with the latest Pathfinder release, not the ¡®main¡¯ branch.
+
+8.Using Docker Compose
+
+Alternatively, ¡®docker-compose¡¯ can be used.
+
+8.1.Setup:
+
+Create the folder ¡®pathfinder¡¯ where your ¡®docker-compose.yaml¡¯ is.
+
+mkdir -p pathfinder
+# replace the value by of PATHFINDER_ETHEREUM_API_URL by the HTTP(s) URL pointing to your Ethereum node's endpoint
+cp example.pathfinder-var.env pathfinder-var.env
+docker-compose up -d
+
+8.2.Check logs:
+
+docker-compose logs -f"
+What is database Snapshots?,"Re-syncing the whole history for either the mainnet or testnet networks might take a long time. To speed up the process you can use database snapshot files that contain the full state and history of the network up to a specific block.
+
+The database files are hosted on Cloudflare R2. There are two ways to download the files:
+
+1.Using the Rclone tool
+2.Via the HTTPS URL: we've found this to be less reliable in general
+
+We recommend using RClone. Add the following to your RClone configuration file (¡®$HOME/.config/rclone/rclone.conf¡¯):
+
+[pathfinder-snapshots]
+type = s3
+provider = Cloudflare
+env_auth = false
+access_key_id = 7635ce5752c94f802d97a28186e0c96d
+secret_access_key = 529f8db483aae4df4e2a781b9db0c8a3a7c75c82ff70787ba2620310791c7821
+endpoint = https://cbf011119e7864a873158d83f3304e27.r2.cloudflarestorage.com
+acl = private
+
+You can then download a compressed database using the command:
+
+rclone copy -P pathfinder-snapshots:pathfinder-snapshots/testnet_0.9.0_880310.sqlite.zst .
+
+To avoid issues please check that the SHA2-256 checksum of the compressed file you've downloaded matches the value we've published.
+
+We're storing database snapshots as SQLite database files compressed with zstd. You can uncompress the files you've downloaded using the following command:
+
+zstd -T0 -d testnet_0.9.0_880310.sqlite.zst -o goerli.sqlite
+
+This produces uncompressed database file ¡®goerli.sqlite¡¯ that can then be used by pathfinder.
+
+Available database snapshots:
+
+Network Block Pathfinder version required Filename Download URL Compressed size SHA2-256 checksum of compressed file
+testnet 880310 >= 0.9.0 testnet_0.9.0_880310.sqlite.zst Download 102.36 GB 55f7e30e4cc3ba3fb0cd610487e5eb4a69428af1aacc340ba60cf1018b58b51c
+mainnet 309113 >= 0.9.0 mainnet_0.9.0_309113.sqlite.zst Download 279.85 GB 0430900a18cd6ae26465280bbe922ed5d37cfcc305babfc164e21d927b4644ce
+integration 315152 >= 0.9.1 integration_0.9.1_315152.sqlite.zst Download 8.45 GB 2ad5ab46163624bd6d9aaa0dff3cdd5c7406e69ace78f1585f9d8f011b8b9526"
+how to set up with pathfinder node?,"The ¡®pathfinder¡¯ node options can be configured via the command line as well as environment variables.
+
+The command line options are passed in after the ¡®docker run¡¯ options, as follows:
+
+sudo docker run --name pathfinder [...] eqlabs/pathfinder:latest <pathfinder options>
+
+Using ¡®¡ªhelp¡¯ will display the ¡®pathfinder¡¯ options, including their environment variable names:
+
+sudo docker run --rm eqlabs/pathfinder:latest ¨Chelp
+
+Block times on ¡®mainnet¡¯ can be prohibitively long for certain applications. As a workaround, Starknet added the concept of a ¡®pending¡¯ block which is the block currently under construction. This is supported by pathfinder, and usage is documented in the JSON-RPC API with various methods accepting 'block_id'='pending'.
+
+Note that ¡®pending¡¯ support is disabled by default and must be enabled by setting ¡®poll-pending=true¡¯ in the configuration options.
+
+Logging can be configured using the ¡®RUST_LOG¡¯ environment variable. We recommend setting it when you start the container:
+
+sudo docker run --name pathfinder [...] -e RUST_LOG=<log level> eqlabs/pathfinder:latest
+
+The following log levels are supported, from most to least verbose:
+
+trace
+debug
+info  # default
+warn
+error
+
+The Starknet network can be selected with the ¡®¡ªnetwork¡¯ configuration option.
+
+If ¡®¡ªnetwork¡¯ is not specified, network selection will default to match your Ethereum endpoint:
+
+1.Starknet mainnet for Ethereum mainnet,
+2.Starknet testnet for Ethereum Goerli
+
+You can specify a custom network with ¡®¡ªnetwork custom¡¯ and specifying the ¡®--gateway-url¡¯, ¡®feeder-gateway-url¡¯ and ¡®chain-id¡¯ options. Note that ¡®chain-id¡¯ should be specified as text e.g. ¡®SN_GOERLI¡¯."
+What is JSON-RPC API?,"You can interact with Starknet using the JSON-RPC API. Pathfinder supports the official Starknet RPC API and in addition supplements this with its own pathfinder specific extensions such as ¡®pathfinder_getProof¡¯.
+
+Currently pathfinder supports ¡®v0.3¡¯, ¡®v0.4¡¯, and ¡®v0.5¡¯ versions of the Starknet JSON-RPC specification. The ¡®path¡¯ of the URL used to access the JSON-RPC server determines which version of the API is served:
+
+the ¡®v0.3.0¡¯ API is exposed on the ¡®/rpc/v0.3¡¯ and ¡®/rpc/v0_3¡¯ path
+the ¡®v0.4.0¡¯ API is exposed on the ¡®/¡¯, ¡®/rpc/v0.4¡¯ and ¡®/rpc/v0_4¡¯ path
+the ¡®v0.5.1¡¯ API is exposed on the ¡®/rpc/v0.5¡¯ and ¡®/rpc/v0_5¡¯ path
+the pathfinder extension API is exposed on ¡®/rpc/pathfinder/v0.1¡¯
+Note that the pathfinder extension is versioned separately from the Starknet specification itself.
+
+Pathfinder has a monitoring API which can be enabled with the ¡®--monitor-address¡¯ configuration option.
+
+¡®/health¡¯ provides a method to check the health status of your ¡®pathfinder¡¯ node, and is commonly useful in Kubernetes docker setups. It returns a ¡®200 OK¡¯ status if the node is healthy.
+
+¡®pathfinder¡¯ does several things before it is ready to respond to RPC queries. In most cases this startup time is less than a second, however there are certain scenarios where this can be considerably longer. For example, applying an expensive database migration after an upgrade could take several minutes (or even longer) on testnet. Or perhaps our startup network checks fail many times due to connection issues.
+
+¡®/ready¡¯ provides a way of checking whether the node's JSON-RPC API is ready to be queried. It returns a ¡®503 Service Unavailable¡¯ status until all startup tasks complete, and then ¡®200 OK¡¯ from then on.
+
+¡®/metrics¡¯ provides a Prometheus metrics scrape endpoint. Currently the following metrics are available:
+
+1.rpc_method_calls_total,
+2.rpc_method_calls_failed_total
+
+You must use the label key ¡®method¡¯ to retrieve a counter for a particular RPC method, for example:
+
+1.rpc_method_calls_total{method='starknet_getStateUpdate'}
+2.rpc_method_calls_failed_total{method='starknet_chainId'}
+
+You may also use the label key ¡®version¡¯ to specify a particular version of the RPC API, for example:
+
+rpc_method_calls_total{method='starknet_getEvents', version='v0.3'}
+
+Feeder Gateway and Gateway related counters here:
+
+1.gateway_requests_total
+2.gateway_requests_failed_total
+
+Labels:
+
+1.¡¯method¡¯, to retrieve a counter for a particular sequencer request type
+2.¡¯tag¡¯
+2.1.works with: ¡®get_block¡¯, ¡®get_state_update¡¯
+2.2.valid values:
+2.2.1.¡¯pending¡¯
+2.2.2.¡¯latest¡¯
+3.¡¯reason¡¯
+3.1.works with: ¡®gateway_requests_failed_total¡¯
+3.2.valid values:
+3.3.1¡¯decode¡¯
+3.3.2¡¯starknet¡¯
+3.3.3¡¯rate_limiting¡¯
+
+Valid examples:
+
+gateway_requests_total{method='get_block'}
+gateway_requests_total{method='get_block', tag='latest'}
+gateway_requests_failed_total{method='get_state_update'}
+gateway_requests_failed_total{method='get_state_update', tag='pending'}
+gateway_requests_failed_total{method='get_state_update', tag='pending', reason='starknet'}
+gateway_requests_failed_total{method='get_state_update', reason='rate_limiting'}
+
+These will not work:
+
+1.¡¯gateway_requests_total{method='get_transaction', tag='latest'}¡¯, ¡®tag¡¯ is not supported for that ¡®method¡¯
+2.¡¯gateway_requests_total{method='get_transaction', reason='decode'}¡¯, ¡®reason¡¯ is only supported for failures.
+
+And sync related metrics here:
+
+1.¡®current_block¡¯ currently sync'd block height of the node
+2.¡®highest_block¡¯ height of the block chain
+3.¡¯block_time¡¯ timestamp difference between the current block and its parent
+4.¡¯block_latency¡¯ delay between current block being published and sync'd locally
+5.¡¯block_download¡¯ time taken to download current block's data excluding classes
+6.¡¯block_processing¡¯ time taken to process and store the current block
+
+Build info metrics:
+
+¡®pathfinder_build_info¡¯ reports curent ¡®version¡¯ as a version property."
