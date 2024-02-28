@@ -1,0 +1,598 @@
+question,answer
+"What is Starknet Foundry?","Starknet Foundry is a tool designed for testing and developing Starknet contracts. It is an adaptation of the Ethereum Foundry for Starknet, aiming to expedite the development process.
+
+The project consists of two primary components:
+
+1.Forge: A testing tool specifically for Cairo contracts. This tool acts as a test runner and boasts features designed to enhance your testing process. Tests are written directly in Cairo, eliminating the need for other programming languages. Additionally, the Forge implementation uses Rust, mirroring Ethereum Foundry's choice of language.
+
+2.Cast: This serves as a DevOps tool for Starknet, initially supporting a series of commands to interface with Starknet. In the future, Cast aims to offer deployment scripts for contracts and other DevOps functions."
+"What is Cast in Starknet Foundry?","Cast provides the Command Line Interface (CLI) for starknet, while Forge addresses testing. Written in Rust, Cast utilizes starknet Rust and integrates with Scarb. This integration allows for argument specification in 'Scarb.toml', streamlining the process.
+
+'sncast' simplifies interaction with smart contracts, reducing the number of necessary commands compared to using 'starkli' alone.
+
+In this section, we'll delve into 'sncast'."
+"What should I do before use Cast?","You should check if your computer installed these components successfully:
+
+# scarb --version
+scarb 2.4.3
+cairo: 2.4.3
+sierra: 1.4.0
+
+# snforge --version
+snforge 0.14.0
+
+# sncast --version
+sncast 0.14.0
+The Rust Devnet"
+"Give me an example contract from starknet foundry.","The following code sample is sourced from starknet foundry. If yo desire to get the files you can do it from Foundry Example Code.
+
+#[starknet::interface]
+trait IHelloStarknet<TContractState> {
+    fn increase_balance(ref self: TContractState, amount: felt252);
+    fn get_balance(self: @TContractState) -> felt252;
+}
+
+#[starknet::contract]
+mod HelloStarknet {
+    #[storage]
+    struct Storage {
+        balance: felt252,
+    }
+
+    #[abi(embed_v0)]
+    impl HelloStarknetImpl of super::IHelloStarknet<ContractState> {
+        // Increases the balance by the given amount.
+        fn increase_balance(ref self: ContractState, amount: felt252) {
+            self.balance.write(self.balance.read() + amount);
+        }
+
+        // Gets the balance.
+        fn get_balance(self: @ContractState) -> felt252 {
+            self.balance.read()
+        }
+    }
+}
+
+Before interacting with this sample smart contract, it's crucial to test its functionality using 'snforge' to ensure its integrity.
+
+Here are the associated tests:
+
+Take a keen look onto the imports ie
+
+use casttest::{IHelloStarknetDispatcherTrait, IHelloStarknetDispatcher}
+
+'casttest' from the above line is the name of the project as given in the 'scarb.toml' file.
+
+#[cfg(test)]
+mod tests {
+    use casttest::{IHelloStarknetDispatcherTrait, IHelloStarknetDispatcher};
+    use snforge_std::{declare, ContractClassTrait};
+
+    #[test]
+    fn call_and_invoke() {
+        // Declare and deploy a contract
+        let contract = declare('HelloStarknet');
+        let contract_address = contract.deploy(@ArrayTrait::new()).unwrap();
+
+        // Create a Dispatcher object for interaction with the deployed contract
+        let dispatcher = IHelloStarknetDispatcher { contract_address };
+
+        // Query a contract view function
+        let balance = dispatcher.get_balance();
+        assert(balance == 0, 'balance == 0');
+
+        // Invoke a contract function to mutate state
+        dispatcher.increase_balance(100);
+
+        // Verify the transaction's effect
+        let balance = dispatcher.get_balance();
+        assert(balance == 100, 'balance == 100');
+    }
+}
+
+If needed, copy the provided code snippets into the lib.cairo file of your new scarb project.
+
+To execute tests, follow the steps below:
+
+1.Ensure 'snforge' is listed as a dependency in your 'Scarb.toml' file, positioned beneath the 'starknet' dependency. Your dependencies section should appear as (make sure to use the latest version of 'snforge' and 'starknet'):
+
+starknet = '2.4.1'
+snforge_std = { git = 'https://github.com/foundry-rs/starknet-foundry.git', tag = 'v0.14.0' }
+
+2.Run the command:
+
+snforge test
+
+Note: Use 'snforge' for testing instead of the 'scarb test' command. The tests are set up to utilize functions from 'snforge_std'. Running 'scarb test' would cause errors."
+"How to set up Starknet Devnet with Starknet Foundry?","The focus of this question is on using 'Rust starknet devnet'. If you've been using 'katana' or 'pythonic devnet', please be cautious as there might be inconsistencies. If you haven't configured 'devnet', consider following the guide from Starknet devnet for a quick setup.
+
+To launch 'starknet devnet', use the command:
+
+cargo run
+
+Upon successful startup, you should receive a response similar to:
+
+Finished dev [unoptimized + debuginfo] target(s) in 0.21s
+     Running 'target/debug/starknet-devnet'
+Predeployed FeeToken
+Address: 0x49D36570D4E46F48E99674BD3FCC84644DDD6B96F7C741B1562B82F9E004DC7
+Class Hash: 0x6A22BF63C7BC07EFFA39A25DFBD21523D211DB0100A0AFD054D172B81840EAF
+
+Predeployed UDC
+Address: 0x41A78E741E5AF2FEC34B695679BC6891742439F7AFB8484ECD7766661AD02BF
+Class Hash: 0x7B3E05F48F0C69E4A65CE5E076A66271A527AFF2C34CE1083EC6E1526997A69
+
+| Account address |  0x243a10223fa0a8276cb9bb48cbb2da26dd945d0d09162610d32365b1f8580e1
+| Private key     |  0x41f7d13cf9a928319d39c06b328f76af
+| Public key      |  0x21952db4ec4ca2f0ce5ea3bfe545ad853043b80c06ef44335908e883e5a8988
+
+...
+...
+...
+2023-11-23T17:06:48.221449Z  INFO starknet_devnet: Starknet Devnet listening on 127.0.0.1:5050
+(Note: The abbreviated ... is just a placeholder for the detailed response. In your actual output, you'll see the full details.)
+
+Now, you have written a smart contract, tested it, and successfully initiated starknet devnet."
+"How to use 'sncast' command?","Let's unpack 'sncast'.
+
+As a multifunctional tool, the quickest way to discover its capabilities is via the command:
+
+sncast --help
+
+In the output, you'll notice distinct categories: 'commands' and 'options'. Each option offers both a concise ('short') and a descriptive ('long') variant.
+
+Tip: While both option variants are useful, we'll prioritize the long form in this guide. This choice aids clarity, especially when constructing intricate commands.
+
+Delving deeper, to understand specific commands such as 'account', you can run:
+
+
+sncast account help
+
+Each account subcommand like 'add', 'create', and 'deploy' can be further explored. For instance:
+
+sncast account add --help
+
+The layered structure of 'sncast' provides a wealth of information right at your fingertips. It's like having dynamic documentation. Make it a habit to explore, and you'll always stay informed."
+"How to use sncast for interacting with the contract?","By default, starknet devnet offers several predeployed accounts. These are accounts already registered with the node, loaded with test tokens (for gas fees and various transactions). Developers can use them directly with any contract on the local node (i.e., starknet devnet). Now you have two ways to interact with contract:
+
+1.Utilize Predeployed Accounts
+
+To employ a predeployed account with the smart contract, execute the 'account add' command as shown below:
+
+sncast [SNCAST_MAIN_OPTIONS] account add [SUBCOMMAND_OPTIONS] --name <NAME> --address <ADDRESS> --private-key <PRIVATE_KEY>
+
+Although several options can accompany the add command (e.g., '--name, --address', '--class-hash', '--deployed', '--private-key', '--public-key', '--salt', '--add-profile'), we'll focus on a select few for this illustration.
+
+Choose an account from the 'starknet-devnet', for demonstration, we'll select account '#0', and execute:
+
+sncast --url http://localhost:5050/rpc account add  --name account1 --address 0x5f...60ba --private-key 0xc...0acc --add-profile
+
+Points to remember:
+
+'-name' - Mandatory field.
+'-address' - Necessary account address.
+'-private-key' - Private key of the account.
+'-add-profile' - Though optional, it's pivotal. By enabling 'sncast' to include the account in your 'Scarb.toml' file, you can manage multiple accounts, facilitating transactions among them when working with your smart contract using sncast.
+
+Now that we have familiarized ourselves with using a predeployed account, let's proceed to add a new account.
+
+2.Creating and Deploying a New Account to Starknet Devnet
+
+Creating a new account involves a few more steps than using an existing one, but it's straightforward when broken down. Here are the steps:
+
+    1.Account Creation
+
+To create a new account, use (you can use 'sncast account create --help' to see the available options):
+
+sncast --url http://localhost:5050/rpc account create --name new_account --class-hash  0x19...8dd6 --add-profile
+
+Wondering where the '--class-hash' comes from? It's visible in the output from the 'starknet-devnet' command under the Predeclared Starknet CLI account section. For example:
+
+Predeclared Starknet CLI account:
+Class hash: 0x195c984a44ae2b8ad5d49f48c0aaa0132c42521dcfc66513530203feca48dd6
+
+    2.Funding the Account
+
+To fund the new account, replace the address in the following command with your new one:
+
+curl -d '{'amount':8646000000000, 'address':'0x6e...eadf'}' -H 'Content-Type: application/json' -X POST http://127.0.0.1:5050/mint
+Note: The amount is specified in the previous command's output.
+
+A successful fund addition will return:
+
+{'new_balance':8646000000000,'tx_hash':'0x48...1919','unit':'wei'}
+
+    3.Account Deployment
+
+Deploy the account to the 'starknet devnet' local node to register it with the chain:
+
+sncast --url http://localhost:5050/rpc account deploy --name new_account --max-fee 0x64a7168300
+
+A successful deployment provides a transaction hash. If it doesn't work, revisit your previous steps.
+
+    4.Setting a Default Profile
+
+You can define a default profile for your 'sncast' actions. To set one, edit the 'Scarb.toml' file. To make the 'new_account' the default profile, find the section '[tool.sncast.new_account]' and change it to '[tool.sncast]'. This means 'sncast' will default to using this profile unless instructed otherwise."
+"How to use sncast to declare my smart contract?","1.Building the Contract
+
+Execute the following to build the contract:
+
+scarb build
+
+If you've successfully run tests using 'snforge', the 'scarb build' should operate without issues. After the build completes, a new 'target' folder will appear at the root of your project.
+
+Within the 'target' folder, you'll find a 'dev' sub-folder containing three files: '*.casm.json', '*.sierra.json', and '*.starknet_artifacts.json'.
+
+If these files aren't present, it's likely due to missing configurations in your 'Scarb.toml' file. To address this, append the following lines after 'dependencies':
+
+[[target.starknet-contract]]
+sierra = true
+casm = true
+
+These lines instruct the compiler to produce both 'sierra' and 'casm' outputs.
+
+2.Declaring the Contract
+
+We will use the 'sncast declare' command to declare the contract. Here's the format:
+
+sncast declare [OPTIONS] --contract-name <CONTRACT>
+
+Given this, the correct command would be:
+
+sncast --profile account1 declare --contract-name HelloStarknet
+
+Note:- that we've omitted the '--url' option. Why? When using '--profile', as seen here with 'account1', it's not necessary. Remember, earlier in this guide, we discussed adding and creating new accounts. You can use either 'account1' or 'new_account' and achieve the desired result.
+
+Hint: You can define a default profile for sncast actions. Modify the 'Scarb.toml' file to set a default. For example, to make 'new_account' the default, find '[tool.sncast.new_account]' and change it to '[tool.sncast]'. Then, there's no need to specify the profile for each call, simplifying your command to:
+
+sncast declare --contract-name HelloStarknet
+
+The output will resemble:
+
+command: declare
+class_hash: 0x20fe30f3990ecfb673d723944f28202db5acf107a359bfeef861b578c00f2a0
+transaction_hash: 0x7fbdcca80e7c666f1b5c4522fdad986ad3b731107001f7d8df5f3cb1ce8fd11
+
+Make sure to note the **class hash as it will be essential in the subsequent step.
+
+Note: If you encounter an error stating Class hash already declared, simply move to the next step. Redeclaring an already-declared contract isn't permissible. Use the mentioned class hash for deployment."
+"How to use sncast to deploy my smart contract?","With the contract successfully declared and a 'class hash' obtained, we're ready to proceed to contract deployment. This step is straightforward. Replace '<class-hash>' in the command below with your obtained class hash:
+
+sncast deploy --class-hash 0x20fe30f3990ecfb673d723944f28202db5acf107a359bfeef861b578c00f2a0
+
+Executing this will likely yield:
+
+command: deploy
+contract_address: 0x7e3fc427c2f085e7f8adeaec7501cacdfe6b350daef18d76755ddaa68b3b3f9
+transaction_hash: 0x6bdf6cfc8080336d9315f9b4df7bca5fb90135817aba4412ade6f942e9dbe60
+
+However, you may encounter some issues, such as:
+
+Error: RPC url not passed nor found in Scarb.toml. This indicates the absence of a default profile in the 'Scarb.toml' file. To remedy this:
+
+Add the '--profile' option, followed by the desired profile name, as per the ones you've established.
+Alternatively, set a default profile as previously discussed in the 'Declaring the Contract' section under 'Hint' or as detailed in the 'Adding, Creating, and Deploying Account' subsection.
+
+You've successfully deployed your contract with 'sncast'! Now, let's explore how to interact with it."
+"How can I use sncast to interact with contract?","1.Invoking Contract Functions
+
+To write to the contract, invoke its functions. Here's a basic overview of the command:
+
+Usage: sncast invoke [OPTIONS] --contract-address <CONTRACT_ADDRESS> --function <FUNCTION>
+
+Options:
+  -a, --contract-address <CONTRACT_ADDRESS>  Address of the contract
+  -f, --function <FUNCTION>                  Name of the function
+  -c, --calldata <CALLDATA>                  Data for the function
+  -m, --max-fee <MAX_FEE>                    Maximum transaction fee (auto-estimated if absent)
+  -h, --help                                 Show help
+
+To demonstrate, let's invoke the 'increase_balance' method of our smart contract with a preset default profile. Not every option is always necessary; for instance, sometimes, including the '--max-fee might be essential'.
+
+sncast invoke --contract-address 0x7e...b3f9 --function increase_balance --calldata 4
+
+If successful, you'll receive a transaction hash like this:
+
+command: invoke
+transaction_hash: 0x33248e393d985a28826e9fbb143d2cf0bb3342f1da85483cf253b450973b638
+
+2.Reading from the Contract
+
+To retrieve data from the contract, use the 'sncast call'  command. Here's how it works:
+
+sncast call --help
+
+Executing the command displays:
+
+Usage: sncast call [OPTIONS] --contract-address <CONTRACT_ADDRESS> --function <FUNCTION>
+
+Options:
+  -a, --contract-address <CONTRACT_ADDRESS>  Address of the contract (hex format)
+  -f, --function <FUNCTION>                  Name of the function to call
+  -c, --calldata <CALLDATA>                  Function arguments (list of hex values)
+  -b, --block-id <BLOCK_ID>                  Block identifier for the call. Accepts: pending, latest, block hash (with a 0x prefix), or block number (u64). Default is 'pending'.
+  -h, --help                                 Show help
+
+For instance:
+
+sncast call --contract-address 0x7e...b3f9 --function get_balance
+
+While not all options are used in the example, you might need to include options like '--calldata', specifying it as a list or array.
+
+A successful call returns:
+
+command: call
+response: [0x4]
+
+This indicates successful read and write operations on the contract.
+
+3.sncast Multicall
+
+Use 'sncast multicall' to simultaneously read and write to the contract. Let's explore how to effectively use this feature.
+
+First, understand its basic usage:
+
+sncast multicall --help
+
+This command displays:
+
+Execute multiple calls
+
+Usage: sncast multicall <COMMAND>
+
+Commands:
+  run   Execute multicall using a .toml file
+  new   Create a template for the multicall .toml file
+  help  Display help for subcommand(s)
+
+Options:
+  -h, --help  Show help
+
+To delve deeper, initiate the 'new' subcommand:
+
+Generate a template for the multicall .toml file
+
+Usage: sncast multicall new [OPTIONS]
+
+Options:
+  -p, --output-path <OUTPUT_PATH>  File path for saving the template
+  -o, --overwrite                  Overwrite file if it already exists at specified path
+  -h, --help                       Display help
+
+Generate a template called 'call1.toml':
+
+sncast multicall new --output-path ./call1.toml --overwrite
+This provides a basic template:
+
+[[call]]
+call_type = 'deploy'
+class_hash = ''
+inputs = []
+id = ''
+unique = false
+
+[[call]]
+call_type = 'invoke'
+contract_address = ''
+function = ''
+inputs = []
+
+Modify 'call1.toml' to:
+
+[[call]]
+call_type = 'invoke'
+contract_address = '0x7e3fc427c2f085e7f8adeaec7501cacdfe6b350daef18d76755ddaa68b3b3f9'
+function = 'increase_balance'
+inputs = ['0x4']
+
+[[call]]
+call_type = 'invoke'
+contract_address = '0x7e3fc427c2f085e7f8adeaec7501cacdfe6b350daef18d76755ddaa68b3b3f9'
+function = 'increase_balance'
+inputs = ['0x1']
+
+In multicalls, only 'deploy' and 'invoke' actions are allowed. For a detailed guide on these, refer to the earlier section.
+
+Note: Ensure inputs are in hexadecimal format. Strings work normally, but numbers require this format for accurate results.
+
+To execute the multicall, use:
+
+sncast multicall run --path call1.toml
+
+Upon success:
+
+command: multicall run
+transaction_hash: 0x1ae4122266f99a5ede495ff50fdbd927c31db27ec601eb9f3eaa938273d4d61
+
+Check the balance:
+
+sncast call --contract-address 0x7e...b3f9 --function get_balance
+
+The response:
+
+command: call
+response: [0x9]
+
+The expected balance, '0x9', is confirmed."
+"Can you give me an example script of how to deploy contract?","1. Create the Script File
+
+In the root directory of your project, create a file named 'script.sh'. This file will contain the deployment script.
+
+Modify the file permissions to make it executable:
+
+chmod +x script.sh
+
+?? NOTE: The script file must be executable to run. The 'chmod +x' command changes the file permissions to allow execution.
+
+2. Insert the Script
+
+Below is the content for 'script.sh'. It adheres to best practices for clarity, error management, and long-term support.
+
+Security Note: Using environment variables is safer than hardcoding private keys in your scripts, but they're still accessible to any process on your machine and could potentially be leaked in logs or error messages.
+
+On step 5 declaring, Uncomment according to local devnet you are using either the rust node or python node for declaration to work as expected.
+
+Here is the script:
+
+#!/usr/bin/env bash
+
+# Ensure the script stops on first error
+set -e
+
+# Global variables
+file_path='$HOME/.starknet_accounts/starknet_open_zeppelin_accounts.json'
+CONTRACT_NAME='HelloStarknet'
+PROFILE_NAME='account1'
+MULTICALL_FILE='multicall.toml'
+FAILED_TESTS=false
+
+# Addresses and Private keys as environment variables
+ACCOUNT1_ADDRESS=${ACCOUNT1_ADDRESS:-'0x7f61fa3893ad0637b2ff76fed23ebbb91835aacd4f743c2347716f856438429'}
+ACCOUNT2_ADDRESS=${ACCOUNT2_ADDRESS:-'0x53c615080d35defd55569488bc48c1a91d82f2d2ce6199463e095b4a4ead551'}
+ACCOUNT1_PRIVATE_KEY=${ACCOUNT1_PRIVATE_KEY:-'CHANGE_ME'}
+ACCOUNT2_PRIVATE_KEY=${ACCOUNT2_PRIVATE_KEY:-'CHANGE_ME'}
+
+# Utility function to log messages
+function log_message() {
+    echo -e '\n$1'
+}
+
+# Step 1: Clean previous environment
+if [ -e '$file_path' ]; then
+    log_message 'Removing existing accounts file...'
+    rm -rf '$file_path'
+fi
+
+# Step 2: Define accounts for the smart contract
+accounts_json=$(cat <<EOF
+[
+    {
+        'name': 'account1',
+        'address': '$ACCOUNT1_ADDRESS',
+        'private_key': '$ACCOUNT1_PRIVATE_KEY'
+    },
+    {
+        'name': 'account2',
+        'address': '$ACCOUNT2_ADDRESS',
+        'private_key': '$ACCOUNT2_PRIVATE_KEY'
+    }
+]
+EOF
+)
+
+# Step 3: Run contract tests
+echo -e '\nTesting the contract...'
+testing_result=$(snforge test 2>&1)
+if echo '$testing_result' | grep -q 'Failure'; then
+    echo -e 'Tests failed!\n'
+    snforge
+    echo -e '\nEnsure that your tests are passing before proceeding.\n'
+    FAILED_TESTS=true
+fi
+
+if [ '$FAILED_TESTS' != 'true' ]; then
+    echo 'Tests passed successfully.'
+
+    # Step 4: Create new account(s)
+    echo -e '\nCreating account(s)...'
+    for row in $(echo '${accounts_json}' | jq -c '.[]'); do
+        name=$(echo '${row}' | jq -r '.name')
+        address=$(echo '${row}' | jq -r '.address')
+        private_key=$(echo '${row}' | jq -r '.private_key')
+
+        account_creation_result=$(sncast --url http://localhost:5050/rpc account add --name '$name' --address '$address' --private-key '$private_key' --add-profile 2>&1)
+        if echo '$account_creation_result' | grep -q 'error:'; then
+            echo 'Account $name already exists.'
+        else
+            echo 'Account $name created successfully.'
+        fi
+    done
+
+    # Step 5: Build, declare, and deploy the contract
+    echo -e '\nBuilding the contract...'
+    scarb build
+
+    echo -e '\nDeclaring the contract...'
+    declaration_output=$(sncast --profile '$PROFILE_NAME' --wait declare --contract-name '$CONTRACT_NAME' 2>&1)
+
+    if echo '$declaration_output' | grep -q 'error: Class with hash'; then
+        echo 'Class hash already declared.'
+        # CLASS_HASH=$(echo '$declaration_output' | sed -n 's/.*Class with hash \([^ ]*\).*/\1/p') ## Uncomment this for pythonic devnet
+        CLASS_HASH=$(echo '$declaration_output' | sed -n 's/.*\(0x[0-9a-fA-F]*\).*/\1/p') ## Uncomment this for rust devnet
+    else
+        echo 'New class hash declaration.'
+        CLASS_HASH=$(echo '$declaration_output' | grep -o 'class_hash: 0x[^ ]*' | sed 's/class_hash: //')
+    fi
+
+    echo 'Class Hash: $CLASS_HASH'
+
+    echo -e '\nDeploying the contract...'
+    deployment_result=$(sncast --profile '$PROFILE_NAME' deploy --class-hash '$CLASS_HASH')
+    CONTRACT_ADDRESS=$(echo '$deployment_result' | grep -o 'contract_address: 0x[^ ]*' | awk '{print $2}')
+    echo 'Contract address: $CONTRACT_ADDRESS'
+
+    # Step 6: Create and execute multicalls
+    echo -e '\nSetting up multicall...'
+    cat >'$MULTICALL_FILE' <<-EOM
+[[call]]
+call_type = 'invoke'
+contract_address = '$CONTRACT_ADDRESS'
+function = 'increase_balance'
+inputs = ['0x1']
+
+[[call]]
+call_type = 'invoke'
+contract_address = '$CONTRACT_ADDRESS'
+function = 'increase_balance'
+inputs = ['0x2']
+EOM
+
+    echo 'Executing multicall...'
+    sncast --profile '$PROFILE_NAME' multicall run --path '$MULTICALL_FILE'
+
+    # Step 7: Query the contract state
+    echo -e '\nChecking balance...'
+    sncast --profile '$PROFILE_NAME' call --contract-address '$CONTRACT_ADDRESS' --function get_balance
+
+    # Step 8: Clean up temporary files
+    echo -e '\nCleaning up...'
+    [ -e '$MULTICALL_FILE' ] && rm '$MULTICALL_FILE'
+
+    echo -e '\nScript completed successfully.\n'
+fi
+
+3. [Optional]Adjust the Bash Path
+The line '#!/usr/bin/env bash' indicates the path to the bash interpreter. If you require a different version or location of bash, determine its path using:
+
+which bash
+
+Then replace '#!/usr/bin/env' bash in the script with the resulting path, such as '#!/path/to/your/bash'.
+"
+"What else do I need to do before use sncast?","You should adapt it to suit your specific needs and requirements. The script is compatible with the following versions or higher:
+
+# scarb --version
+scarb 2.4.3
+cairo: 2.4.3
+sierra: 1.4.0
+
+# snforge --version
+snforge 0.14.0
+
+# sncast --version
+sncast 0.14.0
+The Rust Devnet
+
+And here are additional tools:
+
+The script requires 'jq' to run. You can install it with 'sudo apt install jq' on Ubuntu or 'brew install jq' on macOS. For more information, refer to the JQ Docs."
+"What else do I need to do when using sncast to run the script?","When running the script, you'll need to provide the environment variables 'ACCOUNT1_PRIVATE_KEY' and 'ACCOUNT2_PRIVATE_KEY'. Example:
+
+ACCOUNT1_PRIVATE_KEY='0x259f4329e6f4590b' ACCOUNT2_PRIVATE_KEY='0xb4862b21fb97d' ./script.sh
+
+And here are more considerations:
+
+1.The 'set -e' directive in the script ensures it exits if any command fails, enhancing the reliability of the deployment and testing process.
+
+2.Always secure private keys and sensitive information. Keep them away from logs and visible outputs.
+
+3.For greater flexibility, consider moving hardcoded values like accounts or contract names to a configuration file. This approach simplifies updates and overall management."

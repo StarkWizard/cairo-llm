@@ -1,0 +1,1420 @@
+question,answer
+"Why need multicalls?","Multicalls come handy in several scenarios. Here are some examples:
+
+1.Token Swapping on Decentralized Exchanges: In a typical token swap operation on a decentralized exchange (DEX), you first need to approve the spending of the tokens and then initiate the swap. Executing these operations separately could be cumbersome from a user experience perspective. With multicall, these calls can be combined into a single transaction, simplifying the user's task.
+
+2.Fetching Blockchain Data: When you want to query the prices of two different tokens from the blockchain, it's beneficial to have them both come from the same block for consistency. Multicall returns the latest block number along with the aggregated results, providing this consistency.
+
+The benefits of multicall transactions can be realized more in the context of account abstraction."
+"How to create multicall account abstraction?","Multicall is a feature of Account Abstraction that lets you bundle multiple user operations into a single transaction for a smoother UX.
+
+The Call data type is a struct that has all the data you need to execute a single user operation.
+
+There are different traits that a smart contract must implement to be considered an account contract. Let's create account abstraction from the scratch following the SNIP-6 and SRC-5 standards.
+
+1. Project Setup.
+
+In order to be able to compile an account contract to Sierra, a prerequisite to deploy it to testnet or mainnet, you'll need to make sure to have a version of Scarb that includes a Cairo compiler that targets Sierra 1.3 as it's the latest version supported by Starknet's testnet. At this point in time Scarb 0.7 is used.
+
+~ $ scarb --version
+>>>
+scarb 0.7.0 (58cc88efb 2023-08-23)
+cairo: 2.2.0 (https://crates.io/crates/cairo-lang-compiler/2.2.0)
+sierra: 1.3.0
+
+Create a new project with Scarb using the new command.
+
+~ $ scarb new aa
+
+The command creates a folder with the same name that includes a configuration file for Scarb.
+
+~ $ cd aa
+aa $ tree .
+>>>
+.
+├── Scarb.toml
+└── src
+    └── lib.cairo
+
+Scarb configures the project for vanilla Cairo instead of Starknet smart contracts by default.
+///
+# Scarb.toml
+
+[package]
+name = 'aa'
+version = '0.1.0'
+
+[dependencies]
+# foo = { path = 'vendor/foo' }
+///
+There is a need to make some changes to the configuration file to activate the Starknet plugin in the compiler so we can work with smart contracts.
+///
+# Scarb.toml
+
+[package]
+name = 'aa'
+version = '0.1.0'
+
+[dependencies]
+starknet = '2.2.0'
+
+[[target.starknet-contract]]
+///
+Let's now replace the content of the sample Cairo code that comes with a new project with the scaffold of our account contract.
+///
+#[starknet::contract]
+mod Account {}
+///
+Given that one of the most important features of our account contract is to validate signatures, there is a need to store the public key associated with the private key of the signer.
+///
+#[starknet::contract]
+mod Account {
+
+  #[storage]
+  struct Storage {
+    public_key: felt252
+  }
+}
+///
+To make sure everything is wired up correctly, let's compile our project.
+///
+aa $ scarb build
+>>>
+Compiling aa v0.1.0 (/Users/david/apps/sandbox/aa/Scarb.toml)
+Finished release target(s) in 2 seconds
+///
+Welldone, It works, time to move to the interesting part of our tutorial.
+
+2. SNIP-6
+
+Remember that for a smart contract to be considered an account contract, it must implement the trait defined by SNIP-6.
+///
+trait ISRC6 {
+  fn __execute__(calls: Array<Call>) -> Array<Span<felt252>>;
+  fn __validate__(calls: Array<Call>) -> felt252;
+  fn is_valid_signature(hash: felt252, signature: Array<felt252>) -> felt252;
+}
+///
+There is a need to eventually annotate the implementation of this trait with the 'external' attribute, the contract state will be the first argument provided to each method. We can define the type of the contract state with the generic 'T'.
+///
+trait ISRC6<T> {
+  fn __execute__(ref self: T, calls: Array<Call>) -> Array<Span<felt252>>;
+  fn __validate__(self: @T, calls: Array<Call>) -> felt252;
+  fn is_valid_signature(self: @T, hash: felt252, signature: Array<felt252>) -> felt252;
+}
+///
+The execute function is the only one that receives a reference to the contract state because it's the only one likely to either modify its internal state or to modify the state of another smart contract and thus to require the payment of gas fees for its execution. The other two functions, validate and is_valid_signature, are read-only and shouldn't require the payment of gas fees. For this reason they are both receiving a snapshot of the contract state instead.
+
+The question now becomes, how should we use this trait in our account contract. Should we annotate the trait with the interface attribute and then create an implementation like the code shown below?
+///
+#[starnet::interface]
+trait ISRC6<T> {
+  fn __execute__(ref self: T, calls: Array<Call>) -> Array<Span<felt252>>;
+  fn __validate__(self: @T, calls: Array<Call>) -> felt252;
+  fn is_valid_signature(self: @T, hash: felt252, signature: Array<felt252>) -> felt252;
+}
+
+#[starknet::contract]
+mod Account {
+  ...
+  #[external(v0)]
+  impl ISRC6Impl of super::ISRC6<ContractState> {...}
+}
+///
+Or should we use it instead 'without' the interface attribute?
+///
+trait ISRC6<T> {
+  fn __execute__(ref self: T, calls: Array<Call>) -> Array<Span<felt252>>;
+  fn __validate__(self: @T, calls: Array<Call>) -> felt252;
+  fn is_valid_signature(self: @T, hash: felt252, signature: Array<felt252>) -> felt252;
+}
+
+#[starknet::contract]
+mod Account {
+  ...
+  #[external(v0)]
+  impl ISRC6Impl of super::ISRC6<ContractState> {...}
+}
+///
+What happens without defining the trait explicitly?
+///
+#[starknet::contract]
+mod Account {
+  ...
+  #[external(v0)]
+  #[generate_trait]
+  impl ISRC6Impl of ISRC6Trait {...}
+}
+///
+From a technical view, both are all valid alternatives but they all fail to capture the right intention.
+
+Every function inside an implementation annotated with the external attribute will have its own selector that other people and smart contracts can use to interact with my account contract. But the thing is, even though they can use the derived selectors to call those functions, but one will be recommended for users to use and for the Starknet protocol.
+
+The functions execute and validate are meant to be used only by the Starknet protocol even if the functions are publicly accessible via its selectors. The only function that is made public for web3 apps to use for signature validation is is_valid_signature.
+
+Furthermore, a separate trait annotated with the interface attribute will be created and group all the functions in an account contract that users are expected to interact with. On the other hand, the trait will be auto generated, for all those functions that users are not expected to use directly even though they are public.
+///
+use starknet::account::Call;
+
+#[starnet::interface]
+trait IAccount<T> {
+  fn is_valid_signature(self: @T, hash: felt252, signature: Array<felt252>) -> felt252;
+}
+
+#[starknet::contract]
+mod Account {
+  use super::Call;
+
+  #[storage]
+  struct Storage {
+    public_key: felt252
+  }
+
+  #[external(v0)]
+  impl AccountImpl of super::IAccount<ContractState> {
+    fn is_valid_signature(self: @ContractState, hash: felt252, signature: Array<felt252>) -> felt252 { ... }
+  }
+
+  #[external(v0)]
+  #[generate_trait]
+  impl ProtocolImpl of ProtocolTrait {
+    fn __execute__(ref self: ContractState, calls: Array<Call>) -> Array<Span<felt252>> { ... }
+    fn __validate__(self: @ContractState, calls: Array<Call>) -> felt252 { ... }
+  }
+}
+///"
+"What about protecting protocol-only functions?","Although there might be legitimate use cases for other smart contracts to directly interact with the functions execute and validate of an account contract, these will rather be restricted to be callable only by the Starknet protocol in case there's an attack vector that has not been foresee.
+
+To create private functions, this simply create a new implementation that is not annotated with the external attribute so no public selectors are created.
+///
+#[starknet::contract]
+mod Account {
+ use starknet::get_caller_address;
+ use zeroable::Zeroable;
+ ...
+
+ #[generate_trait]
+ impl PrivateImpl of PrivateTrait {
+   fn only_protocol(self: @ContractState) {
+     let sender = get_caller_address();
+     assert(sender.is_zero(), 'Account: invalid caller');
+   }
+ }
+}
+///"
+"How to declare transaction and deploy transaction?","validate_declare is used to validate the signature of a declare transaction while validate_deploy is used for the same purpose but for the deploy_account transaction. The latter is often referred to as “counterfactual deployment”.
+///
+#[starknet::contract]
+mod Account {
+  ...
+
+  #[external(v0)]
+  #[generate_trait]
+  impl ProtocolImpl of ProtocolTrait {
+
+    fn __validate__(self: @ContractState, calls: Array<Call>) -> felt252 {
+      self.only_protocol();
+      self.validate_transaction()
+    }
+
+    fn __validate_declare__(self: @ContractState, class_hash: felt252) -> felt252 {
+      self.only_protocol();
+      self.validate_transaction()
+    }
+
+    fn __validate_deploy__(self: @ContractState, class_hash: felt252, salt: felt252, public_key: felt252) -> felt252 {
+      self.only_protocol();
+      self.validate_transaction()
+    }
+  }
+
+  #[generate_trait]
+  impl PrivateImpl of PrivateTrait {
+    ...
+
+    fn validate_transaction(self: @ContractState) -> felt252 {
+      let tx_info = get_tx_info().unbox();
+      let tx_hash = tx_info.transaction_hash;
+      let signature = tx_info.signature;
+
+      let is_valid = self.is_valid_signature_bool(tx_hash, signature);
+      assert(is_valid, 'Account: Incorrect tx signature');
+      'VALID'
+    }
+  }
+}
+///"
+"What about execute transactions?","Looking at the signature of the execute function it is noticed that an array of calls are being passed instead of a single element.
+///
+#[starknet::contract]
+mod Account {
+  ...
+  #[external(v0)]
+  #[generate_trait]
+  impl ProtocolImpl of ProtocolTrait {
+    fn __execute__(ref self: ContractState, calls: Array<Call>) -> Array<Span<felt252>> { ... }
+    ...
+  }
+}
+///
+This is because multicall is a feature of Account Abstraction that lets you bundle multiple user operations into a single transaction for a smoother UX.
+
+The Call data type is a struct that has all the data you need to execute a single user operation.
+///
+#[derive(Drop, Serde)]
+struct Call {
+  to: ContractAddress,
+  selector: felt252,
+  calldata: Array<felt252>
+}
+///
+Instead of trying to face the multicall head on, let's first create a private function that deals with a single call that we can then reuse by iterating over the array of calls.
+///
+#[starknet::contract]
+mod Account {
+  ...
+  use starknet::call_contract_syscall;
+
+  #[generate_trait]
+  impl PrivateImpl of PrivateTrait {
+    ...
+    fn execute_single_call(self: @ContractState, call: Call) -> Span<felt252> {
+      let Call{to, selector, calldata} = call;
+      call_contract_syscall(to, selector, calldata.span()).unwrap_syscall()
+    }
+  }
+}
+///
+Destructure the 'Call' struct and then we use the low level syscall 'call_contract_syscall' to invoke a function on another smart contract without the help of a dispatcher.
+
+However, with the single 'call' function, multi 'call' function can be built by iterating over a Call array and returning the responses as an array as well.
+///
+...
+#[starknet::contract]
+mod Account {
+  ...
+  #[generate_trait]
+  impl PrivateImpl of PrivateTrait {
+    ...
+    fn execute_multiple_calls(self: @ContractState, mut calls: Array<Call>) -> Array<Span<felt252>> {
+      let mut res = ArrayTrait::new();
+      loop {
+        match calls.pop_front() {
+          Option::Some(call) => {
+            let _res = self.execute_single_call(call);
+            res.append(_res);
+          },
+          Option::None(_) => {
+            break ();
+          },
+        };
+      };
+      res
+    }
+  }
+}
+///
+Finally, let's go back to the execute function and make use of the functions that was just created.
+///
+...
+#[starknet::contract]
+mod Account {
+  ...
+  #[external(v0)]
+  #[generate_trait]
+  impl ProtocolImpl of ProtocolTrait {
+    fn __execute__(ref self: ContractState, calls: Array<Call>) -> Array<Span<felt252>> {
+      self.only_protocol();
+      self.execute_multiple_calls(calls)
+    }
+    ...
+  }
+  ...
+}
+///"
+"What versions that trasaction supported?","As Starknet evolved, changes have been required to the structure of the transactions to accommodate more advanced functionality. To avoid creating breaking changes whenever a transaction structure needs to be updated, a “version” field was added to all transactions so older and newer transactions can co-exist.
+
+Maintaining different transaction versions is complex and because this is just a tutorial, I'll restrict my account contract to only support the newest version of each type of transaction and those are:
+
+Version 1 for invoke transactions
+Version 1 for deploy_account transactions
+Version 2 for declare transactions
+
+The supported transaction versions will be discussed below in a module for logical grouping.
+///
+...
+
+mod SUPPORTED_TX_VERSION {
+  const DEPLOY_ACCOUNT: felt252 = 1;
+  const DECLARE: felt252 = 2;
+  const INVOKE: felt252 = 1;
+}
+
+#[starknet::contract]
+mod Account { ... }
+///
+Now create a private function that will check if the executed transaction is of the latest version and hence supported by your account contract. If not, you should abort the transaction execution with an assert.
+///
+...
+
+#[starknet::contract]
+mod Account {
+  ...
+  use super::SUPPORTED_TX_VERSION;
+
+  ...
+
+  #[external(v0)]
+  #[generate_trait]
+  impl ProtocolImpl of ProtocolTrait {
+    fn __execute__(ref self: ContractState, calls: Array<Call>) -> Array<Span<felt252>> {
+      self.only_protocol();
+      self.only_supported_tx_version(SUPPORTED_TX_VERSION::INVOKE);
+      self.execute_multiple_calls(calls)
+    }
+
+    fn __validate__(self: @ContractState, calls: Array<Call>) -> felt252 {
+      self.only_protocol();
+      self.only_supported_tx_version(SUPPORTED_TX_VERSION::INVOKE);
+      self.validate_transaction()
+    }
+
+    fn __validate_declare__(self: @ContractState, class_hash: felt252) -> felt252 {
+      self.only_protocol();
+      self.only_supported_tx_version(SUPPORTED_TX_VERSION::DECLARE);
+      self.validate_transaction()
+    }
+
+    fn __validate_deploy__(self: @ContractState, class_hash: felt252, salt: felt252, public_key: felt252) -> felt252 {
+      self.only_protocol();
+      self.only_supported_tx_version(SUPPORTED_TX_VERSION::DEPLOY_ACCOUNT);
+      self.validate_transaction()
+    }
+  }
+
+  #[generate_trait]
+  impl PrivateImpl of PrivateTrait {
+    ...
+
+    fn only_supported_tx_version(self: @ContractState, supported_tx_version: felt252) {
+      let tx_info = get_tx_info().unbox();
+      let version = tx_info.version;
+      assert(
+        version == supported_tx_version,
+        'Account: Unsupported tx version'
+      );
+    }
+  }
+}
+///"
+"What about simulated transactions?","It's possible to request the Sequencer to estimate the amount of gas required to execute a transaction without actually executing it. Starkli for example provides the flag estimate-only that you can append to any transaction to instruct the Sequencer to only simulate the transaction and return the estimated cost.
+
+To differentiate a regular transaction from a transaction simulation while protecting against replay attacks, the version of a transaction simulation is the same value as the normal transaction but offset by the value 2^128. For example, the version of a simulated declare transaction is 2^128 + 2 because the latest version of a regular declare transaction is 2.
+
+With that in mind, we can modify the function only_supported_tx_version to account for simulated transactions.
+///
+...
+
+#[starknet::contract]
+mod Account {
+  ...
+  const SIMULATE_TX_VERSION_OFFSET: felt252 = 340282366920938463463374607431768211456; // 2**128
+
+  ...
+
+  #[generate_trait]
+  impl PrivateImpl of PrivateTrait {
+    ...
+    fn only_supported_tx_version(self: @ContractState, supported_tx_version: felt252) {
+      let tx_info = get_tx_info().unbox();
+      let version = tx_info.version;
+      assert(
+        version == supported_tx_version ||
+        version == SIMULATE_TX_VERSION_OFFSET + supported_tx_version,
+        'Account: Unsupported tx version'
+      );
+    }
+  }
+}
+///"
+"What about introspection?","Previously mentioned the standard SRC-5 is for introspection.
+///
+trait ISRC5 {
+  fn supports_interface(interface_id: felt252) -> bool;
+}
+///
+For an account contract to self identify as such, it must return true when passed the interface_id 1270010605630597976495846281167968799381097569185364931397797212080166453709. The reason why that particular number is used is explained in the previous article so go check it out for more details.
+
+Because this is a public function that I do expect people and other smart contracts to call on my account contract, will add this function to its public interface.
+///
+...
+
+#[starnet::interface]
+trait IAccount<T> {
+  ...
+  fn supports_interface(self: @T, interface_id: felt252) -> bool;
+}
+
+#[starknet::contract]
+mod Account {
+  ...
+  const SRC6_TRAIT_ID: felt252 = 1270010605630597976495846281167968799381097569185364931397797212080166453709;
+
+  ...
+
+  #[external(v0)]
+  impl AccountImpl of super::IAccount<ContractState> {
+    ...
+    fn supports_interface(self: @ContractState, interface_id: felt252) -> bool {
+      interface_id == SRC6_TRAIT_ID
+    }
+  }
+  ...
+}
+///"
+"How to expose the public key?","Although not required, it is a good idea to expose the public key associated with the account contract's signer. One use case is to easily and safely debug the correct deployment of the account contract by reading the stored public key and comparing it (offline) to the public key of my signer.
+///
+...
+
+#[starknet::contract]
+mod Account {
+  ...
+
+  #[external(v0)]
+  impl AccountImpl of IAccount<ContractState> {
+    ...
+    fn public_key(self: @ContractState) -> felt252 {
+      self.public_key.read()
+    }
+  }
+}
+///"
+"What is Multisignature Account?","Multisig, refers to a system where multiple signatures are required to authorize a transaction. This is commonly used in the context of cryptocurrency wallets, where funds can only be spent if a certain number of private keys agree to the transaction.
+
+Multisignature (multisig) technology is an integral part of the modern blockchain landscape. It enhances security by requiring multiple signatures to confirm a transaction, hence reducing the risk of fraudulent transactions and increasing control over asset management.
+
+In Starknet, the concept of multisig accounts is abstracted at the protocol level, allowing developers to implement custom account contracts that embody this concept. In this chapter, we'll delve into the workings of a multisig account and see how it's created in Starknet using an account contract."
+"Why need multisig?","There are several reasons why someone might choose to use a multisig wallet:
+
+1. Enhanced security:
+
+Multisig contract account are much more secure than traditional single-signature contract accounts. With a single-signature contract account, if your private key is lost or stolen, your funds are gone. With a multisig contract account, even if one private key is compromised, the funds are still safe. This is because at least two (or more) private keys are required to authorize a transaction.
+
+2. Disaster recovery:
+
+Multisig contract account can be used to protect against the loss of a private key. If one private key is lost, the other keys can still be used to recover the funds. This can be helpful in the event of a natural disaster, hardware failure, or other unforeseen event.
+
+3. Transparency and accountability:
+
+Multisig contract account can be used to increase transparency and accountability in organizations. For example, a company might use a multisig wallet to store its funds, and require the signatures of two or more executives to authorize any spending. This can help to prevent fraud and ensure that everyone is aware of how the company's money is being spent.
+
+The benefits of Multisig contract account can be realized more in the context of account abstraction.
+
+4. Multisig Account Abstraction Creation.
+
+Account abstraction enables built-in multisig functionality within accounts. Each account can be programmed to demand multiple signatures before transaction execution. This eliminates the need for separate multisig smart contracts, simplifying their use.
+
+A multisig account must have different traits that a smart contract must implement to be considered an account contract. In this book we will create an account contract from scratch following the SNIP-6 and SRC-5 standards."
+"How to set up with multisig contract?","In order to be able to compile an account contract to Sierra, a prerequisite to deploy it to testnet or mainnet, you'll need to make sure to have a version of Scarb that includes a Cairo compiler that targets Sierra 1.3 as it's the latest version supported by Starknet's testnet. At this point in time is Scarb 2.4.4 is used.
+
+mac@Macs-MacBook-Pro-2 Desktop % scarb --version
+scarb 2.4.4 (0c8def3aa 2023-10-31)
+cairo: 2.4.4 (https://crates.io/crates/cairo-lang-compiler/2.4.4)
+sierra: 1.3.0
+
+With Scarb we can create a new project using the new command.
+
+~ $ scarb new multisign
+
+The command creates a folder with the same name that includes a configuration file for Scarb.
+
+~ $ cd multisign
+aa $ tree .
+>>>
+.
+├── Scarb.toml
+└── src
+    └── lib.cairo
+
+By default, Scarb configures our project for vanilla Cairo instead of Starknet smart contracts.
+///
+# Scarb.toml
+
+[package]
+name = 'multisign'
+version = '0.1.0'
+
+[dependencies]
+# foo = { path = 'vendor/foo' }
+///
+We need to make some changes to the configuration file to activate the Starknet plugin in the compiler so we can work with smart contracts.
+///
+# Scarb.toml
+
+[package]
+name = ' multisign '
+version = '0.1.0'
+
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
+
+[dependencies]
+
+starknet = '>=2.4.4'
+
+[[target.starknet-contract]]
+sierra = true
+casm = true
+///
+We can now replace the content of the sample Cairo code that comes with a new project with the scaffold of our account contract.
+///
+#[starknet::contract]
+mod Multisign {}
+///
+Given that one of the most important features of our account contract is to validate signatures, we need to store the public key associated with the private key of the signer.
+///
+#[starknet::contract]
+mod Multisign {
+
+  #[storage]
+  struct Storage {
+    public_key: felt252
+  }
+}
+///
+To make sure everything is wired up correctly, let's compile our project.
+
+mac@Macs-MacBook-Pro-2 multisign % scarb build
+>>>
+   Compiling multisign v0.1.0 (/Users/mac/multisig/Scarb.toml)
+    Finished release target(s) in 2 seconds
+
+It works, time to move to the interesting part of our tutorial.
+
+About SNIP-6:
+
+Recall that for a smart contract to be considered an account contract, it must implement the trait defined by SNIP-6.
+///
+trait ISRC6 {
+  fn __execute__(calls: Array<Call>) -> Array<Span<felt252>>;
+  fn __validate__(calls: Array<Call>) -> felt252;
+  fn is_valid_signature(hash: felt252, signature: Array<felt252>) -> felt252;
+}
+///
+Because we will eventually annotate the implementation of this trait with the external attribute, the contract state will be the first argument provided to each method. We can define the type of the contract state with the generic T.
+///
+trait ISRC6<T> {
+  fn __execute__(ref self: T, calls: Array<Call>) -> Array<Span<felt252>>;
+  fn __validate__(self: @T, calls: Array<Call>) -> felt252;
+  fn is_valid_signature(self: @T, hash: felt252, signature: Array<felt252>) -> felt252;
+}
+///
+The execute function is the only one that receives a reference to the contract state because it's the only one likely to either modify its internal state or to modify the state of another smart contract and thus to require the payment of gas fees for its execution. The other two functions, validate and is_valid_signature, are read-only and shouldn't require the payment of gas fees. For this reason they are both receiving a snapshot of the contract state instead.
+
+Let's now define the trait for our multisig account explicitly.
+/
+#[starknet::interface]
+trait TestMultisign<T> {
+ fn __execute__(ref self: T, calls: Array<account::Call>) -> Array<Span<felt252>>;
+ fn __validate__(self: @T, calls: Array<account::Call>) -> felt252;
+ fn is_valid_signature( self: @T, hash: felt252, signature: Array<felt252>) -> felt252;
+ fn supports_interface(self: @T, interface_id: felt252) -> bool;
+}
+///
+Each function inside an implementation annotated with the external attribute will have its own selector that other people and smart contracts can use to interact with my account contract.
+
+The functions execute and validate are meant to be used only by the Starknet protocol even if the functions are publicly accessible via its selectors. The only function that I want to make public for web3 apps to use for signature validation is is_valid_signature.
+
+In addition, we will create a separate trait annotated with the interface attribute that will group all the functions in the account contract that is expected to interact with. On the other hand, we will auto generate the trait for all those functions that users will not see to use directly even though they are public.
+///
+use starknet::account;
+
+// @title SRC-6 Standard Account
+#[starknet::interface]
+trait ISRC6<T> {
+ // @notice Execute a transaction through the account
+ // @param calls The list of calls to execute
+ // @return The list of each call's serialized return value
+ fn __execute__(
+  ref self: T,
+  calls: Array<account::Call>
+ ) -> Array<Span<felt252>>;
+
+ // @notice Assert whether the transaction is valid to be executed
+ // @param calls The list of calls to execute
+ // @return The string 'VALID' represented as a felt when is valid
+ fn __validate__(self: @T, calls: Array<account::Call>) -> felt252;
+
+ // @notice Assert whether a given signature for a given hash is valid
+ // @dev signatures must be deserialized
+ // @param hash The hash of the data
+ // @param signature The signature to be validated
+ // @return The string 'VALID' represented as a felt when is valid
+ fn is_valid_signature(
+  self: @T,
+  hash: felt252,
+  signature: Array<felt252>
+ ) -> felt252;
+}
+
+// @title SRC-5 Iterface detection
+#[starknet::interface]
+trait ISRC5<T> {
+ // @notice Query if a contract implements an interface
+ // @param interface_id The interface identifier, as specified in SRC-5
+ // @return `true` if the contract implements `interface_id`, `false` otherwise
+ fn supports_interface(self: @T, interface_id: felt252) -> bool;
+}
+
+// @title Multisign Account
+#[starknet::contract]
+mod Multisign {
+ use super::ISRC6;
+ use super::ISRC5;
+ use starknet::account;
+
+ const SRC6_INTERFACE_ID: felt252 = 1270010605630597976495846281167968799381097569185364931397797212080166453709; // hash of SNIP-6 trait
+ const MAX_SIGNERS_COUNT: usize = 32;
+
+ #[storage]
+ struct Storage {
+  signers: LegacyMap<felt252, felt252>,
+  threshold: usize,
+  outside_nonce: LegacyMap<felt252, felt252>
+ }
+
+ // @notice Contructor of the account
+ // @dev Asserts threshold in relation with signers-len
+ // @param threshold Initial threshold
+ // @param signers Array of inital signers' public-keys
+ #[constructor]
+ fn constructor(
+  ref self: ContractState,
+  threshold: usize,
+  signers: Array<felt252>) {
+  assert_threshold(threshold, signers.len());
+
+  self.add_signers(signers.span(), 0);
+  self.threshold.write(threshold);
+ }
+
+ #[external(v0)]
+ impl SRC6 of ISRC6<ContractState> {
+  fn __execute__(
+   ref self: ContractState,
+   calls: Array<account::Call>
+  ) -> Array<Span<felt252>> {
+   assert_only_protocol();
+   execute_multi_call(calls.span())
+  }
+
+  fn __validate__(
+   self: @ContractState,
+   calls: Array<account::Call>
+  ) -> felt252 {
+   assert_only_protocol();
+   assert(calls.len() > 0, 'validate/no-calls');
+   self.assert_valid_calls(calls.span());
+   starknet::VALIDATED
+  }
+
+  fn is_valid_signature(
+   self: @ContractState,
+   hash: felt252,
+   signature: Array<felt252>
+  ) -> felt252 {
+   if self.is_valid_signature_span(hash, signature.span()) {
+    starknet::VALIDATED
+   } else {
+    0
+   }
+  }
+ }
+
+ #[external(v0)]
+ impl SRC5 of ISRC5<ContractState> {
+  fn supports_interface(
+   self: @ContractState,
+   interface_id: felt252
+  ) -> bool {
+   interface_id == SRC6_INTERFACE_ID
+  }
+ }
+
+ #[generate_trait]
+ impl Private of PrivateTrait {
+  fn add_signers(
+   ref self: ContractState,
+   mut signers: Span<felt252>,
+   last: felt252
+  ) {
+   match signers.pop_front() {
+    Option::Some(signer_ref) => {
+     let signer = *signer_ref;
+     assert(signer != 0, 'signer/zero-signer');
+     assert(!self.is_signer_using_last(signer, last),
+      'signer/is-already-signer');
+     self.signers.write(last, signer);
+     self.add_signers(signers, signer);
+    },
+    Option::None => ()
+   }
+  }
+
+  fn is_signer_using_last(
+   self: @ContractState,
+   signer: felt252,
+   last: felt252
+  ) -> bool {
+   if signer == 0 {
+    return false;
+   }
+
+   let next = self.signers.read(signer);
+   if next != 0 {
+    return true;
+   }
+   last == signer
+  }
+
+  fn is_valid_signature_span(
+   self: @ContractState,
+   hash: felt252,
+   signature: Span<felt252>
+  ) -> bool {
+   let threshold = self.threshold.read();
+   assert(threshold != 0, 'Uninitialized');
+   let mut signatures = deserialize_signatures(signature)
+    .expect('signature/invalid-len');
+   assert(threshold == signatures.len(), 'signature/invalid-len');
+   let mut last: u256 = 0;
+   loop {
+    match signatures.pop_front() {
+     Option::Some(signature_ref) => {
+      let signature = *signature_ref;
+      let signer_uint = signature.signer.into();
+      assert(signer_uint > last, 'signature/not-sorted');
+      if !self.is_valid_signer_signature(
+        hash,
+        signature.signer,
+        signature.signature_r,
+        signature.signature_s,
+       ) {
+       break false;
+      }
+      last = signer_uint;
+     },
+     Option::None => {
+      break true;
+     }
+    }
+   }
+  }
+
+  fn is_valid_signer_signature(
+   self: @ContractState,
+   hash: felt252,
+   signer: felt252,
+   signature_r: felt252,
+   signature_s: felt252
+  ) -> bool {
+   assert(self.is_signer(signer), 'signer/not-a-signer');
+   ecdsa::check_ecdsa_signature(hash, signer, signature_r, signature_s)
+  }
+
+  fn is_signer(self: @ContractState, signer: felt252) -> bool {
+   if signer == 0 {
+    return false;
+   }
+   let next = self.signers.read(signer);
+   if next != 0 {
+    return true;
+   }
+   self.get_last() == signer
+  }
+
+  fn get_last(self: @ContractState) -> felt252 {
+   let mut curr = self.signers.read(0);
+   loop {
+    let next = self.signers.read(curr);
+    if next == 0 {
+     break curr;
+    }
+    curr = next;
+   }
+  }
+
+  fn assert_valid_calls(
+   self: @ContractState,
+   calls: Span<account::Call>
+  ) {
+   assert_no_self_call(calls);
+
+   let tx_info = starknet::get_tx_info().unbox();
+   assert(
+    self.is_valid_signature_span(
+     tx_info.transaction_hash,
+     tx_info.signature
+    ),
+    'call/invalid-signature'
+   )
+  }
+ }
+
+ fn assert_threshold(threshold: usize, signers_len: usize) {
+  assert(threshold != 0, 'threshold/is-zero');
+  assert(signers_len != 0, 'signers_len/is-zero');
+  assert(signers_len <= MAX_SIGNERS_COUNT,
+    'signers_len/too-high');
+  assert(threshold <= signers_len, 'threshold/too-high');
+ }
+
+ #[derive(Copy, Drop, Serde)]
+ struct SignerSignature {
+  signer: felt252,
+  signature_r: felt252,
+  signature_s: felt252
+ }
+
+ fn deserialize_signatures(
+  mut serialized: Span<felt252>
+ ) -> Option<Span<SignerSignature>> {
+  let mut signatures = ArrayTrait::new();
+  loop {
+   if serialized.len() == 0 {
+    break Option::Some(signatures.span());
+   }
+   match Serde::deserialize(ref serialized) {
+    Option::Some(s) => { signatures.append(s) },
+    Option::None => { break Option::None; },
+   }
+  }
+ }
+
+ fn assert_only_protocol() {
+  assert(starknet::get_caller_address().is_zero(), 'caller/non-zero');
+ }
+
+ fn assert_no_self_call(
+  mut calls: Span<account::Call>
+ ) {
+  let self = starknet::get_contract_address();
+  loop {
+   match calls.pop_front() {
+    Option::Some(call) => {
+     assert(*call.to != self, 'call/call-to-self');
+    },
+    Option::None => {
+     break ;
+    }
+   }
+  }
+ }
+
+ fn execute_multi_call(mut calls: Span<account::Call>) -> Array<Span<felt252>> {
+  assert(calls.len() != 0, 'execute/no-calls');
+  let mut result: Array<Span<felt252>> = ArrayTrait::new();
+  let mut idx = 0;
+  loop {
+   match calls.pop_front() {
+    Option::Some(call) => {
+     match starknet::call_contract_syscall(
+      *call.to,
+      *call.selector,
+      call.calldata.span()
+     ) {
+      Result::Ok(retdata) => {
+       result.append(retdata);
+       idx += 1;
+      },
+      Result::Err(err) => {
+       let mut data = ArrayTrait::new();
+       data.append('call/multicall-faild');
+       data.append(idx);
+       let mut err = err;
+       loop {
+        match err.pop_front() {
+         Option::Some(v) => {
+          data.append(v);
+         },
+         Option::None => {
+          break;
+         }
+        }
+       };
+       panic(data);
+      }
+     }
+    },
+    Option::None => {
+     break;
+    }
+   }
+  };
+  result
+ }
+}
+///
+"
+"What function does multisig contract have?","Let's take a closer look at the various functions associated with multisig functionality in the provided contract.
+
+1. add_signers Function
+
+This is an internal function designed to add the public keys of the account owners to a permanent storage. Ideally, a multisig account structure should permit adding and deleting owners as per the agreement of the account owners. However, each change should be a transaction requiring the threshold number of signatures.
+///
+ #[generate_trait]
+ impl Private of PrivateTrait {
+  fn add_signers(
+   ref self: ContractState,
+   mut signers: Span<felt252>,
+   last: felt252
+  ) {
+   match signers.pop_front() {
+    Option::Some(signer_ref) => {
+     let signer = *signer_ref;
+     assert(signer != 0, 'signer/zero-signer');
+     assert(!self.is_signer_using_last(signer, last),
+      'signer/is-already-signer');
+     self.signers.write(last, signer);
+     self.add_signers(signers, signer);
+    },
+    Option::None => ()
+   }
+  }
+///
+2. is_signer_using_last Function
+
+This function allows the owners of the account to submit transactions. Upon submission, the function checks the validity of the signer, ensures the caller is one of the account owners, and adds the transaction to the transactions map. It also increments the current transaction index.
+///
+fn is_signer_using_last(
+   self: @ContractState,
+   signer: felt252,
+   last: felt252
+  ) -> bool {
+   if signer == 0 {
+    return false;
+   }
+
+   let next = self.signers.read(signer);
+   if next != 0 {
+    return true;
+   }
+   last == signer
+  }
+
+  fn is_valid_signature_span(
+   self: @ContractState,
+   hash: felt252,
+   signature: Span<felt252>
+  ) -> bool {
+   let threshold = self.threshold.read();
+   assert(threshold != 0, 'Uninitialized');
+   let mut signatures = deserialize_signatures(signature)
+    .expect('signature/invalid-len');
+   assert(threshold == signatures.len(), 'signature/invalid-len');
+   let mut last: u256 = 0;
+   loop {
+    match signatures.pop_front() {
+     Option::Some(signature_ref) => {
+      let signature = *signature_ref;
+      let signer_uint = signature.signer.into();
+      assert(signer_uint > last, 'signature/not-sorted');
+      if !self.is_valid_signer_signature(
+        hash,
+        signature.signer,
+        signature.signature_r,
+        signature.signature_s,
+       ) {
+       break false;
+      }
+      last = signer_uint;
+     },
+     Option::None => {
+      break true;
+     }
+    }
+   }
+  }
+///
+3. is_valid_signer_signature Function
+
+Similarly, the 'is_valid_signer_signature' function provides a way to record confirmations for each signer. An account owner, who did not submit the transaction, can confirm it, increasing its confirmation count.
+///
+fn is_valid_signer_signature(
+   self: @ContractState,
+   hash: felt252,
+   signer: felt252,
+   signature_r: felt252,
+   signature_s: felt252
+  ) -> bool {
+   assert(self.is_signer(signer), 'signer/not-a-signer');
+   ecdsa::check_ecdsa_signature(hash, signer, signature_r, signature_s)
+  }
+
+  fn is_signer(self: @ContractState, signer: felt252) -> bool {
+   if signer == 0 {
+    return false;
+   }
+   let next = self.signers.read(signer);
+   if next != 0 {
+    return true;
+   }
+   self.get_last() == signer
+  }
+///
+4. execute_multi_call Function
+
+The execute_multi_call function serves as the final step in the transaction process. It checks the validity of the transaction, whether it has been previously executed, and if the threshold number of signatures has been reached. The transaction is executed if all the checks pass.
+///
+ fn execute_multi_call(mut calls: Span<account::Call>) -> Array<Span<felt252>> {
+  assert(calls.len() != 0, 'execute/no-calls');
+  let mut result: Array<Span<felt252>> = ArrayTrait::new();
+  let mut idx = 0;
+  loop {
+   match calls.pop_front() {
+    Option::Some(call) => {
+     match starknet::call_contract_syscall(
+      *call.to,
+      *call.selector,
+      call.calldata.span()
+     ) {
+      Result::Ok(retdata) => {
+       result.append(retdata);
+       idx += 1;
+      },
+      Result::Err(err) => {
+       let mut data = ArrayTrait::new();
+       data.append('call/multicall-faild');
+       data.append(idx);
+       let mut err = err;
+       loop {
+        match err.pop_front() {
+         Option::Some(v) => {
+          data.append(v);
+         },
+         Option::None => {
+          break;
+         }
+        }
+       };
+       panic(data);
+      }
+     }
+    },
+    Option::None => {
+     break;
+    }
+   }
+  };
+  result
+ }
+}
+///"
+"What about protecting Protocol-Only functions in multisig contract?","There maybe other use cases for other smart contracts to directly interact with the functions execute and validate of my account contract, I would rather restrict them to be callable only by the Starknet protocol in case there's an attack vector that I'm failing to foresee.
+
+When the Starknet protocol calls a function it uses the zero address as the caller. We can use this fact to create a private function named only_protocol. To create private functions we simply create a new implementation that is not annotated with the external attribute so no public selectors are created.
+///
+fn assert_only_protocol() {
+  assert(starknet::get_caller_address().is_zero(), 'caller/non-zero');
+ }
+
+ fn assert_no_self_call(
+  mut calls: Span<account::Call>
+ ) {
+  let self = starknet::get_contract_address();
+  loop {
+   match calls.pop_front() {
+    Option::Some(call) => {
+     assert(*call.to != self, 'call/call-to-self');
+    },
+    Option::None => {
+     break ;
+    }
+   }
+  }
+ }
+
+ fn execute_multi_call(mut calls: Span<account::Call>) -> Array<Span<felt252>> {
+  assert(calls.len() != 0, 'execute/no-calls');
+  let mut result: Array<Span<felt252>> = ArrayTrait::new();
+  let mut idx = 0;
+  loop {
+   match calls.pop_front() {
+    Option::Some(call) => {
+     match starknet::call_contract_syscall(
+      *call.to,
+      *call.selector,
+      call.calldata.span()
+     ) {
+      Result::Ok(retdata) => {
+       result.append(retdata);
+       idx += 1;
+      },
+      Result::Err(err) => {
+       let mut data = ArrayTrait::new();
+       data.append('call/multicall-faild');
+       data.append(idx);
+       let mut err = err;
+       loop {
+        match err.pop_front() {
+         Option::Some(v) => {
+          data.append(v);
+         },
+         Option::None => {
+          break;
+         }
+        }
+       };
+       panic(data);
+      }
+     }
+    },
+    Option::None => {
+     break;
+    }
+   }
+  };
+  result
+ }
+}
+///
+Notice that the function is_valid_signature is not protected by the only_protocol function because we do want to allow anyone to use it."
+"What about signature validation?","To validate the signature of a transaction we will need to use the public key associated with the signer of the account contract. We have already defined public_key to be part of the storage of our account but we need to capture its value during deployment using the constructor.
+///
+#[storage]
+#[starknet::contract]
+mod Multisign {
+ use super::ISRC6;
+ use super::ISRC5;
+ use starknet::account;
+
+ const SRC6_INTERFACE_ID: felt252 = 1270010605630597976495846281167968799381097569185364931397797212080166453709; // hash of SNIP-6 trait
+ const MAX_SIGNERS_COUNT: usize = 32;
+
+ #[storage]
+ struct Storage {
+  signers: LegacyMap<felt252, felt252>,
+  threshold: usize,
+  outside_nonce: LegacyMap<felt252, felt252>
+ }
+
+ // @notice Contructor of the account
+ // @dev Asserts threshold in relation with signers-len
+ // @param threshold Initial threshold
+ // @param signers Array of inital signers' public-keys
+ #[constructor]
+ fn constructor(
+  ref self: ContractState,
+  threshold: usize,
+  signers: Array<felt252>) {
+  assert_threshold(threshold, signers.len());
+
+  self.add_signers(signers.span(), 0);
+  self.threshold.write(threshold);
+ }
+///
+The logic of the function is_valid_signature can be implemented , if the signature is valid, it should return the short string 'VALID' and if not it should return the value 0. Returning zero is just a convention, we can return any felt as long as it is not the felt that represents the short string 'VALID'.
+
+The logic of returning a felt252 value instead of a boolean maybe confusing. That's why there is a need to create an internal function called is_valid_signature_bool that will perform the same logic but will return a boolean instead of a felt252 depending on the result of validating a signature.
+///
+fn is_valid_signature_span(
+   self: @ContractState,
+   hash: felt252,
+   signature: Span<felt252>
+  ) -> bool {
+   let threshold = self.threshold.read();
+   assert(threshold != 0, 'Uninitialized');
+   let mut signatures = deserialize_signatures(signature)
+    .expect('signature/invalid-len');
+   assert(threshold == signatures.len(), 'signature/invalid-len');
+   let mut last: u256 = 0;
+   loop {
+    match signatures.pop_front() {
+     Option::Some(signature_ref) => {
+      let signature = *signature_ref;
+      let signer_uint = signature.signer.into();
+      assert(signer_uint > last, 'signature/not-sorted');
+      if !self.is_valid_signer_signature(
+        hash,
+        signature.signer,
+        signature.signature_r,
+        signature.signature_s,
+       ) {
+       break false;
+      }
+      last = signer_uint;
+     },
+     Option::None => {
+      break true;
+     }
+    }
+   }
+  }
+fn is_valid_signer_signature(
+   self: @ContractState,
+   hash: felt252,
+   signer: felt252,
+   signature_r: felt252,
+   signature_s: felt252
+  ) -> bool {
+   assert(self.is_signer(signer), 'signer/not-a-signer');
+   ecdsa::check_ecdsa_signature(hash, signer, signature_r, signature_s)
+  }
+///
+Private function can be used to validate a transaction signature as required by the validate function. In contrast to the function is_valid_signature we will use an assert to stop the transaction execution in case the signature is found to be invalid. Here's a little casting problem. The function is_valid_signature_bool expects the signature to be passed as an Array but the signature variable inside the validate function is a Span. Because it is easier (and cheaper) to derive a Span from an Array than the opposite, I'll change the function signature of is_valid_signature_bool to expect a Span instead of an Array.
+
+This little change will require deriving a Span from the signature variable inside the function is_valid_signature before calling is_valid_signature_bool which we can easily do with the span() method available on the ArrayTrait."
+"Why need auto payment?","As blockchain adoption increases, there will be a greater need for products with a superior user experience and core functionality that support real use cases. In a few simple steps, we can set up automatic recurring payments today directly on our mobile banking applications. In fact, online bill pay is growing rapidly, and customers especially younger ones have come to expect the ability to set up recurring payments and take advantage of other conveniences associated with using auto-payments. About 3 in 10 surveyed users have changed the way they pay their bills in the past two years and finding a more convenient way to pay was the most frequently cited reason. However, this is not a trivial task on a blockchain like Ethereum, the largest blockchain network by on-chain payment volumes. For certain types of digital wallets, such as a self-custodial wallet where the user has sole control over the wallet and private keys, automated programmable payments that can pull payments automatically from a user's account at recurring intervals requires engineering work.
+
+The concept and one of the leading Ethereum developer proposals known as Account Abstraction to explore how smart contracts can be implemented to enable automated programmable payments. We propose a new solution towards a real-world application of auto payments to demonstrate how to write a smart contract for a self-custodial wallet that can pull funds automatically, instead of requiring the user's active participation each time to instruct and push payments on a blockchain.
+
+Consider a hypothetical scenario: today is the 25th of February. Alex is going away on vacation to the Alps, and she will be returning on March 10th. She must pay her mortgage, TV subscription and utility bills by the 5th of every month. She does not have enough money to pay before she goes on vacation, but she will have enough money when she gets her paycheck on the 1st of March. How is Alex going to enjoy her vacation without missing her payments?"
+"What about auto payment on Ethereum?","Ethereum has two types of accounts: Externally Owned Accounts (EOA) and Contract Accounts. EOAs have a private and public key pairing which helps them initiate transactions. On the other hand, Contract Accounts are smart contracts that rely on predefined codes to trigger particular transactions. In that view, accounts abstraction refers to the process of unifying both contracts under a single merged type that makes it easier for users to interact with blockchain-based applications. This mechanism would enable user accounts to behave like smart contracts, unlocking many new use cases. For instance, users could set up delegate accounts that process automatic periodic payments on users' behalf. Account abstraction can also unlock a broader range of innovative features that simplify the Web 3 experience for average users, including gasless transactions or changing the account signer at every particular interval to increase security.
+
+Let us revisit Alex's situation. Suppose Alex owns a user account which is where her paychecks are deposited and from where she would like to pay her mortgage, TV subscription and utility bills. Today, to pay her bills, Alex has to initiate a transaction that transfers tokens from her EOA to a user account belonging to the recipient, that is, to whomever she is paying her bills. In more detail, Alex's EOA has an associated secret or private key known only to Alex. This private key is used by Alex in the generation of an Elliptic Curve Digital Signature Algorithm (ECDSA) signature that is crucial for the creation of a valid transaction. And this already brings us to the problem at hand. If Alex is away on holiday, who will generate this signature to create the transaction that will make her payment?
+
+One solution is for Alex to use what is known as a custodial wallet. With a custodial wallet, another party controls Alex's private key. In other words, Alex trusts a third party to secure her funds and return them if she wanted to trade or send them somewhere else. The upside here is that Alex can set up an auto payment connected to her custodial wallet. Since the custodian, who is the party that manages her wallet, has access to her private key, they will be able to generate the signature needed to create the transactions for her scheduled auto payments. And this can happen while Alex is away on holiday. The downside is that while a custodial wallet lessens Alex's personal responsibility, it requires Alex's trust in the custodian who holds her funds.
+
+With a self-custodial wallet, one where the user has total control over her wallet, Alex has sole control of her private key. While there is no need to trust a third party when using a self-custodial wallet, this also means that Alex will not be able to set up an auto payment as she must be the one using her key to generate the signature needed for the payment transaction.
+
+Another way to understand this is through the terminology of pull and push payments. A pull payment is a payment transaction that is triggered by the payee, while a push payment on the other hand is a payment transaction that is triggered by the payer. Ethereum supports push payments but doesn't natively support pull payments – auto payments are an example of pull payments."
+"What about auto payment on Starknet?","Account abstraction (AA) is a proposal that attempts to combine user accounts and smart contracts into just one Ethereum account type by making user accounts function like smart contracts. As we will see ahead, AA allows us to design a neat solution for auto payments. But more generally, the motivating rationale behind AA is quite simple but fundamental: Ethereum transactions today have several rigid requirements hardcoded into the Ethereum protocol. For instance, transactions on the Ethereum blockchain today are valid only if they have a valid ECDSA signature, a valid nonce and sufficient account balance to cover the cost of computation.
+
+AA proposes having more flexibility in the process for validating a transaction on the blockchain:
+
+1.It enables multi-owner accounts via multisig signature verification.
+2.It enables the use of post-quantum signatures for the verification of transactions.
+3.It also allows for a so-called public account from which anyone could make a transaction, by removing signature verification entirely.
+
+Essentially, AA allows for programmable validity to verify and validate any blockchain transaction. This means that instead of hard coding validity conditions into the Ethereum protocol that will apply to all transactions in a generalized way, validity conditions can instead be programmed in a customizable way into a smart contract on a per-account basis. With AA, a user deploys an account contract with any of the features described above, among others.
+
+And, most importantly for us in the use case described, AA enables auto payments as we can set up validity rules that no longer include signature verification. We will elaborate on this next.
+
+Our solution for auto payments is to leverage AA and create a new type of account contract – a delegable account. Our main idea is to extend programmable validity rules for transactions to include a pre-approved allow list. In essence, AA allows us to delegate the ability to instruct the user's account to initiate a push payment to a pre-approved auto payment smart contract.
+
+First, a merchant deploys an auto payment smart contract. When a user with a delegable account visits the merchant's website, they will see a request to approve auto payments – similar to Visa acceptance for billers today. Here, the user can see the actions that the auto payment contract will do in the user's name. For example, it can only charge the user once per month, or it cannot charge more than a maximum amount. Crucially, because this is a smart contract, a user can be confident that the auto payment contract cannot execute in a way other than how it is written.
+
+If the user agrees to approve auto payments, the wallet will add the auto payment contract's address to the list of allowed contracts on the user's delegable account.
+
+For a smart contract to be considered an account contract it must at least implement the interface defined by SNIP-6. Additional methods might be required for advanced account functionality.
+///
+// Cheat sheet
+struct Call {
+    to: ContractAddress,
+    selector: felt252,
+    calldata: Array<felt252>
+}
+trait ISRC6 {
+    fn __execute__(calls: Array<Call>) -> Array<Span<felt252>>;
+    fn __validate__(calls: Array<Call>) -> felt252;
+    fn is_valid_signature(hash: felt252, signature: Array<felt252>) -> felt252;
+}
+trait ISRC5 {
+    fn supports_interface(interface_id: felt252) -> bool;
+}
+trait IAccountAddon {
+    fn __validate_declare__(class_hash: felt252) -> felt252;
+    fn __validate_deploy__(class_hash: felt252, salt: felt252, public_key: felt252) -> felt252;
+    fn public_key() -> felt252;
+}
+///
+Much has been said about the need to improve the user experience (UX) of web3 if we want to increase adoption. Account Abstraction (AA) is one of the most powerful tools on Starknet to improve UX as it enables users to sign transactions with FaceID or TouchID, to execute multiple operations in a single transaction and to allow for third party services to perform operations on behalf of the user with fine grain control. No wonder why Visa has been so interested in exploring Starknet for auto payments.
+
+With Account Abstraction, and in contrast to Externally Owned Accounts (EOA), the signer is decoupled from the account. The signer is the piece of code that signs transactions using a private key and elliptic curve cryptography to uniquely identify a user. The account is a smart contract on Starknet that defines how signature verification is performed, executes the transactions signed by the user and ultimately owns the user's assets (aka tokens) on L2.
+
+Note: Using an Elliptic Curve Digital Signature Algorithtm (ECDSA) is not the only way to authenticate a signer, other mechanisms are possible but they come with tradeoffs of performance, cost and ecosystem support. ECDSA remains the most widely used algorithm on Starknet and different curves are supported.
+
+The contract will be create account, declared and deploy it to testnet using Starkli and then use it to interact with Starknet.
+
+For a smart contract to be considered an account (aka account contract) it must adhere to a specific public interface defined by the Starknet Improvement Proposal number 6 (SNIP-6).
+///
+/// @title Represents a call to a target contract
+/// @param to The target contract address
+/// @param selector The target function selector
+/// @param calldata The serialized function parameters
+struct Call {
+    to: ContractAddress,
+    selector: felt252,
+    calldata: Array<felt252>
+}
+/// @title SRC-6 Standard Account
+trait ISRC6 {
+    /// @notice Execute a transaction through the account
+    /// @param calls The list of calls to execute
+    /// @return The list of each call's serialized return value
+    fn __execute__(calls: Array<Call>) -> Array<Span<felt252>>;
+    /// @notice Assert whether the transaction is valid to be executed
+    /// @param calls The list of calls to execute
+    /// @return The string 'VALID' represented as felt when is valid
+    fn __validate__(calls: Array<Call>) -> felt252;
+    /// @notice Assert whether a given signature for a given hash is valid
+    /// @param hash The hash of the data
+    /// @param signature The signature to validate
+    /// @return The string 'VALID' represented as felt when the signature is valid
+    fn is_valid_signature(hash: felt252, signature: Array<felt252>) -> felt252;
+}
+/// @title SRC-5 Standard Interface Detection
+trait ISRC5 {
+    /// @notice Query if a contract implements an interface
+    /// @param interface_id The interface identifier, as specified in SRC-5
+    /// @return `true` if the contract implements `interface_id`, `false` otherwise
+    fn supports_interface(interface_id: felt252) -> bool;
+}
+///
+As you can see in the proposal, an account contract must implement at least the methods execute, validate and is_valid_signature.
+
+The methods execute and validate are meant to be called by the Starknet protocol during different stages of the lifecycle of a transaction. This doesn't mean that only the Starknet protocol can use those methods, as a matter of fact, anyone can call those methods even if the contract account doesn't belong to them. Something to keep an eye on when securing our account.
+
+When a user sends an invoke transaction, the first thing that the protocol does is to call the validate method to check the signature of the transaction. In other words, to authenticate the signer associated with the account. There are restrictions on what you can do inside the validate method to protect the Sequencer against Denial of Service (DoS) attacks [3].
+
+Notice that if the signature verification is successful, the validate method should return the short string VALID as opposed to a boolean. In Cairo, a short string is simply the ASCII representation of a single felt and not a real string. This is why the return type of the method is felt252. If the signature verification fails, you can stop execution with an assert or return literally any other felt that is not the aforementioned short string.
+
+If the protocol is able to authenticate the signer, it will then call the function execute passing as an argument an array of all the operations or “calls” the user wants to perform as a multicall. Each one of these calls define a target smart contract, a method to call (the “selector”) and the arguments expected by the method.
+
+The execution of each Call might result in a value being returned from the target smart contract. This value could be a simple scalar like a felt252 or a boolean, or a complex data structure like a struct or an array. In any case, the Starknet protocol serializes the response using a Span of felt252 elements. Remember that Span represents a snapshot of an Array [4]. This is why the return type of the execute method is an Array of Spans which represents a serialized response from each call in the multicall.
+
+The method is_valid_signature is not defined or used by the Starknet protocol. It was instead an agreement between builders in the Starknet community as a way to allow web3 apps to perform user authentication. Think of a user trying to authenticate to an NFT marketplace using their wallet. The web app will ask the user to sign a message and then it will call the function is_valid_signature to verify that the connected wallet address belongs to the user.
+
+To allow other smart contracts to know if your account contract adheres to the SNIP-6 interface, you should implement the method supports_interface from the SRC5 introspection standard. The interface_id for the SNIP-6 interface is the combined hash of the trait's selectors as defined by Ethereum's ERC165 [5]. You can calculate the id yourself by using the src5-rs utility [6] or you can take my word for it that the id is 1270010605630597976495846281167968799381097569185364931397797212080166453709. Additional Interface
+
+Although the interface defined by the SNIP-6 is enough to guarantee that a smart contract is in fact an account contract, it is the minimum requirement and not the whole story. For an account to be able to declare other smart contracts and pay for the associated gas fees it will need to also implement the method validate_declare. If we also want to be able to deploy our account contract using the counterfactual deployment method then it also needs to implement the validate_deploy method.
+
+Counterfactual deployment is a mechanism to deploy an account contract without relying on another account contract to pay for the related gas fees. This is important if we don't want to associate a new account contract with its deployer address and instead have a “pristine” beginning.
+
+This deployment process starts by calculating locally the would-be-address of our account contract without actually deploying it yet. This is possible to do with tools like Starkli [7]. Once we know the address, we then send enough ETH to that address to cover the costs of deploying our account contract. Once the address is funded we can finally send a deploy_account transaction to Starknet with the compiled code of our account contract. The Sequencer will deploy the account contract to the precalculated address and pay itself gas fees with the ETH we sent there. There's no need to declare an account contract before deploying it.
+
+To allow tools like Starkli to easily integrate with our smart contract in the future, it is recommended to expose the public_key of the signer as a view function as part of the public interface. With all this in mind, the extended interface of an account contract is shown below.
+///
+/// @title IAccount Additional account contract interface
+trait IAccountAddon {
+    /// @notice Assert whether a declare transaction is valid to be executed
+    /// @param class_hash The class hash of the smart contract to be declared
+    /// @return The string 'VALID' represented as felt when is valid
+    fn __validate_declare__(class_hash: felt252) -> felt252;
+    /// @notice Assert whether counterfactual deployment is valid to be executed
+    /// @param class_hash The class hash of the account contract to be deployed
+    /// @param salt Account address randomizer
+    /// @param public_key The public key of the account signer
+    /// @return The string 'VALID' represented as felt when is valid
+    fn __validate_deploy__(class_hash: felt252, salt: felt252, public_key: felt252) -> felt252;
+    /// @notice Exposes the signer's public key
+    /// @return The public key
+    fn public_key() -> felt252;
+}
+///
+In summary, a fully fledged account contract should implement the SNIP-5, SNIP-6 and the Addon interface.
+
+References here:
+
+[1] Auto Payments for Self-Custodial Wallets
+
+[2] SNIP-6 Standard Account Interface
+
+[3] Starknet Docs: Limitations on the validate function
+
+[4] Cairo Book: The Span data type
+
+[5] ERC-165: Standard Interface Detection
+
+[6] Github: src5-rs
+
+[7] Github: starkli"

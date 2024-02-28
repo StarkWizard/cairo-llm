@@ -1,0 +1,240 @@
+question,answer
+"What is Scarb?","Scarb is Cairo's package manager designed for both Cairo and Starknet projects. It handles dependencies, compiles projects, and integrates with tools like Foundry. It is built by the same team that created Foundry for Starknet."
+"How to set up Scarb until I compile my contract?","Follow these steps to develop a Starknet contract using Scarb:
+
+1.Initialize: Use scarb new to set up a new project, generating a Scarb.toml file and initial src/lib.cairo.
+
+2.Code: Add your Cairo code in the src directory.
+
+3.Dependencies: Add external libraries using scarb add.
+
+4.Compile: Execute scarb build to convert your contract into Sierra code."
+"What are Cairo Packages in Scarb?","Cairo packages, also referred to as 'crates' in some contexts, are the building blocks of a Cairo project. Each package must follow several rules:
+
+1.A package must include a Scarb.toml file, which is Scarb's manifest file. It contains the dependencies for your package.
+
+2.A package must include a src/lib.cairo file, which is the root of the package tree. It allows you to define functions and declare used modules.
+
+Package structures might look like the following case where we have a package named my_package, which includes a src directory with the lib.cairo file inside, a snips directory which in itself a package we can use, and a Scarb.toml file in the top-level directory.
+
+my_package/
+|-src/
+|  |-module1.cairo
+|  |-module2.cairo
+|  |-lib.cairo
+|-snips/
+|  |src/
+|  | |-lib.cairo
+|  |-Scarb.toml
+|-Scarb.toml
+
+Within the Scarb.toml file, you might have:
+
+[package]
+name = 'my_package'
+version = '0.1.0'
+
+[dependencies]
+starknet = '>=2.0.1'
+snips = { path = 'snips' }
+Here starknet and snips are the dependencies of the package. The starknet dependency is hosted on the Scarb registry (we do not need to download it), while the snips dependency is located in the snips directory."
+"How to create a new project with Scarb?","To create a new project using Scarb, navigate to your desired project directory and execute the following command:
+
+$ scarb new hello_scarb
+This command will create a new project directory named hello_scarb, including a Scarb.toml file, a src directory with a lib.cairo file inside, and initialize a new Git repository with a .gitignore file.
+
+hello_scarb/
+|-src/
+|  -|lib.cairo
+|-Scarb.toml
+
+Upon opening Scarb.toml in a text editor, you should see something similar to the code snippet below:
+
+[package]
+name = 'hello_scarb'
+version = '0.1.0'
+
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
+[dependencies]
+# foo = { path = 'vendor/foo' }"
+"How to build a project with Scarb?","Clear all content in src/lib.cairo and replace with the following:
+
+// src/lib.cairo
+mod hello_scarb;
+Next, create a new file titled src/hello_scarb.cairo and add the following:
+
+// src/hello_scarb.cairo
+use debug::PrintTrait;
+fn main() {
+    'Hello, Scarb!'.print();
+}
+
+In this instance, the lib.cairo file contains a module declaration referencing hello_scarb, which includes the hello_scarb.cairo file's implementation. For more on modules, imports, and the lib.cairo file, please refer to the cairo-book on Managing Cairo Projects in Chapter 7.
+
+Scarb mandates that your source files be located within the src directory.
+
+To build (compile) your project from your hello_scarb directory, use the following command:
+
+scarb build
+
+This command compiles your project and produces the Sierra code in the target/dev/hello_scarb.sierra.json file. Sierra serves as an intermediate layer between high-level Cairo and compilation targets such as Cairo Assembly (CASM).
+
+To remove the build artifacts and delete the target directory, use the scarb clean command."
+"How to add dependencies to my project in Scarb?","Scarb facilitates the seamless management of dependencies for your Cairo packages. Here are two methods to add dependencies to your project:
+
+1.Edit Scarb.toml File
+Open the Scarb.toml file in your project directory and locate the [dependencies] section. If it doesn't exist, add it. To include a dependency hosted on a Git repository, use the following format:
+
+[dependencies]
+alexandria_math = { git = 'https://github.com/keep-starknet-strange/alexandria.git' }
+
+For consistency, it's recommended to pin Git dependencies to specific commits. This can be done by adding the rev field with the commit hash:
+
+[dependencies]
+alexandria_math = { git = 'https://github.com/keep-starknet-strange/alexandria.git', rev = '81bb93c' }
+
+After adding the dependency, remember to save the file.
+
+2.Use the scarb add Command
+Alternatively, you can use the 'scarb add' command to add dependencies to your project. Open your terminal and execute the following command:
+
+$ scarb add alexandria_math --git https://github.com/keep-starknet-strange/alexandria.git
+
+This command will add the alexandria_math dependency from the specified Git repository to your project.
+
+To remove a dependency, you can use the 'scarb rm' command.
+
+Once a dependency is added, the Scarb.toml file will be automatically updated with the new dependency information."
+"How to use these dependencies in my project?","After dependencies are added to your project, you can start utilizing them in your Cairo code.
+
+For example, let's assume you have added the alexandria_math dependency. Now, you can import and utilize functions from the alexandria_math library in your 'src/hello_scarb.cairo' file:
+
+// src/hello_scarb.cairo
+use alexandria_math::fibonacci;
+
+fn main() -> felt252 {
+    fibonacci::fib(0, 1, 10)
+}
+
+In the above example, we import the fibonacci function from the alexandria_math library and utilize it in the main function."
+"Give me some example commands of Scarb.","Here's a quick cheat sheet of some of the most commonly used Scarb commands:
+
+1.'scarb new <project_name>': Initialize a new project with the given project name.
+
+2.'scarb build': Compile your Cairo code into Sierra code.
+
+3.'scarb add <dependency> --git <repository>': Add a dependency to your project from a specified Git repository.
+
+4.'scarb rm' <dependency>: Remove a dependency from your project.
+
+5.'scarb run' <script>: Run a custom script defined in your Scarb.toml file."
+"Give me an example contract with components in Scarb.","Here is the sample contract with components:
+
+// ...rest of the code
+
+#[starknet::component]
+mod ownable_component {
+    use super::{ContractAddress, IOwnable};
+    use starknet::get_caller_address;
+
+    #[storage]
+    struct Storage {
+        owner: ContractAddress
+    }
+
+    #[event]
+    #[derive(Drop, starknet::Event)]
+    enum Event {
+        OwnershipTransferred: OwnershipTransferred
+    }
+
+    #[derive(Drop, starknet::Event)]
+    struct OwnershipTransferred {
+        previous_owner: ContractAddress,
+        new_owner: ContractAddress,
+    }
+
+    #[embeddable_as(Ownable)]
+    impl OwnableImpl<
+        TContractState, +HasComponent<TContractState>
+    > of IOwnable<ComponentState<TContractState>> {
+        fn transfer_ownership(
+            ref self: ComponentState<TContractState>, new_owner: ContractAddress
+        ) {
+            self.only_owner();
+            self._transfer_ownership(new_owner);
+        }
+        fn owner(self: @ComponentState<TContractState>) -> ContractAddress {
+            self.owner.read()
+        }
+    }
+
+    #[generate_trait]
+    impl InternalImpl<
+        TContractState, +HasComponent<TContractState>
+    > of InternalTrait<TContractState> {
+        fn only_owner(self: @ComponentState<TContractState>) {
+            let owner: ContractAddress = self.owner.read();
+            let caller: ContractAddress = get_caller_address();
+            assert(!caller.is_zero(), 'ZERO_ADDRESS_CALLER');
+            assert(caller == owner, 'NOT_OWNER');
+        }
+
+        fn _transfer_ownership(
+            ref self: ComponentState<TContractState>, new_owner: ContractAddress
+        ) {
+            let previous_owner: ContractAddress = self.owner.read();
+            self.owner.write(new_owner);
+            self
+                .emit(
+                    OwnershipTransferred { previous_owner: previous_owner, new_owner: new_owner }
+                );
+        }
+    }
+}
+
+#[starknet::contract]
+mod ownable_contract {
+    use ownable_project::ownable_component;
+    use super::{ContractAddress, IData};
+
+    component!(path: ownable_component, storage: ownable, event: OwnableEvent);
+
+    #[abi(embed_v0)]
+    impl OwnableImpl = ownable_component::Ownable<ContractState>;
+
+    impl OwnableInternalImpl = ownable_component::InternalImpl<ContractState>;
+
+    #[storage]
+    struct Storage {
+        data: felt252,
+        #[substorage(v0)]
+        ownable: ownable_component::Storage
+    }
+
+    #[event]
+    #[derive(Drop, starknet::Event)]
+    enum Event {
+        OwnableEvent: ownable_component::Event
+    }
+
+    #[constructor]
+    fn constructor(ref self: ContractState, initial_owner: ContractAddress) {
+        self.ownable.owner.write(initial_owner);
+        self.data.write(1);
+    }
+    #[external(v0)]
+    impl OwnableDataImpl of IData<ContractState> {
+        fn get_data(self: @ContractState) -> felt252 {
+            self.data.read()
+        }
+        fn set_data(ref self: ContractState, new_value: felt252) {
+            self.ownable.only_owner();
+            self.data.write(new_value);
+        }
+    }
+}
+
+Basically we decided to apply 'components' on the section related to 'ownership' and created a separeted module 'ownable_component'. Then we kept the data section in our main module 'ownable_contract'.
+
+After you get the full code on your machine, open your terminal, input 'scarb build' to compile it, deploy your contract and call functions."

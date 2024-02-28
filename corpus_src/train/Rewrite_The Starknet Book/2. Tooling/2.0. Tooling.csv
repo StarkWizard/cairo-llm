@@ -1,0 +1,13 @@
+question,answer
+"What can I learn from this chapter?","In this chapter, you'll explore:
+1.Frameworks: Build using Starknet-Foundry.
+2.SDKs: Discover multi-language support through Starknet.js, Starknet-rs, Starknet_py, and Caigo.
+3.Front-end Development: Use Starknet.js and React.
+4.Testing: Understand testing methods with Starknet-Foundry and the Devnet."
+"What tool will I use from  this chapter?","Here is a quick rundown of the tools that could be used for Starknet development and that we will cover in this chapter:
+1.Scarb: A package manager that compiles your contracts.
+2.Starkli: A CLI tool for interacting with the Starknet network.
+3.Starknet Foundry: For contract testing.
+4.Katana: Creates a local test node.
+5.SDKs: starknet.js, Starknet.py, and starknet.rs interface with Starknet using common programming languages.
+6.Starknet-react: Builds front-end apps using React."
