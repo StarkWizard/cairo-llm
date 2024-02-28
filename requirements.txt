@@ -28,4 +28,4 @@ google-generativeai
 trl
 beautifulsoup4
 requests
-markdownify
+html2text

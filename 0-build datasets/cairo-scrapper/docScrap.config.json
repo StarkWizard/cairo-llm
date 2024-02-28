@@ -4,11 +4,15 @@
 		"output": "scrapped/starknet-by-example",
 		"nav_selector": "nav#sidebar",
 		"main_selector": "main"
-	}, 
+	},
 	{
 		"url": "https://book.dojoengine.org/",
 		"output": "scrapped/dojoengine",
 		"nav_selector": "nav#sidebar",
-		"main_selector": "main"
+		"main_selector": "main",
+		"exclude": [
+			"https://book.dojoengine.org/getting-started/contributing.html",
+			"https://book.dojoengine.org/misc/contributors.html"
+		]
 	}
 ]
