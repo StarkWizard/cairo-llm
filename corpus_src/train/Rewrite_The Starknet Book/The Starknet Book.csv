@@ -1,7 +1,7 @@
 question,answer
-"What is 'The Starknet Book'?","The Starknet Book is a work in progress, shaped by ongoing community input, and it is a step-by-step guide aimed at teaching you the essentials of Starknet development. This book will introduce you to tools, architecture, account setups, STARKs, and Starknet-specific apps."
-"What is the difference between 'The Cairo Book' and 'The Starknet Book'?","In short, the Cairo Book helps you master Cairo, while The Starknet Book focuses on Starknet specific features. For a well-rounded understanding, we recommend exploring both. "
-"What is Included in The Starknet Book?","The book has five chapters, which are 1: Introduction to Starknet: delve into the basic concepts of Starknet and familiarize yourself with smart contract deployment.
+What is 'The Starknet Book'?,"The Starknet Book is a work in progress, shaped by ongoing community input, and it is a step-by-step guide aimed at teaching you the essentials of Starknet development. This book will introduce you to tools, architecture, account setups, STARKs, and Starknet-specific apps."
+What is the difference between 'The Cairo Book' and 'The Starknet Book'?,"In short, the Cairo Book helps you master Cairo, while The Starknet Book focuses on Starknet specific features. For a well-rounded understanding, we recommend exploring both. "
+What is Included in The Starknet Book?,"The book has five chapters, which are 1: Introduction to Starknet: delve into the basic concepts of Starknet and familiarize yourself with smart contract deployment.
 2: Starknet Tools: Familiarize yourself with important tools such as Starkli, Katana, Scarb, and Starknet-Foundry. Explore how to utilize languages such as Javascript, Python and Rust for Starknet interactions.
 3: Starknet Architecture: Explore the core structure of Starknet and gain insight into the transaction lifecycle and the interactions between sequencers, validators, and nodes.
 4: Account Abstraction: Dive into Starnet's unique approach to user accounts and master the art of creating custom accounts.
@@ -13,7 +13,7 @@ question,answer
 "If I am a security researcher or smart contract auditor, how can I start to learn Starknet from this book?","If you are a security researcher or smart contract auditor wanting to learn about the Account Abstraction feature and its implications, go for Account Abstraction."
 "If I am a blockchain enthusiast, how can I start to learn Starknet from this book?","If you are a blockchain enthusiast curious about the underlying architecture and mechanics of Starknet and Cairo, explore Starknet Architecture."
 "If I am a cryptography expert or researcher, how can I start to learn Starknet from this book?","If you are a cryptography expert or researcher eager to understand the fundamentals of STARKs and their connection to the Starknet ecosystem, delve into STARKs."
-"Are there any other recommended Educational Resources for learning starknet?","We have compiled a list of valuable educational resources that will help deepen your understanding and enhance your skills in coding with Cairo and staying abreast with Starknet developments:
+Are there any other recommended Educational Resources for learning starknet?,"We have compiled a list of valuable educational resources that will help deepen your understanding and enhance your skills in coding with Cairo and staying abreast with Starknet developments:
 1.Starklings: A resource specifically designed to guide you through learning Cairo programming, ensuring that you reach a proficient level.
 2.Starknet Community Forum: An online platform where you can engage in discussions about the latest developments in Starknet.
 3.Starknet Documentation.

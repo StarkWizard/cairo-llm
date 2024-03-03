@@ -28,4 +28,4 @@ neowGen
 google-generativeai
 beautifulsoup4
 requests
-markdownify
+html2text
