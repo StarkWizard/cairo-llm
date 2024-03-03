@@ -1,0 +1,31 @@
+Question,Answer
+1. What is a constructor in StarkNet contracts?," A constructor in StarkNet contracts is a special type of function that runs only once when deploying a contract and can be used to initialize the state of the contract. It's important for contract developers to understand how constructors work, as they provide an opportunity to set up the initial conditions of their smart contract.
+"
+    2. Why do we use constructors in StarkNet contracts?,  Constructors are used to initialize the state of a contract on deployment. They run only once when deploying a contract and can be used to set up initial values for variables or call other functions. This helps ensure that the contract's state is properly initialized before it starts executing code.
+    3. How can we initialize the state of a contract using a constructor?," To initialize the state of a contract, you can define logic inside a constructor function that runs only once when deploying the contract. The constructor function must be annotated with the `#[constructor]` attribute and should not have any arguments. It is also recommended to use the `write` method on the contract's state to store values.
+```"
+    4. What is the purpose of the `#[constructor]` attribute in StarkNet contracts?," The `#[constructor]` attribute marks a function as the constructor for the contract, which means it will be automatically called when the contract is deployed. This allows developers to initialize the state of their contract by defining logic inside the constructor."
+    5. Can a StarkNet contract have multiple constructors?," No, a StarkNet contract can only have one constructor.
+```"
+    6. Where should the constructor function be placed within the code?, The constructor function should be placed outside of any `impl` block and decorated with the `#[constructor]` attribute.
+    7. How can we access the state of a contract during deployment using a constructor?," 7. During deployment, you can access the state of a contract through its constructor function. The constructor is decorated with a `#[constructor]` attribute and runs only once when deploying a contract. It's used to initialize the state of the contract by defining logic inside it. For example, in the `ExampleConstructor` contract above, we store the name of the contract address in the `names` map using the `self.names.write()` method."
+    8. What is the `Storage` module in StarkNet contracts?," The `Storage` module in StarkNet contracts is a way to store data persistently on-chain, similar to how Ethereum smart contracts use storage. It allows developers to define structs and maps that can be accessed by the contract's logic. In the context of the given listing, the `Storage` module contains a `names` map that stores the names of contract addresses as keys and their corresponding values as values.
+```"
+    9. What is the purpose of the `names` field in the `Storage` struct?," The `names` field in the `Storage` struct is used to store a mapping between contract addresses and their corresponding names. This mapping allows the contract to associate each address with its respective name, which can be useful for various purposes such as debugging or verifying the identity of a specific contract."
+    10. How can we store and retrieve names associated with contract addresses using the `names` field?.,"  To store and retrieve names associated with contract addresses, you can use the `names` field of the `Storage` struct. The `names` field is a `LegacyMap<ContractAddress, felt252>` type, which means it stores key-value pairs where the keys are `ContractAddress` and the values are `felt252`.
+
+To store a name associated with an address, you can use the following code:
+```rust
+let storage = Storage::default();
+let contract_address = ContractAddress::from(0x1234);
+let name = felt252::from(""MyContract"");
+storage.names.write(contract_address, name);
+```
+To retrieve a name associated with an address, you can use the following code:
+```rust
+let storage = Storage::default();
+let contract_address = ContractAddress::from(0x1234);
+let name = storage.names.read(&contract_address).expect(""Contract not found"");
+assert_eq!(name, felt252::from(""MyContract""));
+```
+Note that the `names` field is read-only in the `Storage` struct, so you cannot modify it directly. If you need to update a name associated with an address, you will need to create a new entry with the updated information."

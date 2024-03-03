@@ -20,7 +20,6 @@ question,answer
 "What happens when a contract is deployed in Starkli?","A new block is mined."
 "How do you interact with the Testnet using Starkli?","Use a third-party JSON-RPC API provider like Infura or Alchemy."
 "What command gets the latest block number on the Testnet?","starkli block-number --rpc https://starknet-goerli.g.alchemy.com/v2/V0WI..."
-"What was the block number returned by the command for Testnet?","896360."
 "Where can you confirm the block number obtained from the Testnet?","On Starkscan."
 "How does Starkli streamline the process of invoking commands?","By simplifying command syntax and execution."
 "What environment variables need to be set up for transferring ETH in Starkli?","STARKNET_ACCOUNT and STARKNET_KEYSTORE."
