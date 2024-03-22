@@ -74,19 +74,5 @@
     "nav_selector": "nav.menu",
     "main_selector": "main",
     "exclude": ["https://www.starknetjs.com/docs/API/**"]
-  },
-  {
-    "url": "https://www.starknetjs.com/docs/API/",
-    "output": "scrapped/starknetjs",
-    "nav_selector": "nav.menu",
-    "main_selector": "main",
-    "exclude": ["https://www.starknetjs.com/docs/guides/**"]
-  },
-  {
-    "url": "https://www.starknetjs.com/docs/guides/intro",
-    "output": "scrapped/starknetjs",
-    "nav_selector": "nav.menu",
-    "main_selector": "main",
-    "exclude": ["https://www.starknetjs.com/docs/API/**"]
   }
 ]
