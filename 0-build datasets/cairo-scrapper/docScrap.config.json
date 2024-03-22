@@ -1,19 +1,92 @@
 [
-
-	{
-		"url": "https://starknet-by-example.voyager.online/",
-		"output": "scrapped/starknet-by-example",
-		"nav_selector": "nav#sidebar",
-		"main_selector": "main"
-	},
-	{
-		"url": "https://book.dojoengine.org/getting-started",
-		"output": "scrapped/dojoengine",
-		"nav_selector": "nav#sidebar",
-		"main_selector": "main",
-		"exclude": [
-			"https://book.dojoengine.org/getting-started/contributing.html",
-			"https://book.dojoengine.org/misc/contributors.html"
-		]
-	}
+  {
+    "url": "https://starknet-by-example.voyager.online/",
+    "output": "scrapped/starknet-by-example",
+    "nav_selector": "nav#sidebar",
+    "main_selector": "main"
+  },
+  {
+    "url": "https://book.dojoengine.org/getting-started",
+    "output": "scrapped/dojoengine",
+    "nav_selector": "nav.vocs_Sidebar_navigation",
+    "main_selector": "article.vocs_Content",
+    "exclude": ["https://book.dojoengine.org/misc/contributors"]
+  },
+  {
+    "url": "https://book.dojoengine.org/getting-started/quick-start",
+    "output": "scrapped/dojoengine",
+    "nav_selector": "nav.vocs_Sidebar_navigation",
+    "main_selector": "article.vocs_Content",
+    "exclude": ["https://book.dojoengine.org/misc/contributors"]
+  },
+  {
+    "url": "https://book.dojoengine.org/cairo/hello-dojo",
+    "output": "scrapped/dojoengine",
+    "nav_selector": "nav.vocs_Sidebar_navigation",
+    "main_selector": "article.vocs_Content",
+    "exclude": ["https://book.dojoengine.org/misc/contributors"]
+  },
+  {
+    "url": "https://book.dojoengine.org/cairo/overview",
+    "output": "scrapped/dojoengine",
+    "nav_selector": "nav.vocs_Sidebar_navigation",
+    "main_selector": "article.vocs_Content",
+    "exclude": ["https://book.dojoengine.org/misc/contributors"]
+  },
+  {
+    "url": "https://book.dojoengine.org/toolchain/dojoup",
+    "output": "scrapped/dojoengine",
+    "nav_selector": "nav.vocs_Sidebar_navigation",
+    "main_selector": "article.vocs_Content",
+    "exclude": ["https://book.dojoengine.org/misc/contributors"]
+  },
+  {
+    "url": "https://book.dojoengine.org/client/dojojs",
+    "output": "scrapped/dojoengine",
+    "nav_selector": "nav.vocs_Sidebar_navigation",
+    "main_selector": "article.vocs_Content",
+    "exclude": ["https://book.dojoengine.org/misc/contributors"]
+  },
+  {
+    "url": "https://book.dojoengine.org/deployment/locally",
+    "output": "scrapped/dojoengine",
+    "nav_selector": "nav.vocs_Sidebar_navigation",
+    "main_selector": "article.vocs_Content",
+    "exclude": ["https://book.dojoengine.org/misc/contributors"]
+  },
+  {
+    "url": "https://docs.madara.build/",
+    "output": "scrapped/madara",
+    "nav_selector": "ul.nextra-menu-desktop",
+    "main_selector": "main",
+    "exclude": ["https://docs.madara.build/contribute"]
+  },
+  {
+    "url": "https://www.starknetjs.com/docs/API/",
+    "output": "scrapped/starknetjs",
+    "nav_selector": "nav.menu",
+    "main_selector": "main",
+    "exclude": ["https://www.starknetjs.com/docs/guides/**"]
+  },
+  {
+    "url": "https://www.starknetjs.com/docs/guides/",
+    "output": "scrapped/starknetjs",
+    "nav_selector": "nav.menu",
+    "main_selector": "main",
+    "exclude": ["https://www.starknetjs.com/docs/API/**"]
+  },
+  {
+    "url": "https://www.starknetjs.com/docs/API/",
+    "output": "scrapped/starknetjs",
+    "nav_selector": "nav.menu",
+    "main_selector": "main",
+    "exclude": ["https://www.starknetjs.com/docs/guides/**"]
+  },
+  {
+    "url": "https://www.starknetjs.com/docs/guides/intro",
+    "output": "scrapped/starknetjs",
+    "nav_selector": "nav.menu",
+    "main_selector": "main",
+    "exclude": ["https://www.starknetjs.com/docs/API/**"]
+  }
 ]

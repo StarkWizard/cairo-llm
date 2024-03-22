@@ -6,6 +6,7 @@ import argparse
 from fnmatch import fnmatch
 from bs4 import BeautifulSoup
 import html2text
+import urllib.parse
 
 def get_config (file):
     with open(file, 'r') as json_file:
@@ -14,8 +15,11 @@ def get_config (file):
     return config
 
 
-def print_error ():
-    print(traceback.format_exc())
+def print_error (error, debug: bool):
+    if debug:
+        print(traceback.format_exc())
+    else:
+        print(error)
 
 
 def get_soup (url): 
@@ -25,17 +29,22 @@ def get_soup (url):
     return BeautifulSoup(response.text, 'html.parser')
 
 def normalize_link (site, link):
+    parsed_uri = urllib.parse.urlparse(site["url"])
     if not link.startswith("http"):
-        return os.path.join(site["url"], link)
+        return urllib.parse.urljoin('{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri), link)
     return link
 
 
 def get_internal_nav_links (site):
     soup = get_soup(site["url"])   
     print(site["url"]) 
+    nav = soup.select_one(site.get("nav_selector") or "nav")
+    if nav is None:
+        raise Exception(f"Failed to find nav selector {site.get('nav_selector')} in {site['url']}")
 
-    links = soup.select_one(site.get("nav_selector") or "nav").find_all('a', href=True)
-    internal_links = [link['href'] for link in links if not link.get('href').startswith("http") or link.get('href').startswith(site["url"])]
+    links = nav.find_all('a', href=True)
+    parsed_uri = urllib.parse.urlparse(site["url"])
+    internal_links = [link['href'] for link in links if not link.get('href').startswith("https://") or link.get('href').startswith('{uri.scheme}://{uri.netloc}'.format(uri=parsed_uri))]
     exclude = site.get("exclude") or []
 
     normalized_internal_links = [normalize_link(site, link) for link in internal_links]
@@ -151,7 +160,7 @@ def main():
             internal_links = get_internal_nav_links(site)
             crawl_site(root_path, site, internal_links, extension,split)
         except Exception as e:
-            print_error(e)
+            print_error(e, debug=False)
 
 
 if __name__ == "__main__":
