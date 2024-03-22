@@ -1,4 +1,5 @@
 [
+
 	{
 		"url": "https://starknet-by-example.voyager.online/",
 		"output": "scrapped/starknet-by-example",
@@ -6,7 +7,7 @@
 		"main_selector": "main"
 	},
 	{
-		"url": "https://book.dojoengine.org/",
+		"url": "https://book.dojoengine.org/getting-started",
 		"output": "scrapped/dojoengine",
 		"nav_selector": "nav#sidebar",
 		"main_selector": "main",

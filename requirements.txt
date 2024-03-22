@@ -32,3 +32,4 @@ html2text
 langchain
 faiss-gpu
 sentence_transformers
+langchain-community
