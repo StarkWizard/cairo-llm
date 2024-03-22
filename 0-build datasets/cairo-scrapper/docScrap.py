@@ -29,9 +29,9 @@ def get_soup (url):
     return BeautifulSoup(response.text, 'html.parser')
 
 def normalize_link (site, link):
+    parsed_uri = urllib.parse.urlparse(site["url"])
     if not link.startswith("http"):
-        print(link, urllib.parse.urljoin(site["url"], link))
-        return urllib.parse.urljoin(site["url"], link)
+        return urllib.parse.urljoin('{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri), link)
     return link
 
 
@@ -42,7 +42,8 @@ def get_internal_nav_links (site):
         raise Exception(f"Failed to find nav selector {site.get('nav_selector')} in {site['url']}")
 
     links = nav.find_all('a', href=True)
-    internal_links = [link['href'] for link in links if not link.get('href').startswith("http") or link.get('href').startswith(site["url"])]
+    parsed_uri = urllib.parse.urlparse(site["url"])
+    internal_links = [link['href'] for link in links if not link.get('href').startswith("https://") or link.get('href').startswith('{uri.scheme}://{uri.netloc}'.format(uri=parsed_uri))]
     exclude = site.get("exclude") or []
 
     normalized_internal_links = [normalize_link(site, link) for link in internal_links]
