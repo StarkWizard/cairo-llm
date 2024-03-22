@@ -1,0 +1,29 @@
+The Cairo Programming Language
+   
+Installation
+Cairo can be installed by simply downloading Scarb. Scarb bundles the Cairo compiler and the Cairo language server together in an easy-to-install package so that you can start writing Cairo code right away.
+
+Scarb is also Cairo's package manager and is heavily inspired by Cargo, Rust’s build system and package manager.
+
+Scarb handles a lot of tasks for you, such as building your code (either pure Cairo or Starknet contracts), downloading the libraries your code depends on, building those libraries, and provides LSP support for the VSCode Cairo 1 extension.
+
+As you write more complex Cairo programs, you might add dependencies, and if you start a project using Scarb, managing external code and dependencies will be a lot easier to do.
+
+Let's start by installing Scarb.
+
+Installing Scarb
+Requirements
+Scarb requires a Git executable to be available in the PATH environment variable.
+
+Installation
+To install Scarb, please refer to the installation instructions. We strongly recommend that you install Scarb via asdf, a CLI tool that can manage multiple language runtime versions on a per-project basis. This will ensure that the version of Scarb you use to work on a project always matches the one defined in the project settings, avoiding problems lead to version mismatch. Otherwise, you can simply run the following command in your terminal, and follow the onscreen instructions. This will install the latest stable release of Scarb.
+
+curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+Verify installation by running the following command in new terminal session, it should print both Scarb and Cairo language versions, e.g:
+$ scarb --version
+scarb 2.4.0 (cba988e68 2023-12-06)
+cairo: 2.4.0 (https://crates.io/crates/cairo-lang-compiler/2.4.0)
+sierra: 1.4.0
+
+Installing the VSCode extension
+Cairo has a VSCode extension that provides syntax highlighting, code completion, and other useful features. You can install it from the VSCode Marketplace. Once installed, go into the extension settings, and make sure to tick the Enable Language Server and Enable Scarb options.

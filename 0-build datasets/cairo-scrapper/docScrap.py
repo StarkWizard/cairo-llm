@@ -31,7 +31,9 @@ def normalize_link (site, link):
 
 
 def get_internal_nav_links (site):
-    soup = get_soup(site["url"])    
+    soup = get_soup(site["url"])   
+    print(site["url"]) 
+
     links = soup.select_one(site.get("nav_selector") or "nav").find_all('a', href=True)
     internal_links = [link['href'] for link in links if not link.get('href').startswith("http") or link.get('href').startswith(site["url"])]
     exclude = site.get("exclude") or []
@@ -85,20 +87,28 @@ def convert_soup_to_markdown(soup):
 
 
 def convert_soup_to_txt(soup):
-    res = ""
-    for string in soup.strings:
-        res += string
+    res =""
+    last = ""
+    for i in soup:
+        new = i.get_text(separator='', strip=False)
+        if new != last:
+            res += new + "\n"
+        last = new
     return res
 
 
-def crawl_site (root_path, site, internal_links, extension):
+def crawl_site (root_path, site, internal_links, extension, split):
     create_folder(os.path.join(root_path, site["output"]))
     for link in internal_links:
         print("Parsing...", link)
         soup = get_soup(link)
         main_soup = soup.select(site["main_selector"] + " *")
-        divided_soup = split_soup_by_headings(main_soup)
-        
+
+        if(split):
+            divided_soup = split_soup_by_headings(main_soup)
+        else:
+            divided_soup = [main_soup]
+
         for index, source in enumerate(divided_soup, start=1):
             filename = os.path.basename(link).rsplit('.', 1)[0] + "_" + str(index) + "." + extension
             if extension == "md":
@@ -128,16 +138,18 @@ def main():
     """
     parser = argparse.ArgumentParser(description="docScrap: Documentation Scrapper CLI Tool")
     parser.add_argument("-ext", "--extension", help="Output file extension", choices=["md", "txt"])
+    parser.add_argument("-s", "--split", help="Split the pages into multiple files with small chunks", action="store_true", default=False)
     args = parser.parse_args()
     extension = args.extension or "md"
 
     root_path = os.path.dirname(os.path.realpath(__file__))
     site_list = get_config(os.path.join(root_path,'docScrap.config.json'))
-
+    split = args.split
+    
     for site in site_list:
         try:
             internal_links = get_internal_nav_links(site)
-            crawl_site(root_path, site, internal_links, extension)
+            crawl_site(root_path, site, internal_links, extension,split)
         except Exception as e:
             print_error(e)
 

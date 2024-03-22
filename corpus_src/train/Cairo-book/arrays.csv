@@ -121,7 +121,7 @@ create an array 'messages' that contains a u64, a u16, a tuple (u32,u32)","
 fn main() {
     let mut messages: Array<Data> = ArrayTrait::new();
     messages.append(Data::lInteger(100));
-    messages.append(Data::sInteger(40));
+    messages.append(Data::sInteger(40));    
     messages.append(Data::Tuple(50,50));
 }
 ```
