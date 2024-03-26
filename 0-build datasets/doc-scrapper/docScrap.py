@@ -7,6 +7,19 @@ from fnmatch import fnmatch
 from bs4 import BeautifulSoup
 import html2text
 import urllib.parse
+from rich.console import Console
+from tqdm import tqdm
+
+console = Console()
+
+def info_print (msg):
+    console.print(f"[bold green]>{msg}[/bold green]")
+
+def generic_print (msg):
+    console.print(f"{msg}")
+
+def error_print (msg):
+    console.print(f"[bold red]>{msg}[/bold red]")
 
 def get_config (file):
     with open(file, 'r') as json_file:
@@ -25,7 +38,8 @@ def print_error (error, debug: bool):
 def get_soup (url): 
     response = requests.get(url)
     if (response.status_code != 200):
-        raise Exception(f"Failed to load page {url}, status code: {response.status_code}")
+         error_print ("Error getting page " + url)
+         raise Exception(f"Failed to load page {url}, status code: {response.status_code}")
     return BeautifulSoup(response.text, 'html.parser')
 
 def normalize_link (site, link):
@@ -37,9 +51,10 @@ def normalize_link (site, link):
 
 def get_internal_nav_links (site):
     soup = get_soup(site["url"])   
-    print(site["url"]) 
+    info_print("Parsing : " + site["url"]) 
     nav = soup.select_one(site.get("nav_selector") or "nav")
     if nav is None:
+        error_print ("Error getting page " + site["url"])
         raise Exception(f"Failed to find nav selector {site.get('nav_selector')} in {site['url']}")
 
     links = nav.find_all('a', href=True)
@@ -56,7 +71,7 @@ def get_internal_nav_links (site):
             print(f"Exclude: {link}")
         else:
             final_links.append(link)
-
+    
     return final_links
     
 
@@ -108,8 +123,8 @@ def convert_soup_to_txt(soup):
 
 def crawl_site (root_path, site, internal_links, extension, split):
     create_folder(os.path.join(root_path, site["output"]))
-    for link in internal_links:
-        print("Parsing...", link)
+    for link in tqdm(internal_links, desc="Parsing"):
+        
         soup = get_soup(link)
         main_soup = soup.select(site["main_selector"] + " *")
 
@@ -134,6 +149,7 @@ def main():
     Example config file:
     [
         {
+            "active": true,
             "url": https://example.com,
             "output": "scrapped/path-to-save",
             "nav_selector": "nav",
@@ -156,11 +172,13 @@ def main():
     split = args.split
     
     for site in site_list:
-        try:
-            internal_links = get_internal_nav_links(site)
-            crawl_site(root_path, site, internal_links, extension,split)
-        except Exception as e:
-            print_error(e, debug=False)
+        if site["active"] is True:
+            try:
+                internal_links = get_internal_nav_links(site)
+                crawl_site(root_path, site, internal_links, extension,split)
+                info_print(">Done.")
+            except Exception as e:
+                print_error(e, debug=False)
 
 
 if __name__ == "__main__":

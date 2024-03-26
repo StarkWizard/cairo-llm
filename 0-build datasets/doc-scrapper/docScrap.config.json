@@ -1,11 +1,13 @@
 [
   {
+    "active": false,
     "url": "https://starknet-by-example.voyager.online/",
     "output": "scrapped/starknet-by-example",
     "nav_selector": "nav#sidebar",
     "main_selector": "main"
   },
   {
+    "active": true,
     "url": "https://book.dojoengine.org/getting-started",
     "output": "scrapped/dojoengine",
     "nav_selector": "nav.vocs_Sidebar_navigation",
@@ -13,6 +15,7 @@
     "exclude": ["https://book.dojoengine.org/misc/contributors"]
   },
   {
+    "active": true,
     "url": "https://book.dojoengine.org/getting-started/quick-start",
     "output": "scrapped/dojoengine",
     "nav_selector": "nav.vocs_Sidebar_navigation",
@@ -20,6 +23,7 @@
     "exclude": ["https://book.dojoengine.org/misc/contributors"]
   },
   {
+    "active": true,
     "url": "https://book.dojoengine.org/cairo/hello-dojo",
     "output": "scrapped/dojoengine",
     "nav_selector": "nav.vocs_Sidebar_navigation",
@@ -27,6 +31,7 @@
     "exclude": ["https://book.dojoengine.org/misc/contributors"]
   },
   {
+    "active": true,
     "url": "https://book.dojoengine.org/cairo/overview",
     "output": "scrapped/dojoengine",
     "nav_selector": "nav.vocs_Sidebar_navigation",
@@ -34,6 +39,7 @@
     "exclude": ["https://book.dojoengine.org/misc/contributors"]
   },
   {
+    "active": true,
     "url": "https://book.dojoengine.org/toolchain/dojoup",
     "output": "scrapped/dojoengine",
     "nav_selector": "nav.vocs_Sidebar_navigation",
@@ -41,6 +47,7 @@
     "exclude": ["https://book.dojoengine.org/misc/contributors"]
   },
   {
+    "active": true,
     "url": "https://book.dojoengine.org/client/dojojs",
     "output": "scrapped/dojoengine",
     "nav_selector": "nav.vocs_Sidebar_navigation",
@@ -48,6 +55,7 @@
     "exclude": ["https://book.dojoengine.org/misc/contributors"]
   },
   {
+    "active": true,
     "url": "https://book.dojoengine.org/deployment/locally",
     "output": "scrapped/dojoengine",
     "nav_selector": "nav.vocs_Sidebar_navigation",
@@ -55,6 +63,7 @@
     "exclude": ["https://book.dojoengine.org/misc/contributors"]
   },
   {
+    "active": true,
     "url": "https://docs.madara.build/",
     "output": "scrapped/madara",
     "nav_selector": "ul.nextra-menu-desktop",
@@ -62,6 +71,7 @@
     "exclude": ["https://docs.madara.build/contribute"]
   },
   {
+    "active": true,
     "url": "https://www.starknetjs.com/docs/API/",
     "output": "scrapped/starknetjs",
     "nav_selector": "nav.menu",
@@ -69,6 +79,7 @@
     "exclude": ["https://www.starknetjs.com/docs/guides/**"]
   },
   {
+    "active": false,
     "url": "https://www.starknetjs.com/docs/guides/",
     "output": "scrapped/starknetjs",
     "nav_selector": "nav.menu",

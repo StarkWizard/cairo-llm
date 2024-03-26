@@ -7,6 +7,8 @@ from langchain_community.vectorstores import FAISS
 from langchain.chains.summarize import load_summarize_chain
 from langchain.chains import RetrievalQA
 from accelerate import Accelerator
+from langchain.globals import set_debug
+
 
 import os 
 import json
@@ -26,7 +28,7 @@ def load_llm():
         'max_new_tokens': 3000,
         'temperature': 0.01,
         'context_length': 7000,
-        'gpu_layers': 0
+        'gpu_layers': 20
     }
     
     # Initialisation du modèle avec indication explicite pour l'utilisation du GPU
@@ -35,7 +37,7 @@ def load_llm():
         model_type="mistral",
         max_new_tokens=1048,
         temperature=0.3,
-        gpu_layers=0,
+        gpu_layers=20,
         config=config,
     )
 
@@ -43,7 +45,8 @@ def load_llm():
     llm, config = accelerator.prepare(llm, config)
     return llm
 
-
+llm_ques_gen_pipeline = None
+llm_answer_gen = None
 
 #load a text and create chunks of text
 def file_processing(file_path):
@@ -114,18 +117,16 @@ def write_to_csv(file_path,ques_list,ans_list, force_overwritte=False):
 
 
 # Build The LLM Pipeline
-def llm_pipeline(file_path):
+def llm_pipeline(file_path,nb_questions=10):
 
     document_ques_gen, document_answer_gen = file_processing(file_path)
 
-
-
-    llm_ques_gen_pipeline = load_llm()
+    
 
     prompt_template = """
     You are an expert at creating questions based on documentation.
     Your goal is to prepare an LLM for training and build a dataset
-    You do this by asking standalone questions about the text below.The question must be standalone, questions should not be repeated
+    You do this by asking standalone questions about the text below.The question must be standalone, questions should not be repeated. Create {nb_questions} questions.
     Here is the text:
 
     ------------
@@ -138,7 +139,7 @@ def llm_pipeline(file_path):
     QUESTIONS:
     """
 
-    PROMPT_QUESTIONS = PromptTemplate(template=prompt_template, input_variables=["text"])
+    PROMPT_QUESTIONS = PromptTemplate(template=prompt_template, input_variables=["text","nb_questions"])
 
     refine_template = ("""
     You are an expert at creating practice questions based on documentation.
@@ -163,17 +164,17 @@ def llm_pipeline(file_path):
 
     ques_gen_chain = load_summarize_chain(llm = llm_ques_gen_pipeline, 
                                             chain_type = "refine", 
-                                            verbose = True, 
+                                            verbose = False, 
                                             question_prompt=PROMPT_QUESTIONS, 
                                             refine_prompt=REFINE_PROMPT_QUESTIONS)
 
-    ques = ques_gen_chain.run(document_ques_gen)
-
+    ques = ques_gen_chain.invoke({"input_documents": document_ques_gen,"nb_questions":nb_questions})["output_text"]
+    print(ques)
     embeddings = HuggingFaceBgeEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 
     vector_store = FAISS.from_documents(document_answer_gen, embeddings)
 
-    llm_answer_gen = load_llm()
+   
 
     ques_list = ques.split("\n")
     filtered_ques_list = [element for element in ques_list if element.endswith('?') or element.endswith('.')]
@@ -186,9 +187,9 @@ def llm_pipeline(file_path):
 
 
 # from a text file, generate corresponding CSV file
-def get_csv (file_path,target_dir):
+def get_csv (file_path,target_dir,nbq):
     file_name = os.path.basename(file_path)
-    answer_generation_chain, ques_list = llm_pipeline(file_path)
+    answer_generation_chain, ques_list = llm_pipeline(file_path,nbq)
     ans_list = []
     base_folder = target_dir + "/"
     if not os.path.isdir(base_folder):
@@ -197,7 +198,7 @@ def get_csv (file_path,target_dir):
 
     for question in ques_list:
         print("Question: ", question)
-        answer = answer_generation_chain.run(question)
+        answer = answer_generation_chain.invoke(question)["result"]
         print("Answer: ", answer)
         print("--------------------------------------------------\n\n")
         ans_list.append(answer)
@@ -208,20 +209,32 @@ def get_csv (file_path,target_dir):
 import argparse
 def main():
     console = Console()
+    set_debug(False)
     parser = argparse.ArgumentParser(description="Generate QA CSV from text file")
 
     
     parser.add_argument("source_file", type=str, help="Name for the text file to be processed.")
     parser.add_argument("output_dir", type=str, help="Output directory")
-
+    parser.add_argument("--nbq", type=int, default=10, help="Number of questions to generate (default: 10)")
+   
     # Analyse des arguments fournis par l'utilisateur
     args = parser.parse_args()
 
-   
+    global llm_ques_gen_pipeline 
+    llm_ques_gen_pipeline = load_llm()   
+    global llm_answer_gen
+    llm_answer_gen = load_llm()
+
+
     console.print(f"[bold green]Processing [/bold green]{args.source_file}...")
-    get_csv(args.source_file,args.output_dir)
+    get_csv(args.source_file,args.output_dir,args.nbq)
     console.print(f"[bold green]Saving to: [/bold green]{args.output_dir}...")
 
+# reste a faire:
+# si un repertoire est passé en param, traiter tous les fichiers enfants
+# En déduire le nb de questions
+# Mettre un pourcentage d'avancement
+# supprimer les textes de petite taille
 
 if __name__ == "__main__":
     main()
