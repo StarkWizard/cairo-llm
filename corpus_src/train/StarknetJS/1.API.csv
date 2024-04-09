@@ -1,23 +1,23 @@
 question,answer
-What is the provider of Starknet.js?,"The following is an introduction to the provider of Starknet.js.
+"What is the provider of Starknet.js?","The following is an introduction to the provider of Starknet.js.
 The Provider API allows you to interact with the Starknet network, without signing transactions or messages.
 Typically, these are read calls on the blockchain."
-What is the account of Starknet.js?,"The following is an introduction to the account of Starknet.js.
+"What is the account of Starknet.js?","The following is an introduction to the account of Starknet.js.
 An Account extends Provider and inherits all of its methods.
 It also introduces new methods that allow Accounts to create and verify signatures with a custom Signer, declare and deploy Contract and deploy new Account
 This API is the primary way to interact with an account contract on Starknet."
-What is the contract of Starknet.js?,"The following is an introduction to the contract of Starknet.js.
+"What is the contract of Starknet.js?","The following is an introduction to the contract of Starknet.js.
 Contracts API can do data transformations in JavaScript based on an ABI. They can also call and invoke to Starknet through a provided Signer.
 Contracts allow you to transform Cairo values, like Uint256 to BigNumber. It could also allow users to pass their own transformers, similar to JSON.parse."
-What is the signer of Starknet.js?,"The following is an introduction to the signer of Starknet.js.
+"What is the signer of Starknet.js?","The following is an introduction to the signer of Starknet.js.
 The Signer API allows you to sign transactions and messages, and also allows you to get the public key."
-What is the utils?,"The following is an introduction to the utils.
+"What is the utils?","The following is an introduction to the utils.
 Util functions are provided so you can use various low level functions in your application:
-1.elliptic curve?
-2.hash?
-3.num?
-4.encode?
-5.merkle?
-6.shortString?
-7.stark?
+1.elliptic curve
+2.hash
+3.num
+4.encode
+5.merkle
+6.shortString
+7.stark
 8.uint256"
