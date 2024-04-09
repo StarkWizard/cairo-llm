@@ -1,5 +1,5 @@
 question,answer
-"what is cairo's namespace?,"The following is an introduction to cairo's namespace.
+"what is cairo's namespace?","The following is an introduction to cairo's namespace.
 1.isCairo1Abi
 isCairo1Abi(abi): boolean
 
@@ -298,7 +298,7 @@ Returns
 Record<number, boolean | object | BigNumberish>
 
 Defined in
-src/utils/calldata/cairo.ts:119"
+src/utils/calldata/cairo.ts:119
 "What is constants's namespace?","The following is an introduction to constants's namespace.
 1.Enumerations
 
