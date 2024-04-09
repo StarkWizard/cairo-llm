@@ -1,5 +1,5 @@
 question,answer
-What is included in namespaces?,"Namespaces include the following content.
+"What is included in namespaces?","Namespaces include the following content.
 1.types
 2.constants
 3.encode
@@ -18,10 +18,10 @@ What is included in namespaces?,"Namespaces include the following content.
 16.selector
 17.events
 18.cairo"
-What is included in enumerations?,"Enumerations include the following content.
+"What is included in enumerations?","Enumerations include the following content.
 1.CairoOptionVariant
 2.CairoResultVariant"
-What is included in references?,"References include the following content.
+"What is included in references?","References include the following content.
 1.RPC
 Re-exports RPC
 
@@ -486,7 +486,7 @@ Re-exports StarkNetDomain
 
 155.TypedData
 Re-exports TypedData"
-What is included in classes?,"Classes include the following content.
+"What is included in classes?","Classes include the following content.
 1.Account
 2.AccountInterface
 3.Contract
@@ -506,7 +506,7 @@ What is included in classes?,"Classes include the following content.
 17.CairoCustomEnum
 18.CairoOption
 19.CairoResult"
-What is included in type aliases?,"Type aliases include the following content.
+"What is included in type aliases?","Type aliases include the following content.
 1.TypedContract
 TypedContract<TAbi>: AbiWanTypedContract<TAbi> & ContractInterface
 
@@ -540,7 +540,7 @@ Index signature
 
 Defined in
 src/utils/calldata/enum/CairoCustomEnum.ts:1"
-What is included in variables?,"Variables include the following content.
+"What is included in variables?","Variables include the following content.
 1.number
 Const number: num = num
 Deprecated
@@ -554,7 +554,7 @@ Const defaultProvider: Provider
 
 Defined in
 src/provider/index.ts:9"
-What is included in functions?,"Functions include the following content.
+"What is included in functions?","Functions include the following content.
 1.getCalldata
 getCalldata(args, callback): Calldata
 
@@ -742,8 +742,8 @@ Parse Transaction Receipt Event from UDC invoke transaction and create DeployCon
 Parameters
 Name                      Type
 txReceipt    InvokeTransactionReceiptResponse
-Returns
-Object
+Returns                    /
+Object                     /
 
 DeployContractResponse | UDC Event Response data
 
