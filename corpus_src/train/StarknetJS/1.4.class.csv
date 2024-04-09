@@ -1,5 +1,5 @@
 question,answer
-What is included in Account of Class?,"The Account of Class includes the following content.
+"What is included in Account of Class?","The Account of Class includes the following content.
 1.Hierarchy
 Provider
 Account
@@ -993,7 +993,7 @@ AccountInterface.getContractVersion
 
 Inherited from
 Provider.getContractVersion"
-What is included in AccountInterface of Class?,"The AccountInterface of Class includes the following content.
+"What is included in AccountInterface of Class?","The AccountInterface of Class includes the following content.
 1.Hierarchy
 ProviderInterface
 
@@ -1720,7 +1720,7 @@ Promise<ContractVersion>
 
 Inherited from
 ProviderInterface.getContractVersion"
-What is included in CairoCustomEnum of Class?,"The CairoCustomEnum of Class includes the following content.
+"What is included in CairoCustomEnum of Class?","The CairoCustomEnum of Class includes the following content.
 Param
 
 object containing the variants and its content. Example : {Success: 234, Warning: undefined, Error: undefined}. Only one variant with a value, object, array.
@@ -1791,7 +1791,7 @@ the name of the valid variant of a Cairo custom Enum.
 [src/utils/calldata/enum/CairoCustomEnum.ts:58](https://github.com/starknet-io/starknet.js/blob/v5.24.3/src/utils/calldata/enum/CairoCustomEnum.ts#L58)
 
 ###"
-What is included in CairoOption of Class?,"The CairoOption of Class includes the following content.
+"What is included in CairoOption of Class?","The CairoOption of Class includes the following content.
 Param
 
 CairoOptionVariant.Some or CairoOptionVariant.None
@@ -1852,7 +1852,7 @@ Returns
 boolean
 
 true if the valid variant is 'isNone'."
-What is included in CairoResult of Class?,"The CairoResult of Class includes the following content.
+"What is included in CairoResult of Class?","The CairoResult of Class includes the following content.
 Param
 
 CairoResultVariant.Ok or CairoResultVariant.Err
@@ -1915,7 +1915,7 @@ Returns
 boolean
 
 true if the valid variant is 'isErr'."
-What is included in CallData of Class?,"The CallData of Class includes the following content.
+"What is included in CallData of Class?","The CallData of Class includes the following content.
 1.Constructors
 constructor
 new CallData(abi)
@@ -2066,7 +2066,7 @@ Returns
 Result
 
 Result - parsed and formatted response object"
-What is included in Contract of Class?,"The Contract of Class includes the following content.
+"What is included in Contract of Class?","The Contract of Class includes the following content.
 Implements
 ContractInterface
 Indexable
@@ -2329,7 +2329,7 @@ TypedContract<TAbi>
 
 Implementation of
 ContractInterface.typed"
-What is included in ContractFactory of Class?,"The ContractFactory of Class includes the following content.
+"What is included in ContractFactory of Class?","The ContractFactory of Class includes the following content.
 1.Constructors
 constructor
 new ContractFactory(params)
@@ -2395,7 +2395,7 @@ Name Type
 address string
 Returns
 Contract"
-What is included in ContractInterface of Class?,"The ContractInterface of Class includes the following content.
+"What is included in ContractInterface of Class?","The ContractInterface of Class includes the following content.
 Implemented by
 Contract
 Indexable
@@ -2584,7 +2584,7 @@ Name Type
 tAbi TAbi
 Returns
 TypedContract<TAbi>"
-What is included in CustomError of Class?,"The CustomError of Class includes the following content.
+"What is included in CustomError of Class?","The CustomError of Class includes the following content.
 1.Hierarchy
 Error
 
@@ -2675,7 +2675,7 @@ Error.captureStackTrace
 
 Defined in
 node_modules/@types/node/globals.d.ts:4"
-What is included in GatewayError of Class?,"The GatewayError of Class includes the following content.
+"What is included in GatewayError of Class?","The GatewayError of Class includes the following content.
 1.Hierarchy
 LibraryError
 
@@ -2768,7 +2768,7 @@ LibraryError.captureStackTrace
 
 Defined in
 node_modules/@types/node/globals.d.ts:4"
-What is included in HttpError of Class?,"The HttpError of Class includes the following content.
+"What is included in HttpError of Class?","The HttpError of Class includes the following content.
 1.Hierarchy
 LibraryError
 
@@ -2861,7 +2861,7 @@ LibraryError.captureStackTrace
 
 Defined in
 node_modules/@types/node/globals.d.ts:4"
-What is included in LibraryError of Class?,"The LibraryError of Class includes the following content.
+"What is included in LibraryError of Class?","The LibraryError of Class includes the following content.
 1.Hierarchy
 CustomError
 
@@ -2954,7 +2954,7 @@ CustomError.captureStackTrace
 
 Defined in
 node_modules/@types/node/globals.d.ts:4"
-What is included in Provider of Class?,"The Provider of Class includes the following content.
+"What is included in Provider of Class?","The Provider of Class includes the following content.
 1.Hierarchy
 Provider
 
@@ -3406,7 +3406,7 @@ Promise<ContractVersion>
 
 Implementation of
 ProviderInterface.getContractVersion"
-What is included in ProviderInterface of Class?,"The ProviderInterface of Class includes the following content.
+"What is included in ProviderInterface of Class?","The ProviderInterface of Class includes the following content.
 1.Hierarchy
 
 ProviderInterface
@@ -3761,7 +3761,7 @@ classHash string
 options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
 Returns
 Promise<ContractVersion>"
-What is included in RpcProvider of Class?,"The RpcProvider of Class includes the following content.
+"What is included in RpcProvider of Class?","The RpcProvider of Class includes the following content.
 1.Implements
 ProviderInterface
 2.Constructors
@@ -3922,7 +3922,7 @@ Returns
 void
 
 fetchEndpoint
-Protected fetchEndpoint<T>(method, params?): Promise<Methods[T][``""result""``]>
+Protected fetchEndpoint<T>(method, params?): Promise<Methods[T][``''result''``]>
 
 Type parameters
 Name Type
@@ -3930,9 +3930,9 @@ T extends keyof ReadMethods | keyof WriteMethods | keyof TraceMethods
 Parameters
 Name Type
 method T
-params? Methods[T][``""params""``]
+params? Methods[T][``''params''``]
 Returns
-Promise<Methods[T][``""result""``]>
+Promise<Methods[T][``''result''``]>
 
 getChainId
 getChainId(): Promise<StarknetChainId>
@@ -4202,7 +4202,7 @@ Implementation of
 ProviderInterface.getClassHashAt
 
 getClassByHash
-getClassByHash(classHash): Promise<LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">>
+getClassByHash(classHash): Promise<LegacyContractClass | Omit<CompiledSierra, 'sierra_program_debug_info'>>
 
 Returns the contract class deployed under the given class hash.
 
@@ -4210,7 +4210,7 @@ Parameters
 Name Type Description
 classHash BigNumberish class hash
 Returns
-Promise<LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">>
+Promise<LegacyContractClass | Omit<CompiledSierra, 'sierra_program_debug_info'>>
 
 Contract class of compiled contract
 
@@ -4218,17 +4218,17 @@ Implementation of
 ProviderInterface.getClassByHash
 
 getClass
-getClass(classHash, blockIdentifier?): Promise<LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">>
+getClass(classHash, blockIdentifier?): Promise<LegacyContractClass | Omit<CompiledSierra, 'sierra_program_debug_info'>>
 
 Parameters
 Name Type
 classHash BigNumberish
 blockIdentifier BlockIdentifier
 Returns
-Promise<LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">>
+Promise<LegacyContractClass | Omit<CompiledSierra, 'sierra_program_debug_info'>>
 
 getClassAt
-getClassAt(contractAddress, blockIdentifier?): Promise<LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">>
+getClassAt(contractAddress, blockIdentifier?): Promise<LegacyContractClass | Omit<CompiledSierra, 'sierra_program_debug_info'>>
 
 Gets the contract class of the deployed contract.
 
@@ -4237,7 +4237,7 @@ Name Type Description
 contractAddress BigNumberish contract address
 blockIdentifier BlockIdentifier block identifier
 Returns
-Promise<LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">>
+Promise<LegacyContractClass | Omit<CompiledSierra, 'sierra_program_debug_info'>>
 
 Contract class of compiled contract
 
@@ -4517,10 +4517,10 @@ buildTransaction(invocation, versionType?): BROADCASTED_TXN
 Parameters
 Name Type
 invocation AccountInvocationItem
-versionType? ""fee"" | ""transaction""
+versionType? 'fee' | 'transaction'
 Returns
 BROADCASTED_TXN"
-What is included in SequencerProvider of Class?,"The SequencerProvider of Class includes the following content.
+"What is included in SequencerProvider of Class?","The SequencerProvider of Class includes the following content.
 1.Implements
 ProviderInterface
 2.Constructors
@@ -4581,13 +4581,13 @@ endpoint keyof Endpoints
 Returns
 string
 getFetchMethod
-Private getFetchMethod(endpoint): ""POST"" | ""GET""
+Private getFetchMethod(endpoint): 'POST' | 'GET'
 
 Parameters
 Name Type
 endpoint keyof Endpoints
 Returns
-""POST"" | ""GET""
+'POST' | 'GET'
 
 getQueryString
 Private getQueryString(query?): string
@@ -4608,7 +4608,7 @@ Returns
 undefined | Record<string, string>
 
 fetchEndpoint
-Protected fetchEndpoint<T>(endpoint, ...?destructured?): Promise<Endpoints[T][``""RESPONSE""``]>
+Protected fetchEndpoint<T>(endpoint, ...?destructured?): Promise<Endpoints[T][``''RESPONSE''``]>
 
 Type parameters
 Name Type
@@ -4616,9 +4616,9 @@ T extends keyof Endpoints
 Parameters
 Name Type
 endpoint T
-...?destructured? Endpoints[T][``""QUERY""``] extends never ? Endpoints[T][``""REQUEST""``] extends never ? [] : [undefined, Endpoints[T][``""REQUEST""``]] : Endpoints[T][``""REQUEST""``] extends never ? [Endpoints[T][``""QUERY""``]] : [Endpoints[T][``""QUERY""``], Endpoints[T][``""REQUEST""``]]
+...?destructured? Endpoints[T][``''QUERY''``] extends never ? Endpoints[T][``''REQUEST''``] extends never ? [] : [undefined, Endpoints[T][``''REQUEST''``]] : Endpoints[T][``''REQUEST''``] extends never ? [Endpoints[T][``''QUERY''``]] : [Endpoints[T][``''QUERY''``], Endpoints[T][``''REQUEST''``]]
 Returns
-Promise<Endpoints[T][``""RESPONSE""``]>
+Promise<Endpoints[T][``''RESPONSE''``]>
 
 fetch
 fetch(endpoint, options?): Promise<any>
@@ -5138,12 +5138,12 @@ Build Single AccountTransaction from Single AccountInvocation
 Parameters
 Name Type Description
 invocation AccountInvocationItem AccountInvocationItem
-versionType? ""fee"" | ""transaction"" 'fee' | 'transaction' - used to determine default versions
+versionType? 'fee' | 'transaction' 'fee' | 'transaction' - used to determine default versions
 Returns
 AccountTransactionItem
 
 AccountTransactionItem"
-What is included in Signer of Class?,"The Signer of Class includes the following content.
+"What is included in Signer of Class?","The Signer of Class includes the following content.
 1.Implements
 SignerInterface
 2.Constructors
@@ -5242,7 +5242,7 @@ signature
 
 Implementation of
 SignerInterface.signDeclareTransaction"
-What is included in SignerInterface of Class?,"The SignerInterface of Class includes the following content.
+"What is included in SignerInterface of Class?","The SignerInterface of Class includes the following content.
 1.Implemented by
 Signer
 2.Constructors
@@ -5318,7 +5318,7 @@ Returns
 Promise<Signature>
 
 signature"
-What is included in MerkleTree of Class?,"The MerkleTree of Class includes the following content.
+"What is included in MerkleTree of Class?","The MerkleTree of Class includes the following content.
 1.Constructors
 constructor
 new MerkleTree(leafHashes)
