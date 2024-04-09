@@ -1,0 +1,1163 @@
+question,answer
+"What is ProjConstructor of Interface?","The following is an introduction to the ProjConstructor of Interface.
+1.Type parameters
+Name
+T
+2.Hierarchy
+GroupConstructor<ProjPointType<T>>
+
+ProjConstructor
+
+3.Constructors
+constructor
+new ProjConstructor(x, y, z)
+
+Parameters
+Name Type
+x T
+y T
+z T
+Inherited from
+GroupConstructor<ProjPointType<T>>.constructor
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:76
+
+4.Properties
+BASE
+BASE: ProjPointType<T>
+
+Inherited from
+GroupConstructor.BASE
+
+Defined in
+node_modules/@noble/curves/abstract/curve.d.ts:19
+
+ZERO
+ZERO: ProjPointType<T>
+
+Inherited from
+GroupConstructor.ZERO
+
+Defined in
+node_modules/@noble/curves/abstract/curve.d.ts:20
+
+5.Methods
+fromAffine
+fromAffine(p): ProjPointType<T>
+
+Parameters
+Name Type
+p AffinePoint<T>
+Returns
+ProjPointType<T>
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:77
+
+fromHex
+fromHex(hex): ProjPointType<T>
+
+Parameters
+Name Type
+hex Hex
+Returns
+ProjPointType<T>
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:78
+
+fromPrivateKey
+fromPrivateKey(privateKey): ProjPointType<T>
+
+Parameters
+Name Type
+privateKey PrivKey
+Returns
+ProjPointType<T>
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:79
+
+normalizeZ
+normalizeZ(points): ProjPointType<T>[]
+
+Parameters
+Name Type
+points ProjPointType<T>[]
+Returns
+ProjPointType<T>[]
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:80"
+"What is ProjPointType of Interface?","The following is an introduction to the ProjPointType of Interface.
+1.Design rationale for types
+Interaction between classes from different curves should fail: k256.Point.BASE.add(p256.Point.BASE)
+For this purpose we want to use instanceof operator, which is fast and works during runtime
+Different calls of curve() would return different classes - curve(params) !== curve(params): if somebody decided to monkey-patch their curve, it won't affect others
+TypeScript can't infer types for classes created inside a function. Classes is one instance of nominative types in TypeScript and interfaces only check for shape, so it's hard to create unique type for every function call.
+
+We can use generic types via some param, like curve opts, but that would: 1. Enable interaction between curve(params) and curve(params) (curves of same params) which is hard to debug. 2. Params can be generic and we can't enforce them to be constant value: if somebody creates curve from non-constant params, it would be allowed to interact with other curves with non-constant params
+
+2.Type parameters
+Name
+T
+3.Hierarchy
+Group<ProjPointType<T>>
+
+ProjPointType
+
+4.Properties
+px
+Readonly px: T
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:58
+
+py
+Readonly py: T
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:59
+
+pz
+Readonly pz: T
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:60
+
+5.Accessors
+x
+get x(): T
+
+Returns
+T
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:61
+
+y
+get y(): T
+
+Returns
+T
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:62
+
+5.Methods
+multiply
+multiply(scalar): ProjPointType<T>
+
+Parameters
+Name Type
+scalar bigint
+Returns
+ProjPointType<T>
+
+Overrides
+Group.multiply
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:63
+
+toAffine
+toAffine(iz?): AffinePoint<T>
+
+Parameters
+Name Type
+iz? T
+Returns
+AffinePoint<T>
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:64
+
+isTorsionFree
+isTorsionFree(): boolean
+
+Returns
+boolean
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:65
+
+clearCofactor
+clearCofactor(): ProjPointType<T>
+
+Returns
+ProjPointType<T>
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:66
+
+assertValidity
+assertValidity(): void
+
+Returns
+void
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:67
+
+hasEvenY
+hasEvenY(): boolean
+
+Returns
+boolean
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:68
+
+toRawBytes
+toRawBytes(isCompressed?): Uint8Array
+
+Parameters
+Name Type
+isCompressed? boolean
+Returns
+Uint8Array
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:69
+
+toHex
+toHex(isCompressed?): string
+
+Parameters
+Name Type
+isCompressed? boolean
+Returns
+string
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:70
+
+multiplyUnsafe
+multiplyUnsafe(scalar): ProjPointType<T>
+
+Parameters
+Name Type
+scalar bigint
+Returns
+ProjPointType<T>
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:71
+
+multiplyAndAddUnsafe
+multiplyAndAddUnsafe(Q, a, b): undefined | ProjPointType<T>
+
+Parameters
+Name Type
+Q ProjPointType<T>
+a bigint
+b bigint
+Returns
+undefined | ProjPointType<T>
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:72
+
+_setWindowSize
+_setWindowSize(windowSize): void
+
+Parameters
+Name Type
+windowSize number
+Returns
+void
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:73
+
+double
+double(): ProjPointType<T>
+
+Returns
+ProjPointType<T>
+
+Inherited from
+Group.double
+
+Defined in
+node_modules/@noble/curves/abstract/curve.d.ts:11
+
+negate
+negate(): ProjPointType<T>
+
+Returns
+ProjPointType<T>
+
+Inherited from
+Group.negate
+
+Defined in
+node_modules/@noble/curves/abstract/curve.d.ts:12
+
+add
+add(other): ProjPointType<T>
+
+Parameters
+Name Type
+other ProjPointType<T>
+Returns
+ProjPointType<T>
+
+Inherited from
+Group.add
+
+Defined in
+node_modules/@noble/curves/abstract/curve.d.ts:13
+
+subtract
+subtract(other): ProjPointType<T>
+
+Parameters
+Name Type
+other ProjPointType<T>
+Returns
+ProjPointType<T>
+
+Inherited from
+Group.subtract
+
+Defined in
+node_modules/@noble/curves/abstract/curve.d.ts:14
+
+equals
+equals(other): boolean
+
+Parameters
+Name Type
+other ProjPointType<T>
+Returns
+boolean
+
+Inherited from
+Group.equals
+
+Defined in
+node_modules/@noble/curves/abstract/curve.d.ts:15"
+"What is SignatureType of Interface?","The following is an introduction to the SignatureType of Interface.
+1.Properties
+r
+Readonly r: bigint
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:141
+
+s
+Readonly s: bigint
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:142
+
+recovery
+Optional Readonly recovery: number
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:143
+
+2.Methods
+assertValidity
+assertValidity(): void
+
+Returns
+void
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:144
+
+addRecoveryBit
+addRecoveryBit(recovery): RecoveredSignatureType
+
+Parameters
+Name Type
+recovery number
+Returns
+RecoveredSignatureType
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:145
+
+hasHighS
+hasHighS(): boolean
+
+Returns
+boolean
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:146
+
+normalizeS
+normalizeS(): SignatureType
+
+Returns
+SignatureType
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:147
+
+recoverPublicKey
+recoverPublicKey(msgHash): ProjPointType<bigint>
+
+Parameters
+Name Type
+msgHash Hex
+Returns
+ProjPointType<bigint>
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:148
+
+toCompactRawBytes
+toCompactRawBytes(): Uint8Array
+
+Returns
+Uint8Array
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:149
+
+toCompactHex
+toCompactHex(): string
+
+Returns
+string
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:150
+
+toDERRawBytes
+toDERRawBytes(isCompressed?): Uint8Array
+
+Parameters
+Name Type
+isCompressed? boolean
+Returns
+Uint8Array
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:151
+
+toDERHex
+toDERHex(isCompressed?): string
+
+Parameters
+Name Type
+isCompressed? boolean
+Returns
+string
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:152"
+"What is CallStruct of Interface?","The following is an introduction to the CallStruct of Interface.
+Properties
+1.to
+to: string
+
+2.selector
+selector: string
+
+3.calldata
+calldata: string[]"
+"What is CommonTransactionResponse of Interface?","The following is an introduction to the CommonTransactionResponse of Interface.
+1.Hierarchy
+CommonTransactionResponse
+
+InvokeTransactionResponse
+
+DeclareTransactionResponse
+
+2.Properties
+transaction_hash
+Optional transaction_hash: string
+
+version
+Optional version: string
+
+signature
+Optional signature: Signature
+
+max_fee
+Optional max_fee: string
+
+nonce
+Optional nonce: string"
+"What is ContractEntryPoint of Interface?","The following is an introduction to the ContractEntryPoint of Interface.
+Properties
+1.offset
+offset: string
+
+2.selector
+selector: string"
+"What is DeclareContractResponse of Interface?","The following is an introduction to the DeclareContractResponse of Interface.
+Properties
+1.transaction_hash
+transaction_hash: string
+
+2.class_hash
+class_hash: string"
+"What is DeclareSignerDetails of Interface?","The following is an introduction to the DeclareSignerDetails of Interface.
+Properties
+1.classHash
+classHash: string
+
+2.senderAddress
+senderAddress: string
+
+3.chainId
+chainId: StarknetChainId
+
+4.maxFee
+maxFee: BigNumberish
+
+5.version
+version: BigNumberish
+
+6.nonce
+nonce: BigNumberish
+
+7.compiledClassHash
+Optional compiledClassHash: string"
+"What is DeclareTransactionResponse of Interface?","The following is an introduction to the DeclareTransactionResponse of Interface.
+1.Hierarchy
+CommonTransactionResponse
+
+DeclareTransactionResponse
+
+2.Properties
+contract_class
+Optional contract_class: any
+
+sender_address
+Optional sender_address: string
+
+transaction_hash
+Optional transaction_hash: string
+
+Inherited from
+CommonTransactionResponse.transaction_hash
+
+version
+Optional version: string
+
+Inherited from
+CommonTransactionResponse.version
+
+signature
+Optional signature: Signature
+
+Inherited from
+CommonTransactionResponse.signature
+
+max_fee
+Optional max_fee: string
+
+Inherited from
+CommonTransactionResponse.max_fee
+
+nonce
+Optional nonce: string
+
+Inherited from
+CommonTransactionResponse.nonce"
+"What is DeployContractResponse of Interface?","The following is an introduction to the DeployContractResponse of Interface.
+Properties
+1.contract_address
+contract_address: string
+
+2.transaction_hash
+ransaction_hash: string"
+"What is EstimateFee of Interface?","The following is an introduction to the EstimateFee of Interface.
+1.Hierarchy
+EstimateFeeResponse
+
+EstimateFee
+
+2.Properties
+suggestedMaxFee
+suggestedMaxFee: bigint
+
+Overrides
+EstimateFeeResponse.suggestedMaxFee
+
+overall_fee
+overall_fee: bigint
+
+Inherited from
+EstimateFeeResponse.overall_fee
+
+gas_consumed
+Optional gas_consumed: bigint
+
+Inherited from
+EstimateFeeResponse.gas_consumed
+
+gas_price
+Optional gas_price: bigint
+
+Inherited from
+EstimateFeeResponse.gas_price"
+"What is EstimateFeeDetails of Interface?","The following is an introduction to the EstimateFeeDetails of Interface.
+Properties
+1.nonce
+Optional nonce: BigNumberish
+
+2.blockIdentifier
+Optional blockIdentifier: BlockIdentifier
+
+3.skipValidate
+Optional skipValidate: boolean"
+"What is EstimateFeeResponse of Interface?","The following is an introduction to the EstimateFeeResponse of Interface.
+1.Hierarchy
+EstimateFeeResponse
+
+EstimateFee
+
+2.Properties
+overall_fee
+overall_fee: bigint
+
+gas_consumed
+Optional gas_consumed: bigint
+
+gas_price
+Optional gas_price: bigint
+
+suggestedMaxFee
+Optional suggestedMaxFee: bigint"
+"What is Event of Interface?","The following is an introduction to the Event of Interface.
+Properties
+1.from_address
+from_address: string
+
+2.keys
+keys: string[]
+
+3.data
+data: string[]"
+"What is GetBlockResponse of Interface?","The following is an introduction to the GetBlockResponse of Interface.
+Properties
+1.timestamp
+timestamp: number
+
+2.block_hash
+block_hash: string
+
+3.block_number
+block_number: number
+
+4.new_root
+new_root: string
+
+5.parent_hash
+parent_hash: string
+
+6.status
+status: BlockStatus
+
+7.transactions
+transactions: string[]
+
+8.gas_price
+Optional gas_price: string
+
+9.sequencer_address
+Optional sequencer_address: string
+
+10.starknet_version
+Optional starknet_version: string
+
+11.transaction_receipts
+Optional transaction_receipts: any"
+"What is GetCodeResponse of Interface?","The following is an introduction to the GetCodeResponse of Interface.
+Properties
+bytecode
+bytecode: ByteCode"
+"What is InvocationsSignerDetails of Interface?","The following is an introduction to the InvocationsSignerDetails of Interface.
+1.Hierarchy
+Required<InvocationsDetails>
+
+InvocationsSignerDetails
+
+2.Properties
+walletAddress
+walletAddress: string
+
+chainId
+chainId: StarknetChainId
+
+cairoVersion
+cairoVersion: CairoVersion
+
+nonce
+nonce: BigNumberish
+
+Inherited from
+Required.nonce
+
+maxFee
+maxFee: BigNumberish
+
+Inherited from
+Required.maxFee
+
+version
+version: BigNumberish
+
+Inherited from
+Required.version"
+"What is InvokeFunctionResponse of Interface?","The following is an introduction to the InvokeFunctionResponse of Interface.
+Properties
+transaction_hash
+transaction_hash: string"
+"What is InvokeTransactionReceiptResponse of Interface?","The following is an introduction to the InvokeTransactionReceiptResponse of Interface.
+Properties
+1.type
+Optional type: TransactionType
+
+2.execution_status
+execution_status: TransactionExecutionStatus
+
+3.finality_status
+finality_status: TransactionFinalityStatus
+
+4.status
+Optional status: 'NOT_RECEIVED' | 'RECEIVED' | 'ACCEPTED_ON_L2' | 'ACCEPTED_ON_L1' | 'REJECTED' | 'REVERTED'
+
+5.actual_fee
+actual_fee: string
+
+6.block_hash
+block_hash: string
+
+7.block_number
+block_number: BlockNumber
+
+8.transaction_hash
+transaction_hash: string
+
+9.transaction_index
+Optional transaction_index: number
+
+10.messages_sent
+messages_sent: MessageToL1[]
+
+11.events
+events: any[]
+
+12.execution_resources
+Optional execution_resources: any"
+"What is InvokeTransactionResponse of Interface?","The following is an introduction to the InvokeTransactionResponse of Interface.
+1.Hierarchy
+CommonTransactionResponse
+
+InvokeTransactionResponse
+
+2.Properties
+contract_address
+Optional contract_address: string
+
+sender_address
+Optional sender_address: string
+
+entry_point_selector
+Optional entry_point_selector: string
+
+calldata
+calldata: RawCalldata
+
+transaction_hash
+Optional transaction_hash: string
+
+Inherited from
+CommonTransactionResponse.transaction_hash
+
+version
+Optional version: string
+
+Inherited from
+CommonTransactionResponse.version
+
+signature
+Optional signature: Signature
+
+Inherited from
+CommonTransactionResponse.signature
+
+max_fee
+Optional max_fee: string
+
+Inherited from
+CommonTransactionResponse.max_fee
+
+nonce
+Optional nonce: string
+
+Inherited from
+CommonTransactionResponse.nonce"
+"What is MessageToL1 of Interface?","The following is an introduction to the MessageToL1 of Interface.
+Properties
+1.to_address
+to_address: string
+
+2.payload
+payload: string[]"
+"What is MessageToL2 of Interface?","The following is an introduction to the MessageToL2 of Interface.
+Properties
+1.from_address
+from_address: string
+
+2.payload
+payload: string[]"
+"What is Program of Interface?","The following is an introduction to the Program of Interface.
+1.Hierarchy
+Record<string, any>
+
+Program
+
+2.Properties
+builtins
+builtins: string[]
+
+data
+data: string[]"
+"What is ProviderOptions of Interface?","The following is an introduction to the ProviderOptions of Interface.
+Properties
+1.sequencer
+Optional sequencer: SequencerProviderOptions
+
+2.rpc
+Optional rpc: RpcProviderOptions"
+"What is BLOCK_NOT_FOUND of Interface?","The following is an introduction to the BLOCK_NOT_FOUND of Interface.
+Properties
+1.code
+code: 24
+
+2.message
+message: 'Block not found' "
+"What is CLASS_ALREADY_DECLARED of Interface?","The following is an introduction to the CLASS_ALREADY_DECLARED of Interface.
+Properties
+1.code
+code: 51
+
+2.message
+message: 'Class already declared' "
+"What is CLASS_HASH_NOT_FOUND of Interface?","The following is an introduction to the CLASS_HASH_NOT_FOUND of Interface.
+Properties
+1.code
+code: 28
+
+2.message
+message: 'Class hash not found' "
+"What is COMPILATION_FAILED of Interface?","The following is an introduction to the COMPILATION_FAILED of Interface.
+Properties
+1.code
+code: 56
+
+2.message
+message: 'Compilation failed' "
+"What is COMPILED_CLASS_HASH_MISMATCH of Interface?","The following is an introduction to the COMPILED_CLASS_HASH_MISMATCH of Interface.
+Properties
+1.code
+code: 60
+
+2.message
+message: 'the compiled class hash did not match the one supplied in the transaction' "
+"What is CONTRACT_CLASS_SIZE_IS_TOO_LARGE of Interface?","The following is an introduction to the CONTRACT_CLASS_SIZE_IS_TOO_LARGE of Interface.
+Properties
+1.code
+code: 57
+
+2.message
+message: 'Contract class size it too large' "
+"What is CONTRACT_ERROR of Interface?","The following is an introduction to the CONTRACT_ERROR of Interface.
+Properties
+1.code
+code: 40
+
+2.message
+message: 'Contract error'
+
+3.data
+data: Object
+
+Type declaration
+Name Type
+revert_error string"
+"What is CONTRACT_NOT_FOUND of Interface?","The following is an introduction to the CONTRACT_NOT_FOUND of Interface.
+Properties
+1.code
+code: 20
+
+2.message
+message: 'Contract not found' "
+"What is DUPLICATE_TX of Interface?","The following is an introduction to the DUPLICATE_TX of Interface.
+Properties
+1.code
+code: 59
+
+2.message
+message: 'A transaction with the same hash already exists in the mempool' "
+"What is FAILED_TO_RECEIVE_TXN of Interface?","The following is an introduction to the FAILED_TO_RECEIVE_TXN of Interface.
+Properties
+1.code
+code: 1
+
+2.message
+message: 'Failed to write transaction' "
+"What is INSUFFICIENT_ACCOUNT_BALANCE of Interface?","The following is an introduction to the INSUFFICIENT_ACCOUNT_BALANCE of Interface.
+Properties
+1.code
+code: 54
+
+2.message
+message: 'Account balance is smaller than the transaction's max_fee' "
+"What is INSUFFICIENT_MAX_FEE of Interface?","The following is an introduction to the INSUFFICIENT_MAX_FEE of Interface.
+Properties
+1.code
+code: 53
+
+2.message
+message: 'Max fee is smaller than the minimal transaction cost (validation plus fee transfer)' "
+"What is INVALID_BLOCK_HASH of Interface?","The following is an introduction to the INVALID_BLOCK_HASH of Interface.
+Properties
+1.code
+code: 26
+
+2.message
+message: 'Invalid block hash' "
+"What is INVALID_CALL_DATA of Interface?","The following is an introduction to the INVALID_CALL_DATA of Interface.
+Properties
+1.code
+code: 22
+
+2.message
+message: 'Invalid call data' "
+"What is INVALID_CONTINUATION_TOKEN of Interface?","The following is an introduction to the INVALID_CONTINUATION_TOKEN of Interface.
+Properties
+1.code
+code: 33
+
+2.message
+message: 'The supplied continuation token is invalid or unknown' "
+"What is INVALID_MESSAGE_SELECTOR of Interface?","The following is an introduction to the INVALID_MESSAGE_SELECTOR of Interface.
+Properties
+1.code
+code: 21
+
+2.message
+message: 'Invalid message selector' "
+"What is INVALID_TRANSACTION_NONCE of Interface?","The following is an introduction to the INVALID_TRANSACTION_NONCE of Interface.
+Properties
+1.code
+code: 52
+
+2.message
+message: 'Invalid transaction nonce' "
+"What is INVALID_TXN_HASH of Interface?","The following is an introduction to the INVALID_TXN_HASH of Interface.
+Properties
+1.code
+code: 25
+
+2.message
+message: 'Invalid transaction hash' "
+"What is INVALID_TXN_INDEX of Interface?","The following is an introduction to the INVALID_TXN_INDEX of Interface.
+Properties
+1.code
+code: 27
+
+2.message
+message: 'Invalid transaction index in a block' "
+"What is NON_ACCOUNT of Interface?","The following is an introduction to the NON_ACCOUNT of Interface.
+Properties
+1.code
+code: 58
+
+2.message
+message: 'Sender address in not an account contract' "
+"What is NO_BLOCKS of Interface?","The following is an introduction to the NO_BLOCKS of Interface.
+Properties
+1.code
+code: 32
+
+2.message
+message: 'There are no blocks' "
+"What is NO_TRACE_AVAILABLE of Interface?","The following is an introduction to the NO_TRACE_AVAILABLE of Interface.
+1.code
+code: 10
+
+2.message
+message: 'No trace available for transaction'
+
+3.data
+data: Object
+
+Type declaration
+Name Type
+status 'RECEIVED' | 'REJECTED' "
+"What is PAGE_SIZE_TOO_BIG of Interface?","The following is an introduction to the PAGE_SIZE_TOO_BIG of Interface.
+1.code
+code: 31
+
+2.message
+message: 'Requested page size is too big' "
+"What is TOO_MANY_KEYS_IN_FILTER of Interface?","The following is an introduction to the TOO_MANY_KEYS_IN_FILTER of Interface.
+1.code
+code: 34
+
+2.message
+message: 'Too many keys provided in a filter' "
+"What is TXN_HASH_NOT_FOUND of Interface?","The following is an introduction to the TXN_HASH_NOT_FOUND of Interface.
+1.code
+code: 29
+
+2.message
+message: 'Transaction hash not found' "
+"What is UNEXPECTED_ERROR of Interface?","The following is an introduction to the UNEXPECTED_ERROR of Interface.
+1.code
+code: 63
+
+2.message
+message: 'An unexpected error occurred'
+
+3.data
+data: string"
+"What is UNSUPPORTED_CONTRACT_CLASS_VERSION of Interface?","The following is an introduction to the UNSUPPORTED_CONTRACT_CLASS_VERSION of Interface.
+1.code
+code: 62
+
+2.message
+message: 'the contract class version is not supported' "
+"What is UNSUPPORTED_TX_VERSION of Interface?","The following is an introduction to the UNSUPPORTED_TX_VERSION of Interface.
+1.code
+code: 61
+
+2.message
+message: 'the transaction version is not supported' "
+"What is VALIDATION_FAILURE of Interface?","The following is an introduction to the VALIDATION_FAILURE of Interface.
+1.code
+code: 55
+
+2.message
+message: 'Account validation failed' "
+"What is InvokeFunctionTransactionResponse of Interface?","The following is an introduction to the InvokeFunctionTransactionResponse of Interface.
+1.Hierarchy
+InvokeFunctionTransaction
+
+InvokeFunctionTransactionResponse
+
+2.The following is an introduction to the ProjConstructor of Interface.
+transaction_hash
+transaction_hash: string
+
+entry_point_selector
+entry_point_selector: string
+
+type
+type: INVOKE
+
+Inherited from
+InvokeFunctionTransaction.type
+
+sender_address
+sender_address: string
+
+Inherited from
+InvokeFunctionTransaction.sender_address
+
+signature
+Optional signature: string[]
+
+Inherited from
+InvokeFunctionTransaction.signature
+
+entry_point_type
+Optional entry_point_type: EXTERNAL
+
+Inherited from
+InvokeFunctionTransaction.entry_point_type
+
+calldata
+Optional calldata: RawCalldata
+
+Inherited from
+InvokeFunctionTransaction.calldata
+
+nonce
+nonce: BigNumberish
+
+Inherited from
+InvokeFunctionTransaction.nonce
+
+max_fee
+Optional max_fee: BigNumberish
+
+Inherited from
+InvokeFunctionTransaction.max_fee
+
+version
+Optional version: BigNumberish
+
+Inherited from
+InvokeFunctionTransaction.version"
+"What is StarkNetDomain of Interface?","The following is an introduction to the StarkNetDomain of Interface.
+1.Hierarchy
+Record<string, unknown>
+
+StarkNetDomain
+
+2.Properties
+name
+Optional name: string
+
+version
+Optional version: string
+
+chainId
+Optional chainId: string | number"
+"What is StateUpdateResponse of Interface?","The following is an introduction to the StateUpdateResponse of Interface.
+Properties
+1.block_hash
+Optional block_hash: string
+
+2.new_root
+Optional new_root: string
+
+3.old_root
+old_root: string
+
+4.state_diff
+state_diff: Object
+
+Type declaration
+Name Type
+storage_diffs StorageDiffs
+deployed_contracts DeployedContracts
+nonces NonceUpdates
+old_declared_contracts? OldDeclaredContracts
+declared_classes? DeclaredClasses
+replaced_classes? ReplacedClasses | ReplacedClasses
+deprecated_declared_classes? DeprecatedDeclaredClasses"
+"What is TypedData of Interface?","The following is an introduction to the TypedData of Interface.
+Properties
+1.types
+types: Record<string, StarkNetType[]>
+
+2.primaryType
+primaryType: string
+
+3.domain
+domain: StarkNetDomain
+
+4.message
+message: Record<string, unknown>"
+"What is Uint256 of Interface?","The following is an introduction to the Uint256 of Interface.
+Properties
+1.low
+low: BigNumberish
+
+2.high
+high: BigNumberish"
