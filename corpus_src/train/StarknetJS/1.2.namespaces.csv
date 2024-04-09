@@ -1,5 +1,5 @@
 question,answer
-what is cairo's namespace?,"The following is an introduction to cairo's namespace.
+"what is cairo's namespace?,"The following is an introduction to cairo's namespace.
 1.isCairo1Abi
 isCairo1Abi(abi): boolean
 
@@ -299,7 +299,7 @@ Record<number, boolean | object | BigNumberish>
 
 Defined in
 src/utils/calldata/cairo.ts:119"
-What is constants's namespace?,"The following is an introduction to constants's namespace.
+"What is constants's namespace?","The following is an introduction to constants's namespace.
 1.Enumerations
 
 1.BaseUrl
@@ -323,13 +323,13 @@ Defined in
 src/constants.ts:6
 
 3.HEX_STR_TRANSACTION_VERSION_1
-Const HEX_STR_TRANSACTION_VERSION_1: ""0x1""
+Const HEX_STR_TRANSACTION_VERSION_1: '0x1'
 
 Defined in
 src/constants.ts:8
 
 4.HEX_STR_TRANSACTION_VERSION_2
-Const HEX_STR_TRANSACTION_VERSION_2: ""0x2""
+Const HEX_STR_TRANSACTION_VERSION_2: '0x2'
 
 Defined in
 src/constants.ts:9
@@ -404,10 +404,10 @@ Const RPC_MAINNET_NODES: string[]
 
 Defined in
 src/constants.ts:53"
-What is ec's namespace?,"The following is an introduction to ec's namespace.
+"What is ec's namespace?","The following is an introduction to ec's namespace.
 1.starkCurve
 2.weierstrass"
-What is ecode's namespace?,"The following is an introduction to ecode's namespace.
+"What is ecode's namespace?","The following is an introduction to ecode's namespace.
 1.References
 
 IS_BROWSER
@@ -626,7 +626,7 @@ string
 
 Defined in
 src/utils/encode.ts:143"
-What is event's namespace?,"The following is an introduction to event's namespace.
+"What is event's namespace?","The following is an introduction to event's namespace.
 Functions
 getAbiEvents
 getAbiEvents(abi): AbiEvents
@@ -658,7 +658,7 @@ ParsedEvents - parsed events corresponding to the abi
 
 Defined in
 src/utils/events/index.ts:38"
-What is hash's namespace?,"The following is an introduction to hash's namespace.
+"What is hash's namespace?","The following is an introduction to hash's namespace.
 1.Namespaces
 poseidon
 
@@ -695,7 +695,7 @@ Return transaction versions based on version type, default version type is 'tran
 
 Parameters
 Name                     Type
-versionType?    ""fee"" | ""transaction""
+versionType?    'fee' | 'transaction'
 Returns
 Object
 
@@ -1022,7 +1022,7 @@ format: hex-string
 
 Defined in
 src/utils/selector.ts:67"
-What is json's namespace?,"The following is an introduction to json's namespace.
+"What is json's namespace?","The following is an introduction to json's namespace.
 Functions
 parse
 parse(x): any
@@ -1093,7 +1093,7 @@ string
 
 Defined in
 src/utils/json.ts:37"
-What is merkle's namespace?,"The following is an introduction to merkle's namespace.
+"What is merkle's namespace?","The following is an introduction to merkle's namespace.
 1.Classes
 MerkleTree
 
@@ -1113,7 +1113,7 @@ boolean
 
 Defined in
 src/utils/merkle.ts:85"
-What is num's namespace?,"The following is an introduction to num's namespace.
+"What is num's namespace?","The following is an introduction to num's namespace.
 1.References
 BigNumberish
 Re-exports BigNumberish
@@ -1378,7 +1378,7 @@ src/utils/num.ts:117
 toCairoBool
 toCairoBool(value): string
 
-Convert boolean to ""0"" or ""1""
+Convert boolean to '0' or '1'
 
 Parameters
 Name	          Type
@@ -1388,7 +1388,7 @@ string
 
 Defined in
 src/utils/num.ts:158"
-What is provider's namespace?,"The following is an introduction to provider's namespace.
+"What is provider's namespace?","The following is an introduction to provider's namespace.
 Functions
 1.wait
 wait(delay): Promise<unknown>
@@ -1435,7 +1435,7 @@ ContractClass
 
 Defined in
 src/utils/provider.ts:41"
-What is selector's namespace?,"The following is an introduction to selector's namespace.
+"What is selector's namespace?","The following is an introduction to selector's namespace.
 References
 1.keccakBn
 Re-exports keccakBn
@@ -1448,7 +1448,7 @@ Re-exports getSelectorFromName
 
 4.getSelector
 Re-exports getSelector"
-What is shortString's namespace?,"The following is an introduction to shortString's namespace.
+"What is shortString's namespace?","The following is an introduction to shortString's namespace.
 Functions
 1.isASCII
 isASCII(str): boolean
@@ -1529,7 +1529,7 @@ Example
 ###
 
 const myEncodedString: string = encodeShortString('uri/pict/t38.jpg');
-// return hex string (ex.""0x7572692f706963742f7433382e6a7067"")
+// return hex string (ex.'0x7572692f706963742f7433382e6a7067')
 
 ###
 
@@ -1553,12 +1553,12 @@ Example
 ###
 
 const myDecodedString: string = decodeShortString('0x7572692f706963742f7433382e6a7067');
-// return string (ex.""uri/pict/t38.jpg"")
+// return string (ex.'uri/pict/t38.jpg')
 
 ###
 Parameters
 Name     Type               Description
-str     string   representing a 248 bit max number (ex. ""0x1A4F64EA56"" or ""236942575435676423"")
+str     string   representing a 248 bit max number (ex. '0x1A4F64EA56' or '236942575435676423')
 Returns
 string
 
@@ -1594,7 +1594,7 @@ boolean
 
 Defined in
 src/utils/shortString.ts:42"
-What is stark's namespace?,"The following is an introduction to stark's namespace.
+"What is stark's namespace?","The following is an introduction to stark's namespace.
 Functions
 1.compressProgram
 compressProgram(jsonProgram): CompressedProgram
@@ -1715,7 +1715,7 @@ bigint
 
 Defined in
 src/utils/stark.ts:88"
-What is starknetId's namespace?,"The following is an introduction to starknetId's namespace.
+"What is starknetId's namespace?","The following is an introduction to starknetId's namespace.
 1.Enumerations
 StarknetIdContract
 
@@ -1755,7 +1755,7 @@ string
 
 Defined in
 src/utils/starknetId.ts:108"
-What is transaction's namespace?,"The following is an introduction to transaction's namespace.
+"What is transaction's namespace?","The following is an introduction to transaction's namespace.
 Functions
 1.transformCallsToMulticallArrays
 transformCallsToMulticallArrays(calls): Object
@@ -1851,7 +1851,7 @@ Calldata
 
 Defined in
 src/utils/transaction.ts:89"
-What is typedData's namespace?,"The following is an introduction to typedData's namespace.
+"What is typedData's namespace?","The following is an introduction to typedData's namespace.
 1.References
 StarkNetMerkleType
 Re-exports StarkNetMerkleType
@@ -1963,9 +1963,9 @@ Name           Type
 T        extends TypedData
 Parameters
 Name           Type
-types        T[""types""]
+types        T['types']
 type          string
-data        T[""message""]
+data        T['message']
 Returns
 string[][]
 
@@ -1982,9 +1982,9 @@ Name          Type
 T       extends TypedData
 Parameters
 Name          Type
-types      T[""types""]
+types      T['types']
 type        string
-data     T[""message""]
+data       T['message']
 Returns
 string
 
@@ -2005,7 +2005,7 @@ string
 
 Defined in
 src/utils/typedData.ts:223"
-What about types's namespace?,"The following is an introduction to types's namespace.
+"What about types's namespace?","The following is an introduction to types's namespace.
 1.Namespaces
 RPC
 Sequencer
@@ -2276,13 +2276,13 @@ Defined in
 src/types/contract.ts:26
 
 CallOptions
-CallOptions: Pick<ContractOptions, ""blockIdentifier"" | ""parseRequest"" | ""parseResponse"" | ""formatResponse"">
+CallOptions: Pick<ContractOptions, 'blockIdentifier' | 'parseRequest' | 'parseResponse' | 'formatResponse'>
 
 Defined in
 src/types/contract.ts:37
 
 InvokeOptions
-InvokeOptions: Pick<ContractOptions, ""maxFee"" | ""nonce"" | ""signature"" | ""parseRequest"">
+InvokeOptions: Pick<ContractOptions, 'maxFee' | 'nonce' | 'signature' | 'parseRequest'>
 
 Defined in
 src/types/contract.ts:42
@@ -2420,7 +2420,7 @@ Defined in
 src/types/lib/index.ts:60
 
 DeployAccountContractTransaction
-DeployAccountContractTransaction: Omit<DeployAccountContractPayload, ""contractAddress""> & { signature?: Signature }
+DeployAccountContractTransaction: Omit<DeployAccountContractPayload, 'contractAddress'> & { signature?: Signature }
 
 Defined in
 src/types/lib/index.ts:67
@@ -2450,7 +2450,7 @@ Defined in
 src/types/lib/index.ts:81
 
 DeclareAndDeployContractPayload
-DeclareAndDeployContractPayload: Omit<UniversalDeployerContractPayload, ""classHash""> & DeclareContractPayload
+DeclareAndDeployContractPayload: Omit<UniversalDeployerContractPayload, 'classHash'> & DeclareContractPayload
 
 Defined in
 src/types/lib/index.ts:88
@@ -2491,13 +2491,13 @@ Defined in
 src/types/lib/index.ts:106
 
 CairoVersion
-CairoVersion: ""0"" | ""1"" | undefined
+CairoVersion: '0' | '1' | undefined
 
 Defined in
 src/types/lib/index.ts:108
 
 CompilerVersion
-CompilerVersion: ""0"" | ""1"" | ""2"" | undefined
+CompilerVersion: '0' | '1' | '2' | undefined
 
 Defined in
 src/types/lib/index.ts:109
@@ -2692,7 +2692,7 @@ AbiEntry: Object
 Type declaration
 Name          Type
 name          string
-type          ""felt"" | ""felt*"" | string
+type          'felt' | 'felt*' | string
 Defined in
 src/types/lib/contract/abi.ts:5
 
@@ -2702,8 +2702,8 @@ EventEntry: Object
 Type declaration
 Name          Type
 name          string
-type          ""felt"" | ""felt*"" | string
-kind          ""key"" | ""data""
+type          'felt' | 'felt*' | string
+kind          'key' | 'data'
 Defined in
 src/types/lib/contract/abi.ts:7
 
@@ -2715,7 +2715,7 @@ Name                        Type
 inputs                   AbiEntry[]
 name                      string
 outputs                   AbiEntry[]
-stateMutability?          ""view""
+stateMutability?          'view'
 state_mutability?          string
 type FunctionAbiType
 Defined in
@@ -2738,7 +2738,7 @@ Name                   Type
 members     AbiEntry & { offset: number }[]
 name                   string
 size                   number
-type                   ""struct""
+type                   'struct'
 Defined in
 src/types/lib/contract/abi.ts:27
 
@@ -2759,7 +2759,7 @@ Name                   Type
 variants          AbiEntry & { offset: number }[]
 name                   string
 size                   number
-type                   ""enum""
+type                   'enum'
 Defined in
 src/types/lib/contract/abi.ts:35
 
@@ -2785,8 +2785,8 @@ Type declaration
 Name          Type
 name          string
 members      EventEntry[]
-kind          ""struct""
-type          ""event""
+kind          'struct'
+type          'event'
 Defined in
 src/types/lib/contract/abi.ts:46
 
@@ -2796,7 +2796,7 @@ LegacyEvent: Object
 Type declaration
 Name          Type
 name          string
-type          ""event""
+type          'event'
 data          EventEntry[]
 keys          EventEntry[]
 Defined in
@@ -2816,7 +2816,7 @@ Defined in
 src/types/lib/contract/legacy.ts:7
 
 LegacyCompiledContract
-LegacyCompiledContract: Omit<LegacyContractClass, ""program""> & { program: Program }
+LegacyCompiledContract: Omit<LegacyContractClass, 'program'> & { program: Program }
 
 format produced after compile .cairo to .json
 
@@ -2891,7 +2891,7 @@ Defined in
 src/types/lib/contract/sierra.ts:19
 
 SierraContractClass
-SierraContractClass: Omit<CompiledSierra, ""abi"" | ""sierra_program_debug_info""> & { sierra_program: string ; abi: string }
+SierraContractClass: Omit<CompiledSierra, 'abi' | 'sierra_program_debug_info'> & { sierra_program: string ; abi: string }
 
 format produced after compressing 'sierra_program', stringifies 'abi' property and omit sierra_program_debug_info CompressedCompiledSierra
 
@@ -2965,7 +2965,7 @@ Defined in
 src/types/provider/configuration.ts:9
 
 SequencerHttpMethod
-SequencerHttpMethod: ""POST"" | ""GET""
+SequencerHttpMethod: 'POST' | 'GET'
 
 Defined in
 src/types/provider/configuration.ts:18
@@ -3120,7 +3120,7 @@ Defined in
 src/types/provider/response.ts:223
 
 ContractClassResponse
-ContractClassResponse: LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">
+ContractClassResponse: LegacyContractClass | Omit<CompiledSierra, 'sierra_program_debug_info'>
 
 Standardized type Cairo0 program compressed and Cairo1 sierra_program decompressed abi Abi CompiledSierra without '.sierra_program_debug_info'
 
@@ -3139,7 +3139,7 @@ StarkNetMerkleType: Object
 Type declaration
 Name           Type
 name           string
-type           ""merkletree""
+type           'merkletree'
 contains       string
 Defined in
 src/types/typedData.ts:1
@@ -3159,7 +3159,7 @@ CairoEnum: CairoCustomEnum | CairoOption<any> | CairoResult<any, any>
 
 Defined in
 src/types/cairoEnum.ts:3"
-What about uint256's namespace?,"The following is an introduction to uint256's namespace.
+"What about uint256's namespace?","The following is an introduction to uint256's namespace.
 1.References
 Uint256
 Re-exports Uint256
@@ -3219,7 +3219,7 @@ Uint256
 
 Defined in
 src/utils/uint256.ts:29"
-What about starkCurve's namespace?,"The following is an introduction to starkCurve's namespace.
+"What about starkCurve's namespace?","The following is an introduction to starkCurve's namespace.
 1.Type Aliases
 ProjectivePoint
 ProjectivePoint: ProjPointType<bigint>
@@ -3294,7 +3294,7 @@ Defined in
 node_modules/@scure/starknet/lib/index.d.ts:45
 
 Fp251
-Const Fp251: Readonly<IField<bigint> & Required<Pick<IField<bigint>, ""isOdd"">>>
+Const Fp251: Readonly<IField<bigint> & Required<Pick<IField<bigint>, 'isOdd'>>>
 
 Defined in
 node_modules/@scure/starknet/lib/index.d.ts:60
@@ -3549,7 +3549,7 @@ bigint[]
 
 Defined in
 node_modules/@noble/curves/abstract/poseidon.d.ts:27"
-What about weierstrass's namespace?,"The following is an introduction to weierstrass's namespace.
+"What about weierstrass's namespace?","The following is an introduction to weierstrass's namespace.
 1.Interfaces
 ProjPointType
 ProjConstructor
@@ -3784,7 +3784,7 @@ x      T
 y      T
 Defined in
 node_modules/@noble/curves/abstract/weierstrass.d.ts:233"
-What about poseidon's namespace?,"The following is an introduction to poseidon's namespace.
+"What about poseidon's namespace?","The following is an introduction to poseidon's namespace.
 1.Type Aliases
 PoseidonOpts
 PoseidonOpts: Object
@@ -3849,7 +3849,7 @@ Name              Type
 roundConstants bigint[][]
 Defined in
 node_modules/@noble/curves/abstract/poseidon.d.ts:26"
-What types of errors are namespaces have?,"The following is an introduction to the types of errors.
+"What types of errors are namespaces have?","The following is an introduction to the types of errors.
 Interfaces
 
 1.FAILED_TO_RECEIVE_TXN
@@ -3881,7 +3881,7 @@ Interfaces
 27.UNSUPPORTED_TX_VERSION
 28.UNSUPPORTED_CONTRACT_CLASS_VERSION
 29.UNEXPECTED_ERROR"
-What is JRPC's namespace?,"The following is an introduction to JRPC's namespace.
+"What is JRPC's namespace?","The following is an introduction to JRPC's namespace.
 Type Aliases
 1.RequestBody
 RequestBody: Object
@@ -3889,14 +3889,14 @@ RequestBody: Object
 Type declaration
 Name        Type
 id        number | string
-jsonrpc     ""2.0""
+jsonrpc     '2.0'
 method      string
 params?       {}
 Defined in
 src/types/api/jsonrpc/index.ts:1
 
 2.ResponseBody
-ResponseBody: { id: number | string ; jsonrpc: ""2.0"" } & SuccessResponseBody | ErrorResponseBody
+ResponseBody: { id: number | string ; jsonrpc: '2.0' } & SuccessResponseBody | ErrorResponseBody
 
 Defined in
 src/types/api/jsonrpc/index.ts:8
@@ -3931,7 +3931,7 @@ Defined in
 src/types/api/jsonrpc/index.ts:21
 
 Previous"
-What is SPEC's namespace?,"The following is an introduction to SPEC's namespace.
+"What is SPEC's namespace?","The following is an introduction to SPEC's namespace.
 Type Aliases
 FELT
 FELT: string
@@ -4012,79 +4012,79 @@ Defined in
 src/types/api/rpcspec/components.ts:26
 
 STRUCT_ABI_TYPE
-STRUCT_ABI_TYPE: ""struct""
+STRUCT_ABI_TYPE: 'struct'
 
 Defined in
 src/types/api/rpcspec/components.ts:27
 
 EVENT_ABI_TYPE
-EVENT_ABI_TYPE: ""event""
+EVENT_ABI_TYPE: 'event'
 
 Defined in
 src/types/api/rpcspec/components.ts:28
 
 FUNCTION_ABI_TYPE
-FUNCTION_ABI_TYPE: ""function"" | ""l1_handler"" | ""constructor""
+FUNCTION_ABI_TYPE: 'function' | 'l1_handler' | 'constructor'
 
 Defined in
 src/types/api/rpcspec/components.ts:29
 
 ENTRY_POINT_TYPE
-ENTRY_POINT_TYPE: ""EXTERNAL"" | ""L1_HANDLER"" | ""CONSTRUCTOR""
+ENTRY_POINT_TYPE: 'EXTERNAL' | 'L1_HANDLER' | 'CONSTRUCTOR'
 
 Defined in
 src/types/api/rpcspec/components.ts:31
 
 CALL_TYPE
-CALL_TYPE: ""DELEGATE"" | ""LIBRARY_CALL"" | ""CALL""
+CALL_TYPE: 'DELEGATE' | 'LIBRARY_CALL' | 'CALL'
 
 Defined in
 src/types/api/rpcspec/components.ts:33
 
 TXN_STATUS
-TXN_STATUS: ""RECEIVED"" | ""REJECTED"" | ""ACCEPTED_ON_L2"" | ""ACCEPTED_ON_L1""
+TXN_STATUS: 'RECEIVED' | 'REJECTED' | 'ACCEPTED_ON_L2' | 'ACCEPTED_ON_L1'
 
 Defined in
 src/types/api/rpcspec/components.ts:35
 
 SIMULATION_FLAG
-SIMULATION_FLAG: ""SKIP_VALIDATE"" | ""SKIP_FEE_CHARGE""
+SIMULATION_FLAG: 'SKIP_VALIDATE' | 'SKIP_FEE_CHARGE'
 
 Defined in
 src/types/api/rpcspec/components.ts:37
 
 DA_MODE
-DA_MODE: ""L1"" | ""L2""
+DA_MODE: 'L1' | 'L2'
 
 Defined in
 src/types/api/rpcspec/components.ts:39
 
 TXN_TYPE
-TXN_TYPE: ""DECLARE"" | ""DEPLOY"" | ""DEPLOY_ACCOUNT"" | ""INVOKE"" | ""L1_HANDLER""
+TXN_TYPE: 'DECLARE' | 'DEPLOY' | 'DEPLOY_ACCOUNT' | 'INVOKE' | 'L1_HANDLER'
 
 Defined in
 src/types/api/rpcspec/components.ts:40
 
 TXN_FINALITY_STATUS
-TXN_FINALITY_STATUS: ""ACCEPTED_ON_L2"" | ""ACCEPTED_ON_L1""
+TXN_FINALITY_STATUS: 'ACCEPTED_ON_L2' | 'ACCEPTED_ON_L1'
 
 Defined in
 src/types/api/rpcspec/components.ts:41
 
 TXN_EXECUTION_STATUS
-TXN_EXECUTION_STATUS: ""SUCCEEDED"" | ""REVERTED""
+TXN_EXECUTION_STATUS: 'SUCCEEDED' | 'REVERTED'
 
 Defined in
 src/types/api/rpcspec/components.ts:42
 
 BLOCK_STATUS
-BLOCK_STATUS: ""PENDING"" | ""ACCEPTED_ON_L2"" | ""ACCEPTED_ON_L1"" | ""REJECTED""
+BLOCK_STATUS: 'PENDING' | 'ACCEPTED_ON_L2' | 'ACCEPTED_ON_L1' | 'REJECTED'
 
 Defined in
 src/types/api/rpcspec/components.ts:43
 
 BLOCK_TAG
-BLOCK_TAG: ""latest"" | ""pending""
+BLOCK_TAG: 'latest' | 'pending'
 
 Defined in
 src/types/api/rpcspec/components.ts:44
@@ -4349,10 +4349,10 @@ DECLARE_TXN_V0: Object
 
 Type declaration
 Name                   Type
-type                ""DECLARE""
+type                'DECLARE'
 sender_address       ADDRESS
 max_fee                FELT
-version                ""0x0""
+version                '0x0'
 signature            SIGNATURE
 class_hash             FELT
 Defined in
@@ -4363,10 +4363,10 @@ DECLARE_TXN_V1: Object
 
 Type declaration
 Name             Type
-type           ""DECLARE""
+type           'DECLARE'
 sender_address  ADDRESS
 max_fee          FELT
-version          ""0x1""
+version          '0x1'
 signature       SIGNATURE
 nonce             FELT
 class_hash        FELT
@@ -4378,11 +4378,11 @@ DECLARE_TXN_V2: Object
 
 Type declaration
 Name                  Type   
-type                ""DECLARE""
+type                'DECLARE'
 sender_address       ADDRESS
 compiled_class_hash   FELT
 max_fee               FELT
-version                ""0x2""
+version                '0x2'
 signature           SIGNATURE
 nonce                   FELT
 class_hash              FELT
@@ -4418,7 +4418,7 @@ BROADCASTED_DECLARE_TXN_V1: Object
 
 Type declaration
 Name             Type
-type          ""DECLARE""
+type          'DECLARE'
 sender_address ADDRESS
 max_fee          FELT
 version      NUM_AS_HEX
@@ -4433,7 +4433,7 @@ BROADCASTED_DECLARE_TXN_V2: Object
 
 Type declaration
 Name                   Type
-type                ""DECLARE""
+type                'DECLARE'
 sender_address       ADDRESS
 compiled_class_hash    FELT
 max_fee                FELT
@@ -4455,7 +4455,7 @@ DEPLOY_ACCOUNT_TXN_V1: Object
 
 Type declaration
 Name                        Type
-type                   ""DEPLOY_ACCOUNT""
+type                   'DEPLOY_ACCOUNT'
 max_fee                    FELT
 version                  NUM_AS_HEX
 signature                 SIGNATURE
@@ -4471,8 +4471,8 @@ DEPLOY_TXN: Object
 
 Type declaration
 Name                       Type
-type                       ""DEPLOY""
-version                     NUM_AS_HEX
+type                       'DEPLOY'
+version                    NUM_AS_HEX
 contract_address_salt      FELT
 constructor_calldata       FELT[]
 class_hash                 FELT
@@ -4490,9 +4490,9 @@ INVOKE_TXN_V0: Object
 
 Type declaration
 Name                Type
-type                ""INVOKE""
+type                'INVOKE'
 max_fee              FELT
-version             ""0x0""
+version             '0x0'
 signature           SIGNATURE
 contract_address     ADDRESS
 entry_point_selector  FELT
@@ -4505,7 +4505,7 @@ INVOKE_TXN_V1: Object
 
 Type declaration
 Name             Type
-type            ""INVOKE""
+type            'INVOKE'
 sender_address   ADDRESS
 calldata         FELT[]
 max_fee          FELT
@@ -4516,7 +4516,7 @@ Defined in
 src/types/api/rpcspec/components.ts:295
 
 L1_HANDLER_TXN
-L1_HANDLER_TXN: { version: NUM_AS_HEX ; type: ""L1_HANDLER"" ; nonce: NUM_AS_HEX } & FUNCTION_CALL
+L1_HANDLER_TXN: { version: NUM_AS_HEX ; type: 'L1_HANDLER' ; nonce: NUM_AS_HEX } & FUNCTION_CALL
 
 Defined in
 src/types/api/rpcspec/components.ts:305
@@ -4550,62 +4550,62 @@ type                     TXN_TYPE
 messages_sent           MSG_TO_L1[]
 events                     EVENT[]
 revert_reason                string
-finality_status ""ACCEPTED_ON_L2""
+finality_status 'ACCEPTED_ON_L2'
 execution_status TXN_EXECUTION_STATUS
 execution_resources EXECUTION_RESOURCES
 Defined in
 src/types/api/rpcspec/components.ts:324
 
 INVOKE_TXN_RECEIPT
-INVOKE_TXN_RECEIPT: { type: ""INVOKE"" } & COMMON_RECEIPT_PROPERTIES
+INVOKE_TXN_RECEIPT: { type: 'INVOKE' } & COMMON_RECEIPT_PROPERTIES
 
 Defined in
 src/types/api/rpcspec/components.ts:336
 
 PENDING_INVOKE_TXN_RECEIPT
-PENDING_INVOKE_TXN_RECEIPT: { type: ""INVOKE"" } & PENDING_COMMON_RECEIPT_PROPERTIES
+PENDING_INVOKE_TXN_RECEIPT: { type: 'INVOKE' } & PENDING_COMMON_RECEIPT_PROPERTIES
 
 Defined in
 src/types/api/rpcspec/components.ts:340
 
 DECLARE_TXN_RECEIPT
-DECLARE_TXN_RECEIPT: { type: ""DECLARE"" } & COMMON_RECEIPT_PROPERTIES
+DECLARE_TXN_RECEIPT: { type: 'DECLARE' } & COMMON_RECEIPT_PROPERTIES
 
 Defined in
 src/types/api/rpcspec/components.ts:344
 
 PENDING_DECLARE_TXN_RECEIPT
-PENDING_DECLARE_TXN_RECEIPT: { type: ""DECLARE"" } & PENDING_COMMON_RECEIPT_PROPERTIES
+PENDING_DECLARE_TXN_RECEIPT: { type: 'DECLARE' } & PENDING_COMMON_RECEIPT_PROPERTIES
 
 Defined in
 src/types/api/rpcspec/components.ts:348
 
 DEPLOY_ACCOUNT_TXN_RECEIPT
-DEPLOY_ACCOUNT_TXN_RECEIPT: { type: ""DEPLOY_ACCOUNT"" ; contract_address: FELT } & COMMON_RECEIPT_PROPERTIES
+DEPLOY_ACCOUNT_TXN_RECEIPT: { type: 'DEPLOY_ACCOUNT' ; contract_address: FELT } & COMMON_RECEIPT_PROPERTIES
 
 Defined in
 src/types/api/rpcspec/components.ts:352
 
 PENDING_DEPLOY_ACCOUNT_TXN_RECEIPT
-PENDING_DEPLOY_ACCOUNT_TXN_RECEIPT: { type: ""DEPLOY_ACCOUNT"" ; contract_address: FELT } & PENDING_COMMON_RECEIPT_PROPERTIES
+PENDING_DEPLOY_ACCOUNT_TXN_RECEIPT: { type: 'DEPLOY_ACCOUNT' ; contract_address: FELT } & PENDING_COMMON_RECEIPT_PROPERTIES
 
 Defined in
 src/types/api/rpcspec/components.ts:357
 
 DEPLOY_TXN_RECEIPT
-DEPLOY_TXN_RECEIPT: { type: ""DEPLOY"" ; contract_address: FELT } & COMMON_RECEIPT_PROPERTIES
+DEPLOY_TXN_RECEIPT: { type: 'DEPLOY' ; contract_address: FELT } & COMMON_RECEIPT_PROPERTIES
 
 Defined in
 src/types/api/rpcspec/components.ts:362
 
 L1_HANDLER_TXN_RECEIPT
-L1_HANDLER_TXN_RECEIPT: { type: ""L1_HANDLER"" ; message_hash: NUM_AS_HEX } & COMMON_RECEIPT_PROPERTIES
+L1_HANDLER_TXN_RECEIPT: { type: 'L1_HANDLER' ; message_hash: NUM_AS_HEX } & COMMON_RECEIPT_PROPERTIES
 
 Defined in
 src/types/api/rpcspec/components.ts:367
 
 PENDING_L1_HANDLER_TXN_RECEIPT
-PENDING_L1_HANDLER_TXN_RECEIPT: { type: ""L1_HANDLER"" ; message_hash: NUM_AS_HEX } & PENDING_COMMON_RECEIPT_PROPERTIES
+PENDING_L1_HANDLER_TXN_RECEIPT: { type: 'L1_HANDLER' ; message_hash: NUM_AS_HEX } & PENDING_COMMON_RECEIPT_PROPERTIES
 
 Defined in
 src/types/api/rpcspec/components.ts:372
@@ -4753,7 +4753,7 @@ Defined in
 src/types/api/rpcspec/components.ts:459
 
 FUNCTION_STATE_MUTABILITY
-FUNCTION_STATE_MUTABILITY: ""view""
+FUNCTION_STATE_MUTABILITY: 'view'
 
 Defined in
 src/types/api/rpcspec/components.ts:466
@@ -4848,7 +4848,7 @@ INVOKE_TXN_TRACE: Object
 
 Type declaration
 Name Type
-type ""INVOKE""
+type 'INVOKE'
 execute_invocation FUNCTION_INVOCATION | { revert_reason: string }
 validate_invocation? FUNCTION_INVOCATION
 fee_transfer_invocation? FUNCTION_INVOCATION
@@ -4861,7 +4861,7 @@ DECLARE_TXN_TRACE: Object
 
 Type declaration
 Name Type
-type ""DECLARE""
+type 'DECLARE'
 validate_invocation? FUNCTION_INVOCATION
 fee_transfer_invocation? FUNCTION_INVOCATION
 state_diff? STATE_DIFF
@@ -4873,7 +4873,7 @@ DEPLOY_ACCOUNT_TXN_TRACE: Object
 
 Type declaration
 Name Type
-type ""DEPLOY_ACCOUNT""
+type 'DEPLOY_ACCOUNT'
 constructor_invocation FUNCTION_INVOCATION
 validate_invocation? FUNCTION_INVOCATION
 fee_transfer_invocation? FUNCTION_INVOCATION
@@ -4886,7 +4886,7 @@ L1_HANDLER_TXN_TRACE: Object
 
 Type declaration
 Name Type
-type ""L1_HANDLER""
+type 'L1_HANDLER'
 function_invocation FUNCTION_INVOCATION
 state_diff? STATE_DIFF
 Defined in
@@ -4934,7 +4934,7 @@ order number
 message MSG_TO_L1
 Defined in
 src/types/api/rpcspec/components.ts:577"
-What is RPC's namespace?,"The following is an introduction to RPC's namespace.
+"What is RPC's namespace?","The following is an introduction to RPC's namespace.
 1.Namespaces
 JRPC
 Errors
@@ -5174,7 +5174,7 @@ ReplacedClasses: REPLACED_CLASS[]
 
 Defined in
 src/types/api/rpcspec/nonspec.ts:94"
-What is Sequencer's namespace?,"The following is an introduction to Sequencer's namespace.
+"What is Sequencer's namespace?","The following is an introduction to Sequencer's namespace.
 1.Interfaces
 InvokeFunctionTransactionResponse
 2.References
@@ -5286,7 +5286,7 @@ AddTransactionResponse: Object
 Type declaration
 Name Type
 transaction_hash string
-code? ""TRANSACTION_RECEIVED""
+code? 'TRANSACTION_RECEIVED'
 address? string
 class_hash? string
 Defined in
@@ -5454,19 +5454,19 @@ Defined in
 src/types/api/sequencer.ts:284
 
 InvokeEstimateFee
-InvokeEstimateFee: Omit<InvokeFunctionTransaction, ""max_fee"" | ""entry_point_type"">
+InvokeEstimateFee: Omit<InvokeFunctionTransaction, 'max_fee' | 'entry_point_type'>
 
 Defined in
 src/types/api/sequencer.ts:288
 
 DeclareEstimateFee
-DeclareEstimateFee: Omit<DeclareTransaction, ""max_fee"">
+DeclareEstimateFee: Omit<DeclareTransaction, 'max_fee'>
 
 Defined in
 src/types/api/sequencer.ts:289
 
 DeployAccountEstimateFee
-DeployAccountEstimateFee: Omit<DeployAccountTransaction, ""max_fee"">
+DeployAccountEstimateFee: Omit<DeployAccountTransaction, 'max_fee'>
 
 Defined in
 src/types/api/sequencer.ts:290
