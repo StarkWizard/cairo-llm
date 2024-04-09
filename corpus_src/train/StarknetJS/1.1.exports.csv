@@ -1,0 +1,761 @@
+question,answer
+What is included in namespaces?,"Namespaces include the following content.
+1.types
+2.constants
+3.encode
+4.hash
+5.json
+6.num
+7.transaction
+8.stark
+9.merkle
+10.uint256
+11.shortString
+12.typedData
+13.ec
+14.starknetId
+15.provider
+16.selector
+17.events
+18.cairo"
+What is included in enumerations?,"Enumerations include the following content.
+1.CairoOptionVariant
+2.CairoResultVariant"
+What is included in references?,"References include the following content.
+1.RPC
+Re-exports RPC
+
+2.CallL1Handler
+Re-exports CallL1Handler
+
+3.DeployedContractItem
+Re-exports DeployedContractItem
+
+4.ExecutionResources
+Re-exports ExecutionResources
+
+5.FunctionInvocation
+Re-exports FunctionInvocation
+
+6.GetContractAddressesResponse
+Re-exports GetContractAddressesResponse
+
+7.GetTransactionStatusResponse
+Re-exports GetTransactionStatusResponse
+
+8.SequencerIdentifier
+Re-exports SequencerIdentifier
+
+9.Sequencer
+Re-exports Sequencer
+
+10.EstimateFee
+Re-exports EstimateFee
+
+11.EstimateFeeBulk
+Re-exports EstimateFeeBulk
+
+12.AccountInvocationsFactoryDetails
+Re-exports AccountInvocationsFactoryDetails
+
+13.EstimateFeeDetails
+Re-exports EstimateFeeDetails
+
+14.DeployContractResponse
+Re-exports DeployContractResponse
+
+15.MultiDeployContractResponse
+Re-exports MultiDeployContractResponse
+
+16.DeployContractUDCResponse
+Re-exports DeployContractUDCResponse
+
+17.DeclareDeployUDCResponse
+Re-exports DeclareDeployUDCResponse
+
+18.SimulateTransactionDetails
+-exports SimulateTransactionDetails
+
+19.SIMULATION_FLAG
+Re-exports SIMULATION_FLAG
+
+20.ValidateType
+Re-exports ValidateType
+
+21.Uint
+Re-exports Uint
+
+22.Litteral
+Re-exports Litteral
+
+23.AsyncContractFunction
+Re-exports AsyncContractFunction
+
+24.ContractFunction
+Re-exports ContractFunction
+
+25.Result
+Re-exports Result
+
+26.ArgsOrCalldata
+Re-exports ArgsOrCalldata
+
+27.ArgsOrCalldataWithOptions
+Re-exports ArgsOrCalldataWithOptions
+
+28.ContractOptions
+Re-exports ContractOptions
+
+29.CallOptions
+Re-exports CallOptions
+
+30.InvokeOptions
+Re-exports InvokeOptions
+
+31.ParsedEvent
+Re-exports ParsedEvent
+
+32.ParsedEvents
+Re-exports ParsedEvents
+
+33.WeierstrassSignatureType
+Re-exports WeierstrassSignatureType
+
+34.ArraySignatureType
+Re-exports ArraySignatureType
+
+35.Signature
+Re-exports Signature
+
+36.BigNumberish
+Re-exports BigNumberish
+
+37.Calldata
+Re-exports Calldata
+
+38.Uint256
+Re-exports Uint256
+
+39.RawCalldata
+Re-exports RawCalldata
+
+40.HexCalldata
+Re-exports HexCalldata
+
+41.AllowArray
+Re-exports AllowArray
+
+42.OptionalPayload
+Re-exports OptionalPayload
+
+43.RawArgs
+Re-exports RawArgs
+
+44.RawArgsObject
+Re-exports RawArgsObject
+
+45.RawArgsArray
+Re-exports RawArgsArray
+
+46.MultiType
+Re-exports MultiType
+
+47.UniversalDeployerContractPayload
+Re-exports UniversalDeployerContractPayload
+
+48.DeployAccountContractPayload
+Re-exports DeployAccountContractPayload
+
+49.DeployAccountContractTransaction
+Re-exports DeployAccountContractTransaction
+
+50.DeclareContractPayload
+Re-exports DeclareContractPayload
+
+51.CompleteDeclareContractPayload
+Re-exports CompleteDeclareContractPayload
+
+52.DeclareAndDeployContractPayload
+Re-exports DeclareAndDeployContractPayload
+
+53.DeclareContractTransaction
+Re-exports DeclareContractTransaction
+
+54.CallDetails
+Re-exports CallDetails
+
+55.Invocation
+Re-exports Invocation
+
+56.Call
+Re-exports Call
+
+57.CairoVersion
+Re-exports CairoVersion
+
+58.CompilerVersion
+Re-exports CompilerVersion
+
+59.InvocationsDetails
+Re-exports InvocationsDetails
+
+60.Details
+Re-exports Details
+
+61.InvocationsDetailsWithNonce
+Re-exports InvocationsDetailsWithNonce
+
+62.TransactionType
+Re-exports TransactionType
+
+63.TransactionStatus
+Re-exports TransactionStatus
+
+64.TransactionFinalityStatus
+Re-exports TransactionFinalityStatus
+
+65.TransactionExecutionStatus
+Re-exports TransactionExecutionStatus
+
+66.BlockStatus
+Re-exports BlockStatus
+
+67.BlockTag
+Re-exports BlockTag
+
+68.BlockNumber
+Re-exports BlockNumber
+
+69.BlockIdentifier
+Re-exports BlockIdentifier
+
+70.AccountInvocationItem
+Re-exports AccountInvocationItem
+
+71.AccountInvocations
+Re-exports AccountInvocations
+
+72.Invocations
+Re-exports Invocations
+
+73.Tupled
+Re-exports Tupled
+
+74.Args
+Re-exports Args
+
+75.ParsedStruct
+Re-exports ParsedStruct
+
+76.waitForTransactionOptions
+Re-exports waitForTransactionOptions
+
+77.getSimulateTransactionOptions
+Re-exports getSimulateTransactionOptions
+
+78.getContractVersionOptions
+Re-exports getContractVersionOptions
+
+79.getEstimateFeeBulkOptions
+Re-exports getEstimateFeeBulkOptions
+
+80.CallStruct
+Re-exports CallStruct
+
+81.ContractVersion
+Re-exports ContractVersion
+
+82.ContractClass
+Re-exports ContractClass
+
+83.CompiledContract
+Re-exports CompiledContract
+
+84.CairoContract
+Re-exports CairoContract
+
+85.EntryPointType
+Re-exports EntryPointType
+
+86.Abi
+Re-exports Abi
+
+87.AbiEntry
+Re-exports AbiEntry
+
+88.EventEntry
+Re-exports EventEntry
+
+89.FunctionAbi
+Re-exports FunctionAbi
+
+90.AbiStructs
+Re-exports AbiStructs
+
+91.StructAbi
+Re-exports StructAbi
+
+92.AbiEnums
+Re-exports AbiEnums
+
+93.EnumAbi
+Re-exports EnumAbi
+
+94.AbiEvents
+Re-exports AbiEvents
+
+95.EventAbi
+Re-exports EventAbi
+
+96.Cairo1Event
+Re-exports Cairo1Event
+
+97.LegacyEvent
+Re-exports LegacyEvent
+
+98.LegacyContractClass
+Re-exports LegacyContractClass
+
+99.LegacyCompiledContract
+Re-exports LegacyCompiledContract
+
+100.Builtins
+Re-exports Builtins
+
+101.CompressedProgram
+Re-exports CompressedProgram
+
+102.EntryPointsByType
+Re-exports EntryPointsByType
+
+103.ContractEntryPointFields
+Re-exports ContractEntryPointFields
+
+104.Program
+Re-exports Program
+
+105.CairoAssembly
+Re-exports CairoAssembly
+
+106.CompiledSierra
+Re-exports CompiledSierra
+
+107.SierraContractClass
+Re-exports SierraContractClass
+
+108.CompiledSierraCasm
+Re-exports CompiledSierraCasm
+
+109.ByteCode
+Re-exports ByteCode
+
+110.PythonicHints
+Re-exports PythonicHints
+
+111.SierraProgramDebugInfo
+Re-exports SierraProgramDebugInfo
+
+112.SierraEntryPointsByType
+Re-exports SierraEntryPointsByType
+
+113.SierraContractEntryPointFields
+Re-exports SierraContractEntryPointFields
+
+114.ProviderOptions
+Re-exports ProviderOptions
+
+115.RpcProviderOptions
+Re-exports RpcProviderOptions
+
+116.SequencerHttpMethod
+Re-exports SequencerHttpMethod
+
+117.SequencerProviderOptions
+Re-exports SequencerProviderOptions
+
+118.GetBlockResponse
+Re-exports GetBlockResponse
+
+119.GetCodeResponse
+Re-exports GetCodeResponse
+
+120.ContractEntryPoint
+Re-exports ContractEntryPoint
+
+121.GetTransactionResponse
+Re-exports GetTransactionResponse
+
+122.CommonTransactionResponse
+Re-exports CommonTransactionResponse
+
+123.InvokeTransactionResponse
+Re-exports InvokeTransactionResponse
+
+124.DeclareTransactionResponse
+Re-exports DeclareTransactionResponse
+
+125.MessageToL1
+Re-exports MessageToL1
+
+126.Event
+Re-exports Event
+
+127.MessageToL2
+Re-exports MessageToL2
+
+128.RejectedTransactionResponse
+Re-exports RejectedTransactionResponse
+
+129.GetTransactionReceiptResponse
+Re-exports GetTransactionReceiptResponse
+
+130.SuccessfulTransactionReceiptResponse
+Re-exports SuccessfulTransactionReceiptResponse
+
+131.InvokeTransactionReceiptResponse
+Re-exports InvokeTransactionReceiptResponse
+
+132.DeclareTransactionReceiptResponse
+Re-exports DeclareTransactionReceiptResponse
+
+133.DeployTransactionReceiptResponse
+Re-exports DeployTransactionReceiptResponse
+
+134.RejectedTransactionReceiptResponse
+Re-exports RejectedTransactionReceiptResponse
+
+135.RevertedTransactionReceiptResponse
+Re-exports RevertedTransactionReceiptResponse
+
+136.EstimateFeeResponse
+Re-exports EstimateFeeResponse
+
+137.InvokeFunctionResponse
+Re-exports InvokeFunctionResponse
+
+138.DeclareContractResponse
+Re-exports DeclareContractResponse
+
+139.CallContractResponse
+Re-exports CallContractResponse
+
+140.EstimateFeeAction
+Re-exports EstimateFeeAction
+
+141.EstimateFeeResponseBulk
+Re-exports EstimateFeeResponseBulk
+
+142.Storage
+Re-exports Storage
+
+143.Nonce
+Re-exports Nonce
+
+144.SimulationFlags
+Re-exports SimulationFlags
+
+145.SimulatedTransaction
+Re-exports SimulatedTransaction
+
+146.SimulateTransactionResponse
+Re-exports SimulateTransactionResponse
+
+147.StateUpdateResponse
+Re-exports StateUpdateResponse
+
+148.ContractClassResponse
+Re-exports ContractClassResponse
+
+149.InvocationsSignerDetails
+Re-exports InvocationsSignerDetails
+
+150.DeclareSignerDetails
+Re-exports DeclareSignerDetails
+
+151.DeployAccountSignerDetails
+Re-exports DeployAccountSignerDetails
+
+152.StarkNetMerkleType
+Re-exports StarkNetMerkleType
+
+153.StarkNetType
+Re-exports StarkNetType
+
+154.StarkNetDomain
+Re-exports StarkNetDomain
+
+155.TypedData
+Re-exports TypedData"
+What is included in classes?,"Classes include the following content.
+1.Account
+2.AccountInterface
+3.Contract
+4.ContractInterface
+5.ContractFactory
+6.Provider
+7.CustomError
+8.LibraryError
+9.GatewayError
+10.HttpError
+11.SequencerProvider
+12.ProviderInterface
+13.RpcProvider
+14.SignerInterface
+15.Signer
+16.CallData
+17.CairoCustomEnum
+18.CairoOption
+19.CairoResult"
+What is included in type aliases?,"Type aliases include the following content.
+1.TypedContract
+TypedContract<TAbi>: AbiWanTypedContract<TAbi> & ContractInterface
+
+Type parameters
+Name           Type
+TAbi       extends AbiKanabi
+
+Defined in
+src/contract/interface.ts:22
+
+2.ContractFactoryParams
+ContractFactoryParams: Object
+
+Type declaration
+Name                    Type
+compiledContract    CompiledContract
+account                 any
+casm?               CairoAssembly
+classHash?             string
+compiledClassHash?     string
+abi?                    Abi
+
+Defined in
+src/contract/contractFactory.ts:13
+
+3.CairoEnumRaw
+CairoEnumRaw: Object
+
+Index signature
+[key: string]: any
+
+Defined in
+src/utils/calldata/enum/CairoCustomEnum.ts:1"
+What is included in variables?,"Variables include the following content.
+1.number
+Const number: num = num
+Deprecated
+prefer the 'num' naming
+
+Defined in
+src/index.ts:46
+
+2.defaultProvider
+Const defaultProvider: Provider
+
+Defined in
+src/provider/index.ts:9"
+What is included in functions?,"Functions include the following content.
+1.getCalldata
+getCalldata(args, callback): Calldata
+
+Parameters
+Name           Type
+args         RawArgs
+callback     Function
+Returns
+Calldata
+
+Defined in
+src/contract/default.ts:108
+
+2.splitArgsAndOptions
+splitArgsAndOptions(args): { args: ArgsOrCalldata ; options: ContractOptions } | { args: ArgsOrCalldata ; options?: undefined }
+
+Parameters
+Name                 Type
+args        ArgsOrCalldataWithOptions
+Returns
+{ args: ArgsOrCalldata ; options: ContractOptions } | { args: ArgsOrCalldata ; options?: undefined }
+
+Defined in
+src/contract/default.ts:35
+
+3.fixStack
+fixStack(target, fn?): void
+
+Parameters
+Name         Type          Default value
+target      Error            undefined
+fn         Function      target.constructor
+Returns
+void
+
+Defined in
+src/provider/errors.ts:2
+
+4.fixProto
+fixProto(target, prototype): void
+
+Parameters
+Name           Type
+target        Error
+prototype     Object
+Returns
+void
+
+Defined in
+src/provider/errors.ts:8
+
+5.getDefaultNodeUrl
+getDefaultNodeUrl(networkName?, mute?): string
+
+Parameters
+Name              Type Default          value
+networkName?      NetworkName        undefined
+mute               boolean              false
+Returns
+string
+
+Defined in
+src/provider/rpc.ts:45
+
+6.addAddressPadding
+addAddressPadding(address): string
+
+Parameters
+Name            Type
+address      BigNumberish
+Returns
+string
+
+Defined in
+src/utils/address.ts:10
+
+7.validateAndParseAddress
+validateAndParseAddress(address): string
+
+Parameters
+Name            Type
+address      BigNumberish
+Returns
+string
+
+Defined in
+src/utils/address.ts:14
+
+8.getChecksumAddress
+getChecksumAddress(address): string
+
+Parameters
+Name           Type
+address      BigNumberish
+Returns
+string
+
+Defined in
+src/utils/address.ts:27
+
+9.validateChecksumAddress
+validateChecksumAddress(address): boolean
+
+Parameters
+Name         Type
+address     string
+Returns
+boolean
+
+Defined in
+src/utils/address.ts:44
+
+10.isUrl
+isUrl(s?): boolean
+
+Loosely validate a URL string.
+
+Parameters
+Name    Type
+s?     string
+Returns
+boolean
+
+Defined in
+src/utils/url.ts:20
+
+11.buildUrl
+buildUrl(baseUrl, defaultPath, urlOrPath?): string
+
+Parameters
+Name           Type
+baseUrl       string
+defaultPath   string
+urlOrPath?    string
+Returns
+string
+
+Defined in
+src/utils/url.ts:49
+
+12.isSierra
+isSierra(contract): contract is CompiledSierra | SierraContractClass
+
+Parameters
+Name                    Type
+contract        string | CairoContract
+Returns
+contract is CompiledSierra | SierraContractClass
+
+Defined in
+src/utils/contract.ts:14
+
+
+13.extractContractHashes
+extractContractHashes(payload): CompleteDeclareContractPayload
+
+Parameters
+Name                Type
+payload    DeclareContractPayload
+Returns
+CompleteDeclareContractPayload
+
+Defined in
+src/utils/contract.ts:21
+
+14.contractClassResponseToLegacyCompiledContract
+contractClassResponseToLegacyCompiledContract(ccr): LegacyCompiledContract
+
+Helper to redeclare response Cairo0 contract
+
+Parameters
+Name           Type
+ccr      ContractClassResponse
+Returns
+LegacyCompiledContract
+
+Defined in
+src/utils/contract.ts:46
+
+15.parseUDCEvent
+parseUDCEvent(txReceipt): Object
+
+Parse Transaction Receipt Event from UDC invoke transaction and create DeployContractResponse compatible response with addition of the UDC Event data
+
+Parameters
+Name                      Type
+txReceipt    InvokeTransactionReceiptResponse
+Returns
+Object
+
+DeployContractResponse | UDC Event Response data
+
+Name                     Type
+transaction_hash        string
+contract_address         any
+address                  any
+deployer                 any
+unique                   any
+classHash                any
+calldata_len             any
+calldata                 any
+salt                     any
+Defined in
+src/utils/events.ts:11"

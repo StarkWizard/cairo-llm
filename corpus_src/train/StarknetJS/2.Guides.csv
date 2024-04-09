@@ -1,0 +1,2348 @@
+question,answer
+How to get start£¿,"This is an introduction about how to get start.
+1.Installation
+###
+
+# use the main branch
+
+npm install starknet
+
+# to use latest features (merges in develop branch)
+
+npm install starknet@next
+
+###
+2.Running test locally
+With Devnet
+Sequencer Devnet docs
+RPC Devnet repo
+Get the Sequencer Devnet with Docker:
+###
+
+docker pull shardlabs/starknet-devnet:latest
+docker run -p 5050:5050 shardlabs/starknet-devnet:latest --seed 0
+
+###
+Open a new console tab, go to your starknet.js directory, and run:
+###
+
+npm run test # all tests
+npm run test ./__tests__/contract.test.ts # just one test suite
+
+###
+By default, defaultProvider tests will be run through the Sequencer.
+
+If you want to run defaultProvider through the RPC run:
+###
+
+export TEST_RPC_URL = ""http://127.0.0.1:5050/rpc""
+
+# only RPC related tests:
+npm run test ./__tests__/rpcProvider.test.ts
+
+###
+3.Running docs locally
+If you want to change documentation and see how it looks before making a PR:
+###
+
+cd www
+npm install # install docusaurus
+npm run start # fires up a local documentation site
+
+###
+4.Compiling Starknet Contracts
+Please check the Starknet documentation here to compile Starknet contracts.
+
+Additional helpful resources can also be found at OpenZeppelin documentation site.
+
+5.Interacting with contracts and accounts
+For a basic overview on how to interact with contracts and accounts continue following this guide.
+
+For some more extensive examples visit PhilippeR26's workshop.
+
+6.Contracts used in the guides
+You can find the compiled contracts used in these guides in the compiled_contracts directory."
+What is Starknet.js ?,"This is an introduction to Starknet.js.
+Starknet.js is a library that helps to connect your website or your Decentralized Application (DAPP) to the blockchain-based Starknet network, using JavaScript / TypeScript language.
+Overview
+
+Some important topics that have to be understood:
+
+1.You can connect your DAPP to several networks:
+
+Starknet mainnet (Layer 2 of Ethereum network ).
+Starknet testnet (Layer 2 of Goerli network (testnet of Ethereum)).
+Starknet-devnet (your local Starknet network, for developers).
+and also to some more specific solutions:
+
+private customized version of Starknet.
+local Starknet node (connected to mainnet or testnet).
+Understand what is Starknet and how it works is necessary. Then, you can learn how to interact with it using Starknet.js. So, at this stage, you should be aware of the content of the Starknet official doc and the Starknet Book.
+
+2.Only the Provider object is talking directly to the network - your DAPP will talk mainly to Account and Contract objects. You will define with the Provider with which network you want to work. You can ask the Provider for some low-level data of the network (block, timestamp, ...).
+3.Signer and Utils objects contain many useful functions for interaction with Starknet.js.
+4.The Contract object is mainly used to read the memory of a blockchain contract.
+5.The Account object is the most useful:
+as a wallet, to store your tokens.
+as a way to pay the fees to the network, and to be able to write in its memory."
+How to connect to the network through Provider object£¿,"This is an introduction about how to connect to the network through Provider object.
+The first thing to do is to define with which network you want to interact.
+
+With the Provider object, you define which network to use.
+###
+
+import { Provider } from 'starknet';
+
+###
+1.Connect your DAPP to Starknet mainnet
+###
+
+const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
+
+###
+2.Connect your DAPP to Starknet testnet
+###
+
+const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } }); // for testnet
+
+###
+3.Connect your DAPP to Starknet devnet
+###
+
+const provider = new Provider({ sequencer: { baseUrl: 'http://127.0.0.1:5050' } });
+
+###
+If you have customized host and port during starknet-devnet initialization, adapt in accordance to your script.
+
+4.Connect your DAPP to a private Starknet network
+If necessary you can have full control of the network access (for example, for your company's private test network):
+###
+
+const provider = new Provider({
+  sequencer: {
+    baseUrl: 'https://mynetwork.mycompany.io',
+    feederGatewayUrl: 'feeder_gateway',
+    gatewayUrl: 'gateway',
+  },
+});
+
+###
+5.Connect your DAPP to a Starknet node
+Pathfinder
+For a local Pathfinder node:
+###
+
+const provider = new Provider({ rpc: { nodeUrl: '127.0.0.1:9545/rpc/v0.4' } });
+
+###
+Your node can be located in your local network (example: pathfinder node running on a computer on your network, launched with this additional option: --http-rpc 0.0.0.0:9545). You can connect with:
+###
+
+const provider = new Provider({ rpc: { nodeUrl: '192.168.1.99:9545/rpc/v0.4' } });
+
+###
+Juno
+Initialize the provider with:
+###
+
+const provider = new RpcProvider({ nodeUrl: 'http://127.0.0.1:6060/v0_5' });
+
+###
+Other node clients
+Other examples (some need a secret key):
+
+Mainnet:
+###
+
+// Infura node rpc for Mainnet:
+const providerInfuraMainnet = new RpcProvider({
+  nodeUrl: 'https://starknet-mainnet.infura.io/v3/' + infuraKey,
+});
+// Blast node rpc for Mainnet:
+const providerBlastMainnet = new RpcProvider({
+  nodeUrl: 'https://starknet-mainnet.blastapi.io/' + blastKey + '/rpc/v0.4',
+});
+// Lava node rpc for Mainnet:
+const providerMainnetLava = new RpcProvider({
+  nodeUrl: 'https://g.w.lavanet.xyz:443/gateway/strk/rpc-http/' + lavaMainnetKey,
+});
+// Alchemy node rpc for Mainnet:
+const providerAlchemyMainnet = new RpcProvider({
+  nodeUrl: 'https://starknet-mainnet.g.alchemy.com/v2/' + alchemyKey,
+});
+
+###
+Testnet:
+###
+
+// Infura node rpc for Testnet:
+const providerInfuraTestnet = new RpcProvider({
+  nodeUrl: 'https://starknet-goerli.infura.io/v3/' + infuraKey,
+});
+// Blast node rpc for Testnet:
+const providerBlastTestnet = new RpcProvider({
+  nodeUrl: 'https://starknet-testnet.blastapi.io/' + blastKey + '/rpc/v0.4',
+});
+// Alchemy node rpc for Testnet:
+const providerAlchemyTestnet = new RpcProvider({
+  nodeUrl: 'https://starknet-goerli.g.alchemy.com/v2/' + alchemyKey,
+});
+
+###
+6.Specific methods
+Some methods are available only if connected to a sequencer, and some others are available only if connected to a node (using RPC).
+
+Specific sequencer methods
+For example, if you want to estimate the fee of an L1 ?? L2 message, you need to use a method that is available only in the sequencer. The class SequencerProvider is available for this case:
+###
+
+import { SequencerProvider, constants } from ""starknet"";
+const provider = new SequencerProvider({ baseUrl: constants.BaseUrl.SN_GOERLI }); // for testnet
+const responseEstimateMessageFee = await provider.estimateMessageFee(.....)
+
+###
+Specific RPC methods
+For example, if you want to read the list of pending transactions, you need to use a method available from an RPC node. The class RpcProvider is available for this case:
+###
+
+import { RpcProvider } from 'starknet';
+const providerRPC = new RpcProvider({ nodeUrl: 'http://192.168.1.99:9545/rpc/v0.4' }); // for a pathfinder node located in a PC in the local network
+const pendingTx = await providerRPC.getPendingTransactions();
+
+###
+RPC providers are for example Infura, Alchemy, Chainstack... Or you can spin up your own Pathfinder node!
+
+For example, to connect to Alchemy with your personal API key:
+###
+
+const providerRPC = new RpcProvider({
+  nodeUrl: 'https://starknet-mainnet.g.alchemy.com/v2/' + alchemyKey,
+});
+
+###"
+How to connect to an existing account£¿,"This is an introduction about how connect to an existing account.
+Once your provider is initialized, you can connect an existing account.
+
+You need 2 pieces of data:
+
+the address of the account
+the private key of this account
+###
+
+import { Account, Provider } from 'starknet';
+
+###
+1.Connect to a pre-deployed account in Starknet-devnet
+When you launch starknet-devnet, 10 accounts are pre-deployed with 100 dummy ETH in each.
+
+Addresses and private keys are displayed on the console at initialization.
+
+This data will change at each launch, so to freeze them, launch with: starknet-devnet --seed 0.
+
+The result for account #0:
+
+Address: 0x7e00d496e324876bbc8531f2d9a82bf154d1a04a50218ee74cdd372f75a551a
+Public key: 0x7e52885445756b313ea16849145363ccb73fb4ab0440dbac333cf9d13de82b9
+Private key: 0xe3e70682c2094cac629f6fbed82c07cd
+
+Then you can use this code:
+###
+
+// initialize provider
+const provider = new Provider({ sequencer: { baseUrl: 'http://127.0.0.1:5050' } });
+// initialize existing pre-deployed account 0 of Devnet
+const privateKey = '0xe3e70682c2094cac629f6fbed82c07cd';
+const accountAddress = '0x7e00d496e324876bbc8531f2d9a82bf154d1a04a50218ee74cdd372f75a551a';
+
+const account = new Account(provider, accountAddress, privateKey);
+
+###
+Your account is now connected, and you can use it.
+
+IMPORTANT: If this account is based on a Cairo v2 contract (for example OpenZeppelin account 0.7.0 or later), do not forget to add the parameter ""1"" after the privateKey parameter:
+###
+
+const account = new Account(provider, accountAddress, privateKey, '1');
+
+###
+Take care that this added parameter is a string, NOT a number.
+
+2.Connect to an existing account (in any network)
+The code is the same, you just have to:
+
+connect to the appropriate network.
+use the address of this account (public data).
+use the private key of this account (very sensitive data: your code MUST not disclose it).
+For example, to connect an existing account on testnet, with a private key stored in a .env non-archived file:
+###
+
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+// initialize provider
+const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } });
+// initialize existing account
+const privateKey = process.env.OZ_NEW_ACCOUNT_PRIVKEY;
+const accountAddress = '0x051158d244c7636dde39ec822873b29e6c9a758c6a9812d005b6287564908667';
+
+const account = new Account(provider, accountAddress, privateKey);
+// add ,""1"" after privateKey if this account is not a Cairo 0 contract
+
+###"
+How to connect to deployed contract£¿,"This is an introduction about how connect to deployed contract.
+Once your provider is initialized, you can connect a contract already deployed in the network.
+
+You need 2 pieces of data:
+
+the address of the contract
+the ABI file of the contract (or the compiled/compressed contract file, that includes the abi)
+If you don't have the abi file, the provider.getClassAt() and provider.getClassByHash() commands will recover the compressed contract file. As these methods generate a significant workload to the sequencer/node, it's recommended to store the result in your computer, to be able to reuse it later without using the provider:
+###
+
+import fs from 'fs';
+const compressedContract = await provider.getClassAt(addrContract);
+fs.writeFileSync('./myAbi.json', json.stringify(compressedContract.abi, undefined, 2));
+
+###
+When possible, prefer to read the compiled contract from a local Json file, as it's much more faster, using the json.parse util provided by Starknet.js, as shown below.
+
+1.Get the abi from a compiled/compressed file
+###
+
+import { Provider, Contract, json } from 'starknet';
+
+###
+If you have the compiled/compressed file of the contract, use this code to recover all data, including the ABI:
+###
+
+const compiledContract = json.parse(
+  fs.readFileSync('./compiledContracts/test.json').toString('ascii')
+);
+
+###
+Note the json.parse util provided by Starknet.js
+
+2.Connect to the contract
+###
+
+// initialize provider
+const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } });
+
+// initialize deployed contract
+const testAddress = '0x7667469b8e93faa642573078b6bf8c790d3a6184b2a1bb39c5c923a732862e1';
+const compiledTest = json.parse(fs.readFileSync('./compiledContracts/test.json').toString('ascii'));
+
+// connect the contract
+const myTestContract = new Contract(compiledTest.abi, testAddress, provider);
+
+###"
+How to interact with your contract£¿,"This is an introduction about how to interact with your contract.
+Once your provider, contract, and account are connected, you can interact with the contract:
+
+you can read the memory of the contract, without fees.
+you can write to memory, but you have to pay fees.
+On Mainnet, you have to pay fees with a bridged ETH token.
+On Testnet, you have to pay with a bridged Goerli ETH token.
+On devnet, you have to pay with a dummy ETH token.
+Your account should be funded enough to pay fees (0.01 ETH should be enough to start).
+
+This contract contains a storage variable called balance.
+
+It can be read with the @view function: get_balance()
+Balance can be modified with the @external function: increase_balance(amount1: felt, amount2: felt)
+import { Provider, Contract, Account, ec, json } from 'starknet';
+
+1.Read from contract memory, with meta-class
+To read the balance, you need to connect a Provider and a Contract.
+You have to call Starknet, with the use of the meta-class method: contract.function_name(params) (here params is not necessary, because there are no parameters for the get_balance function).
+###
+
+//initialize Provider
+const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } });
+// Connect the deployed Test contract in Testnet
+const testAddress = '0x5f7cd1fd465baff2ba9d2d1501ad0a2eb5337d9a885be319366b5205a414fdd';
+
+// read abi of Test contract
+const { abi: testAbi } = await provider.getClassAt(testAddress);
+if (testAbi === undefined) {
+  throw new Error('no abi.');
+}
+const myTestContract = new Contract(testAbi, testAddress, provider);
+
+// Interaction with the contract with call
+const bal1 = await myTestContract.get_balance();
+console.log('Initial balance =', bal1.res.toString()); // .res because the return value is called 'res' in the Cairo 0 contract.
+// With Cairo 1 contract, the result value is in bal1, as bigint.
+
+###
+2.Write to contract memory, with meta-class
+To increase the balance, you need in addition a connected and funded Account.
+
+You have to invoke Starknet, with the use of the meta-class method: contract.function_name(params)
+
+After the invoke, you have to wait the incorporation of the modification of Balance in the network, with await provider.waitForTransaction(transaction_hash)
+
+Here is an example of how to increase and check the balance:
+###
+
+//initialize Provider
+const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } });
+// connect your account. To adapt to your own account:
+const privateKey0 = process.env.OZ_ACCOUNT_PRIVATE_KEY;
+const account0Address = '0x123....789';
+
+const account0 = new Account(provider, account0Address, privateKey0);
+// add ,""1"" after privateKey0 if this account is not a Cairo 0 contract
+
+// Connect the deployed Test contract in Testnet
+const testAddress = '0x5f7cd1fd465baff2ba9d2d1501ad0a2eb5337d9a885be319366b5205a414fdd';
+
+// read abi of Test contract
+const { abi: testAbi } = await provider.getClassAt(testAddress);
+if (testAbi === undefined) {
+  throw new Error('no abi.');
+}
+const myTestContract = new Contract(testAbi, testAddress, provider);
+
+// Connect account with the contract
+myTestContract.connect(account0);
+
+// Interactions with the contract with meta-class
+const bal1 = await myTestContract.get_balance();
+console.log('Initial balance =', bal1.res.toString()); // Cairo 0 contract
+// increase_balance needs 2 felts, to add them to the balance.
+const myCall = myTestContract.populate('increase_balance', [10, 30]);
+const res = await myTestContract.increase_balance(myCall.calldata);
+await provider.waitForTransaction(res.transaction_hash);
+
+const bal2 = await myTestContract.get_balance();
+console.log('Final balance =', bal2.res.toString());
+
+Contract.populate() is the recommended method to define the parameters to call/invoke the Cairo functions.
+
+###
+3.Sending sequential transactions
+If you intend to send sequential transactions through the contract object, like so:
+###
+
+const tx = await cairo1Contract.array2d_ex(data);
+const tx1 = await cairo1Contract.array2d_ex(data);
+
+###
+Be sure to use waitForTransaction between the calls, because you may experience issues with the nonce not incrementing:
+###
+
+const tx = await cairo1Contract.array2d_ex(data);
+await provider.waitForTransaction(tx.transaction_hash);
+const tx1 = await cairo1Contract.array2d_ex(data);
+await provider.waitForTransaction(tx1.transaction_hash);
+
+###
+4.Write several operations, with Account.execute
+In a Starknet transaction, you can include several invoke operations. It will be performed with account.execute.
+
+We will later see this case more in detail in this dedicated guide, but in summary, you use this command with the following parameters:
+
+address of the contract to invoke
+name of the function to invoke
+and an array of parameters for this function
+###
+
+const result = await account.execute({
+  contractAddress: myContractAddress,
+  entrypoint: 'transfer',
+  calldata: CallData.compile({
+    recipient: receiverAddress,
+    amount: cairo.uint256(100000n),
+  }),
+});
+await provider.waitForTransaction(result.transaction_hash);
+
+###
+5.Other existing methods
+Some other useful methods to interact with Starknet:
+
+Function name defined in the code
+If you want to call a function with its name contained in a variable:
+###
+
+const listFn = ['calc-sum', 'calc-hash', 'calc-proof'];
+// fnChoice is a number defined during execution
+const res = await myTestContract[listFn[fnChoice]](200, 234567897n, 865423);
+
+###
+Light and fast call
+If you want to have a very fast execution, with minimum resource usage:
+###
+
+const specialParameters: Calldata = ['2036735872918048433518', '5130580', '18'];
+const getResponse = await myAccount.call('get_bal', specialParameters, { parseRequest: false });
+
+###
+You provide the low-level numbers expected by Starknet, without any parsing or checking. See more details here."
+How to create a new contract£¿,"This is an introduction about how to create a new contract.
+When you have compiled your new Cairo contract, you can deploy it in the network.
+
+In Starknet, a new contract has to be added in two phases:
+
+Create the contract class.
+Deploy an instance of the contract.
+You must first declare your contract class and only then deploy a new instance of it!
+
+Both declaration and deployment will cost fees. That's why these functions are methods of the Account object. The account should be funded enough to be able to process everything.
+
+The contract class contains the logic of the contract. A contract class is identified by its Class Hash.
+The contract instance contains the memory storage of this instance. A contract instance is identified by its contract address. You will interact with the contract instance by using this address.
+You will have only one Class Hash for one contract code, but you can have as many contract instances as you need.
+
+Other users of the network can use your declared contract. It means that if somebody has already declared a contract class (and paid this declaration), and if you would like to have your own instance of this contract, you have only to deploy (and pay) a new instance.
+
+Example: if you want an ERC20 contract, and somebody has already declared an ERC20 contract that conforms to your needs, you have just to deploy a new instance of this contract class.
+###
+
+import { Provider, Account, Contract, json, stark, uint256, shortString } from 'starknet';
+
+###
+declareAndDeploy() your new contract
+Starknet.js proposes a function to perform both operations in one step: declareAndDeploy().
+
+Here, to declare & deploy a Test.cairo smart contract, in devnet:
+###
+
+// connect provider
+const provider = new Provider({ sequencer: { baseUrl: 'http://127.0.0.1:5050' } });
+// connect your account. To adapt to your own account:
+const privateKey0 = process.env.OZ_ACCOUNT_PRIVATE_KEY;
+const account0Address: string = '0x123....789';
+const account0 = new Account(provider, account0Address, privateKey0);
+// add ,""1"" after privateKey0 if this account is not a Cairo 0 contract
+
+// Declare & deploy Test contract in devnet
+const compiledTestSierra = json.parse(
+  fs.readFileSync('./compiledContracts/test.sierra').toString('ascii')
+);
+const compiledTestCasm = json.parse(
+  fs.readFileSync('./compiledContracts/test.casm').toString('ascii')
+);
+const deployResponse = await account0.declareAndDeploy({
+  contract: compiledTestSierra,
+  casm: compiledTestCasm,
+});
+
+// Connect the new contract instance:
+const myTestContract = new Contract(
+  compiledTest.abi,
+  deployResponse.deploy.contract_address,
+  provider
+);
+console.log('Test Contract Class Hash =', deployResponse.declare.class_hash);
+console.log(' Test Contract connected at =', myTestContract.address);
+
+###
+deployContract() for a new instance
+If the contract class is already declared, it's faster and cheaper: just use deployContract().
+###
+
+// connect provider
+const provider = new Provider({ sequencer: { baseUrl: 'http://127.0.0.1:5050' } });
+// connect your account. To adapt to your own account:
+const privateKey0 = process.env.OZ_ACCOUNT_PRIVATE_KEY;
+const account0Address: string = '0x123....789';
+
+const account0 = new Account(provider, account0Address, privateKey0);
+// add ,""1"" after privateKey0 if this account is not a Cairo 0 contract
+
+// Deploy Test contract in devnet
+// ClassHash of the already declared contract
+const testClassHash = '0xff0378becffa6ad51c67ac968948dbbd110b8a8550397cf17866afebc6c17d';
+
+const deployResponse = await account0.deployContract({ classHash: testClassHash });
+await provider.waitForTransaction(deployResponse.transaction_hash);
+
+// read abi of Test contract
+const { abi: testAbi } = await provider.getClassByHash(testClassHash);
+if (testAbi === undefined) {
+  throw new Error('no abi.');
+}
+
+// Connect the new contract instance:
+const myTestContract = new Contract(testAbi, deployResponse.contract_address, provider);
+console.log('Test Contract connected at =', myTestContract.address);
+
+###
+Construct the constructor
+If your contract has a constructor with inputs, you have to provide these inputs in the deployContract or declareAndDeploy commands. For example, with this contract constructor:
+###
+
+    ""name"": ""constructor"",
+    ""inputs"": [
+      {
+        ""name"": ""text"",
+        ""type"": ""core::felt252""
+      },
+      {
+        ""name"": ""longText"",
+        ""type"": ""core::array::Array::<core::felt252>""
+      },
+      {
+        ""name"": ""array1"",
+        ""type"": ""core::array::Array::<core::felt252>""
+      }
+    ],
+
+###
+You have several ways to define these inputs:
+
+myCalldata.compile
+This is the recommended way to proceed:
+###
+
+const myArray1: RawCalldata = ['0x0a', 24, 36n];
+const contractCallData: CallData = new CallData(compiledContractSierra.abi);
+const contractConstructor: Calldata = contractCallData.compile('constructor', {
+  text: 'niceToken',
+  longText: 'http://addressOfMyERC721pictures/image1.jpg',
+  array1: myArray1,
+});
+const deployResponse = await account0.deployContract({
+  classHash: contractClassHash,
+  constructorCalldata: contractConstructor,
+});
+
+###
+Starknet.js will perform a full verification of conformity with the abi. Properties can be unordered. Do not use properties for array_len, it will be handled automatically by Starknet.js.
+
+CallData.compile
+For very simple constructors, you can use CallData.compile:
+###
+
+const myArray1: RawCalldata = ['0x0a', 24, 36n];
+const contractConstructor: Calldata = CallData.compile({
+  text: 'niceToken',
+  longText: 'http://addressOfMyERC721pictures/image1.jpg',
+  array1: myArray1,
+});
+const deployResponse = await account0.deployContract({
+  classHash: contractClassHash,
+  constructorCalldata: contractConstructor,
+});
+
+###
+Properties have to be ordered in conformity with the abi.
+
+Even easier:
+###
+
+const contractConstructor: Calldata = CallData.compile([
+  'niceToken',
+  'http://addressOfMyERC721pictures/image1.jpg',
+  myArray1,
+]);
+
+###
+declare() for a new class
+If you want only declare a new Contract Class, use declare().
+###
+
+// connect provider
+const provider = new Provider({ sequencer: { baseUrl: 'http://127.0.0.1:5050' } });
+// connect your account. To adapt to your own account:
+const privateKey0 = process.env.OZ_ACCOUNT_PRIVATE_KEY;
+const account0Address: string = '0x123....789';
+
+const account0 = new Account(provider, account0Address, privateKey0);
+// add ,""1"" after privateKey0 if this account is not a Cairo 0 contract
+
+// Declare Test contract in devnet
+const compiledTestSierra = json.parse(
+  fs.readFileSync('./compiledContracts/test.sierra').toString('ascii')
+);
+const compiledTestCasm = json.parse(
+  fs.readFileSync('./compiledContracts/test.casm').toString('ascii')
+);
+const declareResponse = await account0.declare({
+  contract: compiledTestSierra,
+  casm: compiledTestCasm,
+});
+console.log('Test Contract declared with classHash =', declareResponse.class_hash);
+await provider.waitForTransaction(declareResponse.transaction_hash);
+console.log('Test Completed.');
+
+###"
+How to transform date£¿,"This is an introduction about how to transform date.
+This guide is the most important of all this documentation. Take your time, and read it carefully...
+
+Cairo contracts and JavaScript/TypeScript languages do not have the same types of data. To exchange data with Starknet, the data have to be transformed and formatted in a list of numbers.
+
+So, it's necessary to prepare the data before sending them to a contract. On the other side, when a contract sends data to your DAPP (the result of a call), you also have to transform them before using them in your code.
+
+In Starknet.js, you can perform these transformations manually, but you can take advantage of methods that perform these transformations.
+
+1.Types of data
+Cairo
+Cairo has 2 versions, involving 2 types of data:
+
+Cairo 0: here, everything is felt, an integer on 251 bits.
+Available: array, struct, tuple, named tuple, or a mix of these elements.
+Cairo 1: with plethora of literal types: u8, u16, u32, usize, u64, u128, felt252, u256, bool, address.
+Available: array, struct, tuple, or a mix of these elements.
+Starknet.js is compatible with both versions.
+
+Starknet
+Starknet is waiting for a list of felts, and answers with the same format.
+
+JavaScript / TypeScript
+These types do not exist in JS/TS - you have Number, bigInt, string, array, objects... and types defined in libraries.
+
+In Starknet.js, it's a bit ... complicated: you have the BigNumberish type and it can include:
+
+String (representing a number): ""123"", ""0xabc2""
+Number (max 53 bits): 123
+BigInt (max 255 bits): 12345612345n
+###
+
+import { BigNumberish } from 'starknet';
+const decimals: BigNumberish = 18;
+
+###
+2.Preparation of data before delivery
+If your Cairo smart contract is waiting for a:
+
+felt, u8, u16, u32, usize, u64, u128, felt252, ContractAddress, EthAddress, ClassHash
+Starknet is waiting for a felt.
+You can send to Starknet.js methods: bigNumberish.
+###
+
+await myContract.my_function(12, '13', '0xe', 15n);
+
+###
+EthAddress is limited to 160 bits. felt, felt252, ClassHash and ContractAddress are limited to 252 bits.
+
+bool
+Starknet is waiting for a felt, containing 0 or 1.
+You can send to Starknet.js methods: boolean, bigNumberish.
+###
+
+await myContract.my_function(true, 1);
+
+###
+u256
+Starknet is waiting for 2 felts, the first including the lowest 128 bits, the second including the 128 highest bits.
+You can send to Starknet.js methods: bigNumberish (Cairo 1 only), Uint256 object (both Cairo 0 & 1).
+###
+
+await myContract0.my_function({ low: 100, high: 0 }); // Cairo 0 & 1 contract
+await myContract1.my_function(cairo.uint256(100)); // Cairo 0 & 1 contract
+await myContract2.my_function(12345678, '13456789765', '0xe23a40b543f', 1534566734334n); // Cairo 1 contract
+
+###
+In specific cases that we will see hereunder, you can use an object, with the following format:
+###
+
+const a1: Uint256 = cairo.uint256(
+  '0x05f7cd1fd465baff2ba9d2d1501ad0a2eb5337d9a885be319366b5205a414fdd'
+);
+const a2: Uint256 = {
+  low: '0xeb5337d9a885be319366b5205a414fdd',
+  high: '0x05f7cd1fd465baff2ba9d2d1501ad0a2',
+};
+const a3: Uint256 = { low: a1.low, high: a1.high };
+
+###
+string
+Starknet is waiting for a felt, including 31 ASCII characters max. You can send to Starknet.js methods: string, bigNumberish.
+###
+
+await myContract.my_function('Token', '0x0x534e5f4d41494e');
+
+###
+To encode yourself a string:
+###
+
+const encStr: string = shortString.encodeShortString('Stark');
+
+###
+To decode yourself a string:
+###
+
+const decStr: string = shortString.decodeShortString('0x7572692f706963742f7433382e6a7067');
+
+###
+The result is: ""uri/pict/t38.jpg""
+
+longString
+longString is a string that may contain more than 31 characters. Starknet is waiting for an array of felt: string_len, string1, string2, ...
+You can send to Starknet.js methods: string, bigNumberish[].
+###
+
+await myContract.my_function('http://addressOfMyERC721pictures/image1.jpg');
+
+###
+If you want to split yourself your longString in 31 chars substrings:
+###
+
+const splitted: string[] = shortString.splitLongString(
+  'http://addressOfMyERC721pictures/image1.jpg'
+);
+
+###
+If you want to split your longString in an array of felts:
+###
+
+const longString: string[] = shortString
+  .splitLongString('http://addressOfMyERC721pictures/image1.jpg')
+  .map((str) => shortString.encodeShortString(str));
+
+###
+tuple
+Starknet is waiting for a list of felts.
+You can send it to Starknet.js methods: cairo.tuple(), object.
+###
+
+const myTpl = cairo.tuple('0x0a', 200);
+await myContract.my_function(myTpl);
+
+###
+To construct your tuple:
+
+const myTpl = { '0': '0x0a', '1': 200 };
+
+named tuple
+Only for Cairo 0.
+
+Starknet is waiting for a list of felts.
+You can send to Starknet.js methods: an object, cairo.tuple(), list of bigNumberish.
+From this ABI:
+###
+
+{
+  ""name"": ""data2"",
+  ""type"": ""(min: felt, max: felt)""
+}
+
+###
+You can create this code:
+
+const namedTup = { min: '0x4e65ac6', max: 296735486n };
+await myContract.my_function(namedTup);
+
+It's not mandatory to create an object conform to the Cairo 0 named tuple, you can just use the cairo.tuple() function.
+
+struct
+Starknet is waiting for a list of felts.
+You can send to Starknet.js methods: an object.
+###
+
+const myStruct = { type: 'TR1POST', tries: 8, isBridged: true };
+await myContract.my_function(myStruct);
+
+###
+array
+Starknet is waiting for an array of felts: array_len, array1, array2, ...
+You can send it to Starknet.js methods: bigNumberish[].
+###
+
+Const myArray = [10, ""0xaa"", 567n];
+await myContract.my_function(myArray);
+
+###
+Do not add the array_len parameter before your array. Starknet.js will manage this element automatically.
+
+It's also applicable for Cairo Span type.
+
+complex types
+You can mix and nest literals, arrays, structs, and tuples.
+
+Starknet is waiting for a list of felts.
+All these examples are valid:
+###
+
+type Order2 = {
+  p1: BigNumberish;
+  p2: BigNumberish[];
+}; // struct
+const myOrder2: Order2 = {
+  p1: 17,
+  p2: [234, 467456745457n, '0x56ec'],
+};
+const param1 = cairo.tuple(cairo.tuple(34, '0x5e'), 234n);
+const param2 = [
+  [200, 201],
+  [202, 203],
+  [204, 205],
+];
+const param3 = [myOrder2, myOrder2];
+const param4 = [cairo.tuple(251, 40000n), cairo.tuple(252, 40001n)];
+await myContract.my_function(param1, param2, param3, param4);
+
+###
+3.Authorized types for Starknet.js methods
+There are 12 methods using contract parameters. Some types are authorized for each method:
+
+list of parameters
+Only meta-class methods are using a list of parameters (as illustrated in the previous chapter).
+A Meta-Class is a Class that has any of its properties determined at run-time. The Contract object uses a Contract's ABI to determine what methods are available.
+###
+
+await myContract.my_function('TOKEN', '13', [10, 11, 12], 135438734812n);
+// or
+const functionName = 'my_function';
+await myContract[functionName]('TOKEN', '13', [10, 11, 12], 135438734812n);
+
+###
+Array of parameters
+An array of parameters can be used as input:
+###
+
+const myParams = [{ x: 100, y: 200 }, 13, [10, 11, 12], cairo.uint256('0x295fa652e32b')];
+const txResp = await account0.execute({
+  contractAddress: testAddress,
+  entrypoint: 'change_activity',
+  calldata: myParams,
+});
+
+###
+All Starknet.js methods accept this type of input, except meta-class, which needs 3 dots prefix:
+###
+
+const myParams = ['TOKEN', '13', [10, 11, 12], 135438734812n];
+await myContract.my_function(...myParams);
+// or
+const functionName = 'my_function';
+await myContract[functionName](...myParams);
+
+###
+Objects properties have to be ordered in accordance with the ABI.
+
+Object (without ABI conformity check)
+The use of objects allows a clear representation of the list of parameters:
+###
+
+const myParams = {
+  name: 'TOKEN',
+  decimals: '13',
+  amount: 135438734812n,
+};
+const deployResponse = await myAccount.deployContract({
+  classHash: contractClassHash,
+  constructorCalldata: myParams,
+});
+
+###
+This type is available for: CallData.compile(), hash.calculateContractAddressFromHash, account.deployContract, account.deployAccount, account.execute
+
+Objects properties have to be ordered in accordance with the ABI.
+
+Object (with ABI conformity check)
+This is the recommended type of input to use, especially for complex ABI.
+###
+
+const myFalseUint256 = { high: 1, low: 23456 }; // wrong order; should be low first
+type Order2 = {
+  p1: BigNumberish;
+  p2: BigNumberish[];
+};
+const myOrder2bis: Order2 = {
+  // wrong order; p1 should be first
+  p2: [234, 467456745457n, '0x56ec'],
+  p1: '17',
+};
+const functionParameters: RawArgsObject = {
+  //wrong order; all properties are mixed
+  active: true,
+  symbol: 'NIT',
+  initial_supply: myFalseUint256,
+  recipient: account0.address,
+  decimals: 18,
+  tupOfTup: cairo.tuple(cairo.tuple(34, '0x5e'), myFalseUint256),
+  card: myOrder2bis,
+  longText: 'Zorg is back, for ever, here and everywhere',
+  array1: [100, 101, 102],
+  array2: [
+    [200, 201],
+    [202, 203],
+    [204, 205],
+  ],
+  array3: [myOrder2bis, myOrder2bis],
+  array4: [myFalseUint256, myFalseUint256],
+  tuple1: cairo.tuple(40000n, myOrder2bis, [54, 55n, '0xae'], 'texte'),
+  name: 'niceToken',
+  array5: [cairo.tuple(251, 40000n), cairo.tuple(252, 40001n)],
+};
+const contractCallData: CallData = new CallData(compiledContractSierra.abi);
+const myCalldata: Calldata = contractCallData.compile('constructor', functionParameters);
+const deployResponse = await account0.deployContract({
+  classHash: contractClassHash,
+  constructorCalldata: myCalldata,
+});
+// or
+const myCall: Call = myContract.populate('setup_elements', functionParameters);
+const tx = await account0.execute(myCall);
+// or
+const myCall: Call = myContract.populate('get_elements', functionParameters);
+const res = await myContract.get_elements(myCall.calldata);
+
+###
+It can be used only with methods that know the abi: Contract.populate, myCallData.compile.
+Starknet.js will perform a full check of conformity with the ABI of the contract, reorder the object's properties if necessary, stop if something is wrong or missing, remove not requested properties, and convert everything to Starknet format.
+Starknet.js will alert you earlier of errors in your parameters (with human comprehensible words), before the call to Starknet. So, no more incomprehensible Starknet messages due to parameters construction.
+
+If a property array_len has been added before an array, this property is ignored as it's automatically managed by Starknet.js.
+
+Call, or Call[]
+A Call is an object with this format:
+###
+
+type Call = {
+  contractAddress: string;
+  entrypoint: string;
+  calldata?: RawArgs;
+};
+
+###
+...and is only authorized with Account.execute . It can be generated manually or by Contract.populate():
+###
+
+const myCall: Call = myContract.populate('get_component', [100, recipient]);
+// or
+const myCall: Call = {
+  contractAddress: tokenContract.address,
+  entrypoint: 'get_component',
+  calldata: CallData.compile([100, recipient]),
+};
+
+const tx = await account0.execute(myCall);
+
+###
+It's particularly interesting when you want to invoke a function several times in the same transaction:
+###
+
+const myCall1: Call = myContract.populate('mint', { type: 7, qty: 10 });
+const myCall2: Call = myContract.populate('mint', { type: 21, qty: 3 });
+const myCall3: Call = myContract.populate('mint', { type: 2, qty: 1 });
+const tx = await account0.execute([myCall1, myCall2, myCall3]);
+
+###
+Array of strings (representing numbers)
+This type is particularly useful when you need the maximum performance and speed in your code; You have no automatic transformation, no checks with ABI, and no parsing.
+
+You provide to starknet.js the low-level data expected by Starknet:
+###
+
+const specialParameters: Calldata = [
+  '2036735872918048433518',
+  '5130580',
+  '18',
+  '23456',
+  '1',
+  '17',
+  '3',
+  '234',
+  '467456745457',
+  '22252',
+];
+const getResponse = await myAccount.get_bal(specialParameters, { parseRequest: false });
+
+###
+To use with parseRequest: false (see hereunder).
+
+summary table for arguments
+These types of arguments can't be used at your convenience everywhere. Here is a table showing which types can be used in which function:
+
+Function array of parameters ordered object non ordered object Call & MultiCall list of parameters array of strings (*) array of strings (**)
+TypeScript type N/A {} RawArgsArray {} RawArgsObject Call & Call[] ...[] string[] string[]
+contract.metaClass() contract[metaclass]()     ok ok ok?
+contract.call / contract.invoke ok     ok ok
+account.execute
+
+(with 3 params, incl. calldata) 
+
+ok 
+
+ok  ok
+
+
+
+
+
+ok
+account.deployContract / Account ok ok     ok?
+account.declareAndDeploy ok ok     ok?
+CallData.compile ok ok?     ok?
+myCallData.compile ok ok ok    ok?
+Contract.populate ok ok ok    ok
+hash. calculateContract AddressFromHash ok ok     ok?
+(*) = with parseRequest: false
+(**) = result of Calldata.compile, myCallData.compile, myContract.populate().calldata
+
+4.Receive data from a Cairo contract
+When you perform a call, the result depends on the contract language:
+
+In Cairo 0, the answer is an object, with keys using the Cairo variable's names.
+Example:
+###
+
+const res=myContract.call(...);
+const amount = res.amount;
+
+###
+In Cairo 1, the result is a variable:
+###
+
+const amount = myContract.call(...);
+
+###
+Type in Cairo 1 Cairo 1 code Type expected in JS/TS JS/TS function to recover data
+u8, u16, u32, usize, u64, u128, felt252, address func get_v()->u128 bigint const res: bigint = myContract.call(...
+                             string representing an hex number const res=myContract.call(...
+const address: string = num.toHex(res);
+u8, u16, u32, usize func get_v() -> u16 number (53 bits max) const res=myContract.call(...
+const total: number = Number(res)
+u256 (255 bits max) func get_v() -> u256 bigint const res: bigint = myContract.call(...
+array of u8, u16, u32, usize, u64, u128, felt252, address func get_v() -> Array<u64> bigint[] const res: bigint[] = myContract.call(...
+shortString (31 ASCII characters max) func get_v() -> felt252 string const res=myContract.call(...
+const title:string = shortString.decodeShortstring(res)
+longString func get_v() -> Array<felt252> string const res=myContract.call(...
+const longString = res.map( (shortStr: bigint) => { return shortString.decodeShortString( num.toHex( shortStr)) }).join("""");
+Tuple func get_v() -> (felt252, u8) Object {""0"": bigint, ""1"": bigint} const res = myContract.call(...
+const res0: bigint = res[""0""];
+const results: bigint[] = Object.values(res)
+Struct func get_v() -> MyStruct MyStruct = { account: bigint, amount: bigint} const res: MyStruct = myContract.call(...
+complex array func get_v() -> Array<fMyStruct> MyStruct[] const res: MyStruct[] = myContract.call(...
+If you don't know if your Contract object is interacting with a Cairo 0 or a Cairo 1 contract, you have these methods:
+###
+
+import { cairo } from 'starknet';
+const isCairo1: boolean = myContract.isCairo1();
+const isAbiCairo1: boolean = cairo.isCairo1Abi(myAbi);
+
+###
+5.Parse configuration
+parseRequest
+If for any reason (mainly for speed of processing), you want to define yourself the low-level parameters to send to Starknet, you can use the parseRequest option.
+Parameters are an array of strings (representing numbers).
+
+const txH = await myContract.send_tk(['2036735872918048433518', '5130580', '18'], {
+  parseRequest: false,
+});
+
+parseResponse
+If for any reason, you want to receive a low-level answer from Starknet, you can use the parseResponse option.
+
+const result = await myContract.call('get_bals', 100n, { parseResponse: false });
+
+The answer is an array of strings (representing numbers).
+
+formatResponse
+As seen above, the strings returned by Starknet are not automatically parsed, because ABI does not inform when a contract returns a string.
+But there is a way to have automatic parsing of a string.
+
+For example, if a contract returns a struct containing a shortString and a longString:
+###
+
+{ name: felt252, description: Array<felt252> }
+
+###
+You can automate the string parsing with:
+###
+
+const formatAnswer = { name: 'string', description: 'string' };
+const result = await myContract.get_text(calldata, {
+  parseRequest: true,
+  parseResponse: true,
+  formatResponse: formatAnswer,
+});
+
+###
+The result will be an object, with 2 strings:
+###
+
+{ name: ""Organic"", description: ""The best way to read a long string!!!"" }
+
+###"
+How to estimate fees£¿,"This is an introduction about how to estimate fees.
+By default, all nonfree Starknet commands (declare, deploy, invoke) work without any limitation of cost.
+
+Nevertheless, you might want to inform the DAPP user of the cost of the incoming transaction before proceeding and requesting its validation.
+
+Starknet.js proposes several functions to estimate the fees:
+
+1.estimateDeclareFee
+To estimate the cost to declare a contract in the network:
+###
+
+const { suggestedMaxFee: estimatedFee1 } = await account0.estimateDeclareFee({
+  contract: compiledTest,
+  classHash: testClassHash,
+});
+
+###
+The result is in estimatedFee1, of type BigInt.
+
+2.estimateDeployFee
+To estimate the cost to deploy a contract in the network:
+###
+
+const { suggestedMaxFee: estimatedFee1 } = await account0.estimateDeployFee({
+  classHash: testClassHash,
+  // constructorCalldata is not necessary if the contract to deploy has no constructor
+  constructorCalldata: callData,
+});
+
+###
+The result is in estimatedFee1, of type BigInt.
+
+3.estimateAccountDeployFee
+To estimate the cost to deploy an account in the network:
+###
+
+const { suggestedMaxFee: estimatedFee1 } = await account0.estimateAccountDeployFee({
+  classHash: OZaccountClassHash,
+  constructorCalldata: OZaccountConstructorCallData,
+  contractAddress: OZcontractAddress,
+});
+
+###
+The result is in estimatedFee1, of type BigInt.
+
+4.estimateInvokeFee
+To estimate the cost to invoke a contract in the network:
+###
+
+const { suggestedMaxFee: estimatedFee1 } = await account0.estimateInvokeFee({
+  contractAddress: testAddress,
+  entrypoint: 'increase_balance',
+  calldata: ['10', '30'],
+});
+
+###
+The result is in estimatedFee1, of type BigInt.
+
+5.Fee limitation
+In all non-free functions, you can add an optional parameter limiting the fee consumption.
+If the fee has been previously estimated, you can use this value for this parameter, but sometimes this value is under-evaluated: don't hesitate to add a margin of approximately 10%:
+###
+
+(estimatedFee1 * 11n) / 10n;
+
+###
+You can also use the stark.estimatedFeeToMaxFee function:
+###
+
+import { stark } from 'starknet';
+stark.estimatedFeeToMaxFee(estimatedFee1, 0.1);
+
+###
+Example for declaring:
+###
+
+const { suggestedMaxFee: estimatedFee1 } = await account0.estimateDeclareFee({
+  contract: compiledTest,
+});
+
+const declareResponse = await account0.declare(
+  { contract: compiledTest },
+  { maxFee: (estimatedFee1 * 11n) / 10n }
+);
+
+###"
+How to Work with ERC20 tokens£¿,"This is an introduction about how to estimate fees.
+Based on what has been seen in the previous pages of this guide, we will use an ERC20 contract.
+
+1.What's an ERC20
+As in Ethereum, a token has an ERC20 contract to manage it. This contract contains a table, that lists the quantity of tokens owned by each involved account: 
+
+For example, Account address 2 owns 100 tokens of this ERC20 contract.
+
+Users have the feeling that their tokens are stored in their wallets, but it's absolutely false. You have no list of assets stored in your account contract. In fact, a token has its own ERC20 contract, and the amount of token owned by your account address is stored in this contract.
+
+If you want to have your balance of a token, ask for its ERC20 contract, with the function ERC20contract.balanceOf(accountAddress).
+
+When you want to transfer some tokens in your possession, you have to use the ERC20 contract function transfer, through the account.execute function (or meta-class methods). In this way, Starknet.js will send to the account contract a message signed with the private key.
+
+This message contains the name of the function to call in the ERC20 contract, with its optional parameters.
+
+The account contract will use the public key to check that you have the private key, then will ask the ERC20 contract to execute the requested function.
+
+This way, the ERC20 contract is absolutely sure that the caller of the transfer function knows the private key of this account.
+
+2.ETH token is an ERC20 in Starknet
+In opposition to Ethereum, the ETH token is an ERC20 in Starknet, like all other tokens. In all networks, its ERC20 contract address is:
+###
+
+const addrETH = '0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7';
+
+###
+3.Deploy an ERC20
+Let's dive down the rabbit hole!
+
+This example works with an ERC20 mintable (everybody can mint new tokens), that we will deploy on the devnet (launched with starknet-devnet --seed 0).
+
+First, let's initialize an account:
+###
+
+// initialize provider
+const provider = new Provider({ sequencer: { baseUrl: 'http://127.0.0.1:5050' } });
+// initialize existing pre-deployed account 0 of Devnet
+const privateKey = '0xe3e70682c2094cac629f6fbed82c07cd';
+const accountAddress = '0x7e00d496e324876bbc8531f2d9a82bf154d1a04a50218ee74cdd372f75a551a';
+
+const account0 = new Account(provider, accountAddress, privateKey);
+
+###
+Declaration and deployment of the ERC20 contract:
+###
+
+// Deploy an ERC20 contract
+console.log('Deployment Tx - ERC20 Contract to Starknet...');
+const compiledErc20mintable = json.parse(
+  fs.readFileSync('compiled_contracts/ERC20MintableOZ051.json').toString('ascii')
+);
+const initialTk: Uint256 = cairo.uint256(100);
+const erc20CallData: CallData = new CallData(compiledErc20mintable.abi);
+const ERC20ConstructorCallData: Calldata = erc20CallData.compile('constructor', {
+  name: 'niceToken',
+  symbol: 'NIT',
+  decimals: 18,
+  initial_supply: initialTk,
+  recipient: account0.address,
+  owner: account0.address,
+});
+
+console.log('constructor=', ERC20ConstructorCallData);
+const deployERC20Response = await account0.declareAndDeploy({
+  contract: compiledErc20mintable,
+  constructorCalldata: ERC20ConstructorCallData,
+});
+console.log('ERC20 declared hash: ', deployERC20Response.declare.class_hash);
+console.log('ERC20 deployed at address: ', deployERC20Response.deploy.contract_address);
+
+// Get the erc20 contract address
+const erc20Address = deployERC20Response.deploy.contract_address;
+// Create a new erc20 contract object
+const erc20 = new Contract(compiledErc20mintable.abi, erc20Address, provider);
+erc20.connect(account0);
+
+###
+4.Interact with an ERC20
+Here we will read the balance, mint new tokens, and transfer tokens:
+###
+
+// Check balance - should be 100
+console.log(`Calling Starknet for account balance...`);
+const balanceInitial = await erc20.balanceOf(account0.address);
+console.log('account0 has a balance of:', uint256.uint256ToBN(balanceInitial.balance).toString()); // Cairo 0 response
+
+// Mint 1000 tokens to account address
+const amountToMint = cairo.uint256(1000);
+console.log('Invoke Tx - Minting 1000 tokens to account0...');
+const { transaction_hash: mintTxHash } = await erc20.mint(account0.address, amountToMint, {
+  maxFee: 900_000_000_000_000,
+});
+
+// Wait for the invoke transaction to be accepted on Starknet
+console.log(`Waiting for Tx to be Accepted on Starknet - Minting...`);
+await provider.waitForTransaction(mintTxHash);
+
+// Check balance - should be 1100
+console.log(`Calling Starknet for account balance...`);
+const balanceBeforeTransfer = await erc20.balanceOf(account0.address);
+console.log(
+  'account0 has a balance of:',
+  uint256.uint256ToBN(balanceBeforeTransfer.balance).toString()
+); // Cairo 0 response
+
+// Execute tx transfer of 10 tokens
+console.log(`Invoke Tx - Transfer 10 tokens back to erc20 contract...`);
+const toTransferTk: Uint256 = cairo.uint256(10);
+const transferCallData: Call = erc20.populate('transfer', {
+  recipient: erc20Address,
+  amount: toTransferTk, // with Cairo 1 contract, 'toTransferTk' can be replaced by '10n'
+});
+const { transaction_hash: transferTxHash } = await erc20.transfer(transferCallData.calldata);
+
+// Wait for the invoke transaction to be accepted on Starknet
+console.log(`Waiting for Tx to be Accepted on Starknet - Transfer...`);
+await provider.waitForTransaction(transferTxHash);
+
+// Check balance after transfer - should be 1090
+console.log(`Calling Starknet for account balance...`);
+const balanceAfterTransfer = await erc20.balanceOf(account0.address);
+console.log(
+  'account0 has a balance of:',
+  uint256.uint256ToBN(balanceAfterTransfer.balance).toString()
+); // Cairo 0 response
+console.log('Script completed.');
+
+###"
+What is event£¿,"This is an introduction about events.
+A contract may emit events throughout its execution. Each event contains the following fields:
+
+from_address: address of the contract emitting the events
+keys: a list of field elements
+data: a list of field elements
+The keys can be used for indexing the events, while the data may contain any information that we wish to log.
+
+The events are recorded in the blocks of the blockchain.
+
+Example of Cairo code for an event:
+
+#[derive(Drop, starknet::Event)]
+    struct EventPanic {
+        #[key]
+        errorType: u8,
+        errorDescription: felt252,
+    }
+
+Here we have an event called EventPanic, with an u8 stored in keys, and a felt252 (text) in data.
+
+1.Why events ?
+Events are a useful tool for logging and notifying external entities about specific occurrences within a contract, with a timestamp (the block number). They emit data that can be accessed by everybody.
+
+Some cases:
+
+When a specific value is reached in a contract, an event can be created to store the fact that this value has been reached at a specific block number.
+When the L1 network has triggered the execution of a L2 contract, you can store in the event some results and when it occurs.
+An event can be useful also when you invoke a contract. When you invoke a Cairo function (meaning to write in the network), the API does not authorize any response (only call functions can provide an answer). To generate an event in the code is a way to provide a response (for example for the creation of an account, an event is generated to return the account address).
+
+2.With the Transaction hash
+If you use Starknet.js to invoke a Cairo function that will trigger a new event, you will receive the transaction hash as a response. Preserve it so it can be used to easily retrieve the event data.
+
+Example of invocation:
+###
+
+const transactionHash = myContract.invoke('emitEventPanic', [8, 'Mega Panic.']);
+
+###
+Then get the transaction receipt:
+
+const txReceipt = await provider.waitForTransaction(transactionHash);
+
+Raw response
+You can recover all the events related to this transaction hash:
+###
+
+const listEvents = txReceipt.events;
+
+###
+The result is an array of events (here only one event):
+
+[
+  {
+    from_address: '0x47cb13bf174043adde61f7bea49ab2d9ebc575b0431f85bcbfa113a6f93fc4',
+    keys: ['0x3ba972537cb2f8e811809bba7623a2119f4f1133ac9e955a53d5a605af72bf2', '0x8'],
+    data: ['0x4d6567612050616e69632e'],
+  },
+];
+
+The first parameter in the keys array is a hash of the name of the event, calculated this way:
+###
+
+const nameHash = num.toHex(hash.starknetKeccak('EventPanic'));
+
+###
+The second parameter is the errorType variable content (stored in keys array because of the #[key] flag in the Cairo code).
+
+The data array contains the errorDescription variable content ('0x4d6567612050616e69632e' corresponds to the encoded value of ""Mega Panic."")
+
+You can decode it with:
+###
+
+const ErrorMessage = shortString.decodeShortString('0x4d6567612050616e69632e');
+
+###
+Parsed response
+Once you have the transaction receipt, you can parse the events to have something easier to process.
+We will perform parsing this way:
+###
+
+const events = myTestContract.parseEvents(txReceipt);
+
+###
+The result is an array of parsed events (here only one event):
+###
+
+events = [
+  {
+    EventPanic: { errorType: 8n, errorDescription: 93566154138418073030976302n },
+  },
+];
+
+###
+Easier to read and process, isn't it?
+
+3.Without transaction hash
+If you don't have the transaction Hash of the contract execution that created the event, it will be necessary to search inside the blocks of the Starknet blockchain.
+
+In this example, if you want to read the events recorded in the last 10 blocks, you need to use a method available only from an RPC node. The class RpcProvider is available for this case:
+###
+
+import { RpcProvider } from 'starknet';
+const providerRPC = new RpcProvider({
+  nodeUrl: ""{ nodeUrl: 'https://starknet-goerli.infura.io/v3/' + infuraKey }"",
+}); // for an Infura node on Testnet
+const lastBlock = await providerRPC.getBlock('latest');
+const keyFilter = [num.toHex(hash.starknetKeccak('EventPanic')), '0x8'];
+const eventsList = await providerRPC.getEvents({
+  address: myContractAddress,
+  from_block: { block_number: lastBlock.block_number - 9 },
+  to_block: { block_number: lastBlock.block_number },
+  keys: [keyFilter],
+  chunk_size: 10,
+});
+
+###
+address, from_block, to_block, keys are all optional parameters.
+
+If you don't want to filter by key, you can either remove the keys parameter, or affect it this way: [[]] .
+
+Here we have only one event. You can easily read this event:
+###
+
+const event = eventsList.events[0];
+console.log('data length =', event.data.length, 'key length =', event.keys.length, ':');
+console.log('\nkeys =', event.keys, 'data =', event.data);
+
+###
+To limit the workload of the node, the parameter chunk_size defines a size of chunk to read. If the request needs an additional chunk, the response includes a key continuation_token containing a string to use in the next request.
+Hereunder a code to read all the chunks of a request:
+###
+
+const keyFilter = [num.toHex(hash.starknetKeccak('EventPanic')), '0x8'];
+let block = await provider.getBlock('latest');
+console.log('bloc #', block.block_number);
+
+let continuationToken: string | undefined = '0';
+let chunkNum: number = 1;
+while (continuationToken) {
+  const eventsRes = await providerRPC.getEvents({
+    from_block: {
+      block_number: block.block_number - 30,
+    },
+    to_block: {
+      block_number: block.block_number,
+    },
+    address: myContractAddress,
+    keys: [keyFilter],
+    chunk_size: 5,
+    continuation_token: continuationToken,
+  });
+  const nbEvents = eventsRes.events.length;
+  continuationToken = eventsRes.continuation_token;
+  console.log('chunk nb =', chunkNum, '.', nbEvents, 'events recovered.');
+  console.log('continuation_token =', continuationToken);
+  for (let i = 0; i < nbEvents; i++) {
+    const event = eventsRes.events[i];
+    console.log(
+      'event #',
+      i,
+      'data length =',
+      event.data.length,
+      'key length =',
+      event.keys.length,
+      ':'
+    );
+    console.log('\nkeys =', event.keys, 'data =', event.data);
+  }
+  chunkNum++;
+}
+
+###"
+How to messages with L1 network£¿,"This is an introduction about how to messages with L1 network.
+You can exchange messages between L1 & L2 networks:
+
+L2 Starknet mainnet ?? L1 Ethereum.
+L2 Starknet testnet ?? L1 Goerli ETH testnet.
+L2 local Starknet devnet ?? L1 local ETH testnet (Ganache, ...).
+You can find an explanation of the global mechanism here.
+
+Most of the code for this messaging process will be written in Cairo, but Starknet.js provides some functionalities for this subject.
+
+1.L1 to L2 messages
+To send a message from L1 to L2, you need a solidity smart contract in the L1 network, calling the SendMessageToL2 function of the Starknet core contract. The interface of this function:
+###
+
+/**
+    Sends a message to an L2 contract.
+    This function is payable, the paid amount is the message fee.
+    Returns the hash of the message and the nonce of the message.
+*/
+function sendMessageToL2(
+    uint256 toAddress,
+    uint256 selector,
+    uint256[] calldata payload
+) external payable returns (bytes32, uint256);
+
+###
+You have to pay in the L1 an extra fee when invoking sendMessageToL2 (of course paid with the L1 fee TOKEN), to pay the L2 part of the messaging mechanism. You can estimate this fee with this function:
+###
+
+import { SequencerProvider } from 'starknet';
+const provider = new SequencerProvider({ baseUrl: constants.BaseUrl.SN_GOERLI }); // for testnet
+
+const responseEstimateMessageFee = await provider.estimateMessageFee({
+  from_address: L1address,
+  to_address: L2address,
+  entry_point_selector: 'handle_l1_mess',
+  payload: ['1234567890123456789', '200'],
+});
+
+###
+If the fee is paid in L1, the Cairo contract at to_Address is automatically executed, function entry_point_selector (the function shall have a decorator @l1_handler in the Cairo code), with parameters payload.
+
+2.L2 to L1 messages
+To send a message to L1, you will just invoke a Cairo contract function, paying a fee that will pay all the processes (in L1 & L2).
+
+If necessary you can estimate this fee with the generic estimateInvokeFee function:
+###
+
+const { suggestedMaxFee: estimatedFee1 } = await account0.estimateInvokeFee({
+  contractAddress: testAddress,
+  entrypoint: 'withdraw_to_L1',
+  calldata: ['123456789', '30'],
+});
+
+###
+The result is in estimatedFee1, of type BN."
+What is Signature£¿,"This is an introduction about Signature.
+You can use Starknet.js to sign a message outside of the network, using the standard methods of hash and sign of Starknet. In this way, in some cases, you can avoid paying fees to store data in-chain; you transfer the signed message off-chain, and the recipient can verify (without fee) on-chain the validity of the message.
+
+1.Sign and send a message
+Your message has to be an array of BigNumberish. First, calculate the hash of this message, then calculate the signature.
+
+If the message does not respect some safety rules of composition, this method could be a way of attack of your smart contract. If you have any doubt, prefer the EIP712 like method, which is safe, but is also more complicated.
+###
+
+import { ec, hash, num, json, Contract, WeierstrassSignatureType } from 'starknet';
+
+const privateKey = '0x1234567890987654321';
+const starknetPublicKey = ec.starkCurve.getStarkKey(privateKey);
+const fullPublicKey = encode.addHexPrefix(
+  encode.buf2hex(ec.starkCurve.getPublicKey(privateKey, false))
+);
+
+const message: BigNumberish[] = [1, 128, 18, 14];
+
+const msgHash = hash.computeHashOnElements(message);
+const signature: WeierstrassSignatureType = ec.starkCurve.sign(msgHash, privateKey);
+
+###
+Then you can send, by any means, to the recipient of the message:
+
+the message.
+the signature.
+the full public key (or an account address using this private key).
+2.Receive and verify a message
+On the receiver side, you can verify that:
+
+the message has not been modified,
+the sender of this message owns the private key corresponding to the public key.
+2 ways to perform this verification:
+
+off-chain, using the full public key (very fast, but only for standard Starknet hash & sign).
+on-chain, using the account address (slow, add workload to the node/sequencer, but can manage exotic account abstraction about hash or sign).
+Verify outside of Starknet:
+The sender provides the message, the signature, and the full public key. Verification:
+###
+
+const msgHash1 = hash.computeHashOnElements(message);
+const result1 = ec.starkCurve.verify(signature, msgHash1, fullPublicKey);
+console.log('Result (boolean) =', result1);
+
+###
+The sender can also provide their account address. Then you can check that this full public key is linked to this account. The public Key that you can read in the account contract is part (part X) of the full public Key (parts X & Y):
+
+Read the Public Key of the account:
+###
+
+const provider = new Provider({ sequencer: { baseUrl: 'http://127.0.0.1:5050' } }); //devnet
+const compiledAccount = json.parse(
+  fs.readFileSync('./compiled_contracts/Account_0_5_1.json').toString('ascii')
+);
+const accountAddress = '0x....'; // account of sender
+const contractAccount = new Contract(compiledAccount.abi, accountAddress, provider);
+const pubKey3 = await contractAccount.call('getPublicKey');
+
+###
+Check that the Public Key of the account is part of the full public Key:
+###
+
+const isFullPubKeyRelatedToAccount: boolean =
+  publicKey.publicKey == BigInt(encode.addHexPrefix(fullPublicKey.slice(4, 68)));
+console.log('Result (boolean)=', isFullPubKeyRelatedToAccount);
+
+###
+Verify in the Starknet network, with the account:
+The sender can provide an account address, despite a full public key.
+###
+
+const provider = new Provider({ sequencer: { baseUrl: 'http://127.0.0.1:5050' } }); //devnet
+const compiledAccount = json.parse(
+  fs.readFileSync('./compiled_contracts/Account_0_5_1.json').toString('ascii')
+);
+
+const accountAddress = '0x...'; // account of sender
+const contractAccount = new Contract(compiledAccount.abi, accountAddress, provider);
+const msgHash2 = hash.computeHashOnElements(message);
+// The call of isValidSignature will generate an error if not valid
+let result2: boolean;
+try {
+  await contractAccount.isValidSignature(msgHash2, [signature.r, signature.s]);
+  result2 = true;
+} catch {
+  result2 = false;
+}
+console.log('Result (boolean) =', result2);
+
+###
+3.Sign and verify the following EIP712
+Previous examples are valid for an array of numbers. In the case of a more complex structure of an object, you have to work in the spirit of EIP 712. This JSON structure has 4 mandatory items: types, primaryType, domain, and message.
+These items are designed to be able to be an interface with a wallet. At sign request, the wallet will display:
+
+the message will be displayed at the bottom of the wallet display, showing clearly (not in hex) the message to sign. Its structure has to be in accordance with the type listed in primaryType, defined in types.
+the domain will be shown above the message. Its structure has to be in accordance with StarkNetDomain.
+The predefined types that you can use:
+
+felt: for an integer on 251 bits.
+felt*: for an array of felt.
+string: for a shortString of 31 ASCII characters max.
+selector: for a name of a smart contract function.
+merkletree: for a Root of a Merkle tree. the root is calculated with the provided data.
+###
+
+const typedDataValidate: TypedData = {
+  types: {
+    StarkNetDomain: [
+      { name: 'name', type: 'string' },
+      { name: 'version', type: 'felt' },
+      { name: 'chainId', type: 'felt' },
+    ],
+    Airdrop: [
+      { name: 'address', type: 'felt' },
+      { name: 'amount', type: 'felt' },
+    ],
+    Validate: [
+      { name: 'id', type: 'felt' },
+      { name: 'from', type: 'felt' },
+      { name: 'amount', type: 'felt' },
+      { name: 'nameGamer', type: 'string' },
+      { name: 'endDate', type: 'felt' },
+      { name: 'itemsAuthorized', type: 'felt*' }, // array of felt
+      { name: 'chkFunction', type: 'selector' }, // name of function
+      { name: 'rootList', type: 'merkletree', contains: 'Airdrop' }, // root of a merkle tree
+    ],
+  },
+  primaryType: 'Validate',
+  domain: {
+    name: 'myDapp', // put the name of your dapp to ensure that the signatures will not be used by other DAPP
+    version: '1',
+    chainId: shortString.encodeShortString('SN_GOERLI'), // shortString of 'SN_GOERLI' (or 'SN_MAIN'), to be sure that signature can't be used by other network.
+  },
+  message: {
+    id: '0x0000004f000f',
+    from: '0x2c94f628d125cd0e86eaefea735ba24c262b9a441728f63e5776661829a4066',
+    amount: '400',
+    nameGamer: 'Hector26',
+    endDate: '0x27d32a3033df4277caa9e9396100b7ca8c66a4ef8ea5f6765b91a7c17f0109c',
+    itemsAuthorized: ['0x01', '0x03', '0x0a', '0x0e'],
+    chkFunction: 'check_authorization',
+    rootList: [
+      {
+        address: '0x69b49c2cc8b16e80e86bfc5b0614a59aa8c9b601569c7b80dde04d3f3151b79',
+        amount: '1554785',
+      },
+      {
+        address: '0x7447084f620ba316a42c72ca5b8eefb3fe9a05ca5fe6430c65a69ecc4349b3b',
+        amount: '2578248',
+      },
+      {
+        address: '0x3cad9a072d3cf29729ab2fad2e08972b8cfde01d4979083fb6d15e8e66f8ab1',
+        amount: '4732581',
+      },
+      {
+        address: '0x7f14339f5d364946ae5e27eccbf60757a5c496bf45baf35ddf2ad30b583541a',
+        amount: '913548',
+      },
+    ],
+  },
+};
+
+// connect your account, then
+const signature2 = (await account.signMessage(typedDataValidate)) as WeierstrassSignatureType;
+
+###
+On the receiver side, you receive the JSON, the signature, and the account address. To verify the message:
+###
+
+const compiledAccount = json.parse(
+  fs.readFileSync('./compiledContracts/Account_0_5_1.json').toString('ascii')
+);
+const contractAccount = new Contract(compiledAccount.abi, accountAddress, provider);
+
+const msgHash5 = typedData.getMessageHash(typedDataValidate, accountAddress);
+// The call of isValidSignature will generate an error if not valid
+let result5: boolean;
+try {
+  await contractAccount.isValidSignature(msgHash5, [signature2.r, signature2.s]);
+  result5 = true;
+} catch {
+  result5 = false;
+}
+console.log('Result5 (boolean) =', result5);
+
+###"
+How to Interact with more than one contract within one transaction£¿,"This is an introduction about how to Interact with more than one contract within one transaction.
+Interacting with more than one contract with one transaction is one of Starknet's features. To use this feature, two contracts are required.
+
+1.Setup
+Set up basic stuff before multicall.
+###
+
+// devnet private key from Account #0 if generated with --seed 0
+const privateKey = '0xe3e70682c2094cac629f6fbed82c07cd';
+const accountAddress = '0x7e00d496e324876bbc8531f2d9a82bf154d1a04a50218ee74cdd372f75a551a';
+
+// Ether token contract address
+const contractAddress_1 = '0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7';
+
+// contract address which require ether
+const contractAddress_2 = '0x078f36c1d59dd29e00a0bb60aa2a9409856f4f9841c47f165aba5bab4225aa6b';
+
+const account = new Account(provider, accountAddress, privateKey);
+
+###
+2.Interact with contracts
+Interact with more than one contract by using account.execute([calls]). The example is as follows.
+###
+
+const multiCall = await account.execute([
+  // Calling the first contract
+  {
+    contractAddress: contractAddress_1,
+    entrypoint: 'approve',
+    // approve 1 wei for bridge
+    calldata: CallData.compile({
+      spender: contractAddress_2,
+      amount: cairo.uint256(1),
+    }),
+  },
+  // Calling the second contract
+  {
+    contractAddress: contractAddress_2,
+    entrypoint: 'transfer_ether',
+    // transfer 1 wei to the contract address
+    calldata: CallData.compile({
+      amount: cairo.uint256(1),
+    }),
+  },
+]);
+await provider.waitForTransaction(multiCall.transaction_hash);
+
+###"
+What is Cairo Enums£¿,"This is an introduction about Cairo Enums.
+1.Cairo Enums usage
+Cairo-lang v0.12.0 (includes Cairo v2.0.0) introduces a new type of data that can be exchanged with Starknet: the Enums. Not related to the TypeScript Enums, the Cairo Enums are identical to Rust Enums.
+More information in the Starknet book here.
+In the following paragraphs, you will see how to send and receive Enums with the Starknet network.
+
+2.Cairo Option
+The Option Enum is a core enum, and has 2 variants (Some and None). Only the some variant can contain data.
+
+Receive Cairo Option
+An example of Cairo code that returns an Option enum:
+###
+
+fn test(self: @ContractState, val1: u16) -> Option<Order> {
+    if val1 < 100 {
+        return Option::None(());
+    }
+    Option::Some(Order { p1: 18, p2: val1 })
+}
+
+###
+In your code, the Starknet.js response will be an instance of the CairoOption class:
+###
+
+import { CairoOption } from 'starknet';
+type Order = {
+  p1: BigNumberish;
+  p2: BigNumberish;
+};
+const res: CairoOption<Order> = await myTestContract.test(50);
+const res2: CairoOption<Order> = await myTestContract.test(150);
+
+###
+In CairoOption<T>, T is the type of the data related to the Some variant.
+The CairoOption class has ""Cairo like"" methods:
+###
+
+const a = res.isSome(); // false
+const a2 = res2.isSome(); // true
+const b = res.isNone(); // true
+const b2 = res2.isNone(); // false
+const c = res.unwrap(); // undefined
+const c2: Order = res2.unwrap(); // { p1: 18n, p2: 150n }
+
+###
+Send Cairo Option
+An example of Cairo code that use an Option enum as input:
+###
+
+fn test5(self: @ContractState, inp: Option<Order>) -> u16 {
+    match inp {
+        Option::Some(x) => {
+            return x.p2;
+        },
+        Option::None(()) => {
+            return 17;
+        }
+    }
+}
+
+###
+In your code, the Starknet.js request is an instance of the CairoOption class:
+###
+
+import { CairoOption, CairoOptionVariant } from 'starknet';
+type Order = {
+  p1: BigNumberish;
+  p2: BigNumberish;
+};
+const res = (await myTestContract.call('test5', [
+  new CairoOption<Order>(CairoOptionVariant.Some, { p1: 20, p2: 40 }),
+])) as bigint;
+const res2 = (await myTestContract.call('test5', [
+  new CairoOption<Order>(CairoOptionVariant.None),
+])) as bigint;
+
+###
+3.Cairo Result
+Cairo v2.1.0 introduces an other core Enum: Result.
+This Enum has 2 variants (Ok and Err) and both variants can contain data.
+
+Receive Cairo Result
+An example of Cairo code that returns a Result enum:
+###
+
+fn test(self: @ContractState, val1: u16) -> Result<u16, u16> {
+    if val1 < 100 {
+        return Result::Err(14);
+    }
+    Result::Ok(val1)
+}
+
+###
+In your code, the Starknet.js response will be an instance of the CairoResult class:
+###
+
+import { CairoResult } from 'starknet';
+
+const res: CairoResult<bigint, bigint> = await myTestContract.test(90);
+const res2 = (await myTestContract.call('test', [110])) as CairoResult<bigint, bigint>;
+
+###
+In CairoResult<T, U>, T is the type of the data related to the Ok variant, and U is the type of the data related to the Err variant.
+The CairoResult class has ""Cairo like"" methods:
+###
+
+const a = res.isOk(); // false
+const a2 = res2.isOk(); // true
+const b = res.isErr(); // true
+const b2 = res2.isErr(); // false
+const c = res.unwrap(); // 14n
+const c2 = res2.unwrap(); // 110n
+
+###
+Send Cairo Result
+An example of Cairo code that uses a Result enum:
+###
+
+fn test8(self: @ContractState, inp: Result<Order, u16>) -> u16 {
+    match inp {
+        Result::Ok(x) => {
+            return x.p2;
+        },
+        Result::Err(y) => {
+            return y;
+        }
+    }
+}
+
+###
+In your code, the Starknet.js request is an instance of the CairoResult class:
+###
+
+import { CairoResult, CairoResultVariant } from 'starknet';
+
+const res = (await myTestContract.call('test8', [
+  new CairoResult<Order, BigNumberish>(CairoResultVariant.Ok, { p1: 50, p2: 60 }),
+])) as bigint;
+const res2 = (await myTestContract.call('test8', [
+  new CairoResult<Order, BigNumberish>(CairoResultVariant.Err, 50),
+])) as bigint;
+
+###
+4.Cairo custom Enum
+In Cairo v2.0.0, you can also create your own customized Enum.
+
+Receive Cairo custom Enum
+An example of Cairo code that returns the Result enum:
+###
+
+#[derive(Drop, Serde, Append)]
+enum MyEnum {
+    Response: Order,
+    Warning: felt252,
+    Error: (u16,u16),
+    Critical: Array<u32>,
+    Empty:(),
+}
+fn test(self: @ContractState, val1: u16) -> MyEnum {
+    if val1 < 100 {
+        return MyEnum::Error((3,4));
+    }
+    if val1 == 100 {
+        return MyEnum::Warning('attention:100');
+    }
+    if val1 < 150 {
+        let mut arr=ArrayTrait::new();
+        arr.append(5);
+        arr.append(6);
+        return MyEnum::Critical(arr);
+    }
+    if val1<200 {
+        return MyEnum::Empty(());
+    }
+    MyEnum::Response(Order { p1: 1, p2: val1 })
+}
+
+###
+This example Enum has 5 variants (Response, Warning, Error, Critical and Empty) and both variants can contain data.
+
+In your code, the Starknet.js response will be an instance of the CairoCustomEnum class:
+###
+
+import { CairoCustomEnum } from 'starknet';
+
+const res: CairoCustomEnum = await myTestContract.test(10);
+const res2: CairoCustomEnum = await myTestContract.test(100);
+const res3: CairoCustomEnum = await myTestContract.test(120);
+const res4: CairoCustomEnum = await myTestContract.test(190);
+const res5: CairoCustomEnum = await myTestContract.test(220);
+
+###
+The CairoCustomEnum class has ""Cairo like"" methods:
+###
+
+const a = res.activeVariant(); // ""Error""
+const a2 = res2.activeVariant(); // ""Warning""
+const a3 = res3.activeVariant(); // ""Critical""
+const a4 = res4.activeVariant(); // ""Response""
+const a5 = res5.activeVariant(); // ""Empty""
+const c = res.unwrap(); // {""0"": 3n, ""1"": 4n}
+const c2: bigint = res2.unwrap(); // 7721172739414537047772488609840n
+const c3: bigint[] = res3.unwrap(); // [5n, 6n]
+const c4: Order = res4.unwrap(); // { p1: 1n, p2: 190n }
+const c5: Object = res5.unwrap(); // {}
+
+###
+In a CairoCustomEnum instance, you can also have a direct access to the content of a variant:
+###
+
+const d: Order = res4.variant.Response; // { p1: 1n, p2: 190n }
+const e = res4.variant['Critical']; // undefined
+
+###
+Send Cairo custom Enum
+An example of Cairo code that uses the Result enum:
+###
+
+#[derive(Drop, Serde, Append)]
+enum MyEnum {
+    Response: Order,
+    Warning: felt252,
+    Error: (u16,u16),
+    Critical: Array<u32>,
+    Empty:(),
+}
+fn test2a(self: @ContractState, customEnum:MyEnum ) -> u16{
+    match customEnum{
+        MyEnum::Response(my_order)=>{return my_order.p2;},
+        MyEnum::Warning(val)=>{return 0x13_u16;},
+        MyEnum::Error((a,b))=>{return b;},
+        MyEnum::Critical(myArray)=>{return 0x3c_u16;},
+        MyEnum::Empty(_)=>{return 0xab_u16;}
+    }
+}
+
+###
+In your code, the Starknet.js request is an instance of the CairoCustomEnum class:
+###
+
+import { CairoCustomEnum } from 'starknet';
+
+const orderToSend: Order = { p1: 8, p2: 10 };
+const myCustomEnum = new CairoCustomEnum({ Response: orderToSend });
+const res14 = (await myTestContract.call('test2a', [myCustomEnum])) as bigint;
+const res14c = (await myTestContract.call('test2a', [
+  new CairoCustomEnum({ Error: cairo.tuple(100, 110) }),
+])) as bigint;
+const res14d = (await myTestContract.call('test2a', [
+  new CairoCustomEnum({ Critical: ['0x10', '0x11'] }),
+])) as bigint;
+const res14e = (await myTestContract.call('test2a', [
+  new CairoCustomEnum({ Empty: {} }),
+])) as bigint;
+
+###
+Take care that if you call a method that do not use the abi (as CallData.compile), you have to list all the variants of the enum, like this:
+###
+
+const orderToSend: Order = { p1: 8, p2: 10 };
+const myCustomEnum = new CairoCustomEnum({
+  Response: undefined,
+  Warning: undefined,
+  Error: cairo.tuple(100, 110),
+  Critical: undefined,
+  Empty: undefined,
+});
+const myCalldata = CallData.compile(myCustomEnum);
+const res = (await myTestContract.call('test2a', myCalldata)) as bigint;
+
+###"
+What is Automatic TypeScript parsing of Cairo ABI-s£¿,"This is an introduction about Automatic TypeScript parsing of Cairo ABI-s.
+Starknet.js has integrated Abi-Wan-Kanabi, the standalone TypeScript parser for Cairo smart contracts.
+
+It enables on-the-fly typechecking and autocompletion for contract calls directly in TypeScript. Developers can now catch typing mistakes early, prior to executing a call on-chain, thus enhancing the overall DAPP development experience.
+
+1.Supported Cairo ABI-s
+Please take a look on the Abi-Wan documentation for a list of supported Cairo ABI-s.
+
+2.Usage
+First, you need to wrap your ABI in a array and export it as a const.
+
+Example:
+###
+
+export const tAbi = [
+  {
+    type: 'function',
+    name: 'increase_balance',
+    inputs: [
+      {
+        name: 'amount',
+        type: 'core::felt252',
+      },
+    ],
+    outputs: [],
+    state_mutability: 'external',
+  },
+] as const;
+
+###
+Later on, to use it in our code, we have 2 options.
+###
+
+Option 1
+import { tAbi } from '../__mocks__/hello';
+import { TypedContract } from '../src';
+
+###
+let cairo1Contract: TypedContract<typeof tAbi>; // tAbi is your Cairo contract ABI
+
+After that, you can use cairo1Contract in your code as you would before, but with autocomplete and type checking!
+
+For example:
+###
+
+const tx = await cairo1Contract.increase_balance(100);
+
+###
+Option 2
+###
+
+import { tAbi } from '../__mocks__/hello';
+
+// ...
+
+let cairo1Contract = new Contract(compiledHelloSierra.abi, dd.deploy.contract_address, account);
+
+let cairo1ContractTyped = cairo1Contract.typedv1(tAbi); // or typedv2(tAbi) if you are using Cairo compiler v2
+
+cairo1ContractTyped.test_bool();
+
+###"
+How to Migrate from v4 to v5£¿,"This is an introduction about how to Migrate from v4 to v5.
+This document only covers the features present in v4 which have changed in some significant way in v5.
+
+If you encounter any missing changes, please let us know and we will update this guide.
+
+1.number utility replaced by num
+To avoid confusion with the native number type, the number namespace has been renamed to num.
+###
+
+// v4
+const res = number.isHex(d1);
+
+// v5
+const res = num.isHex(d1);
+
+###
+number.toFelt() has been removed, if manual handling is necessary cairo.felt() can be used.
+
+2.bn.js no longer supported
+The bn.js library has been removed in favor of using the native JavaScript BigInt data type.
+###
+
+// v4
+const qty = new BN('0x4a8bc');
+
+// v5
+const qty1 = BigInt('0x4a8bc');
+const qty2 = 32786324915918425n;
+
+###
+The BigNumberish type is now defined as:
+
+String representing a number: ""123"", ""0xabc2""
+Number (max 53 bits): 123
+BigInt (max 255 bits): 12345612345n
+Some commonly used BN utility methods are of course no longer present, however, they have simple equivalents:
+
+.mul() and .div(): common operators can be used with bigints: + - * /
+.umod() can be easily replaced with:
+###
+
+// v4
+const c = a.umod(b);
+
+// v5
+const tmp = a % b; // a and b are bigint
+const c = tmp >= 0n ? tmp : tmp + b;
+
+###
+.toarray() can be replaced with num.hexToBytes(a)
+3.ec (elliptic curve)
+With the bn.js removal the accompanying elliptic curve libraries have also been replaced, consequently many functions have been relocated or modified.
+
+The concept of a key pair, where the private and public key are used as a single entity, has been removed. ec.getKeyPair(), ec.getKeyPairFromPublicKey() and ec.genKeyPair() do not exist anymore, corresponding methods use the private key directly. Check the following examples:
+
+Account creation:
+###
+
+// v4
+const privateKey0 = accountTestnet4PrivateKey;
+const account0Address: string = accountTestnet4Address;
+const starkKeyPair0 = ec.getKeyPair(privateKey0);
+const account0 = new Account(provider, account0Address, starkKeyPair0);
+
+// v5
+const privateKey0 = accountTestnet4PrivateKey;
+const account0Address: string = accountTestnet4Address;
+const account0 = new Account(provider, account0Address, privateKey0);
+
+###
+Derive partial public key (starknetPubKey):
+###
+
+// v4
+const starknetPubKey = ec.getStarkKey(keyPair);
+
+// v5
+const starknetPubKey = ec.starkCurve.getStarkKey(privateKey); // only X part of full pubKey
+
+###
+Derive full public key (fullPubKey):
+###
+
+// v4
+const fullPubKey = encode.addHexPrefix(keyPair.getPublic('hex'));
+
+// v5
+const fullPubKey = encode.addHexPrefix(
+  encode.buf2hex(ec.starkCurve.getPublicKey(privateKey, false))
+); // full key
+
+###
+ec.sign and ec.verify:
+###
+
+// v4
+const signature = ec.sign(keyPair, msgHash);
+const isVerified = ec.verify(inferredKeyPair, msgHash, signature);
+
+// v5
+const signature = ec.starkCurve.sign(msgHash, privateKey);
+const verifStarknet = ec.starkCurve.verify(signature, msgHash, fullPubKeySource);
+
+###
+pedersen hash calculation:
+###
+
+// v4
+const hashMsg = hash.pedersen([account, price]);
+
+// v5
+const hashMsg = ec.starkCurve.pedersen(account, price);
+
+###
+4.'declareAndDeploy' renaming
+The account.declareDeploy() method has been renamed to declareAndDeploy():
+###
+
+// v4
+const response = await account0.declareDeploy({ contract: compiledTest, classHash: testClassHash });
+
+// v5
+const response = await account0.declareAndDeploy({
+  contract: compiledHelloSierra,
+  casm: compiledHelloCasm,
+});
+
+###
+Note: declare and declareAndDeploy no longer require classHash! The new ec library is now able to calculate it quickly and does so automatically when it is not provided. If a contract has been written in Cairo 1 the casm property is needed.
+
+5.Calldata and returned values
+Deep modifications and improvements have been performed concerning exchange of data with the Cairo contract functions. The complete new rules are listed in this guide.
+In short, it is easier to construct a list of parameters while relying on the built-in verification of the conformity to the abi.
+Returned values from a Cairo 0 contract are identical, but returned values from a Cairo 1 contract are easier to recover.
+
+stark.compileCalldata() has been replaced by CallData.compile(). Regardless, the new Contract.populate() and myCallData.compile() methods are the recommended way to create calldata.
+
+6.Provider
+Constants for Provider initialization have been updated:
+###
+
+// v4
+const providerTestnet = new Provider({ sequencer: { network: 'goerli-alpha' } });
+
+// v5
+const providerTestnet = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } }); // or SN_MAIN
+
+###
+Provider.chainId() has been removed, Provider.getChainId() should be used.
+###
+
+// v4
+const chainId = myProvider.chainId();
+
+// v5
+const chainId = await myProvider.getChainId();
+
+###
+7.Uint256
+The approach to create a uint256 variable has changed:
+###
+
+// v4
+const amountIn = uint256.bnToUint256(amountToSwap);
+
+// v5
+const amountIn: Uint256 = cairo.uint256(50000n);
+
+###
+8.get-starknet
+In your DAPP React code you can connect to ArgentX or Braavos wallets using the get-starknet library.
+
+The current v2.1.0 version is not yet compatible with starknet.js v5.
+An update is expected."

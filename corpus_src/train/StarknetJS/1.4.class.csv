@@ -1,0 +1,5381 @@
+question,answer
+What is included in Account of Class?,"The Account of Class includes the following content.
+1.Hierarchy
+Provider
+Account
+
+2.Implements
+AccountInterface
+3.Constructors
+constructor
+new Account(providerOrOptions, address, pkOrSigner, cairoVersion?)
+
+Parameters
+Name                Type
+providerOrOptions ProviderOptions | ProviderInterface
+address           string
+pkOrSigner       string | Uint8Array | SignerInterface
+cairoVersion?     CairoVersion
+Overrides
+Provider.constructor
+
+4.Properties
+signer
+signer: SignerInterface
+
+Implementation of
+AccountInterface.signer
+
+address
+address: string
+
+Implementation of
+AccountInterface.address
+
+cairoVersion
+cairoVersion: CairoVersion
+
+Implementation of
+AccountInterface.cairoVersion
+
+deploySelf
+deploySelf: (__namedParameters: DeployAccountContractPayload, transactionsDetail: InvocationsDetails) => Promise<DeployContractResponse>
+
+Type declaration
+(?destructured?, transactionsDetail?): Promise<DeployContractResponse>
+
+Parameters
+Name Type
+?destructured? DeployAccountContractPayload
+transactionsDetail InvocationsDetails
+Returns
+Promise<DeployContractResponse>
+
+5.Methods
+getNonce
+getNonce(blockIdentifier?): Promise<string>
+
+Gets the nonce of the account with respect to a specific block
+
+Parameters
+Name Type Description
+blockIdentifier? BlockIdentifier optional blockIdentifier. Defaults to 'pending'
+Returns
+Promise<string>
+
+nonce of the account
+
+Implementation of
+AccountInterface.getNonce
+
+getNonceSafe
+Private getNonceSafe(nonce?): Promise<bigint>
+
+Parameters
+Name Type
+nonce? BigNumberish
+Returns
+Promise<bigint>
+
+getCairoVersion
+getCairoVersion(classHash?): Promise<CairoVersion>
+
+Retrieves the Cairo version from the network and sets cairoVersion if not already set in the constructor
+
+Parameters
+Name Type             Description
+classHash? string    if provided detects Cairo version from classHash, otherwise from the account address
+Returns
+Promise<CairoVersion>
+
+estimateFee
+estimateFee(calls, estimateFeeDetails?): Promise<EstimateFee>
+
+Parameters
+Name Type
+calls AllowArray<Call>
+estimateFeeDetails? EstimateFeeDetails
+Returns
+Promise<EstimateFee>
+
+estimateInvokeFee
+estimateInvokeFee(calls, ?destructured??): Promise<EstimateFee>
+
+Estimate Fee for executing an INVOKE transaction on starknet
+
+Parameters
+Name      Type                   Description
+calls     AllowArray<Call>    the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata
+?destructured? EstimateFeeDetails  -
+Returns
+Promise<EstimateFee>
+
+response from estimate_fee
+
+Implementation of
+AccountInterface.estimateInvokeFee
+
+estimateDeclareFee
+estimateDeclareFee(?destructured?, ?destructured??): Promise<EstimateFee>
+
+Estimate Fee for executing a DECLARE transaction on starknet
+
+Parameters
+Name             Type                                Description
+?destructured?   DeclareContractPayload      the payload object containing: - contract - the compiled contract to be declared - classHash - the class hash of the compiled contract. This can be obtained by using starknet-cli.
+?destructured?   EstimateFeeDetails                    -
+Returns
+Promise<EstimateFee>
+
+response from estimate_fee
+
+Implementation of
+AccountInterface.estimateDeclareFee
+
+estimateAccountDeployFee
+estimateAccountDeployFee(?destructured?, ?destructured??): Promise<EstimateFee>
+
+Estimate Fee for executing a DEPLOY_ACCOUNT transaction on starknet
+
+Parameters
+Name                  Type                             Description
+?destructured? DeployAccountContractPayload        contract - the compiled contract to be deployed - classHash - the class hash of the compiled contract. This can be obtained by using starknet-cli.
+?destructured?    EstimateFeeDetails               optional blockIdentifier - constant nonce = 0
+Returns
+Promise<EstimateFee>
+
+response from estimate_fee
+
+Implementation of
+AccountInterface.estimateAccountDeployFee
+
+estimateDeployFee
+estimateDeployFee(payload, transactionsDetail?): Promise<EstimateFee>
+
+Estimate Fee for executing a UDC DEPLOY transaction on starknet This is different from the normal DEPLOY transaction as it goes through the Universal Deployer Contract (UDC)
+
+Parameters
+Name                       Type                                                       Description
+payload     UniversalDeployerContractPayload | UniversalDeployerContractPayload[]     containing - classHash: computed class hash of compiled contract - salt: address salt - unique: bool if true ensure unique salt - calldata: constructor calldata
+transactionsDetail?     InvocationsDetails                                            Invocation Details containing: - optional nonce - optional version - optional maxFee
+Returns
+Promise<EstimateFee>
+
+Implementation of
+AccountInterface.estimateDeployFee
+
+estimateFeeBulk
+estimateFeeBulk(invocations, ?destructured??): Promise<EstimateFeeBulk>
+
+Estimate Fee for executing a list of transactions on starknet Contract must be deployed for fee estimation to be possible
+
+Parameters
+Name Type
+invocations Invocations
+?destructured? EstimateFeeDetails
+Returns
+Promise<EstimateFeeBulk>
+
+response from estimate_fee
+
+Implementation of
+AccountInterface.estimateFeeBulk
+
+buildInvocation
+buildInvocation(call, signerDetails): Promise<Invocation>
+
+Parameters
+Name Type
+call Call[]
+signerDetails InvocationsSignerDetails
+Returns
+Promise<Invocation>
+
+execute
+execute(calls, abis?, transactionsDetail?): Promise<InvokeFunctionResponse>
+
+Invoke execute function in account contract
+
+Parameters
+Name                          Type          Default value                 Description
+calls                       AllowArray<Call>   undefined                  the invocation object or an array of them, containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+abis                        undefined | Abi[]   undefined                  -
+transactionsDetail           InvocationsDetails   {}                       -
+Returns
+Promise<InvokeFunctionResponse>
+
+response from addTransaction
+
+Implementation of
+AccountInterface.execute
+
+declareIfNot
+declareIfNot(payload, transactionsDetail?): Promise<DeclareContractResponse>
+
+First check if contract is already declared, if not declare it If contract already declared returned transaction_hash is ''. Method will pass even if contract is already declared
+
+Parameters
+Name Type Description
+payload DeclareContractPayload -
+transactionsDetail InvocationsDetails (optional)
+Returns
+Promise<DeclareContractResponse>
+
+declare
+declare(payload, transactionsDetail?): Promise<DeclareContractResponse>
+
+Declares a given compiled contract (json) to starknet
+
+Parameters
+Name               Type                    Description
+payload            DeclareContractPayload  transaction payload to be deployed containing: - contract: compiled contract code - (optional) classHash: computed class hash of compiled contract.Pre-compute it for faster execution. - (required for Cairo1 without compiledClassHash) casm: CompiledContract | string; - (optional for Cairo1 with casm) compiledClassHash: compiled class hash from casm. Pre-compute it for faster execution.
+transactionsDetail InvocationsDetails I      nvocation Details containing: - optional nonce - optional version - optional maxFee
+Returns
+Promise<DeclareContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+Implementation of
+AccountInterface.declare
+
+deploy
+deploy(payload, details?): Promise<MultiDeployContractResponse>
+
+Deploys a declared contract to starknet - using Universal Deployer Contract (UDC) support multicall
+
+Parameters
+Name     Type                                                                       Description
+payload  UniversalDeployerContractPayload | UniversalDeployerContractPayload[]      classHash: computed class hash of compiled contract - [constructorCalldata] contract constructor calldata -[salt=pseudorandom] deploy address salt - [unique=true] ensure unique salt
+details? InvocationsDetails                                                         [nonce=getNonce] - [version=transactionVersion] - [maxFee=getSuggestedMaxFee]
+Returns
+Promise<MultiDeployContractResponse>
+
+contract_address[]
+transaction_hash
+Implementation of
+AccountInterface.deploy
+
+deployContract
+deployContract(payload, details?): Promise<DeployContractUDCResponse>
+
+Simplify deploy simulating old DeployContract with same response + UDC specific response Internal wait for L2 transaction, support multicall
+
+Parameters
+Name        Type                                                                      Description
+payload     UniversalDeployerContractPayload | UniversalDeployerContractPayload[]     classHash: computed class hash of compiled contract - [constructorCalldata] contract constructor calldata - [salt=pseudorandom] deploy address salt - [unique=true] ensure unique salt
+details?   InvocationsDetails                                                         [nonce=getNonce] - [version=transactionVersion] - [maxFee=getSuggestedMaxFee]
+Returns
+Promise<DeployContractUDCResponse>
+
+contract_address
+transaction_hash
+address
+deployer
+unique
+classHash
+calldata_len
+calldata
+salt
+Implementation of
+AccountInterface.deployContract
+
+declareAndDeploy
+declareAndDeploy(payload, details?): Promise<DeclareDeployUDCResponse>
+
+Declares and Deploy a given compiled contract (json) to starknet using UDC Internal wait for L2 transaction, do not support multicall Method will pass even if contract is already declared (internal using DeclareIfNot)
+
+Parameters
+Name       Type                       Description
+payload    DeclareAndDeploy           ContractPayload contract: compiled contract code - [casm=cairo1]: CairoAssembly | undefined; - [compiledClassHash]: string | undefined; - [classHash]: computed class hash of compiled contract - [constructorCalldata] contract constructor calldata - [salt=pseudorandom] deploy address salt - [unique=true] ensure unique salt
+details?   InvocationsDetails         [nonce=getNonce] - [version=transactionVersion] - [maxFee=getSuggestedMaxFee]
+Returns
+Promise<DeclareDeployUDCResponse>
+
+declare
+transaction_hash
+deploy
+contract_address
+transaction_hash
+address
+deployer
+unique
+classHash
+calldata_len
+calldata
+salt
+Implementation of
+AccountInterface.declareAndDeploy
+
+deployAccount
+deployAccount(?destructured?, transactionsDetail?): Promise<DeployContractResponse>
+
+Deploy the account on Starknet
+
+Parameters
+Name               Type                                 Description
+?destructured?     DeployAccountContractPayload         transaction payload to be deployed containing: - classHash: computed class hash of compiled contract - optional constructor calldata -optional address salt - optional contractAddress
+transactionsDetail InvocationsDetails                   Invocation Details containing: - constant nonce = 0 - optional version - optional maxFee
+Returns
+Promise<DeployContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+Implementation of
+AccountInterface.deployAccount
+
+signMessage
+signMessage(typedData): Promise<Signature>
+
+Sign an JSON object for off-chain usage with the starknet private key and return the signature This adds a message prefix so it can't be interchanged with transactions
+
+Throws
+
+if the JSON object is not a valid JSON
+
+Parameters
+Name Type
+typedData TypedData
+Returns
+Promise<Signature>
+
+the signature of the JSON object
+
+Implementation of
+AccountInterface.signMessage
+
+hashMessage
+hashMessage(typedData): Promise<string>
+
+Hash a JSON object with Pedersen hash and return the hash This adds a message prefix so it can't be interchanged with transactions
+
+Throws
+
+if the JSON object is not a valid JSON
+
+Parameters
+Name Type
+typedData TypedData
+Returns
+Promise<string>
+
+the hash of the JSON object
+
+Implementation of
+AccountInterface.hashMessage
+
+verifyMessageHash
+verifyMessageHash(hash, signature): Promise<boolean>
+
+Verify a signature of a given hash
+
+Warning
+
+This method is not recommended, use verifyMessage instead
+
+Throws
+
+if the signature is not a valid signature
+
+Parameters
+Name Type Description
+hash BigNumberish hash to be verified
+signature Signature signature of the hash
+Returns
+Promise<boolean>
+
+true if the signature is valid, false otherwise
+
+Implementation of
+AccountInterface.verifyMessageHash
+
+verifyMessage
+verifyMessage(typedData, signature): Promise<boolean>
+
+Verify a signature of a JSON object
+
+Throws
+
+if the JSON object is not a valid JSON or the signature is not a valid signature
+
+Parameters
+Name Type Description
+typedData TypedData JSON object to be verified
+signature Signature signature of the JSON object
+Returns
+Promise<boolean>
+
+true if the signature is valid, false otherwise
+
+Implementation of
+AccountInterface.verifyMessage
+
+getSuggestedMaxFee
+getSuggestedMaxFee(?destructured?, details): Promise<bigint>
+
+Gets Suggested Max Fee based on the transaction type
+
+Parameters
+Name Type
+?destructured? EstimateFeeAction
+details EstimateFeeDetails
+Returns
+Promise<bigint>
+
+suggestedMaxFee
+
+Implementation of
+AccountInterface.getSuggestedMaxFee
+
+buildDeclarePayload
+buildDeclarePayload(payload, ?destructured?): Promise<DeclareContractTransaction>
+
+will be renamed to buildDeclareContractTransaction
+
+Parameters
+Name Type
+payload DeclareContractPayload
+?destructured? InvocationsSignerDetails
+Returns
+Promise<DeclareContractTransaction>
+
+buildAccountDeployPayload
+buildAccountDeployPayload(?destructured?, ?destructured?): Promise<DeployAccountContractTransaction>
+
+Parameters
+Name Type
+?destructured? DeployAccountContractPayload
+?destructured? InvocationsSignerDetails
+Returns
+Promise<DeployAccountContractTransaction>
+
+buildUDCContractPayload
+buildUDCContractPayload(payload): Call[]
+
+Parameters
+Name Type
+payload UniversalDeployerContractPayload | UniversalDeployerContractPayload[]
+Returns
+Call[]
+
+simulateTransaction
+simulateTransaction(invocations, ?destructured??): Promise<SimulateTransactionResponse>
+
+Simulates an array of transaction and returns an array of transaction trace and estimated fee.
+
+Parameters
+Name            Type             Description
+invocations     Invocations      Invocations containing: - type - transaction type: DECLARE, (multi)DEPLOY, DEPLOY_ACCOUNT, (multi)INVOKE_FUNCTION
+?destructured?  SimulateTransactionDetails SimulateTransactionDetails
+Returns
+Promise<SimulateTransactionResponse>
+
+response from simulate_transaction
+
+Implementation of
+AccountInterface.simulateTransaction
+
+accountInvocationsFactory
+accountInvocationsFactory(invocations, ?destructured?): Promise<AccountInvocations>
+
+Parameters
+Name Type
+invocations Invocations
+?destructured? AccountInvocationsFactoryDetails
+Returns
+Promise<AccountInvocations>
+
+getStarkName
+getStarkName(address?, StarknetIdContract?): Promise<string>
+
+Parameters
+Name Type
+address BigNumberish
+StarknetIdContract? string
+Returns
+Promise<string>
+
+Overrides
+Provider.getStarkName
+
+getChainId
+getChainId(): Promise<StarknetChainId>
+
+Gets the Starknet chain Id
+
+Returns
+Promise<StarknetChainId>
+
+the chain Id
+
+Implementation of
+AccountInterface.getChainId
+
+Inherited from
+Provider.getChainId
+
+getBlock
+getBlock(blockIdentifier): Promise<GetBlockResponse>
+
+Gets the block information
+
+Parameters
+Name Type Description
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<GetBlockResponse>
+
+the block object
+
+Implementation of
+AccountInterface.getBlock
+
+Inherited from
+Provider.getBlock
+
+getClassAt
+getClassAt(contractAddress, blockIdentifier?): Promise<ContractClassResponse>
+
+Gets the contract class of the deployed contract.
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<ContractClassResponse>
+
+Contract class of compiled contract
+
+Implementation of
+AccountInterface.getClassAt
+
+Inherited from
+Provider.getClassAt
+
+getClassHashAt
+getClassHashAt(contractAddress, blockIdentifier?): Promise<string>
+
+Returns the contract class hash in the given block for the contract deployed at the given address
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<string>
+
+Class hash
+
+Implementation of
+AccountInterface.getClassHashAt
+
+Inherited from
+Provider.getClassHashAt
+
+getClassByHash
+getClassByHash(classHash): Promise<ContractClassResponse>
+
+Returns the contract class deployed under the given class hash.
+
+Parameters
+Name Type Description
+classHash string class hash
+Returns
+Promise<ContractClassResponse>
+
+Contract class of compiled contract
+
+Implementation of
+AccountInterface.getClassByHash
+
+Inherited from
+Provider.getClassByHash
+
+getEstimateFee
+getEstimateFee(invocationWithTxType, invocationDetails, blockIdentifier): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given INVOKE transaction
+
+Deprecated
+
+Please use getInvokeEstimateFee or getDeclareEstimateFee instead. Should not be used outside of Account class
+
+Parameters
+Name                   Type                            Description
+invocationWithTxType   Invocation                     the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+invocationDetails       InvocationsDetailsWithNonce   optional details containing: - nonce - optional nonce - version - optional version
+blockIdentifier         BlockIdentifier                (optional) block identifier
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+AccountInterface.getEstimateFee
+
+Inherited from
+Provider.getEstimateFee
+
+getInvokeEstimateFee
+getInvokeEstimateFee(invocationWithTxType, invocationDetails, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given INVOKE transaction
+
+Parameters
+Name                     Type                          Description
+invocationWithTxType     Invocation                    the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+invocationDetails        InvocationsDetailsWithNonce   optional details containing: - nonce - optional nonce - version - optional version
+blockIdentifier?         BlockIdentifier               (optional) block identifier
+skipValidate?            boolean                       (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+AccountInterface.getInvokeEstimateFee
+
+Inherited from
+Provider.getInvokeEstimateFee
+
+getEstimateFeeBulk
+getEstimateFeeBulk(invocations, options): Promise<EstimateFeeResponseBulk>
+
+Estimates the fee for a list of INVOKE transaction
+
+Parameters
+Name Type Description
+invocations AccountInvocations AccountInvocations - Complete invocations array with account details
+options getEstimateFeeBulkOptions getEstimateFeeBulkOptions - (optional) blockIdentifier - BlockIdentifier - (optional) skipValidate - boolean (default false)
+Returns
+Promise<EstimateFeeResponseBulk>
+
+the estimated fee
+
+Implementation of
+AccountInterface.getEstimateFeeBulk
+
+Inherited from
+Provider.getEstimateFeeBulk
+
+getNonceForAddress
+getNonceForAddress(contractAddress, blockIdentifier?): Promise<string>
+
+Returns the nonce associated with the given address in the given block
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier? BlockIdentifier -
+Returns
+Promise<string>
+
+the hex nonce
+
+Implementation of
+AccountInterface.getNonceForAddress
+
+Inherited from
+Provider.getNonceForAddress
+
+getStorageAt
+getStorageAt(contractAddress, key, blockIdentifier?): Promise<string>
+
+Get the value of the storage (contract's variable) at the given address and key
+
+Parameters
+Name Type Description
+contractAddress string 
+key BigNumberish from getStorageVarAddress('<STORAGE_VARIABLE_NAME>') (WIP)
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<string>
+
+the value of the storage variable
+
+Implementation of
+AccountInterface.getStorageAt
+
+Inherited from
+Provider.getStorageAt
+
+getTransaction
+getTransaction(txHash): Promise<GetTransactionResponse>
+
+Gets the transaction information from a tx id.
+
+Parameters
+Name Type
+txHash BigNumberish
+Returns
+Promise<GetTransactionResponse>
+
+the transaction object { transaction_id, status, transaction, block_number?, block_number?, transaction_index?, transaction_failure_reason? }
+
+Implementation of
+AccountInterface.getTransaction
+
+Inherited from
+Provider.getTransaction
+
+getTransactionReceipt
+getTransactionReceipt(txHash): Promise<GetTransactionReceiptResponse>
+
+Gets the transaction receipt from a tx hash.
+
+Parameters
+Name Type
+txHash BigNumberish
+Returns
+Promise<GetTransactionReceiptResponse>
+
+the transaction receipt object
+
+Implementation of
+AccountInterface.getTransactionReceipt
+
+Inherited from
+Provider.getTransactionReceipt
+
+callContract
+callContract(request, blockIdentifier?): Promise<CallContractResponse>
+
+Calls a function on the Starknet contract.
+
+Parameters
+Name Type Description
+request Call transaction to be called
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<CallContractResponse>
+
+the result of the function on the smart contract.
+
+Implementation of
+AccountInterface.callContract
+
+Inherited from
+Provider.callContract
+
+invokeFunction
+invokeFunction(functionInvocation, details): Promise<InvokeFunctionResponse>
+
+Invokes a function on starknet
+
+Deprecated
+
+This method won't be supported as soon as fees are mandatory. Should not be used outside of Account class
+
+Parameters
+Name Type Description
+functionInvocation Invocation the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to [])  the calldata - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - optional nonce - version - optional version - maxFee - optional maxFee
+Returns
+Promise<InvokeFunctionResponse>
+
+response from addTransaction
+
+Implementation of
+AccountInterface.invokeFunction
+
+Inherited from
+Provider.invokeFunction
+
+deployAccountContract
+deployAccountContract(payload, details): Promise<DeployContractResponse>
+
+Deploys a given compiled Account contract (json) to starknet
+
+Parameters
+Name Type Description
+payload DeployAccountContractTransaction payload to be deployed containing: - compiled contract code - constructor calldata - address salt
+details InvocationsDetailsWithNonce -
+Returns
+Promise<DeployContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+Implementation of
+AccountInterface.deployAccountContract
+
+Inherited from
+Provider.deployAccountContract
+
+declareContract
+declareContract(transaction, details): Promise<DeclareContractResponse>
+
+Declares a given compiled contract (json) to starknet
+
+Parameters
+Name Type Description
+transaction DeclareContractTransaction transaction payload to be deployed containing: - compiled contract code - sender address - signature
+details InvocationsDetailsWithNonce Invocation Details containing: - nonce - optional version - optional maxFee
+Returns
+Promise<DeclareContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+Implementation of
+AccountInterface.declareContract
+
+Inherited from
+Provider.declareContract
+
+getDeclareEstimateFee
+getDeclareEstimateFee(transaction, details, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given DECLARE transaction
+
+Parameters
+Name Type Description
+transaction DeclareContractTransaction transaction payload to be declared containing: - compiled contract code - sender address - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - version - optional version - optional maxFee
+blockIdentifier? BlockIdentifier (optional) block identifier
+skipValidate? boolean (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+AccountInterface.getDeclareEstimateFee
+
+Inherited from
+Provider.getDeclareEstimateFee
+
+getDeployAccountEstimateFee
+getDeployAccountEstimateFee(transaction, details, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given DEPLOY_ACCOUNT transaction
+
+Parameters
+Name Type Description
+transaction DeployAccountContractTransaction transaction payload to be deployed containing: - classHash - constructorCalldata - addressSalt - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - version - optional version - optional maxFee
+blockIdentifier? BlockIdentifier (optional) block identifier
+skipValidate? boolean (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+AccountInterface.getDeployAccountEstimateFee
+
+Inherited from
+Provider.getDeployAccountEstimateFee
+
+getCode
+getCode(contractAddress, blockIdentifier?): Promise<GetCodeResponse>
+
+Deprecated
+
+The method should not be used
+
+Parameters
+Name Type
+contractAddress string
+blockIdentifier? BlockIdentifier
+Returns
+Promise<GetCodeResponse>
+
+Implementation of
+AccountInterface.getCode
+
+Inherited from
+Provider.getCode
+
+waitForTransaction
+waitForTransaction(txHash, options?): Promise<GetTransactionReceiptResponse>
+
+Wait for the transaction to be accepted
+
+Parameters
+Name Type Description
+txHash BigNumberish transaction hash
+options? waitForTransactionOptions waitForTransactionOptions - (optional) retryInterval: number | undefined; - (optional) successStates: TransactionStatus[] | undefined;
+Returns
+Promise<GetTransactionReceiptResponse>
+
+GetTransactionReceiptResponse
+
+Implementation of
+AccountInterface.waitForTransaction
+
+Inherited from
+Provider.waitForTransaction
+
+getSimulateTransaction
+getSimulateTransaction(invocations, options?): Promise<SimulateTransactionResponse>
+
+Simulates the transaction and returns the transaction trace and estimated fee.
+
+Parameters
+Name Type Description
+invocations AccountInvocations AccountInvocations - Complete invocations array with account details
+options? getSimulateTransactionOptions getSimulateTransactionOptions - (optional) blockIdentifier - block identifier - (optional) skipValidate - skip cairo validate method - (optional) skipExecute - skip cairo execute method
+Returns
+Promise<SimulateTransactionResponse>
+
+an array of transaction trace and estimated fee
+
+Implementation of
+AccountInterface.getSimulateTransaction
+
+Inherited from
+Provider.getSimulateTransaction
+
+getStateUpdate
+getStateUpdate(blockIdentifier?): Promise<StateUpdateResponse>
+
+Gets the state changes in a specific block (result of executing the requested block)
+
+Parameters
+Name Type Description
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<StateUpdateResponse>
+
+StateUpdateResponse
+
+Implementation of
+AccountInterface.getStateUpdate
+
+Inherited from
+Provider.getStateUpdate
+
+getAddressFromStarkName
+getAddressFromStarkName(name, StarknetIdContract?): Promise<string>
+
+Parameters
+Name Type
+name string
+StarknetIdContract? string
+Returns
+Promise<string>
+
+Inherited from
+Provider.getAddressFromStarkName
+
+getContractVersion
+getContractVersion(contractAddress, classHash?, options?): Promise<ContractVersion>
+
+Gets the contract version from the provided address
+
+Parameters
+Name Type Description
+contractAddress string string
+classHash? undefined undefined
+options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
+Returns
+Promise<ContractVersion>
+
+Implementation of
+AccountInterface.getContractVersion
+
+Inherited from
+Provider.getContractVersion
+
+getContractVersion(contractAddress, classHash, options?): Promise<ContractVersion>
+
+Gets the contract version from the provided address
+
+Parameters
+Name Type Description
+contractAddress undefined undefined
+classHash string 
+options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
+Returns
+Promise<ContractVersion>
+
+Implementation of
+AccountInterface.getContractVersion
+
+Inherited from
+Provider.getContractVersion"
+What is included in AccountInterface of Class?,"The AccountInterface of Class includes the following content.
+1.Hierarchy
+ProviderInterface
+
+AccountInterface
+
+2.Implemented by
+Account
+
+3.Constructors
+constructor
+new AccountInterface()
+
+Inherited from
+ProviderInterface.constructor
+
+4.Properties
+address
+Abstract address: string
+
+signer
+Abstract signer: SignerInterface
+
+cairoVersion
+Abstract cairoVersion: CairoVersion
+
+5.Methods
+estimateInvokeFee
+Abstract estimateInvokeFee(calls, estimateFeeDetails?): Promise<EstimateFeeResponse>
+
+Estimate Fee for executing an INVOKE transaction on starknet
+
+Parameters
+Name                    Type                     Description
+calls                   AllowArray<Call>         the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata
+estimateFeeDetails?      EstimateFeeDetails      -
+Returns
+Promise<EstimateFeeResponse>
+
+response from estimate_fee
+
+estimateDeclareFee
+Abstract estimateDeclareFee(contractPayload, estimateFeeDetails?): Promise<EstimateFeeResponse>
+
+Estimate Fee for executing a DECLARE transaction on starknet
+
+Parameters
+Name                                          Type                      Description
+contractPayload DeclareContractPayload        the payload object containing: - contract - the compiled contract to be declared - classHash - the class hash of the compiled contract. This can be obtained by using starknet-cli.
+estimateFeeDetails?                           EstimateFeeDetails        -
+Returns
+Promise<EstimateFeeResponse>
+
+response from estimate_fee
+
+estimateAccountDeployFee
+Abstract estimateAccountDeployFee(contractPayload, estimateFeeDetails?): Promise<EstimateFeeResponse>
+
+Estimate Fee for executing a DEPLOY_ACCOUNT transaction on starknet
+
+Parameters
+Name Type Description
+contractPayload DeployAccountContractPayload contract - the compiled contract to be deployed - classHash - the class hash of the compiled contract. This can be obtained by using starknet-cli.
+estimateFeeDetails? EstimateFeeDetails optional blockIdentifier - constant nonce = 0
+Returns
+Promise<EstimateFeeResponse>
+
+response from estimate_fee
+
+estimateDeployFee
+Abstract estimateDeployFee(deployContractPayload, transactionsDetail?): Promise<EstimateFeeResponse>
+
+Estimate Fee for executing a UDC DEPLOY transaction on starknet This is different from the normal DEPLOY transaction as it goes through the Universal Deployer Contract (UDC)
+
+Parameters
+Name Type Description
+deployContractPayload  UniversalDeployerContractPayload | UniversalDeployerContractPayload[] containing - classHash: computed class hash of compiled contract - salt: address salt - unique: bool if true ensure unique salt - calldata: constructor calldata
+transactionsDetail? InvocationsDetails Invocation Details containing: - optional nonce - optional version - optional maxFee
+Returns
+Promise<EstimateFeeResponse>
+
+estimateFeeBulk
+Abstract estimateFeeBulk(invocations, details?): Promise<EstimateFeeResponseBulk>
+
+Estimate Fee for executing a list of transactions on starknet Contract must be deployed for fee estimation to be possible
+
+Parameters
+Name Type
+invocations Invocations
+details? EstimateFeeDetails
+Returns
+Promise<EstimateFeeResponseBulk>
+
+response from estimate_fee
+
+execute
+Abstract execute(transactions, abis?, transactionsDetail?): Promise<InvokeFunctionResponse>
+
+Invoke execute function in account contract
+
+Parameters
+Name Type Description
+transactions AllowArray<Call> the invocation object or an array of them, containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+abis? Abi[] -
+transactionsDetail? InvocationsDetails -
+Returns
+Promise<InvokeFunctionResponse>
+
+response from addTransaction
+
+declare
+Abstract declare(contractPayload, transactionsDetail?): Promise<DeclareContractResponse>
+
+Declares a given compiled contract (json) to starknet
+
+Parameters
+Name Type Description
+contractPayload DeclareContractPayload transaction payload to be deployed containing: - contract: compiled contract code - (optional) classHash: computed class hash of compiled contract. Pre-compute it for faster execution. - (required for Cairo1 without compiledClassHash) casm: CompiledContract | string; - (optional for Cairo1 with casm) compiledClassHash: compiled class hash from casm. Pre-compute it for faster execution.
+transactionsDetail? InvocationsDetails Invocation Details containing: - optional nonce - optional version - optional maxFee
+Returns
+Promise<DeclareContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+deploy
+Abstract deploy(payload, details?): Promise<MultiDeployContractResponse>
+
+Deploys a declared contract to starknet - using Universal Deployer Contract (UDC) support multicall
+
+Parameters
+Name Type Description
+payload UniversalDeployerContractPayload | UniversalDeployerContractPayload[] classHash: computed class hash of compiled contract - [constructorCalldata] contract constructor calldata - [salt=pseudorandom] deploy address salt - [unique=true] ensure unique salt
+details? InvocationsDetails [nonce=getNonce] - [version=transactionVersion] - [maxFee=getSuggestedMaxFee]
+Returns
+Promise<MultiDeployContractResponse>
+
+contract_address[]
+transaction_hash
+
+deployContract
+Abstract deployContract(payload, details?): Promise<DeployContractUDCResponse>
+
+Simplify deploy simulating old DeployContract with same response + UDC specific response Internal wait for L2 transaction, support multicall
+
+Parameters
+Name Type Description
+payload UniversalDeployerContractPayload | UniversalDeployerContractPayload[] classHash: computed class hash of compiled contract - [constructorCalldata] contract constructor calldata - [salt=pseudorandom] deploy address salt - [unique=true] ensure unique salt
+details? InvocationsDetails [nonce=getNonce] - [version=transactionVersion] - [maxFee=getSuggestedMaxFee]
+Returns
+Promise<DeployContractUDCResponse>
+
+contract_address
+transaction_hash
+address
+deployer
+unique
+classHash
+calldata_len
+calldata
+salt
+
+declareAndDeploy
+Abstract declareAndDeploy(payload, details?): Promise<DeclareDeployUDCResponse>
+
+Declares and Deploy a given compiled contract (json) to starknet using UDC Internal wait for L2 transaction, do not support multicall Method will pass even if contract is already declared (internal using DeclareIfNot)
+
+Parameters
+Name Type Description
+payload DeclareAndDeployContractPayload contract: compiled contract code - [casm=cairo1]: CairoAssembly | undefined; - [compiledClassHash]: string | undefined; - [classHash]: computed class hash of compiled contract - [constructorCalldata] contract constructor calldata - [salt=pseudorandom] deploy address salt - [unique=true] ensure unique salt
+details? InvocationsDetails [nonce=getNonce] - [version=transactionVersion] - [maxFee=getSuggestedMaxFee]
+Returns
+Promise<DeclareDeployUDCResponse>
+
+declare
+transaction_hash
+deploy
+contract_address
+transaction_hash
+address
+deployer
+unique
+classHash
+calldata_len
+calldata
+salt
+
+deployAccount
+Abstract deployAccount(contractPayload, transactionsDetail?): Promise<DeployContractResponse>
+
+Deploy the account on Starknet
+
+Parameters
+Name Type Description
+contractPayload DeployAccountContractPayload transaction payload to be deployed containing: - classHash: computed class hash of compiled contract - optional constructor calldata - optional address salt - optional contractAddress
+transactionsDetail? InvocationsDetails Invocation Details containing: - constant nonce = 0 - optional version - optional maxFee
+Returns
+Promise<DeployContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+signMessage
+Abstract signMessage(typedData): Promise<Signature>
+
+Sign an JSON object for off-chain usage with the starknet private key and return the signature This adds a message prefix so it can't be interchanged with transactions
+
+Throws
+
+if the JSON object is not a valid JSON
+
+Parameters
+Name Type
+typedData TypedData
+Returns
+Promise<Signature>
+
+the signature of the JSON object
+
+hashMessage
+Abstract hashMessage(typedData): Promise<string>
+
+Hash a JSON object with Pedersen hash and return the hash This adds a message prefix so it can't be interchanged with transactions
+
+Throws
+
+if the JSON object is not a valid JSON
+
+Parameters
+Name Type
+typedData TypedData
+Returns
+Promise<string>
+
+the hash of the JSON object
+
+verifyMessage
+Abstract verifyMessage(typedData, signature): Promise<boolean>
+
+Verify a signature of a JSON object
+
+Throws
+
+if the JSON object is not a valid JSON or the signature is not a valid signature
+
+Parameters
+Name Type Description
+typedData TypedData JSON object to be verified
+signature Signature signature of the JSON object
+Returns
+Promise<boolean>
+
+true if the signature is valid, false otherwise
+
+verifyMessageHash
+Abstract verifyMessageHash(hash, signature): Promise<boolean>
+
+Verify a signature of a given hash
+
+Warning
+
+This method is not recommended, use verifyMessage instead
+
+Throws
+
+if the signature is not a valid signature
+
+Parameters
+Name Type Description
+hash BigNumberish hash to be verified
+signature Signature signature of the hash
+Returns
+Promise<boolean>
+
+true if the signature is valid, false otherwise
+
+getNonce
+Abstract getNonce(blockIdentifier?): Promise<string>
+
+Gets the nonce of the account with respect to a specific block
+
+Parameters
+Name Type Description
+blockIdentifier? BlockIdentifier optional blockIdentifier. Defaults to 'pending'
+Returns
+Promise<string>
+
+nonce of the account
+
+getSuggestedMaxFee
+Abstract getSuggestedMaxFee(estimateFeeAction, details): Promise<bigint>
+
+Gets Suggested Max Fee based on the transaction type
+
+Parameters
+Name Type
+estimateFeeAction EstimateFeeAction
+details EstimateFeeDetails
+Returns
+Promise<bigint>
+
+suggestedMaxFee
+
+simulateTransaction
+Abstract simulateTransaction(invocations, details?): Promise<SimulateTransactionResponse>
+
+Simulates an array of transaction and returns an array of transaction trace and estimated fee.
+
+Parameters
+Name Type Description
+invocations Invocations Invocations containing: - type - transaction type: DECLARE, (multi)DEPLOY, DEPLOY_ACCOUNT, (multi)INVOKE_FUNCTION
+details? SimulateTransactionDetails SimulateTransactionDetails
+Returns
+Promise<SimulateTransactionResponse>
+
+response from simulate_transaction
+
+getChainId
+Abstract getChainId(): Promise<StarknetChainId>
+
+Gets the Starknet chain Id
+
+Returns
+Promise<StarknetChainId>
+
+the chain Id
+
+Inherited from
+ProviderInterface.getChainId
+
+callContract
+Abstract callContract(call, blockIdentifier?): Promise<CallContractResponse>
+
+Calls a function on the Starknet contract.
+
+Parameters
+Name Type Description
+call Call transaction to be called
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<CallContractResponse>
+
+the result of the function on the smart contract.
+
+Inherited from
+ProviderInterface.callContract
+
+getBlock
+Abstract getBlock(blockIdentifier): Promise<GetBlockResponse>
+
+Gets the block information
+
+Parameters
+Name Type Description
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<GetBlockResponse>
+
+the block object
+
+Inherited from
+ProviderInterface.getBlock
+
+getCode
+Abstract getCode(contractAddress, blockIdentifier?): Promise<GetCodeResponse>
+
+Deprecated
+
+The method should not be used
+
+Parameters
+Name Type
+contractAddress string
+blockIdentifier? BlockIdentifier
+Returns
+Promise<GetCodeResponse>
+
+Inherited from
+ProviderInterface.getCode
+
+getClassAt
+Abstract getClassAt(contractAddress, blockIdentifier?): Promise<ContractClassResponse>
+
+Gets the contract class of the deployed contract.
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<ContractClassResponse>
+
+Contract class of compiled contract
+
+Inherited from
+ProviderInterface.getClassAt
+
+getClassHashAt
+Abstract getClassHashAt(contractAddress, blockIdentifier?): Promise<string>
+
+Returns the contract class hash in the given block for the contract deployed at the given address
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<string>
+
+Class hash
+
+Inherited from
+ProviderInterface.getClassHashAt
+
+getClassByHash
+Abstract getClassByHash(classHash): Promise<ContractClassResponse>
+
+Returns the contract class deployed under the given class hash.
+
+Parameters
+Name Type Description
+classHash string class hash
+Returns
+Promise<ContractClassResponse>
+
+Contract class of compiled contract
+
+Inherited from
+ProviderInterface.getClassByHash
+
+getNonceForAddress
+Abstract getNonceForAddress(contractAddress, blockIdentifier?): Promise<string>
+
+Returns the nonce associated with the given address in the given block
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier? BlockIdentifier -
+Returns
+Promise<string>
+
+the hex nonce
+
+Inherited from
+ProviderInterface.getNonceForAddress
+
+getStorageAt
+Abstract getStorageAt(contractAddress, key, blockIdentifier?): Promise<string>
+
+Get the value of the storage (contract's variable) at the given address and key
+
+Parameters
+Name Type Description
+contractAddress string 
+key BigNumberish from getStorageVarAddress('<STORAGE_VARIABLE_NAME>') (WIP)
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<string>
+
+the value of the storage variable
+
+Inherited from
+ProviderInterface.getStorageAt
+
+getTransaction
+Abstract getTransaction(transactionHash): Promise<GetTransactionResponse>
+
+Gets the transaction information from a tx id.
+
+Parameters
+Name Type
+transactionHash BigNumberish
+Returns
+Promise<GetTransactionResponse>
+
+the transaction object { transaction_id, status, transaction, block_number?, block_number?, transaction_index?, transaction_failure_reason? }
+
+Inherited from
+ProviderInterface.getTransaction
+
+getTransactionReceipt
+Abstract getTransactionReceipt(transactionHash): Promise<GetTransactionReceiptResponse>
+
+Gets the transaction receipt from a tx hash.
+
+Parameters
+Name Type
+transactionHash BigNumberish
+Returns
+Promise<GetTransactionReceiptResponse>
+
+the transaction receipt object
+
+Inherited from
+ProviderInterface.getTransactionReceipt
+
+deployAccountContract
+Abstract deployAccountContract(payload, details): Promise<DeployContractResponse>
+
+Deploys a given compiled Account contract (json) to starknet
+
+Parameters
+Name Type Description
+payload DeployAccountContractPayload payload to be deployed containing: - compiled contract code - constructor calldata - address salt
+details InvocationsDetailsWithNonce -
+Returns
+Promise<DeployContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+Inherited from
+ProviderInterface.deployAccountContract
+
+invokeFunction
+Abstract invokeFunction(invocation, details): Promise<InvokeFunctionResponse>
+
+Invokes a function on starknet
+
+Deprecated
+
+This method won't be supported as soon as fees are mandatory. Should not be used outside of Account class
+
+Parameters
+Name Type Description
+invocation Invocation the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - optional nonce - version - optional version - maxFee - optional maxFee
+Returns
+Promise<InvokeFunctionResponse>
+
+response from addTransaction
+
+Inherited from
+ProviderInterface.invokeFunction
+
+declareContract
+Abstract declareContract(transaction, details): Promise<DeclareContractResponse>
+
+Declares a given compiled contract (json) to starknet
+
+Parameters
+Name Type Description
+transaction DeclareContractTransaction transaction payload to be deployed containing: - compiled contract code - sender address - signature
+details InvocationsDetailsWithNonce Invocation Details containing: - nonce - optional version - optional maxFee
+Returns
+Promise<DeclareContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+Inherited from
+ProviderInterface.declareContract
+
+getEstimateFee
+Abstract getEstimateFee(invocation, details, blockIdentifier, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given INVOKE transaction
+
+Deprecated
+
+Please use getInvokeEstimateFee or getDeclareEstimateFee instead. Should not be used outside of Account class
+
+Parameters
+Name Type Description
+invocation Invocation the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - optional nonce - version - optional version
+blockIdentifier BlockIdentifier (optional) block identifier
+skipValidate? boolean (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Inherited from
+ProviderInterface.getEstimateFee
+
+getInvokeEstimateFee
+Abstract getInvokeEstimateFee(invocation, details, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given INVOKE transaction
+
+Parameters
+Name Type Description
+invocation Invocation the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - optional nonce - version - optional version
+blockIdentifier? BlockIdentifier (optional) block identifier
+skipValidate? boolean (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Inherited from
+ProviderInterface.getInvokeEstimateFee
+
+getDeclareEstimateFee
+Abstract getDeclareEstimateFee(transaction, details, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given DECLARE transaction
+
+Parameters
+Name Type Description
+transaction DeclareContractTransaction transaction payload to be declared containing: - compiled contract code - sender address - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - version - optional version - optional maxFee
+blockIdentifier? BlockIdentifier (optional) block identifier
+skipValidate? boolean (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Inherited from
+ProviderInterface.getDeclareEstimateFee
+
+getDeployAccountEstimateFee
+Abstract getDeployAccountEstimateFee(transaction, details, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given DEPLOY_ACCOUNT transaction
+
+Parameters
+Name Type Description
+transaction DeployAccountContractTransaction transaction payload to be deployed containing: - classHash - constructorCalldata - addressSalt - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - version - optional version - optional maxFee
+blockIdentifier? BlockIdentifier (optional) block identifier
+skipValidate? boolean (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Inherited from
+ProviderInterface.getDeployAccountEstimateFee
+
+getEstimateFeeBulk
+Abstract getEstimateFeeBulk(invocations, options?): Promise<EstimateFeeResponseBulk>
+
+Estimates the fee for a list of INVOKE transaction
+
+Parameters
+Name Type Description
+invocations AccountInvocations AccountInvocations - Complete invocations array with account details
+options? getEstimateFeeBulkOptions getEstimateFeeBulkOptions - (optional) blockIdentifier - BlockIdentifier - (optional) skipValidate - boolean (default false)
+Returns
+Promise<EstimateFeeResponseBulk>
+
+the estimated fee
+
+Inherited from
+ProviderInterface.getEstimateFeeBulk
+
+waitForTransaction
+Abstract waitForTransaction(txHash, options?): Promise<GetTransactionReceiptResponse>
+
+Wait for the transaction to be accepted
+
+Parameters
+Name Type Description
+txHash BigNumberish transaction hash
+options? waitForTransactionOptions waitForTransactionOptions - (optional) retryInterval: number | undefined; - (optional) successStates: TransactionStatus[] | undefined;
+Returns
+Promise<GetTransactionReceiptResponse>
+
+GetTransactionReceiptResponse
+
+Inherited from
+ProviderInterface.waitForTransaction
+
+getSimulateTransaction
+Abstract getSimulateTransaction(invocations, options?): Promise<SimulateTransactionResponse>
+
+Simulates the transaction and returns the transaction trace and estimated fee.
+
+Parameters
+Name Type Description
+invocations AccountInvocations AccountInvocations - Complete invocations array with account details
+options? getSimulateTransactionOptions getSimulateTransactionOptions - (optional) blockIdentifier - block identifier - (optional) skipValidate - skip cairo validate method - (optional) skipExecute - skip cairo execute method
+Returns
+Promise<SimulateTransactionResponse>
+
+an array of transaction trace and estimated fee
+
+Inherited from
+ProviderInterface.getSimulateTransaction
+
+getStateUpdate
+Abstract getStateUpdate(blockIdentifier?): Promise<StateUpdateResponse>
+
+Gets the state changes in a specific block (result of executing the requested block)
+
+Parameters
+Name Type Description
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<StateUpdateResponse>
+
+StateUpdateResponse
+
+Inherited from
+ProviderInterface.getStateUpdate
+
+getContractVersion
+Abstract getContractVersion(contractAddress, classHash?, options?): Promise<ContractVersion>
+
+Gets the contract version from the provided address
+
+Parameters
+Name Type Description
+contractAddress string string
+classHash? undefined undefined
+options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
+Returns
+Promise<ContractVersion>
+
+Inherited from
+ProviderInterface.getContractVersion
+
+Abstract getContractVersion(contractAddress, classHash, options?): Promise<ContractVersion>
+
+Gets the contract version from the provided address
+
+Parameters
+Name Type Description
+contractAddress undefined undefined
+classHash string 
+options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
+Returns
+Promise<ContractVersion>
+
+Inherited from
+ProviderInterface.getContractVersion"
+What is included in CairoCustomEnum of Class?,"The CairoCustomEnum of Class includes the following content.
+Param
+
+object containing the variants and its content. Example : {Success: 234, Warning: undefined, Error: undefined}. Only one variant with a value, object, array.
+
+Example
+###
+
+const myCairoEnum = new CairoCustomEnum({
+  Success: undefined,
+  Warning: '0x7f32ea',
+  Error: undefined,
+});
+
+###
+1.Constructors
+constructor
+new CairoCustomEnum(enumContent)
+
+Parameters
+Name Type Description
+enumContent CairoEnumRaw an object with the variants as keys and the content as value. Only one content shall be defined.
+
+2.Properties
+variant
+Readonly variant: CairoEnumRaw
+
+direct readonly access to variants of the Cairo Custom Enum.
+
+Example
+###
+
+const successValue = myCairoEnum.variant.Success;
+
+#### Defined in
+
+[src/utils/calldata/enum/CairoCustomEnum.ts:22](https://github.com/starknet-io/starknet.js/blob/v5.24.3/src/utils/calldata/enum/CairoCustomEnum.ts#L22)
+
+## Methods
+
+### unwrap
+
+**unwrap**(): `any`
+
+#### Returns
+
+`any`
+
+the content of the valid variant of a Cairo custom Enum.
+
+#### Defined in
+
+[src/utils/calldata/enum/CairoCustomEnum.ts:45](https://github.com/starknet-io/starknet.js/blob/v5.24.3/src/utils/calldata/enum/CairoCustomEnum.ts#L45)
+
+___
+
+### activeVariant
+
+**activeVariant**(): `string`
+
+#### Returns
+
+`string`
+
+the name of the valid variant of a Cairo custom Enum.
+
+#### Defined in
+
+[src/utils/calldata/enum/CairoCustomEnum.ts:58](https://github.com/starknet-io/starknet.js/blob/v5.24.3/src/utils/calldata/enum/CairoCustomEnum.ts#L58)
+
+###"
+What is included in CairoOption of Class?,"The CairoOption of Class includes the following content.
+Param
+
+CairoOptionVariant.Some or CairoOptionVariant.None
+
+Param
+
+value of type T.
+
+Example
+###
+
+const myOption = new CairoOption<BigNumberish>(CairoOptionVariant.Some, '0x54dda8');
+
+###
+1.Type parameters
+Name
+T
+2.Constructors
+constructor
+new CairoOption<T>(variant, someContent?)
+
+Type parameters
+Name
+T
+Parameters
+Name Type
+variant CairoOptionVariant
+someContent? T
+
+3.Properties
+Some
+Optional Readonly Some: T
+
+None
+Optional Readonly None: boolean
+
+4.Methods
+unwrap
+unwrap(): undefined | T
+
+Returns
+undefined | T
+
+the content of the valid variant of a Cairo custom Enum. If None, returns 'undefined'.
+
+isSome
+isSome(): boolean
+
+Returns
+boolean
+
+true if the valid variant is 'isSome'.
+
+isNone
+isNone(): boolean
+
+Returns
+boolean
+
+true if the valid variant is 'isNone'."
+What is included in CairoResult of Class?,"The CairoResult of Class includes the following content.
+Param
+
+CairoResultVariant.Ok or CairoResultVariant.Err
+
+Param
+
+value of type T or U.
+
+Example
+###
+
+const myOption = new CairoResult<BigNumberish, CustomError>(CairoResultVariant.Ok, '0x54dda8');
+
+###
+Type parameters
+Name
+T
+U
+Constructors
+constructor
+new CairoResult<T, U>(variant, resultContent)
+
+Type parameters
+Name
+T
+U
+Parameters
+Name Type
+variant CairoResultVariant
+resultContent T | U
+
+Properties
+Ok
+Optional Readonly Ok: T
+
+Err
+Optional Readonly Err: U
+
+Methods
+unwrap
+unwrap(): T | U
+
+Returns
+T | U
+
+the content of the valid variant of a Cairo Result.
+
+isOk
+isOk(): boolean
+
+Returns
+boolean
+
+true if the valid variant is 'Ok'.
+
+isErr
+isErr(): boolean
+
+Returns
+boolean
+
+true if the valid variant is 'isErr'."
+What is included in CallData of Class?,"The CallData of Class includes the following content.
+1.Constructors
+constructor
+new CallData(abi)
+
+Parameters
+Name Type
+abi Abi
+
+2.Properties
+abi
+abi: Abi
+
+parser
+parser: AbiParserInterface
+
+structs
+Protected Readonly structs: AbiStructs
+
+enums
+Protected Readonly enums: AbiEnums
+
+3.Methods
+compile
+Static compile(rawArgs): Calldata
+
+Compile contract callData without abi
+
+Parameters
+Name Type Description
+rawArgs RawArgs RawArgs representing cairo method arguments or string array of compiled data
+Returns
+Calldata
+
+Calldata
+
+getAbiStruct
+Static getAbiStruct(abi): AbiStructs
+
+Helper to extract structs from abi
+
+Parameters
+Name Type Description
+abi Abi Abi
+Returns
+AbiStructs
+
+AbiStructs - structs from abi
+
+getAbiEnum
+Static getAbiEnum(abi): AbiEnums
+
+Helper to extract enums from abi
+
+Parameters
+Name Type Description
+abi Abi Abi
+Returns
+AbiEnums
+
+AbiEnums - enums from abi
+
+toCalldata
+Static toCalldata(rawCalldata?): Calldata
+
+Helper: Compile HexCalldata | RawCalldata | RawArgs
+
+Parameters
+Name Type Default value Description
+rawCalldata RawArgs [] HexCalldata | RawCalldata | RawArgs
+Returns
+Calldata
+
+Calldata
+
+toHex
+Static toHex(raw?): HexCalldata
+
+Helper: Convert raw to HexCalldata
+
+Parameters
+Name Type Default value Description
+raw RawArgs [] HexCalldata | RawCalldata | RawArgs
+Returns
+HexCalldata
+
+HexCalldata
+
+validate
+validate(type, method, args?): void
+
+Validate arguments passed to the method as corresponding to the ones in the abi
+
+Parameters
+Name Type Default value Description
+type ValidateType undefined ValidateType - type of the method
+method string undefined string - name of the method
+args ArgsOrCalldata [] ArgsOrCalldata - arguments that are passed to the method
+Returns
+void
+
+compile
+compile(method, argsCalldata): Calldata
+
+Compile contract callData with abi Parse the calldata by using input fields from the abi for that method
+
+Example
+###
+
+const calldata = myCallData.compile('constructor', ['0x34a', [1, 3n]]);
+
+const calldata2 = myCallData.compile('constructor', { list: [1, 3n], balance: '0x34' }); // wrong order is valid
+
+###
+Parameters
+Name Type Description
+method string string - method name
+argsCalldata RawArgs -
+Returns
+Calldata
+
+Calldata - parsed arguments in format that contract is expecting
+
+parse
+parse(method, response): Result
+
+Parse elements of the response array and structuring them into response object
+
+Parameters
+Name Type Description
+method string string - method name
+response string[] string[] - response from the method
+Returns
+Result
+
+Result - parsed response corresponding to the abi
+
+format
+format(method, response, format): Result
+
+Format cairo method response data to native js values based on provided format schema
+
+Parameters
+Name Type Description
+method string string - cairo method name
+response string[] string[] - cairo method response
+format object object - formatter object schema
+Returns
+Result
+
+Result - parsed and formatted response object"
+What is included in Contract of Class?,"The Contract of Class includes the following content.
+Implements
+ContractInterface
+Indexable
+[key: string]: AsyncContractFunction | any
+
+1.Constructors
+constructor
+new Contract(abi, address, providerOrAccount?)
+
+Contract class to handle contract methods
+
+Parameters
+Name Type Default value Description
+abi Abi undefined Abi of the contract object
+address string undefined (optional) - address to connect to
+providerOrAccount ProviderInterface | AccountInterface defaultProvider (optional) - Provider or Account to attach to
+
+2.Properties
+abi
+abi: Abi
+
+Implementation of
+ContractInterface.abi
+
+address
+address: string
+
+Implementation of
+ContractInterface.address
+
+providerOrAccount
+providerOrAccount: ProviderInterface | AccountInterface
+
+Implementation of
+ContractInterface.providerOrAccount
+
+deployTransactionHash
+Optional deployTransactionHash: string
+
+Implementation of
+ContractInterface.deployTransactionHash
+
+structs
+Protected Readonly structs: Object
+
+Index signature
+[name: string]: StructAbi
+
+events
+Protected Readonly events: AbiEvents
+
+functions
+Readonly functions: Object
+
+Index signature
+[name: string]: AsyncContractFunction
+
+Implementation of
+ContractInterface.functions
+
+callStatic
+Readonly callStatic: Object
+
+Index signature
+[name: string]: AsyncContractFunction
+
+Implementation of
+ContractInterface.callStatic
+
+populateTransaction
+Readonly populateTransaction: Object
+
+Index signature
+[name: string]: ContractFunction
+
+Implementation of
+ContractInterface.populateTransaction
+
+estimateFee
+Readonly estimateFee: Object
+
+Index signature
+[name: string]: ContractFunction
+
+Implementation of
+ContractInterface.estimateFee
+
+callData
+Private callData: CallData
+
+3.Methods
+attach
+attach(address): void
+
+Saves the address of the contract deployed on network that will be used for interaction
+
+Parameters
+Name Type Description
+address string address of the contract
+Returns
+void
+
+Implementation of
+ContractInterface.attach
+
+connect
+connect(providerOrAccount): void
+
+Attaches to new Provider or Account
+
+Parameters
+Name Type Description
+providerOrAccount ProviderInterface | AccountInterface new Provider or Account to attach to
+Returns
+void
+
+Implementation of
+ContractInterface.connect
+
+deployed
+deployed(): Promise<Contract>
+
+Resolves when contract is deployed on the network or when no deployment transaction is found
+
+Throws
+
+When deployment fails
+
+Returns
+Promise<Contract>
+
+Promise that resolves when contract is deployed on the network or when no deployment transaction is found
+
+Implementation of
+ContractInterface.deployed
+
+call
+call(method, args?, ?destructured??): Promise<Result>
+
+Calls a method on a contract
+
+Parameters
+Name Type Default value Description
+method string undefined name of the method
+args ArgsOrCalldata [] Array of the arguments for the call
+?destructured? CallOptions {} optional blockIdentifier
+Returns
+Promise<Result>
+
+Result of the call as an array with key value pars
+
+Implementation of
+ContractInterface.call
+
+invoke
+invoke(method, args?, ?destructured??): Promise<InvokeFunctionResponse>
+
+Invokes a method on a contract
+
+Parameters
+Name Type Default value Description
+method string undefined name of the method
+args ArgsOrCalldata [] Array of the arguments for the invoke or Calldata
+?destructured? InvokeOptions {} 
+Returns
+Promise<InvokeFunctionResponse>
+
+Add Transaction Response
+
+Implementation of
+ContractInterface.invoke
+
+estimate
+estimate(method, args?): Promise<EstimateFeeResponse>
+
+Estimates a method on a contract
+
+Parameters
+Name Type Default value Description
+method string undefined name of the method
+args ArgsOrCalldata [] Array of the arguments for the call or Calldata
+Returns
+Promise<EstimateFeeResponse>
+
+Implementation of
+ContractInterface.estimate
+
+populate
+populate(method, args?): Call
+
+Calls a method on a contract
+
+Parameters
+Name Type Default value Description
+method string undefined name of the method
+args RawArgs [] Array of the arguments for the call or Calldata
+Returns
+Call
+
+Invocation object
+
+Implementation of
+ContractInterface.populate
+
+parseEvents
+parseEvents(receipt): ParsedEvents
+
+Parse contract events of a GetTransactionReceiptResponse received from waitForTransaction. Based on contract's abi
+
+Parameters
+Name Type Description
+receipt GetTransactionReceiptResponse transaction receipt
+Returns
+ParsedEvents
+
+Events parsed
+
+Implementation of
+ContractInterface.parseEvents
+
+isCairo1
+isCairo1(): boolean
+
+tells if the contract comes from a Cairo 1 contract
+
+Example
+
+const isCairo1: boolean = myContract.isCairo1();
+
+Returns
+boolean
+
+TRUE if the contract comes from a Cairo1 contract
+
+Implementation of
+ContractInterface.isCairo1
+
+getVersion
+getVersion(): Promise<ContractVersion>
+
+Retrieves the version of the contract (cairo version & compiler version)
+
+Returns
+Promise<ContractVersion>
+
+Implementation of
+ContractInterface.getVersion
+
+typed
+typed<TAbi>(tAbi): TypedContract<TAbi>
+
+Type parameters
+Name Type
+TAbi extends readonly (AbiFunction | AbiEvent | AbiStruct | AbiEnum)[]
+Parameters
+Name Type
+tAbi TAbi
+Returns
+TypedContract<TAbi>
+
+Implementation of
+ContractInterface.typed"
+What is included in ContractFactory of Class?,"The ContractFactory of Class includes the following content.
+1.Constructors
+constructor
+new ContractFactory(params)
+
+Parameters
+Name Type Description
+params ContractFactoryParams CFParams - compiledContract: CompiledContract; - account: AccountInterface; - casm?: CairoAssembly; - classHash?: string; - compiledClassHash?: string; abi?:Abi;
+
+2.Properties
+compiledContract
+compiledContract: CompiledContract
+
+account
+account: AccountInterface
+
+abi
+abi: Abi
+
+classHash
+Optional classHash: string
+
+casm
+Optional casm: CairoAssembly
+
+compiledClassHash
+Optional compiledClassHash: string
+
+CallData
+Private CallData: CallData
+
+3.Methods
+deploy
+deploy(...args): Promise<Contract>
+
+Deploys contract and returns new instance of the Contract
+
+If contract is not declared it will first declare it, and then deploy
+
+Parameters
+Name Type
+...args ArgsOrCalldataWithOptions
+Returns
+Promise<Contract>
+
+connect
+connect(account): ContractFactory
+
+Attaches to new Account
+
+Parameters
+Name Type Description
+account AccountInterface new Account to attach to
+Returns
+ContractFactory
+
+attach
+attach(address): Contract
+
+Attaches current abi and account to the new address
+
+Parameters
+Name Type
+address string
+Returns
+Contract"
+What is included in ContractInterface of Class?,"The ContractInterface of Class includes the following content.
+Implemented by
+Contract
+Indexable
+[key: string]: AsyncContractFunction | any
+
+1.Constructors
+constructor
+new ContractInterface()
+
+2.Properties
+abi
+Abstract abi: Abi
+
+address
+Abstract address: string
+
+providerOrAccount
+Abstract providerOrAccount: ProviderInterface | AccountInterface
+
+deployTransactionHash
+Optional Abstract deployTransactionHash: string
+
+functions
+Readonly functions: Object
+
+Index signature
+[name: string]: AsyncContractFunction
+
+callStatic
+Readonly callStatic: Object
+
+Index signature
+[name: string]: AsyncContractFunction
+
+populateTransaction
+Readonly populateTransaction: Object
+
+Index signature
+[name: string]: ContractFunction
+
+estimateFee
+Readonly estimateFee: Object
+
+Index signature
+[name: string]: ContractFunction
+3.Methods
+attach
+Abstract attach(address): void
+
+Saves the address of the contract deployed on network that will be used for interaction
+
+Parameters
+Name Type Description
+address string address of the contract
+Returns
+void
+
+connect
+Abstract connect(providerOrAccount): void
+
+Attaches to new Provider or Account
+
+Parameters
+Name Type Description
+providerOrAccount ProviderInterface | AccountInterface new Provider or Account to attach to
+Returns
+void
+
+deployed
+Abstract deployed(): Promise<ContractInterface>
+
+Resolves when contract is deployed on the network or when no deployment transaction is found
+
+Throws
+
+When deployment fails
+
+Returns
+Promise<ContractInterface>
+
+Promise that resolves when contract is deployed on the network or when no deployment transaction is found
+
+call
+Abstract call(method, args?, options?): Promise<Result>
+
+Calls a method on a contract
+
+Parameters
+Name Type Description
+method string name of the method
+args? ArgsOrCalldata Array of the arguments for the call
+options? CallOptions optional blockIdentifier
+Returns
+Promise<Result>
+
+Result of the call as an array with key value pars
+
+invoke
+Abstract invoke(method, args?, options?): Promise<InvokeFunctionResponse>
+
+Invokes a method on a contract
+
+Parameters
+Name Type Description
+method string name of the method
+args? ArgsOrCalldata Array of the arguments for the invoke or Calldata
+options? InvokeOptions 
+Returns
+Promise<InvokeFunctionResponse>
+
+Add Transaction Response
+
+estimate
+Abstract estimate(method, args?, options?): Promise<EstimateFeeResponse>
+
+Estimates a method on a contract
+
+Parameters
+Name Type Description
+method string name of the method
+args? ArgsOrCalldata Array of the arguments for the call or Calldata
+options? Object optional blockIdentifier
+options.blockIdentifier? BlockIdentifier -
+Returns
+Promise<EstimateFeeResponse>
+
+populate
+Abstract populate(method, args?): Invocation
+
+Calls a method on a contract
+
+Parameters
+Name Type Description
+method string name of the method
+args? ArgsOrCalldata Array of the arguments for the call or Calldata
+Returns
+Invocation
+
+Invocation object
+
+parseEvents
+Abstract parseEvents(receipt): ParsedEvents
+
+Parse contract events of a GetTransactionReceiptResponse received from waitForTransaction. Based on contract's abi
+
+Parameters
+Name Type Description
+receipt GetTransactionReceiptResponse transaction receipt
+Returns
+ParsedEvents
+
+Events parsed
+
+isCairo1
+Abstract isCairo1(): boolean
+
+tells if the contract comes from a Cairo 1 contract
+
+Example
+###
+
+const isCairo1: boolean = myContract.isCairo1();
+
+###
+Returns
+boolean
+
+TRUE if the contract comes from a Cairo1 contract
+
+getVersion
+Abstract getVersion(): Promise<ContractVersion>
+
+Retrieves the version of the contract (cairo version & compiler version)
+
+Returns
+Promise<ContractVersion>
+
+typed
+Abstract typed<TAbi>(tAbi): TypedContract<TAbi>
+
+Type parameters
+Name Type
+TAbi extends readonly (AbiFunction | AbiEvent | AbiStruct | AbiEnum)[]
+Parameters
+Name Type
+tAbi TAbi
+Returns
+TypedContract<TAbi>"
+What is included in CustomError of Class?,"The CustomError of Class includes the following content.
+1.Hierarchy
+Error
+
+CustomError
+
+LibraryError
+
+2.Constructors
+constructor
+new CustomError(message?)
+
+Parameters
+Name Type
+message? string
+Overrides
+Error.constructor
+
+3.Properties
+prepareStackTrace
+Static Optional prepareStackTrace: (err: Error, stackTraces: CallSite[]) => any
+
+Type declaration
+(err, stackTraces): any
+
+Optional override for formatting stack traces
+
+Parameters
+Name Type
+err Error
+stackTraces CallSite[]
+Returns
+any
+
+Inherited from
+Error.prepareStackTrace
+
+Defined in
+node_modules/@types/node/globals.d.ts:11
+
+stackTraceLimit
+Static stackTraceLimit: number
+
+Inherited from
+Error.stackTraceLimit
+
+Defined in
+node_modules/@types/node/globals.d.ts:13
+
+name
+name: string
+
+Overrides
+Error.name
+
+message
+message: string
+
+Inherited from
+Error.message
+
+Defined in
+www/node_modules/typescript/lib/lib.es5.d.ts:1055
+
+stack
+Optional stack: string
+
+Inherited from
+Error.stack
+
+Defined in
+www/node_modules/typescript/lib/lib.es5.d.ts:1056
+
+4.Methods
+captureStackTrace
+Static captureStackTrace(targetObject, constructorOpt?): void
+
+Create .stack property on a target object
+
+Parameters
+Name Type
+targetObject object
+constructorOpt? Function
+Returns
+void
+
+Inherited from
+Error.captureStackTrace
+
+Defined in
+node_modules/@types/node/globals.d.ts:4"
+What is included in GatewayError of Class?,"The GatewayError of Class includes the following content.
+1.Hierarchy
+LibraryError
+
+GatewayError
+
+2.Constructors
+constructor
+new GatewayError(message, errorCode)
+
+Parameters
+Name Type
+message string
+errorCode string
+Overrides
+LibraryError.constructor
+
+3.Properties
+prepareStackTrace
+Static Optional prepareStackTrace: (err: Error, stackTraces: CallSite[]) => any
+
+Type declaration
+(err, stackTraces): any
+
+Optional override for formatting stack traces
+
+Parameters
+Name Type
+err Error
+stackTraces CallSite[]
+Returns
+any
+
+Inherited from
+LibraryError.prepareStackTrace
+
+Defined in
+node_modules/@types/node/globals.d.ts:11
+
+stackTraceLimit
+Static stackTraceLimit: number
+
+Inherited from
+LibraryError.stackTraceLimit
+
+Defined in
+node_modules/@types/node/globals.d.ts:13
+
+errorCode
+errorCode: string
+
+name
+name: string
+
+Inherited from
+LibraryError.name
+
+message
+message: string
+
+Inherited from
+LibraryError.message
+
+Defined in
+www/node_modules/typescript/lib/lib.es5.d.ts:1055
+
+stack
+Optional stack: string
+
+Inherited from
+LibraryError.stack
+
+Defined in
+www/node_modules/typescript/lib/lib.es5.d.ts:1056
+
+4.Methods
+captureStackTrace
+Static captureStackTrace(targetObject, constructorOpt?): void
+
+Create .stack property on a target object
+
+Parameters
+Name Type
+targetObject object
+constructorOpt? Function
+Returns
+void
+
+Inherited from
+LibraryError.captureStackTrace
+
+Defined in
+node_modules/@types/node/globals.d.ts:4"
+What is included in HttpError of Class?,"The HttpError of Class includes the following content.
+1.Hierarchy
+LibraryError
+
+HttpError
+
+2.Constructors
+constructor
+new HttpError(message, errorCode)
+
+Parameters
+Name Type
+message string
+errorCode number
+Overrides
+LibraryError.constructor
+
+3.Properties
+prepareStackTrace
+Static Optional prepareStackTrace: (err: Error, stackTraces: CallSite[]) => any
+
+Type declaration
+(err, stackTraces): any
+
+Optional override for formatting stack traces
+
+Parameters
+Name Type
+err Error
+stackTraces CallSite[]
+Returns
+any
+
+Inherited from
+LibraryError.prepareStackTrace
+
+Defined in
+node_modules/@types/node/globals.d.ts:11
+
+stackTraceLimit
+Static stackTraceLimit: number
+
+Inherited from
+LibraryError.stackTraceLimit
+
+Defined in
+node_modules/@types/node/globals.d.ts:13
+
+errorCode
+errorCode: number
+
+name
+name: string
+
+Inherited from
+LibraryError.name
+
+message
+message: string
+
+Inherited from
+LibraryError.message
+
+Defined in
+www/node_modules/typescript/lib/lib.es5.d.ts:1055
+
+stack
+Optional stack: string
+
+Inherited from
+LibraryError.stack
+
+Defined in
+www/node_modules/typescript/lib/lib.es5.d.ts:1056
+
+4.Methods
+captureStackTrace
+Static captureStackTrace(targetObject, constructorOpt?): void
+
+Create .stack property on a target object
+
+Parameters
+Name Type
+targetObject object
+constructorOpt? Function
+Returns
+void
+
+Inherited from
+LibraryError.captureStackTrace
+
+Defined in
+node_modules/@types/node/globals.d.ts:4"
+What is included in LibraryError of Class?,"The LibraryError of Class includes the following content.
+1.Hierarchy
+CustomError
+
+LibraryError
+
+GatewayError
+
+HttpError
+
+2.Constructors
+constructor
+new LibraryError(message?)
+
+Parameters
+Name Type
+message? string
+Inherited from
+CustomError.constructor
+
+3.Properties
+prepareStackTrace
+Static Optional prepareStackTrace: (err: Error, stackTraces: CallSite[]) => any
+
+Type declaration
+(err, stackTraces): any
+
+Optional override for formatting stack traces
+
+Parameters
+Name Type
+err Error
+stackTraces CallSite[]
+Returns
+any
+
+Inherited from
+CustomError.prepareStackTrace
+
+Defined in
+node_modules/@types/node/globals.d.ts:11
+
+stackTraceLimit
+Static stackTraceLimit: number
+
+Inherited from
+CustomError.stackTraceLimit
+
+Defined in
+node_modules/@types/node/globals.d.ts:13
+
+name
+name: string
+
+Inherited from
+CustomError.name
+
+message
+message: string
+
+Inherited from
+CustomError.message
+
+Defined in
+www/node_modules/typescript/lib/lib.es5.d.ts:1055
+
+stack
+Optional stack: string
+
+Inherited from
+CustomError.stack
+
+Defined in
+www/node_modules/typescript/lib/lib.es5.d.ts:1056
+
+4.Methods
+captureStackTrace
+Static captureStackTrace(targetObject, constructorOpt?): void
+
+Create .stack property on a target object
+
+Parameters
+Name Type
+targetObject object
+constructorOpt? Function
+Returns
+void
+
+Inherited from
+CustomError.captureStackTrace
+
+Defined in
+node_modules/@types/node/globals.d.ts:4"
+What is included in Provider of Class?,"The Provider of Class includes the following content.
+1.Hierarchy
+Provider
+
+Account
+
+2.Implements
+ProviderInterface
+3.Constructors
+constructor
+new Provider(providerOrOptions?)
+
+Parameters
+Name Type
+providerOrOptions? ProviderOptions | ProviderInterface
+
+4.Properties
+provider
+Private provider: ProviderInterface
+
+5.Methods
+getChainId
+getChainId(): Promise<StarknetChainId>
+
+Gets the Starknet chain Id
+
+Returns
+Promise<StarknetChainId>
+
+the chain Id
+
+Implementation of
+ProviderInterface.getChainId
+
+getBlock
+getBlock(blockIdentifier): Promise<GetBlockResponse>
+
+Gets the block information
+
+Parameters
+Name Type Description
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<GetBlockResponse>
+
+the block object
+
+Implementation of
+ProviderInterface.getBlock
+
+getClassAt
+getClassAt(contractAddress, blockIdentifier?): Promise<ContractClassResponse>
+
+Gets the contract class of the deployed contract.
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<ContractClassResponse>
+
+Contract class of compiled contract
+
+Implementation of
+ProviderInterface.getClassAt
+
+getClassHashAt
+getClassHashAt(contractAddress, blockIdentifier?): Promise<string>
+
+Returns the contract class hash in the given block for the contract deployed at the given address
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<string>
+
+Class hash
+
+Implementation of
+ProviderInterface.getClassHashAt
+
+getClassByHash
+getClassByHash(classHash): Promise<ContractClassResponse>
+
+Returns the contract class deployed under the given class hash.
+
+Parameters
+Name Type Description
+classHash string class hash
+Returns
+Promise<ContractClassResponse>
+
+Contract class of compiled contract
+
+Implementation of
+ProviderInterface.getClassByHash
+
+getEstimateFee
+getEstimateFee(invocationWithTxType, invocationDetails, blockIdentifier): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given INVOKE transaction
+
+Deprecated
+
+Please use getInvokeEstimateFee or getDeclareEstimateFee instead. Should not be used outside of Account class
+
+Parameters 
+Name                Type                           Description
+invocationWithTxType Invocation                    the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata (defaultsto[])the calldata - signature - (defaults to []) the signature
+invocationDetails InvocationsDetailsWithNonce      optional details containing: - nonce - optional nonce - version - optional version 
+blockIdentifier      BlockIdentifier               (optional) block identifier
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getEstimateFee
+
+getInvokeEstimateFee
+getInvokeEstimateFee(invocationWithTxType, invocationDetails, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given INVOKE transaction
+
+Parameters
+Name                     Type                 Description
+invocationWithTxType     Invocation           the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata (defaults to []) the calldata - signature - (defaults to []) the signature
+invocationDetails        InvocationsDetailsWithNonce   optional details containing: - nonce - optional nonce - version - optional version
+blockIdentifier?        BlockIdentifier       (optional) block identifier
+skipValidate?           boolean               (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getInvokeEstimateFee
+
+getEstimateFeeBulk
+getEstimateFeeBulk(invocations, options): Promise<EstimateFeeResponseBulk>
+
+Estimates the fee for a list of INVOKE transaction
+
+Parameters
+Name Type Description
+invocations AccountInvocations AccountInvocations - Complete invocations array with account details
+options getEstimateFeeBulkOptions getEstimateFeeBulkOptions - (optional) blockIdentifier - BlockIdentifier - (optional) skipValidate - boolean (default false)
+Returns
+Promise<EstimateFeeResponseBulk>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getEstimateFeeBulk
+
+getNonceForAddress
+getNonceForAddress(contractAddress, blockIdentifier?): Promise<string>
+
+Returns the nonce associated with the given address in the given block
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier? BlockIdentifier -
+Returns
+Promise<string>
+
+the hex nonce
+
+Implementation of
+ProviderInterface.getNonceForAddress
+
+getStorageAt
+getStorageAt(contractAddress, key, blockIdentifier?): Promise<string>
+
+Get the value of the storage (contract's variable) at the given address and key
+
+Parameters
+Name Type Description
+contractAddress string 
+key BigNumberish from getStorageVarAddress('<STORAGE_VARIABLE_NAME>') (WIP)
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<string>
+
+the value of the storage variable
+
+Implementation of
+ProviderInterface.getStorageAt
+
+getTransaction
+getTransaction(txHash): Promise<GetTransactionResponse>
+
+Gets the transaction information from a tx id.
+
+Parameters
+Name Type
+txHash BigNumberish
+Returns
+Promise<GetTransactionResponse>
+
+the transaction object { transaction_id, status, transaction, block_number?, block_number?, transaction_index?, transaction_failure_reason? }
+
+Implementation of
+ProviderInterface.getTransaction
+
+getTransactionReceipt
+getTransactionReceipt(txHash): Promise<GetTransactionReceiptResponse>
+
+Gets the transaction receipt from a tx hash.
+
+Parameters
+Name Type
+txHash BigNumberish
+Returns
+Promise<GetTransactionReceiptResponse>
+
+the transaction receipt object
+
+Implementation of
+ProviderInterface.getTransactionReceipt
+
+callContract
+callContract(request, blockIdentifier?): Promise<CallContractResponse>
+
+Calls a function on the Starknet contract.
+
+Parameters
+Name Type Description
+request Call transaction to be called
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<CallContractResponse>
+
+the result of the function on the smart contract.
+
+Implementation of
+ProviderInterface.callContract
+
+invokeFunction
+invokeFunction(functionInvocation, details): Promise<InvokeFunctionResponse>
+
+Invokes a function on starknet
+
+Deprecated
+
+This method won't be supported as soon as fees are mandatory. Should not be used outside of Account class
+
+Parameters
+Name                 Type                  Description
+functionInvocation Invocation              the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata (defaults to []) the calldata - signature - (defaults to []) the signature
+details            InvocationsDetailsWithNonce optional details containing: - nonce - optional nonce - version - optional version - maxFee - optional maxFee
+Returns
+Promise<InvokeFunctionResponse>
+
+response from addTransaction
+
+Implementation of
+ProviderInterface.invokeFunction
+
+deployAccountContract
+deployAccountContract(payload, details): Promise<DeployContractResponse>
+
+Deploys a given compiled Account contract (json) to starknet
+
+Parameters
+Name Type Description
+payload DeployAccountContractTransaction payload to be deployed containing: - compiled contract code - constructor calldata - address salt
+details InvocationsDetailsWithNonce -
+Returns
+Promise<DeployContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+Implementation of
+ProviderInterface.deployAccountContract
+
+declareContract
+declareContract(transaction, details): Promise<DeclareContractResponse>
+
+Declares a given compiled contract (json) to starknet
+
+Parameters
+Name Type Description
+transaction DeclareContractTransaction transaction payload to be deployed containing: - compiled contract code - sender address - signature
+details InvocationsDetailsWithNonce Invocation Details containing: - nonce - optional version - optional maxFee
+Returns
+Promise<DeclareContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+Implementation of
+ProviderInterface.declareContract
+
+getDeclareEstimateFee
+getDeclareEstimateFee(transaction, details, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given DECLARE transaction
+
+Parameters
+Name Type Description
+transaction DeclareContractTransaction transaction payload to be declared containing: - compiled contract code - sender address - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - version - optional version - optional maxFee
+blockIdentifier? BlockIdentifier (optional) block identifier
+skipValidate? boolean (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getDeclareEstimateFee
+
+getDeployAccountEstimateFee
+getDeployAccountEstimateFee(transaction, details, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given DEPLOY_ACCOUNT transaction
+
+Parameters
+Name Type Description
+transaction DeployAccountContractTransaction transaction payload to be deployed containing: - classHash - constructorCalldata - addressSalt - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - version - optional version - optional maxFee
+blockIdentifier? BlockIdentifier (optional) block identifier
+skipValidate? boolean (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getDeployAccountEstimateFee
+
+getCode
+getCode(contractAddress, blockIdentifier?): Promise<GetCodeResponse>
+
+Deprecated
+
+The method should not be used
+
+Parameters
+Name Type
+contractAddress string
+blockIdentifier? BlockIdentifier
+Returns
+Promise<GetCodeResponse>
+
+Implementation of
+ProviderInterface.getCode
+
+waitForTransaction
+waitForTransaction(txHash, options?): Promise<GetTransactionReceiptResponse>
+
+Wait for the transaction to be accepted
+
+Parameters
+Name Type Description
+txHash BigNumberish transaction hash
+options? waitForTransactionOptions waitForTransactionOptions - (optional) retryInterval: number | undefined; - (optional) successStates: TransactionStatus[] | undefined;
+Returns
+Promise<GetTransactionReceiptResponse>
+
+GetTransactionReceiptResponse
+
+Implementation of
+ProviderInterface.waitForTransaction
+
+getSimulateTransaction
+getSimulateTransaction(invocations, options?): Promise<SimulateTransactionResponse>
+
+Simulates the transaction and returns the transaction trace and estimated fee.
+
+Parameters
+Name Type Description
+invocations AccountInvocations AccountInvocations - Complete invocations array with account details
+options? getSimulateTransactionOptions getSimulateTransactionOptions - (optional) blockIdentifier - block identifier - (optional) skipValidate - skip cairo validate method - (optional) skipExecute - skip cairo execute method
+Returns
+Promise<SimulateTransactionResponse>
+
+an array of transaction trace and estimated fee
+
+Implementation of
+ProviderInterface.getSimulateTransaction
+
+getStateUpdate
+getStateUpdate(blockIdentifier?): Promise<StateUpdateResponse>
+
+Gets the state changes in a specific block (result of executing the requested block)
+
+Parameters
+Name Type Description
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<StateUpdateResponse>
+
+StateUpdateResponse
+
+Implementation of
+ProviderInterface.getStateUpdate
+
+getStarkName
+getStarkName(address, StarknetIdContract?): Promise<string>
+
+Parameters
+Name Type
+address BigNumberish
+StarknetIdContract? string
+Returns
+Promise<string>
+
+getAddressFromStarkName
+getAddressFromStarkName(name, StarknetIdContract?): Promise<string>
+
+Parameters
+Name Type
+name string
+StarknetIdContract? string
+Returns
+Promise<string>
+
+getContractVersion
+getContractVersion(contractAddress, classHash?, options?): Promise<ContractVersion>
+
+Gets the contract version from the provided address
+
+Parameters
+Name Type Description
+contractAddress string string
+classHash? undefined undefined
+options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
+Returns
+Promise<ContractVersion>
+
+Implementation of
+ProviderInterface.getContractVersion
+
+getContractVersion(contractAddress, classHash, options?): Promise<ContractVersion>
+
+Gets the contract version from the provided address
+
+Parameters
+Name Type Description
+contractAddress undefined undefined
+classHash string 
+options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
+Returns
+Promise<ContractVersion>
+
+Implementation of
+ProviderInterface.getContractVersion"
+What is included in ProviderInterface of Class?,"The ProviderInterface of Class includes the following content.
+1.Hierarchy
+
+ProviderInterface
+AccountInterface
+
+2.Implemented by
+Provider
+RpcProvider
+SequencerProvider
+3.Constructors
+constructor
+new ProviderInterface()
+
+4.Methods
+getChainId
+Abstract getChainId(): Promise<StarknetChainId>
+
+Gets the Starknet chain Id
+
+Returns
+Promise<StarknetChainId>
+
+the chain Id
+
+callContract
+Abstract callContract(call, blockIdentifier?): Promise<CallContractResponse>
+
+Calls a function on the Starknet contract.
+
+Parameters
+Name Type Description
+call Call transaction to be called
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<CallContractResponse>
+
+the result of the function on the smart contract.
+
+getBlock
+Abstract getBlock(blockIdentifier): Promise<GetBlockResponse>
+
+Gets the block information
+
+Parameters
+Name Type Description
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<GetBlockResponse>
+
+the block object
+
+getCode
+Abstract getCode(contractAddress, blockIdentifier?): Promise<GetCodeResponse>
+
+Deprecated
+
+The method should not be used
+
+Parameters
+Name Type
+contractAddress string
+blockIdentifier? BlockIdentifier
+Returns
+Promise<GetCodeResponse>
+
+getClassAt
+Abstract getClassAt(contractAddress, blockIdentifier?): Promise<ContractClassResponse>
+
+Gets the contract class of the deployed contract.
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<ContractClassResponse>
+
+Contract class of compiled contract
+
+getClassHashAt
+Abstract getClassHashAt(contractAddress, blockIdentifier?): Promise<string>
+
+Returns the contract class hash in the given block for the contract deployed at the given address
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<string>
+
+Class hash
+
+getClassByHash
+Abstract getClassByHash(classHash): Promise<ContractClassResponse>
+
+Returns the contract class deployed under the given class hash.
+
+Parameters
+Name Type Description
+classHash string class hash
+Returns
+Promise<ContractClassResponse>
+
+Contract class of compiled contract
+
+getNonceForAddress
+Abstract getNonceForAddress(contractAddress, blockIdentifier?): Promise<string>
+
+Returns the nonce associated with the given address in the given block
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier? BlockIdentifier -
+Returns
+Promise<string>
+
+the hex nonce
+
+getStorageAt
+Abstract getStorageAt(contractAddress, key, blockIdentifier?): Promise<string>
+
+Get the value of the storage (contract's variable) at the given address and key
+
+Parameters
+Name Type Description
+contractAddress string 
+key BigNumberish from getStorageVarAddress('<STORAGE_VARIABLE_NAME>') (WIP)
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<string>
+
+the value of the storage variable
+
+getTransaction
+Abstract getTransaction(transactionHash): Promise<GetTransactionResponse>
+
+Gets the transaction information from a tx id.
+
+Parameters
+Name Type
+transactionHash BigNumberish
+Returns
+Promise<GetTransactionResponse>
+
+the transaction object { transaction_id, status, transaction, block_number?, block_number?, transaction_index?, transaction_failure_reason? }
+
+getTransactionReceipt
+Abstract getTransactionReceipt(transactionHash): Promise<GetTransactionReceiptResponse>
+
+Gets the transaction receipt from a tx hash.
+
+Parameters
+Name Type
+transactionHash BigNumberish
+Returns
+Promise<GetTransactionReceiptResponse>
+
+the transaction receipt object
+
+deployAccountContract
+Abstract deployAccountContract(payload, details): Promise<DeployContractResponse>
+
+Deploys a given compiled Account contract (json) to starknet
+
+Parameters
+Name Type Description
+payload DeployAccountContractPayload payload to be deployed containing: - compiled contract code - constructor calldata - address salt
+details InvocationsDetailsWithNonce -
+Returns
+Promise<DeployContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+invokeFunction
+Abstract invokeFunction(invocation, details): Promise<InvokeFunctionResponse>
+
+Invokes a function on starknet
+
+Deprecated
+
+This method won't be supported as soon as fees are mandatory. Should not be used outside of Account class
+
+Parameters
+Name Type Description
+invocation Invocation the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - optional nonce - version - optional version - maxFee - optional maxFee
+Returns
+Promise<InvokeFunctionResponse>
+
+response from addTransaction
+
+declareContract
+Abstract declareContract(transaction, details): Promise<DeclareContractResponse>
+
+Declares a given compiled contract (json) to starknet
+
+Parameters
+Name Type Description
+transaction DeclareContractTransaction transaction payload to be deployed containing: - compiled contract code - sender address - signature
+details InvocationsDetailsWithNonce Invocation Details containing: - nonce - optional version - optional maxFee
+Returns
+Promise<DeclareContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+getEstimateFee
+Abstract getEstimateFee(invocation, details, blockIdentifier, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given INVOKE transaction
+
+Deprecated
+
+Please use getInvokeEstimateFee or getDeclareEstimateFee instead. Should not be used outside of Account class
+
+Parameters
+Name Type Description
+invocation Invocation the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - optional nonce - version - optional version
+blockIdentifier BlockIdentifier (optional) block identifier
+skipValidate? boolean (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+getInvokeEstimateFee
+Abstract getInvokeEstimateFee(invocation, details, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given INVOKE transaction
+
+Parameters
+Name Type Description
+invocation Invocation the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - optional nonce - version - optional version
+blockIdentifier? BlockIdentifier (optional) block identifier
+skipValidate? boolean (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+getDeclareEstimateFee
+Abstract getDeclareEstimateFee(transaction, details, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given DECLARE transaction
+
+Parameters
+Name Type Description
+transaction DeclareContractTransaction transaction payload to be declared containing: - compiled contract code - sender address - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - version - optional version - optional maxFee
+blockIdentifier? BlockIdentifier (optional) block identifier
+skipValidate? boolean (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+getDeployAccountEstimateFee
+Abstract getDeployAccountEstimateFee(transaction, details, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given DEPLOY_ACCOUNT transaction
+
+Parameters
+Name Type Description
+transaction DeployAccountContractTransaction transaction payload to be deployed containing: - classHash - constructorCalldata - addressSalt - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - version - optional version - optional maxFee
+blockIdentifier? BlockIdentifier (optional) block identifier
+skipValidate? boolean (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+getEstimateFeeBulk
+Abstract getEstimateFeeBulk(invocations, options?): Promise<EstimateFeeResponseBulk>
+
+Estimates the fee for a list of INVOKE transaction
+
+Parameters
+Name Type Description
+invocations AccountInvocations AccountInvocations - Complete invocations array with account details
+options? getEstimateFeeBulkOptions getEstimateFeeBulkOptions - (optional) blockIdentifier - BlockIdentifier - (optional) skipValidate - boolean (default false)
+Returns
+Promise<EstimateFeeResponseBulk>
+
+the estimated fee
+
+waitForTransaction
+Abstract waitForTransaction(txHash, options?): Promise<GetTransactionReceiptResponse>
+
+Wait for the transaction to be accepted
+
+Parameters
+Name Type Description
+txHash BigNumberish transaction hash
+options? waitForTransactionOptions waitForTransactionOptions - (optional) retryInterval: number | undefined; - (optional) successStates: TransactionStatus[] | undefined;
+Returns
+Promise<GetTransactionReceiptResponse>
+
+GetTransactionReceiptResponse
+
+getSimulateTransaction
+Abstract getSimulateTransaction(invocations, options?): Promise<SimulateTransactionResponse>
+
+Simulates the transaction and returns the transaction trace and estimated fee.
+
+Parameters
+Name Type Description
+invocations AccountInvocations AccountInvocations - Complete invocations array with account details
+options? getSimulateTransactionOptions getSimulateTransactionOptions - (optional) blockIdentifier - block identifier - (optional) skipValidate - skip cairo validate method - (optional) skipExecute - skip cairo execute method
+Returns
+Promise<SimulateTransactionResponse>
+
+an array of transaction trace and estimated fee
+
+getStateUpdate
+Abstract getStateUpdate(blockIdentifier?): Promise<StateUpdateResponse>
+
+Gets the state changes in a specific block (result of executing the requested block)
+
+Parameters
+Name Type Description
+blockIdentifier? BlockIdentifier block identifier
+Returns
+Promise<StateUpdateResponse>
+
+StateUpdateResponse
+
+getContractVersion
+Abstract getContractVersion(contractAddress, classHash?, options?): Promise<ContractVersion>
+
+Gets the contract version from the provided address
+
+Parameters
+Name Type Description
+contractAddress string string
+classHash? undefined undefined
+options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
+Returns
+Promise<ContractVersion>
+
+Abstract getContractVersion(contractAddress, classHash, options?): Promise<ContractVersion>
+
+Gets the contract version from the provided address
+
+Parameters
+Name Type Description
+contractAddress undefined undefined
+classHash string 
+options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
+Returns
+Promise<ContractVersion>"
+What is included in RpcProvider of Class?,"The RpcProvider of Class includes the following content.
+1.Implements
+ProviderInterface
+2.Constructors
+constructor
+new RpcProvider(optionsOrProvider?)
+
+Parameters
+Name Type
+optionsOrProvider? RpcProviderOptions
+
+3.Properties
+nodeUrl
+nodeUrl: string
+
+headers
+headers: object
+
+responseParser
+Private responseParser: RPCResponseParser
+
+retries
+Private retries: number
+
+blockIdentifier
+Private blockIdentifier: BlockIdentifier
+
+chainId
+Private Optional chainId: StarknetChainId
+
+getBlockHashAndNumber
+getBlockHashAndNumber: () => Promise<BlockHashAndNumber>
+
+Type declaration
+(): Promise<BlockHashAndNumber>
+
+Deprecated
+
+renamed to getBlockLatestAccepted(); (will be removed in next minor version)
+
+Returns
+Promise<BlockHashAndNumber>
+
+getStateUpdate
+getStateUpdate: (blockIdentifier: BlockIdentifier) => Promise<PENDING_STATE_UPDATE | STATE_UPDATE>
+
+Type declaration
+(blockIdentifier?): Promise<PENDING_STATE_UPDATE | STATE_UPDATE>
+
+Deprecated
+
+renamed to getBlockStateUpdate();
+
+Parameters
+Name Type
+blockIdentifier BlockIdentifier
+Returns
+Promise<PENDING_STATE_UPDATE | STATE_UPDATE>
+
+Implementation of
+ProviderInterface.getStateUpdate
+
+traceBlockTransactions
+traceBlockTransactions: (blockIdentifier: BlockIdentifier) => Promise<BlockTransactionsTraces>
+
+Type declaration
+(blockIdentifier?): Promise<BlockTransactionsTraces>
+
+Returns the execution traces of all transactions included in the given block
+
+Deprecated
+
+renamed to getBlockTransactionsTraces()
+
+Parameters
+Name Type
+blockIdentifier BlockIdentifier
+Returns
+Promise<BlockTransactionsTraces>
+
+getTransactionCount
+getTransactionCount: (blockIdentifier: BlockIdentifier) => Promise<number>
+
+Type declaration
+(blockIdentifier?): Promise<number>
+
+Get the number of transactions in a block given a block id
+
+Deprecated
+
+renamed to getBlockTransactionCount()
+
+Parameters
+Name Type
+blockIdentifier BlockIdentifier
+Returns
+Promise<number>
+
+Number of transactions
+
+traceTransaction
+traceTransaction: (txHash: BigNumberish) => Promise<TRANSACTION_TRACE>
+
+Type declaration
+(txHash): Promise<TRANSACTION_TRACE>
+
+Deprecated
+
+renamed to getTransactionTrace(); For a given executed transaction, return the trace of its execution, including internal calls
+
+Parameters
+Name Type
+txHash BigNumberish
+Returns
+Promise<TRANSACTION_TRACE>
+
+getSimulateTransaction
+getSimulateTransaction: (invocations: AccountInvocations, __namedParameters: getSimulateTransactionOptions) => Promise<SimulateTransactionResponse>
+
+Type declaration
+(invocations, ?destructured?): Promise<SimulateTransactionResponse>
+
+Deprecated
+
+renamed to simulateTransaction();
+
+Parameters
+Name Type
+invocations AccountInvocations
+?destructured? getSimulateTransactionOptions
+Returns
+Promise<SimulateTransactionResponse>
+
+Implementation of
+ProviderInterface.getSimulateTransaction
+
+4.Methods
+fetch
+fetch(method, params?, id?): Promise<Response>
+
+Parameters
+Name Type Default value
+method string undefined
+params? object undefined
+id string | number 0
+Returns
+Promise<Response>
+
+errorHandler
+Protected errorHandler(method, params, rpcError?, otherError?): void
+
+Parameters
+Name Type
+method string
+params any
+rpcError? Error
+otherError? any
+Returns
+void
+
+fetchEndpoint
+Protected fetchEndpoint<T>(method, params?): Promise<Methods[T][``""result""``]>
+
+Type parameters
+Name Type
+T extends keyof ReadMethods | keyof WriteMethods | keyof TraceMethods
+Parameters
+Name Type
+method T
+params? Methods[T][``""params""``]
+Returns
+Promise<Methods[T][``""result""``]>
+
+getChainId
+getChainId(): Promise<StarknetChainId>
+
+Gets the Starknet chain Id
+
+Returns
+Promise<StarknetChainId>
+
+the chain Id
+
+Implementation of
+ProviderInterface.getChainId
+
+getSpecVersion
+getSpecVersion(): Promise<string>
+
+NEW: Returns the version of the Starknet JSON-RPC specification being used
+
+Returns
+Promise<string>
+
+getNonceForAddress
+getNonceForAddress(contractAddress, blockIdentifier?): Promise<string>
+
+Returns the nonce associated with the given address in the given block
+
+Parameters
+Name Type Description
+contractAddress BigNumberish contract address
+blockIdentifier BlockIdentifier -
+Returns
+Promise<string>
+
+the hex nonce
+
+Implementation of
+ProviderInterface.getNonceForAddress
+
+getBlock
+getBlock(blockIdentifier?): Promise<GetBlockResponse>
+
+Deprecated
+
+use getBlockWithTxHashes or getBlockWithTxs (will be removed on sequencer deprecation)
+
+Parameters
+Name Type
+blockIdentifier BlockIdentifier
+Returns
+Promise<GetBlockResponse>
+
+Implementation of
+ProviderInterface.getBlock
+
+getBlockLatestAccepted
+getBlockLatestAccepted(): Promise<BlockHashAndNumber>
+
+Get the most recent accepted block hash and number
+
+Returns
+Promise<BlockHashAndNumber>
+
+getBlockNumber
+getBlockNumber(): Promise<number>
+
+Deprecated
+
+redundant use getBlockLatestAccepted(); Get the most recent accepted block number
+
+Returns
+Promise<number>
+
+Number of the latest block
+
+getBlockWithTxHashes
+getBlockWithTxHashes(blockIdentifier?): Promise<BlockWithTxHashes>
+
+Parameters
+Name Type
+blockIdentifier BlockIdentifier
+Returns
+Promise<BlockWithTxHashes>
+
+getBlockWithTxs
+getBlockWithTxs(blockIdentifier?): Promise<BlockWithTxs>
+
+Parameters
+Name Type
+blockIdentifier BlockIdentifier
+Returns
+Promise<BlockWithTxs>
+
+getBlockStateUpdate
+getBlockStateUpdate(blockIdentifier?): Promise<PENDING_STATE_UPDATE | STATE_UPDATE>
+
+Parameters
+Name Type
+blockIdentifier BlockIdentifier
+Returns
+Promise<PENDING_STATE_UPDATE | STATE_UPDATE>
+
+getBlockTransactionsTraces
+getBlockTransactionsTraces(blockIdentifier?): Promise<BlockTransactionsTraces>
+
+Parameters
+Name Type
+blockIdentifier BlockIdentifier
+Returns
+Promise<BlockTransactionsTraces>
+
+getBlockTransactionCount
+getBlockTransactionCount(blockIdentifier?): Promise<number>
+
+Parameters
+Name Type
+blockIdentifier BlockIdentifier
+Returns
+Promise<number>
+
+getPendingTransactions
+getPendingTransactions(): Promise<TransactionWithHash[]>
+
+Return transactions from pending block
+
+Deprecated
+
+Instead use getBlock(BlockTag.pending); (will be removed in next minor version)
+
+Returns
+Promise<TransactionWithHash[]>
+
+getTransaction
+getTransaction(txHash): Promise<InvokeTransactionResponse | DeclareTransactionResponse | RejectedTransactionResponse>
+
+Deprecated
+
+use getTransactionByHash or getTransactionByBlockIdAndIndex (will be removed on sequencer deprecation)
+
+Parameters
+Name Type
+txHash BigNumberish
+Returns
+Promise<InvokeTransactionResponse | DeclareTransactionResponse | RejectedTransactionResponse>
+
+Implementation of
+ProviderInterface.getTransaction
+
+getTransactionByHash
+getTransactionByHash(txHash): Promise<TransactionWithHash>
+
+Parameters
+Name Type
+txHash BigNumberish
+Returns
+Promise<TransactionWithHash>
+
+getTransactionByBlockIdAndIndex
+getTransactionByBlockIdAndIndex(blockIdentifier, index): Promise<TransactionWithHash>
+
+Parameters
+Name Type
+blockIdentifier BlockIdentifier
+index number
+Returns
+Promise<TransactionWithHash>
+
+getTransactionReceipt
+getTransactionReceipt(txHash): Promise<TransactionReceipt>
+
+Gets the transaction receipt from a tx hash.
+
+Parameters
+Name Type
+txHash BigNumberish
+Returns
+Promise<TransactionReceipt>
+
+the transaction receipt object
+
+Implementation of
+ProviderInterface.getTransactionReceipt
+
+getTransactionTrace
+getTransactionTrace(txHash): Promise<TRANSACTION_TRACE>
+
+Parameters
+Name Type
+txHash BigNumberish
+Returns
+Promise<TRANSACTION_TRACE>
+
+getTransactionStatus
+getTransactionStatus(transactionHash): Promise<TransactionStatus>
+
+NEW: Get the status of a transaction
+
+Parameters
+Name Type
+transactionHash BigNumberish
+Returns
+Promise<TransactionStatus>
+
+simulateTransaction
+simulateTransaction(invocations, simulateTransactionOptions): Promise<SimulateTransactionResponse>
+
+Parameters
+Name Type Description
+invocations AccountInvocations AccountInvocations
+simulateTransactionOptions getSimulateTransactionOptions blockIdentifier and flags to skip validation and fee charge
+- blockIdentifier
+- skipValidate (default false)
+- skipFeeCharge (default true)
+Returns
+Promise<SimulateTransactionResponse>
+
+waitForTransaction
+waitForTransaction(txHash, options?): Promise<TransactionReceipt>
+
+Wait for the transaction to be accepted
+
+Parameters
+Name Type Description
+txHash BigNumberish transaction hash
+options? waitForTransactionOptions waitForTransactionOptions - (optional) retryInterval: number | undefined; - (optional) successStates: TransactionStatus[] | undefined;
+Returns
+Promise<TransactionReceipt>
+
+GetTransactionReceiptResponse
+
+Implementation of
+ProviderInterface.waitForTransaction
+
+getStorageAt
+getStorageAt(contractAddress, key, blockIdentifier?): Promise<string>
+
+Get the value of the storage (contract's variable) at the given address and key
+
+Parameters
+Name Type Description
+contractAddress BigNumberish 
+key BigNumberish from getStorageVarAddress('<STORAGE_VARIABLE_NAME>') (WIP)
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<string>
+
+the value of the storage variable
+
+Implementation of
+ProviderInterface.getStorageAt
+
+getClassHashAt
+getClassHashAt(contractAddress, blockIdentifier?): Promise<string>
+
+Returns the contract class hash in the given block for the contract deployed at the given address
+
+Parameters
+Name Type Description
+contractAddress BigNumberish contract address
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<string>
+
+Class hash
+
+Implementation of
+ProviderInterface.getClassHashAt
+
+getClassByHash
+getClassByHash(classHash): Promise<LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">>
+
+Returns the contract class deployed under the given class hash.
+
+Parameters
+Name Type Description
+classHash BigNumberish class hash
+Returns
+Promise<LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">>
+
+Contract class of compiled contract
+
+Implementation of
+ProviderInterface.getClassByHash
+
+getClass
+getClass(classHash, blockIdentifier?): Promise<LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">>
+
+Parameters
+Name Type
+classHash BigNumberish
+blockIdentifier BlockIdentifier
+Returns
+Promise<LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">>
+
+getClassAt
+getClassAt(contractAddress, blockIdentifier?): Promise<LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">>
+
+Gets the contract class of the deployed contract.
+
+Parameters
+Name Type Description
+contractAddress BigNumberish contract address
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<LegacyContractClass | Omit<CompiledSierra, ""sierra_program_debug_info"">>
+
+Contract class of compiled contract
+
+Implementation of
+ProviderInterface.getClassAt
+
+getCode
+getCode(_contractAddress, _blockIdentifier?): Promise<GetCodeResponse>
+
+Deprecated
+
+The method should not be used
+
+Parameters
+Name Type
+_contractAddress string
+_blockIdentifier? BlockIdentifier
+Returns
+Promise<GetCodeResponse>
+
+Implementation of
+ProviderInterface.getCode
+
+getContractVersion
+getContractVersion(contractAddress, classHash?, options?): Promise<ContractVersion>
+
+Gets the contract version from the provided address
+
+Parameters
+Name Type Description
+contractAddress BigNumberish string
+classHash? undefined undefined
+options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
+Returns
+Promise<ContractVersion>
+
+Implementation of
+ProviderInterface.getContractVersion
+
+getContractVersion(contractAddress, classHash, options?): Promise<ContractVersion>
+
+Gets the contract version from the provided address
+
+Parameters
+Name Type Description
+contractAddress undefined undefined
+classHash BigNumberish 
+options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
+Returns
+Promise<ContractVersion>
+
+Implementation of
+ProviderInterface.getContractVersion
+
+getEstimateFee
+getEstimateFee(invocation, invocationDetails, blockIdentifier?): Promise<EstimateFeeResponse>
+
+Deprecated
+
+use gettypeEstimateFee (will be refactored based on type after sequencer deprecation)
+
+Parameters
+Name Type
+invocation Invocation
+invocationDetails InvocationsDetailsWithNonce
+blockIdentifier BlockIdentifier
+Returns
+Promise<EstimateFeeResponse>
+
+Implementation of
+ProviderInterface.getEstimateFee
+
+getInvokeEstimateFee
+getInvokeEstimateFee(invocation, invocationDetails, blockIdentifier?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given INVOKE transaction
+
+Parameters
+Name Type Description
+invocation Invocation the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+invocationDetails InvocationsDetailsWithNonce optional details containing: - nonce - optional nonce - version - optional version
+blockIdentifier BlockIdentifier (optional) block identifier
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getInvokeEstimateFee
+
+getDeclareEstimateFee
+getDeclareEstimateFee(invocation, details, blockIdentifier?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given DECLARE transaction
+
+Parameters
+Name Type Description
+invocation DeclareContractTransaction transaction payload to be declared containing: - compiled contract code - sender address - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - version - optional version - optional maxFee
+blockIdentifier BlockIdentifier (optional) block identifier
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getDeclareEstimateFee
+
+getDeployAccountEstimateFee
+getDeployAccountEstimateFee(invocation, details, blockIdentifier?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given DEPLOY_ACCOUNT transaction
+
+Parameters
+Name Type Description
+invocation DeployAccountContractTransaction transaction payload to be deployed containing: - classHash - constructorCalldata - addressSalt - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - version - optional version - optional maxFee
+blockIdentifier BlockIdentifier (optional) block identifier
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getDeployAccountEstimateFee
+
+getEstimateFeeBulk
+getEstimateFeeBulk(invocations, ?destructured?): Promise<EstimateFeeResponseBulk>
+
+Estimates the fee for a list of INVOKE transaction
+
+Parameters
+Name Type Description
+invocations AccountInvocations AccountInvocations - Complete invocations array with account details
+?destructured? getEstimateFeeBulkOptions getEstimateFeeBulkOptions - (optional) blockIdentifier - BlockIdentifier - (optional) skipValidate - boolean (default false)
+Returns
+Promise<EstimateFeeResponseBulk>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getEstimateFeeBulk
+invokeFunction
+invokeFunction(functionInvocation, details): Promise<InvokedTransaction>
+
+Invokes a function on starknet
+
+Deprecated
+
+This method won't be supported as soon as fees are mandatory. Should not be used outside of Account class
+
+Parameters
+Name Type Description
+functionInvocation Invocation the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - optional nonce - version - optional version - maxFee - optional maxFee
+Returns
+Promise<InvokedTransaction>
+
+response from addTransaction
+
+Implementation of
+ProviderInterface.invokeFunction
+
+declareContract
+declareContract(?destructured?, details): Promise<DeclaredTransaction>
+
+Declares a given compiled contract (json) to starknet
+
+Parameters
+Name Type Description
+?destructured? DeclareContractTransaction transaction payload to be deployed containing: - compiled contract code - sender address - signature
+details InvocationsDetailsWithNonce Invocation Details containing: - nonce - optional version - optional maxFee
+Returns
+Promise<DeclaredTransaction>
+
+a confirmation of sending a transaction on the starknet contract
+
+Implementation of
+ProviderInterface.declareContract
+
+deployAccountContract
+deployAccountContract(?destructured?, details): Promise<DeployedAccountTransaction>
+
+Deploys a given compiled Account contract (json) to starknet
+
+Parameters
+Name Type Description
+?destructured? DeployAccountContractTransaction payload to be deployed containing: - compiled contract code - constructor calldata - address salt
+details InvocationsDetailsWithNonce -
+Returns
+Promise<DeployedAccountTransaction>
+
+a confirmation of sending a transaction on the starknet contract
+
+Implementation of
+ProviderInterface.deployAccountContract
+
+callContract
+callContract(call, blockIdentifier?): Promise<CallContractResponse>
+
+Calls a function on the Starknet contract.
+
+Parameters
+Name Type Description
+call Call transaction to be called
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<CallContractResponse>
+
+the result of the function on the smart contract.
+
+Implementation of
+ProviderInterface.callContract
+
+estimateMessageFee
+estimateMessageFee(message, blockIdentifier?): Promise<FEE_ESTIMATE>
+
+NEW: Estimate the fee for a message from L1
+
+Parameters
+Name Type Description
+message MSG_FROM_L1 Message From L1
+blockIdentifier BlockIdentifier -
+Returns
+Promise<FEE_ESTIMATE>
+
+getSyncingStats
+getSyncingStats(): Promise<Syncing>
+
+Returns an object about the sync status, or false if the node is not synching
+
+Returns
+Promise<Syncing>
+
+Object with the stats data
+
+getEvents
+getEvents(eventFilter): Promise<EVENTS_CHUNK>
+
+Returns all events matching the given filter
+
+Parameters
+Name Type
+eventFilter EventFilter
+Returns
+Promise<EVENTS_CHUNK>
+
+events and the pagination of the events
+
+getStarkName
+getStarkName(address, StarknetIdContract?): Promise<string>
+
+StarknetId Endpoint (get name from address)
+
+Parameters
+Name Type
+address BigNumberish
+StarknetIdContract? string
+Returns
+Promise<string>
+
+getAddressFromStarkName
+getAddressFromStarkName(name, StarknetIdContract?): Promise<string>
+
+StarknetId Endpoint (get address from name)
+
+Parameters
+Name Type
+name string
+StarknetIdContract? string
+Returns
+Promise<string>
+
+buildTransaction
+buildTransaction(invocation, versionType?): BROADCASTED_TXN
+
+Parameters
+Name Type
+invocation AccountInvocationItem
+versionType? ""fee"" | ""transaction""
+Returns
+BROADCASTED_TXN"
+What is included in SequencerProvider of Class?,"The SequencerProvider of Class includes the following content.
+1.Implements
+ProviderInterface
+2.Constructors
+constructor
+new SequencerProvider(optionsOrProvider?)
+
+Parameters
+Name Type Default value
+optionsOrProvider SequencerProviderOptions defaultOptions
+
+3.Properties
+baseUrl
+baseUrl: string
+
+feederGatewayUrl
+feederGatewayUrl: string
+
+gatewayUrl
+gatewayUrl: string
+
+headers
+Optional headers: Record<string, string>
+
+blockIdentifier
+Private blockIdentifier: BlockIdentifier
+
+chainId
+Private chainId: StarknetChainId
+
+responseParser
+Private responseParser: SequencerAPIResponseParser
+
+4.Methods
+getNetworkFromName
+Static Protected getNetworkFromName(name): BaseUrl
+
+Parameters
+Name Type
+name StarknetChainId | NetworkName
+Returns
+BaseUrl
+
+getChainIdFromBaseUrl
+Static Protected getChainIdFromBaseUrl(baseUrl): StarknetChainId
+
+Parameters
+Name Type
+baseUrl string
+Returns
+StarknetChainId
+
+getFetchUrl
+Private getFetchUrl(endpoint): string
+
+Parameters
+Name Type
+endpoint keyof Endpoints
+Returns
+string
+getFetchMethod
+Private getFetchMethod(endpoint): ""POST"" | ""GET""
+
+Parameters
+Name Type
+endpoint keyof Endpoints
+Returns
+""POST"" | ""GET""
+
+getQueryString
+Private getQueryString(query?): string
+
+Parameters
+Name Type
+query? Record<string, any>
+Returns
+string
+
+getHeaders
+Private getHeaders(method): undefined | Record<string, string>
+
+Parameters
+Name Type
+method SequencerHttpMethod
+Returns
+undefined | Record<string, string>
+
+fetchEndpoint
+Protected fetchEndpoint<T>(endpoint, ...?destructured?): Promise<Endpoints[T][``""RESPONSE""``]>
+
+Type parameters
+Name Type
+T extends keyof Endpoints
+Parameters
+Name Type
+endpoint T
+...?destructured? Endpoints[T][``""QUERY""``] extends never ? Endpoints[T][``""REQUEST""``] extends never ? [] : [undefined, Endpoints[T][``""REQUEST""``]] : Endpoints[T][``""REQUEST""``] extends never ? [Endpoints[T][``""QUERY""``]] : [Endpoints[T][``""QUERY""``], Endpoints[T][``""REQUEST""``]]
+Returns
+Promise<Endpoints[T][``""RESPONSE""``]>
+
+fetch
+fetch(endpoint, options?): Promise<any>
+
+Parameters
+Name Type
+endpoint string
+options? Object
+options.method? SequencerHttpMethod
+options.body? any
+options.parseAlwaysAsBigInt? boolean
+Returns
+Promise<any>
+
+getChainId
+getChainId(): Promise<StarknetChainId>
+
+Gets the Starknet chain Id
+
+Returns
+Promise<StarknetChainId>
+
+the chain Id
+
+Implementation of
+ProviderInterface.getChainId
+
+callContract
+callContract(?destructured?, blockIdentifier?): Promise<CallContractResponse>
+
+Calls a function on the Starknet contract.
+
+Parameters
+Name Type Description
+?destructured? Call transaction to be called
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<CallContractResponse>
+
+the result of the function on the smart contract.
+
+Implementation of
+ProviderInterface.callContract
+
+getBlock
+getBlock(blockIdentifier?): Promise<GetBlockResponse>
+
+Gets the block information
+
+Parameters
+Name Type Description
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<GetBlockResponse>
+
+the block object
+
+Implementation of
+ProviderInterface.getBlock
+
+getNonceForAddress
+getNonceForAddress(contractAddress, blockIdentifier?): Promise<string>
+
+Returns the nonce associated with the given address in the given block
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier BlockIdentifier -
+Returns
+Promise<string>
+
+the hex nonce
+
+Implementation of
+ProviderInterface.getNonceForAddress
+
+getStorageAt
+getStorageAt(contractAddress, key, blockIdentifier?): Promise<string>
+
+Get the value of the storage (contract's variable) at the given address and key
+
+Parameters
+Name Type Description
+contractAddress string 
+key BigNumberish from getStorageVarAddress('<STORAGE_VARIABLE_NAME>') (WIP)
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<string>
+
+the value of the storage variable
+
+Implementation of
+ProviderInterface.getStorageAt
+
+getTransaction
+getTransaction(txHash): Promise<GetTransactionResponse>
+
+Gets the transaction information from a tx id.
+
+Parameters
+Name Type
+txHash BigNumberish
+Returns
+Promise<GetTransactionResponse>
+
+the transaction object { transaction_id, status, transaction, block_number?, block_number?, transaction_index?, transaction_failure_reason? }
+
+Implementation of
+ProviderInterface.getTransaction
+
+getTransactionReceipt
+getTransactionReceipt(txHash): Promise<GetTransactionReceiptResponse>
+
+Gets the transaction receipt from a tx hash.
+
+Parameters
+Name Type
+txHash BigNumberish
+Returns
+Promise<GetTransactionReceiptResponse>
+
+the transaction receipt object
+
+Implementation of
+ProviderInterface.getTransactionReceipt
+
+getClassAt
+getClassAt(contractAddress, blockIdentifier?): Promise<ContractClassResponse>
+
+Gets the contract class of the deployed contract.
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<ContractClassResponse>
+
+Contract class of compiled contract
+
+Implementation of
+ProviderInterface.getClassAt
+
+getClassHashAt
+getClassHashAt(contractAddress, blockIdentifier?): Promise<string>
+
+Returns the contract class hash in the given block for the contract deployed at the given address
+
+Parameters
+Name Type Description
+contractAddress string contract address
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<string>
+
+Class hash
+
+Implementation of
+ProviderInterface.getClassHashAt
+
+getClassByHash
+getClassByHash(classHash, blockIdentifier?): Promise<ContractClassResponse>
+
+Returns the contract class deployed under the given class hash.
+
+Parameters
+Name Type Description
+classHash string class hash
+blockIdentifier BlockIdentifier -
+Returns
+Promise<ContractClassResponse>
+
+Contract class of compiled contract
+
+Implementation of
+ProviderInterface.getClassByHash
+
+getCompiledClassByClassHash
+getCompiledClassByClassHash(classHash, blockIdentifier?): Promise<CairoAssembly>
+
+Parameters
+Name Type
+classHash string
+blockIdentifier BlockIdentifier
+Returns
+Promise<CairoAssembly>
+
+getContractVersion
+getContractVersion(contractAddress, classHash?, options?): Promise<ContractVersion>
+
+Gets the contract version from the provided address
+
+Parameters
+Name Type Description
+contractAddress string string
+classHash? undefined undefined
+options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
+Returns
+Promise<ContractVersion>
+
+Implementation of
+ProviderInterface.getContractVersion
+
+getContractVersion(contractAddress, classHash, options?): Promise<ContractVersion>
+
+Gets the contract version from the provided address
+
+Parameters
+Name Type Description
+contractAddress undefined undefined
+classHash string 
+options? getContractVersionOptions getContractVersionOptions - (optional) compiler - (default true) extract compiler version using type tactic from abi - (optional) blockIdentifier - block identifier
+Returns
+Promise<ContractVersion>
+
+Implementation of
+ProviderInterface.getContractVersion
+
+invokeFunction
+invokeFunction(functionInvocation, details): Promise<InvokeFunctionResponse>
+
+Invokes a function on starknet
+
+Deprecated
+
+This method won't be supported as soon as fees are mandatory. Should not be used outside of Account class
+
+Parameters
+Name Type Description
+functionInvocation Invocation the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce optional details containing: - nonce - optional nonce - version - optional version - maxFee - optional maxFee
+Returns
+Promise<InvokeFunctionResponse>
+
+response from addTransaction
+
+Implementation of
+ProviderInterface.invokeFunction
+
+deployAccountContract
+deployAccountContract(?destructured?, details): Promise<DeployContractResponse>
+
+Deploys a given compiled Account contract (json) to starknet
+
+Parameters
+Name Type Description
+?destructured? DeployAccountContractTransaction payload to be deployed containing: - compiled contract code - constructor calldata - address salt
+details InvocationsDetailsWithNonce -
+Returns
+Promise<DeployContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+Implementation of
+ProviderInterface.deployAccountContract
+
+declareContract
+declareContract(?destructured?, details): Promise<DeclareContractResponse>
+
+Declares a given compiled contract (json) to starknet
+
+Parameters
+Name Type Description
+?destructured? DeclareContractTransaction transaction payload to be deployed containing: - compiled contract code - sender address - signature
+details InvocationsDetailsWithNonce Invocation Details containing: - nonce - optional version - optional maxFee
+Returns
+Promise<DeclareContractResponse>
+
+a confirmation of sending a transaction on the starknet contract
+
+Implementation of
+ProviderInterface.declareContract
+
+getEstimateFee
+getEstimateFee(invocation, invocationDetails, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given INVOKE transaction
+
+Deprecated
+
+Please use getInvokeEstimateFee or getDeclareEstimateFee instead. Should not be used outside of Account class
+
+Parameters
+Name Type Default value Description
+invocation Invocation undefined the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+invocationDetails InvocationsDetailsWithNonce undefined optional details containing: - nonce - optional nonce - version - optional version
+blockIdentifier BlockIdentifier undefined (optional) block identifier
+skipValidate boolean false (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getEstimateFee
+
+getInvokeEstimateFee
+getInvokeEstimateFee(invocation, invocationDetails, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given INVOKE transaction
+
+Parameters
+Name Type Default value Description
+invocation Invocation undefined the invocation object containing: - contractAddress - the address of the contract - entrypoint - the entrypoint of the contract - calldata - (defaults to []) the calldata - signature - (defaults to []) the signature
+invocationDetails InvocationsDetailsWithNonce undefined optional details containing: - nonce - optional nonce - version - optional version
+blockIdentifier BlockIdentifier undefined (optional) block identifier
+skipValidate boolean false (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getInvokeEstimateFee
+
+getDeclareEstimateFee
+getDeclareEstimateFee(invocation, details, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given DECLARE transaction
+
+Parameters
+Name Type Default value Description
+invocation DeclareContractTransaction undefined transaction payload to be declared containing: - compiled contract code - sender address - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce undefined optional details containing: - nonce - version - optional version - optional maxFee
+blockIdentifier BlockIdentifier undefined (optional) block identifier
+skipValidate boolean false (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getDeclareEstimateFee
+
+getDeployAccountEstimateFee
+getDeployAccountEstimateFee(invocation, details, blockIdentifier?, skipValidate?): Promise<EstimateFeeResponse>
+
+Estimates the fee for a given DEPLOY_ACCOUNT transaction
+
+Parameters
+Name Type Default value Description
+invocation DeployAccountContractTransaction undefined transaction payload to be deployed containing: - classHash - constructorCalldata - addressSalt - signature - (defaults to []) the signature
+details InvocationsDetailsWithNonce undefined optional details containing: - nonce - version - optional version - optional maxFee
+blockIdentifier BlockIdentifier undefined (optional) block identifier
+skipValidate boolean false (optional) skip cairo validate method
+Returns
+Promise<EstimateFeeResponse>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getDeployAccountEstimateFee
+
+getEstimateFeeBulk
+getEstimateFeeBulk(invocations, ?destructured?): Promise<EstimateFeeResponseBulk>
+
+Estimates the fee for a list of INVOKE transaction
+
+Parameters
+Name Type Description
+invocations AccountInvocations AccountInvocations - Complete invocations array with account details
+?destructured? getEstimateFeeBulkOptions getEstimateFeeBulkOptions - (optional) blockIdentifier - BlockIdentifier - (optional) skipValidate - boolean (default false)
+Returns
+Promise<EstimateFeeResponseBulk>
+
+the estimated fee
+
+Implementation of
+ProviderInterface.getEstimateFeeBulk
+
+getCode
+getCode(contractAddress, blockIdentifier?): Promise<GetCodeResponse>
+
+Deprecated
+
+The method should not be used
+
+Parameters
+Name Type
+contractAddress string
+blockIdentifier BlockIdentifier
+Returns
+Promise<GetCodeResponse>
+
+Implementation of
+ProviderInterface.getCode
+
+waitForTransaction
+waitForTransaction(txHash, options?): Promise<GetTransactionReceiptResponse>
+
+Wait for the transaction to be accepted
+
+Parameters
+Name Type Description
+txHash BigNumberish transaction hash
+options? waitForTransactionOptions waitForTransactionOptions - (optional) retryInterval: number | undefined; - (optional) successStates: TransactionStatus[] | undefined;
+Returns
+Promise<GetTransactionReceiptResponse>
+
+GetTransactionReceiptResponse
+
+Implementation of
+ProviderInterface.waitForTransaction
+
+getTransactionStatus
+getTransactionStatus(txHash): Promise<GetTransactionStatusResponse>
+
+Gets the status of a transaction.
+
+Parameters
+Name Type Description
+txHash BigNumberish BigNumberish
+Returns
+Promise<GetTransactionStatusResponse>
+
+GetTransactionStatusResponse - the transaction status object
+
+getContractAddresses
+getContractAddresses(): Promise<GetContractAddressesResponse>
+
+Gets the smart contract address on the goerli testnet.
+
+Returns
+Promise<GetContractAddressesResponse>
+
+GetContractAddressesResponse - starknet smart contract addresses
+
+getTransactionTrace
+getTransactionTrace(txHash): Promise<TransactionTraceResponse>
+
+Gets the transaction trace from a tx id.
+
+Parameters
+Name Type Description
+txHash BigNumberish BigNumberish
+Returns
+Promise<TransactionTraceResponse>
+
+TransactionTraceResponse - the transaction trace
+
+estimateMessageFee
+estimateMessageFee(?destructured?, blockIdentifier?): Promise<EstimateFeeResponse>
+
+Parameters
+Name Type
+?destructured? CallL1Handler
+blockIdentifier BlockIdentifier
+Returns
+Promise<EstimateFeeResponse>
+
+getSimulateTransaction
+getSimulateTransaction(invocations, ?destructured?): Promise<SimulateTransactionResponse>
+
+Simulate transaction using Sequencer provider WARNING!: Sequencer will process only first element from invocations array
+
+Parameters
+Name Type Description
+invocations AccountInvocations Array of invocations, but only first invocation will be processed
+?destructured? getSimulateTransactionOptions -
+Returns
+Promise<SimulateTransactionResponse>
+
+Implementation of
+ProviderInterface.getSimulateTransaction
+
+getStateUpdate
+getStateUpdate(blockIdentifier?): Promise<StateUpdateResponse>
+
+Gets the state changes in a specific block (result of executing the requested block)
+
+Parameters
+Name Type Description
+blockIdentifier BlockIdentifier block identifier
+Returns
+Promise<StateUpdateResponse>
+
+StateUpdateResponse
+
+Implementation of
+ProviderInterface.getStateUpdate
+
+getBlockTraces
+getBlockTraces(blockIdentifier?): Promise<BlockTransactionTracesResponse>
+
+Parameters
+Name Type
+blockIdentifier BlockIdentifier
+Returns
+Promise<BlockTransactionTracesResponse>
+
+getStarkName
+getStarkName(address, StarknetIdContract?): Promise<string>
+
+Parameters
+Name Type
+address BigNumberish
+StarknetIdContract? string
+Returns
+Promise<string>
+
+getAddressFromStarkName
+getAddressFromStarkName(name, StarknetIdContract?): Promise<string>
+
+Parameters
+Name Type
+name string
+StarknetIdContract? string
+Returns
+Promise<string>
+
+buildTransaction
+buildTransaction(invocation, versionType?): AccountTransactionItem
+
+Build Single AccountTransaction from Single AccountInvocation
+
+Parameters
+Name Type Description
+invocation AccountInvocationItem AccountInvocationItem
+versionType? ""fee"" | ""transaction"" 'fee' | 'transaction' - used to determine default versions
+Returns
+AccountTransactionItem
+
+AccountTransactionItem"
+What is included in Signer of Class?,"The Signer of Class includes the following content.
+1.Implements
+SignerInterface
+2.Constructors
+constructor
+new Signer(pk?)
+
+Parameters
+Name Type
+pk string | Uint8Array
+
+3.Properties
+pk
+Protected pk: string | Uint8Array
+
+4.Methods
+getPubKey
+getPubKey(): Promise<string>
+
+Method to get the public key of the signer
+
+Returns
+Promise<string>
+
+public key of signer as hex string with 0x prefix
+
+Implementation of
+SignerInterface.getPubKey
+
+signMessage
+signMessage(typedData, accountAddress): Promise<Signature>
+
+Sign an JSON object for off-chain usage with the starknet private key and return the signature This adds a message prefix so it can't be interchanged with transactions
+
+Throws
+
+if the JSON object is not a valid JSON
+
+Parameters
+Name Type Description
+typedData TypedData JSON object to be signed
+accountAddress string account
+Returns
+Promise<Signature>
+
+the signature of the JSON object
+
+Implementation of
+SignerInterface.signMessage
+
+signTransaction
+signTransaction(transactions, transactionsDetail, abis?): Promise<Signature>
+
+Signs a transaction with the starknet private key and returns the signature
+
+Parameters
+Name Type
+transactions Call[]
+transactionsDetail InvocationsSignerDetails
+abis? Abi[]
+Returns
+Promise<Signature>
+
+signature
+
+Implementation of
+SignerInterface.signTransaction
+
+signDeployAccountTransaction
+signDeployAccountTransaction(?destructured?): Promise<Signature>
+
+Signs a DEPLOY_ACCOUNT transaction with the starknet private key and returns the signature
+
+Parameters
+Name Type Description
+?destructured? DeployAccountSignerDetails contractAddress - the computed address of the contract - constructorCalldata - calldata to be passed in deploy constructor - addressSalt - contract address salt - chainId - the chainId to declare contract on - maxFee - maxFee for the declare transaction - version - transaction version - nonce - Nonce of the declare transaction
+Returns
+Promise<Signature>
+
+signature
+
+Implementation of
+SignerInterface.signDeployAccountTransaction
+
+signDeclareTransaction
+signDeclareTransaction(?destructured?): Promise<Signature>
+
+Signs a DECLARE transaction with the starknet private key and returns the signature
+
+Parameters
+Name Type Description
+?destructured? DeclareSignerDetails classHash - computed class hash. Will be replaced by ContractClass in future once class hash is present in CompiledContract - senderAddress - the address of the sender - chainId - the chainId to declare contract on - maxFee - maxFee for the declare transaction - version - transaction version - nonce - Nonce of the declare transaction
+Returns
+Promise<Signature>
+
+signature
+
+Implementation of
+SignerInterface.signDeclareTransaction"
+What is included in SignerInterface of Class?,"The SignerInterface of Class includes the following content.
+1.Implemented by
+Signer
+2.Constructors
+constructor
+new SignerInterface()
+
+3.Methods
+getPubKey
+Abstract getPubKey(): Promise<string>
+
+Method to get the public key of the signer
+
+Returns
+Promise<string>
+
+public key of signer as hex string with 0x prefix
+
+signMessage
+Abstract signMessage(typedData, accountAddress): Promise<Signature>
+
+Sign an JSON object for off-chain usage with the starknet private key and return the signature This adds a message prefix so it can't be interchanged with transactions
+
+Throws
+
+if the JSON object is not a valid JSON
+
+Parameters
+Name Type Description
+typedData TypedData JSON object to be signed
+accountAddress string account
+Returns
+Promise<Signature>
+
+the signature of the JSON object
+
+signTransaction
+Abstract signTransaction(transactions, transactionsDetail, abis?): Promise<Signature>
+
+Signs a transaction with the starknet private key and returns the signature
+
+Parameters
+Name Type
+transactions Call[]
+transactionsDetail InvocationsSignerDetails
+abis? Abi[]
+Returns
+Promise<Signature>
+
+signature
+
+signDeployAccountTransaction
+Abstract signDeployAccountTransaction(transaction): Promise<Signature>
+
+Signs a DEPLOY_ACCOUNT transaction with the starknet private key and returns the signature
+
+Parameters
+Name Type Description
+transaction DeployAccountSignerDetails contractAddress - the computed address of the contract - constructorCalldata - calldata to be passed in deploy constructor - addressSalt - contract address salt - chainId - the chainId to declare contract on - maxFee - maxFee for the declare transaction - version - transaction version - nonce - Nonce of the declare transaction
+Returns
+Promise<Signature>
+
+signature
+
+signDeclareTransaction
+Abstract signDeclareTransaction(transaction): Promise<Signature>
+
+Signs a DECLARE transaction with the starknet private key and returns the signature
+
+Parameters
+Name Type Description
+transaction DeclareSignerDetails classHash - computed class hash. Will be replaced by ContractClass in future once class hash is present in CompiledContract - senderAddress - the address of the sender - chainId - the chainId to declare contract on - maxFee - maxFee for the declare transaction - version - transaction version - nonce - Nonce of the declare transaction
+Returns
+Promise<Signature>
+
+signature"
+What is included in MerkleTree of Class?,"The MerkleTree of Class includes the following content.
+1.Constructors
+constructor
+new MerkleTree(leafHashes)
+
+Parameters
+Name Type
+leafHashes string[]
+
+2.Properties
+leaves
+leaves: string[]
+
+branches
+branches: string[][] = []
+
+root
+root: string
+
+3.Methods
+hash
+Static hash(a, b): string
+
+Create pedersen hash from a and b
+
+Parameters
+Name Type
+a string
+b string
+Returns
+string
+
+format: hex-string
+
+build
+Private build(leaves): string
+
+Create Merkle tree
+
+Parameters
+Name Type Description
+leaves string[] hex-string array
+Returns
+string
+
+format: hex-string; Merkle tree root
+
+getProof
+getProof(leaf, branch?, hashPath?): string[]
+
+Return path to leaf
+
+Parameters
+Name Type Default value Description
+leaf string undefined hex-string
+branch string[] undefined hex-string array
+hashPath string[] [] hex-string array
+Returns
+string[]
+
+format: hex-string array"
