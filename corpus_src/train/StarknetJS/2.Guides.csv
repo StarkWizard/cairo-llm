@@ -1,5 +1,5 @@
 question,answer
-How to get start£¿,"This is an introduction about how to get start.
+"How to get start?","This is an introduction about how to get start.
 1.Installation
 ###
 
@@ -35,7 +35,7 @@ By default, defaultProvider tests will be run through the Sequencer.
 If you want to run defaultProvider through the RPC run:
 ###
 
-export TEST_RPC_URL = ""http://127.0.0.1:5050/rpc""
+export TEST_RPC_URL = 'http://127.0.0.1:5050/rpc'
 
 # only RPC related tests:
 npm run test ./__tests__/rpcProvider.test.ts
@@ -62,7 +62,7 @@ For some more extensive examples visit PhilippeR26's workshop.
 
 6.Contracts used in the guides
 You can find the compiled contracts used in these guides in the compiled_contracts directory."
-What is Starknet.js ?,"This is an introduction to Starknet.js.
+"What is Starknet.js?","This is an introduction to Starknet.js:
 Starknet.js is a library that helps to connect your website or your Decentralized Application (DAPP) to the blockchain-based Starknet network, using JavaScript / TypeScript language.
 Overview
 
@@ -85,7 +85,7 @@ Understand what is Starknet and how it works is necessary. Then, you can learn h
 5.The Account object is the most useful:
 as a wallet, to store your tokens.
 as a way to pay the fees to the network, and to be able to write in its memory."
-How to connect to the network through Provider object£¿,"This is an introduction about how to connect to the network through Provider object.
+"How to connect to the network through Provider object?","This is an introduction about how to connect to the network through Provider object.
 The first thing to do is to define with which network you want to interact.
 
 With the Provider object, you define which network to use.
@@ -196,7 +196,7 @@ Specific sequencer methods
 For example, if you want to estimate the fee of an L1 ?? L2 message, you need to use a method that is available only in the sequencer. The class SequencerProvider is available for this case:
 ###
 
-import { SequencerProvider, constants } from ""starknet"";
+import { SequencerProvider, constants } from 'starknet';
 const provider = new SequencerProvider({ baseUrl: constants.BaseUrl.SN_GOERLI }); // for testnet
 const responseEstimateMessageFee = await provider.estimateMessageFee(.....)
 
@@ -220,7 +220,7 @@ const providerRPC = new RpcProvider({
 });
 
 ###"
-How to connect to an existing account£¿,"This is an introduction about how connect to an existing account.
+"How to connect to an existing account?","This is an introduction about how connect to an existing account.
 Once your provider is initialized, you can connect an existing account.
 
 You need 2 pieces of data:
@@ -259,7 +259,7 @@ const account = new Account(provider, accountAddress, privateKey);
 ###
 Your account is now connected, and you can use it.
 
-IMPORTANT: If this account is based on a Cairo v2 contract (for example OpenZeppelin account 0.7.0 or later), do not forget to add the parameter ""1"" after the privateKey parameter:
+IMPORTANT: If this account is based on a Cairo v2 contract (for example OpenZeppelin account 0.7.0 or later), do not forget to add the parameter '1' after the privateKey parameter:
 ###
 
 const account = new Account(provider, accountAddress, privateKey, '1');
@@ -286,10 +286,10 @@ const privateKey = process.env.OZ_NEW_ACCOUNT_PRIVKEY;
 const accountAddress = '0x051158d244c7636dde39ec822873b29e6c9a758c6a9812d005b6287564908667';
 
 const account = new Account(provider, accountAddress, privateKey);
-// add ,""1"" after privateKey if this account is not a Cairo 0 contract
+// add ,'1' after privateKey if this account is not a Cairo 0 contract
 
 ###"
-How to connect to deployed contract£¿,"This is an introduction about how connect to deployed contract.
+"How to connect to deployed contract?","This is an introduction about how connect to deployed contract.
 Once your provider is initialized, you can connect a contract already deployed in the network.
 
 You need 2 pieces of data:
@@ -336,7 +336,7 @@ const compiledTest = json.parse(fs.readFileSync('./compiledContracts/test.json')
 const myTestContract = new Contract(compiledTest.abi, testAddress, provider);
 
 ###"
-How to interact with your contract£¿,"This is an introduction about how to interact with your contract.
+"How to interact with your contract?","This is an introduction about how to interact with your contract.
 Once your provider, contract, and account are connected, you can interact with the contract:
 
 you can read the memory of the contract, without fees.
@@ -392,7 +392,7 @@ const privateKey0 = process.env.OZ_ACCOUNT_PRIVATE_KEY;
 const account0Address = '0x123....789';
 
 const account0 = new Account(provider, account0Address, privateKey0);
-// add ,""1"" after privateKey0 if this account is not a Cairo 0 contract
+// add ,'1' after privateKey0 if this account is not a Cairo 0 contract
 
 // Connect the deployed Test contract in Testnet
 const testAddress = '0x5f7cd1fd465baff2ba9d2d1501ad0a2eb5337d9a885be319366b5205a414fdd';
@@ -480,7 +480,7 @@ const getResponse = await myAccount.call('get_bal', specialParameters, { parseRe
 
 ###
 You provide the low-level numbers expected by Starknet, without any parsing or checking. See more details here."
-How to create a new contract£¿,"This is an introduction about how to create a new contract.
+"How to create a new contract?","This is an introduction about how to create a new contract.
 When you have compiled your new Cairo contract, you can deploy it in the network.
 
 In Starknet, a new contract has to be added in two phases:
@@ -515,7 +515,7 @@ const provider = new Provider({ sequencer: { baseUrl: 'http://127.0.0.1:5050' } 
 const privateKey0 = process.env.OZ_ACCOUNT_PRIVATE_KEY;
 const account0Address: string = '0x123....789';
 const account0 = new Account(provider, account0Address, privateKey0);
-// add ,""1"" after privateKey0 if this account is not a Cairo 0 contract
+// add ,'1' after privateKey0 if this account is not a Cairo 0 contract
 
 // Declare & deploy Test contract in devnet
 const compiledTestSierra = json.parse(
@@ -550,7 +550,7 @@ const privateKey0 = process.env.OZ_ACCOUNT_PRIVATE_KEY;
 const account0Address: string = '0x123....789';
 
 const account0 = new Account(provider, account0Address, privateKey0);
-// add ,""1"" after privateKey0 if this account is not a Cairo 0 contract
+// add ,'1' after privateKey0 if this account is not a Cairo 0 contract
 
 // Deploy Test contract in devnet
 // ClassHash of the already declared contract
@@ -574,19 +574,19 @@ Construct the constructor
 If your contract has a constructor with inputs, you have to provide these inputs in the deployContract or declareAndDeploy commands. For example, with this contract constructor:
 ###
 
-    ""name"": ""constructor"",
-    ""inputs"": [
+    'name': 'constructor',
+    'inputs': [
       {
-        ""name"": ""text"",
-        ""type"": ""core::felt252""
+        'name': 'text',
+        'type': 'core::felt252'
       },
       {
-        ""name"": ""longText"",
-        ""type"": ""core::array::Array::<core::felt252>""
+        'name': 'longText',
+        'type': 'core::array::Array::<core::felt252>'
       },
       {
-        ""name"": ""array1"",
-        ""type"": ""core::array::Array::<core::felt252>""
+        'name': 'array1',
+        'type': 'core::array::Array::<core::felt252>'
       }
     ],
 
@@ -651,7 +651,7 @@ const privateKey0 = process.env.OZ_ACCOUNT_PRIVATE_KEY;
 const account0Address: string = '0x123....789';
 
 const account0 = new Account(provider, account0Address, privateKey0);
-// add ,""1"" after privateKey0 if this account is not a Cairo 0 contract
+// add ,'1' after privateKey0 if this account is not a Cairo 0 contract
 
 // Declare Test contract in devnet
 const compiledTestSierra = json.parse(
@@ -669,7 +669,7 @@ await provider.waitForTransaction(declareResponse.transaction_hash);
 console.log('Test Completed.');
 
 ###"
-How to transform date£¿,"This is an introduction about how to transform date.
+"How to transform date?","This is an introduction about how to transform date.
 This guide is the most important of all this documentation. Take your time, and read it carefully...
 
 Cairo contracts and JavaScript/TypeScript languages do not have the same types of data. To exchange data with Starknet, the data have to be transformed and formatted in a list of numbers.
@@ -696,7 +696,7 @@ These types do not exist in JS/TS - you have Number, bigInt, string, array, obje
 
 In Starknet.js, it's a bit ... complicated: you have the BigNumberish type and it can include:
 
-String (representing a number): ""123"", ""0xabc2""
+String (representing a number): '123', '0xabc2'
 Number (max 53 bits): 123
 BigInt (max 255 bits): 12345612345n
 ###
@@ -768,7 +768,7 @@ To decode yourself a string:
 const decStr: string = shortString.decodeShortString('0x7572692f706963742f7433382e6a7067');
 
 ###
-The result is: ""uri/pict/t38.jpg""
+The result is: 'uri/pict/t38.jpg'
 
 longString
 longString is a string that may contain more than 31 characters. Starknet is waiting for an array of felt: string_len, string1, string2, ...
@@ -816,8 +816,8 @@ From this ABI:
 ###
 
 {
-  ""name"": ""data2"",
-  ""type"": ""(min: felt, max: felt)""
+  'name': 'data2',
+  'type': 'min: felt, max: felt'
 }
 
 ###
@@ -842,7 +842,7 @@ Starknet is waiting for an array of felts: array_len, array1, array2, ...
 You can send it to Starknet.js methods: bigNumberish[].
 ###
 
-Const myArray = [10, ""0xaa"", 567n];
+Const myArray = [10, '0xaa', 567n];
 await myContract.my_function(myArray);
 
 ###
@@ -1103,9 +1103,9 @@ array of u8, u16, u32, usize, u64, u128, felt252, address func get_v() -> Array<
 shortString (31 ASCII characters max) func get_v() -> felt252 string const res=myContract.call(...
 const title:string = shortString.decodeShortstring(res)
 longString func get_v() -> Array<felt252> string const res=myContract.call(...
-const longString = res.map( (shortStr: bigint) => { return shortString.decodeShortString( num.toHex( shortStr)) }).join("""");
-Tuple func get_v() -> (felt252, u8) Object {""0"": bigint, ""1"": bigint} const res = myContract.call(...
-const res0: bigint = res[""0""];
+const longString = res.map( (shortStr: bigint) => { return shortString.decodeShortString( num.toHex( shortStr)) }).join('''');
+Tuple func get_v() -> (felt252, u8) Object {'0': bigint, '1': bigint} const res = myContract.call(...
+const res0: bigint = res['0'];
 const results: bigint[] = Object.values(res)
 Struct func get_v() -> MyStruct MyStruct = { account: bigint, amount: bigint} const res: MyStruct = myContract.call(...
 complex array func get_v() -> Array<fMyStruct> MyStruct[] const res: MyStruct[] = myContract.call(...
@@ -1157,10 +1157,10 @@ const result = await myContract.get_text(calldata, {
 The result will be an object, with 2 strings:
 ###
 
-{ name: ""Organic"", description: ""The best way to read a long string!!!"" }
+{ name: 'Organic', description: 'The best way to read a long string!!!' }
 
 ###"
-How to estimate fees£¿,"This is an introduction about how to estimate fees.
+"How to estimate fees?","This is an introduction about how to estimate fees.
 By default, all nonfree Starknet commands (declare, deploy, invoke) work without any limitation of cost.
 
 Nevertheless, you might want to inform the DAPP user of the cost of the incoming transaction before proceeding and requesting its validation.
@@ -1246,7 +1246,7 @@ const declareResponse = await account0.declare(
 );
 
 ###"
-How to Work with ERC20 tokens£¿,"This is an introduction about how to estimate fees.
+"How to Work with ERC20 tokens?","This is an introduction about how to estimate fees.
 Based on what has been seen in the previous pages of this guide, we will use an ERC20 contract.
 
 1.What's an ERC20
@@ -1375,7 +1375,7 @@ console.log(
 console.log('Script completed.');
 
 ###"
-What is event£¿,"This is an introduction about events.
+"What is event?","This is an introduction about events.
 A contract may emit events throughout its execution. Each event contains the following fields:
 
 from_address: address of the contract emitting the events
@@ -1443,7 +1443,7 @@ const nameHash = num.toHex(hash.starknetKeccak('EventPanic'));
 ###
 The second parameter is the errorType variable content (stored in keys array because of the #[key] flag in the Cairo code).
 
-The data array contains the errorDescription variable content ('0x4d6567612050616e69632e' corresponds to the encoded value of ""Mega Panic."")
+The data array contains the errorDescription variable content ('0x4d6567612050616e69632e' corresponds to the encoded value of 'Mega Panic.')
 
 You can decode it with:
 ###
@@ -1479,7 +1479,7 @@ In this example, if you want to read the events recorded in the last 10 blocks, 
 
 import { RpcProvider } from 'starknet';
 const providerRPC = new RpcProvider({
-  nodeUrl: ""{ nodeUrl: 'https://starknet-goerli.infura.io/v3/' + infuraKey }"",
+  nodeUrl: '{ nodeUrl: 'https://starknet-goerli.infura.io/v3/' + infuraKey }',
 }); // for an Infura node on Testnet
 const lastBlock = await providerRPC.getBlock('latest');
 const keyFilter = [num.toHex(hash.starknetKeccak('EventPanic')), '0x8'];
@@ -1548,7 +1548,7 @@ while (continuationToken) {
 }
 
 ###"
-How to messages with L1 network£¿,"This is an introduction about how to messages with L1 network.
+"How to messages with L1 network?","This is an introduction about how to messages with L1 network.
 You can exchange messages between L1 & L2 networks:
 
 L2 Starknet mainnet ?? L1 Ethereum.
@@ -1604,7 +1604,7 @@ const { suggestedMaxFee: estimatedFee1 } = await account0.estimateInvokeFee({
 
 ###
 The result is in estimatedFee1, of type BN."
-What is Signature£¿,"This is an introduction about Signature.
+"What is Signature?","This is an introduction about Signature.
 You can use Starknet.js to sign a message outside of the network, using the standard methods of hash and sign of Starknet. In this way, in some cases, you can avoid paying fees to store data in-chain; you transfer the signed message off-chain, and the recipient can verify (without fee) on-chain the validity of the message.
 
 1.Sign and send a message
@@ -1791,7 +1791,7 @@ try {
 console.log('Result5 (boolean) =', result5);
 
 ###"
-How to Interact with more than one contract within one transaction£¿,"This is an introduction about how to Interact with more than one contract within one transaction.
+"How to Interact with more than one contract within one transaction?","This is an introduction about how to Interact with more than one contract within one transaction.
 Interacting with more than one contract with one transaction is one of Starknet's features. To use this feature, two contracts are required.
 
 1.Setup
@@ -1839,7 +1839,7 @@ const multiCall = await account.execute([
 await provider.waitForTransaction(multiCall.transaction_hash);
 
 ###"
-What is Cairo Enums£¿,"This is an introduction about Cairo Enums.
+"What is Cairo Enums?","This is an introduction about Cairo Enums.
 1.Cairo Enums usage
 Cairo-lang v0.12.0 (includes Cairo v2.0.0) introduces a new type of data that can be exchanged with Starknet: the Enums. Not related to the TypeScript Enums, the Cairo Enums are identical to Rust Enums.
 More information in the Starknet book here.
@@ -1873,7 +1873,7 @@ const res2: CairoOption<Order> = await myTestContract.test(150);
 
 ###
 In CairoOption<T>, T is the type of the data related to the Some variant.
-The CairoOption class has ""Cairo like"" methods:
+The CairoOption class has 'Cairo like' methods:
 ###
 
 const a = res.isSome(); // false
@@ -1942,7 +1942,7 @@ const res2 = (await myTestContract.call('test', [110])) as CairoResult<bigint, b
 
 ###
 In CairoResult<T, U>, T is the type of the data related to the Ok variant, and U is the type of the data related to the Err variant.
-The CairoResult class has ""Cairo like"" methods:
+The CairoResult class has 'Cairo like' methods:
 ###
 
 const a = res.isOk(); // false
@@ -2031,15 +2031,15 @@ const res4: CairoCustomEnum = await myTestContract.test(190);
 const res5: CairoCustomEnum = await myTestContract.test(220);
 
 ###
-The CairoCustomEnum class has ""Cairo like"" methods:
+The CairoCustomEnum class has 'Cairo like' methods:
 ###
 
-const a = res.activeVariant(); // ""Error""
-const a2 = res2.activeVariant(); // ""Warning""
-const a3 = res3.activeVariant(); // ""Critical""
-const a4 = res4.activeVariant(); // ""Response""
-const a5 = res5.activeVariant(); // ""Empty""
-const c = res.unwrap(); // {""0"": 3n, ""1"": 4n}
+const a = res.activeVariant(); // 'Error'
+const a2 = res2.activeVariant(); // 'Warning'
+const a3 = res3.activeVariant(); // 'Critical'
+const a4 = res4.activeVariant(); // 'Response'
+const a5 = res5.activeVariant(); // 'Empty'
+const c = res.unwrap(); // {'0': 3n, '1': 4n}
 const c2: bigint = res2.unwrap(); // 7721172739414537047772488609840n
 const c3: bigint[] = res3.unwrap(); // [5n, 6n]
 const c4: Order = res4.unwrap(); // { p1: 1n, p2: 190n }
@@ -2110,7 +2110,7 @@ const myCalldata = CallData.compile(myCustomEnum);
 const res = (await myTestContract.call('test2a', myCalldata)) as bigint;
 
 ###"
-What is Automatic TypeScript parsing of Cairo ABI-s£¿,"This is an introduction about Automatic TypeScript parsing of Cairo ABI-s.
+"What is Automatic TypeScript parsing of Cairo ABI-s?","This is an introduction about Automatic TypeScript parsing of Cairo ABI-s.
 Starknet.js has integrated Abi-Wan-Kanabi, the standalone TypeScript parser for Cairo smart contracts.
 
 It enables on-the-fly typechecking and autocompletion for contract calls directly in TypeScript. Developers can now catch typing mistakes early, prior to executing a call on-chain, thus enhancing the overall DAPP development experience.
@@ -2172,7 +2172,7 @@ let cairo1ContractTyped = cairo1Contract.typedv1(tAbi); // or typedv2(tAbi) if y
 cairo1ContractTyped.test_bool();
 
 ###"
-How to Migrate from v4 to v5£¿,"This is an introduction about how to Migrate from v4 to v5.
+"How to Migrate from v4 to v5?","This is an introduction about how to Migrate from v4 to v5.
 This document only covers the features present in v4 which have changed in some significant way in v5.
 
 If you encounter any missing changes, please let us know and we will update this guide.
@@ -2204,7 +2204,7 @@ const qty2 = 32786324915918425n;
 ###
 The BigNumberish type is now defined as:
 
-String representing a number: ""123"", ""0xabc2""
+String representing a number: '123', '0xabc2'
 Number (max 53 bits): 123
 BigInt (max 255 bits): 12345612345n
 Some commonly used BN utility methods are of course no longer present, however, they have simple equivalents:
