@@ -29,7 +29,6 @@ fn smallest_element<T, impl TPartialOrd: PartialOrd<T>, impl TCopy: Copy<T>, imp
 }
 ```
 "
-
 "How are generic fields incorporated into structs in Cairo, and can you give an example?","Generic fields are added to structs by specifying the type parameter in angle brackets after the struct name. Here’s an example:
 ```
 struct Wallet<T> {

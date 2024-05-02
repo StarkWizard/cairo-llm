@@ -68,6 +68,3 @@ Keeping track of contract dependencies and ensuring consistent compilation with 
 Use the starknet CLI tool to call contract functions.
 Prepare the necessary input data as per the contract's interface.
 Use the starknet invoke or starknet call commands to write or read data from the contract, respectively."
-
-
-

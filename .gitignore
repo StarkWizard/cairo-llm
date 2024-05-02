@@ -10,3 +10,9 @@ cairo-mistral
 **/*.model
 **/StarkWizard
 **/llama.cpp
+**/token.txt
+**/node_modules
+**/pnpm-lock.yaml
+**/scrapped
+**/wandb
+**/scrapped

@@ -10,3 +10,34 @@ curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh
 
 - Install the Cairo 1.0 extension for Visual Studio Code.
 "
+"What are the necessary components to begin with Dojo?","Rust, Cairo, protoc"
+"How can I download the Dojo repository?","git clone https://github.com/dojoengine/dojo.git"
+"What are the steps to configure a development environment for Dojo?","Begin by setting up Rust and executing the test suite to verify your installation: rustup override set stable && rustup update && cargo test
+
+Note: Your specific Linux distribution may require you to install extra dependencies. Ensure you install any dependencies that are recommended or missing during the installation.
+
+Proceed by installing the Scarb package manager with the following command: curl --proto ‘=https’ --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+
+Complete the setup by adding the Cairo 1.0 extension to Visual Studio Code.
+"
+"What is the method to clone Dojo's repositories?","git clone https://github.com/dojoengine/dojo.git"
+"How can I establish a development environment for Dojo?","Begin the setup by installing Rust, then run the test suite to ensure everything is correctly configured:
+rustup override set stable && rustup update && cargo test
+
+Note: You might need to install extra dependencies based on your Linux distribution. It's important to install any necessary or missing dependencies that come up during the setup.
+
+Following that, install the Scarb package manager using this command:
+curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+
+Finally, add the Cairo 1.0 extension to Visual Studio Code.
+"
+"What essential elements are required to start with Dojo?","Rust, Cairo, protoc"
+"How does one acquire the Dojo repository?","git clone https://github.com/dojoengine/dojo.git"
+"What is the procedure to set up a Dojo development environment?","Initiate by installing Rust and conducting a test suite to check your installation: rustup override set stable && rustup update && cargo test
+
+Note: Depending on your Linux distribution, additional dependencies may be required. Ensure to install all recommended or identified missing dependencies during the setup.
+
+Next, install the Scarb package manager through this command: curl --proto ‘=https’ --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+
+Conclude by integrating the Cairo 1.0 extension into Visual Studio Code.
+"

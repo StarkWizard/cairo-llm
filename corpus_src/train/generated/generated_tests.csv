@@ -151,4 +151,3 @@ in the context of the tests provided is used to validate that the variable 'resu
 "what does the `#[cfg(test)]` attribute indicate?","The `#[cfg(test)]` attribute indicates that the following code is meant for testing t specific code segments or functions work as expected by asserting certain conditions."
 "What happens if you don't provide a test function with the maximum amount of gas it can consume when testing recursive functions or loops?","If you don't provide a test function with the maximum amount of gas it can consume when testing recursive functions or loops, it might run into infinite loops or consume excessive gas, leading to potential problems or inefficiencies."
 "How do you measure the gas usage of a specific operation?","To measure the gas usage of a specific operation, you subtract the value of `testing::get_available_gas()` after the operation from its value before the operation."
-

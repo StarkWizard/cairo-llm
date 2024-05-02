@@ -235,4 +235,3 @@ mod TokenWrapper {
 "Why might you need to use the starknet_keccak hash function when making calls using syscalls?","The starknet_keccak hash function is used to generate the function selector, which identifies the function to be called when using syscalls."
 "What happens behind the scenes when you use a high-level dispatcher to interact with a contract?","The dispatcher takes care of details like function selection, serialization, and deserialization, invoking the appropriate syscall and providing a more abstracted and intuitive way for developers to make calls."
 "How are contract interfaces leveraged in StarkNet based on the provided information?","Each time a contract interface is defined in StarkNet, the compiler automatically generates and exports two dispatchers, streamlining the process of interacting with other contracts or classes."
-

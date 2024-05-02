@@ -54,8 +54,8 @@ fn main() {
     // first_value is set to the removed element, or Option::None if the array is empty.
 }
 ```
- "
- "How can I get the value at a specific index of an array","
+"
+"How can I get the value at a specific index of an array","
  To access array elements, you can use get() or at() array methods that return different types. Using arr.at(index) is equivalent to using the subscripting operator arr[index].
 
 The get function returns an Option<Box<@T>>, which means it returns an option to a Box type (Cairo's smart-pointer type) containing a snapshot to the element at the specified index if that element exists in the array. If the element doesn't exist, get returns None. This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics.
@@ -107,7 +107,6 @@ fn main() {
 ```
 "
 "
-
 create an array 'messages' that contains a u64, a u16, a tuple (u32,u32)","
 ```
  //If you want to store elements of different types in an array, you can use an Enum.
@@ -122,7 +121,7 @@ create an array 'messages' that contains a u64, a u16, a tuple (u32,u32)","
 fn main() {
     let mut messages: Array<Data> = ArrayTrait::new();
     messages.append(Data::lInteger(100));
-    messages.append(Data::sInteger(40));
+    messages.append(Data::sInteger(40));    
     messages.append(Data::Tuple(50,50));
 }
 ```
@@ -196,7 +195,6 @@ third = my_array.at(2)
     names.append('Alice');
     names.append('Bob');
 "
-
 "Can I do my_array.net() to get the next element of an array?","No, there is no such method, you need to use get() or at, with the correct index"
 "Please correct: 
     let mut i=0
@@ -242,5 +240,4 @@ fn main() {
     messages.append(Data::Tuple((10, 30)));
 }
 ```
-
 "

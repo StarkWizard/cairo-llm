@@ -27,3 +27,10 @@ struct Health {
     y: u32
 }
 "
+"How do ECS systems generally handle entities?","Various Entity-Component-System (ECS) architectures handle entities in different ways, each with their unique method of entity management."
+"In Dojo, how are entities managed?","In Dojo, entities are managed as primary key values within the world. Models, representing different aspects of the entity, are attached to these keys."
+"Could you give an example of an entity in a Dojo-based game?","An example of an entity in a Dojo game could be a game character that is associated with models like 'Moves' and 'Position'."
+"What should be considered when defining models for a Dojo entity?","When defining models for a Dojo entity, it's important to remember that the entity itself is not directly referenced. Instead, the focus is on structuring data that the entity will contain."
+"How is the 'Moves' struct defined in Dojo?","In Dojo, the 'Moves' struct typically contains information such as the player's contract address and their remaining moves."
+"What does the 'Health' struct represent in Dojo?","The 'Health' struct in Dojo usually includes details like the player's contract address, along with their health-related attributes, such as hit points or health status."
+"What is the significance of the key field in Dojo structs?","The key field in Dojo structs serves to uniquely identify the specific entity that the struct is associated with, acting as a unique identifier or a link to the entity."

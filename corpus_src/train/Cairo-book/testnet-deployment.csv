@@ -31,7 +31,6 @@ question,answer
 "What is the purpose of 'salt' in 'kdfparams'?","'salt' is a random value combined with the password to deter dictionary attacks."
 "What is the 'mac' in the keystore.json file?","'mac' (Message Authentication Code) ensures the integrity of the encrypted private key."
 "What command checks the version of the scarb tool?","scarb --version."
-"What is the purpose of the starkli tool?","starkli --version checks the version of the Starkli tool used to interact with Starknet."
 "Is it necessary to deploy a smart wallet to the network for it to be used as a signer?","Yes, it is necessary to deploy the smart wallet to a network like Starknet Goerli or mainnet."
 "What is the purpose of funding a smart wallet on the Goerli Testnet?","Funding is required to deploy the wallet on the network."
 "How do you create a Signer from the private key of a smart wallet?","Use the starkli signer keystore from-key command with the path to the keystore file."
@@ -150,6 +149,3 @@ question,answer
 "Why is the Starknet testnet useful?","For testing smart contract deployment and interactions without real-world consequences."
 "What does the 'starkli call' command demonstrate about a smart contract?","Its read functionalities and current state information."
 "What does the 'version' field in a descriptor file indicate?","The version of the descriptor file format or the wallet variant."
-
-
-
