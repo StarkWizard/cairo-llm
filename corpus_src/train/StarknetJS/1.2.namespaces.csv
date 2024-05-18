@@ -1,0 +1,5738 @@
+question,answer
+"what is cairo's namespace?","The following is an introduction to cairo's namespace.
+1.isCairo1Abi
+isCairo1Abi(abi): boolean
+
+Test if an ABI comes from a Cairo 1 contract
+
+Example
+###
+
+const isCairo1: boolean = isCairo1Abi(myAbi: Abi);
+
+###
+Parameters
+Name     Type                    Description
+abi       Abi     representing the interface of a Cairo contract
+Returns
+boolean
+
+TRUE if it is an ABI from a Cairo1 contract
+
+Defined in
+src/utils/calldata/cairo.ts:53
+
+2.getAbiContractVersion
+getAbiContractVersion(abi): ContractVersion
+
+Return ContractVersion (Abi version) based on Abi or undefined for unknown version
+
+Parameters
+Name   Type
+abi    Abi
+Returns
+ContractVersion
+
+string
+
+Defined in
+src/utils/calldata/cairo.ts:67
+
+3.felt
+felt(it): string
+
+Create felt Cairo type (cairo type helper)
+
+Parameters
+Name       Type
+it     BigNumberish
+Returns
+string
+
+format: felt-string
+
+Defined in
+src/utils/calldata/cairo.ts:127
+
+4.isLen
+isLen(name): boolean
+
+Parameters
+Name         Type
+name        string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:16
+
+5.isTypeFelt
+isTypeFelt(type): boolean
+
+Parameters
+Name        Type
+type       string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:17
+
+6.isTypeArray
+isTypeArray(type): boolean
+
+Parameters
+Name       Type
+type      string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:18
+
+7.isTypeTuple
+isTypeTuple(type): boolean
+
+Parameters
+Name     Type
+type    string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:22
+
+8.isTypeNamedTuple
+isTypeNamedTuple(type): boolean
+
+Parameters
+Name    Type
+type   string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:23
+
+9.isTypeStruct
+isTypeStruct(type, structs): boolean
+
+Parameters
+Name         Type
+type        string
+structs    AbiStructs
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:24
+
+10.isTypeEnum
+isTypeEnum(type, enums): boolean
+
+Parameters
+Name     Type
+type    string
+enums  AbiEnums
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:25
+
+11.isTypeOption
+isTypeOption(type): boolean
+
+Parameters
+Name      Type
+type     string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:26
+
+12.isTypeResult
+isTypeResult(type): boolean
+
+Parameters
+Name     Type
+type    string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:27
+
+13.isTypeUint
+isTypeUint(type): boolean
+
+Parameters
+Name     Type
+type    string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:28
+
+14.isTypeLitteral
+isTypeLitteral(type): boolean
+
+Parameters
+Name    Type
+type   string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:29
+
+15.isTypeUint256
+isTypeUint256(type): boolean
+
+Parameters
+Name       Type
+type      string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:30
+
+16.isTypeBool
+isTypeBool(type): boolean
+
+Parameters
+Name    Type
+type   string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:31
+
+17.isTypeContractAddress
+isTypeContractAddress(type): boolean
+
+Parameters
+Name    Type
+type   string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:32
+
+18.isTypeEthAddress
+isTypeEthAddress(type): boolean
+
+Parameters
+Name     Type
+type    string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:34
+
+19.isCairo1Type
+isCairo1Type(type): boolean
+
+Parameters
+Name      Type
+type     string
+Returns
+boolean
+
+Defined in
+src/utils/calldata/cairo.ts:36
+
+20.getArrayType
+getArrayType(type): string
+
+Parameters
+Name     Type
+type    string
+Returns
+string
+
+Defined in
+src/utils/calldata/cairo.ts:37
+
+21.uint256
+uint256(it): Uint256
+
+Create Uint256 Cairo type (helper for common struct type)
+
+Example
+###
+
+uint256('892349863487563453485768723498');
+
+###
+Parameters
+Name      Type
+it    BigNumberish
+Returns
+Uint256
+
+Defined in
+src/utils/calldata/cairo.ts:101
+
+22.tuple
+tuple(...args): Record<number, boolean | object | BigNumberish>
+
+Create unnamed tuple Cairo type (helper same as common struct type)
+
+Example
+###
+
+tuple(1, '0x101', 16);
+
+###
+Parameters
+Name                       Type
+...args        (boolean | object | BigNumberish)[]
+Returns
+Record<number, boolean | object | BigNumberish>
+
+Defined in
+src/utils/calldata/cairo.ts:119
+"What is constants's namespace?","The following is an introduction to constants's namespace.
+1.Enumerations
+
+1.BaseUrl
+2.NetworkName
+3.StarknetChainId
+4.TransactionHashPrefix
+
+2.Variables
+1.IS_BROWSER
+Const IS_BROWSER: boolean
+
+Defined in
+src/utils/encode.ts:4
+
+2.TEXT_TO_FELT_MAX_LEN
+Const TEXT_TO_FELT_MAX_LEN: 31
+
+Cairo Felt support storing max 31 character
+
+Defined in
+src/constants.ts:6
+
+3.HEX_STR_TRANSACTION_VERSION_1
+Const HEX_STR_TRANSACTION_VERSION_1: '0x1'
+
+Defined in
+src/constants.ts:8
+
+4.HEX_STR_TRANSACTION_VERSION_2
+Const HEX_STR_TRANSACTION_VERSION_2: '0x2'
+
+Defined in
+src/constants.ts:9
+
+5.BN_TRANSACTION_VERSION_1
+Const BN_TRANSACTION_VERSION_1: 1n
+
+Defined in
+src/constants.ts:10
+
+6.BN_TRANSACTION_VERSION_2
+Const BN_TRANSACTION_VERSION_2: 2n
+
+Defined in
+src/constants.ts:11
+
+7.BN_FEE_TRANSACTION_VERSION_1
+Const BN_FEE_TRANSACTION_VERSION_1: bigint
+
+Defined in
+src/constants.ts:12
+
+8.BN_FEE_TRANSACTION_VERSION_2
+Const BN_FEE_TRANSACTION_VERSION_2: bigint
+
+Defined in
+src/constants.ts:13
+
+9.ZERO
+Const ZERO: 0n
+
+Defined in
+src/constants.ts:15
+
+10.MASK_250
+Const MASK_250: bigint
+
+Defined in
+src/constants.ts:16
+
+11.MASK_251
+Const MASK_251: bigint
+
+Defined in
+src/constants.ts:17
+
+12.API_VERSION
+Const API_VERSION: 0n
+
+Defined in
+src/constants.ts:18
+
+13.UDC
+Const UDC: Object
+
+Type declaration
+Name          Type
+ADDRESS      string
+ENTRYPOINT   string
+
+Defined in
+src/constants.ts:43
+
+14.RPC_GOERLI_NODES
+Const RPC_GOERLI_NODES: string[]
+
+Defined in
+src/constants.ts:48
+
+15.RPC_MAINNET_NODES
+Const RPC_MAINNET_NODES: string[]
+
+Defined in
+src/constants.ts:53"
+"What is ec's namespace?","The following is an introduction to ec's namespace.
+1.starkCurve
+2.weierstrass"
+"What is ecode's namespace?","The following is an introduction to ecode's namespace.
+1.References
+
+IS_BROWSER
+Re-exports IS_BROWSER
+
+2.factions
+
+arrayBufferToString
+arrayBufferToString(array): string
+
+Convert array buffer to string
+
+[internal usage]
+
+Parameters
+Name        Type
+array    ArrayBuffer
+Returns
+string
+
+Defined in
+src/utils/encode.ts:18
+
+utf8ToArray
+utf8ToArray(str): Uint8Array
+
+Convert utf8-string to Uint8Array
+
+[internal usage]
+
+Parameters
+Name     Type
+str     string
+Returns
+Uint8Array
+
+Defined in
+src/utils/encode.ts:27
+
+stringToArrayBuffer
+stringToArrayBuffer(str): Uint8Array
+
+Convert utf8-string to Uint8Array
+
+Deprecated
+
+equivalent to 'utf8ToArray', alias will be removed
+
+Parameters
+Name       Type
+str       string
+Returns
+Uint8Array
+
+Defined in
+src/utils/encode.ts:36
+
+atobUniversal
+atobUniversal(a): Uint8Array
+
+Convert string to array buffer (browser and node compatible)
+
+Parameters
+Name      Type
+a        string
+Returns
+Uint8Array
+
+Defined in
+src/utils/encode.ts:43
+
+btoaUniversal
+btoaUniversal(b): string
+
+Convert array buffer to string (browser and node compatible)
+
+Parameters
+Name      Type
+b     ArrayBuffer
+Returns
+string
+
+Defined in
+src/utils/encode.ts:50
+
+buf2hex
+buf2hex(buffer): string
+
+Convert array buffer to hex-string
+
+Parameters
+Name         Type
+buffer    Uint8Array
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/encode.ts:58
+
+
+removeHexPrefix
+removeHexPrefix(hex): string
+
+Remove hex prefix '0x' from hex-string
+
+Parameters
+Name    Type    Description
+hex   string    hex-string
+Returns
+string
+
+format: base16-string
+
+Defined in
+src/utils/encode.ts:67
+
+addHexPrefix
+addHexPrefix(hex): string
+
+Add hex prefix '0x' to base16-string
+
+Parameters
+Name    Type    Description
+hex    string  base16-string
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/encode.ts:76
+
+padLeft
+padLeft(str, length, padding?): string
+
+Prepend string (default with '0')
+
+Parameters
+Name          Type         Default value
+str          string         undefined
+length       number         undefined
+padding      string         STRING_ZERO
+Returns
+string
+
+Defined in
+src/utils/encode.ts:98
+
+calcByteLength
+calcByteLength(str, byteSize?): number
+
+Calculate byte length of string
+
+[no internal usage]
+
+Parameters
+Name        Type      Default value
+str        string      undefined
+byteSize   number           8
+Returns
+number
+
+Defined in
+src/utils/encode.ts:107
+
+sanitizeBytes
+sanitizeBytes(str, byteSize?, padding?): string
+
+Prepend '0' to string bytes
+
+[no internal usage]
+
+Parameters
+Name        Type        Default value
+str         string        undefined
+byteSize    number            8
+padding     string        STRING_ZERO
+Returns
+string
+
+Defined in
+src/utils/encode.ts:118
+
+sanitizeHex
+sanitizeHex(hex): string
+
+Prepend '0' to hex-string bytes
+
+[no internal usage]
+
+Parameters
+Name         Type         Description
+hex         string        hex-string
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/encode.ts:129
+
+pascalToSnake
+pascalToSnake(text): string
+
+String transformation util
+
+Pascal case to screaming snake case
+
+Parameters
+Name         Type
+text        string
+Returns
+string
+
+Defined in
+src/utils/encode.ts:143"
+"What is event's namespace?","The following is an introduction to event's namespace.
+Functions
+getAbiEvents
+getAbiEvents(abi): AbiEvents
+
+Parameters
+Name    Type
+abi     Abi
+Returns
+AbiEvents
+
+Defined in
+src/utils/events/index.ts:17
+
+parseEvents
+parseEvents(providerReceivedEvents, abiEvents, abiStructs, abiEnums): ParsedEvents
+
+Parse raw events and structure them into response object based on a contract structs and defined events
+
+Parameters
+Name                              Type                       Description
+providerReceivedEvents          Event[]        ProviderEvent[] - Array of raw events
+abiEvents                      AbiEvents       AbiEvents - Events defined in the abi
+abiStructs                    AbiStructs      AbiStructs - Structs defined in the abi
+abiEnums                        AbiEnums                          -
+Returns
+ParsedEvents
+
+ParsedEvents - parsed events corresponding to the abi
+
+Defined in
+src/utils/events/index.ts:38"
+"What is hash's namespace?","The following is an introduction to hash's namespace.
+1.Namespaces
+poseidon
+
+2.Variables
+transactionVersion
+Const transactionVersion: 1n
+
+Defined in
+src/utils/hash.ts:38
+
+transactionVersion_2
+Const transactionVersion_2: 2n
+
+Defined in
+src/utils/hash.ts:39
+
+feeTransactionVersion
+Const feeTransactionVersion: bigint = BN_FEE_TRANSACTION_VERSION_1
+
+Defined in
+src/utils/hash.ts:40
+
+feeTransactionVersion_2
+Const feeTransactionVersion_2: bigint = BN_FEE_TRANSACTION_VERSION_2
+
+Defined in
+src/utils/hash.ts:41
+
+3.Functions
+getVersionsByType
+getVersionsByType(versionType?): Object
+
+Return transaction versions based on version type, default version type is 'transaction'
+
+Parameters
+Name                     Type
+versionType?    'fee' | 'transaction'
+Returns
+Object
+
+Name    Type
+v1     bigint
+v2     bigint
+Defined in
+src/utils/hash.ts:46
+
+computeHashOnElements
+computeHashOnElements(data): string
+
+Compute pedersen hash from data
+
+Parameters
+Name            Type
+data        BigNumberish[]
+Returns
+string
+
+format: hex-string - pedersen hash
+
+Defined in
+src/utils/hash.ts:56
+
+calculateTransactionHashCommon
+calculateTransactionHashCommon(txHashPrefix, version, contractAddress, entryPointSelector, calldata, maxFee, chainId, additionalData?): string
+
+Calculate transaction pedersen hash for common properties
+
+Following implementation is based on this python implementation #
+
+Parameters
+Name                 Type                           Default value
+txHashPrefix           TransactionHashPrefix           undefined
+version                BigNumberish                    undefined
+contractAddress        BigNumberish                    undefined
+entryPointSelector     BigNumberish                    undefined
+calldata               RawCalldata                     undefined
+maxFee                 BigNumberish                    undefined
+chainId                StarknetChainId                 undefined
+additionalData         BigNumberish[]                      []
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/hash.ts:68
+
+calculateDeployTransactionHash
+calculateDeployTransactionHash(contractAddress, constructorCalldata, version, chainId, constructorName?): string
+
+Calculate deploy transaction hash
+
+Parameters
+Name                              Type               Default value
+contractAddress          BigNumberish                  undefined
+constructorCalldata      RawCalldata                   undefined
+version                      BigNumberish              undefined
+chainId                     StarknetChainId            undefined
+constructorName               string                  'constructor'
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/hash.ts:96
+
+calculateDeclareTransactionHash
+calculateDeclareTransactionHash(classHash, senderAddress, version, maxFee, chainId, nonce, compiledClassHash?): string
+
+Calculate declare transaction hash
+
+Parameters
+Name                               Type                               Description
+classHash                         string                               hex-string
+senderAddress                     BigNumberish                               -
+version                           BigNumberish                               -
+maxFee                            BigNumberish                               -
+chainId                           StarknetChainId                            -
+nonce                             BigNumberish                               -
+compiledClassHash?                string                               hex-string
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/hash.ts:120
+
+calculateDeployAccountTransactionHash
+calculateDeployAccountTransactionHash(contractAddress, classHash, constructorCalldata, salt, version, maxFee, chainId, nonce): string
+
+Calculate deploy_account transaction hash
+
+Parameters
+Name                          Type
+contractAddress               BigNumberish
+classHash                     BigNumberish
+constructorCalldata           RawCalldata
+salt                          BigNumberish
+version                       BigNumberish
+maxFee                        BigNumberish
+chainId                       StarknetChainId
+nonce                         BigNumberish
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/hash.ts:145
+
+calculateTransactionHash
+calculateTransactionHash(contractAddress, version, calldata, maxFee, chainId, nonce): string
+
+Calculate invoke transaction hash
+
+Parameters
+Name                          Type
+contractAddress               BigNumberish
+version                       BigNumberish
+calldata                      RawCalldata
+maxFee                        BigNumberish
+chainId                       StarknetChainId
+nonce                         BigNumberish
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/hash.ts:173
+
+calculateContractAddressFromHash
+calculateContractAddressFromHash(salt, classHash, constructorCalldata, deployerAddress): string
+
+Calculate contract address from class hash
+
+Parameters
+Name                          Type
+salt                          BigNumberish
+classHash                     BigNumberish
+constructorCalldata           RawArgs
+deployerAddress               BigNumberish
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/hash.ts:197
+
+formatSpaces
+formatSpaces(json): string
+
+Format json-string to conform starknet json-string
+
+Parameters
+Name                          Type                          Description
+json                          string                        json-string
+Returns
+string
+
+format: json-string
+
+Defined in
+src/utils/hash.ts:234
+
+default
+default(compiledContract): string
+
+Compute hinted class hash for legacy compiled contract (Cairo 0)
+
+Parameters
+Name                          Type
+compiledContract             LegacyCompiledContract
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/hash.ts:256
+
+computeLegacyContractClassHash
+computeLegacyContractClassHash(contract): string
+
+Computes the class hash for legacy compiled contract (Cairo 0)
+
+Parameters
+Name                          Type
+contract                string | LegacyCompiledContract
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/hash.ts:268
+
+computeCompiledClassHash
+computeCompiledClassHash(casm): string
+
+Compute compiled class hash for contract (Cairo 1)
+
+Parameters
+Name    Type
+casm CairoAssembly
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/hash.ts:326
+
+computeSierraContractClassHash
+computeSierraContractClassHash(sierra): string
+
+Compute sierra contract class hash (Cairo 1)
+
+Parameters
+Name        Type
+sierra CompiledSierra
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/hash.ts:371
+
+computeContractClassHash
+computeContractClassHash(contract): string
+
+Compute ClassHash (sierra or legacy) based on provided contract
+
+Parameters
+Name                Type
+contract    string | CompiledContract
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/hash.ts:408
+
+keccakBn
+keccakBn(value): string
+
+Calculate hex-string keccak hash for a given BigNumberish
+
+BigNumberish -> hex-string keccak hash
+
+Parameters
+Name         Type
+value   BigNumberish
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/selector.ts:14
+
+starknetKeccak
+starknetKeccak(str): bigint
+
+Calculate bigint keccak hash for a given string
+
+String -> bigint keccak hash
+
+Reference
+
+Parameters
+Name   Type                  Description
+str    string     the value you want to get the keccak hash from
+Returns
+bigint
+
+starknet keccak hash as BigInt
+
+Defined in
+src/utils/selector.ts:39
+
+getSelectorFromName
+getSelectorFromName(funcName): string
+
+Calculate hex-string selector for a given abi-function-name
+
+Abi-function-name -> hex-string selector
+
+Reference
+
+Parameters
+Name          Type            Description
+funcName      string     ascii-string of 'abi function name'
+Returns
+string
+
+format: hex-string; selector for 'abi function name'
+
+Defined in
+src/utils/selector.ts:54
+
+getSelector
+getSelector(value): string
+
+Calculate hex-string selector from abi-function-name, decimal string or hex string
+
+('abi-function-name' or dec-string or hex-string) -> hex-string selector
+
+Parameters
+Name           Type                   Description
+value         string         hex-string | dec-string | ascii-string
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/selector.ts:67"
+"What is json's namespace?","The following is an introduction to json's namespace.
+Functions
+parse
+parse(x): any
+
+Convert JSON string to JSON object
+
+NOTE: the String() wrapping is used so the behavior conforms to JSON.parse() which can accept simple data types but is not represented in the default typing
+
+Parameters
+Name      Type          Description
+x               string         JSON string
+Returns
+any
+
+Defined in
+src/utils/json.ts:21
+
+parseAlwaysAsBig
+parseAlwaysAsBig(x): any
+
+Convert JSON string to JSON object with all numbers as bigint
+
+Parameters
+Name         Type            Description
+x                   string          JSON string
+Returns
+any
+
+Defined in
+src/utils/json.ts:27
+
+stringify
+stringify(value, replacer?, space?, numberStringifiers?): string
+
+Convert JSON object to JSON string
+
+NOTE: the not-null assertion is used so the return type conforms to JSON.stringify() which can also return undefined but is not represented in the default typing
+
+Parameters
+Name                                                            Type
+value                                                         unknown
+replacer?                                                       any
+space?                                                string | number
+numberStringifiers?                  NumberStringifier[]
+Returns
+string
+
+JSON string
+
+Defined in
+src/utils/json.ts:37
+
+stringifyAlwaysAsBig
+stringifyAlwaysAsBig(value, replacer?, space?, numberStringifiers?): string
+
+Deprecated
+
+equivalent to 'stringify', alias will be removed
+
+Parameters
+Name                                                       Type
+value                                                       unknown
+replacer?                                                       any
+space?                                              string | number
+numberStringifiers?                   NumberStringifier[]
+Returns
+string
+
+Defined in
+src/utils/json.ts:37"
+"What is merkle's namespace?","The following is an introduction to merkle's namespace.
+1.Classes
+MerkleTree
+
+2.Functions
+proofMerklePath
+proofMerklePath(root, leaf, path): boolean
+
+Test Merkle tree path
+
+Parameters
+Name	Type	               Description
+root	string	               hex-string
+leaf	string               	hex-string
+path	string[]             	hex-string array
+Returns
+boolean
+
+Defined in
+src/utils/merkle.ts:85"
+"What is num's namespace?","The following is an introduction to num's namespace.
+1.References
+BigNumberish
+Re-exports BigNumberish
+
+2.Functions
+isHex
+isHex(hex): boolean
+
+Test if string is hex-string
+
+Parameters
+Name	          Type	         Description
+hex          	string         	hex-string
+Returns
+boolean
+Defined in
+src/utils/num.ts:14
+
+toBigInt
+toBigInt(value): bigint
+
+Convert BigNumberish to bigint
+
+Parameters
+Name	        Type
+value    	BigNumberish
+Returns
+bigint
+
+Defined in
+src/utils/num.ts:21
+
+isBigInt
+isBigInt(value): value is bigint
+
+Test if value is bigint
+
+Parameters
+Name     	Type
+value    	any
+Returns
+value is bigint
+
+Defined in
+src/utils/num.ts:28
+
+toHex
+toHex(number): string
+
+Convert BigNumberish to hex-string
+
+Parameters
+Name          	Type
+number	    BigNumberish
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/num.ts:36
+
+toStorageKey
+toStorageKey(number): string
+
+Convert BigNumberish to storage-key-string
+
+Same as toHex but conforming to the STORAGE_KEY pattern ^0x0[0-7]{1}[a-fA-F0-9]{0,62}$.
+
+A storage key is represented as up to 62 hex digits, 3 bits, and 5 leading zeroes: 0x0 + [0-7] + 62 hex = 0x + 64 hex
+
+Parameters
+Name             	Type
+number      	BigNumberish
+Returns
+string
+
+format: storage-key-string
+
+Defined in
+src/utils/num.ts:54
+
+hexToDecimalString
+hexToDecimalString(hex): string
+
+Convert hexadecimal string to decimal string
+
+Parameters
+Name           	Type	           Description
+hex	           string	           hex-string
+Returns
+string
+
+format: decimal string
+
+Defined in
+src/utils/num.ts:64
+
+assertInRange
+assertInRange(input, lowerBound, upperBound, inputName?): void
+
+Asserts input is equal to or greater then lowerBound and lower then upperBound.
+
+The inputName parameter is used in the assertion message.
+
+Parameters
+Name	           Type          	Default value
+input	      BigNumberish        	undefined
+lowerBound 	BigNumberish        	undefined
+upperBound	 BigNumberish        	undefined
+inputName	     string                	''
+Returns
+void
+
+Defined in
+src/utils/num.ts:81
+
+bigNumberishArrayToDecimalStringArray
+bigNumberishArrayToDecimalStringArray(rawCalldata): string[]
+
+Convert BigNumberish array to decimal string array
+
+Parameters
+Name	               Type
+rawCalldata	    BigNumberish[]
+Returns
+string[]
+
+format: decimal string array
+
+Defined in
+src/utils/num.ts:102
+
+bigNumberishArrayToHexadecimalStringArray
+bigNumberishArrayToHexadecimalStringArray(rawCalldata): string[]
+
+Convert BigNumberish array to hexadecimal string array
+
+Parameters
+Name                   	Type
+rawCalldata       	BigNumberish[]
+Returns
+string[]
+
+format: hex-string array
+
+Defined in
+src/utils/num.ts:110
+
+getDecimalString
+getDecimalString(value): string
+
+Convert string to decimal string
+
+Parameters
+Name	          Type
+value	        string
+Returns
+string
+
+format: decimal string
+
+Defined in
+src/utils/num.ts:123
+
+getHexString
+getHexString(value): string
+
+Convert string to hexadecimal string
+
+Parameters
+Name	             Type
+value           	string
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/num.ts:137
+
+getHexStringArray
+getHexStringArray(value): string[]
+
+Convert string array to hex-string array
+
+Parameters
+Name            	Type
+value         	string[]
+Returns
+string[]
+
+format: hex-string array
+
+Defined in
+src/utils/num.ts:151
+
+hexToBytes
+hexToBytes(value): Uint8Array
+
+Convert hex-string to an array of Bytes (Uint8Array)
+
+Parameters
+Name          	Type	         Description
+value        	string         	hex-string
+Returns
+Uint8Array
+
+Defined in
+src/utils/num.ts:164
+
+toHexString
+toHexString(number): string
+
+Alias of ToHex
+
+Parameters
+Name             	Type
+number       	BigNumberish
+Returns
+string
+
+Defined in
+src/utils/num.ts:36
+
+cleanHex
+cleanHex(hex): string
+
+Remove hex string leading zero and lowercase it
+
+Example
+###
+
+'0x01A...' -> '0x1a..'
+
+###
+Parameters
+Name        	Type	        Description
+hex        	string        	hex-string
+Returns
+string
+
+format: hex-string
+
+Defined in
+src/utils/num.ts:74
+
+isStringWholeNumber
+isStringWholeNumber(value): boolean
+
+Test if string is whole number (0, 1, 2, 3...)
+
+Parameters
+Name            	Type
+value          	string
+Returns
+boolean
+
+Defined in
+src/utils/num.ts:117
+
+toCairoBool
+toCairoBool(value): string
+
+Convert boolean to '0' or '1'
+
+Parameters
+Name	          Type
+value	       boolean
+Returns
+string
+
+Defined in
+src/utils/num.ts:158"
+"What is provider's namespace?","The following is an introduction to provider's namespace.
+Functions
+1.wait
+wait(delay): Promise<unknown>
+
+Helper - Async Sleep for 'delay' time
+
+Parameters
+Name      Type
+delay    number
+Returns
+Promise<unknown>
+
+Defined in
+src/utils/provider.ts:16
+
+2.createSierraContractClass
+createSierraContractClass(contract): SierraContractClass
+
+Create Sierra Contract Class from a given Compiled Sierra
+
+CompiledSierra -> SierraContractClass
+
+Parameters
+Name              Type
+contract    CompiledSierra
+Returns
+SierraContractClass
+
+Defined in
+src/utils/provider.ts:27
+
+3.parseContract
+parseContract(contract): ContractClass
+
+Create Contract Class from a given CompiledContract or string
+
+(CompiledContract or string) -> ContractClass
+
+Parameters
+Name                    Type
+contract      string | CompiledContract
+Returns
+ContractClass
+
+Defined in
+src/utils/provider.ts:41"
+"What is selector's namespace?","The following is an introduction to selector's namespace.
+References
+1.keccakBn
+Re-exports keccakBn
+
+2.starknetKeccak
+Re-exports starknetKeccak
+
+3.getSelectorFromName
+Re-exports getSelectorFromName
+
+4.getSelector
+Re-exports getSelector"
+"What is shortString's namespace?","The following is an introduction to shortString's namespace.
+Functions
+1.isASCII
+isASCII(str): boolean
+
+Test if string contains only ASCII characters (string can be ascii text)
+
+Parameters
+Name    Type
+str    string
+Returns
+boolean
+
+Defined in
+src/utils/shortString.ts:8
+
+2.isShortString
+isShortString(str): boolean
+
+Test if string is a Cairo short string (string has less or equal 31 characters)
+
+Parameters
+Name    Type
+str    string
+Returns
+boolean
+
+Defined in
+src/utils/shortString.ts:16
+
+3.isDecimalString
+isDecimalString(str): boolean
+
+Test if string contains only numbers (string can be converted to decimal number)
+
+Parameters
+Name    Type
+str    string
+Returns
+boolean
+
+Defined in
+src/utils/shortString.ts:23
+
+4.isText
+isText(val): boolean
+
+Test if value is a free-from string text, and not a hex string or number string
+
+Parameters
+Name   Type
+val    any
+Returns
+boolean
+
+Defined in
+src/utils/shortString.ts:30
+
+5.splitLongString
+splitLongString(longStr): string[]
+
+Split long text into short strings
+
+Parameters
+Name       Type
+longStr   string
+Returns
+string[]
+
+Defined in
+src/utils/shortString.ts:47
+
+6.encodeShortString
+encodeShortString(str): string
+
+Convert an ASCII string to a hexadecimal string.
+
+Example
+###
+
+const myEncodedString: string = encodeShortString('uri/pict/t38.jpg');
+// return hex string (ex.'0x7572692f706963742f7433382e6a7067')
+
+###
+
+Parameters
+Name    Type                 Description
+str    string          short string (ASCII string, 31 characters max)
+Returns
+string
+
+format: hex-string; 248 bits max
+
+Defined in
+src/utils/shortString.ts:62
+
+7.decodeShortString
+decodeShortString(str): string
+
+Convert a hexadecimal or decimal string to an ASCII string.
+
+Example
+###
+
+const myDecodedString: string = decodeShortString('0x7572692f706963742f7433382e6a7067');
+// return string (ex.'uri/pict/t38.jpg')
+
+###
+Parameters
+Name     Type               Description
+str     string   representing a 248 bit max number (ex. '0x1A4F64EA56' or '236942575435676423')
+Returns
+string
+
+format: short string; 31 characters max
+
+Defined in
+src/utils/shortString.ts:78
+
+8.isShortText
+isShortText(val): boolean
+
+Test if value is short text
+
+Parameters
+Name     Type
+val      any
+Returns
+boolean
+
+Defined in
+src/utils/shortString.ts:37
+
+9.isLongText
+isLongText(val): boolean
+
+Test if value is long text
+
+Parameters
+Name     Type
+val      any
+Returns
+boolean
+
+Defined in
+src/utils/shortString.ts:42"
+"What is stark's namespace?","The following is an introduction to stark's namespace.
+Functions
+1.compressProgram
+compressProgram(jsonProgram): CompressedProgram
+
+Compress compiled Cairo program
+
+Reference
+
+Parameters
+Name                  Type                             Description
+jsonProgram      string | Program        Representing the compiled cairo program
+Returns
+CompressedProgram
+
+Defined in
+src/utils/stark.ts:20
+
+2.decompressProgram
+decompressProgram(base64): any
+
+Decompress compressed compiled Cairo program
+
+Parameters
+Name      Type              Description
+base64    string          Compressed program
+Returns
+any
+
+Parsed decompressed compiled Cairo program
+
+Defined in
+src/utils/stark.ts:31
+
+3.randomAddress
+randomAddress(): string
+
+Random Address based on random keyPair
+
+Returns
+string
+
+Defined in
+src/utils/stark.ts:40
+
+4.makeAddress
+makeAddress(input): string
+
+Lowercase and hex prefix string
+
+Deprecated
+
+Not used internally, naming is confusing based on functionality
+
+Parameters
+Name           Type
+input         string
+Returns
+string
+
+Defined in
+src/utils/stark.ts:50
+
+5.formatSignature
+formatSignature(sig?): ArraySignatureType
+
+Format Signature to standard type (hex array)
+
+Parameters
+Name      Type
+sig?    Signature
+Returns
+ArraySignatureType
+
+Custom hex array or weierstrass.SignatureType hex array
+
+Defined in
+src/utils/stark.ts:58
+
+6.signatureToDecimalArray
+signatureToDecimalArray(sig?): ArraySignatureType
+
+Format Signature to decimal string array
+
+Parameters
+Name     Type
+sig?    Signature
+Returns
+ArraySignatureType
+
+Defined in
+src/utils/stark.ts:74
+
+7.signatureToHexArray
+signatureToHexArray(sig?): ArraySignatureType
+
+Format Signature to hex string array
+
+Parameters
+Name      Type
+sig?    Signature
+Returns
+ArraySignatureType
+
+Defined in
+src/utils/stark.ts:81
+
+8.estimatedFeeToMaxFee
+estimatedFeeToMaxFee(estimatedFee, overhead?): bigint
+
+Convert estimated fee to max fee with overhead
+
+Parameters
+Name                Type           Default value
+estimatedFee    BigNumberish         undefined
+overhead           number               0.5
+Returns
+bigint
+
+Defined in
+src/utils/stark.ts:88"
+"What is starknetId's namespace?","The following is an introduction to starknetId's namespace.
+1.Enumerations
+StarknetIdContract
+
+2.Functions
+useDecoded
+useDecoded(encoded): string
+
+Parameters
+Name          Type
+encoded      bigint[]
+Returns
+string
+
+Defined in
+src/utils/starknetId.ts:20
+
+useEncoded
+useEncoded(decoded): bigint
+
+Parameters
+Name       Type
+decoded   string
+Returns
+bigint
+
+Defined in
+src/utils/starknetId.ts:61
+
+getStarknetIdContract
+getStarknetIdContract(chainId): string
+
+Parameters
+Name             Type
+chainId    StarknetChainId
+Returns
+string
+
+Defined in
+src/utils/starknetId.ts:108"
+"What is transaction's namespace?","The following is an introduction to transaction's namespace.
+Functions
+1.transformCallsToMulticallArrays
+transformCallsToMulticallArrays(calls): Object
+
+Transforms a list of Calls, each with their own calldata, into two arrays: one with the entry points, and one with the concatenated calldata
+
+Parameters
+Name Type
+calls    Call[]
+Returns
+Object
+
+Name             Type
+callArray   ParsedStruct[]
+calldata       Calldata
+Defined in
+src/utils/transaction.ts:18
+
+2.fromCallsToExecuteCalldata
+fromCallsToExecuteCalldata(calls): Calldata
+
+Transforms a list of calls into the Cairo 0 __execute__ calldata.
+
+Parameters
+Name       Type
+calls     Call[]
+Returns
+Calldata
+
+Defined in
+src/utils/transaction.ts:40
+
+3.fromCallsToExecuteCalldataWithNonce
+fromCallsToExecuteCalldataWithNonce(calls, nonce): Calldata
+
+Transforms a list of calls into the Cairo 0 __execute__ calldata including nonce.
+
+Deprecated
+
+Parameters
+Name         Type
+calls        Call[]
+nonce     BigNumberish
+Returns
+Calldata
+
+Defined in
+src/utils/transaction.ts:51
+
+4.transformCallsToMulticallArrays_cairo1
+transformCallsToMulticallArrays_cairo1(calls): CallStruct[]
+
+Format Data inside Calls
+
+Deprecated
+
+Not required for getting execute Calldata
+
+Parameters
+Name    Type
+calls     Call[]
+Returns
+CallStruct[]
+
+Defined in
+src/utils/transaction.ts:60
+
+5.fromCallsToExecuteCalldata_cairo1
+fromCallsToExecuteCalldata_cairo1(calls): Calldata
+
+Transforms a list of calls into the Cairo 1 __execute__ calldata.
+
+Parameters
+Name      Type
+calls       Call[]
+Returns
+Calldata
+
+Defined in
+src/utils/transaction.ts:72
+
+6.getExecuteCalldata
+getExecuteCalldata(calls, cairoVersion?): Calldata
+
+Create __execute__ Calldata from Calls based on Cairo versions
+
+Parameters
+Name             Type         Default value
+calls              Call[]            undefined
+cairoVersion   CairoVersion       '0'
+Returns
+Calldata
+
+Defined in
+src/utils/transaction.ts:89"
+"What is typedData's namespace?","The following is an introduction to typedData's namespace.
+1.References
+StarkNetMerkleType
+Re-exports StarkNetMerkleType
+
+StarkNetType
+Re-exports StarkNetType
+
+StarkNetDomain
+Re-exports StarkNetDomain
+
+TypedData
+Re-exports TypedData
+
+2.Functions
+prepareSelector
+prepareSelector(selector): string
+
+Parameters
+Name       Type
+selector  string
+Returns
+string
+
+Defined in
+src/utils/typedData.ts:36
+
+isMerkleTreeType
+isMerkleTreeType(type): type is StarkNetMerkleType
+
+Parameters
+Name     Type
+type  StarkNetType
+Returns
+type is StarkNetMerkleType
+
+Defined in
+src/utils/typedData.ts:40
+
+getDependencies
+getDependencies(types, type, dependencies?): string[]
+
+Get the dependencies of a struct type. If a struct has the same dependency multiple times, it's only included once in the resulting array.
+
+Parameters
+Name                 Type                 Default value
+types   Record<string, StarkNetType[]>     undefined
+type                string                 undefined
+dependencies?       string[]                   []
+Returns
+string[]
+
+Defined in
+src/utils/typedData.ts:58
+
+encodeType
+encodeType(types, type): string
+
+Encode a type to a string. All dependent types are alphabetically sorted.
+
+Parameters
+Name              Type
+types   Record<string, StarkNetType[]>
+type string
+Returns
+string
+
+Defined in
+src/utils/typedData.ts:110
+
+getTypeHash
+getTypeHash(types, type): string
+
+Get a type string as hash.
+
+Parameters
+Name                 Type
+types   Record<string, StarkNetType[]>
+type string
+Returns
+string
+
+Defined in
+src/utils/typedData.ts:124
+
+encodeValue
+encodeValue(types, type, data, ctx?): [string, string]
+
+Encodes a single value to an ABI serialisable string, number or Buffer. Returns the data as tuple, which consists of an array of ABI compatible types, and an array of corresponding values.
+
+Parameters
+Name                   Type
+types    Record<string, StarkNetType[]>
+type                  string
+data unknown
+ctx Context
+Returns
+[string, string]
+
+Defined in
+src/utils/typedData.ts:132
+
+encodeData
+encodeData<T>(types, type, data): string[][]
+
+Encode the data to an ABI encoded Buffer. The data should be a key -> value object with all the required values. All dependent types are automatically encoded.
+
+Type parameters
+Name           Type
+T        extends TypedData
+Parameters
+Name           Type
+types        T['types']
+type          string
+data        T['message']
+Returns
+string[][]
+
+Defined in
+src/utils/typedData.ts:180
+
+getStructHash
+getStructHash<T>(types, type, data): string
+
+Get encoded data as a hash. The data should be a key -> value object with all the required values. All dependent types are automatically encoded.
+
+Type parameters
+Name          Type
+T       extends TypedData
+Parameters
+Name          Type
+types      T['types']
+type        string
+data       T['message']
+Returns
+string
+
+Defined in
+src/utils/typedData.ts:212
+
+getMessageHash
+getMessageHash(typedData, account): string
+
+Get the EIP-191 encoded message to sign, from the typedData object.
+
+Parameters
+Name          Type
+typedData  TypedData
+account   BigNumberish
+Returns
+string
+
+Defined in
+src/utils/typedData.ts:223"
+"What about types's namespace?","The following is an introduction to types's namespace.
+1.Namespaces
+RPC
+Sequencer
+
+2.Enumerations
+SIMULATION_FLAG
+ValidateType
+Uint
+Litteral
+TransactionType
+TransactionStatus
+TransactionFinalityStatus
+TransactionExecutionStatus
+BlockStatus
+BlockTag
+EntryPointType
+
+3.Interfaces
+EstimateFee
+EstimateFeeDetails
+DeployContractResponse
+Uint256
+CallStruct
+Program
+ProviderOptions
+GetBlockResponse
+GetCodeResponse
+ContractEntryPoint
+CommonTransactionResponse
+InvokeTransactionResponse
+DeclareTransactionResponse
+MessageToL1
+Event
+MessageToL2
+InvokeTransactionReceiptResponse
+EstimateFeeResponse
+InvokeFunctionResponse
+DeclareContractResponse
+StateUpdateResponse
+InvocationsSignerDetails
+DeclareSignerDetails
+StarkNetDomain
+TypedData
+
+4.Type Aliases
+CallL1Handler
+CallL1Handler: Object
+
+Type declaration
+Name                                    Type
+from_address                     string
+to_address                           string
+entry_point_selector     string
+payload                                 string[]
+Defined in
+src/types/api/sequencer.ts:66
+
+DeployedContractItem
+DeployedContractItem: Object
+
+Type declaration
+Name                   Type
+address              string
+class_hash           string
+Defined in
+src/types/api/sequencer.ts:73
+
+ExecutionResources
+ExecutionResources: Object
+
+Type declaration
+Name                                                            Type
+n_steps                                                         number
+builtin_instance_counter          { pedersen_builtin: number ; range_check_builtin: number ; bitwise_builtin: number ; output_builtin: number ; ecdsa_builtin: number ; ec_op_builtin?: number }
+builtin_instance_counter.pedersen_builtin                       number
+builtin_instance_counter.range_check_builtin                    number
+builtin_instance_counter.bitwise_builtin                        number
+builtin_instance_counter.output_builtin                         number
+builtin_instance_counter.ecdsa_builtin                          number
+builtin_instance_counter.ec_op_builtin?                         number
+n_memory_holes number
+Defined in
+src/types/api/sequencer.ts:53
+
+FunctionInvocation
+FunctionInvocation: Object
+
+Type declaration
+Name                        Type
+caller_address              string
+contract_address            string
+calldata                    RawCalldata
+call_type?                  string
+class_hash?                 string
+selector?                   string
+entry_point_type?           EXTERNAL
+result                      any[]
+execution_resources         ExecutionResources
+internal_calls              FunctionInvocation[]
+events                      any[]
+messages                    any[]
+Defined in
+src/types/api/sequencer.ts:38
+
+GetContractAddressesResponse
+GetContractAddressesResponse: Object
+
+Type declaration
+Name                    Type
+Starknet               string
+GpsStatementVerifier   string
+Defined in
+src/types/api/sequencer.ts:33
+
+GetTransactionStatusResponse
+GetTransactionStatusResponse: Object
+
+Type declaration
+Name                                     Type
+tx_status                            TransactionStatus
+execution_status                     TransactionExecutionStatus
+finality_status                      TransactionFinalityStatus
+block_hash?                              string
+tx_failure_reason?                  { code: string ; error_message: string }
+tx_failure_reason.code                   string
+tx_failure_reason.error_message          string
+tx_revert_reason?                        string
+Defined in
+src/types/api/sequencer.ts:21
+
+SequencerIdentifier
+SequencerIdentifier: { blockHash: string } | { blockNumber: BlockNumber }
+
+Defined in
+src/types/api/sequencer.ts:78
+
+EstimateFeeBulk
+EstimateFeeBulk: EstimateFee[]
+
+Defined in
+src/types/account.ts:8
+
+AccountInvocationsFactoryDetails
+AccountInvocationsFactoryDetails: Object
+
+Type declaration
+Name                   Type
+versions            bigint[]
+nonce?             BigNumberish
+blockIdentifier?   BlockIdentifier
+Defined in
+src/types/account.ts:10
+
+MultiDeployContractResponse
+MultiDeployContractResponse: Object
+
+Type declaration
+Name                  Type
+contract_address    string[]
+transaction_hash    string
+Defined in
+src/types/account.ts:27
+
+DeployContractUDCResponse
+DeployContractUDCResponse: Object
+
+Type declaration
+Name                 Type
+contract_address    string
+transaction_hash    string
+address             string
+deployer            string
+unique              string
+classHash           string
+calldata_len        string
+calldata            string[]
+salt                string
+Defined in
+src/types/account.ts:32
+
+DeclareDeployUDCResponse
+DeclareDeployUDCResponse: Object
+
+Type declaration
+Name                                    Type
+declare          { class_hash: BigNumberish } & Partial<DeclareTransactionReceiptResponse>
+deploy DeployContractUDCResponse
+Defined in
+src/types/account.ts:44
+
+SimulateTransactionDetails
+SimulateTransactionDetails: Object
+
+Type declaration
+Name                          Type
+nonce?                   BigNumberish
+blockIdentifier?          BlockIdentifier
+skipValidate?            boolean
+skipExecute?              boolean
+Defined in
+src/types/account.ts:51
+
+AsyncContractFunction
+AsyncContractFunction<T>: (...args: ArgsOrCalldataWithOptions) => Promise<T>
+
+Type parameters
+Name      Type
+T          any
+Type declaration
+(...args): Promise<T>
+
+Parameters
+Name          Type
+...args   ArgsOrCalldataWithOptions
+Returns
+Promise<T>
+
+Defined in
+src/types/contract.ts:11
+
+ContractFunction
+ContractFunction: (...args: ArgsOrCalldataWithOptions) => any
+
+Type declaration
+? (...args): any
+
+Parameters
+Name                   Type
+...args          ArgsOrCalldataWithOptions
+Returns
+any
+
+Defined in
+src/types/contract.ts:12
+
+Result
+Result: { [key: string]: any; } | Result[] | bigint | string | boolean | CairoEnum
+
+Defined in
+src/types/contract.ts:14
+
+ArgsOrCalldata
+ArgsOrCalldata: RawArgsArray | [Calldata] | Calldata
+
+Defined in
+src/types/contract.ts:24
+
+ArgsOrCalldataWithOptions
+ArgsOrCalldataWithOptions: ArgsOrCalldata & ContractOptions
+
+Defined in
+src/types/contract.ts:25
+
+ContractOptions
+ContractOptions: Object
+
+Type declaration
+Name                            Type
+blockIdentifier?          BlockIdentifier
+parseRequest?              boolean
+parseResponse?            boolean
+formatResponse?          { [key: string]: any; }
+maxFee?                   BigNumberish
+nonce?                   BigNumberish
+signature?                   Signature
+addressSalt?             string 
+Defined in
+src/types/contract.ts:26
+
+CallOptions
+CallOptions: Pick<ContractOptions, 'blockIdentifier' | 'parseRequest' | 'parseResponse' | 'formatResponse'>
+
+Defined in
+src/types/contract.ts:37
+
+InvokeOptions
+InvokeOptions: Pick<ContractOptions, 'maxFee' | 'nonce' | 'signature' | 'parseRequest'>
+
+Defined in
+src/types/contract.ts:42
+
+ParsedEvent
+ParsedEvent: Object
+
+Index signature
+[name: string]: ParsedStruct
+
+Defined in
+src/types/contract.ts:47
+
+ParsedEvents
+ParsedEvents: ParsedEvent[]
+
+Defined in
+src/types/contract.ts:49
+
+WeierstrassSignatureType
+WeierstrassSignatureType: SignatureType
+
+Defined in
+src/types/lib/index.ts:6
+
+ArraySignatureType
+ArraySignatureType: string[]
+
+Defined in
+src/types/lib/index.ts:7
+
+Signature
+Signature: ArraySignatureType | WeierstrassSignatureType
+
+Defined in
+src/types/lib/index.ts:8
+
+BigNumberish
+BigNumberish: string | number | bigint
+
+Defined in
+src/types/lib/index.ts:10
+
+Calldata
+Calldata: string[] & { __compiled__?: boolean }
+
+Compiled calldata ready to be sent decimal-string array
+
+Defined in
+src/types/lib/index.ts:16
+
+RawCalldata
+RawCalldata: BigNumberish[]
+
+BigNumberish array use CallData.compile() to convert to Calldata
+
+Defined in
+src/types/lib/index.ts:32
+
+HexCalldata
+HexCalldata: string[]
+
+Hexadecimal-string array
+
+Defined in
+src/types/lib/index.ts:37
+
+AllowArray
+AllowArray<T>: T | T[]
+
+Type parameters
+Name
+T
+Defined in
+src/types/lib/index.ts:39
+
+OptionalPayload
+? OptionalPayload<T>: { payload: T } | T
+
+Type parameters
+Name
+T
+Defined in
+src/types/lib/index.ts:41
+
+RawArgs
+RawArgs: RawArgsObject | RawArgsArray
+
+Defined in
+src/types/lib/index.ts:43
+
+RawArgsObject
+RawArgsObject: Object
+
+Index signature
+[inputName: string]: MultiType | MultiType[] | RawArgs
+
+Defined in
+src/types/lib/index.ts:45
+
+RawArgsArray
+RawArgsArray: (MultiType | MultiType[] | RawArgs)[]
+
+Defined in
+src/types/lib/index.ts:49
+
+MultiType
+MultiType: BigNumberish | Uint256 | object | boolean | CairoEnum
+
+Defined in
+src/types/lib/index.ts:51
+
+UniversalDeployerContractPayload
+UniversalDeployerContractPayload: Object
+
+Type declaration
+Name                   Type
+classHash          BigNumberish
+salt?                   string
+unique?                 boolean
+constructorCalldata?    RawArgs
+Defined in
+src/types/lib/index.ts:53
+
+DeployAccountContractPayload
+DeployAccountContractPayload: Object
+
+Type declaration
+Name                            Type
+classHash                       string
+constructorCalldata?          RawArgs
+addressSalt?                   BigNumberish
+contractAddress?                string
+Defined in
+src/types/lib/index.ts:60
+
+DeployAccountContractTransaction
+DeployAccountContractTransaction: Omit<DeployAccountContractPayload, 'contractAddress'> & { signature?: Signature }
+
+Defined in
+src/types/lib/index.ts:67
+
+DeclareContractPayload
+DeclareContractPayload: Object
+
+Type declaration
+Name                   Type
+contract          CompiledContract | string
+classHash?            string
+casm?          CompiledSierraCasm
+compiledClassHash?    string
+Defined in
+src/types/lib/index.ts:74
+
+CompleteDeclareContractPayload
+CompleteDeclareContractPayload: Object
+
+Type declaration
+Name                   Type
+contract       CompiledContract | string
+classHash              string
+casm?                 CompiledSierraCasm
+compiledClassHash?     string
+Defined in
+src/types/lib/index.ts:81
+
+DeclareAndDeployContractPayload
+DeclareAndDeployContractPayload: Omit<UniversalDeployerContractPayload, 'classHash'> & DeclareContractPayload
+
+Defined in
+src/types/lib/index.ts:88
+
+DeclareContractTransaction
+DeclareContractTransaction: Object
+
+Type declaration
+Name                   Type
+contract          ContractClass
+senderAddress          string
+signature?          Signature
+compiledClassHash?     string
+Defined in
+src/types/lib/index.ts:91
+
+CallDetails
+CallDetails: Object
+
+Type declaration
+Name                   Type
+contractAddress      string
+calldata?      RawArgs | Calldata
+entrypoint?          string
+Defined in
+src/types/lib/index.ts:98
+
+Invocation
+Invocation: CallDetails & { signature?: Signature }
+
+Defined in
+src/types/lib/index.ts:104
+
+Call
+Call: CallDetails & { entrypoint: string }
+
+Defined in
+src/types/lib/index.ts:106
+
+CairoVersion
+CairoVersion: '0' | '1' | undefined
+
+Defined in
+src/types/lib/index.ts:108
+
+CompilerVersion
+CompilerVersion: '0' | '1' | '2' | undefined
+
+Defined in
+src/types/lib/index.ts:109
+
+InvocationsDetails
+InvocationsDetails: Object
+
+Type declaration
+Name          Type
+nonce?     BigNumberish
+maxFee?    BigNumberish
+version?   BigNumberish  
+Defined in
+src/types/lib/index.ts:111
+
+Details
+Details: Object
+
+Contain all additional details params
+
+Type declaration
+Name          Type
+nonce     BigNumberish
+maxFee    BigNumberish
+version   BigNumberish
+chainId   StarknetChainId
+Defined in
+src/types/lib/index.ts:120
+
+InvocationsDetailsWithNonce
+InvocationsDetailsWithNonce: InvocationsDetails & { nonce: BigNumberish }
+
+Defined in
+src/types/lib/index.ts:127
+
+BlockNumber
+BlockNumber: BlockTag | null | number
+
+Defined in
+src/types/lib/index.ts:176
+
+BlockIdentifier
+BlockIdentifier: BlockNumber | BigNumberish
+
+hex string and BN are detected as block hashes decimal string and number are detected as block numbers null appends nothing to the request url
+
+Defined in
+src/types/lib/index.ts:183
+
+AccountInvocationItem
+AccountInvocationItem: { type: DECLARE } & DeclareContractTransaction | { type: DEPLOY_ACCOUNT } & DeployAccountContractTransaction | { type: INVOKE } & Invocation & InvocationsDetailsWithNonce
+
+items used by AccountInvocations
+
+Defined in
+src/types/lib/index.ts:188
+
+AccountInvocations
+AccountInvocations: AccountInvocationItem[]
+
+Complete invocations array with account details (internal type from account -> provider)
+
+Defined in
+src/types/lib/index.ts:198
+
+Invocations
+Invocations: ({ type: DECLARE } & OptionalPayload<DeclareContractPayload> | { type: DEPLOY } & OptionalPayload<AllowArray<UniversalDeployerContractPayload>> | { type: DEPLOY_ACCOUNT } & OptionalPayload<DeployAccountContractPayload> | { type: INVOKE } & OptionalPayload<AllowArray<Call>>)[]
+
+Invocations array user provide to bulk method (simulate)
+
+Defined in
+src/types/lib/index.ts:203
+
+Tupled
+Tupled: Object
+
+Type declaration
+Name          Type
+element       any
+type          string
+Defined in
+src/types/lib/index.ts:212
+
+Args
+Args: Object
+
+Index signature
+[inputName: string]: BigNumberish | BigNumberish[] | ParsedStruct | ParsedStruct[]
+
+Defined in
+src/types/lib/index.ts:214
+
+ParsedStruct
+ParsedStruct: Object
+
+Index signature
+[key: string]: BigNumberish | BigNumberish[] | ParsedStruct | Uint256
+
+Defined in
+src/types/lib/index.ts:217
+
+waitForTransactionOptions
+waitForTransactionOptions: Object
+
+Type declaration
+Name                                     Type
+retryInterval?                           number
+successStates?          (TransactionFinalityStatus | TransactionExecutionStatus)[]
+errorStates?          (TransactionFinalityStatus | TransactionExecutionStatus)[]
+Defined in
+src/types/lib/index.ts:221
+
+getSimulateTransactionOptions
+getSimulateTransactionOptions: Object
+
+Type declaration
+Name                   Type
+blockIdentifier?   BlockIdentifier
+skipValidate?      boolean
+skipExecute?       boolean
+skipFeeCharge?     boolean
+Defined in
+src/types/lib/index.ts:227
+
+getContractVersionOptions
+getContractVersionOptions: Object
+
+Type declaration
+Name                   Type
+blockIdentifier?   BlockIdentifier
+compiler?            boolean
+Defined in
+src/types/lib/index.ts:234
+
+getEstimateFeeBulkOptions
+getEstimateFeeBulkOptions: Object
+
+Type declaration
+Name                   Type
+blockIdentifier?   BlockIdentifier
+skipValidate?          boolean
+Defined in
+src/types/lib/index.ts:239
+
+ContractVersion
+ContractVersion: Object
+
+Represent Contract version
+
+Type declaration
+Name                   Type                   Description
+cairo              CairoVersion              version of the cairo language
+compiler          CompilerVersion          version of the cairo compiler used to compile the contract
+Defined in
+src/types/lib/index.ts:253
+
+ContractClass
+ContractClass: LegacyContractClass | SierraContractClass
+
+format produced after compressing compiled contract CompressedCompiledContract
+
+Defined in
+src/types/lib/contract/index.ts:9
+
+CompiledContract
+CompiledContract: LegacyCompiledContract | CompiledSierra
+
+format produced after compile .cairo to .json
+
+Defined in
+src/types/lib/contract/index.ts:14
+
+CairoContract
+CairoContract: ContractClass | CompiledContract
+
+Compressed or decompressed Cairo0 or Cairo1 Contract
+
+Defined in
+src/types/lib/contract/index.ts:19
+
+Abi
+Abi: (FunctionAbi | EventAbi | StructAbi | any)[]
+
+ABI
+
+Defined in
+src/types/lib/contract/abi.ts:2
+
+AbiEntry
+AbiEntry: Object
+
+Type declaration
+Name          Type
+name          string
+type          'felt' | 'felt*' | string
+Defined in
+src/types/lib/contract/abi.ts:5
+
+EventEntry
+EventEntry: Object
+
+Type declaration
+Name          Type
+name          string
+type          'felt' | 'felt*' | string
+kind          'key' | 'data'
+Defined in
+src/types/lib/contract/abi.ts:7
+
+FunctionAbi
+FunctionAbi: Object
+
+Type declaration
+Name                        Type
+inputs                   AbiEntry[]
+name                      string
+outputs                   AbiEntry[]
+stateMutability?          'view'
+state_mutability?          string
+type FunctionAbiType
+Defined in
+src/types/lib/contract/abi.ts:16
+
+AbiStructs
+AbiStructs: Object
+
+Index signature
+[name: string]: StructAbi
+
+Defined in
+src/types/lib/contract/abi.ts:25
+
+StructAbi
+StructAbi: Object
+
+Type declaration
+Name                   Type
+members     AbiEntry & { offset: number }[]
+name                   string
+size                   number
+type                   'struct'
+Defined in
+src/types/lib/contract/abi.ts:27
+
+AbiEnums
+AbiEnums: Object
+
+Index signature
+[name: string]: EnumAbi
+
+Defined in
+src/types/lib/contract/abi.ts:34
+
+EnumAbi
+EnumAbi: Object
+
+Type declaration
+Name                   Type
+variants          AbiEntry & { offset: number }[]
+name                   string
+size                   number
+type                   'enum'
+Defined in
+src/types/lib/contract/abi.ts:35
+
+AbiEvents
+AbiEvents: Object
+
+Index signature
+[hash: string]: EventAbi
+
+Defined in
+src/types/lib/contract/abi.ts:42
+
+EventAbi
+EventAbi: Cairo1Event | LegacyEvent
+
+Defined in
+src/types/lib/contract/abi.ts:44
+
+Cairo1Event
+Cairo1Event: Object
+
+Type declaration
+Name          Type
+name          string
+members      EventEntry[]
+kind          'struct'
+type          'event'
+Defined in
+src/types/lib/contract/abi.ts:46
+
+LegacyEvent
+LegacyEvent: Object
+
+Type declaration
+Name          Type
+name          string
+type          'event'
+data          EventEntry[]
+keys          EventEntry[]
+Defined in
+src/types/lib/contract/abi.ts:53
+
+LegacyContractClass
+LegacyContractClass: Object
+
+format produced after compressing 'program' property
+
+Type declaration
+Name                   Type
+program            CompressedProgram
+entry_points_by_type   EntryPointsByType
+abi                     Abi
+Defined in
+src/types/lib/contract/legacy.ts:7
+
+LegacyCompiledContract
+LegacyCompiledContract: Omit<LegacyContractClass, 'program'> & { program: Program }
+
+format produced after compile .cairo to .json
+
+Defined in
+src/types/lib/contract/legacy.ts:16
+
+Builtins
+Builtins: string[]
+
+SUBTYPES
+
+Defined in
+src/types/lib/contract/legacy.ts:21
+
+CompressedProgram
+CompressedProgram: string
+
+Defined in
+src/types/lib/contract/legacy.ts:22
+
+EntryPointsByType
+EntryPointsByType: Object
+
+Type declaration
+Name                   Type
+CONSTRUCTOR           ContractEntryPointFields[]
+EXTERNAL              ContractEntryPointFields[]
+L1_HANDLER            ContractEntryPointFields[]
+Defined in
+src/types/lib/contract/legacy.ts:24
+
+ContractEntryPointFields
+ContractEntryPointFields: Object
+
+Type declaration
+Name          Type
+selector    string
+offset      string | number
+builtins?   Builtins
+Defined in
+src/types/lib/contract/legacy.ts:30
+
+CairoAssembly
+CairoAssembly: Object
+
+SYSTEM TYPES
+
+Type declaration
+Name                      Type
+prime                   string
+compiler_version        string
+bytecode                ByteCode
+hints                   any[]
+pythonic_hints?         PythonicHints
+entry_points_by_type    EntryPointsByType
+Defined in
+src/types/lib/contract/sierra.ts:5
+
+CompiledSierra
+CompiledSierra: Object
+
+format produced after starknet-compile .cairo to .json sierra_program is hex array
+
+Type declaration
+Name                          Type
+sierra_program                ByteCode
+sierra_program_debug_info?    SierraProgramDebugInfo
+contract_class_version        string
+entry_points_by_type          SierraEntryPointsByType
+abi                           Abi
+Defined in
+src/types/lib/contract/sierra.ts:19
+
+SierraContractClass
+SierraContractClass: Omit<CompiledSierra, 'abi' | 'sierra_program_debug_info'> & { sierra_program: string ; abi: string }
+
+format produced after compressing 'sierra_program', stringifies 'abi' property and omit sierra_program_debug_info CompressedCompiledSierra
+
+Defined in
+src/types/lib/contract/sierra.ts:31
+
+CompiledSierraCasm
+CompiledSierraCasm: CairoAssembly
+
+Defined in
+src/types/lib/contract/sierra.ts:35
+
+ByteCode
+ByteCode: string[]
+
+SUBTYPES
+
+Defined in
+src/types/lib/contract/sierra.ts:38
+
+PythonicHints
+? PythonicHints: [number, string[]][]
+
+Defined in
+src/types/lib/contract/sierra.ts:39
+
+SierraProgramDebugInfo
+SierraProgramDebugInfo: Object
+
+Type declaration
+Name                Type
+type_names         [number, string][]
+libfunc_names      [number, string][]
+user_func_names    [number, string][]
+Defined in
+src/types/lib/contract/sierra.ts:41
+
+SierraEntryPointsByType
+SierraEntryPointsByType: Object
+
+Type declaration
+Name                     Type
+CONSTRUCTOR           SierraContractEntryPointFields[]
+EXTERNAL              SierraContractEntryPointFields[]
+L1_HANDLER            SierraContractEntryPointFields[]
+Defined in
+src/types/lib/contract/sierra.ts:47
+
+SierraContractEntryPointFields
+SierraContractEntryPointFields: Object
+
+Type declaration
+Name           Type
+selector       string
+function_idx   number
+Defined in
+src/types/lib/contract/sierra.ts:53
+
+RpcProviderOptions
+RpcProviderOptions: Object
+
+Type declaration
+Name                Type
+nodeUrl?           string | NetworkName
+retries?           number
+headers?           object
+blockIdentifier?   BlockIdentifier
+chainId?           StarknetChainId
+default?           boolean
+Defined in
+src/types/provider/configuration.ts:9
+
+SequencerHttpMethod
+SequencerHttpMethod: 'POST' | 'GET'
+
+Defined in
+src/types/provider/configuration.ts:18
+
+SequencerProviderOptions
+SequencerProviderOptions: { headers?: Record<string, string> ; blockIdentifier?: BlockIdentifier ; chainId?: StarknetChainId } & { network: NetworkName | StarknetChainId } | { baseUrl: string ; feederGatewayUrl?: string ; gatewayUrl?: string }
+
+Defined in
+src/types/provider/configuration.ts:20
+
+GetTransactionResponse
+GetTransactionResponse: InvokeTransactionResponse | DeclareTransactionResponse | RejectedTransactionResponse
+
+Defined in
+src/types/provider/response.ts:52
+
+RejectedTransactionResponse
+RejectedTransactionResponse: Object
+
+Type declaration
+Name                                         Type
+status                                     `${REJECTED}`
+transaction_failure_reason                { code: string ; error_message: string }
+transaction_failure_reason.code              string
+transaction_failure_reason.error_message      string
+Defined in
+src/types/provider/response.ts:93
+
+GetTransactionReceiptResponse
+GetTransactionReceiptResponse: SuccessfulTransactionReceiptResponse | RevertedTransactionReceiptResponse | RejectedTransactionReceiptResponse
+
+Defined in
+src/types/provider/response.ts:101
+
+SuccessfulTransactionReceiptResponse
+SuccessfulTransactionReceiptResponse: InvokeTransactionReceiptResponse | DeployTransactionReceiptResponse | DeclareTransactionReceiptResponse
+
+Defined in
+src/types/provider/response.ts:106
+
+DeclareTransactionReceiptResponse
+DeclareTransactionReceiptResponse: Object
+
+Type declaration
+Name                                      Type
+type?                                    TransactionType
+execution_status                         TransactionExecutionStatus
+finality_status                          TransactionFinalityStatus
+status?                                 `${TransactionStatus}`
+actual_fee                                string
+block_hash                                BlockHash
+block_number                              BlockNumber
+transaction_hash                          string
+transaction_index?                        number
+messages_sent                             MessageToL1[]
+events                                    any[]
+Defined in
+src/types/provider/response.ts:126
+
+DeployTransactionReceiptResponse
+DeployTransactionReceiptResponse: InvokeTransactionReceiptResponse
+
+Defined in
+src/types/provider/response.ts:140
+
+RejectedTransactionReceiptResponse
+RejectedTransactionReceiptResponse: Object
+
+Type declaration
+Name                                              Type
+status                                            `${REJECTED}`
+transaction_failure_reason                     { code: string ; error_message: string }
+transaction_failure_reason.code                string
+transaction_failure_reason.error_message       string
+Defined in
+src/types/provider/response.ts:148
+
+RevertedTransactionReceiptResponse
+RevertedTransactionReceiptResponse: Object
+
+Type declaration
+Name                                    Type
+type?                                    TransactionType | any
+execution_status                         REVERTED | any
+finality_status                          TransactionFinalityStatus | any
+status?                                  TransactionStatus
+actual_fee                               string
+block_hash?                              string
+block_number?                            BlockNumber
+transaction_hash                         string
+transaction_index?                       number
+messages_sent                            MessageToL1[]
+events                                   any[]
+revert_reason?                          string
+Defined in
+src/types/provider/response.ts:156
+
+CallContractResponse
+CallContractResponse: Object
+
+Type declaration
+Name      Type
+result    string[]
+Defined in
+src/types/provider/response.ts:187
+
+EstimateFeeAction
+EstimateFeeAction: { type: INVOKE ; payload: AllowArray<Call> } | { type: DECLARE ; payload: DeclareContractPayload } | { type: DEPLOY_ACCOUNT ; payload: DeployAccountContractPayload } | { type: DEPLOY ; payload: UniversalDeployerContractPayload }
+
+Defined in
+src/types/provider/response.ts:191
+
+EstimateFeeResponseBulk
+EstimateFeeResponseBulk: EstimateFeeResponse[]
+
+Defined in
+src/types/provider/response.ts:209
+
+Storage
+Storage: Storage
+
+Defined in
+src/types/provider/response.ts:211
+
+Nonce
+Nonce: Nonce
+
+Defined in
+src/types/provider/response.ts:213
+
+SimulationFlags
+SimulationFlags: SimulationFlags
+
+Defined in
+src/types/provider/response.ts:215
+
+SimulatedTransaction
+SimulatedTransaction: Object
+
+Type declaration
+Name Type
+transaction_trace TransactionTrace | TransactionTraceResponse
+fee_estimation FeeEstimate | EstimateFeeResponse
+suggestedMaxFee? string | bigint
+Defined in
+src/types/provider/response.ts:217
+
+SimulateTransactionResponse
+SimulateTransactionResponse: SimulatedTransaction[]
+
+Defined in
+src/types/provider/response.ts:223
+
+ContractClassResponse
+ContractClassResponse: LegacyContractClass | Omit<CompiledSierra, 'sierra_program_debug_info'>
+
+Standardized type Cairo0 program compressed and Cairo1 sierra_program decompressed abi Abi CompiledSierra without '.sierra_program_debug_info'
+
+Defined in
+src/types/provider/response.ts:247
+
+DeployAccountSignerDetails
+DeployAccountSignerDetails: Required<DeployAccountContractPayload> & Required<InvocationsDetails> & { contractAddress: BigNumberish ; chainId: StarknetChainId }
+
+Defined in
+src/types/signer.ts:25
+
+StarkNetMerkleType
+StarkNetMerkleType: Object
+
+Type declaration
+Name           Type
+name           string
+type           'merkletree'
+contains       string
+Defined in
+src/types/typedData.ts:1
+
+StarkNetType
+StarkNetType: { name: string ; type: string } | StarkNetMerkleType
+
+A single type, as part of a struct. The type field can be any of the EIP-712 supported types.
+
+Note that the uint and int aliases like in Solidity, and fixed point numbers are not supported by the EIP-712 standard.
+
+Defined in
+src/types/typedData.ts:13
+
+CairoEnum
+CairoEnum: CairoCustomEnum | CairoOption<any> | CairoResult<any, any>
+
+Defined in
+src/types/cairoEnum.ts:3"
+"What about uint256's namespace?","The following is an introduction to uint256's namespace.
+1.References
+Uint256
+Re-exports Uint256
+
+2.Variables
+UINT_128_MAX
+Const UINT_128_MAX: bigint
+
+Defined in
+src/utils/uint256.ts:9
+
+UINT_256_MAX
+Const UINT_256_MAX: bigint
+
+Defined in
+src/utils/uint256.ts:10
+
+Functions
+uint256ToBN
+uint256ToBN(uint256): bigint
+
+Convert Uint256 to bigint
+
+Parameters
+Name    Type
+uint256 Uint256
+Returns
+bigint
+
+Defined in
+src/utils/uint256.ts:15
+
+isUint256
+isUint256(bn): boolean
+
+Test BigNumberish is smaller or equal 2**256-1
+
+Parameters
+Name Type
+bn   BigNumberish
+Returns
+boolean
+
+Defined in
+src/utils/uint256.ts:22
+
+bnToUint256
+bnToUint256(bn): Uint256
+
+Convert BigNumberish (string | number | bigint) to Uint256 (hex)
+
+Parameters
+Name  Type
+bn    BigNumberish
+Returns
+Uint256
+
+Defined in
+src/utils/uint256.ts:29"
+"What about starkCurve's namespace?","The following is an introduction to starkCurve's namespace.
+1.Type Aliases
+ProjectivePoint
+ProjectivePoint: ProjPointType<bigint>
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:6
+
+node_modules/@scure/starknet/lib/index.d.ts:45
+
+PoseidonOpts
+PoseidonOpts: Object
+
+Type declaration
+Name            Type
+Fp              IField<bigint>
+rate            number
+capacity        number
+roundsFull      number
+roundsPartial   number
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:62
+
+PoseidonFn
+PoseidonFn: ReturnType<typeof poseidon> & { m: number ; rate: number ; capacity: number }
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:69
+
+2.Variables
+MAX_VALUE
+Const MAX_VALUE: bigint
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:7
+
+_starkCurve
+Const _starkCurve: weierstrass
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:8
+
+CURVE
+Const CURVE: Readonly<{ nBitLength: number ; nByteLength: number ; Fp: IField<bigint> ; n: bigint ; h: bigint ; hEff?: bigint ; Gx: bigint ; Gy: bigint ; allowInfinityPoint?: boolean ; a: bigint ; b: bigint ; allowedPrivateKeyLengths?: readonly number[] ; wrapPrivateKey?: boolean ; endo?: { beta: bigint ; splitScalar: (k: bigint) => { k1neg: boolean ; k1: bigint ; k2neg: boolean ; k2: bigint } } ; isTorsionFree?: (c: weierstrass, point: ProjPointType<bigint>) => boolean ; clearCofactor?: (c: weierstrass, point: ProjPointType<bigint>) => ProjPointType<bigint> ; hash: u.CHash ; hmac: (key: Uint8Array, ...messages: Uint8Array[]) => Uint8Array ; randomBytes: (bytesLength?: number) => Uint8Array ; lowS: boolean ; bits2int?: (bytes: Uint8Array) => bigint ; bits2int_modN?: (bytes: Uint8Array) => bigint ; p: bigint }>
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:13
+
+ProjectivePoint
+ProjectivePoint: ProjConstructor<bigint>
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:6
+
+node_modules/@scure/starknet/lib/index.d.ts:45
+
+Signature
+Const Signature: weierstrass
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:45
+
+utils
+Const utils: Object
+
+Type declaration
+Name                                           Type
+normPrivateKeyToScalar                      (key: u.PrivKey) => bigint
+randomPrivateKey                             () => Uint8Array
+precompute                                    (windowSize?: number, point?: ProjPointType<bigint>) => ProjPointType<bigint>
+isValidPrivateKey                             (privateKey: PrivKey) => boolean
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:45
+
+Fp251
+Const Fp251: Readonly<IField<bigint> & Required<Pick<IField<bigint>, 'isOdd'>>>
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:60
+
+3.Functions
+getPublicKey
+getPublicKey(privKey, isCompressed?): Uint8Array
+
+Parameters
+Name           Type
+privKey        Hex
+isCompressed?  boolean
+Returns
+Uint8Array
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:9
+
+getSharedSecret
+getSharedSecret(privKeyA, pubKeyB): Uint8Array
+
+Parameters
+Name               Type
+privKeyA           Hex
+pubKeyB            Hex
+Returns
+Uint8Array
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:10
+
+sign
+sign(msgHash, privKey, opts?): SignatureType
+
+Parameters
+Name        Type
+msgHash     Hex
+privKey     Hex
+opts?       any
+Returns
+SignatureType
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:11
+
+verify
+verify(signature, msgHash, pubKey): boolean
+
+Parameters
+Name               Type
+signature        Hex | SignatureType
+msgHash          Hex
+pubKey           Hex
+Returns
+boolean
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:12
+
+grindKey
+grindKey(seed): string
+
+Parameters
+Name        Type
+seed        Hex
+Returns
+string
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:52
+
+getStarkKey
+getStarkKey(privateKey): string
+
+Parameters
+Name        Type
+privateKey  Hex
+Returns
+string
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:53
+
+ethSigToPrivate
+ethSigToPrivate(signature): string
+
+Parameters
+Name        Type
+signature   string
+Returns
+string
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:54
+
+getAccountPath
+getAccountPath(layer, application, ethereumAddress, index): string
+
+Parameters
+Name               Type
+layer               string
+application        string
+ethereumAddress    string
+index               number
+Returns
+string
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:55
+
+pedersen
+pedersen(x, y): string
+
+Parameters
+Name        Type
+x           PedersenArg
+y           PedersenArg
+Returns
+string
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:57
+
+_poseidonMDS
+_poseidonMDS(Fp, name, m, attempt?): bigint[][]
+
+Parameters
+Name        Type
+Fp          IField<bigint>
+name        string
+m           number
+attempt?    number
+Returns
+bigint[][]
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:61
+
+poseidonBasic
+poseidonBasic(opts, mds): PoseidonFn
+
+Parameters
+Name        Type
+opts        PoseidonOpts
+mds         bigint[][]
+Returns
+PoseidonFn
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:74
+
+poseidonCreate
+poseidonCreate(opts, mdsAttempt?): PoseidonFn
+
+Parameters
+Name          Type
+opts         PoseidonOpts
+mdsAttempt?  number
+Returns
+PoseidonFn
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:75
+
+poseidonHash
+poseidonHash(x, y, fn?): bigint
+
+Parameters
+Name            Type
+x               bigint
+y               bigint
+fn?               PoseidonFn
+Returns
+bigint
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:77
+
+poseidonHashFunc
+poseidonHashFunc(x, y, fn?): Uint8Array
+
+Parameters
+Name       Type
+x        Uint8Array
+y        Uint8Array
+fn?      PoseidonFn
+Returns
+Uint8Array
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:78
+
+poseidonHashSingle
+poseidonHashSingle(x, fn?): bigint
+
+Parameters
+Name        Type
+x           bigint
+fn?        PoseidonFn
+Returns
+bigint
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:79
+
+poseidonHashMany
+poseidonHashMany(values, fn?): bigint
+
+Parameters
+Name        Type
+values     bigint[]
+fn?        PoseidonFn
+Returns
+bigint
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:80
+
+computeHashOnElements
+computeHashOnElements(data, fn?): PedersenArg
+
+Parameters
+Name        Type
+data        PedersenArg[]
+fn?        (x: PedersenArg, y: PedersenArg) => string
+Returns
+PedersenArg
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:58
+
+keccak
+keccak(data): bigint
+
+Parameters
+Name  Type
+data  Uint8Array
+Returns
+bigint
+
+Defined in
+node_modules/@scure/starknet/lib/index.d.ts:59
+
+poseidonSmall
+poseidonSmall(values): bigint[]
+
+Parameters
+Name   Type
+values bigint[]
+Returns
+bigint[]
+
+Defined in
+node_modules/@noble/curves/abstract/poseidon.d.ts:27"
+"What about weierstrass's namespace?","The following is an introduction to weierstrass's namespace.
+1.Interfaces
+ProjPointType
+ProjConstructor
+SignatureType
+
+2.Type Aliases
+AffinePoint
+AffinePoint<T>: { x: T ; y: T } & { z?: never ; t?: never }
+
+Type parameters
+Name
+T
+Defined in
+node_modules/@noble/curves/abstract/curve.d.ts:3
+
+BasicWCurve
+BasicWCurve<T>: BasicCurve<T> & { a: T ; b: T ; allowedPrivateKeyLengths?: readonly number[] ; wrapPrivateKey?: boolean ; endo?: EndomorphismOpts ; isTorsionFree?: (c: ProjConstructor<T>, point: ProjPointType<T>) => boolean ; clearCofactor?: (c: ProjConstructor<T>, point: ProjPointType<T>) => ProjPointType<T> }
+
+Type parameters
+Name
+T
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:17
+
+SignOpts
+SignOpts: Object
+
+Type declaration
+Name               Type
+lowS?              boolean
+extraEntropy?      Entropy
+prehash?           boolean
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:27
+
+VerOpts
+VerOpts: Object
+
+Type declaration
+Name          Type
+lowS?         boolean
+prehash?      boolean
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:32
+
+CurvePointsType
+CurvePointsType<T>: BasicWCurve<T> & { fromBytes?: (bytes: Uint8Array) => AffinePoint<T> ; toBytes?: (c: ProjConstructor<T>, point: ProjPointType<T>, isCompressed: boolean) => Uint8Array }
+
+Type parameters
+Name
+T
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:82
+
+CurvePointsRes
+CurvePointsRes<T>: Object
+
+Type parameters
+Name
+T
+Type declaration
+Name                          Type
+ProjectivePoint               ProjConstructor<T>
+normPrivateKeyToScalar       (key: PrivKey) => bigint
+weierstrassEquation          (x: T) => T
+isWithinCurveOrder           (num: bigint) => boolean
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:86
+
+RecoveredSignatureType
+RecoveredSignatureType: SignatureType & { recovery: number }
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:154
+
+SignatureConstructor
+SignatureConstructor: Object
+
+Call signature
+new SignatureConstructor(r, s): SignatureType
+
+Parameters
+Name      Type
+r         bigint
+s         bigint
+Returns
+SignatureType
+
+Type declaration
+Name                     Type
+fromCompact           (hex: Hex) => SignatureType
+fromDER               (hex: Hex) => SignatureType
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:157
+
+PubKey
+PubKey: Hex | ProjPointType<bigint>
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:166
+
+CurveType
+CurveType: BasicWCurve<bigint> & { hash: CHash ; hmac: HmacFnSync ; randomBytes: (bytesLength?: number) => Uint8Array ; lowS?: boolean ; bits2int?: (bytes: Uint8Array) => bigint ; bits2int_modN?: (bytes: Uint8Array) => bigint }
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:167
+
+CurveFn
+CurveFn: Object
+
+Type declaration
+Name                              Type
+CURVE                             ReturnType<typeof validateOpts>
+getPublicKey                      (privateKey: PrivKey, isCompressed?: boolean) => Uint8Array
+getSharedSecret                   (privateA: PrivKey, publicB: Hex, isCompressed?: boolean) => Uint8Array
+sign                              (msgHash: Hex, privKey: PrivKey, opts?: SignOpts) => RecoveredSignatureType
+verify                            (signature: Hex | SignatureLike, msgHash: Hex, publicKey: Hex, opts?: VerOpts) => boolean
+ProjectivePoint                    ProjConstructor<bigint>
+Signature                          SignatureConstructor
+utils                             { normPrivateKeyToScalar: (key: PrivKey) => bigint ; randomPrivateKey: () => Uint8Array ; precompute: (windowSize?: number, point?: ProjPointType<bigint>)=> ProjPointType<bigint> ; isValidPrivateKey: (privateKey: PrivKey) => boolean }
+utils.normPrivateKeyToScalar      (key: PrivKey) => bigint
+utils.randomPrivateKey             () => Uint8Array
+utils.precompute                   (windowSize?: number, point?: ProjPointType<bigint>) => ProjPointType<bigint>
+utils.isValidPrivateKey             [object Object]
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:200
+
+3.Variables
+DER
+Const DER: Object
+
+Type declaration
+Name                                    Type
+Err                      (m?: string) => { name: string ; message: string ; stack?: string }
+_parseInt                (data: Uint8Array) => { d: bigint ; l: Uint8Array }
+toSig                    (hex: string | Uint8Array) => { r: bigint ; s: bigint }
+hexFromSig               (sig: { r: bigint ; s: bigint }) => string
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:92
+
+4.Functions
+weierstrassPoints
+weierstrassPoints<T>(opts): Object
+
+Type parameters
+Name
+T
+Parameters
+Name   Type
+opts   CurvePointsType<T>
+Returns
+Object
+
+Name                                                         Type
+CURVE                                                         Readonly<{ nBitLength: number ; nByteLength: number ; Fp: mod.IField<T> ; n: bigint ; h: bigint ; hEff?: bigint ; Gx: T ; Gy: T; allowInfinityPoint?: boolean ; a: T ; b: T ; allowedPrivateKeyLengths?: readonly number[] ; wrapPrivateKey?: boolean ; endo?: EndomorphismOpts ; isTorsionFree?: (c: ProjConstructor<T>,point: ProjPointType<T>) => boolean ; clearCofactor?: (c: ProjConstructor<T>, point: ProjPointType<T>) => ProjPointType<T> ; fromBytes?: (bytes: Uint8Array) => AffinePoint<T> ; toBytes?: (c:ProjConstructor<T>, point: ProjPointType<T>, isCompressed: boolean) => Uint8Array ; p: bigint }>
+ProjectivePoint                                            ProjConstructor<T>
+normPrivateKeyToScalar                                     (key: PrivKey) => bigint
+weierstrassEquation                                        (x: T) => T
+isWithinCurveOrder                                         (num: bigint) => boolean
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:113
+
+weierstrass
+weierstrass(curveDef): CurveFn
+
+Parameters
+Name        Type
+curveDef    CurveType
+Returns
+CurveFn
+
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:215
+
+SWUFpSqrtRatio
+SWUFpSqrtRatio<T>(Fp, Z): (u: T, v: T) => { isValid: boolean ; value: T }
+
+Implementation of the Shallue and van de Woestijne method for any weierstrass curve. TODO: check if there is a way to merge this with uvRatio in Edwards; move to modular. b = True and y = sqrt(u / v) if (u / v) is square in F, and b = False and y = sqrt(Z * (u / v)) otherwise.
+
+Type parameters
+Name
+T
+Parameters
+Name        Type
+Fp        IField<T>
+Z             T
+Returns
+fn
+
+(u, v): Object
+
+Parameters
+Name        Type
+u             T
+v             T
+Returns
+Object
+
+Name            Type
+isValid        boolean
+value           T
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:225
+
+mapToCurveSimpleSWU
+mapToCurveSimpleSWU<T>(Fp, opts): (u: T) => { x: T ; y: T }
+
+
+Type parameters
+Name
+T
+Parameters
+Name        Type
+Fp        IField<T>
+opts        Object
+opts.A        T
+opts.B        T
+opts.Z        T
+Returns
+fn
+
+? (u): Object
+
+Parameters
+Name Type
+u T
+Returns
+Object
+
+Name Type
+x      T
+y      T
+Defined in
+node_modules/@noble/curves/abstract/weierstrass.d.ts:233"
+"What about poseidon's namespace?","The following is an introduction to poseidon's namespace.
+1.Type Aliases
+PoseidonOpts
+PoseidonOpts: Object
+
+Type declaration
+Name                     Type
+Fp                      IField<bigint>
+t                        number
+roundsFull               number
+roundsPartial            number
+sboxPower?               number
+reversePartialPowIdx?    boolean
+mds                      bigint[][]
+roundConstants           bigint[][]
+Defined in
+node_modules/@noble/curves/abstract/poseidon.d.ts:3
+
+2.Functions
+validateOpts
+validateOpts(opts): Readonly<{ rounds: number ; sboxFn: (n: bigint) => bigint ; roundConstants: bigint[][] ; mds: bigint[][] ; Fp: IField<bigint> ; t: number ; roundsFull: number ;roundsPartial: number ; sboxPower?: number ; reversePartialPowIdx?: boolean }>
+
+Parameters
+Name Type
+opts PoseidonOpts
+Returns
+Readonly<{ rounds: number ; sboxFn: (n: bigint) => bigint ; roundConstants: bigint[][] ; mds: bigint[][] ; Fp: IField<bigint> ; t: number ; roundsFull: number ; roundsPartial: number ;sboxPower?: number ; reversePartialPowIdx?: boolean }>
+
+Defined in
+node_modules/@noble/curves/abstract/poseidon.d.ts:13
+
+splitConstants
+splitConstants(rc, t): bigint[][]
+
+Parameters
+Name Type
+rc   bigint[]
+t    number
+Returns
+bigint[][]
+
+Defined in
+node_modules/@noble/curves/abstract/poseidon.d.ts:25
+
+poseidon
+poseidon(opts): (values: bigint[]) => bigint[]
+
+Parameters
+Name Type
+opts PoseidonOpts
+Returns
+fn
+
+(values): bigint[]
+
+Parameters
+Name   Type
+values bigint[]
+Returns
+bigint[]
+
+Name              Type
+roundConstants bigint[][]
+Defined in
+node_modules/@noble/curves/abstract/poseidon.d.ts:26"
+"What types of errors are namespaces have?","The following is an introduction to the types of errors.
+Interfaces
+
+1.FAILED_TO_RECEIVE_TXN
+2.NO_TRACE_AVAILABLE
+3.CONTRACT_NOT_FOUND
+4.INVALID_MESSAGE_SELECTOR
+5.INVALID_CALL_DATA
+6.BLOCK_NOT_FOUND
+7.INVALID_TXN_HASH
+8.INVALID_BLOCK_HASH
+9.INVALID_TXN_INDEX
+10.CLASS_HASH_NOT_FOUND
+11.TXN_HASH_NOT_FOUND
+12.PAGE_SIZE_TOO_BIG
+13.NO_BLOCKS
+14.INVALID_CONTINUATION_TOKEN
+15.TOO_MANY_KEYS_IN_FILTER
+16.CONTRACT_ERROR
+17.CLASS_ALREADY_DECLARED
+18.INVALID_TRANSACTION_NONCE
+19.INSUFFICIENT_MAX_FEE
+20.INSUFFICIENT_ACCOUNT_BALANCE
+21.VALIDATION_FAILURE
+22.COMPILATION_FAILED
+23.CONTRACT_CLASS_SIZE_IS_TOO_LARGE
+24.NON_ACCOUNT
+25.DUPLICATE_TX
+26.COMPILED_CLASS_HASH_MISMATCH
+27.UNSUPPORTED_TX_VERSION
+28.UNSUPPORTED_CONTRACT_CLASS_VERSION
+29.UNEXPECTED_ERROR"
+"What is JRPC's namespace?","The following is an introduction to JRPC's namespace.
+Type Aliases
+1.RequestBody
+RequestBody: Object
+
+Type declaration
+Name        Type
+id        number | string
+jsonrpc     '2.0'
+method      string
+params?       {}
+Defined in
+src/types/api/jsonrpc/index.ts:1
+
+2.ResponseBody
+ResponseBody: { id: number | string ; jsonrpc: '2.0' } & SuccessResponseBody | ErrorResponseBody
+
+Defined in
+src/types/api/jsonrpc/index.ts:8
+
+3.SuccessResponseBody
+SuccessResponseBody: Object
+
+Type declaration
+Name    Type
+result unknown
+Defined in
+src/types/api/jsonrpc/index.ts:13
+
+4.ErrorResponseBody
+ErrorResponseBody: Object
+
+Type declaration
+Name     Type
+error    Error
+Defined in
+src/types/api/jsonrpc/index.ts:17
+
+5.Error
+Error: Object
+
+Type declaration
+Name       Type
+code     number
+message  string
+data?    unknown
+Defined in
+src/types/api/jsonrpc/index.ts:21
+
+Previous"
+"What is SPEC's namespace?","The following is an introduction to SPEC's namespace.
+Type Aliases
+FELT
+FELT: string
+
+A field element. represented by at most 63 hex digits
+
+Pattern
+
+^0x(0|[a-fA-F1-9]{1}[a-fA-F0-9]{0,62})$
+
+Defined in
+src/types/api/rpcspec/components.ts:9
+
+ETH_ADDRESS
+ETH_ADDRESS: string
+
+an ethereum address represented as 40 hex digits
+
+Pattern
+
+^0x[a-fA-F0-9]{40}$
+
+Defined in
+src/types/api/rpcspec/components.ts:14
+
+STORAGE_KEY
+STORAGE_KEY: string
+
+A storage key. Represented as up to 62 hex digits, 3 bits, and 5 leading zeroes.
+
+Pattern
+
+^0x0[0-7]{1}[a-fA-F0-9]{0,62}$
+
+Defined in
+src/types/api/rpcspec/components.ts:19
+
+ADDRESS
+ADDRESS: FELT
+
+Defined in
+src/types/api/rpcspec/components.ts:20
+
+NUM_AS_HEX
+NUM_AS_HEX: string
+
+Defined in
+src/types/api/rpcspec/components.ts:21
+
+SIGNATURE
+SIGNATURE: FELT[]
+
+Defined in
+src/types/api/rpcspec/components.ts:22
+
+BLOCK_NUMBER
+BLOCK_NUMBER: number
+
+Defined in
+src/types/api/rpcspec/components.ts:23
+
+BLOCK_HASH
+BLOCK_HASH: FELT
+
+Defined in
+src/types/api/rpcspec/components.ts:24
+
+TXN_HASH
+TXN_HASH: FELT
+
+Defined in
+src/types/api/rpcspec/components.ts:25
+
+CHAIN_ID
+CHAIN_ID: NUM_AS_HEX
+
+Defined in
+src/types/api/rpcspec/components.ts:26
+
+STRUCT_ABI_TYPE
+STRUCT_ABI_TYPE: 'struct'
+
+Defined in
+src/types/api/rpcspec/components.ts:27
+
+EVENT_ABI_TYPE
+EVENT_ABI_TYPE: 'event'
+
+Defined in
+src/types/api/rpcspec/components.ts:28
+
+FUNCTION_ABI_TYPE
+FUNCTION_ABI_TYPE: 'function' | 'l1_handler' | 'constructor'
+
+Defined in
+src/types/api/rpcspec/components.ts:29
+
+ENTRY_POINT_TYPE
+ENTRY_POINT_TYPE: 'EXTERNAL' | 'L1_HANDLER' | 'CONSTRUCTOR'
+
+Defined in
+src/types/api/rpcspec/components.ts:31
+
+CALL_TYPE
+CALL_TYPE: 'DELEGATE' | 'LIBRARY_CALL' | 'CALL'
+
+Defined in
+src/types/api/rpcspec/components.ts:33
+
+TXN_STATUS
+TXN_STATUS: 'RECEIVED' | 'REJECTED' | 'ACCEPTED_ON_L2' | 'ACCEPTED_ON_L1'
+
+Defined in
+src/types/api/rpcspec/components.ts:35
+
+SIMULATION_FLAG
+SIMULATION_FLAG: 'SKIP_VALIDATE' | 'SKIP_FEE_CHARGE'
+
+Defined in
+src/types/api/rpcspec/components.ts:37
+
+DA_MODE
+DA_MODE: 'L1' | 'L2'
+
+Defined in
+src/types/api/rpcspec/components.ts:39
+
+TXN_TYPE
+TXN_TYPE: 'DECLARE' | 'DEPLOY' | 'DEPLOY_ACCOUNT' | 'INVOKE' | 'L1_HANDLER'
+
+Defined in
+src/types/api/rpcspec/components.ts:40
+
+TXN_FINALITY_STATUS
+TXN_FINALITY_STATUS: 'ACCEPTED_ON_L2' | 'ACCEPTED_ON_L1'
+
+Defined in
+src/types/api/rpcspec/components.ts:41
+
+TXN_EXECUTION_STATUS
+TXN_EXECUTION_STATUS: 'SUCCEEDED' | 'REVERTED'
+
+Defined in
+src/types/api/rpcspec/components.ts:42
+
+BLOCK_STATUS
+BLOCK_STATUS: 'PENDING' | 'ACCEPTED_ON_L2' | 'ACCEPTED_ON_L1' | 'REJECTED'
+
+Defined in
+src/types/api/rpcspec/components.ts:43
+
+BLOCK_TAG
+BLOCK_TAG: 'latest' | 'pending'
+
+Defined in
+src/types/api/rpcspec/components.ts:44
+
+EVENTS_CHUNK
+EVENTS_CHUNK: Object
+
+READ API
+
+Type declaration
+Name                  Type
+events            EMITTED_EVENT[]
+continuation_token?   string
+Defined in
+src/types/api/rpcspec/components.ts:50
+
+RESULT_PAGE_REQUEST
+RESULT_PAGE_REQUEST: Object
+
+Type declaration
+Name                  Type
+continuation_token?   string
+chunk_size            number
+Defined in
+src/types/api/rpcspec/components.ts:57
+
+EMITTED_EVENT
+EMITTED_EVENT: EVENT & { block_hash: BLOCK_HASH ; block_number: BLOCK_NUMBER ; transaction_hash: TXN_HASH }
+
+Defined in
+src/types/api/rpcspec/components.ts:64
+
+EVENT
+EVENT: { from_address: ADDRESS } & EVENT_CONTENT
+
+Defined in
+src/types/api/rpcspec/components.ts:70
+
+EVENT_CONTENT
+EVENT_CONTENT: Object
+
+Type declaration
+Name        Type
+keys        FELT[]
+data        FELT[]
+Defined in
+src/types/api/rpcspec/components.ts:74
+
+EVENT_FILTER
+EVENT_FILTER: Object
+
+Type declaration
+Name              Type
+from_block?    BLOCK_ID
+to_block?      BLOCK_ID
+address?        ADDRESS
+keys?           FELT[][]
+Defined in
+src/types/api/rpcspec/components.ts:79
+
+BLOCK_ID
+BLOCK_ID: { block_hash?: BLOCK_HASH ; block_number?: BLOCK_NUMBER } | BLOCK_TAG
+
+Defined in
+src/types/api/rpcspec/components.ts:86
+
+SYNC_STATUS
+SYNC_STATUS: Object
+
+Type declaration
+Name                       Type
+starting_block_hash    BLOCK_HASH
+starting_block_num     BLOCK_NUMBER
+current_block_hash     BLOCK_HASH
+current_block_num       BLOCK_NUMBER
+highest_block_hash     BLOCK_HASH
+highest_block_num       BLOCK_NUMBER
+Defined in
+src/types/api/rpcspec/components.ts:93
+
+NEW_CLASSES
+NEW_CLASSES: Object
+
+Type declaration
+Name                Type
+class_hash           FELT
+compiled_class_hash  FELT
+Defined in
+src/types/api/rpcspec/components.ts:102
+
+REPLACED_CLASS
+REPLACED_CLASS: Object
+
+Type             declaration
+Name                Type
+class_hash          FELT
+contract_address    FELT
+Defined in
+src/types/api/rpcspec/components.ts:107
+
+NONCE_UPDATE
+NONCE_UPDATE: Object
+
+Type declaration
+Name                Type
+contract_address ADDRESS
+nonce                FELT
+Defined in
+src/types/api/rpcspec/components.ts:112
+
+STATE_DIFF
+STATE_DIFF: Object
+
+Type declaration
+Name                                Type
+storage_diffs             CONTRACT_STORAGE_DIFF_ITEM[]
+deprecated_declared_classes       FELT[]
+declared_classes             NEW_CLASSES[]
+deployed_contracts          DEPLOYED_CONTRACT_ITEM[]
+replaced_classes          REPLACED_CLASS[]
+nonces                         NONCE_UPDATE[]
+Defined in
+src/types/api/rpcspec/components.ts:117
+
+PENDING_STATE_UPDATE
+PENDING_STATE_UPDATE: Object
+
+Type declaration
+Name           Type
+old_root       FELT
+state_diff   STATE_DIFF
+Defined in
+src/types/api/rpcspec/components.ts:126
+
+STATE_UPDATE
+STATE_UPDATE: Object
+
+Type declaration
+Name         Type
+block_hash BLOCK_HASH
+old_root    FELT
+new_root    FELT
+state_diff STATE_DIFF
+Defined in
+src/types/api/rpcspec/components.ts:131
+
+BLOCK_BODY_WITH_TX_HASHES
+BLOCK_BODY_WITH_TX_HASHES: Object
+
+Type declaration
+Name          Type
+transactions TXN_HASH[]
+Defined in
+src/types/api/rpcspec/components.ts:138
+
+BLOCK_BODY_WITH_TXS
+BLOCK_BODY_WITH_TXS: Object
+
+Type declaration
+Name                            Type
+transactions    { transaction: TXN ; transaction_hash: TXN_HASH }[]
+Defined in
+src/types/api/rpcspec/components.ts:142
+
+BLOCK_HEADER
+BLOCK_HEADER: Object
+
+Type declaration
+Name                Type
+block_hash         BLOCK_HASH
+parent_hash        BLOCK_HASH
+block_number       BLOCK_NUMBER
+new_root             FELT
+timestamp          number
+sequencer_address   FELT
+l1_gas_price    RESOURCE_PRICE
+starknet_version    string
+Defined in
+src/types/api/rpcspec/components.ts:149
+
+PENDING_BLOCK_HEADER
+PENDING_BLOCK_HEADER: Object
+
+Type declaration
+Name             Type
+parent_hash    BLOCK_HASH
+timestamp        number
+sequencer_address FELT
+l1_gas_price   RESOURCE_PRICE
+starknet_version  string
+Defined in
+src/types/api/rpcspec/components.ts:160
+
+BLOCK_WITH_TX_HASHES
+BLOCK_WITH_TX_HASHES: { status: BLOCK_STATUS } & BLOCK_HEADER & BLOCK_BODY_WITH_TX_HASHES
+
+Defined in
+src/types/api/rpcspec/components.ts:168
+
+BLOCK_WITH_TXS
+BLOCK_WITH_TXS: { status: BLOCK_STATUS } & BLOCK_HEADER & BLOCK_BODY_WITH_TXS
+
+Defined in
+src/types/api/rpcspec/components.ts:171
+
+PENDING_BLOCK_WITH_TX_HASHES
+PENDING_BLOCK_WITH_TX_HASHES: BLOCK_BODY_WITH_TX_HASHES & PENDING_BLOCK_HEADER
+
+Defined in
+src/types/api/rpcspec/components.ts:173
+
+PENDING_BLOCK_WITH_TXS
+PENDING_BLOCK_WITH_TXS: BLOCK_BODY_WITH_TXS & PENDING_BLOCK_HEADER
+
+Defined in
+src/types/api/rpcspec/components.ts:175
+
+DEPLOYED_CONTRACT_ITEM
+DEPLOYED_CONTRACT_ITEM: Object
+
+Type declaration
+Name          Type
+address       FELT
+class_hash    FELT
+Defined in
+src/types/api/rpcspec/components.ts:177
+
+CONTRACT_STORAGE_DIFF_ITEM
+CONTRACT_STORAGE_DIFF_ITEM: Object
+
+Type declaration
+Name             Type
+address         string
+storage_entries StorageDiffItem[]
+Defined in
+src/types/api/rpcspec/components.ts:182
+
+StorageDiffItem
+StorageDiffItem: Object
+
+Type declaration
+Name    Type
+key    string
+value  string
+Defined in
+src/types/api/rpcspec/components.ts:189
+
+TXN
+TXN: INVOKE_TXN | L1_HANDLER_TXN | DECLARE_TXN | DEPLOY_TXN | DEPLOY_ACCOUNT_TXN
+
+Defined in
+src/types/api/rpcspec/components.ts:196
+
+DECLARE_TXN
+DECLARE_TXN: DECLARE_TXN_V0 | DECLARE_TXN_V1 | DECLARE_TXN_V2
+
+Defined in
+src/types/api/rpcspec/components.ts:198
+
+DECLARE_TXN_V0
+DECLARE_TXN_V0: Object
+
+Type declaration
+Name                   Type
+type                'DECLARE'
+sender_address       ADDRESS
+max_fee                FELT
+version                '0x0'
+signature            SIGNATURE
+class_hash             FELT
+Defined in
+src/types/api/rpcspec/components.ts:200
+
+DECLARE_TXN_V1
+DECLARE_TXN_V1: Object
+
+Type declaration
+Name             Type
+type           'DECLARE'
+sender_address  ADDRESS
+max_fee          FELT
+version          '0x1'
+signature       SIGNATURE
+nonce             FELT
+class_hash        FELT
+Defined in
+src/types/api/rpcspec/components.ts:209
+
+DECLARE_TXN_V2
+DECLARE_TXN_V2: Object
+
+Type declaration
+Name                  Type   
+type                'DECLARE'
+sender_address       ADDRESS
+compiled_class_hash   FELT
+max_fee               FELT
+version                '0x2'
+signature           SIGNATURE
+nonce                   FELT
+class_hash              FELT
+Defined in
+src/types/api/rpcspec/components.ts:219
+
+BROADCASTED_TXN
+BROADCASTED_TXN: BROADCASTED_INVOKE_TXN | BROADCASTED_DECLARE_TXN | BROADCASTED_DEPLOY_ACCOUNT_TXN
+
+Defined in
+src/types/api/rpcspec/components.ts:230
+
+BROADCASTED_INVOKE_TXN
+BROADCASTED_INVOKE_TXN: INVOKE_TXN_V0 | INVOKE_TXN_V1
+
+Defined in
+src/types/api/rpcspec/components.ts:235
+
+BROADCASTED_DEPLOY_ACCOUNT_TXN
+BROADCASTED_DEPLOY_ACCOUNT_TXN: DEPLOY_ACCOUNT_TXN
+
+Defined in
+src/types/api/rpcspec/components.ts:237
+
+BROADCASTED_DECLARE_TXN
+BROADCASTED_DECLARE_TXN: BROADCASTED_DECLARE_TXN_V1 | BROADCASTED_DECLARE_TXN_V2
+
+Defined in
+src/types/api/rpcspec/components.ts:239
+
+BROADCASTED_DECLARE_TXN_V1
+BROADCASTED_DECLARE_TXN_V1: Object
+
+Type declaration
+Name             Type
+type          'DECLARE'
+sender_address ADDRESS
+max_fee          FELT
+version      NUM_AS_HEX
+signature    SIGNATURE
+nonce             FELT
+contract_class DEPRECATED_CONTRACT_CLASS
+Defined in
+src/types/api/rpcspec/components.ts:241
+
+BROADCASTED_DECLARE_TXN_V2
+BROADCASTED_DECLARE_TXN_V2: Object
+
+Type declaration
+Name                   Type
+type                'DECLARE'
+sender_address       ADDRESS
+compiled_class_hash    FELT
+max_fee                FELT
+version             NUM_AS_HEX
+signature           SIGNATURE    
+nonce                 FELT
+contract_class    CONTRACT_CLASS
+Defined in
+src/types/api/rpcspec/components.ts:251
+
+DEPLOY_ACCOUNT_TXN
+DEPLOY_ACCOUNT_TXN: DEPLOY_ACCOUNT_TXN_V1
+
+Defined in
+src/types/api/rpcspec/components.ts:262
+
+DEPLOY_ACCOUNT_TXN_V1
+DEPLOY_ACCOUNT_TXN_V1: Object
+
+Type declaration
+Name                        Type
+type                   'DEPLOY_ACCOUNT'
+max_fee                    FELT
+version                  NUM_AS_HEX
+signature                 SIGNATURE
+nonce                     FELT
+contract_address_salt     FELT
+constructor_calldata      FELT[]
+class_hash                FELT
+Defined in
+src/types/api/rpcspec/components.ts:264
+
+DEPLOY_TXN
+DEPLOY_TXN: Object
+
+Type declaration
+Name                       Type
+type                       'DEPLOY'
+version                    NUM_AS_HEX
+contract_address_salt      FELT
+constructor_calldata       FELT[]
+class_hash                 FELT
+Defined in
+src/types/api/rpcspec/components.ts:275
+
+INVOKE_TXN
+INVOKE_TXN: INVOKE_TXN_V0 | INVOKE_TXN_V1
+
+Defined in
+src/types/api/rpcspec/components.ts:283
+
+INVOKE_TXN_V0
+INVOKE_TXN_V0: Object
+
+Type declaration
+Name                Type
+type                'INVOKE'
+max_fee              FELT
+version             '0x0'
+signature           SIGNATURE
+contract_address     ADDRESS
+entry_point_selector  FELT
+calldata             FELT[]
+Defined in
+src/types/api/rpcspec/components.ts:285
+
+INVOKE_TXN_V1
+INVOKE_TXN_V1: Object
+
+Type declaration
+Name             Type
+type            'INVOKE'
+sender_address   ADDRESS
+calldata         FELT[]
+max_fee          FELT
+version          NUM_AS_HEX
+signature        SIGNATURE
+nonce            FELT
+Defined in
+src/types/api/rpcspec/components.ts:295
+
+L1_HANDLER_TXN
+L1_HANDLER_TXN: { version: NUM_AS_HEX ; type: 'L1_HANDLER' ; nonce: NUM_AS_HEX } & FUNCTION_CALL
+
+Defined in
+src/types/api/rpcspec/components.ts:305
+
+COMMON_RECEIPT_PROPERTIES
+COMMON_RECEIPT_PROPERTIES: Object
+
+Type declaration
+Name                            Type
+transaction_hash               TXN_HASH
+actual_fee                     FELT
+execution_status             TXN_EXECUTION_STATUS
+finality_status              TXN_FINALITY_STATUS
+block_hash                     BLOCK_HASH
+block_number                   BLOCK_NUMBER
+messages_sent                  MSG_TO_L1[]
+revert_reason                  string
+events                          EVENT[]
+execution_resources      EXECUTION_RESOURCES
+Defined in
+src/types/api/rpcspec/components.ts:311
+
+PENDING_COMMON_RECEIPT_PROPERTIES
+PENDING_COMMON_RECEIPT_PROPERTIES: Object
+
+Type declaration
+Name                     Type
+transaction_hash      TXN_HASH
+actual_fee                FELT
+type                     TXN_TYPE
+messages_sent           MSG_TO_L1[]
+events                     EVENT[]
+revert_reason                string
+finality_status 'ACCEPTED_ON_L2'
+execution_status TXN_EXECUTION_STATUS
+execution_resources EXECUTION_RESOURCES
+Defined in
+src/types/api/rpcspec/components.ts:324
+
+INVOKE_TXN_RECEIPT
+INVOKE_TXN_RECEIPT: { type: 'INVOKE' } & COMMON_RECEIPT_PROPERTIES
+
+Defined in
+src/types/api/rpcspec/components.ts:336
+
+PENDING_INVOKE_TXN_RECEIPT
+PENDING_INVOKE_TXN_RECEIPT: { type: 'INVOKE' } & PENDING_COMMON_RECEIPT_PROPERTIES
+
+Defined in
+src/types/api/rpcspec/components.ts:340
+
+DECLARE_TXN_RECEIPT
+DECLARE_TXN_RECEIPT: { type: 'DECLARE' } & COMMON_RECEIPT_PROPERTIES
+
+Defined in
+src/types/api/rpcspec/components.ts:344
+
+PENDING_DECLARE_TXN_RECEIPT
+PENDING_DECLARE_TXN_RECEIPT: { type: 'DECLARE' } & PENDING_COMMON_RECEIPT_PROPERTIES
+
+Defined in
+src/types/api/rpcspec/components.ts:348
+
+DEPLOY_ACCOUNT_TXN_RECEIPT
+DEPLOY_ACCOUNT_TXN_RECEIPT: { type: 'DEPLOY_ACCOUNT' ; contract_address: FELT } & COMMON_RECEIPT_PROPERTIES
+
+Defined in
+src/types/api/rpcspec/components.ts:352
+
+PENDING_DEPLOY_ACCOUNT_TXN_RECEIPT
+PENDING_DEPLOY_ACCOUNT_TXN_RECEIPT: { type: 'DEPLOY_ACCOUNT' ; contract_address: FELT } & PENDING_COMMON_RECEIPT_PROPERTIES
+
+Defined in
+src/types/api/rpcspec/components.ts:357
+
+DEPLOY_TXN_RECEIPT
+DEPLOY_TXN_RECEIPT: { type: 'DEPLOY' ; contract_address: FELT } & COMMON_RECEIPT_PROPERTIES
+
+Defined in
+src/types/api/rpcspec/components.ts:362
+
+L1_HANDLER_TXN_RECEIPT
+L1_HANDLER_TXN_RECEIPT: { type: 'L1_HANDLER' ; message_hash: NUM_AS_HEX } & COMMON_RECEIPT_PROPERTIES
+
+Defined in
+src/types/api/rpcspec/components.ts:367
+
+PENDING_L1_HANDLER_TXN_RECEIPT
+PENDING_L1_HANDLER_TXN_RECEIPT: { type: 'L1_HANDLER' ; message_hash: NUM_AS_HEX } & PENDING_COMMON_RECEIPT_PROPERTIES
+
+Defined in
+src/types/api/rpcspec/components.ts:372
+
+TXN_RECEIPT
+TXN_RECEIPT: INVOKE_TXN_RECEIPT | L1_HANDLER_TXN_RECEIPT | DECLARE_TXN_RECEIPT | DEPLOY_TXN_RECEIPT | DEPLOY_ACCOUNT_TXN_RECEIPT
+
+Defined in
+src/types/api/rpcspec/components.ts:377
+
+PENDING_TXN_RECEIPT
+PENDING_TXN_RECEIPT: PENDING_INVOKE_TXN_RECEIPT | PENDING_L1_HANDLER_TXN_RECEIPT | PENDING_DECLARE_TXN_RECEIPT | PENDING_DEPLOY_ACCOUNT_TXN_RECEIPT
+
+Defined in
+src/types/api/rpcspec/components.ts:384
+
+MSG_TO_L1
+MSG_TO_L1: Object
+
+Type declaration
+Name         Type
+from_address FELT
+to_address   FELT
+payload     FELT[]
+Defined in
+src/types/api/rpcspec/components.ts:390
+
+MSG_FROM_L1
+MSG_FROM_L1: Object
+
+Type declaration
+Name                     Type
+from_address          ETH_ADDRESS
+to_address               ADDRESS
+entry_point_selector    FELT
+payload                FELT[]
+Defined in
+src/types/api/rpcspec/components.ts:396
+
+FUNCTION_CALL
+FUNCTION_CALL: Object
+
+Type declaration
+Name                Type
+contract_address   ADDRESS
+entry_point_selector FELT
+calldata            FELT[]
+Defined in
+src/types/api/rpcspec/components.ts:403
+
+CONTRACT_CLASS
+CONTRACT_CLASS: Object
+
+Type declaration
+Name                                   Type
+sierra_program                         FELT[]
+contract_class_version                string
+entry_points_by_type                { CONSTRUCTOR: SIERRA_ENTRY_POINT[] ; EXTERNAL: SIERRA_ENTRY_POINT[] ; L1_HANDLER: SIERRA_ENTRY_POINT[] }
+entry_points_by_type.CONSTRUCTOR    SIERRA_ENTRY_POINT[]
+entry_points_by_type.EXTERNAL       SIERRA_ENTRY_POINT[]
+entry_points_by_type.L1_HANDLER      SIERRA_ENTRY_POINT[]
+abi string
+Defined in
+src/types/api/rpcspec/components.ts:409
+
+DEPRECATED_CONTRACT_CLASS
+DEPRECATED_CONTRACT_CLASS: Object
+
+Type declaration
+Name                                     Type
+program                                 string
+entry_points_by_type         { CONSTRUCTOR: DEPRECATED_CAIRO_ENTRY_POINT[] ; EXTERNAL: DEPRECATED_CAIRO_ENTRY_POINT[] ; L1_HANDLER: DEPRECATED_CAIRO_ENTRY_POINT[] }
+entry_points_by_type.CONSTRUCTOR DEPRECATED_CAIRO_ENTRY_POINT[]
+entry_points_by_type.EXTERNAL    DEPRECATED_CAIRO_ENTRY_POINT[]
+entry_points_by_type.L1_HANDLER  DEPRECATED_CAIRO_ENTRY_POINT[]
+abi CONTRACT_ABI
+Defined in
+src/types/api/rpcspec/components.ts:420
+
+DEPRECATED_CAIRO_ENTRY_POINT
+DEPRECATED_CAIRO_ENTRY_POINT: Object
+
+Type declaration
+Name     Type
+offset   NUM_AS_HEX | number
+selector FELT
+Defined in
+src/types/api/rpcspec/components.ts:430
+
+SIERRA_ENTRY_POINT
+SIERRA_ENTRY_POINT: Object
+
+Type declaration
+Name Type
+selector FELT
+function_idx number
+Defined in
+src/types/api/rpcspec/components.ts:435
+
+CONTRACT_ABI
+CONTRACT_ABI: CONTRACT_ABI_ENTRY[]
+
+Defined in
+src/types/api/rpcspec/components.ts:440
+
+CONTRACT_ABI_ENTRY
+CONTRACT_ABI_ENTRY: Object
+
+Type declaration
+Name Type
+selector FELT
+input string
+output string
+Defined in
+src/types/api/rpcspec/components.ts:442
+
+STRUCT_ABI_ENTRY
+STRUCT_ABI_ENTRY: Object
+
+Type declaration
+Name Type
+type STRUCT_ABI_TYPE
+name string
+size number
+members STRUCT_MEMBER[]
+Defined in
+src/types/api/rpcspec/components.ts:448
+
+STRUCT_MEMBER
+STRUCT_MEMBER: TYPED_PARAMETER & { offset: number }
+
+Defined in
+src/types/api/rpcspec/components.ts:455
+
+EVENT_ABI_ENTRY
+EVENT_ABI_ENTRY: Object
+
+Type declaration
+Name Type
+type EVENT_ABI_TYPE
+name string
+keys TYPED_PARAMETER[]
+data TYPED_PARAMETER[]
+Defined in
+src/types/api/rpcspec/components.ts:459
+
+FUNCTION_STATE_MUTABILITY
+FUNCTION_STATE_MUTABILITY: 'view'
+
+Defined in
+src/types/api/rpcspec/components.ts:466
+
+FUNCTION_ABI_ENTRY
+FUNCTION_ABI_ENTRY: Object
+
+Type declaration
+Name Type
+type FUNCTION_ABI_TYPE
+name string
+inputs TYPED_PARAMETER[]
+outputs TYPED_PARAMETER[]
+stateMutability FUNCTION_STATE_MUTABILITY
+Defined in
+src/types/api/rpcspec/components.ts:468
+
+TYPED_PARAMETER
+TYPED_PARAMETER: Object
+
+Type declaration
+Name Type
+name string
+type string
+Defined in
+src/types/api/rpcspec/components.ts:476
+
+FEE_ESTIMATE
+FEE_ESTIMATE: Object
+
+Type declaration
+Name Type
+gas_consumed NUM_AS_HEX
+gas_price NUM_AS_HEX
+overall_fee NUM_AS_HEX
+Defined in
+src/types/api/rpcspec/components.ts:481
+
+RESOURCE_LIMITS
+RESOURCE_LIMITS: Object
+
+Type declaration
+Name Type
+max_amount NUM_AS_HEX
+max_price_per_unit NUM_AS_HEX
+Defined in
+src/types/api/rpcspec/components.ts:487
+
+RESOURCE_PRICE
+RESOURCE_PRICE: Object
+
+Type declaration
+Name Type
+price_in_strk? NUM_AS_HEX
+price_in_wei NUM_AS_HEX
+Defined in
+src/types/api/rpcspec/components.ts:492
+
+EXECUTION_RESOURCES
+EXECUTION_RESOURCES: Object
+
+Type declaration
+Name Type
+steps NUM_AS_HEX
+memory_holes NUM_AS_HEX
+range_check_builtin_applications NUM_AS_HEX
+pedersen_builtin_applications NUM_AS_HEX
+poseidon_builtin_applications NUM_AS_HEX
+ec_op_builtin_applications NUM_AS_HEX
+ecdsa_builtin_applications NUM_AS_HEX
+bitwise_builtin_applications NUM_AS_HEX
+keccak_builtin_applications NUM_AS_HEX
+Defined in
+src/types/api/rpcspec/components.ts:497
+
+TRANSACTION_TRACE
+TRANSACTION_TRACE: Object
+
+TRACE API
+
+Type declaration
+Name Type
+invoke_tx_trace? INVOKE_TXN_TRACE
+declare_tx_trace? DECLARE_TXN_TRACE
+deploy_account_tx_trace? DEPLOY_ACCOUNT_TXN_TRACE
+l1_handler_tx_trace? L1_HANDLER_TXN_TRACE
+Defined in
+src/types/api/rpcspec/components.ts:514
+
+INVOKE_TXN_TRACE
+INVOKE_TXN_TRACE: Object
+
+Type declaration
+Name Type
+type 'INVOKE'
+execute_invocation FUNCTION_INVOCATION | { revert_reason: string }
+validate_invocation? FUNCTION_INVOCATION
+fee_transfer_invocation? FUNCTION_INVOCATION
+state_diff? STATE_DIFF
+Defined in
+src/types/api/rpcspec/components.ts:522
+
+DECLARE_TXN_TRACE
+DECLARE_TXN_TRACE: Object
+
+Type declaration
+Name Type
+type 'DECLARE'
+validate_invocation? FUNCTION_INVOCATION
+fee_transfer_invocation? FUNCTION_INVOCATION
+state_diff? STATE_DIFF
+Defined in
+src/types/api/rpcspec/components.ts:531
+
+DEPLOY_ACCOUNT_TXN_TRACE
+DEPLOY_ACCOUNT_TXN_TRACE: Object
+
+Type declaration
+Name Type
+type 'DEPLOY_ACCOUNT'
+constructor_invocation FUNCTION_INVOCATION
+validate_invocation? FUNCTION_INVOCATION
+fee_transfer_invocation? FUNCTION_INVOCATION
+state_diff? STATE_DIFF
+Defined in
+src/types/api/rpcspec/components.ts:539
+
+L1_HANDLER_TXN_TRACE
+L1_HANDLER_TXN_TRACE: Object
+
+Type declaration
+Name Type
+type 'L1_HANDLER'
+function_invocation FUNCTION_INVOCATION
+state_diff? STATE_DIFF
+Defined in
+src/types/api/rpcspec/components.ts:548
+
+NESTED_CALL
+NESTED_CALL: FUNCTION_INVOCATION
+
+Defined in
+src/types/api/rpcspec/components.ts:555
+
+FUNCTION_INVOCATION
+FUNCTION_INVOCATION: Object
+
+Type declaration
+Name Type
+function_call FUNCTION_CALL
+caller_address string
+class_hash string
+entry_point_type ENTRY_POINT_TYPE
+call_type CALL_TYPE
+result string[]
+calls NESTED_CALL[]
+events ORDERED_EVENT[]
+messages ORDERED_MESSAGE[]
+Defined in
+src/types/api/rpcspec/components.ts:558
+
+ORDERED_EVENT
+ORDERED_EVENT: Object
+
+Type declaration
+Name Type
+order number
+event EVENT
+Defined in
+src/types/api/rpcspec/components.ts:571
+
+ORDERED_MESSAGE
+ORDERED_MESSAGE: Object
+
+Type declaration
+Name Type
+order number
+message MSG_TO_L1
+Defined in
+src/types/api/rpcspec/components.ts:577"
+"What is RPC's namespace?","The following is an introduction to RPC's namespace.
+1.Namespaces
+JRPC
+Errors
+SPEC
+2.Enumerations
+ETransactionType
+ESimulationFlag
+ETransactionStatus
+ETransactionFinalityStatus
+ETransactionExecutionStatus
+EBlockTag
+EDataAvailabilityMode
+3.Type Aliases
+Methods
+Methods: ReadMethods & WriteMethods & TraceMethods
+
+Defined in
+src/types/api/rpcspec/methods.ts:42
+
+ABI
+ABI: (FUNCTION | CONSTRUCTOR | L1_HANDLER | EVENT | STRUCT | ENUM | INTERFACE | IMPL)[]
+
+TypeScript Representation of Cairo1 v2+ Starknet Contract ABI
+
+starknet_metadata.json - tags/v0.5.0
+
+Defined in
+src/types/api/rpcspec/contract.ts:10
+
+ContractClass
+ContractClass: CONTRACT_CLASS | DEPRECATED_CONTRACT_CLASS
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:40
+
+SimulateTransactionResponse
+SimulateTransactionResponse: { transaction_trace: TRANSACTION_TRACE ; fee_estimation: FEE_ESTIMATE }[]
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:42
+
+FeeEstimate
+FeeEstimate: FEE_ESTIMATE
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:47
+
+TransactionWithHash
+TransactionWithHash: TXN & { transaction_hash: TXN_HASH }
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:49
+
+BlockHashAndNumber
+BlockHashAndNumber: Object
+
+Type declaration
+Name Type
+block_hash BLOCK_HASH
+block_number BLOCK_NUMBER
+Defined in
+src/types/api/rpcspec/nonspec.ts:51
+
+BlockWithTxs
+BlockWithTxs: BLOCK_WITH_TXS | PENDING_BLOCK_WITH_TXS
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:53
+
+BlockWithTxHashes
+BlockWithTxHashes: BLOCK_WITH_TX_HASHES | PENDING_BLOCK_WITH_TX_HASHES
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:55
+
+StateUpdate
+StateUpdate: STATE_UPDATE | PENDING_STATE_UPDATE
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:57
+
+BlockTransactionsTraces
+BlockTransactionsTraces: { transaction_hash: FELT ; trace_root: TRANSACTION_TRACE }[]
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:59
+
+Syncing
+Syncing: false | SYNC_STATUS
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:61
+
+Events
+Events: EVENTS_CHUNK
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:63
+
+InvokedTransaction
+InvokedTransaction: Object
+
+Type declaration
+Name Type
+transaction_hash TXN_HASH
+Defined in
+src/types/api/rpcspec/nonspec.ts:65
+
+DeclaredTransaction
+DeclaredTransaction: Object
+
+Type declaration
+Name Type
+transaction_hash TXN_HASH
+class_hash FELT
+Defined in
+src/types/api/rpcspec/nonspec.ts:67
+
+DeployedAccountTransaction
+DeployedAccountTransaction: Object
+
+Type declaration
+Name Type
+transaction_hash TXN_HASH
+contract_address FELT
+Defined in
+src/types/api/rpcspec/nonspec.ts:69
+
+ContractAddress
+ContractAddress: ADDRESS
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:72
+
+Felt
+Felt: FELT
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:73
+
+Nonce
+Nonce: FELT
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:74
+
+TransactionHash
+TransactionHash: TXN_HASH
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:75
+
+TransactionTrace
+TransactionTrace: TRANSACTION_TRACE
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:76
+
+BlockHash
+BlockHash: BLOCK_HASH
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:77
+
+TransactionReceipt
+TransactionReceipt: TXN_RECEIPT | PENDING_TXN_RECEIPT
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:78
+
+EventFilter
+EventFilter: EVENT_FILTER & RESULT_PAGE_REQUEST
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:79
+
+SimulationFlags
+SimulationFlags: SIMULATION_FLAG[]
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:80
+
+L1Message
+L1Message: MSG_FROM_L1
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:81
+
+BaseTransaction
+BaseTransaction: BROADCASTED_TXN
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:82
+
+ChainId
+ChainId: CHAIN_ID
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:83
+
+Transaction
+Transaction: TXN
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:84
+
+TransactionStatus
+TransactionStatus: Object
+
+Type declaration
+Name Type
+finality_status TXN_STATUS
+execution_status? TXN_EXECUTION_STATUS
+Defined in
+src/types/api/rpcspec/nonspec.ts:85
+
+StorageDiffs
+StorageDiffs: CONTRACT_STORAGE_DIFF_ITEM[]
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:91
+
+DeprecatedDeclaredClasses
+DeprecatedDeclaredClasses: FELT[]
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:92
+
+NonceUpdates
+NonceUpdates: NONCE_UPDATE[]
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:93
+
+ReplacedClasses
+ReplacedClasses: REPLACED_CLASS[]
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:94"
+"What is Sequencer's namespace?","The following is an introduction to Sequencer's namespace.
+1.Interfaces
+InvokeFunctionTransactionResponse
+2.References
+GetTransactionStatusResponse
+Re-exports GetTransactionStatusResponse
+
+GetContractAddressesResponse
+Re-exports GetContractAddressesResponse
+
+FunctionInvocation
+Re-exports FunctionInvocation
+
+ExecutionResources
+Re-exports ExecutionResources
+
+CallL1Handler
+Re-exports CallL1Handler
+
+DeployedContractItem
+Re-exports DeployedContractItem
+
+SequencerIdentifier
+Re-exports SequencerIdentifier
+
+3.Type Aliases
+TransactionTraceResponse
+TransactionTraceResponse: Object
+
+Type declaration
+Name Type
+validate_invocation? FunctionInvocation
+function_invocation? FunctionInvocation
+fee_transfer_invocation? FunctionInvocation
+constructor_invocation? FunctionInvocation
+signature string[]
+Defined in
+src/types/api/sequencer.ts:81
+
+DeclareTransaction
+DeclareTransaction: Object
+
+Type declaration
+Name Type
+type DECLARE
+sender_address string
+contract_class ContractClass
+signature? string[]
+nonce BigNumberish
+max_fee? BigNumberish
+version? BigNumberish
+compiled_class_hash? string
+Defined in
+src/types/api/sequencer.ts:89
+
+DeployTransaction
+DeployTransaction: Object
+
+Type declaration
+Name Type
+type DEPLOY
+contract_definition ContractClass
+contract_address_salt BigNumberish
+constructor_calldata string[]
+nonce? BigNumberish
+Defined in
+src/types/api/sequencer.ts:100
+
+DeployAccountTransaction
+DeployAccountTransaction: Object
+
+Type declaration
+Name Type
+type DEPLOY_ACCOUNT
+class_hash string
+contract_address_salt BigNumberish
+constructor_calldata string[]
+signature? string[]
+max_fee? BigNumberish
+version? BigNumberish
+nonce? BigNumberish
+Defined in
+src/types/api/sequencer.ts:108
+
+InvokeFunctionTransaction
+InvokeFunctionTransaction: Object
+
+Type declaration
+Name Type
+type INVOKE
+sender_address string
+signature? string[]
+entry_point_type? EXTERNAL
+calldata? RawCalldata
+nonce BigNumberish
+max_fee? BigNumberish
+version? BigNumberish
+Defined in
+src/types/api/sequencer.ts:119
+
+Transaction
+Transaction: DeclareTransaction | DeployTransaction | InvokeFunctionTransaction | DeployAccountTransaction
+
+Defined in
+src/types/api/sequencer.ts:130
+
+AddTransactionResponse
+AddTransactionResponse: Object
+
+Type declaration
+Name Type
+transaction_hash string
+code? 'TRANSACTION_RECEIVED'
+address? string
+class_hash? string
+Defined in
+src/types/api/sequencer.ts:136
+
+GetCodeResponse
+GetCodeResponse: Object
+
+Type declaration
+Name Type
+bytecode ByteCode
+abi Abi
+Defined in
+src/types/api/sequencer.ts:143
+
+TransactionResponse
+TransactionResponse: DeclareTransaction | DeployTransaction | InvokeFunctionTransactionResponse
+
+Defined in
+src/types/api/sequencer.ts:153
+
+SuccessfulTransactionResponse
+SuccessfulTransactionResponse: Object
+
+Type declaration
+Name Type
+execution_status SUCCEEDED
+finality_status TransactionFinalityStatus
+status TransactionStatus
+block_hash string
+block_number BlockNumber
+transaction_index number
+transaction TransactionResponse
+Defined in
+src/types/api/sequencer.ts:158
+
+RevertedTransactionResponse
+RevertedTransactionResponse: Object
+
+Type declaration
+Name Type
+execution_status REVERTED
+finality_status TransactionFinalityStatus
+status TransactionStatus
+block_hash string
+block_number BlockNumber
+transaction_index number
+transaction TransactionResponse
+revert_error string
+Defined in
+src/types/api/sequencer.ts:168
+
+FailedTransactionResponse
+FailedTransactionResponse: Object
+
+Type declaration
+Name Type
+status REJECTED
+transaction_failure_reason { code: string ; error_message: string }
+transaction_failure_reason.code string
+transaction_failure_reason.error_message string
+transaction TransactionResponse
+Defined in
+src/types/api/sequencer.ts:179
+
+GetTransactionResponse
+GetTransactionResponse: SuccessfulTransactionResponse | RevertedTransactionResponse | FailedTransactionResponse
+
+Defined in
+src/types/api/sequencer.ts:188
+
+TransactionReceiptResponse
+TransactionReceiptResponse: SuccessfulTransactionReceiptResponse | RevertedTransactionReceiptResponse | RejectedTransactionReceiptResponse
+
+Defined in
+src/types/api/sequencer.ts:193
+
+SuccessfulTransactionReceiptResponse
+SuccessfulTransactionReceiptResponse: Object
+
+Type declaration
+Name Type
+execution_status SUCCEEDED
+finality_status TransactionFinalityStatus
+status TransactionStatus
+actual_fee string
+block_hash string
+block_number BlockNumber
+transaction_hash string
+transaction_index number
+l2_to_l1_messages string[]
+events string[]
+execution_resources? ExecutionResources
+Defined in
+src/types/api/sequencer.ts:198
+
+RevertedTransactionReceiptResponse
+RevertedTransactionReceiptResponse: Object
+
+Type declaration
+Name Type
+execution_status REVERTED
+finality_status TransactionFinalityStatus
+status REVERTED
+actual_fee string
+block_hash string
+block_number BlockNumber
+transaction_hash string
+transaction_index number
+l2_to_l1_messages string[]
+events string[]
+revert_error string
+Defined in
+src/types/api/sequencer.ts:212
+
+RejectedTransactionReceiptResponse
+RejectedTransactionReceiptResponse: Object
+
+Type declaration
+Name Type
+execution_status REJECTED
+finality_status TransactionFinalityStatus
+status REJECTED
+transaction_hash string
+l2_to_l1_messages string[]
+events string[]
+transaction_failure_reason { code: string ; error_message: string }
+transaction_failure_reason.code string
+transaction_failure_reason.error_message string
+Defined in
+src/types/api/sequencer.ts:226
+
+GetBlockResponse
+GetBlockResponse: Object
+
+Type declaration
+Name Type
+block_number number
+state_root string
+block_hash string
+transactions { [txHash: string]: TransactionResponse; }
+timestamp number
+transaction_receipts { [txHash: string]: { block_hash: string ; transaction_hash: string ; l2_to_l1_messages: { to_address: string ; payload: string[] ; from_address: string }[] ; block_number: BlockNumber ; status: TransactionStatus ; transaction_index: number }; }
+parent_block_hash string
+status BlockStatus
+gas_price string
+sequencer_address string
+starknet_version string
+Defined in
+src/types/api/sequencer.ts:239
+
+CallContractTransaction
+CallContractTransaction: { calldata?: RawCalldata ; max_fee?: BigNumberish ; version?: BigNumberish ; entry_point_selector: string } & { sender_address: string ; signature: string[] } | { contract_address: string ; signature?: never }
+
+Defined in
+src/types/api/sequencer.ts:268
+
+CallContractResponse
+CallContractResponse: Object
+
+Type declaration
+Name Type
+result string[]
+Defined in
+src/types/api/sequencer.ts:284
+
+InvokeEstimateFee
+InvokeEstimateFee: Omit<InvokeFunctionTransaction, 'max_fee' | 'entry_point_type'>
+
+Defined in
+src/types/api/sequencer.ts:288
+
+DeclareEstimateFee
+DeclareEstimateFee: Omit<DeclareTransaction, 'max_fee'>
+
+Defined in
+src/types/api/sequencer.ts:289
+
+DeployAccountEstimateFee
+DeployAccountEstimateFee: Omit<DeployAccountTransaction, 'max_fee'>
+
+Defined in
+src/types/api/sequencer.ts:290
+
+DeployEstimateFee
+DeployEstimateFee: DeployTransaction
+
+Defined in
+src/types/api/sequencer.ts:291
+
+SimulateTransactionResponse
+SimulateTransactionResponse: Object
+
+Type declaration
+Name Type
+trace TransactionTraceResponse
+fee_estimation EstimateFeeResponse
+Defined in
+src/types/api/sequencer.ts:293
+
+AccountTransactionItem
+AccountTransactionItem: InvokeEstimateFee | DeclareEstimateFee | DeployEstimateFee | DeployAccountEstimateFee
+
+Defined in
+src/types/api/sequencer.ts:298
+
+AccountTransaction
+AccountTransaction: AllowArray<AccountTransactionItem>
+
+Transaction filled with account data
+
+Defined in
+src/types/api/sequencer.ts:307
+
+EstimateFeeResponse
+EstimateFeeResponse: { overall_fee: number ; gas_price: number ; gas_usage: number ; uint: string } | { amount: bigint ; unit: string }
+
+Defined in
+src/types/api/sequencer.ts:310
+
+EstimateFeeResponseBulk
+EstimateFeeResponseBulk: AllowArray<EstimateFeeResponse>
+
+Defined in
+src/types/api/sequencer.ts:322
+
+BlockTransactionTracesResponse
+BlockTransactionTracesResponse: Object
+
+Type declaration
+Name Type
+traces TransactionTraceResponse & { transaction_hash: string }[]
+Defined in
+src/types/api/sequencer.ts:324
+
+Storage
+Storage: string
+
+Defined in
+src/types/api/sequencer.ts:328
+
+StateUpdateResponse
+StateUpdateResponse: Object
+
+Type declaration
+Name Type
+block_hash string
+new_root string
+old_root string
+state_diff { storage_diffs: StorageDiffs ; nonces: Nonces ; deployed_contracts: DeployedContractItem[] ; old_declared_contracts: OldDeclaredContracts ; declared_classes: DeclaredClasses ; replaced_classes: ReplacedClasses }
+state_diff.storage_diffs StorageDiffs
+state_diff.nonces Nonces
+state_diff.deployed_contracts DeployedContractItem[]
+state_diff.old_declared_contracts OldDeclaredContracts
+state_diff.declared_classes DeclaredClasses
+state_diff.replaced_classes ReplacedClasses
+Defined in
+src/types/api/sequencer.ts:330
+
+StorageDiffs
+StorageDiffs: Object
+
+Index signature
+? [address: string]: StateDiffItem[]
+
+Defined in
+src/types/api/sequencer.ts:344
+
+StateDiffItem
+StateDiffItem: Object
+
+Type declaration
+Name Type
+key string
+value string
+Defined in
+src/types/api/sequencer.ts:346
+
+Nonces
+Nonces: Object
+
+Index signature
+? [address: string]: Nonce
+
+Defined in
+src/types/api/sequencer.ts:348
+
+Nonce
+Nonce: string
+
+Defined in
+src/types/api/sequencer.ts:350
+
+DeployedContracts
+DeployedContracts: DeployedContractItem[]
+
+Defined in
+src/types/api/sequencer.ts:352
+
+OldDeclaredContracts
+OldDeclaredContracts: string[]
+
+Defined in
+src/types/api/sequencer.ts:354
+
+DeclaredClasses
+DeclaredClasses: DeclaredClass[]
+
+Defined in
+src/types/api/sequencer.ts:356
+
+DeclaredClass
+DeclaredClass: Object
+
+Type declaration
+Name Type
+class_hash string
+compiled_class_hash string
+Defined in
+src/types/api/sequencer.ts:358
+
+ReplacedClasses
+ReplacedClasses: string[]
+
+Defined in
+src/types/api/sequencer.ts:360
+
+Endpoints
+Endpoints: Object
+
+Type declaration
+Name Type
+get_contract_addresses { QUERY: never ; REQUEST: never ; RESPONSE: GetContractAddressesResponse }
+get_contract_addresses.QUERY never
+get_contract_addresses.REQUEST never
+get_contract_addresses.RESPONSE GetContractAddressesResponse
+add_transaction { QUERY: never ; REQUEST: Transaction ; RESPONSE: AddTransactionResponse }
+add_transaction.QUERY never
+add_transaction.REQUEST Transaction
+add_transaction.RESPONSE AddTransactionResponse
+get_transaction { QUERY: { transactionHash: string } ; REQUEST: never ; RESPONSE: GetTransactionResponse }
+get_transaction.QUERY { transactionHash: string }
+get_transaction.QUERY.transactionHash string
+get_transaction.REQUEST never
+get_transaction.RESPONSE GetTransactionResponse
+get_transaction_status { QUERY: { transactionHash: string } ; REQUEST: never ; RESPONSE: GetTransactionStatusResponse }
+get_transaction_status.QUERY { transactionHash: string }
+get_transaction_status.QUERY.transactionHash string
+get_transaction_status.REQUEST never
+get_transaction_status.RESPONSE GetTransactionStatusResponse
+get_transaction_trace { QUERY: { transactionHash: string } ; REQUEST: never ; RESPONSE: TransactionTraceResponse }
+get_transaction_trace.QUERY { transactionHash: string }
+get_transaction_trace.QUERY.transactionHash string
+get_transaction_trace.REQUEST never
+get_transaction_trace.RESPONSE TransactionTraceResponse
+get_transaction_receipt { QUERY: { transactionHash: string } ; REQUEST: never ; RESPONSE: TransactionReceiptResponse }
+get_transaction_receipt.QUERY { transactionHash: string }
+get_transaction_receipt.QUERY.transactionHash string
+get_transaction_receipt.REQUEST never
+get_transaction_receipt.RESPONSE TransactionReceiptResponse
+get_nonce { QUERY: { contractAddress: string ; blockIdentifier: BlockIdentifier } ; REQUEST: never ; RESPONSE: Nonce }
+get_nonce.QUERY { contractAddress: string ; blockIdentifier: BlockIdentifier }
+get_nonce.QUERY.contractAddress string
+get_nonce.QUERY.blockIdentifier BlockIdentifier
+get_nonce.REQUEST never
+get_nonce.RESPONSE Nonce
+get_storage_at { QUERY: { contractAddress: string ; key: BigNumberish ; blockIdentifier: BlockIdentifier } ; REQUEST: never ; RESPONSE: Storage }
+get_storage_at.QUERY { contractAddress: string ; key: BigNumberish ; blockIdentifier: BlockIdentifier }
+get_storage_at.QUERY.contractAddress string
+get_storage_at.QUERY.key BigNumberish
+get_storage_at.QUERY.blockIdentifier BlockIdentifier
+get_storage_at.REQUEST never
+get_storage_at.RESPONSE Storage
+get_code { QUERY: { contractAddress: string ; blockIdentifier: BlockIdentifier } ; REQUEST: never ; RESPONSE: GetCodeResponse }
+get_code.QUERY { contractAddress: string ; blockIdentifier: BlockIdentifier }
+get_code.QUERY.contractAddress string
+get_code.QUERY.blockIdentifier BlockIdentifier
+get_code.REQUEST never
+get_code.RESPONSE GetCodeResponse
+get_block { QUERY: { blockIdentifier: BlockIdentifier } ; REQUEST: never ; RESPONSE: GetBlockResponse }
+get_block.QUERY { blockIdentifier: BlockIdentifier }
+get_block.QUERY.blockIdentifier BlockIdentifier
+get_block.REQUEST never
+get_block.RESPONSE GetBlockResponse
+call_contract { QUERY: { blockIdentifier: BlockIdentifier } ; REQUEST: CallContractTransaction ; RESPONSE: CallContractResponse }
+call_contract.QUERY { blockIdentifier: BlockIdentifier }
+call_contract.QUERY.blockIdentifier BlockIdentifier
+call_contract.REQUEST CallContractTransaction
+call_contract.RESPONSE CallContractResponse
+estimate_fee { QUERY: { blockIdentifier: BlockIdentifier ; skipValidate: boolean } ; REQUEST: AccountTransactionItem ; RESPONSE: EstimateFeeResponse }
+estimate_fee.QUERY { blockIdentifier: BlockIdentifier ; skipValidate: boolean }
+estimate_fee.QUERY.blockIdentifier BlockIdentifier
+estimate_fee.QUERY.skipValidate boolean
+estimate_fee.REQUEST AccountTransactionItem
+estimate_fee.RESPONSE EstimateFeeResponse
+get_class_by_hash { QUERY: { classHash: string ; blockIdentifier?: BlockIdentifier } ; REQUEST: never ; RESPONSE: CompiledContract }
+get_class_by_hash.QUERY { classHash: string ; blockIdentifier?: BlockIdentifier }
+get_class_by_hash.QUERY.classHash string
+get_class_by_hash.QUERY.blockIdentifier? BlockIdentifier
+get_class_by_hash.REQUEST never
+get_class_by_hash.RESPONSE CompiledContract
+get_class_hash_at { QUERY: { contractAddress: string ; blockIdentifier?: BlockIdentifier } ; REQUEST: never ; RESPONSE: string }
+get_class_hash_at.QUERY { contractAddress: string ; blockIdentifier?: BlockIdentifier }
+get_class_hash_at.QUERY.contractAddress string
+get_class_hash_at.QUERY.blockIdentifier? BlockIdentifier
+get_class_hash_at.REQUEST never
+get_class_hash_at.RESPONSE string
+get_state_update { QUERY: { blockHash?: string ; blockNumber?: BlockNumber } ; REQUEST: never ; RESPONSE: StateUpdateResponse }
+get_state_update.QUERY { blockHash?: string ; blockNumber?: BlockNumber }
+get_state_update.QUERY.blockHash? string
+get_state_update.QUERY.blockNumber? BlockNumber
+get_state_update.REQUEST never
+get_state_update.RESPONSE StateUpdateResponse
+get_full_contract { QUERY: { contractAddress: string ; blockIdentifier?: BlockIdentifier } ; REQUEST: never ; RESPONSE: CompiledContract }
+get_full_contract.QUERY { contractAddress: string ; blockIdentifier?: BlockIdentifier }
+get_full_contract.QUERY.contractAddress string
+get_full_contract.QUERY.blockIdentifier? BlockIdentifier
+get_full_contract.REQUEST never
+get_full_contract.RESPONSE CompiledContract
+estimate_message_fee { QUERY: any ; REQUEST: any ; RESPONSE: EstimateFeeResponse }
+estimate_message_fee.QUERY any
+estimate_message_fee.REQUEST any
+estimate_message_fee.RESPONSE EstimateFeeResponse
+simulate_transaction { QUERY: { blockIdentifier: BlockIdentifier ; skipValidate: boolean } ; REQUEST: AccountTransaction ; RESPONSE: SimulateTransactionResponse }
+simulate_transaction.QUERY { blockIdentifier: BlockIdentifier ; skipValidate: boolean }
+simulate_transaction.QUERY.blockIdentifier BlockIdentifier
+simulate_transaction.QUERY.skipValidate boolean
+simulate_transaction.REQUEST AccountTransaction
+simulate_transaction.RESPONSE SimulateTransactionResponse
+estimate_fee_bulk { QUERY: { blockIdentifier: BlockIdentifier ; skipValidate: boolean } ; REQUEST: AccountTransaction ; RESPONSE: EstimateFeeResponseBulk }
+estimate_fee_bulk.QUERY { blockIdentifier: BlockIdentifier ; skipValidate: boolean }
+estimate_fee_bulk.QUERY.blockIdentifier BlockIdentifier
+estimate_fee_bulk.QUERY.skipValidate boolean
+estimate_fee_bulk.REQUEST AccountTransaction
+estimate_fee_bulk.RESPONSE EstimateFeeResponseBulk
+get_block_traces { QUERY: { blockHash?: string ; blockNumber?: BlockNumber } ; REQUEST: never ; RESPONSE: BlockTransactionTracesResponse }
+get_block_traces.QUERY { blockHash?: string ; blockNumber?: BlockNumber }
+get_block_traces.QUERY.blockHash? string
+get_block_traces.QUERY.blockNumber? BlockNumber
+get_block_traces.REQUEST never
+get_block_traces.RESPONSE BlockTransactionTracesResponse
+get_compiled_class_by_class_hash { QUERY: { classHash: string ; blockIdentifier?: BlockIdentifier } ; REQUEST: any ; RESPONSE: CairoAssembly }
+get_compiled_class_by_class_hash.QUERY { classHash: string ; blockIdentifier?: BlockIdentifier }
+get_compiled_class_by_class_hash.QUERY.classHash string
+get_compiled_class_by_class_hash.QUERY.blockIdentifier? BlockIdentifier
+get_compiled_class_by_class_hash.REQUEST any
+get_compiled_class_by_class_hash.RESPONSE CairoAssembly
+Defined in
+src/types/api/sequencer.ts:362"

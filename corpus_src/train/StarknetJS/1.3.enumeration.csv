@@ -1,0 +1,476 @@
+question,answer
+"What is included in CairoOptionVariant of Enumeration?","The CairoOptionVariant of Enumeration includes the following content.
+Enumeration Members
+1.Some
+Some = 0
+
+Defined in
+src/utils/calldata/enum/CairoOption.ts:2
+
+2.None
+None = 1
+
+Defined in
+src/utils/calldata/enum/CairoOption.ts:3"
+"What is included in CairoResultVariant of Enumeration?","The CairoResultVariant of Enumeration includes the following content.
+Enumeration Members
+1.Ok
+Ok = 0
+
+Defined in
+src/utils/calldata/enum/CairoResult.ts:2
+
+2.Err
+Err = 1
+
+Defined in
+src/utils/calldata/enum/CairoResult.ts:3"
+"What is included in BaseUrl of Enumeration?","The BaseUrl of Enumeration includes the following content.
+Enumeration Members
+1.SN_MAIN
+SN_MAIN = 'https://alpha-mainnet.starknet.io'
+
+Defined in
+src/constants.ts:21
+
+2.SN_GOERLI
+SN_GOERLI = 'https://alpha4.starknet.io'
+
+Defined in
+src/constants.ts:22"
+"What is included in NetworkName of Enumeration?","The NetworkName of Enumeration includes the following content.
+Enumeration Members
+1.SN_MAIN
+SN_MAIN = 'SN_MAIN'
+
+Defined in
+src/constants.ts:26
+
+2.SN_GOERLI
+SN_GOERLI = 'SN_GOERLI'
+
+Defined in
+src/constants.ts:27"
+"What is included in StarknetChainId of Enumeration?","The StarknetChainId of Enumeration includes the following content.
+Enumeration Members
+1.SN_MAIN
+SN_MAIN = '0x534e5f4d41494e'
+
+Defined in
+src/constants.ts:31
+
+2.SN_GOERLI
+SN_GOERLI = '0x534e5f474f45524c49'
+
+Defined in
+src/constants.ts:32"
+"What is included in TransactionHashPrefix of Enumeration?","The TransactionHashPrefix of Enumeration includes the following content.
+Enumeration Members
+1.DECLARE
+DECLARE = '0x6465636c617265'
+
+Defined in
+src/constants.ts:36
+
+2.DEPLOY
+DEPLOY = '0x6465706c6f79'
+
+Defined in
+src/constants.ts:37
+
+3.DEPLOY_ACCOUNT
+DEPLOY_ACCOUNT = '0x6465706c6f795f6163636f756e74'
+
+Defined in
+src/constants.ts:38
+
+4.INVOKE
+INVOKE = '0x696e766f6b65'
+
+Defined in
+src/constants.ts:39
+
+5.L1_HANDLER
+L1_HANDLER = '0x6c315f68616e646c6572'
+
+Defined in
+src/constants.ts:40"
+"What is included in StarknetIdContract of Enumeration?","The StarknetIdContract of Enumeration includes the following content.
+Enumeration Members
+1.MAINNET
+MAINNET = '0x6ac597f8116f886fa1c97a23fa4e08299975ecaf6b598873ca6792b9bbfb678'
+
+Defined in
+src/utils/starknetId.ts:104
+
+2.TESTNET
+TESTNET = '0x3bab268e932d2cecd1946f100ae67ce3dff9fd234119ea2f6da57d16d29fce'
+
+Defined in
+src/utils/starknetId.ts:105"
+"What is included in BlockStatus of Enumeration?","The BlockStatus of Enumeration includes the following content.
+Enumeration Members
+1.PENDING
+PENDING = 'PENDING'
+
+Defined in
+src/types/lib/index.ts:165
+
+2.ACCEPTED_ON_L1
+ACCEPTED_ON_L1 = 'ACCEPTED_ON_L1'
+
+Defined in
+src/types/lib/index.ts:166
+
+3.ACCEPTED_ON_L2
+ACCEPTED_ON_L2 = 'ACCEPTED_ON_L2'
+
+Defined in
+src/types/lib/index.ts:167
+
+4.REJECTED
+REJECTED = 'REJECTED'
+
+Defined in
+src/types/lib/index.ts:168"
+"What is included in BlockTag of Enumeration?","The BlockTag of Enumeration includes the following content.
+Enumeration Members
+1.pending
+pending = 'pending'
+
+Defined in
+src/types/lib/index.ts:172
+
+2.latest
+latest = 'latest'
+
+Defined in
+src/types/lib/index.ts:173"
+"What is included in EntryPointType of Enumeration?","The EntryPointType of Enumeration includes the following content.
+Enumeration Members
+1.EXTERNAL
+EXTERNAL = 'EXTERNAL'
+
+Defined in
+src/types/lib/contract/index.ts:23
+
+2.L1_HANDLER
+L1_HANDLER = 'L1_HANDLER'
+
+Defined in
+src/types/lib/contract/index.ts:24
+
+3.CONSTRUCTOR
+CONSTRUCTOR = 'CONSTRUCTOR'
+
+Defined in
+src/types/lib/contract/index.ts:25"
+"What is included in Litteral of Enumeration?","The Litteral of Enumeration includes the following content.
+Enumeration Members
+1.ClassHash
+ClassHash = 'core::starknet::class_hash::ClassHash'
+
+Defined in
+src/types/calldata.ts:17
+
+2.ContractAddress
+ContractAddress = 'core::starknet::contract_address::ContractAddress'
+
+Defined in
+src/types/calldata.ts:18"
+"What is included in EBlockTag of Enumeration?'","The EBlockTag of Enumeration includes the following content.
+Enumeration Members
+1.LATEST
+LATEST = 'latest'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:127
+
+2.PENDING
+PENDING = 'pending'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:128"
+"What is included in EDataAvailabilityMode of Enumeration?","The EDataAvailabilityMode of Enumeration includes the following content.
+Enumeration Members
+1.L1
+L1 = 'L1'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:132
+
+2.L2
+L2 = 'L2'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:133"
+"What is included in ESimulationFlag of Enumeration?","The ESimulationFlag of Enumeration includes the following content.
+Enumeration Members
+1.SKIP_VALIDATE
+SKIP_VALIDATE = 'SKIP_VALIDATE'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:106
+
+2.SKIP_FEE_CHARGE
+SKIP_FEE_CHARGE = 'SKIP_FEE_CHARGE'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:107"
+"What is included in ETransactionExecutionStatus of Enumeration?","The ETransactionExecutionStatus of Enumeration includes the following content.
+Enumeration Members
+1.SUCCEEDED
+SUCCEEDED = 'SUCCEEDED'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:122
+
+2.REVERTED
+REVERTED = 'REVERTED'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:123"
+"What is included in ETransactionFinalityStatus of Enumeration?","The ETransactionFinalityStatus of Enumeration includes the following content.
+Enumeration Members
+1.ACCEPTED_ON_L2
+ACCEPTED_ON_L2 = 'ACCEPTED_ON_L2'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:118
+
+2.ACCEPTED_ON_L1
+ACCEPTED_ON_L1 = 'ACCEPTED_ON_L1'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:119"
+"What is included in ETransactionStatus of Enumeration?","The ETransactionStatus of Enumeration includes the following content.
+Enumeration Members
+1.RECEIVED
+RECEIVED = 'RECEIVED'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:111
+
+2.REJECTED
+REJECTED = 'REJECTED'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:112
+
+3.ACCEPTED_ON_L2
+ACCEPTED_ON_L2 = 'ACCEPTED_ON_L2'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:113
+
+4.ACCEPTED_ON_L1
+ACCEPTED_ON_L1 = 'ACCEPTED_ON_L1'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:114"
+"What is included in ETransactionType of Enumeration?","The ETransactionType of Enumeration includes the following content.
+Enumeration Members
+1.DECLARE
+DECLARE = 'DECLARE'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:98
+
+2.DEPLOY
+DEPLOY = 'DEPLOY'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:99
+
+3.DEPLOY_ACCOUNT
+DEPLOY_ACCOUNT = 'DEPLOY_ACCOUNT'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:100
+
+4.INVOKE
+INVOKE = 'INVOKE'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:101
+
+5.L1_HANDLER
+L1_HANDLER = 'L1_HANDLER'
+
+Defined in
+src/types/api/rpcspec/nonspec.ts:102"
+"What is included in SIMULATION_FLAG of Enumeration?","The SIMULATION_FLAG of Enumeration includes the following content.
+Enumeration Members
+1.SKIP_VALIDATE
+SKIP_VALIDATE = 'SKIP_VALIDATE'
+
+Defined in
+src/types/account.ts:59
+
+2.SKIP_EXECUTE
+SKIP_EXECUTE = 'SKIP_EXECUTE'
+
+Defined in
+src/types/account.ts:60"
+"What is included in TransactionExecutionStatus of Enumeration?","The TransactionExecutionStatus of Enumeration includes the following content.
+Enumeration Members
+1.REJECTED
+REJECTED = 'REJECTED'
+
+Defined in
+src/types/lib/index.ts:159
+
+2.REVERTED
+REVERTED = 'REVERTED'
+
+Defined in
+src/types/lib/index.ts:160
+
+3.SUCCEEDED
+SUCCEEDED = 'SUCCEEDED'
+
+Defined in
+src/types/lib/index.ts:161"
+"What is included in TransactionFinalityStatus of Enumeration?","The TransactionFinalityStatus of Enumeration includes the following content.
+Enumeration Members
+1.NOT_RECEIVED
+NOT_RECEIVED = 'NOT_RECEIVED'
+
+Defined in
+src/types/lib/index.ts:152
+
+2.RECEIVED
+RECEIVED = 'RECEIVED'
+
+Defined in
+src/types/lib/index.ts:153
+
+3.ACCEPTED_ON_L2
+ACCEPTED_ON_L2 = 'ACCEPTED_ON_L2'
+
+Defined in
+src/types/lib/index.ts:154
+
+4.ACCEPTED_ON_L1
+ACCEPTED_ON_L1 = 'ACCEPTED_ON_L1'
+
+Defined in
+src/types/lib/index.ts:155"
+"What is included in TransactionStatus of Enumeration?","The TransactionStatus of Enumeration includes the following content.
+Enumeration Members
+1.NOT_RECEIVED
+NOT_RECEIVED = 'NOT_RECEIVED'
+
+Defined in
+src/types/lib/index.ts:143
+
+2.RECEIVED
+RECEIVED = 'RECEIVED'
+
+Defined in
+src/types/lib/index.ts:144
+
+3.ACCEPTED_ON_L2
+ACCEPTED_ON_L2 = 'ACCEPTED_ON_L2'
+
+Defined in
+src/types/lib/index.ts:145
+
+4.ACCEPTED_ON_L1
+ACCEPTED_ON_L1 = 'ACCEPTED_ON_L1'
+
+Defined in
+src/types/lib/index.ts:146
+
+5.REJECTED
+REJECTED = 'REJECTED'
+
+Defined in
+src/types/lib/index.ts:147
+
+6.REVERTED
+REVERTED = 'REVERTED'
+
+Defined in
+src/types/lib/index.ts:148"
+"What is included in TransactionType of Enumeration?","The TransactionType of Enumeration includes the following content.
+Enumeration Members
+1.DECLARE
+DECLARE = 'DECLARE'
+
+Defined in
+src/types/lib/index.ts:132
+
+2.DEPLOY
+DEPLOY = 'DEPLOY'
+
+Defined in
+src/types/lib/index.ts:133
+
+3.DEPLOY_ACCOUNT
+DEPLOY_ACCOUNT = 'DEPLOY_ACCOUNT'
+
+Defined in
+src/types/lib/index.ts:134
+
+4.INVOKE
+INVOKE = 'INVOKE_FUNCTION'
+
+Defined in
+src/types/lib/index.ts:135"
+"What is included in Uint of Enumeration?","The Uint of Enumeration includes the following content.
+Enumeration Members
+1.u8
+u8 = 'core::integer::u8'
+
+Defined in
+src/types/calldata.ts:8
+
+2.u16
+u16 = 'core::integer::u16'
+
+Defined in
+src/types/calldata.ts:9
+
+3.u32
+u32 = 'core::integer::u32'
+
+Defined in
+src/types/calldata.ts:10
+
+4.u64
+u64 = 'core::integer::u64'
+
+Defined in
+src/types/calldata.ts:11
+
+5.u128
+u128 = 'core::integer::u128'
+
+Defined in
+src/types/calldata.ts:12
+
+6.u256
+u256 = 'core::integer::u256'
+
+Defined in
+src/types/calldata.ts:13"
+"What is included in ValidateType of Enumeration?","The ValidateType of Enumeration includes the following content.
+Enumeration Members
+1.DEPLOY
+DEPLOY = 'DEPLOY'
+
+Defined in
+src/types/calldata.ts:2
+
+2.CALL
+CALL = 'CALL'
+
+Defined in
+src/types/calldata.ts:3
+
+3.INVOKE
+INVOKE = 'INVOKE'
+
+Defined in
+src/types/calldata.ts:4"
